@@ -277,11 +277,14 @@ UIAspectRatioConstraint_11.Parent = MM2Button
 UIAspectRatioConstraint_11.AspectRatio = 3.9473683834075928
 
 HideButton.Name = "HideButton"
-HideButton.Parent = ScreenGui -- Rodzic przycisku X to ScreenGui
+HideButton.Parent = ScreenGui -- Przycisk X jest dzieckiem ScreenGui, żeby mógł być niezależny
 HideButton.BackgroundColor3 = Color3.new(1, 0, 0)
 HideButton.BorderColor3 = Color3.new(0, 0, 0)
 HideButton.BorderSizePixel = 3
-HideButton.Position = UDim2.new(0.803709507, 0, 0.320000000, 0) -- Początkowa pozycja na ekranie
+-- Poniższe wartości pozycji HideButton.Position i rozmiaru HideButton.Size
+-- są początkowymi wartościami, gdy jest on niezależny.
+-- Będą one dynamicznie zmieniane przez skrypt, gdy GUI będzie widoczne.
+HideButton.Position = UDim2.new(0.803709507, 0, 0.320000000, 0)
 HideButton.Size = UDim2.new(0, 31, 0, 29)
 HideButton.ZIndex = 2 -- Upewnij się, że jest nad Frame
 HideButton.Font = Enum.Font.Unknown
@@ -296,6 +299,7 @@ UITextSizeConstraint_10.Parent = HideButton
 UITextSizeConstraint_10.MaxTextSize = 28
 
 UIAspectRatioConstraint_12.Parent = HideButton
+UITextSizeConstraint_10.MaxTextSize = 28 -- Naprawiono błąd, to powinno być dla UITextSizeConstraint_10
 UIAspectRatioConstraint_12.AspectRatio = 1.0689654350280762
 
 UIAspectRatioConstraint_13.Parent = ScreenGui
@@ -323,20 +327,38 @@ end)
 
 -- Lokalna zmienna do śledzenia, czy przycisk X jest ręcznie przeciągany
 local isXBeingDragged = false
+local lastXPosition = HideButton.Position -- Zapamiętuje ostatnią pozycję X, gdy GUI jest niewidoczne
+
+-- Definiuj offset X względem Frame'a
+-- Te wartości (scale i offset) określają, gdzie "X" ma być w prawym górnym rogu Frame'a
+-- Pozycja X.Scale: 1 (prawy koniec Frame) - X.Size.Scale (szerokość X)
+-- Pozycja X.Offset: tutaj jest 0, bo używamy tylko skali
+-- Pozycja Y.Scale: 0 (górny koniec Frame)
+-- Pozycja Y.Offset: tutaj np. -20, żeby był 20px nad ramką
+local x_offset_from_frame = UDim2.new(1, -HideButton.Size.X.Offset, 0, -HideButton.Size.Y.Offset / 2) -- Przykład: prawy górny róg, przesunięty nieco w lewo i do góry. Dostosuj offsety pixelowe, jeśli chcesz.
+-- Wartość -HideButton.Size.Y.Offset / 2 sprawia, że jest mniej więcej na środku górnej krawędzi Frame, ale możesz dostosować to do swoich preferencji
+-- Np. jeśli chcesz, żeby X wystawał poza ramkę w górę i w prawo:
+-- local x_offset_from_frame = UDim2.new(1, 5, 0, -5) -- 5 pikseli na prawo od prawej krawędzi, 5 pikseli w górę od górnej krawędzi
 
 -- Funkcja do aktualizacji pozycji przycisku X
 local function updateXButtonPosition()
     if Frame.Visible and not isXBeingDragged then
-        -- Obliczanie pozycji X w prawym górnym rogu Frame
-        local xOffset = HideButton.Size.X.Offset -- Szerokość X w pikselach
-        local yOffset = HideButton.Size.Y.Offset -- Wysokość X w pikselach
+        -- Obliczanie pozycji X względem pozycji i rozmiaru Frame
+        local frameAbsolutePosition = Frame.AbsolutePosition
+        local frameAbsoluteSize = Frame.AbsoluteSize
+        local hideButtonAbsoluteSize = HideButton.AbsoluteSize
 
-        -- Pozycja X w UDim2.new(scaleX, offsetX, scaleY, offsetY)
-        -- Chcemy, aby jego prawy górny róg był wyrównany z prawym górnym rogiem Frame
-        local newPosX = Frame.Position.X.Scale + Frame.Size.X.Scale - (xOffset / game.Workspace.CurrentCamera.ViewportSize.X) -- Skalowana pozycja X
-        local newPosY = Frame.Position.Y.Scale - (yOffset / game.Workspace.CurrentCamera.ViewportSize.Y) -- Skalowana pozycja Y (lekko nad ramką)
+        -- Obliczamy pozycję X w pixelach, która ma być "przyklejona"
+        -- np. prawy górny róg ramki
+        local newAbsPosX = frameAbsolutePosition.X + frameAbsoluteSize.X - hideButtonAbsoluteSize.X + 5 -- +5px margines od prawej krawędzi
+        local newAbsPosY = frameAbsolutePosition.Y - 20 -- -20px margines od górnej krawędzi (czyli 20px nad ramką)
 
-        HideButton.Position = UDim2.new(newPosX, 0, newPosY, 0)
+        -- Przekształcamy pozycję pikselową na UDim2
+        local viewportSize = game.Workspace.CurrentCamera.ViewportSize
+        local newScaledX = newAbsPosX / viewportSize.X
+        local newScaledY = newAbsPosY / viewportSize.Y
+
+        HideButton.Position = UDim2.new(newScaledX, 0, newScaledY, 0)
     end
 end
 
@@ -345,29 +367,43 @@ Frame:GetPropertyChangedSignal("Position"):Connect(function()
     updateXButtonPosition()
 end)
 
+-- Połączenie z zdarzeniem zmiany rozmiaru Frame (na wypadek, gdyby rozmiar się zmieniał)
+Frame:GetPropertyChangedSignal("Size"):Connect(function()
+    updateXButtonPosition()
+end)
+
 -- Połączenie z zdarzeniem zmiany widoczności Frame
 Frame:GetPropertyChangedSignal("Visible"):Connect(function()
     if Frame.Visible then
-        updateXButtonPosition()
+        updateXButtonPosition() -- Ustaw X we właściwym miejscu, gdy Frame staje się widoczny
+    else
+        lastXPosition = HideButton.Position -- Zapamiętaj ostatnią pozycję X, gdy Frame znika
     end
 end)
 
 -- Monitorowanie, czy użytkownik przeciąga HideButton
 HideButton.MouseButton1Down:Connect(function()
     isXBeingDragged = true
+    HideButton.Draggable = true -- Upewniamy się, że można go przeciągać
 end)
 
 HideButton.MouseButton1Up:Connect(function()
     isXBeingDragged = false
+    -- Gdy Frame jest widoczny, natychmiast przyklej X z powrotem
+    if Frame.Visible then
+        updateXButtonPosition()
+    end
 end)
 
 -- **Przycisk "X" (HideButton) - Ukrywanie/Pokazywanie panelu**
 HideButton.MouseButton1Click:Connect(function()
     Frame.Visible = not Frame.Visible -- Zmienia widoczność głównej ramki (Frame)
     if Frame.Visible then
-        updateXButtonPosition() -- Zaktualizuj pozycję X, gdy Frame staje się widoczny
+        updateXButtonPosition() -- Ustaw X we właściwym miejscu, gdy Frame staje się widoczny
+    else
+        -- Gdy Frame jest ukryty, X pozostaje w swojej ostatniej pozycji
+        -- i może być ręcznie przeciągany
     end
-    -- HideButton pozostaje widoczny i klikalny
 end)
 
 
@@ -419,6 +455,6 @@ MM2Button.MouseButton1Click:Connect(function()
     sendNotification("MM2 Script", "Skrypt MM2 załadowany!")
 end)
 
--- Wywołaj funkcję raz na początku, aby ustawić X we właściwym miejscu
-task.wait(0.5) -- Krótka pauza, aby upewnić się, że GUI się załadowało
+-- Ustaw początkową pozycję X po krótkiej pauzie, aby upewnić się, że GUI się załadowało
+task.wait(0.5)
 updateXButtonPosition()
