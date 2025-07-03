@@ -1,10 +1,29 @@
 -- Ustawienia początkowe: Dostęp do lokalnego gracza, jego postaci i humanoidu.
 local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoid = character:WaitForChild("Humanoid")
+local character = player.Character or player.CharacterAdded:Wait() -- Czeka na załadowanie postaci
+local humanoid = character:WaitForChild("Humanoid") -- Czeka na humanoid w postaci
 local UserInputService = game:GetService("UserInputService") -- Usługa do obsługi wejścia użytkownika (mysz, dotyk, klawiatura)
 
--- NOWE GUI (zostało zrekonstruowane na podstawie Twojego opisu i elementów)
+-- Obserwator zmian postaci: Jeśli gracz zginie i postać zostanie zmieniona, zaktualizuj referencje
+-- oraz obsłuż zachowanie GUI i prędkości po odrodzeniu.
+player.CharacterAdded:Connect(function(newChar)
+    character = newChar
+    humanoid = character:WaitForChild("Humanoid")
+    -- Po odrodzeniu, zawsze ukryj GUI.
+    if Frame then -- Sprawdzamy, czy ramka istnieje
+        Frame.Visible = false
+    end
+    -- Wracamy do domyślnej prędkości po odrodzeniu, jeśli narzędzie nie jest wyposażone.
+    -- To zapewnia, że gracz nie odradza się z prędkością zmienioną przez narzędzie.
+    if not tool.Parent or tool.Parent ~= character and tool.Parent ~= player.Backpack then
+        humanoid.WalkSpeed = 16 -- Domyślna prędkość Roblox
+        print("Gracz odrodził się. GUI ukryte, prędkość przywrócona do domyślnej (16).")
+    end
+end)
+
+---
+## Definicje GUI
+---
 
 -- Tworzenie wszystkich instancji elementów GUI.
 local ScreenGui = Instance.new("ScreenGui")
@@ -23,6 +42,7 @@ local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
 
 ScreenGui.Parent = player:WaitForChild("PlayerGui") -- Umieszczenie ScreenGui w PlayerGui gracza.
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ScreenGui.Name = "SpeedToolGUI" -- Nadanie nazwy, aby łatwo go zidentyfikować.
 
 Frame.Parent = ScreenGui -- Ramka jest dzieckiem ScreenGui.
 Frame.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
@@ -32,6 +52,7 @@ Frame.BorderSizePixel = 5
 Frame.Position = UDim2.new(0.784961402, 0, 0.430471897, 0)
 Frame.Size = UDim2.new(0, 293, 0, 343)
 Frame.Active = true -- Kluczowe: Włącza reakcję ramki na zdarzenia wejścia (np. kliknięcia, dotyk), umożliwiając jej przeciąganie.
+Frame.Visible = false -- Domyślnie GUI jest niewidoczne. Pojawi się po wyposażeniu narzędzia.
 
 TextLabel.Parent = Frame -- Etykieta tekstowa jest dzieckiem ramki.
 TextLabel.BackgroundColor3 = Color3.new(1, 1, 1)
@@ -102,6 +123,8 @@ UIAspectRatioConstraint.Parent = ScreenGui
 UIAspectRatioConstraint.AspectRatio = 1.9240963459014893
 
 ---
+## Logika GUI i prędkości
+---
 
 -- Zmienna do przechowywania zapisanej prędkości gracza. Początkowo jest pusta (nil).
 local savedSpeed = nil
@@ -109,7 +132,7 @@ local savedSpeed = nil
 -- Funkcja do zmiany prędkości gracza, podłączona do przycisku "Ustaw Prędkość".
 Button.MouseButton1Click:Connect(function()
     local newSpeed = tonumber(SpeedInput.Text) -- Próba konwersji tekstu z pola na liczbę.
-    if newSpeed then -- Sprawdzenie, czy konwersja się powiodła (czy wpisano liczbę).
+    if newSpeed and newSpeed >= 0 then -- Sprawdzenie, czy konwersja się powiodła i czy wartość jest nieujemna.
         humanoid.WalkSpeed = newSpeed -- Ustawienie nowej prędkości chodzenia dla humanoidu gracza.
         print("Prędkość ustawiona na: " .. newSpeed) -- Komunikat w konsoli deweloperskiej.
     else
@@ -120,7 +143,7 @@ end)
 -- Funkcja zapisywania prędkości, podłączona do przycisku "Zapisz Prędkość".
 SaveSpeedButton.MouseButton1Click:Connect(function()
     local newSpeed = tonumber(SpeedInput.Text) -- Próba konwersji tekstu z pola na liczbę.
-    if newSpeed then -- Sprawdzenie, czy konwersja się powiodła.
+    if newSpeed and newSpeed >= 0 then -- Sprawdzenie, czy konwersja się powiodła i czy wartość jest nieujemna.
         savedSpeed = newSpeed -- Zapisanie wartości prędkości do zmiennej 'savedSpeed'.
         SpeedInput.Text = "Zapisano: " .. savedSpeed -- Wyświetlenie zapisanej prędkości w polu tekstowym.
         print("Prędkość zapisana: " .. savedSpeed) -- Komunikat w konsoli.
@@ -130,8 +153,9 @@ SaveSpeedButton.MouseButton1Click:Connect(function()
 end)
 
 ---
+## Logika przesuwania GUI (mysz i dotyk)
+---
 
--- Zmienne i logika do przesuwania GUI (zarówno myszą, jak i dotykiem).
 local dragging = false -- Flaga wskazująca, czy GUI jest aktualnie przeciągane.
 local dragStart -- Przechowuje pozycję myszy/dotyku, gdy rozpoczęto przeciąganie.
 local startPos -- Przechowuje początkową pozycję ramki GUI.
@@ -173,9 +197,12 @@ UserInputService.InputChanged:Connect(function(input, gameProcessedEvent)
 end)
 
 ---
+## Logika narzędzia (Tool)
+---
 
--- Zmienna do przechowywania poprzedniej prędkości gracza. Jest to potrzebne do przywrócenia prędkości po odłożeniu narzędzia.
-local previousSpeed = humanoid.WalkSpeed
+-- Zmienna do przechowywania prędkości gracza PRZED wyposażeniem narzędzia.
+-- To kluczowe, aby móc przywrócić poprzednią prędkość po odłożeniu narzędzia.
+local speedBeforeEquip = humanoid.WalkSpeed
 
 -- Dodanie Narzędzia (Toola) do ekwipunku gracza oraz obsługa jego zachowania.
 local tool = Instance.new("Tool")
@@ -203,19 +230,20 @@ end)
 tool.Equipped:Connect(function()
     -- Gdy narzędzie jest w ręce, GUI staje się widoczne.
     Frame.Visible = true
+    -- Zapisz obecną prędkość gracza, aby móc ją przywrócić po odłożeniu narzędzia.
+    speedBeforeEquip = humanoid.WalkSpeed
     -- Wyświetla zapisaną prędkość lub aktualną prędkość humanoidu w polu tekstowym.
     SpeedInput.Text = tostring(savedSpeed or humanoid.WalkSpeed)
-    previousSpeed = humanoid.WalkSpeed -- Zapisuje obecną prędkość gracza, aby można ją było przywrócić po odłożeniu narzędzia.
-    print("Tool wyposażony. GUI widoczne.") -- Komunikat w konsoli.
+    print("Tool wyposażony. GUI widoczne, zapisano poprzednią prędkość: " .. speedBeforeEquip) -- Komunikat w konsoli.
 end)
 
 -- Zdarzenie Unequipped: Wykonywane, gdy gracz odkłada narzędzie (chowa je z ręki).
 tool.Unequipped:Connect(function()
     -- Gdy narzędzie jest odłożone, GUI znika, a prędkość gracza wraca do poprzedniej.
     Frame.Visible = false
-    humanoid.WalkSpeed = previousSpeed  -- Przywraca poprzednią prędkość chodzenia.
-    SpeedInput.Text = tostring(previousSpeed)  -- Ustawia tekst w polu GUI na poprzednią wartość prędkości.
-    print("Tool odłożony. GUI ukryte, prędkość przywrócona do: " .. previousSpeed) -- Komunikat w konsoli.
+    humanoid.WalkSpeed = speedBeforeEquip  -- Przywraca prędkość chodzenia sprzed wyposażenia narzędzia.
+    SpeedInput.Text = tostring(speedBeforeEquip)  -- Ustawia tekst w polu GUI na poprzednią wartość prędkości.
+    print("Tool odłożony. GUI ukryte, prędkość przywrócona do: " .. speedBeforeEquip) -- Komunikat w konsoli.
 end)
 
 print("Skrypt SpeedTool załadowany i gotowy do działania.") -- Końcowy komunikat potwierdzający załadowanie skryptu.
