@@ -127,6 +127,7 @@ UIAspectRatioConstraint_AllowSkyVoid.AspectRatio = 4 -- Przykładowy współczyn
 
 local player = game.Players.LocalPlayer
 local mouse = player:GetMouse()
+local UserInputService = game:GetService("UserInputService") -- Dodano
 
 local tpToggle = false -- Kontroluje, czy Click TP jest włączony
 local settingsVisibleToggle = false -- Kontroluje widoczność panelu ustawień TP
@@ -145,16 +146,16 @@ end
 -- --- Dragging Function ---
 -- Universal function to make any GUI frame draggable
 local function makeDraggable(frame)
-    local dragging
-    local dragInput
-    local dragStart
-    local startPosition
+    local dragging = false
+    local dragStart = Vector2.new(0,0)
+    local startPosition = UDim2.new(0,0,0,0)
 
     frame.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
             dragging = true
             dragStart = input.Position
             startPosition = frame.Position
+            -- Upewnij się, że inne inputy nie przerywają przeciągania
             input.Changed:Connect(function()
                 if input.UserInputState == Enum.UserInputState.Ended then
                     dragging = false
@@ -163,16 +164,16 @@ local function makeDraggable(frame)
         end
     end)
 
-    frame.InputChanged:Connect(function(input)
+    UserInputService.InputChanged:Connect(function(input, gameProcessedEvent)
         if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-            if dragging then
+            if dragging and not gameProcessedEvent then -- Sprawdź, czy gra nie przetwarza już tego inputu
                 local delta = input.Position - dragStart
                 frame.Position = UDim2.new(startPosition.X.Scale, startPosition.X.Offset + delta.X, startPosition.Y.Scale, startPosition.Y.Offset + delta.Y)
             end
         end
     end)
 
-    frame.InputEnded:Connect(function(input)
+    UserInputService.InputEnded:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
             dragging = false
         end
