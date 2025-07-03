@@ -192,7 +192,7 @@ FlyButton.BorderColor3 = Color3.new(0, 0, 0)
 FlyButton.Position = UDim2.new(0.310007632, 0, 0.113081113, 0)
 FlyButton.Size = UDim2.new(0, 150, 0, 38)
 FlyButton.Font = Enum.Font.SourceSans
-FlyButton.Text = "Konsola"
+FlyButton.Text = "Console"
 FlyButton.TextColor3 = Color3.new(0, 0, 0)
 FlyButton.TextScaled = true
 FlyButton.TextSize = 14
@@ -317,22 +317,22 @@ end)
 
 Invisibiltybutton.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet('https://pastebin.com/raw/3Rnd9rHf'))()
-    sendNotification("Invisibilty Tool", "Skrypt niewidzialności załadowany!")
+    sendNotification("Invisibilty Tool", "Skrypt Invisibility załadowany!")
 end)
 
 SpeedToolbutton.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet("https://pastebin.com/raw/X7B0HPc2"))()
-    sendNotification("Speed Tool", "Skrypt narzędzia szybkości załadowany!")
+    sendNotification("Speed Tool", "Skrypt Speed Tool załadowany!")
 end)
 
 ClicktptoolButton.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet("https://pastebin.com/raw/4KF2WJ9u"))()
-    sendNotification("Click TP Tool", "Skrypt narzędzia TP po kliknięciu załadowany!")
+    sendNotification("Click TP Tool", "Skrypt Click TP tool załadowany!")
 end)
 
 SpectateButton.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet("https://pastebin.com/raw/UFVLWQRw"))()
-    sendNotification("Spectate Tool", "Skrypt spectate załadowany!")
+    sendNotification("Spectate Tool", "Skrypt Spectate załadowany!")
 end)
 
 FlyButton.MouseButton1Click:Connect(function()
