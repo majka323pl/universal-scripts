@@ -1,0 +1,144 @@
+--[[
+
+        Gui2Lua™
+        10zOfficial
+        Version 1.0.0
+
+]]
+
+-- Ustawienia
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+local UserInputService = game:GetService("UserInputService")
+
+-- Tworzenie GUI
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Parent = player:WaitForChild("PlayerGui")
+ScreenGui.ResetOnSpawn = false
+
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(0, 250, 0, 200)
+Frame.Position = UDim2.new(0.4, 0, 0.4, 0)
+Frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+Frame.BorderSizePixel = 2
+Frame.Parent = ScreenGui
+Frame.Active = true
+Frame.Draggable = false -- Zostawiamy false, bo używamy własnej funkcji makeDraggable
+Frame.Visible = false -- Domyślnie ukryte, będzie widoczne z Toola
+
+local TextLabel = Instance.new("TextLabel")
+TextLabel.Size = UDim2.new(1, -10, 0, 30)
+TextLabel.Position = UDim2.new(0, 5, 0, 5)
+TextLabel.Text = "Ustaw prędkość"
+TextLabel.TextScaled = true
+TextLabel.TextColor3 = Color3.new(1, 1, 1)
+TextLabel.BackgroundTransparency = 1
+TextLabel.Parent = Frame
+
+local SpeedInput = Instance.new("TextBox")
+SpeedInput.Size = UDim2.new(1, -10, 0, 40)
+SpeedInput.Position = UDim2.new(0, 5, 0, 40)
+SpeedInput.Text = "16"
+SpeedInput.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+SpeedInput.TextColor3 = Color3.new(1, 1, 1)
+SpeedInput.ClearTextOnFocus = false
+SpeedInput.Parent = Frame
+
+local Button = Instance.new("TextButton")
+Button.Size = UDim2.new(1, -10, 0, 40)
+Button.Position = UDim2.new(0, 5, 0, 90)
+Button.Text = "Zmień prędkość"
+Button.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Button.TextColor3 = Color3.new(1, 1, 1)
+Button.Parent = Frame
+
+local SaveSpeedButton = Instance.new("TextButton")
+SaveSpeedButton.Size = UDim2.new(1, -10, 0, 40)
+SaveSpeedButton.Position = UDim2.new(0, 5, 0, 140)
+SaveSpeedButton.Text = "Zapisz prędkość"
+SaveSpeedButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+SaveSpeedButton.TextColor3 = Color3.new(1, 1, 1)
+SaveSpeedButton.Parent = Frame
+
+local savedSpeed = nil
+local previousSpeed = humanoid.WalkSpeed
+
+local function makeDraggable(frame)
+    local dragging = false
+    local dragStart = Vector2.new(0,0)
+    local startPosition = UDim2.new(0,0,0,0)
+
+    frame.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            dragStart = input.Position
+            startPosition = frame.Position
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.Ended then
+                    dragging = false
+                end
+            end)
+        end
+    end)
+
+    UserInputService.InputChanged:Connect(function(input, gameProcessedEvent)
+        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+            if dragging and not gameProcessedEvent then
+                local delta = input.Position - dragStart
+                frame.Position = UDim2.new(startPosition.X.Scale, startPosition.X.Offset + delta.X, startPosition.Y.Scale, startPosition.Y.Offset + delta.Y)
+            end
+        end
+    end)
+
+    UserInputService.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = false
+        end
+    end)
+end
+
+makeDraggable(Frame)
+
+Button.MouseButton1Click:Connect(function()
+    local newSpeed = tonumber(SpeedInput.Text)
+    if newSpeed and humanoid then
+        humanoid.WalkSpeed = newSpeed
+    else
+        SpeedInput.Text = "Nieprawidłowa wartość"
+    end
+end)
+
+SaveSpeedButton.MouseButton1Click:Connect(function()
+    local newSpeed = tonumber(SpeedInput.Text)
+    if newSpeed then
+        savedSpeed = newSpeed
+        SpeedInput.Text = "Zapisano: " .. savedSpeed
+    else
+        SpeedInput.Text = "Nieprawidłowa wartość"
+    end
+end)
+
+local tool = Instance.new("Tool")
+tool.Name = "SpeedTool"
+tool.RequiresHandle = false
+tool.Parent = player.Backpack
+
+tool.Activated:Connect(function()
+    if savedSpeed then
+        humanoid.WalkSpeed = savedSpeed
+        SpeedInput.Text = tostring(savedSpeed)
+    end
+    Frame.Visible = true
+end)
+
+tool.Equipped:Connect(function()
+    Frame.Visible = true
+    SpeedInput.Text = tostring(savedSpeed or humanoid.WalkSpeed)
+end)
+
+tool.Unequipped:Connect(function()
+    Frame.Visible = false
+    humanoid.WalkSpeed = previousSpeed
+    SpeedInput.Text = tostring(previousSpeed)
+end)
