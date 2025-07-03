@@ -321,12 +321,55 @@ spawn(function() -- Użycie spawn, aby nie blokować reszty skryptu
     sendNotification("Universal Scripts", "Thanks for using Universal Scripts")
 end)
 
+-- Lokalna zmienna do śledzenia, czy przycisk X jest ręcznie przeciągany
+local isXBeingDragged = false
+
+-- Funkcja do aktualizacji pozycji przycisku X
+local function updateXButtonPosition()
+    if Frame.Visible and not isXBeingDragged then
+        -- Obliczanie pozycji X w prawym górnym rogu Frame
+        local xOffset = HideButton.Size.X.Offset -- Szerokość X w pikselach
+        local yOffset = HideButton.Size.Y.Offset -- Wysokość X w pikselach
+
+        -- Pozycja X w UDim2.new(scaleX, offsetX, scaleY, offsetY)
+        -- Chcemy, aby jego prawy górny róg był wyrównany z prawym górnym rogiem Frame
+        local newPosX = Frame.Position.X.Scale + Frame.Size.X.Scale - (xOffset / game.Workspace.CurrentCamera.ViewportSize.X) -- Skalowana pozycja X
+        local newPosY = Frame.Position.Y.Scale - (yOffset / game.Workspace.CurrentCamera.ViewportSize.Y) -- Skalowana pozycja Y (lekko nad ramką)
+
+        HideButton.Position = UDim2.new(newPosX, 0, newPosY, 0)
+    end
+end
+
+-- Połączenie z zdarzeniem zmiany pozycji Frame
+Frame:GetPropertyChangedSignal("Position"):Connect(function()
+    updateXButtonPosition()
+end)
+
+-- Połączenie z zdarzeniem zmiany widoczności Frame
+Frame:GetPropertyChangedSignal("Visible"):Connect(function()
+    if Frame.Visible then
+        updateXButtonPosition()
+    end
+end)
+
+-- Monitorowanie, czy użytkownik przeciąga HideButton
+HideButton.MouseButton1Down:Connect(function()
+    isXBeingDragged = true
+end)
+
+HideButton.MouseButton1Up:Connect(function()
+    isXBeingDragged = false
+end)
 
 -- **Przycisk "X" (HideButton) - Ukrywanie/Pokazywanie panelu**
 HideButton.MouseButton1Click:Connect(function()
     Frame.Visible = not Frame.Visible -- Zmienia widoczność głównej ramki (Frame)
+    if Frame.Visible then
+        updateXButtonPosition() -- Zaktualizuj pozycję X, gdy Frame staje się widoczny
+    end
     -- HideButton pozostaje widoczny i klikalny
 end)
+
 
 -- **Przycisk "Invisibilty" - Ładuje skrypt z Pastebin dla niewidzialności**
 Invisibiltybutton.MouseButton1Click:Connect(function()
@@ -375,3 +418,7 @@ MM2Button.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring"))()
     sendNotification("MM2 Script", "Skrypt MM2 załadowany!")
 end)
+
+-- Wywołaj funkcję raz na początku, aby ustawić X we właściwym miejscu
+task.wait(0.5) -- Krótka pauza, aby upewnić się, że GUI się załadowało
+updateXButtonPosition()
