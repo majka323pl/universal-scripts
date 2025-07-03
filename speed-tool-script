@@ -1,4 +1,4 @@
--- Ustawienia (początek Twojego skryptu, pozostaw bez zmian)
+-- Ustawienia
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
@@ -9,10 +9,7 @@ local savedSpeed = nil
 -- Zmienna do przechowywania poprzedniej prędkości
 local previousSpeed = humanoid.WalkSpeed
 
---- START: KOD Z NOWEGO GUI ---
--- Poniżej wklejony kod z Twojego skryptu "tylko GUI",
--- ze zmienionym Parent dla ScreenGui na PlayerGui gracza.
-
+--- KOD Z NOWEGO GUI ---
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local TextLabel = Instance.new("TextLabel")
@@ -26,7 +23,7 @@ local UICorner_4 = Instance.new("UICorner")
 local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
 
 -- Properties
-ScreenGui.Parent = player:WaitForChild("PlayerGui") -- Ważna zmiana Parent
+ScreenGui.Parent = player:WaitForChild("PlayerGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 Frame.Parent = ScreenGui
@@ -106,84 +103,87 @@ UIAspectRatioConstraint.AspectRatio = 1.9240963459014893
 
 --- KONIEC KODU Z NOWEGO GUI ---
 
--- Funkcja do zmiany prędkości gracza (podłączamy do nowego przycisku Prdko)
+-- Funkcja do zmiany prędkości gracza
 UstawPrdkoButton.MouseButton1Click:Connect(function()
-    local newSpeed = tonumber(Prdko.Text) -- Użyj nowej nazwy zmiennej Prdko
-    if newSpeed and newSpeed > 0 then -- Dodano walidację, żeby prędkość była większa od 0
+    local newSpeed = tonumber(Prdko.Text)
+    if newSpeed and newSpeed > 0 then
         humanoid.WalkSpeed = newSpeed
-        -- Możesz opcjonalnie zaktualizować pole tekstowe, aby pokazać, że prędkość została ustawiona
         Prdko.Text = "Ustawiono: " .. newSpeed
     else
         Prdko.Text = "Nieprawidłowa wartość!"
     end
 end)
 
--- Funkcja zapisywania prędkości (podłączamy do nowego przycisku ZapiszPrdkoButton)
+-- Funkcja zapisywania prędkości
 ZapiszPrdkoButton.MouseButton1Click:Connect(function()
-    local newSpeed = tonumber(Prdko.Text) -- Użyj nowej nazwy zmiennej Prdko
-    if newSpeed and newSpeed > 0 then -- Dodano walidację
+    local newSpeed = tonumber(Prdko.Text)
+    if newSpeed and newSpeed > 0 then
         savedSpeed = newSpeed
-        Prdko.Text = "Zapisano: " .. savedSpeed -- Wyświetlanie zapisanej prędkości w polu tekstowym
+        Prdko.Text = "Zapisano: " .. savedSpeed
     else
         Prdko.Text = "Nieprawidłowa wartość!"
     end
 end)
 
--- Funkcja do przesuwania GUI (podłączamy do nowej ramki Frame)
+-- Funkcja do przesuwania GUI (dodano obsługę dotyku)
 local dragging = false
-local dragInput, dragStart, startPos
+local dragStart, startPos
+local UserInputService = game:GetService("UserInputService")
 
 Frame.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+    -- Sprawdź, czy to kliknięcie myszy LUB dotyk
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
         dragging = true
         dragStart = input.Position
         startPos = Frame.Position
+        -- Przechwytuj dane wejściowe, aby inne elementy nie reagowały podczas przeciągania
+        UserInputService:SetIsMouseLocked(true) 
     end
 end)
 
 Frame.InputEnded:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+    -- Sprawdź, czy to zwolnienie myszy LUB zakończenie dotyku
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
         dragging = false
+        -- Zwolnij przechwycone dane wejściowe
+        UserInputService:SetIsMouseLocked(false)
     end
 end)
 
 Frame.InputChanged:Connect(function(input)
-    if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+    -- Sprawdź, czy to ruch myszy LUB ruch dotyku
+    if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
         local delta = input.Position - dragStart
         Frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
     end
 end)
 
--- Dodanie Toola (teraz odwołujemy się do nowego Frame i ScreenGui)
+-- Dodanie Toola
 local tool = Instance.new("Tool")
 tool.Name = "SpeedTool"
 tool.RequiresHandle = false
 tool.Parent = player.Backpack
 
 tool.Activated:Connect(function()
-    -- Zmiana prędkości po aktywacji narzędzia
     if savedSpeed then
-        humanoid.WalkSpeed = savedSpeed -- Ustawiamy zapisaną prędkość
-        Prdko.Text = tostring(savedSpeed) -- Wyświetlamy zapisaną prędkość w polu tekstowym
+        humanoid.WalkSpeed = savedSpeed
+        Prdko.Text = tostring(savedSpeed)
     else
-        -- Jeśli brak zapisanej prędkości, możesz użyć domyślnej lub nic nie robić
         Prdko.Text = "Wpisz Prędkość..."
     end
-    ScreenGui.Enabled = true -- Nowe GUI jest widoczne, gdy narzędzie jest aktywne
-    Frame.Visible = true -- Upewnij się, że sama ramka jest widoczna
+    ScreenGui.Enabled = true
+    Frame.Visible = true -- Upewnij się, że ramka też jest widoczna
 end)
 
 tool.Equipped:Connect(function()
-    -- Gdy narzędzie jest w ręce, GUI staje się widoczne
     ScreenGui.Enabled = true
     Frame.Visible = true
-    Prdko.Text = tostring(savedSpeed or humanoid.WalkSpeed) -- Pokazujemy zapisaną prędkość lub aktualną
+    Prdko.Text = tostring(savedSpeed or humanoid.WalkSpeed)
 end)
 
 tool.Unequipped:Connect(function()
-    -- Gdy narzędzie jest odłożone, GUI znika i wracamy do poprzedniej prędkości
-    ScreenGui.Enabled = false -- Ukrywamy całe ScreenGui
-    Frame.Visible = false -- Upewnij się, że ramka też się ukrywa
-    humanoid.WalkSpeed = previousSpeed -- Przywracamy poprzednią prędkość
-    Prdko.Text = tostring(previousSpeed) -- Ustawiamy tekst w GUI na poprzednią wartość prędkości
+    ScreenGui.Enabled = false
+    Frame.Visible = false
+    humanoid.WalkSpeed = previousSpeed
+    Prdko.Text = tostring(previousSpeed)
 end)
