@@ -21,10 +21,10 @@ local SpeedToolbutton = Instance.new("TextButton")
 local UICorner_3 = Instance.new("UICorner")
 local ClicktptoolButton = Instance.new("TextButton")
 local UICorner_4 = Instance.new("UICorner")
-local UICorner_5 = Instance.new("UICorner") -- Ta instancja UICorner_5 jest bezpośrednio w ScrollingFrame, co może być błędem w nazewnictwie lub zamierzeniem. Ważne, że istnieje.
-local SpectateButton = Instance.new("TextButton") -- Nowy przycisk Spectate
+local UICorner_5 = Instance.new("UICorner")
+local SpectateButton = Instance.new("TextButton")
 local UICorner_6 = Instance.new("UICorner")
-local FlyButton = Instance.new("TextButton") -- Nowy przycisk Fly
+local FlyButton = Instance.new("TextButton")
 local UICorner_7 = Instance.new("UICorner")
 local HideButton = Instance.new("TextButton")
 local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
@@ -41,6 +41,7 @@ Frame.BorderColor3 = Color3.new(0, 0, 0)
 Frame.BorderSizePixel = 0
 Frame.Position = UDim2.new(0.350392193, 0, 0.348067284, 0)
 Frame.Size = UDim2.new(0.452981263, 0, 0.516566277, 0)
+Frame.Draggable = true -- Sprawia, że Frame jest przesuwalny!
 
 UICorner.Parent = Frame
 
@@ -114,7 +115,7 @@ ClicktptoolButton.TextWrapped = true
 
 UICorner_4.Parent = ClicktptoolButton
 
-UICorner_5.Parent = ScrollingFrame -- Ta instancja UICorner_5 nie jest przypisana do żadnego konkretnego elementu w skrypcie Gui2Lua, ale jest obecna.
+UICorner_5.Parent = ScrollingFrame
 
 SpectateButton.Name = "Spectate Button"
 SpectateButton.Parent = ScrollingFrame
@@ -147,25 +148,44 @@ FlyButton.TextWrapped = true
 UICorner_7.Parent = FlyButton
 
 HideButton.Name = "HideButton"
-HideButton.Parent = Frame
+HideButton.Parent = ScreenGui -- Zmieniono rodzica na ScreenGui, aby był niezależny od Frame
 HideButton.BackgroundColor3 = Color3.new(1, 0, 0)
 HideButton.BorderColor3 = Color3.new(0, 0, 0)
 HideButton.BorderSizePixel = 3
-HideButton.Position = UDim2.new(0.963317394, 0, -0.0283286124, 0)
+HideButton.Position = UDim2.new(0.803709507, 0, 0.320000000, 0) -- Początkowa pozycja, możesz ją dostosować
 HideButton.Size = UDim2.new(0, 31, 0, 29)
-HideButton.ZIndex = 0
+HideButton.ZIndex = 2 -- Upewnij się, że jest nad Frame
 HideButton.Font = Enum.Font.Unknown
 HideButton.Text = "X"
 HideButton.TextColor3 = Color3.new(0, 0, 0)
 HideButton.TextScaled = true
 HideButton.TextSize = 14
 HideButton.TextWrapped = true
+HideButton.Draggable = true -- Sprawia, że HideButton jest przesuwalny!
 
 UIAspectRatioConstraint_2.Parent = ScreenGui
 UIAspectRatioConstraint_2.AspectRatio = 1.7024096250534058
 
 
 -- Functionality (Funkcjonalność - Co dzieje się po kliknięciu przycisków)
+
+-- Funkcja pomocnicza do wysyłania powiadomień Roblox
+local function sendNotification(title, text)
+    game.StarterGui:SetCore("SendNotification", {
+        Title = title,
+        Text = text,
+        Icon = "rbxassetid://6022295536", -- Id dzwonka Roblox
+        Duration = 5 -- Czas wyświetlania powiadomienia w sekundach
+    })
+end
+
+-- Powiadomienie przy starcie skryptu
+spawn(function() -- Użycie spawn, aby nie blokować reszty skryptu
+    -- Poczekaj chwilę, żeby GUI miało szansę się załadować i żeby gracz był w pełni w grze
+    wait(2)
+    sendNotification("Universal Scripts", "Thanks for using Universal Scripts")
+end)
+
 
 -- **Przycisk "X" (HideButton) - Ukrywanie/Pokazywanie panelu**
 HideButton.MouseButton1Click:Connect(function()
@@ -175,30 +195,29 @@ end)
 -- **Przycisk "Invisibilty" - Ładuje skrypt z Pastebin dla niewidzialności**
 Invisibiltybutton.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet('https://pastebin.com/raw/3Rnd9rHf'))()
-    print("Skrypt niewidzialności załadowany!")
+    sendNotification("Invisibilty", "Skrypt niewidzialności załadowany!")
 end)
 
 -- **Przycisk "Speed Tool" - Ładuje skrypt z Pastebin dla narzędzia szybkości**
 SpeedToolbutton.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet("https://pastebin.com/raw/X7B0HPc2"))()
-    print("Skrypt narzędzia szybkości załadowany!")
+    sendNotification("Speed Tool", "Skrypt narzędzia szybkości załadowany!")
 end)
 
 -- **Przycisk "Click tp tool" - Ładuje skrypt z Pastebin dla narzędzia TP po kliknięciu**
 ClicktptoolButton.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet("https://pastebin.com/raw/4KF2WJ9u"))()
-    print("Skrypt narzędzia TP po kliknięciu załadowany!")
+    sendNotification("Click TP Tool", "Skrypt narzędzia TP po kliknięciu załadowany!")
 end)
 
--- **NOWY: Przycisk "Spectate" - Ładuje skrypt z Pastebin dla funkcji spectate**
+-- **Przycisk "Spectate" - Ładuje skrypt z Pastebin dla funkcji spectate**
 SpectateButton.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet("https://pastebin.com/raw/UFVLWQRw"))()
-    print("Skrypt spectate załadowany!")
+    sendNotification("Spectate", "Skrypt spectate załadowany!")
 end)
 
--- **NOWY: Przycisk "Fly" - Ładuje zakodowany skrypt dla funkcji latania**
+-- **Przycisk "Fly" - Ładuje zakodowany skrypt dla funkcji latania**
 FlyButton.MouseButton1Click:Connect(function()
-    -- Ten skrypt jest zakodowany w ciągu znaków ASCII. Jest on dekodowany i wykonywany.
     loadstring("\108\111\97\100\115\116\114\105\110\103\40\103\97\109\101\58\72\116\116\112\71\101\116\40\40\39\104\116\116\112\115\58\47\47\103\101\115\116\46\103\101\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\109\101\111\122\111\110\101\89\84\47\98\102\48\51\55\100\102\102\57\102\48\97\55\48\48\49\55\51\48\52\100\100\100\54\55\102\100\99\100\51\55\48\47\114\97\119\47\97\49\52\101\55\52\102\52\50\53\98\48\54\48\100\102\53\50\51\51\52\51\99\102\51\48\98\55\56\55\48\55\52\101\98\51\99\53\100\50\47\97\114\99\101\117\115\37\50\53\50\48\120\37\50\53\50\48\102\108\121\37\50\53\50\48\50\37\50\53\50\48\111\98\102\108\117\99\97\116\111\114\39\41\44\116\114\117\101\41\41\40\41\10\10")()
-    print("Skrypt latania załadowany!")
+    sendNotification("Fly Tool", "Skrypt latania załadowany!")
 end)
