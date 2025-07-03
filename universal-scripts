@@ -192,7 +192,7 @@ FlyButton.BorderColor3 = Color3.new(0, 0, 0)
 FlyButton.Position = UDim2.new(0.310007632, 0, 0.113081113, 0)
 FlyButton.Size = UDim2.new(0, 150, 0, 38)
 FlyButton.Font = Enum.Font.SourceSans
-FlyButton.Text = "Fly"
+FlyButton.Text = "Konsola"
 FlyButton.TextColor3 = Color3.new(0, 0, 0)
 FlyButton.TextScaled = true
 FlyButton.TextSize = 14
@@ -337,7 +337,7 @@ end)
 
 FlyButton.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
-    sendNotification("Fly Tool", "Skrypt latania załadowany!")
+    sendNotification("Fly Tool", "Skrypt Konsoli załadowany!")
 end)
 
 NoclipButton.MouseButton1Click:Connect(function()
