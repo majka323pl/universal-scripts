@@ -1,9 +1,11 @@
--- Ustawienia
+-- Ustawienia początkowe
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
 
--- NOWE GUI (wygenerowane, ale z poprawionymi nazwami zmiennych i obiektów)
+---
+## NOWE GUI (wygenerowane z Gui2Lua, z poprawionymi nazwami i dodaną właściwością 'Active')
+---
 
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
@@ -17,9 +19,8 @@ local SaveSpeedButton = Instance.new("TextButton") -- Zmieniono nazwę zmiennej 
 local UICorner_4 = Instance.new("UICorner")
 local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
 
--- Properties
-
-ScreenGui.Parent = player:WaitForChild("PlayerGui") -- Używamy PlayerGui, tak jak w oryginalnym skrypcie
+-- Właściwości i hierarchia GUI
+ScreenGui.Parent = player:WaitForChild("PlayerGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 Frame.Parent = ScreenGui
@@ -29,7 +30,7 @@ Frame.BorderColor3 = Color3.new(0, 0, 0)
 Frame.BorderSizePixel = 5
 Frame.Position = UDim2.new(0.784961402, 0, 0.430471897, 0)
 Frame.Size = UDim2.new(0, 293, 0, 343)
-Frame.Active = true -- Dodane, aby umożliwić przeciąganie ramki
+Frame.Active = true -- Kluczowe: Umożliwia przeciąganie i obsługę dotyku!
 
 TextLabel.Parent = Frame
 TextLabel.BackgroundColor3 = Color3.new(1, 1, 1)
@@ -47,7 +48,7 @@ TextLabel.TextWrapped = true
 
 UICorner.Parent = Frame
 
-SpeedInput.Name = "SpeedInput" -- Zmieniono nazwę obiektu na "SpeedInput"
+SpeedInput.Name = "SpeedInput" -- Zmieniona nazwa obiektu
 SpeedInput.Parent = Frame
 SpeedInput.BackgroundColor3 = Color3.new(1, 1, 1)
 SpeedInput.BorderColor3 = Color3.new(0, 0, 0)
@@ -64,7 +65,7 @@ SpeedInput.ClearTextOnFocus = false -- Zachowuje domyślne zachowanie z Twojego 
 
 UICorner_2.Parent = SpeedInput
 
-Button.Name = "Button" -- Zmieniono nazwę obiektu na "Button"
+Button.Name = "Button" -- Zmieniona nazwa obiektu
 Button.Parent = Frame
 Button.BackgroundColor3 = Color3.new(1, 1, 1)
 Button.BorderColor3 = Color3.new(0, 0, 0)
@@ -80,7 +81,7 @@ Button.TextWrapped = true
 
 UICorner_3.Parent = Button
 
-SaveSpeedButton.Name = "SaveSpeedButton" -- Zmieniono nazwę obiektu na "SaveSpeedButton"
+SaveSpeedButton.Name = "SaveSpeedButton" -- Zmieniona nazwa obiektu
 SaveSpeedButton.Parent = Frame
 SaveSpeedButton.BackgroundColor3 = Color3.new(1, 1, 1)
 SaveSpeedButton.BorderColor3 = Color3.new(0, 0, 0)
@@ -99,14 +100,14 @@ UICorner_4.Parent = SaveSpeedButton
 UIAspectRatioConstraint.Parent = ScreenGui
 UIAspectRatioConstraint.AspectRatio = 1.9240963459014893
 
--- KONIEC NOWEGO GUI
-
+---
+## Logika funkcjonalna (niezmieniona, ale od teraz połączona z nowym GUI)
 ---
 
 -- Zmienna do zapisanej prędkości
 local savedSpeed = nil
 
--- Funkcja do zmiany prędkości gracza
+-- Obsługa kliknięć przycisków
 Button.MouseButton1Click:Connect(function()
     local newSpeed = tonumber(SpeedInput.Text)
     if newSpeed then
@@ -117,7 +118,6 @@ Button.MouseButton1Click:Connect(function()
     end
 end)
 
--- Funkcja zapisywania prędkości
 SaveSpeedButton.MouseButton1Click:Connect(function()
     local newSpeed = tonumber(SpeedInput.Text)
     if newSpeed then
@@ -130,13 +130,15 @@ SaveSpeedButton.MouseButton1Click:Connect(function()
 end)
 
 ---
+## Logika przeciągania GUI (obsługa myszy i dotyku)
+---
 
--- Funkcja do przesuwania GUI (z Twojego oryginalnego skryptu)
 local dragging = false
 local dragInput, dragStart, startPos
 
 Frame.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+    -- Rozpoczyna przeciąganie przy kliknięciu myszy (MouseButton1) lub dotyku (Touch)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
         dragging = true
         dragStart = input.Position
         startPos = Frame.Position
@@ -144,42 +146,45 @@ Frame.InputBegan:Connect(function(input)
 end)
 
 Frame.InputEnded:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+    -- Kończy przeciąganie po zwolnieniu myszy lub oderwaniu palca
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
         dragging = false
     end
 end)
 
 Frame.InputChanged:Connect(function(input)
-    if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+    -- Przesuwa ramkę podczas przeciągania
+    if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
         local delta = input.Position - dragStart
         Frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
     end
 end)
 
 ---
+## Logika Toola (aktywacja, wyposażanie, odłożenie)
+---
 
 -- Zmienna do przechowywania poprzedniej prędkości
 local previousSpeed = humanoid.WalkSpeed
 
--- Dodanie Toola (logika narzędzia z Twojego oryginalnego skryptu)
+-- Dodanie Toola do plecaka gracza
 local tool = Instance.new("Tool")
 tool.Name = "SpeedTool"
 tool.RequiresHandle = false
 tool.Parent = player.Backpack
 
 tool.Activated:Connect(function()
-    -- Zmiana prędkości po podniesieniu narzędzia
+    -- Zmiana prędkości po aktywacji narzędzia (kliknięciu)
     if savedSpeed then
         humanoid.WalkSpeed = savedSpeed  -- Ustawiamy zapisaną prędkość
         SpeedInput.Text = tostring(savedSpeed)  -- Wyświetlamy zapisaną prędkość w polu tekstowym
         print("Aktywowano Tool. Prędkość ustawiona na zapisaną: " .. savedSpeed)
     else
-        -- Jeśli nie ma zapisanej prędkości, możesz ustawić domyślną, np. 16
-        humanoid.WalkSpeed = 16
+        humanoid.WalkSpeed = 16 -- Domyślna prędkość, jeśli nic nie zapisano
         SpeedInput.Text = "16"
         print("Aktywowano Tool. Nie ma zapisanej prędkości, ustawiono na 16.")
     end
-    Frame.Visible = true  -- Wyświetlenie GUI po podniesieniu narzędzia
+    Frame.Visible = true  -- Wyświetlenie GUI po aktywacji narzędzia
 end)
 
 tool.Equipped:Connect(function()
@@ -198,4 +203,4 @@ tool.Unequipped:Connect(function()
     print("Tool odłożony. GUI ukryte, prędkość przywrócona do: " .. previousSpeed)
 end)
 
-print("Skrypt SpeedTool załadowany.")
+print("Skrypt SpeedTool załadowany i gotowy do użycia.")
