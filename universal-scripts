@@ -1,0 +1,153 @@
+--[[
+
+        Gui2Lua™
+        10zOfficial
+        Version 1.0.0
+
+]]
+
+
+-- Instances (Instancje - Tworzenie elementów GUI)
+
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+local TextBox = Instance.new("TextBox")
+local ScrollingFrame = Instance.new("ScrollingFrame")
+local Invisibiltybutton = Instance.new("TextButton")
+local UICorner_2 = Instance.new("UICorner")
+local SpeedToolbutton = Instance.new("TextButton")
+local UICorner_3 = Instance.new("UICorner")
+local ClicktptoolButton = Instance.new("TextButton")
+local UICorner_4 = Instance.new("UICorner")
+local HideButton = Instance.new("TextButton") -- Przycisk do ukrywania/pokazywania panelu
+
+-- Properties (Właściwości - Ustawianie wyglądu i pozycji)
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui") -- Ważne: Umieszcza GUI w PlayerGui gracza
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.new(0.172549, 0.172549, 0.172549)
+Frame.BorderColor3 = Color3.new(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.344612539, 0, 0.399723887, 0)
+Frame.Size = UDim2.new(0.452981263, 0, 0.434161663, 0)
+
+UICorner.Parent = Frame
+
+UIAspectRatioConstraint.Parent = Frame
+UIAspectRatioConstraint.AspectRatio = 1.776203989982605
+
+TextBox.Parent = Frame
+TextBox.BackgroundColor3 = Color3.new(1, 1, 1)
+TextBox.BackgroundTransparency = 1
+TextBox.BorderColor3 = Color3.new(0, 0, 0)
+TextBox.BorderSizePixel = 0
+TextBox.Position = UDim2.new(0.339712918, 0, 0, 0)
+TextBox.Size = UDim2.new(0, 247, 0, 33)
+TextBox.Font = Enum.Font.LuckiestGuy
+TextBox.Text = "ADMIN PANEL"
+TextBox.TextColor3 = Color3.new(1, 1, 1)
+TextBox.TextScaled = true
+TextBox.TextSize = 14
+TextBox.TextWrapped = true
+
+ScrollingFrame.Parent = Frame
+ScrollingFrame.Active = true
+ScrollingFrame.BackgroundColor3 = Color3.new(0.231373, 0.231373, 0.231373)
+ScrollingFrame.BorderColor3 = Color3.new(0, 0, 0)
+ScrollingFrame.BorderSizePixel = 0
+ScrollingFrame.Position = UDim2.new(0.0271132383, 0, 0.11331445, 0)
+ScrollingFrame.Size = UDim2.new(0, 599, 0, 305)
+
+Invisibiltybutton.Name = "Invisibilty button"
+Invisibiltybutton.Parent = ScrollingFrame
+Invisibiltybutton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
+Invisibiltybutton.BorderColor3 = Color3.new(0, 0, 0)
+Invisibiltybutton.Position = UDim2.new(0.0203835014, 0, 0.0204660892, 0)
+Invisibiltybutton.Size = UDim2.new(0, 150, 0, 38)
+Invisibiltybutton.Font = Enum.Font.SourceSans
+Invisibiltybutton.Text = "Invisibilty"
+Invisibiltybutton.TextColor3 = Color3.new(0, 0, 0)
+Invisibiltybutton.TextScaled = true
+Invisibiltybutton.TextSize = 14
+Invisibiltybutton.TextWrapped = true
+
+UICorner_2.Parent = Invisibiltybutton
+
+SpeedToolbutton.Name = "Speed Tool button"
+SpeedToolbutton.Parent = ScrollingFrame
+SpeedToolbutton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
+SpeedToolbutton.BorderColor3 = Color3.new(0, 0, 0)
+SpeedToolbutton.Position = UDim2.new(0.310867637, 0, 0.0204680897, 0)
+SpeedToolbutton.Size = UDim2.new(0, 150, 0, 38)
+SpeedToolbutton.Font = Enum.Font.SourceSans
+SpeedToolbutton.Text = "Speed Tool"
+SpeedToolbutton.TextColor3 = Color3.new(0, 0, 0)
+SpeedToolbutton.TextScaled = true
+SpeedToolbutton.TextSize = 14
+SpeedToolbutton.TextWrapped = true
+
+UICorner_3.Parent = SpeedToolbutton
+
+ClicktptoolButton.Name = "Click tp tool Button"
+ClicktptoolButton.Parent = ScrollingFrame
+ClicktptoolButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
+ClicktptoolButton.BorderColor3 = Color3.new(0, 0, 0)
+ClicktptoolButton.Position = UDim2.new(0.613037944, 0, 0.0204786956, 0)
+ClicktptoolButton.Size = UDim2.new(0, 150, 0, 38)
+ClicktptoolButton.Font = Enum.Font.SourceSans
+ClicktptoolButton.Text = "Click tp  tool"
+ClicktptoolButton.TextColor3 = Color3.new(0, 0, 0)
+ClicktptoolButton.TextScaled = true
+ClicktptoolButton.TextSize = 14
+ClicktptoolButton.TextWrapped = true
+
+UICorner_4.Parent = ClicktptoolButton
+
+HideButton.Name = "HideButton"
+HideButton.Parent = Frame -- Ten przycisk jest w głównej ramce, nie w scrollingu
+HideButton.BackgroundColor3 = Color3.new(1, 0, 0) -- Czerwony kolor
+HideButton.BorderColor3 = Color3.new(0, 0, 0)
+HideButton.BorderSizePixel = 3
+HideButton.Position = UDim2.new(0.963317394, 0, -0.0283286124, 0)
+HideButton.Size = UDim2.new(0, 31, 0, 29)
+HideButton.ZIndex = 0
+HideButton.Font = Enum.Font.Unknown
+HideButton.Text = "X"
+HideButton.TextColor3 = Color3.new(0, 0, 0)
+HideButton.TextScaled = true
+HideButton.TextSize = 14
+HideButton.TextWrapped = true
+
+
+-- Functionality (Funkcjonalność - Co dzieje się po kliknięciu przycisków)
+
+-- **Przycisk "X" (HideButton) - Ukrywanie/Pokazywanie panelu**
+HideButton.MouseButton1Click:Connect(function()
+    Frame.Visible = not Frame.Visible -- Zmienia widoczność głównej ramki na przeciwną
+end)
+
+-- **Przycisk "Invisibilty" - Ładuje skrypt z Pastebin dla niewidzialności**
+Invisibiltybutton.MouseButton1Click:Connect(function()
+    -- Pamiętaj, że skrypty ładowane z zewnątrz mogą być ryzykowne, jeśli nie znasz ich zawartości.
+    -- Ten skrypt z Pastebin będzie wykonany po kliknięciu.
+    loadstring(game:HttpGet('https://pastebin.com/raw/3Rnd9rHf'))()
+    print("Skrypt niewidzialności załadowany!")
+end)
+
+-- **Przycisk "Speed Tool" - Ładuje skrypt z Pastebin dla narzędzia szybkości**
+SpeedToolbutton.MouseButton1Click:Connect(function()
+    -- Ten skrypt z Pastebin będzie wykonany po kliknięciu.
+    loadstring(game:HttpGet("https://pastebin.com/raw/X7B0HPc2"))()
+    print("Skrypt narzędzia szybkości załadowany!")
+end)
+
+-- **Przycisk "Click tp tool" - Ładuje skrypt z Pastebin dla narzędzia TP po kliknięciu**
+ClicktptoolButton.MouseButton1Click:Connect(function()
+    -- Ten skrypt z Pastebin będzie wykonany po kliknięciu.
+    loadstring(game:HttpGet("https://pastebin.com/raw/4KF2WJ9u"))()
+    print("Skrypt narzędzia TP po kliknięciu załadowany!")
+end)
