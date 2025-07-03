@@ -4,25 +4,19 @@ local character = player.Character or player.CharacterAdded:Wait() -- Czeka na z
 local humanoid = character:WaitForChild("Humanoid") -- Czeka na humanoid w postaci
 local UserInputService = game:GetService("UserInputService") -- Usługa do obsługi wejścia użytkownika (mysz, dotyk, klawiatura)
 
--- Obserwator zmian postaci: Jeśli gracz zginie i postać zostanie zmieniona, zaktualizuj referencje
--- oraz obsłuż zachowanie GUI i prędkości po odrodzeniu.
+-- Obserwator zmian postaci: Jeśli gracz zginie i postać zostanie zmieniona, zaktualizuj referencje.
+-- To jest kluczowe, aby skrypt nadal działał poprawnie po odrodzeniu gracza.
 player.CharacterAdded:Connect(function(newChar)
     character = newChar
     humanoid = character:WaitForChild("Humanoid")
-    -- Po odrodzeniu, zawsze ukryj GUI.
-    if Frame then -- Sprawdzamy, czy ramka istnieje
+    -- Po odrodzeniu zawsze ukrywamy GUI, aby nie wisiało na ekranie, jeśli narzędzie nie jest aktywne.
+    if Frame then
         Frame.Visible = false
-    end
-    -- Wracamy do domyślnej prędkości po odrodzeniu, jeśli narzędzie nie jest wyposażone.
-    -- To zapewnia, że gracz nie odradza się z prędkością zmienioną przez narzędzie.
-    if not tool.Parent or tool.Parent ~= character and tool.Parent ~= player.Backpack then
-        humanoid.WalkSpeed = 16 -- Domyślna prędkość Roblox
-        print("Gracz odrodził się. GUI ukryte, prędkość przywrócona do domyślnej (16).")
     end
 end)
 
 ---
-## Definicje GUI
+## Definicje i właściwości GUI
 ---
 
 -- Tworzenie wszystkich instancji elementów GUI.
@@ -42,7 +36,7 @@ local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
 
 ScreenGui.Parent = player:WaitForChild("PlayerGui") -- Umieszczenie ScreenGui w PlayerGui gracza.
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-ScreenGui.Name = "SpeedToolGUI" -- Nadanie nazwy, aby łatwo go zidentyfikować.
+ScreenGui.Name = "SpeedToolGUI" -- Nadanie nazwy, aby łatwo go zidentyfikować w drzewie Explorer.
 
 Frame.Parent = ScreenGui -- Ramka jest dzieckiem ScreenGui.
 Frame.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
@@ -52,7 +46,7 @@ Frame.BorderSizePixel = 5
 Frame.Position = UDim2.new(0.784961402, 0, 0.430471897, 0)
 Frame.Size = UDim2.new(0, 293, 0, 343)
 Frame.Active = true -- Kluczowe: Włącza reakcję ramki na zdarzenia wejścia (np. kliknięcia, dotyk), umożliwiając jej przeciąganie.
-Frame.Visible = false -- Domyślnie GUI jest niewidoczne. Pojawi się po wyposażeniu narzędzia.
+Frame.Visible = false -- Domyślnie GUI jest niewidoczne. Pojawi się dopiero po wyposażeniu narzędzia.
 
 TextLabel.Parent = Frame -- Etykieta tekstowa jest dzieckiem ramki.
 TextLabel.BackgroundColor3 = Color3.new(1, 1, 1)
@@ -70,7 +64,7 @@ TextLabel.TextWrapped = true -- Tekst może być zawijany.
 
 UICorner.Parent = Frame -- Zaokrąglenie rogów dla ramki.
 
-SpeedInput.Name = "SpeedInput" -- WAŻNE: Nazwa obiektu w hierarchii, zgodna z oryginalną logiką Twojego kodu.
+SpeedInput.Name = "SpeedInput" -- WAŻNE: Nazwa obiektu w hierarchii, zgodna z logiką, która szuka tego elementu.
 SpeedInput.Parent = Frame -- Pole wpisywania jest dzieckiem ramki.
 SpeedInput.BackgroundColor3 = Color3.new(1, 1, 1)
 SpeedInput.BorderColor3 = Color3.new(0, 0, 0)
@@ -87,7 +81,7 @@ SpeedInput.ClearTextOnFocus = false -- Tekst nie znika od razu po kliknięciu.
 
 UICorner_2.Parent = SpeedInput -- Zaokrąglenie rogów dla pola wpisywania.
 
-Button.Name = "Button" -- WAŻNE: Nazwa obiektu w hierarchii, zgodna z oryginalną logiką Twojego kodu.
+Button.Name = "Button" -- WAŻNE: Nazwa obiektu w hierarchii, zgodna z logiką, która szuka tego elementu.
 Button.Parent = Frame -- Przycisk "Ustaw Prędkość" jest dzieckiem ramki.
 Button.BackgroundColor3 = Color3.new(1, 1, 1)
 Button.BorderColor3 = Color3.new(0, 0, 0)
@@ -103,7 +97,7 @@ Button.TextWrapped = true
 
 UICorner_3.Parent = Button -- Zaokrąglenie rogów dla przycisku "Ustaw Prędkość".
 
-SaveSpeedButton.Name = "SaveSpeedButton" -- WAŻNE: Nazwa obiektu w hierarchii, zgodna z oryginalną logiką Twojego kodu.
+SaveSpeedButton.Name = "SaveSpeedButton" -- WAŻNE: Nazwa obiektu w hierarchii, zgodna z logiką, która szuka tego elementu.
 SaveSpeedButton.Parent = Frame -- Przycisk "Zapisz Prędkość" jest dzieckiem ramki.
 SaveSpeedButton.BackgroundColor3 = Color3.new(1, 1, 1)
 SaveSpeedButton.BorderColor3 = Color3.new(0, 0, 0)
@@ -202,7 +196,7 @@ end)
 
 -- Zmienna do przechowywania prędkości gracza PRZED wyposażeniem narzędzia.
 -- To kluczowe, aby móc przywrócić poprzednią prędkość po odłożeniu narzędzia.
-local speedBeforeEquip = humanoid.WalkSpeed
+local speedBeforeEquip = 16 -- Domyślna prędkość początkowa
 
 -- Dodanie Narzędzia (Toola) do ekwipunku gracza oraz obsługa jego zachowania.
 local tool = Instance.new("Tool")
@@ -230,7 +224,7 @@ end)
 tool.Equipped:Connect(function()
     -- Gdy narzędzie jest w ręce, GUI staje się widoczne.
     Frame.Visible = true
-    -- Zapisz obecną prędkość gracza, aby móc ją przywrócić po odłożeniu narzędzia.
+    -- Zapisz obecną prędkość gracza PRZED zmianą przez narzędzie.
     speedBeforeEquip = humanoid.WalkSpeed
     -- Wyświetla zapisaną prędkość lub aktualną prędkość humanoidu w polu tekstowym.
     SpeedInput.Text = tostring(savedSpeed or humanoid.WalkSpeed)
