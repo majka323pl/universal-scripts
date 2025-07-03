@@ -1,132 +1,134 @@
--- Ustawienia początkowe
-local gracz = game.Players.LocalPlayer
-local postac = gracz.Character or gracz.CharacterAdded:Wait()
-local humanoid = postac:WaitForChild("Humanoid")
-local UsrInputSrv = game:GetService("UserInputService") -- Usługa do obsługi wejścia użytkownika (mysz, dotyk)
+-- Początkowa konfiguracja gracza i jego humanoidu
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+local UserInputService = game:GetService("UserInputService") -- Usługa do obsługi wejścia użytkownika (mysz, dotyk)
 
 ---
 ## Nowe GUI (z obsługą przeciągania myszą i dotykiem)
 ---
 
-local GlownyEkranGUI = Instance.new("ScreenGui")
-local Ramka = Instance.new("Frame")
-local EtykietaTekstowa = Instance.new("TextLabel")
-local ZaokraglenieRogow = Instance.new("UICorner")
-local PoleWpisywaniaPredkosci = Instance.new("TextBox") -- Zmieniona nazwa zmiennej
-local ZaokraglenieRogow2 = Instance.new("UICorner")
-local PrzyciskUstawPredkosc = Instance.new("TextButton") -- Zmieniona nazwa zmiennej
-local ZaokraglenieRogow3 = Instance.new("UICorner")
-local PrzyciskZapiszPredkosc = Instance.new("TextButton") -- Zmieniona nazwa zmiennej
-local ZaokraglenieRogow4 = Instance.new("UICorner")
-local OgraniczenieProporcjiUI = Instance.new("UIAspectRatioConstraint")
+-- Tworzenie instancji wszystkich elementów GUI
+local MainScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+local UICorner = Instance.new("UICorner")
+local SpeedInput = Instance.new("TextBox") -- Zmienna dla pola wpisywania prędkości
+local UICorner_2 = Instance.new("UICorner")
+local SetSpeedButton = Instance.new("TextButton") -- Zmienna dla przycisku "Set Speed"
+local UICorner_3 = Instance.new("UICorner")
+local SaveSpeedButton = Instance.new("TextButton") -- Zmienna dla przycisku "Save Speed"
+local UICorner_4 = Instance.new("UICorner")
+local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
 
--- Właściwości i hierarchia GUI
-GlownyEkranGUI.Parent = gracz:WaitForChild("PlayerGui")
-GlownyEkranGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+-- Ustawianie właściwości i hierarchii elementów GUI
+MainScreenGui.Parent = player:WaitForChild("PlayerGui") -- Przypisanie ScreenGui do PlayerGui gracza
+MainScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-Ramka.Parent = GlownyEkranGUI
-Ramka.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
-Ramka.BackgroundTransparency = 0.30000001192092896
-Ramka.BorderColor3 = Color3.new(0, 0, 0)
-Ramka.BorderSizePixel = 5
-Ramka.Position = UDim2.new(0.784961402, 0, 0.430471897, 0)
-Ramka.Size = UDim2.new(0, 293, 0, 343)
-Ramka.Active = true -- Kluczowe: Umożliwia ramce reagowanie na input (przeciąganie myszą i dotykiem)
+Frame.Parent = MainScreenGui
+Frame.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
+Frame.BackgroundTransparency = 0.30000001192092896
+Frame.BorderColor3 = Color3.new(0, 0, 0)
+Frame.BorderSizePixel = 5
+Frame.Position = UDim2.new(0.784961402, 0, 0.430471897, 0)
+Frame.Size = UDim2.new(0, 293, 0, 343)
+Frame.Active = true -- Kluczowe: Włącza reakcję ramki na zdarzenia wejścia (np. kliknięcia, dotyk), umożliwiając przeciąganie
 
-EtykietaTekstowa.Parent = Ramka
-EtykietaTekstowa.BackgroundColor3 = Color3.new(1, 1, 1)
-EtykietaTekstowa.BackgroundTransparency = 1
-EtykietaTekstowa.BorderColor3 = Color3.new(0, 0, 0)
-EtykietaTekstowa.BorderSizePixel = 0
-EtykietaTekstowa.Position = UDim2.new(0.156996593, 0, 0, 0)
-EtykietaTekstowa.Size = UDim2.new(0, 200, 0, 35)
-EtykietaTekstowa.Font = Enum.Font.SourceSansBold
-EtykietaTekstowa.Text = "Narzędzie Prędkości"
-EtykietaTekstowa.TextColor3 = Color3.new(1, 1, 1)
-EtykietaTekstowa.TextScaled = true
-EtykietaTekstowa.TextSize = 14
-EtykietaTekstowa.TextWrapped = true
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.new(1, 1, 1)
+TextLabel.BackgroundTransparency = 1
+TextLabel.BorderColor3 = Color3.new(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(0.156996593, 0, 0, 0)
+TextLabel.Size = UDim2.new(0, 200, 0, 35)
+TextLabel.Font = Enum.Font.SourceSansBold
+TextLabel.Text = "Speed Tool" -- Tekst etykiety
+TextLabel.TextColor3 = Color3.new(1, 1, 1)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14
+TextLabel.TextWrapped = true
 
-ZaokraglenieRogow.Parent = Ramka
+UICorner.Parent = Frame
 
-PoleWpisywaniaPredkosci.Name = "SpeedInput" -- Zachowana oryginalna nazwa obiektu dla kompatybilności z logiką
-PoleWpisywaniaPredkosci.Parent = Ramka
-PoleWpisywaniaPredkosci.BackgroundColor3 = Color3.new(1, 1, 1)
-PoleWpisywaniaPredkosci.BorderColor3 = Color3.new(0, 0, 0)
-PoleWpisywaniaPredkosci.BorderSizePixel = 0
-PoleWpisywaniaPredkosci.Position = UDim2.new(0.105802044, 0, 0.134110793, 0)
-PoleWpisywaniaPredkosci.Size = UDim2.new(0, 235, 0, 42)
-PoleWpisywaniaPredkosci.Font = Enum.Font.SourceSansBold
-PoleWpisywaniaPredkosci.Text = "Wpisz Prędkość..." -- Domyślny tekst
-PoleWpisywaniaPredkosci.TextColor3 = Color3.new(0, 0, 0)
-PoleWpisywaniaPredkosci.TextScaled = true
-PoleWpisywaniaPredkosci.TextSize = 14
-PoleWpisywaniaPredkosci.TextWrapped = true
-PoleWpisywaniaPredkosci.ClearTextOnFocus = false -- Zachowuje domyślne zachowanie
+SpeedInput.Name = "SpeedInput" -- Nazwa obiektu w hierarchii, zgodna z oryginalną logiką dla innych części skryptu
+SpeedInput.Parent = Frame
+SpeedInput.BackgroundColor3 = Color3.new(1, 1, 1)
+SpeedInput.BorderColor3 = Color3.new(0, 0, 0)
+SpeedInput.BorderSizePixel = 0
+SpeedInput.Position = UDim2.new(0.105802044, 0, 0.134110793, 0)
+SpeedInput.Size = UDim2.new(0, 235, 0, 42)
+SpeedInput.Font = Enum.Font.SourceSansBold
+SpeedInput.Text = "Enter Speed..." -- Domyślny tekst w polu wprowadzania
+SpeedInput.TextColor3 = Color3.new(0, 0, 0)
+SpeedInput.TextScaled = true
+SpeedInput.TextSize = 14
+SpeedInput.TextWrapped = true
+SpeedInput.ClearTextOnFocus = false -- Zachowuje oryginalne zachowanie: tekst nie znika po kliknięciu
 
-ZaokraglenieRogow2.Parent = PoleWpisywaniaPredkosci
+UICorner_2.Parent = SpeedInput
 
-PrzyciskUstawPredkosc.Name = "Button" -- Zachowana oryginalna nazwa obiektu dla kompatybilności z logiką
-PrzyciskUstawPredkosc.Parent = Ramka
-PrzyciskUstawPredkosc.BackgroundColor3 = Color3.new(1, 1, 1)
-PrzyciskUstawPredkosc.BorderColor3 = Color3.new(0, 0, 0)
-PrzyciskUstawPredkosc.BorderSizePixel = 0
-PrzyciskUstawPredkosc.Position = UDim2.new(0.0682593882, 0, 0.527696788, 0)
-PrzyciskUstawPredkosc.Size = UDim2.new(0, 253, 0, 50)
-PrzyciskUstawPredkosc.Font = Enum.Font.Unknown
-PrzyciskUstawPredkosc.Text = "Ustaw Prędkość"
-PrzyciskUstawPredkosc.TextColor3 = Color3.new(0, 0, 0)
-PrzyciskUstawPredkosc.TextScaled = true
-PrzyciskUstawPredkosc.TextSize = 14
-PrzyciskUstawPredkosc.TextWrapped = true
+SetSpeedButton.Name = "Button" -- Nazwa obiektu w hierarchii, zgodna z oryginalną logiką dla innych części skryptu
+SetSpeedButton.Parent = Frame
+SetSpeedButton.BackgroundColor3 = Color3.new(1, 1, 1)
+SetSpeedButton.BorderColor3 = Color3.new(0, 0, 0)
+SetSpeedButton.BorderSizePixel = 0
+SetSpeedButton.Position = UDim2.new(0.0682593882, 0, 0.527696788, 0)
+SetSpeedButton.Size = UDim2.new(0, 253, 0, 50)
+SetSpeedButton.Font = Enum.Font.Unknown
+SetSpeedButton.Text = "Set Speed" -- Tekst przycisku
+SetSpeedButton.TextColor3 = Color3.new(0, 0, 0)
+SetSpeedButton.TextScaled = true
+SetSpeedButton.TextSize = 14
+SetSpeedButton.TextWrapped = true
 
-ZaokraglenieRogow3.Parent = PrzyciskUstawPredkosc
+UICorner_3.Parent = SetSpeedButton
 
-PrzyciskZapiszPredkosc.Name = "SaveSpeedButton" -- Zachowana oryginalna nazwa obiektu dla kompatybilności z logiką
-PrzyciskZapiszPredkosc.Parent = Ramka
-PrzyciskZapiszPredkosc.BackgroundColor3 = Color3.new(1, 1, 1)
-PrzyciskZapiszPredkosc.BorderColor3 = Color3.new(0, 0, 0)
-PrzyciskZapiszPredkosc.BorderSizePixel = 0
-PrzyciskZapiszPredkosc.Position = UDim2.new(0.075085327, 0, 0.725947499, 0)
-PrzyciskZapiszPredkosc.Size = UDim2.new(0, 253, 0, 50)
-PrzyciskZapiszPredkosc.Font = Enum.Font.Unknown
-PrzyciskZapiszPredkosc.Text = "Zapisz Prędkość"
-PrzyciskZapiszPredkosc.TextColor3 = Color3.new(0, 0, 0)
-PrzyciskZapiszPredkosc.TextScaled = true
-PrzyciskZapiszPredkosc.TextSize = 14
-PrzyciskZapiszPredkosc.TextWrapped = true
+SaveSpeedButton.Name = "SaveSpeedButton" -- Nazwa obiektu w hierarchii, zgodna z oryginalną logiką dla innych części skryptu
+SaveSpeedButton.Parent = Frame
+SaveSpeedButton.BackgroundColor3 = Color3.new(1, 1, 1)
+SaveSpeedButton.BorderColor3 = Color3.new(0, 0, 0)
+SaveSpeedButton.BorderSizePixel = 0
+SaveSpeedButton.Position = UDim2.new(0.075085327, 0, 0.725947499, 0)
+SaveSpeedButton.Size = UDim2.new(0, 253, 0, 50)
+SaveSpeedButton.Font = Enum.Font.Unknown
+SaveSpeedButton.Text = "Save Speed" -- Tekst przycisku
+SaveSpeedButton.TextColor3 = Color3.new(0, 0, 0)
+SaveSpeedButton.TextScaled = true
+SaveSpeedButton.TextSize = 14
+SaveSpeedButton.TextWrapped = true
 
-ZaokraglenieRogow4.Parent = PrzyciskZapiszPredkosc
+UICorner_4.Parent = SaveSpeedButton
 
-OgraniczenieProporcjiUI.Parent = GlownyEkranGUI
-OgraniczenieProporcjiUI.AspectRatio = 1.9240963459014893
+UIAspectRatioConstraint.Parent = MainScreenGui
+UIAspectRatioConstraint.AspectRatio = 1.9240963459014893
 
 ---
 ## Logika funkcjonalna (z pierwszego skryptu)
 ---
 
--- Zmienna do zapisanej prędkości
-local zapisanaPredkosc = nil
+-- Zmienna do przechowywania zapisanej prędkości gracza
+local savedSpeed = nil
 
--- Obsługa kliknięć przycisków
-PrzyciskUstawPredkosc.MouseButton1Click:Connect(function()
-    local nowaPredkosc = tonumber(PoleWpisywaniaPredkosci.Text)
-    if nowaPredkosc then
-        humanoid.WalkSpeed = nowaPredkosc
-        print("Prędkość ustawiona na: " .. nowaPredkosc)
+-- Obsługa kliknięć przycisku "Set Speed"
+SetSpeedButton.MouseButton1Click:Connect(function()
+    local newSpeed = tonumber(SpeedInput.Text) -- Próba konwersji tekstu na liczbę
+    if newSpeed then
+        humanoid.WalkSpeed = newSpeed -- Ustawienie nowej prędkości chodzenia humanoidowi
+        print("Speed set to: " .. newSpeed) -- Komunikat w konsoli
     else
-        PoleWpisywaniaPredkosci.Text = "Nieprawidłowa wartość"
+        SpeedInput.Text = "Invalid value" -- Komunikat o błędnej wartości
     end
 end)
 
-PrzyciskZapiszPredkosc.MouseButton1Click:Connect(function()
-    local nowaPredkosc = tonumber(PoleWpisywaniaPredkosci.Text)
-    if nowaPredkosc then
-        zapisanaPredkosc = nowaPredkosc
-        PoleWpisywaniaPredkosci.Text = "Zapisano: " .. zapisanaPredkosc
-        print("Prędkość zapisana: " .. zapisanaPredkosc)
+-- Obsługa kliknięć przycisku "Save Speed"
+SaveSpeedButton.MouseButton1Click:Connect(function()
+    local newSpeed = tonumber(SpeedInput.Text) -- Próba konwersji tekstu na liczbę
+    if newSpeed then
+        savedSpeed = newSpeed -- Zapisanie prędkości
+        SpeedInput.Text = "Saved: " .. savedSpeed -- Wyświetlenie zapisanej prędkości w polu tekstowym
+        print("Speed saved: " .. savedSpeed) -- Komunikat w konsoli
     else
-        PoleWpisywaniaPredkosci.Text = "Nieprawidłowa wartość"
+        SpeedInput.Text = "Invalid value" -- Komunikat o błędnej wartości
     end
 end)
 
@@ -134,85 +136,88 @@ end)
 ## Funkcja do przeciągania GUI (obsługa myszy i dotyku)
 ---
 
+-- Funkcja, która sprawia, że dowolna ramka GUI jest przeciągalna
 local function makeDraggable(frame)
-    local dragging = false
-    local dragStart = Vector2.new(0,0)
-    local startPosition = UDim2.new(0,0,0,0)
+    local dragging = false -- Flaga informująca, czy ramka jest aktualnie przeciągana
+    local dragStart = Vector2.new(0,0) -- Pozycja kursora/dotyku w momencie rozpoczęcia przeciągania
+    local startPosition = UDim2.new(0,0,0,0) -- Początkowa pozycja ramki w momencie rozpoczęcia przeciągania
 
+    -- Reakcja na rozpoczęcie wejścia (kliknięcie myszy lub dotyk) na ramce
     frame.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-            dragging = true
-            dragStart = input.Position
-            startPosition = frame.Position
-            -- W starszych wersjach Roblox, Input.Changed był potrzebny do wykrywania końca przeciągania,
-            -- ale InputEnded na UserInputService jest teraz bardziej niezawodne.
-            -- Zostawiam InputEnded poniżej.
+            dragging = true -- Ustawienie flagi przeciągania na true
+            dragStart = input.Position -- Zapisanie pozycji startowej wejścia
+            startPosition = frame.Position -- Zapisanie pozycji ramki
         end
     end)
 
-    -- Ta funkcja InputChanged powinna być podłączona do UserInputService,
-    -- aby działać również wtedy, gdy mysz/palec opuści ramkę GUI.
-    UsrInputSrv.InputChanged:Connect(function(input, gameProcessedEvent)
+    -- Nasłuchujemy na zmiany wejścia globalnie (na UserInputService),
+    -- aby ramka mogła być przeciągana nawet wtedy, gdy kursor/palec wyjdzie poza jej granice
+    UserInputService.InputChanged:Connect(function(input, gameProcessedEvent)
         if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-            if dragging and not gameProcessedEvent then -- Sprawdzamy gameProcessedEvent, by unikać konfliktu z innymi elementami GUI
-                local delta = input.Position - dragStart
+            if dragging and not gameProcessedEvent then -- Jeśli przeciągamy i zdarzenie nie zostało już przetworzone przez grę (np. przez inny element GUI)
+                local delta = input.Position - dragStart -- Obliczenie przesunięcia
+                -- Ustawienie nowej pozycji ramki, uwzględniając jej skalę i offsety
                 frame.Position = UDim2.new(startPosition.X.Scale, startPosition.X.Offset + delta.X, startPosition.Y.Scale, startPosition.Y.Offset + delta.Y)
             end
         end
     end)
 
-    -- Używamy InputEnded z UserInputService dla pewniejszego wykrycia końca przeciągania
-    UsrInputSrv.InputEnded:Connect(function(input)
+    -- Nasłuchujemy na zakończenie wejścia globalnie, aby przestać przeciągać ramkę
+    UserInputService.InputEnded:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-            dragging = false
+            dragging = false -- Ustawienie flagi przeciągania na false
         end
     end)
 end
 
--- Wywołanie funkcji, aby nasza Ramka była przeciągalna
-makeDraggable(Ramka)
+-- Wywołanie funkcji, aby nasza główna ramka GUI (Frame) była przeciągalna
+makeDraggable(Frame)
 
 ---
 ## Logika Narzędzia (Toola)
 ---
 
--- Zmienna do przechowywania poprzedniej prędkości
-local poprzedniaPredkosc = humanoid.WalkSpeed
+-- Zmienna do przechowywania poprzedniej prędkości gracza przed wyposażeniem narzędzia
+local previousSpeed = humanoid.WalkSpeed
 
--- Dodanie Narzędzia do plecaka gracza
-local narzedzie = Instance.new("Tool")
-narzedzie.Name = "NarzędziePrędkości" -- Nazwa narzędzia
-narzedzie.RequiresHandle = false
-narzedzie.Parent = gracz.Backpack
+-- Tworzenie instancji narzędzia (Toola)
+local tool = Instance.new("Tool")
+tool.Name = "SpeedTool" -- Nazwa narzędzia, widoczna w ekwipunku
+tool.RequiresHandle = false -- Narzędzie nie wymaga uchwytu (modelu w ręce gracza)
+tool.Parent = player.Backpack -- Dodanie narzędzia do plecaka gracza
 
-narzedzie.Activated:Connect(function()
-    -- Zmiana prędkości po aktywacji narzędzia (kliknięciu)
-    if zapisanaPredkosc then
-        humanoid.WalkSpeed = zapisanaPredkosc  -- Ustawiamy zapisaną prędkość
-        PoleWpisywaniaPredkosci.Text = tostring(zapisanaPredkosc)  -- Wyświetlamy zapisaną prędkość w polu tekstowym
-        print("Narzędzie aktywowane. Prędkość ustawiona na zapisaną: " .. zapisanaPredkosc)
+-- Reakcja na aktywację narzędzia (np. kliknięcie lewym przyciskiem myszy)
+tool.Activated:Connect(function()
+    -- Zmiana prędkości po aktywacji narzędzia
+    if savedSpeed then
+        humanoid.WalkSpeed = savedSpeed  -- Ustawiamy zapisaną prędkość
+        SpeedInput.Text = tostring(savedSpeed)  -- Wyświetlamy zapisaną prędkość w polu tekstowym
+        print("Tool activated. Speed set to saved: " .. savedSpeed) -- Komunikat w konsoli
     else
-        humanoid.WalkSpeed = 16 -- Domyślna prędkość, jeśli nic nie zapisano
-        PoleWpisywaniaPredkosci.Text = "16"
-        print("Narzędzie aktywowane. Nie ma zapisanej prędkości, ustawiono na 16.")
+        humanoid.WalkSpeed = 16 -- Domyślna prędkość, jeśli nic nie zostało wcześniej zapisane
+        SpeedInput.Text = "16" -- Ustawienie domyślnego tekstu w polu
+        print("Tool activated. No saved speed, set to 16.") -- Komunikat w konsoli
     end
-    Ramka.Visible = true  -- Wyświetlenie GUI po aktywacji narzędzia
+    Frame.Visible = true  -- Wyświetlenie GUI po aktywacji narzędzia
 end)
 
-narzedzie.Equipped:Connect(function()
-    -- Gdy narzędzie jest w ręce, GUI staje się widoczne
-    Ramka.Visible = true
-    PoleWpisywaniaPredkosci.Text = tostring(zapisanaPredkosc or humanoid.WalkSpeed)  -- Pokazujemy zapisaną prędkość lub domyślną
-    poprzedniaPredkosc = humanoid.WalkSpeed -- Zapisz obecną prędkość przed jej zmianą, gdy narzędzie jest wyposażone
-    print("Narzędzie wyposażone. GUI widoczne.")
+-- Reakcja na wyposażenie narzędzia (wzięcie go do ręki)
+tool.Equipped:Connect(function()
+    -- Gdy narzędzie jest wyposażone, GUI staje się widoczne
+    Frame.Visible = true
+    SpeedInput.Text = tostring(savedSpeed or humanoid.WalkSpeed)  -- Pokazujemy zapisaną prędkość lub aktualną prędkość gracza
+    previousSpeed = humanoid.WalkSpeed -- Zapisujemy obecną prędkość gracza, aby móc ją przywrócić
+    print("Tool equipped. GUI visible.") -- Komunikat w konsoli
 end)
 
-narzedzie.Unequipped:Connect(function()
-    -- Gdy narzędzie jest odłożone, GUI znika i wracamy do poprzedniej prędkości
-    Ramka.Visible = false
-    humanoid.WalkSpeed = poprzedniaPredkosc  -- Przywracamy poprzednią prędkość po odłożeniu narzędzia
-    PoleWpisywaniaPredkosci.Text = tostring(poprzedniaPredkosc)  -- Ustawiamy tekst w GUI na poprzednią wartość prędkości
-    print("Narzędzie odłożone. GUI ukryte, prędkość przywrócona do: " .. poprzedniaPredkosc)
+-- Reakcja na odłożenie narzędzia (schowanie go z ręki)
+tool.Unequipped:Connect(function()
+    -- Gdy narzędzie jest odłożone, GUI znika i prędkość gracza wraca do poprzedniej
+    Frame.Visible = false
+    humanoid.WalkSpeed = previousSpeed  -- Przywracamy poprzednią prędkość gracza
+    SpeedInput.Text = tostring(previousSpeed)  -- Ustawiamy tekst w polu na poprzednią wartość prędkości
+    print("Tool unequipped. GUI hidden, speed reverted to: " .. previousSpeed) -- Komunikat w konsoli
 end)
 
-print("Skrypt Narzędzia Prędkości załadowany i gotowy do użycia.")
+print("SpeedTool script loaded and ready to use.") -- Końcowy komunikat o załadowaniu skryptu
