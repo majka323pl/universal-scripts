@@ -8,7 +8,7 @@ local savedSpeed = nil
 local previousSpeed = humanoid.WalkSpeed
 
 -- Pobranie serwisów Roblox, które będą potrzebne
-local UserInputService = game:GetService("UserInputService") -- Potrzebne do obsługi myszy i dotyku
+local UserInputService = game:GetService("UserInputService") -- Kluczowe do obsługi myszy i dotyku
 local Players = game:GetService("Players")
 
 --- KOD Z NOWEGO GUI ---
@@ -28,6 +28,7 @@ local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
 -- Ustawianie właściwości dla ScreenGui
 ScreenGui.Parent = player:WaitForChild("PlayerGui") -- Upewniamy się, że ScreenGui jest w PlayerGui
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+-- ScreenGui.ResetOnSpawn = false -- OPCJONALNIE: Jeśli chcesz, aby GUI nie resetowało się po śmierci gracza
 
 -- Ustawianie właściwości dla głównej ramki (Frame)
 Frame.Parent = ScreenGui
@@ -37,8 +38,9 @@ Frame.BorderColor3 = Color3.new(0, 0, 0)
 Frame.BorderSizePixel = 5
 Frame.Position = UDim2.new(0.784961402, 0, 0.430471897, 0)
 Frame.Size = UDim2.new(0, 293, 0, 343)
-Frame.Active = true -- !!! TO JEST KLUCZOWE DLA DZIAŁANIA PRZECIĄGANIA DOTYKIEM !!!
-Frame.Selectable = false -- Upewniamy się, że ramka nie jest wybieralna
+Frame.Active = true -- !!! TO JEST KLUCZOWE DLA ODBIORU ZDARZEŃ WEJŚCIOWYCH (DOTYK, MYSZ) !!!
+Frame.Selectable = false -- Upewniamy się, że ramka nie jest wybieralna, co może kolidować
+Frame.ZIndex = 2 -- OPCJONALNIE: Ustaw wyższy ZIndex, jeśli inne GUI mogą ją zasłaniać
 
 -- Ustawianie właściwości dla etykiety tekstowej (TextLabel)
 TextLabel.Parent = Frame
@@ -72,6 +74,7 @@ Prdko.TextColor3 = Color3.new(0, 0, 0)
 Prdko.TextScaled = true
 Prdko.TextSize = 14
 Prdko.TextWrapped = true
+Prdko.ClearTextOnFocus = false -- Domyślne zachowanie jak w starym GUI
 
 -- Ustawianie właściwości dla zaokrąglenia pola tekstowego
 UICorner_2.Parent = Prdko
@@ -146,14 +149,15 @@ local function makeDraggable(frameToDrag)
     local dragStart = Vector2.new(0,0)
     local startPosition = UDim2.new(0,0,0,0)
 
-    -- Rozpoczęcie przeciągania po naciśnięciu myszy lub dotknięciu
+    -- Rozpoczęcie przeciągania po naciśnięciu myszy lub dotknięciu ramki
     frameToDrag.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        -- Ważne: Sprawdzamy UserInputType, a także to, czy input nie pochodzi z Textboxa,
+        -- aby móc normalnie edytować tekst.
+        if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and input.Target ~= Prdko then
             dragging = true
             dragStart = input.Position
             startPosition = frameToDrag.Position
-            -- Subskrybuj zdarzenie InputEnded dla tego konkretnego inputu,
-            -- aby zakończyć przeciąganie, nawet jeśli użytkownik puści palec poza ramką.
+            -- input.Changed dla globalnego zakończenia przeciągania jest często bardziej niezawodne
             input.Changed:Connect(function()
                 if input.UserInputState == Enum.UserInputState.Ended then
                     dragging = false
@@ -172,8 +176,7 @@ local function makeDraggable(frameToDrag)
         end
     end)
 
-    -- Zakończenie przeciągania, gdy mysz lub dotyk przestaje być aktywny
-    -- (dodatkowe zabezpieczenie, jeśli InputEnded z `input.Changed` nie zadziała)
+    -- Dodatkowe zabezpieczenie: zakończenie przeciągania, gdy ogólny input się kończy
     UserInputService.InputEnded:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
             dragging = false
@@ -209,10 +212,4 @@ tool.Equipped:Connect(function()
     Prdko.Text = tostring(savedSpeed or humanoid.WalkSpeed) -- Pokaż zapisaną lub aktualną prędkość
 end)
 
--- Funkcja wywoływana, gdy narzędzie jest odłożone
-tool.Unequipped:Connect(function()
-    ScreenGui.Enabled = false -- Ukryj całe GUI
-    Frame.Visible = false
-    humanoid.WalkSpeed = previousSpeed -- Przywróć poprzednią prędkość
-    Prdko.Text = tostring(previousSpeed) -- Ustaw tekst w polu na poprzednią prędkość
-end)
+-- Funkcja
