@@ -14,11 +14,11 @@ local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local TextLabel = Instance.new("TextLabel")
 local UICorner = Instance.new("UICorner")
-local Prdko = Instance.new("TextBox") -- Ta zmienna to teraz Twój "SpeedInput"
+local Prdko = Instance.new("TextBox")
 local UICorner_2 = Instance.new("UICorner")
-local UstawPrdkoButton = Instance.new("TextButton") -- Ta zmienna to teraz Twój "Button"
+local UstawPrdkoButton = Instance.new("TextButton")
 local UICorner_3 = Instance.new("UICorner")
-local ZapiszPrdkoButton = Instance.new("TextButton") -- Ta zmienna to teraz Twój "SaveSpeedButton"
+local ZapiszPrdkoButton = Instance.new("TextButton")
 local UICorner_4 = Instance.new("UICorner")
 local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
 
@@ -33,6 +33,8 @@ Frame.BorderColor3 = Color3.new(0, 0, 0)
 Frame.BorderSizePixel = 5
 Frame.Position = UDim2.new(0.784961402, 0, 0.430471897, 0)
 Frame.Size = UDim2.new(0, 293, 0, 343)
+Frame.Active = true -- DODANE: Ustawienie ramki jako aktywnej dla odbioru zdarzeń wejściowych!
+Frame.Selectable = false -- Opcjonalnie: Upewnij się, że ramka nie jest "wybieralna", co czasami może przeszkadzać w przeciąganiu
 
 TextLabel.Parent = Frame
 TextLabel.BackgroundColor3 = Color3.new(1, 1, 1)
@@ -58,7 +60,7 @@ Prdko.BorderSizePixel = 0
 Prdko.Position = UDim2.new(0.105802044, 0, 0.134110793, 0)
 Prdko.Size = UDim2.new(0, 235, 0, 42)
 Prdko.Font = Enum.Font.SourceSansBold
-Prdko.Text = "Wpisz Prędkość..." -- Początkowy tekst w polu
+Prdko.Text = "Wpisz Prędkość..."
 Prdko.TextColor3 = Color3.new(0, 0, 0)
 Prdko.TextScaled = true
 Prdko.TextSize = 14
@@ -125,7 +127,7 @@ ZapiszPrdkoButton.MouseButton1Click:Connect(function()
     end
 end)
 
--- Funkcja do przesuwania GUI (dodano obsługę dotyku)
+-- Funkcja do przesuwania GUI (poprawiona obsługa dotyku)
 local dragging = false
 local dragStart, startPos
 local UserInputService = game:GetService("UserInputService")
@@ -137,6 +139,7 @@ Frame.InputBegan:Connect(function(input)
         dragStart = input.Position
         startPos = Frame.Position
         -- Przechwytuj dane wejściowe, aby inne elementy nie reagowały podczas przeciągania
+        -- To jest ważne, aby dotyk nie był "przenoszony" na grę pod GUI
         UserInputService:SetIsMouseLocked(true) 
     end
 end)
@@ -150,13 +153,14 @@ Frame.InputEnded:Connect(function(input)
     end
 end)
 
+-- Poprawiona logika InputChanged dla dotyku
 Frame.InputChanged:Connect(function(input)
-    -- Sprawdź, czy to ruch myszy LUB ruch dotyku
     if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
         local delta = input.Position - dragStart
         Frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
     end
 end)
+
 
 -- Dodanie Toola
 local tool = Instance.new("Tool")
@@ -172,7 +176,7 @@ tool.Activated:Connect(function()
         Prdko.Text = "Wpisz Prędkość..."
     end
     ScreenGui.Enabled = true
-    Frame.Visible = true -- Upewnij się, że ramka też jest widoczna
+    Frame.Visible = true
 end)
 
 tool.Equipped:Connect(function()
@@ -181,7 +185,7 @@ tool.Equipped:Connect(function()
     Prdko.Text = tostring(savedSpeed or humanoid.WalkSpeed)
 end)
 
-tool.Unequipped:Connect(function()
+tool.Unequipped:Connect(function(wasUnequipped) -- wasUnequipped to argument, który otrzymujesz przy Unequipped
     ScreenGui.Enabled = false
     Frame.Visible = false
     humanoid.WalkSpeed = previousSpeed
