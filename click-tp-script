@@ -37,8 +37,8 @@ Frame_ClickTP.BorderColor3 = Color3.new(0, 0, 0)
 Frame_ClickTP.BorderSizePixel = 0
 Frame_ClickTP.Position = UDim2.new(0.800666153, 0, 0.412023097, 0)
 Frame_ClickTP.Size = UDim2.new(0, 259, 0, 154)
-Frame_ClickTP.Draggable = true
-Frame_ClickTP.Active = true -- Dodano, aby ramka była przesuwalna
+Frame_ClickTP.Active = true -- Zapewnia interaktywność
+Frame_ClickTP.Draggable = false -- Ustawiamy na false, bo używamy własnego skryptu przeciągania
 
 UICorner_ClickTP.Parent = Frame_ClickTP
 
@@ -99,8 +99,8 @@ Frame2_ClickTPSettings.Position = UDim2.new(0.422948062, 0, 0.37327823, 0)
 Frame2_ClickTPSettings.Size = UDim2.new(0, 363, 0, 199)
 Frame2_ClickTPSettings.Visible = false -- Domyślnie ukryte
 Frame2_ClickTPSettings.Style = Enum.FrameStyle.RobloxRound
-Frame2_ClickTPSettings.Draggable = true
-Frame2_ClickTPSettings.Active = true -- Dodano, aby ramka była przesuwalna
+Frame2_ClickTPSettings.Active = true -- Zapewnia interaktywność
+Frame2_ClickTPSettings.Draggable = false -- Ustawiamy na false, bo używamy własnego skryptu przeciągania
 
 UICorner_SettingsPanel.Parent = Frame2_ClickTPSettings
 
@@ -142,6 +142,49 @@ local function sendNotification(title, text)
     })
 end
 
+-- --- Dragging Function ---
+-- Universal function to make any GUI frame draggable
+local function makeDraggable(frame)
+    local dragging
+    local dragInput
+    local dragStart
+    local startPosition
+
+    frame.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            dragStart = input.Position
+            startPosition = frame.Position
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.Ended then
+                    dragging = false
+                end
+            end)
+        end
+    end)
+
+    frame.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+            if dragging then
+                local delta = input.Position - dragStart
+                frame.Position = UDim2.new(startPosition.X.Scale, startPosition.X.Offset + delta.X, startPosition.Y.Scale, startPosition.Y.Offset + delta.Y)
+            end
+        end
+    end)
+
+    frame.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = false
+        end
+    end)
+end
+
+-- Apply dragging to both frames
+makeDraggable(Frame_ClickTP)
+makeDraggable(Frame2_ClickTPSettings)
+-- --- End Dragging Function ---
+
+
 -- Initial startup notification
 spawn(function()
     wait(2)
@@ -174,7 +217,7 @@ end)
 SettingsButton_ClickTP.Activated:Connect(function()
     settingsVisibleToggle = not settingsVisibleToggle -- Przełącz stan widoczności
     Frame2_ClickTPSettings.Visible = settingsVisibleToggle
-    -- Usunięto powiadomienie o otwieraniu/zamykaniu ustawień zgodnie z prośbą
+    -- Usunięto powiadomienie o otwieraniu/zamykaniu ustawień
 end)
 
 -- "Allow teleport in sky / void" Button
