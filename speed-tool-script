@@ -6,60 +6,110 @@
 
 ]]
 
--- Ustawienia
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoid = character:WaitForChild("Humanoid")
-local UserInputService = game:GetService("UserInputService")
+-- Instances
 
--- Tworzenie GUI
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Parent = player:WaitForChild("PlayerGui")
+local Frame = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+local UICorner = Instance.new("UICorner")
+local Prdko = Instance.new("TextBox")
+local UICorner_2 = Instance.new("UICorner")
+local UstawPrdkoButton = Instance.new("TextButton")
+local UICorner_3 = Instance.new("UICorner")
+local ZapiszPrdkoButton = Instance.new("TextButton")
+local UICorner_4 = Instance.new("UICorner")
+local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+
+-- Properties
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ScreenGui.ResetOnSpawn = false
 
-local Frame = Instance.new("Frame")
-Frame.Size = UDim2.new(0, 250, 0, 200)
-Frame.Position = UDim2.new(0.4, 0, 0.4, 0)
-Frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-Frame.BorderSizePixel = 2
 Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
+Frame.BackgroundTransparency = 0.30000001192092896
+Frame.BorderColor3 = Color3.new(0, 0, 0)
+Frame.BorderSizePixel = 5
+Frame.Position = UDim2.new(0.784961402, 0, 0.430471897, 0)
+Frame.Size = UDim2.new(0, 293, 0, 343)
 Frame.Active = true
 Frame.Draggable = false
 Frame.Visible = false
 
-local TextLabel = Instance.new("TextLabel")
-TextLabel.Size = UDim2.new(1, -10, 0, 30)
-TextLabel.Position = UDim2.new(0, 5, 0, 5)
-TextLabel.Text = "Ustaw prędkość"
-TextLabel.TextScaled = true
-TextLabel.TextColor3 = Color3.new(1, 1, 1)
-TextLabel.BackgroundTransparency = 1
 TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.new(1, 1, 1)
+TextLabel.BackgroundTransparency = 1
+TextLabel.BorderColor3 = Color3.new(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(0.156996593, 0, 0, 0)
+TextLabel.Size = UDim2.new(0, 200, 0, 35)
+TextLabel.Font = Enum.Font.SourceSansBold
+TextLabel.Text = "Speed Tool"
+TextLabel.TextColor3 = Color3.new(1, 1, 1)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14
+TextLabel.TextWrapped = true
 
-local SpeedInput = Instance.new("TextBox")
-SpeedInput.Size = UDim2.new(1, -10, 0, 40)
-SpeedInput.Position = UDim2.new(0, 5, 0, 40)
-SpeedInput.Text = "16"
-SpeedInput.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-SpeedInput.TextColor3 = Color3.new(1, 1, 1)
-SpeedInput.ClearTextOnFocus = false
-SpeedInput.Parent = Frame
+UICorner.Parent = Frame
 
-local Button = Instance.new("TextButton")
-Button.Size = UDim2.new(1, -10, 0, 40)
-Button.Position = UDim2.new(0, 5, 0, 90)
-Button.Text = "Zmień prędkość"
-Button.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-Button.TextColor3 = Color3.new(1, 1, 1)
-Button.Parent = Frame
+Prdko.Name = "Prędkość"
+Prdko.Parent = Frame
+Prdko.BackgroundColor3 = Color3.new(1, 1, 1)
+Prdko.BorderColor3 = Color3.new(0, 0, 0)
+Prdko.BorderSizePixel = 0
+Prdko.Position = UDim2.new(0.105802044, 0, 0.134110793, 0)
+Prdko.Size = UDim2.new(0, 235, 0, 42)
+Prdko.Font = Enum.Font.SourceSansBold
+Prdko.Text = "Wpisz Prędkość..."
+Prdko.TextColor3 = Color3.new(0, 0, 0)
+Prdko.TextScaled = true
+Prdko.TextSize = 14
+Prdko.TextWrapped = true
 
-local SaveSpeedButton = Instance.new("TextButton")
-SaveSpeedButton.Size = UDim2.new(1, -10, 0, 40)
-SaveSpeedButton.Position = UDim2.new(0, 5, 0, 140)
-SaveSpeedButton.Text = "Zapisz prędkość"
-SaveSpeedButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-SaveSpeedButton.TextColor3 = Color3.new(1, 1, 1)
-SaveSpeedButton.Parent = Frame
+UICorner_2.Parent = Prdko
+
+UstawPrdkoButton.Name = "UstawPrędkośćButton"
+UstawPrdkoButton.Parent = Frame
+UstawPrdkoButton.BackgroundColor3 = Color3.new(1, 1, 1)
+UstawPrdkoButton.BorderColor3 = Color3.new(0, 0, 0)
+UstawPrdkoButton.BorderSizePixel = 0
+UstawPrdkoButton.Position = UDim2.new(0.0682593882, 0, 0.527696788, 0)
+UstawPrdkoButton.Size = UDim2.new(0, 253, 0, 50)
+UstawPrdkoButton.Font = Enum.Font.Unknown
+UstawPrdkoButton.Text = "Ustaw Prędkość"
+UstawPrdkoButton.TextColor3 = Color3.new(0, 0, 0)
+UstawPrdkoButton.TextScaled = true
+UstawPrdkoButton.TextSize = 14
+UstawPrdkoButton.TextWrapped = true
+
+UICorner_3.Parent = UstawPrdkoButton
+
+ZapiszPrdkoButton.Name = "ZapiszPrędkośćButton"
+ZapiszPrdkoButton.Parent = Frame
+ZapiszPrdkoButton.BackgroundColor3 = Color3.new(1, 1, 1)
+ZapiszPrdkoButton.BorderColor3 = Color3.new(0, 0, 0)
+ZapiszPrdkoButton.BorderSizePixel = 0
+ZapiszPrdkoButton.Position = UDim2.new(0.075085327, 0, 0.725947499, 0)
+ZapiszPrdkoButton.Size = UDim2.new(0, 253, 0, 50)
+ZapiszPrdkoButton.Font = Enum.Font.Unknown
+ZapiszPrdkoButton.Text = "Zapisz Prędkość"
+ZapiszPrdkoButton.TextColor3 = Color3.new(0, 0, 0)
+ZapiszPrdkoButton.TextScaled = true
+ZapiszPrdkoButton.TextSize = 14
+ZapiszPrdkoButton.TextWrapped = true
+
+UICorner_4.Parent = ZapiszPrdkoButton
+
+UIAspectRatioConstraint.Parent = ScreenGui
+UIAspectRatioConstraint.AspectRatio = 1.9240963459014893
+
+-- Scripts
+
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+local UserInputService = game:GetService("UserInputService")
 
 local savedSpeed = nil
 local previousSpeed = humanoid.WalkSpeed
@@ -100,22 +150,22 @@ end
 
 makeDraggable(Frame)
 
-Button.MouseButton1Click:Connect(function()
-    local newSpeed = tonumber(SpeedInput.Text)
+UstawPrdkoButton.Activated:Connect(function()
+    local newSpeed = tonumber(Prdko.Text)
     if newSpeed and humanoid then
         humanoid.WalkSpeed = newSpeed
     else
-        SpeedInput.Text = "Nieprawidłowa wartość"
+        Prdko.Text = "Nieprawidłowa wartość"
     end
 end)
 
-SaveSpeedButton.MouseButton1Click:Connect(function()
-    local newSpeed = tonumber(SpeedInput.Text)
+ZapiszPrdkoButton.Activated:Connect(function()
+    local newSpeed = tonumber(Prdko.Text)
     if newSpeed then
         savedSpeed = newSpeed
-        SpeedInput.Text = "Zapisano: " .. savedSpeed
+        Prdko.Text = "Zapisano: " .. savedSpeed
     else
-        SpeedInput.Text = "Nieprawidłowa wartość"
+        Prdko.Text = "Nieprawidłowa wartość"
     end
 end)
 
@@ -127,18 +177,18 @@ tool.Parent = player.Backpack
 tool.Activated:Connect(function()
     if savedSpeed then
         humanoid.WalkSpeed = savedSpeed
-        SpeedInput.Text = tostring(savedSpeed)
+        Prdko.Text = tostring(savedSpeed)
     end
     Frame.Visible = true
 end)
 
 tool.Equipped:Connect(function()
     Frame.Visible = true
-    SpeedInput.Text = tostring(savedSpeed or humanoid.WalkSpeed)
+    Prdko.Text = tostring(savedSpeed or humanoid.WalkSpeed)
 end)
 
 tool.Unequipped:Connect(function()
     Frame.Visible = false
     humanoid.WalkSpeed = previousSpeed
-    SpeedInput.Text = tostring(previousSpeed)
+    Prdko.Text = tostring(previousSpeed)
 end)
