@@ -24,8 +24,8 @@ Frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 Frame.BorderSizePixel = 2
 Frame.Parent = ScreenGui
 Frame.Active = true
-Frame.Draggable = false -- Zostawiamy false, bo używamy własnej funkcji makeDraggable
-Frame.Visible = false -- Domyślnie ukryte, będzie widoczne z Toola
+Frame.Draggable = false
+Frame.Visible = false
 
 local TextLabel = Instance.new("TextLabel")
 TextLabel.Size = UDim2.new(1, -10, 0, 30)
