@@ -37,7 +37,8 @@ Frame_ClickTP.BorderColor3 = Color3.new(0, 0, 0)
 Frame_ClickTP.BorderSizePixel = 0
 Frame_ClickTP.Position = UDim2.new(0.800666153, 0, 0.412023097, 0)
 Frame_ClickTP.Size = UDim2.new(0, 259, 0, 154)
-Frame_ClickTP.Draggable = true -- Czyni to GUI przesuwalnym
+Frame_ClickTP.Draggable = true
+Frame_ClickTP.Active = true -- Dodano, aby ramka była przesuwalna
 
 UICorner_ClickTP.Parent = Frame_ClickTP
 
@@ -98,7 +99,8 @@ Frame2_ClickTPSettings.Position = UDim2.new(0.422948062, 0, 0.37327823, 0)
 Frame2_ClickTPSettings.Size = UDim2.new(0, 363, 0, 199)
 Frame2_ClickTPSettings.Visible = false -- Domyślnie ukryte
 Frame2_ClickTPSettings.Style = Enum.FrameStyle.RobloxRound
-Frame2_ClickTPSettings.Draggable = true -- Czyni to GUI przesuwalnym
+Frame2_ClickTPSettings.Draggable = true
+Frame2_ClickTPSettings.Active = true -- Dodano, aby ramka była przesuwalna
 
 UICorner_SettingsPanel.Parent = Frame2_ClickTPSettings
 
