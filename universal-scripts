@@ -277,20 +277,20 @@ UIAspectRatioConstraint_11.Parent = MM2Button
 UIAspectRatioConstraint_11.AspectRatio = 3.9473683834075928
 
 HideButton.Name = "HideButton"
-HideButton.Parent = Frame -- Zmieniono rodzica na Frame, aby był przy GUI!
+HideButton.Parent = ScreenGui -- Zmieniono rodzica z powrotem na ScreenGui
 HideButton.BackgroundColor3 = Color3.new(1, 0, 0)
 HideButton.BorderColor3 = Color3.new(0, 0, 0)
 HideButton.BorderSizePixel = 3
-HideButton.Position = UDim2.new(0.963317394, 0, -0.0283286124, 0) -- Pozycja względem Frame
-HideButton.Size = UDim2.new(0.0482946634, 0, 0.0802469105, 0)
-HideButton.ZIndex = 2 -- Upewnij się, że jest nad innymi elementami Frame
+HideButton.Position = UDim2.new(0.803709507, 0, 0.320000000, 0) -- Pozycja niezależna od Frame
+HideButton.Size = UDim2.new(0, 31, 0, 29) -- Rozmiar w pixelach
+HideButton.ZIndex = 2 -- Upewnij się, że jest nad Frame
 HideButton.Font = Enum.Font.Unknown
 HideButton.Text = "X"
 HideButton.TextColor3 = Color3.new(0, 0, 0)
 HideButton.TextScaled = true
 HideButton.TextSize = 14
 HideButton.TextWrapped = true
-HideButton.Draggable = false -- Wyłączono przesuwalność dla X, skoro jest częścią Frame
+HideButton.Draggable = true -- Włączono przesuwalność dla X, aby był niezależny
 
 UITextSizeConstraint_10.Parent = HideButton
 UITextSizeConstraint_10.MaxTextSize = 28
@@ -325,7 +325,7 @@ end)
 -- **Przycisk "X" (HideButton) - Ukrywanie/Pokazywanie panelu**
 HideButton.MouseButton1Click:Connect(function()
     Frame.Visible = not Frame.Visible -- Zmienia widoczność głównej ramki na przeciwną
-    -- Nie musimy ukrywać HideButton, skoro jest częścią Frame
+    -- Przycisk X pozostaje widoczny i klikalny
 end)
 
 -- **Przycisk "Invisibilty" - Ładuje skrypt z Pastebin dla niewidzialności**
