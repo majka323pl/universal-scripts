@@ -1,0 +1,200 @@
+--[[
+
+        Gui2Lua™
+        10zOfficial
+        Version 1.0.0
+
+]]
+
+-- Instances (Click TP GUI - Main Control Panel)
+local ScreenGui = Instance.new("ScreenGui")
+local Frame_ClickTP = Instance.new("Frame")
+local UICorner_ClickTP = Instance.new("UICorner")
+local TextLabel_ClickTPTitle = Instance.new("TextLabel")
+local TextButton_ToggleTP = Instance.new("TextButton")
+local SettingsButton_ClickTP = Instance.new("TextButton")
+local UICorner_SettingsButton_ClickTP = Instance.new("UICorner")
+local UICorner_ToggleTPButton = Instance.new("UICorner")
+local UIAspectRatioConstraint_ClickTPScreen = Instance.new("UIAspectRatioConstraint")
+
+-- Instances (Click TP Settings GUI - Sub-panel)
+local Frame2_ClickTPSettings = Instance.new("Frame")
+local TextButton3_AllowSkyVoid = Instance.new("TextButton")
+local UICorner_SettingsPanel = Instance.new("UICorner") -- Dodano UICorner dla Frame2_ClickTPSettings
+local UITextSizeConstraint_AllowSkyVoid = Instance.new("UITextSizeConstraint") -- Dodano
+local UIAspectRatioConstraint_AllowSkyVoid = Instance.new("UIAspectRatioConstraint") -- Dodano
+
+-- Properties (Main Click TP GUI)
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ScreenGui.ResetOnSpawn = false -- GUI nie znika po śmierci
+
+Frame_ClickTP.Name = "Frame_ClickTP"
+Frame_ClickTP.Parent = ScreenGui
+Frame_ClickTP.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
+Frame_ClickTP.BackgroundTransparency = 0.5
+Frame_ClickTP.BorderColor3 = Color3.new(0, 0, 0)
+Frame_ClickTP.BorderSizePixel = 0
+Frame_ClickTP.Position = UDim2.new(0.800666153, 0, 0.412023097, 0)
+Frame_ClickTP.Size = UDim2.new(0, 259, 0, 154)
+Frame_ClickTP.Draggable = true -- Czyni to GUI przesuwalnym
+
+UICorner_ClickTP.Parent = Frame_ClickTP
+
+TextLabel_ClickTPTitle.Parent = Frame_ClickTP
+TextLabel_ClickTPTitle.BackgroundColor3 = Color3.new(1, 1, 1)
+TextLabel_ClickTPTitle.BackgroundTransparency = 1
+TextLabel_ClickTPTitle.BorderColor3 = Color3.new(0, 0, 0)
+TextLabel_ClickTPTitle.BorderSizePixel = 0
+TextLabel_ClickTPTitle.Position = UDim2.new(0.239382237, 0, 0, 0)
+TextLabel_ClickTPTitle.Size = UDim2.new(0, 135, 0, 30)
+TextLabel_ClickTPTitle.Font = Enum.Font.SourceSansBold
+TextLabel_ClickTPTitle.Text = "Click TP Tool"
+TextLabel_ClickTPTitle.TextColor3 = Color3.new(1, 1, 1)
+TextLabel_ClickTPTitle.TextScaled = true
+TextLabel_ClickTPTitle.TextSize = 14
+TextLabel_ClickTPTitle.TextWrapped = true
+
+TextButton_ToggleTP.Name = "TextButton_ToggleTP"
+TextButton_ToggleTP.Parent = Frame_ClickTP
+TextButton_ToggleTP.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
+TextButton_ToggleTP.BorderColor3 = Color3.new(0, 0, 0)
+TextButton_ToggleTP.BorderSizePixel = 2
+TextButton_ToggleTP.Position = UDim2.new(0.111969113, 0, 0.261363626, 0)
+TextButton_ToggleTP.Size = UDim2.new(0, 200, 0, 50)
+TextButton_ToggleTP.Font = Enum.Font.SourceSans
+TextButton_ToggleTP.Text = "False" -- Domyślny tekst
+TextButton_ToggleTP.TextColor3 = Color3.new(0, 0, 0)
+TextButton_ToggleTP.TextScaled = true
+TextButton_ToggleTP.TextSize = 14
+TextButton_ToggleTP.TextWrapped = true
+
+UICorner_ToggleTPButton.Parent = TextButton_ToggleTP
+
+SettingsButton_ClickTP.Name = "SettingsButton_ClickTP"
+SettingsButton_ClickTP.Parent = Frame_ClickTP -- Przycisk Settings jest dzieckiem głównego panelu TP
+SettingsButton_ClickTP.BackgroundColor3 = Color3.new(0.439216, 0.439216, 0.439216)
+SettingsButton_ClickTP.BorderColor3 = Color3.new(0, 0, 0)
+SettingsButton_ClickTP.BorderSizePixel = 2
+SettingsButton_ClickTP.Position = UDim2.new(0.224999994, 0, 0.65, 0) -- Nowa, lepsza pozycja w głównym panelu TP
+SettingsButton_ClickTP.Size = UDim2.new(0, 110, 0, 27)
+SettingsButton_ClickTP.Font = Enum.Font.SourceSans
+SettingsButton_ClickTP.Text = "Settings"
+SettingsButton_ClickTP.TextColor3 = Color3.new(0, 0, 0)
+SettingsButton_ClickTP.TextScaled = true
+SettingsButton_ClickTP.TextSize = 14
+SettingsButton_ClickTP.TextWrapped = true
+
+UICorner_SettingsButton_ClickTP.Parent = SettingsButton_ClickTP
+
+UIAspectRatioConstraint_ClickTPScreen.Parent = ScreenGui
+UIAspectRatioConstraint_ClickTPScreen.AspectRatio = 1.9216867685317993
+
+-- Properties (Click TP Settings GUI)
+Frame2_ClickTPSettings.Name = "Frame2_ClickTPSettings"
+Frame2_ClickTPSettings.Parent = ScreenGui
+Frame2_ClickTPSettings.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Frame2_ClickTPSettings.Position = UDim2.new(0.422948062, 0, 0.37327823, 0)
+Frame2_ClickTPSettings.Size = UDim2.new(0, 363, 0, 199)
+Frame2_ClickTPSettings.Visible = false -- Domyślnie ukryte
+Frame2_ClickTPSettings.Style = Enum.FrameStyle.RobloxRound
+Frame2_ClickTPSettings.Draggable = true -- Czyni to GUI przesuwalnym
+
+UICorner_SettingsPanel.Parent = Frame2_ClickTPSettings
+
+TextButton3_AllowSkyVoid.Name = "TextButton3_AllowSkyVoid"
+TextButton3_AllowSkyVoid.Parent = Frame2_ClickTPSettings
+TextButton3_AllowSkyVoid.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextButton3_AllowSkyVoid.Size = UDim2.new(0, 200, 0, 50)
+TextButton3_AllowSkyVoid.Position = UDim2.new(0.5 - 200/363/2, 0, 0.5 - 50/199/2, 0) -- Wyśrodkowana pozycja
+TextButton3_AllowSkyVoid.Style = Enum.ButtonStyle.RobloxRoundButton
+TextButton3_AllowSkyVoid.Font = Enum.Font.SourceSans
+TextButton3_AllowSkyVoid.Text = "Allow teleport in sky / void is false"
+TextButton3_AllowSkyVoid.TextColor3 = Color3.fromRGB(17, 34, 136)
+TextButton3_AllowSkyVoid.TextScaled = true
+TextButton3_AllowSkyVoid.TextSize = 14.000
+TextButton3_AllowSkyVoid.TextWrapped = true
+
+UITextSizeConstraint_AllowSkyVoid.Parent = TextButton3_AllowSkyVoid
+UITextSizeConstraint_AllowSkyVoid.MaxTextSize = 28 -- Przykładowa maksymalna wielkość tekstu
+
+UIAspectRatioConstraint_AllowSkyVoid.Parent = TextButton3_AllowSkyVoid
+UIAspectRatioConstraint_AllowSkyVoid.AspectRatio = 4 -- Przykładowy współczynnik proporcji
+
+-- Scripts:
+
+local player = game.Players.LocalPlayer
+local mouse = player:GetMouse()
+
+local tpToggle = false -- Kontroluje, czy Click TP jest włączony (użyłem lepszej nazwy zmiennej)
+local settingsVisibleToggle = false -- Kontroluje widoczność panelu ustawień TP
+local allowSkyVoidToggle = false -- Kontroluje "Allow teleport in sky / void"
+local AV_Variable = nil -- Zmienna AV z twojego skryptu
+
+-- Function to send Roblox notifications
+local function sendNotification(title, text)
+    game.StarterGui:SetCore("SendNotification", {
+        Title = title,
+        Text = text,
+        Icon = "rbxassetid://6022295536",
+        Duration = 5
+    })
+end
+
+-- Teleport Toggle Button (On/Off)
+TextButton_ToggleTP.Activated:Connect(function()
+    tpToggle = not tpToggle -- Przełącz stan
+    if tpToggle then
+        TextButton_ToggleTP.Text = "True"
+        sendNotification("Click TP Tool", "Teleportacja po kliknięciu: Włączona!")
+    else
+        TextButton_ToggleTP.Text = "False"
+        sendNotification("Click TP Tool", "Teleportacja po kliknięciu: Wyłączona!")
+    end
+end)
+
+-- Click Teleport Logic
+mouse.Button1Down:Connect(function()
+    if tpToggle then
+        -- Sprawdź, czy cel kliknięcia nie jest zmienną AV_Variable (jeśli AV_Variable jest ustawione)
+        -- W twoim oryginalnym skrypcie AV było ustawiane na "hi" lub nil, co sugeruje, że miało być stringiem,
+        -- ale potem porównywałeś mouse.Target (instance) z AV.
+        -- Poprawiam to tak, aby AV_Variable było booleanem lub nil, co ma więcej sensu dla tego typu logiki.
+        if allowSkyVoidToggle or mouse.Target ~= nil then -- Pozwala na teleportację w pustkę, jeśli allowSkyVoidToggle jest true
+            player.Character.HumanoidRootPart.CFrame = mouse.Hit
+        end
+    end
+end)
+
+-- Settings Button (Toggle Click TP Settings Panel)
+SettingsButton_ClickTP.Activated:Connect(function()
+    settingsVisibleToggle = not settingsVisibleToggle -- Przełącz stan widoczności
+    Frame2_ClickTPSettings.Visible = settingsVisibleToggle
+    if settingsVisibleToggle then
+        sendNotification("Click TP Tool", "Otwarto ustawienia teleportacji.")
+    else
+        sendNotification("Click TP Tool", "Zamknięto ustawienia teleportacji.")
+    end
+end)
+
+-- "Allow teleport in sky / void" Button
+TextButton3_AllowSkyVoid.Activated:Connect(function()
+    allowSkyVoidToggle = not allowSkyVoidToggle -- Przełącz stan
+    if allowSkyVoidToggle then
+        -- Jeśli dozwolone, AV_Variable nie blokuje teleportacji
+        AV_Variable = nil -- Ustawiamy na nil, żeby nie blokowało
+        TextButton3_AllowSkyVoid.Text = "Allow teleport in sky / void is true"
+        sendNotification("Click TP Tool", "Teleportacja w niebo/pustkę: Włączona!")
+    else
+        -- Jeśli niedozwolone, AV_Variable może potencjalnie coś blokować (choć w tej implementacji działa jako 'nie ma blokady')
+        -- W oryginalnym skrypcie AV było stringiem "hi", co jest niekonwencjonalne dla blokady celu.
+        -- Moja logika zakłada, że chcesz, by 'allowSkyVoidToggle' bezpośrednio kontrolowało to zachowanie.
+        AV_Variable = "some_block_value" -- Przykładowa wartość, jeśli kiedyś będzie używana do blokowania konkretnych celów
+        TextButton3_AllowSkyVoid.Text = "Allow teleport in sky / void is false"
+        sendNotification("Click TP Tool", "Teleportacja w niebo/pustkę: Wyłączona!")
+    end
+end)
+
+-- Initial state setup
+task.wait(0.5)
+sendNotification("Click TP Tool", "Witaj w Click tp tool!")
