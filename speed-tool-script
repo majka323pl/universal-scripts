@@ -110,9 +110,17 @@ local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
 local UserInputService = game:GetService("UserInputService")
+local DataStoreService = game:GetService("DataStoreService")
+local speedDataStore = DataStoreService:GetDataStore("PlayerSpeed")
 
-local savedSpeed = nil
-local previousSpeed = humanoid.WalkSpeed
+local function sendNotification(title, text)
+    game.StarterGui:SetCore("SendNotification", {
+        Title = title,
+        Text = text,
+        Icon = "rbxassetid://6022295536",
+        Duration = 5
+    })
+end
 
 local function makeDraggable(frame)
     local dragging = false
@@ -154,41 +162,73 @@ UstawPrdkoButton.Activated:Connect(function()
     local newSpeed = tonumber(Prdko.Text)
     if newSpeed and humanoid then
         humanoid.WalkSpeed = newSpeed
+        sendNotification("Speed Tool", "Prędkość ustawiona na: " .. newSpeed)
     else
-        Prdko.Text = "Nieprawidłowa wartość"
+        sendNotification("Speed Tool", "Nieprawidłowa wartość prędkości!")
     end
 end)
 
 ZapiszPrdkoButton.Activated:Connect(function()
-    local newSpeed = tonumber(Prdko.Text)
-    if newSpeed then
-        savedSpeed = newSpeed
-        Prdko.Text = "Zapisano: " .. savedSpeed
+    local speedToSave = tonumber(Prdko.Text)
+    if speedToSave then
+        pcall(function()
+            speedDataStore:SetAsync(player.UserId, speedToSave)
+            sendNotification("Speed Tool", "Prędkość zapisana: " .. speedToSave)
+        end)
     else
-        Prdko.Text = "Nieprawidłowa wartość"
+        sendNotification("Speed Tool", "Wpisz prawidłową prędkość do zapisania.")
     end
 end)
 
 local tool = Instance.new("Tool")
 tool.Name = "SpeedTool"
 tool.RequiresHandle = false
-tool.Parent = player.Backpack
+tool.CanBeDropped = false -- Nie można go upuścić
+tool.Parent = player.StarterGear -- Dodaje do ekwipunku startowego gracza
 
 tool.Activated:Connect(function()
-    if savedSpeed then
-        humanoid.WalkSpeed = savedSpeed
-        Prdko.Text = tostring(savedSpeed)
+    Frame.Visible = not Frame.Visible -- Przełącz widoczność GUI
+    if Frame.Visible then
+        -- Po otwarciu GUI, wczytaj zapisaną prędkość lub bieżącą
+        local loadedSpeed = pcall(function()
+            return speedDataStore:GetAsync(player.UserId)
+        end)
+        if loadedSpeed[1] and loadedSpeed[2] ~= nil then
+            Prdko.Text = tostring(loadedSpeed[2])
+        else
+            Prdko.Text = tostring(humanoid.WalkSpeed) -- Ustaw bieżącą prędkość jeśli nie ma zapisanej
+        end
     end
-    Frame.Visible = true
 end)
 
 tool.Equipped:Connect(function()
     Frame.Visible = true
-    Prdko.Text = tostring(savedSpeed or humanoid.WalkSpeed)
+    -- Zaktualizuj pole tekstowe GUI po wyposażeniu toolu
+    local loadedSpeed = pcall(function()
+        return speedDataStore:GetAsync(player.UserId)
+    end)
+    if loadedSpeed[1] and loadedSpeed[2] ~= nil then
+        Prdko.Text = tostring(loadedSpeed[2])
+    else
+        Prdko.Text = tostring(humanoid.WalkSpeed)
+    end
 end)
 
 tool.Unequipped:Connect(function()
     Frame.Visible = false
-    humanoid.WalkSpeed = previousSpeed
-    Prdko.Text = tostring(previousSpeed)
+    -- Nie zmieniamy prędkości po odłożeniu toolu
+end)
+
+-- Wczytaj zapisaną prędkość przy dołączeniu gracza i ustaw ją.
+player.CharacterAdded:Connect(function(char)
+    humanoid = char:WaitForChild("Humanoid")
+    spawn(function()
+        local loadedSpeed = pcall(function()
+            return speedDataStore:GetAsync(player.UserId)
+        end)
+        if loadedSpeed[1] and loadedSpeed[2] ~= nil then
+            humanoid.WalkSpeed = loadedSpeed[2]
+            sendNotification("Speed Tool", "Wczytano i ustawiono zapisaną prędkość: " .. loadedSpeed[2])
+        end
+    end)
 end)
