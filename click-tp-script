@@ -20,9 +20,9 @@ local UIAspectRatioConstraint_ClickTPScreen = Instance.new("UIAspectRatioConstra
 -- Instances (Click TP Settings GUI - Sub-panel)
 local Frame2_ClickTPSettings = Instance.new("Frame")
 local TextButton3_AllowSkyVoid = Instance.new("TextButton")
-local UICorner_SettingsPanel = Instance.new("UICorner") -- Dodano UICorner dla Frame2_ClickTPSettings
-local UITextSizeConstraint_AllowSkyVoid = Instance.new("UITextSizeConstraint") -- Dodano
-local UIAspectRatioConstraint_AllowSkyVoid = Instance.new("UIAspectRatioConstraint") -- Dodano
+local UICorner_SettingsPanel = Instance.new("UICorner")
+local UITextSizeConstraint_AllowSkyVoid = Instance.new("UITextSizeConstraint")
+local UIAspectRatioConstraint_AllowSkyVoid = Instance.new("UIAspectRatioConstraint")
 
 -- Properties (Main Click TP GUI)
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
@@ -126,10 +126,9 @@ UIAspectRatioConstraint_AllowSkyVoid.AspectRatio = 4 -- Przykładowy współczyn
 local player = game.Players.LocalPlayer
 local mouse = player:GetMouse()
 
-local tpToggle = false -- Kontroluje, czy Click TP jest włączony (użyłem lepszej nazwy zmiennej)
+local tpToggle = false -- Kontroluje, czy Click TP jest włączony
 local settingsVisibleToggle = false -- Kontroluje widoczność panelu ustawień TP
 local allowSkyVoidToggle = false -- Kontroluje "Allow teleport in sky / void"
-local AV_Variable = nil -- Zmienna AV z twojego skryptu
 
 -- Function to send Roblox notifications
 local function sendNotification(title, text)
@@ -140,6 +139,12 @@ local function sendNotification(title, text)
         Duration = 5
     })
 end
+
+-- Initial startup notification
+spawn(function()
+    wait(2)
+    sendNotification("Click TP Tool", "Witaj w narzędziu Click TP!")
+end)
 
 -- Teleport Toggle Button (On/Off)
 TextButton_ToggleTP.Activated:Connect(function()
@@ -156,11 +161,8 @@ end)
 -- Click Teleport Logic
 mouse.Button1Down:Connect(function()
     if tpToggle then
-        -- Sprawdź, czy cel kliknięcia nie jest zmienną AV_Variable (jeśli AV_Variable jest ustawione)
-        -- W twoim oryginalnym skrypcie AV było ustawiane na "hi" lub nil, co sugeruje, że miało być stringiem,
-        -- ale potem porównywałeś mouse.Target (instance) z AV.
-        -- Poprawiam to tak, aby AV_Variable było booleanem lub nil, co ma więcej sensu dla tego typu logiki.
-        if allowSkyVoidToggle or mouse.Target ~= nil then -- Pozwala na teleportację w pustkę, jeśli allowSkyVoidToggle jest true
+        -- Teleportuje tylko jeśli "Allow teleport in sky / void" jest włączone LUB kliknięto na obiekt w świecie
+        if allowSkyVoidToggle or mouse.Target ~= nil then
             player.Character.HumanoidRootPart.CFrame = mouse.Hit
         end
     end
@@ -170,31 +172,17 @@ end)
 SettingsButton_ClickTP.Activated:Connect(function()
     settingsVisibleToggle = not settingsVisibleToggle -- Przełącz stan widoczności
     Frame2_ClickTPSettings.Visible = settingsVisibleToggle
-    if settingsVisibleToggle then
-        sendNotification("Click TP Tool", "Otwarto ustawienia teleportacji.")
-    else
-        sendNotification("Click TP Tool", "Zamknięto ustawienia teleportacji.")
-    end
+    -- Usunięto powiadomienie o otwieraniu/zamykaniu ustawień zgodnie z prośbą
 end)
 
 -- "Allow teleport in sky / void" Button
 TextButton3_AllowSkyVoid.Activated:Connect(function()
     allowSkyVoidToggle = not allowSkyVoidToggle -- Przełącz stan
     if allowSkyVoidToggle then
-        -- Jeśli dozwolone, AV_Variable nie blokuje teleportacji
-        AV_Variable = nil -- Ustawiamy na nil, żeby nie blokowało
         TextButton3_AllowSkyVoid.Text = "Allow teleport in sky / void is true"
         sendNotification("Click TP Tool", "Teleportacja w niebo/pustkę: Włączona!")
     else
-        -- Jeśli niedozwolone, AV_Variable może potencjalnie coś blokować (choć w tej implementacji działa jako 'nie ma blokady')
-        -- W oryginalnym skrypcie AV było stringiem "hi", co jest niekonwencjonalne dla blokady celu.
-        -- Moja logika zakłada, że chcesz, by 'allowSkyVoidToggle' bezpośrednio kontrolowało to zachowanie.
-        AV_Variable = "some_block_value" -- Przykładowa wartość, jeśli kiedyś będzie używana do blokowania konkretnych celów
         TextButton3_AllowSkyVoid.Text = "Allow teleport in sky / void is false"
         sendNotification("Click TP Tool", "Teleportacja w niebo/pustkę: Wyłączona!")
     end
 end)
-
--- Initial state setup
-task.wait(0.5)
-sendNotification("Click TP Tool", "Witaj w Click tp tool!")
