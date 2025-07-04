@@ -1,7 +1,7 @@
 --[[
 
-        Universal Scripts - Version with Tabs and Game Pass
-        Version 9.0 (Dynamic "Buy Premium" button)
+        Universal Scripts - Version with Tabs and NEW Dedicated Buy Game Pass Button
+        Version 10.0 (Dedicated "Buy Game Pass" button)
 
 ]]
 
@@ -10,10 +10,12 @@ local UserInputService = game:GetService("UserInputService")
 local MarketplaceService = game:GetService("MarketplaceService")
 local StarterGui = game:GetService("StarterGui")
 
-local PREMIUM_GAMEPASS_ID = 1296972626 -- <<< Ustawiono Twoje ID Game Passa >>>
+local PREMIUM_GAMEPASS_ID = 1296972626 -- ID dla Premium (zakładka, jeśli nadal używasz)
+local BUY_GAMEPASS_ID = 1296972626   -- <<< NOWE ID dla dedykowanego przycisku zakupu >>>
 
 print("--- SKRYPT UNIVERSAL SCRIPTS START ---") -- DEBUG
-print("Skrypt załadowany. ID Game Passa ustawione na:", PREMIUM_GAMEPASS_ID)
+print("Skrypt załadowany. ID Game Passa (Premium Tab):", PREMIUM_GAMEPASS_ID)
+print("Skrypt załadowany. ID Game Passa (Buy Button):", BUY_GAMEPASS_ID)
 print("Twoje UserID:", player.UserId)
 print("---")
 
@@ -41,6 +43,10 @@ local HomeTabButton = Instance.new("TextButton")
 local HomeTabButtonUICorner = Instance.new("UICorner")
 local PremiumTabButton = Instance.new("TextButton")
 local PremiumTabButtonUICorner = Instance.new("UICorner")
+
+-- NOWY PRZYCISK ZAKUPU
+local BuyGamePassButton = Instance.new("TextButton")
+local BuyGamePassButtonUICorner = Instance.new("UICorner")
 
 local ScrollingFrameHome = Instance.new("ScrollingFrame")
 local ScrollingFrameHomeUICorner = Instance.new("UICorner")
@@ -196,12 +202,22 @@ PremiumTabButton.TextWrapped = true
 
 PremiumTabButtonUICorner.Parent = PremiumTabButton
 
--- Stworzenie przycisku "Buy Premium" - będzie klonem PremiumTabButton
-local BuyPremiumButton = PremiumTabButton:Clone()
-BuyPremiumButton.Name = "BuyPremiumButton"
-BuyPremiumButton.Text = "Buy Premium"
-BuyPremiumButton.Parent = TabsFrame
-BuyPremiumButton.Visible = false -- Domyślnie niewidoczny
+-- Konfiguracja NOWEGO PRZYCISKU ZAKUPU Game Passa
+BuyGamePassButton.Name = "BuyGamePassButton"
+BuyGamePassButton.Parent = TabsFrame
+BuyGamePassButton.BackgroundColor3 = Color3.new(0.2, 0.6, 0.2) -- Zielony kolor dla przycisku zakupu
+BuyGamePassButton.BorderColor3 = Color3.new(0, 0, 0)
+BuyGamePassButton.BorderSizePixel = 0
+BuyGamePassButton.Size = UDim2.new(0.9, 0, 0, 38)
+BuyGamePassButton.Font = Enum.Font.SourceSans
+BuyGamePassButton.Text = "Buy Game Pass" -- Możesz zmienić na "Buy Your Pass" lub cokolwiek
+BuyGamePassButton.TextColor3 = Color3.new(1, 1, 1) -- Biały tekst
+BuyGamePassButton.TextScaled = true
+BuyGamePassButton.TextSize = 14
+BuyGamePassButton.TextWrapped = true
+
+BuyGamePassButtonUICorner.Parent = BuyGamePassButton
+
 
 ScrollingFrameHome.Name = "ScrollingFrameHome"
 ScrollingFrameHome.Parent = MainFrame
@@ -413,42 +429,35 @@ HideButtonUIAspectRatioConstraint.AspectRatio = 1.0689654350280762
 ScreenGuiUIAspectRatioConstraint.Parent = UniversalScreenGui
 ScreenGuiUIAspectRatioConstraint.AspectRatio = 1.7807486057281494
 
--- Zmienna globalna do przechowywania statusu Game Passa
-local hasGamePass = false
+-- Zmienna globalna do przechowywania statusu Game Passa Premium (dla zakładki Premium)
+local hasGamePassPremium = false
 
 -- Funkcja do aktualizacji widoczności przycisków Premium/Buy Premium
-local function updatePremiumButtonsVisibility()
-    print("DEBUG: Aktualizuję widoczność przycisków Premium. Posiada Game Pass:", hasGamePass)
-    if hasGamePass then
-        PremiumTabButton.Visible = true
-        BuyPremiumButton.Visible = false
-    else
-        PremiumTabButton.Visible = false
-        BuyPremiumButton.Visible = true
-    end
-    -- Upewnij się, że UIListLayout odświeżył pozycje
-    task.wait() -- Krótka pauza, aby UIListLayout mógł się zaktualizować
+-- (teraz uproszczona, bo "Buy Game Pass" jest zawsze widoczny)
+local function updatePremiumTabVisibility()
+    print("DEBUG: Aktualizuję widoczność zakładki Premium. Posiada Game Pass Premium (dla zakładki):", hasGamePassPremium)
+    -- W tej wersji przycisk BuyGamePassButton jest zawsze widoczny,
+    -- a PremiumTabButton po prostu otwiera zakładkę, jeśli gracz ma Game Passa.
+    -- Nie musimy ukrywać ani pokazywać PremiumTabButton, bo ma stałą funkcję.
 end
 
--- Funkcja do sprawdzania statusu Game Passa
-local function checkGamePassStatus()
-    print("DEBUG: Sprawdzam status Game Passa...")
+-- Funkcja do sprawdzania statusu Game Passa Premium (dla zakładki)
+local function checkPremiumGamePassStatus()
+    print("DEBUG: Sprawdzam status Game Passa Premium (dla zakładki)...")
     local success, result = pcall(function()
         return MarketplaceService:UserOwnsGamePassAsync(player.UserId, PREMIUM_GAMEPASS_ID)
     end)
 
     if success then
-        hasGamePass = result -- result to true/false z UserOwnsGamePassAsync
-        print("DEBUG: Status Game Passa:", hasGamePass)
-        updatePremiumButtonsVisibility() -- Zaktualizuj przyciski po sprawdzeniu statusu
-        if not hasGamePass then
-            sendNotification("Universal Scripts", "Game Pass Premium nie znaleziony. Kup, aby uzyskać dostęp do funkcji Premium!")
-        else
+        hasGamePassPremium = result -- result to true/false
+        print("DEBUG: Status Game Passa Premium (dla zakładki):", hasGamePassPremium)
+        updatePremiumTabVisibility() -- Zaktualizuj widoczność zakładki po sprawdzeniu statusu
+        if hasGamePassPremium then
             sendNotification("Universal Scripts", "Posiadasz Game Pass Premium! Funkcje Premium odblokowane.")
         end
     else
-        warn("DEBUG: Błąd podczas sprawdzania Game Passa:", result)
-        sendNotification("Universal Scripts", "Nie można sprawdzić statusu Game Passa. Spróbuj ponownie.")
+        warn("DEBUG: Błąd podczas sprawdzania Game Passa Premium (dla zakładki):", result)
+        sendNotification("Universal Scripts", "Nie można sprawdzić statusu Game Passa Premium. Spróbuj ponownie.")
     end
 end
 
@@ -463,20 +472,18 @@ local function showTab(tabName)
         print("DEBUG: Zakładka Home ustawiona na Visible = true")
     elseif tabName == "Premium" then
         -- Zakładka Premium może być pokazana tylko, jeśli gracz ma Game Passa
-        if hasGamePass then
+        if hasGamePassPremium then
             ScrollingFramePremium.Visible = true
             print("DEBUG: Zakładka Premium ustawiona na Visible = true")
         else
-            -- To nie powinno się zdarzyć, jeśli przycisk Premium jest ukryty
-            -- Ale jako zabezpieczenie
             sendNotification("Universal Scripts", "Musisz posiadać Game Pass Premium, aby uzyskać dostęp do tej zakładki!")
             print("DEBUG: Próba dostępu do zakładki Premium bez Game Passa.")
         end
     end
 end
 
--- Sprawdzenie statusu Game Passa przy starcie skryptu
-checkGamePassStatus()
+-- Sprawdzenie statusu Game Passa Premium przy starcie skryptu
+checkPremiumGamePassStatus()
 -- Domyślnie pokaż zakładkę Home
 showTab("Home")
 
@@ -560,9 +567,9 @@ SpectateButtonPremium.MouseButton1Click:Connect(function()
             loadstring(game:HttpGet("https://pastebin.com/raw/UFVLWQRw"))()
             sendNotification("Narzędzie Obserwacji", "Skrypt obserwacji załadowany!")
         else
-            sendNotification("Universal Scripts", "Musisz posiadać Game Pass Premium, aby użyć tej funkcji!")
+            sendNotification("Universal Scripts", "Musisz posiadać Game Pass Premium (ID: " .. PREMIUM_GAMEPASS_ID .. "), aby użyć tej funkcji!")
             print("DEBUG: Wywołuję PromptGamePassPurchase dla Spectate.")
-            MarketplaceService:PromptGamePassPurchase(player, PREMIUM_GAMEPASS_ID)
+            MarketplaceService:PromptGamePassPurchase(player, PREMIUM_GAMEPASS_ID) -- Nadal dla premium ID
         end
     else
         warn("DEBUG: Błąd podczas sprawdzania Game Passa (Spectate):", currentHasGamePass)
@@ -600,9 +607,9 @@ MM2ButtonPremium.MouseButton1Click:Connect(function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring"))()
             sendNotification("Skrypt MM2", "Skrypt MM2 załadowany!")
         else
-            sendNotification("Universal Scripts", "Musisz posiadać Game Pass Premium, aby użyć tej funkcji!")
+            sendNotification("Universal Scripts", "Musisz posiadać Game Pass Premium (ID: " .. PREMIUM_GAMEPASS_ID .. "), aby użyć tej funkcji!")
             print("DEBUG: Wywołuję PromptGamePassPurchase dla MM2.")
-            MarketplaceService:PromptGamePassPurchase(player, PREMIUM_GAMEPASS_ID)
+            MarketplaceService:PromptGamePassPurchase(player, PREMIUM_GAMEPASS_ID) -- Nadal dla premium ID
         end
     else
         warn("DEBUG: Błąd podczas sprawdzania Game Passa (MM2):", currentHasGamePass)
@@ -640,9 +647,9 @@ FlyButtonPremium.MouseButton1Click:Connect(function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
             sendNotification("Latanie", "Skrypt latania załadowany!")
         else
-            sendNotification("Universal Scripts", "Musisz posiadać Game Pass Premium, aby użyć tej funkcji!")
+            sendNotification("Universal Scripts", "Musisz posiadać Game Pass Premium (ID: " .. PREMIUM_GAMEPASS_ID .. "), aby użyć tej funkcji!")
             print("DEBUG: Wywołuję PromptGamePassPurchase dla Fly.")
-            MarketplaceService:PromptGamePassPurchase(player, PREMIUM_GAMEPASS_ID)
+            MarketplaceService:PromptGamePassPurchase(player, PREMIUM_GAMEPASS_ID) -- Nadal dla premium ID
         end
     else
         warn("DEBUG: Błąd podczas sprawdzania Game Passa (Fly):", currentHasGamePass)
@@ -656,17 +663,16 @@ HomeTabButton.MouseButton1Click:Connect(function()
     showTab("Home")
 end)
 
--- Nowa logika dla przycisku Premium (jeśli gracz ma GP)
 PremiumTabButton.MouseButton1Click:Connect(function()
-    print("DEBUG: Kliknięto przycisk Premium (posiadający GP). Przełączam na Premium.")
+    print("DEBUG: Kliknięto przycisk Premium. Przełączam na Premium.")
     showTab("Premium")
 end)
 
--- Logika dla nowego przycisku "Buy Premium"
-BuyPremiumButton.MouseButton1Click:Connect(function()
-    print("DEBUG: Kliknięto przycisk Buy Premium. Otwieram okno zakupu...")
-    sendNotification("Universal Scripts", "Otwieram okno zakupu Game Passa Premium...")
-    MarketplaceService:PromptGamePassPurchase(player, PREMIUM_GAMEPASS_ID)
+-- Połączenie dla NOWEGO DEDYKOWANEGO przycisku zakupu Game Passa
+BuyGamePassButton.MouseButton1Click:Connect(function()
+    print("DEBUG: Kliknięto przycisk Buy Game Pass. Otwieram okno zakupu dla ID:", BUY_GAMEPASS_ID)
+    sendNotification("Universal Scripts", "Otwieram okno zakupu Game Passa...")
+    MarketplaceService:PromptGamePassPurchase(player, BUY_GAMEPASS_ID)
 end)
 
 HideButton.MouseButton1Click:Connect(function()
@@ -674,24 +680,27 @@ HideButton.MouseButton1Click:Connect(function()
     MainFrame.Visible = not MainFrame.Visible
 end)
 
--- Obsługa zdarzenia po zakończeniu próby zakupu Game Passa
+-- Obsługa zdarzenia po zakończeniu próby zakupu Game Passa (dla obu Game Passów)
 MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gamePassId, wasPurchased)
     print("DEBUG: Zdarzenie PromptGamePassPurchaseFinished: userId=", userId, " gamePassId=", gamePassId, " wasPurchased=", wasPurchased)
-    if userId == player.UserId and gamePassId == PREMIUM_GAMEPASS_ID then
+    if userId == player.UserId then
         if wasPurchased then
-            hasGamePass = true -- Gracz kupił Game Passa
-            sendNotification("Universal Scripts", "Game Pass Premium kupiony pomyślnie! Ciesz się nowymi funkcjami.")
-            updatePremiumButtonsVisibility() -- Zaktualizuj widoczność przycisków
-            showTab("Premium") -- Automatycznie przełącz na zakładkę Premium po zakupie
+            sendNotification("Universal Scripts", "Game Pass (ID: " .. gamePassId .. ") kupiony pomyślnie! Dziękujemy za zakup.")
+            -- Jeśli kupiono Game Passa dla zakładki Premium, zaktualizuj jej status
+            if gamePassId == PREMIUM_GAMEPASS_ID then
+                hasGamePassPremium = true
+                updatePremiumTabVisibility()
+                showTab("Premium") -- Automatycznie przełącz na zakładkę Premium po zakupie
+            end
         else
-            sendNotification("Universal Scripts", "Anulowano zakup Game Passa Premium.")
+            sendNotification("Universal Scripts", "Anulowano zakup Game Passa (ID: " .. gamePassId .. ").")
         end
     end
 end)
 
 -- Początkowe powiadomienie
 spawn(function()
-    wait(2)
+    task.wait(2)
     sendNotification("Universal Scripts", "Dzięki za używanie Universal Scripts! Witaj w nowej wersji!")
     print("--- SKRYPT UNIVERSAL SCRIPTS ZAKOŃCZONO INICJALIZACJĘ ---") -- DEBUG
 end)
