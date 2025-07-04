@@ -1,10 +1,11 @@
+
 --[[
         Universal Scripts - Wersja z GUI stworzonym na podstawie dostarczonego kodu,
         z precyzyjnym pozycjonowaniem przycisków, dynamiczną widocznością przycisku MM2 w Premium,
         usuniętymi dopiskami "(Premium)" z nazw przycisków,
         oraz DYNAMICZNIE POZYCJONOWANYM PRZYCISKIEM "X" (jako ImageButton) jako bezpośrednie dziecko ScreenGui.
-        Version 20.5 - HideButton (ImageButton) jest teraz w pełni przesuwalny, nie resetuje pozycji, obsługuje dotyk
-        i używa PODANEGO PRZEZ CIEBIE OBRAZKA dla przycisku "X".
+        Version 20.6 - HideButton (ImageButton) jest teraz w pełni przesuwalny, nie resetuje pozycji, obsługuje dotyk
+        i używa PODANEGO PRZEZ CIEBIE OBRAZKA dla przycisku "X" i powiadomień.
 ]]
 
 local player = game.Players.LocalPlayer
@@ -15,13 +16,14 @@ local RunService = game:GetService("RunService")
 
 local GAMEPASS_ID = 1296972626 -- JEDYNE ID Game Passa dla całego skryptu
 local MM2_EXPERIENCE_ID = 142823291 -- Poprawne ID dla Murder Mystery 2
-local IMAGE_ID = 109075000814284
+local IMAGE_ID = 109075000814284 -- !!! ID OBRAZKA DLA POWIADOMIEŃ I HIDEBUTTON !!!
 
 print("--- SKRYPT UNIVERSAL SCRIPTS START ---") -- DEBUG
 print("Skrypt załadowany. ID Game Passa:", GAMEPASS_ID)
 print("Twoje UserID:", player.UserId)
 print("Aktualne Experience ID:", game.PlaceId)
 print("Oczekiwane MM2 Experience ID:", MM2_EXPERIENCE_ID)
+print("ID Obrazka dla powiadomień/HideButton:", IMAGE_ID)
 print("---")
 
 -- Zmienna globalna do przechowywania statusu Game Passa
@@ -36,7 +38,7 @@ local function sendNotification(title, text)
     StarterGui:SetCore("SendNotification", {
         Title = title,
         Text = text,
-        Icon = "rbxassetid://(IMAGE_ID)", -- Upewnij się, że to ID obrazu jest poprawne lub zmień na własne
+        Icon = "rbxassetid://" .. IMAGE_ID, -- Używa zmiennej IMAGE_ID
         Duration = 5
     })
 end
@@ -435,7 +437,7 @@ HideButton.Parent = ScreenGui -- Bezpośrednie dziecko ScreenGui dla niezależno
 HideButton.BackgroundColor3 = Color3.new(1, 0, 0) -- Czerwone tło (możesz zmienić, jeśli Twój obrazek jest przezroczysty)
 HideButton.BorderColor3 = Color3.new(0, 0, 0)
 HideButton.BorderSizePixel = 3
-HideButton.Image = "rbxassetid://13470081395" -- !!! TUTAJ ZASTĄPIONE ID OBRAZKA NA TWOJE !!!
+HideButton.Image = "rbxassetid://" .. IMAGE_ID -- !!! Używa zmiennej IMAGE_ID !!!
 HideButton.ImageColor3 = Color3.new(1, 1, 1) -- Kolor obrazu (biały, jeśli obraz jest czarny i chcesz, żeby był biały)
 HideButton.ScaleType = Enum.ScaleType.Fit -- Dopasuj obrazek do rozmiaru przycisku
 HideButton.Position = UDim2.new(0.5, 0, 0.5, 0) -- Pozycja tymczasowa (ustawi ją dynamicznie)
