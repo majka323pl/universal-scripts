@@ -108,7 +108,7 @@ TabsFrame.Parent = MainFrame
 TabsFrame.BackgroundColor3 = Color3.new(0.141176, 0.141176, 0.141176)
 TabsFrame.BorderColor3 = Color3.new(0, 0, 0)
 TabsFrame.BorderSizePixel = 0
-TabsFrame.Position = UDim2.new(0, 0, 3.34969492e-08, 0)
+TabsFrame.Position = UDim2.new(0, 0, 3.349695e-8, 0)
 TabsFrame.Size = UDim2.new(0.21077837, 0, 0.998841524, 0)
 
 HomeTabButton.Name = "HomeTabButton"
@@ -617,7 +617,7 @@ end)
 
 MainFrame.VisibleChanged:Connect(function()
     updateHideButtonPosition()
-})
+
 
 MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gamePassId, wasPurchased)
     if userId == player.UserId and gamePassId == GAMEPASS_ID then
@@ -637,3 +637,5 @@ spawn(function()
 end)
 
 task.wait(0.5)
+
+end)
