@@ -1,7 +1,7 @@
 --[[
 
         Universal Scripts - Version with Tabs and Game Pass
-        Version 7.8.0 (Enhanced Debugging for Premium issue)
+        Version 7.9.0 (Fix for Game Pass purchase prompt not appearing)
 
 ]]
 
@@ -631,14 +631,16 @@ PremiumTabButton.MouseButton1Click:Connect(function()
             showTab("Premium")
             sendNotification("Universal Scripts", "Przełączono na zakładkę Premium.")
         else
-            MarketplaceService:PromptGamePassPurchase(player, PREMIUM_GAMEPASS_ID)
             sendNotification("Universal Scripts", "Game Pass Premium nie znaleziony. Otwieram okno zakupu...")
+            -- WYWOŁANIE ZAKUPU
+            MarketplaceService:PromptGamePassPurchase(player, PREMIUM_GAMEPASS_ID)
         end
     else
         warn("Błąd podczas sprawdzania Game Passa po kliknięciu Premium:", currentHasGamePass)
         sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania Game Passa.")
     end
 end)
+
 
 HideButton.MouseButton1Click:Connect(function()
     print("Kliknięto przycisk Hide. Zmieniam widoczność MainFrame.") -- DEBUG
