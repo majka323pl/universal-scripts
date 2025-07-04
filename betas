@@ -1,59 +1,37 @@
---[[
-        Universal Scripts - Wersja z GUI stworzonym na podstawie dostarczonego kodu,
-        z precyzyjnym pozycjonowaniem przycisków, dynamiczną widocznością przycisku MM2 w Premium,
-        usuniętymi dopiskami "(Premium)" z nazw przycisków,
-        oraz DYNAMICZNIE POZYCJONOWANYM PRZYCISKIEM "X" (jako ImageButton) jako bezpośrednie dziecko ScreenGui.
-        Version 20.16 - Modyfikacja: Gracz bez Premium zostanie przeteleportowany po kliknięciu zakładki Premium.
-]]
-
 local player = game.Players.LocalPlayer
 local UserInputService = game:GetService("UserInputService")
 local MarketplaceService = game:GetService("MarketplaceService")
 local StarterGui = game:GetService("StarterGui")
 local RunService = game:GetService("RunService")
-local TeleportService = game:GetService("TeleportService") -- Dodano TeleportService
+local TeleportService = game:GetService("TeleportService")
 
-local GAMEPASS_ID = 1296972626 -- JEDYNE ID Game Passa dla całego skryptu
-local MM2_EXPERIENCE_ID = 142823291 -- Poprawne ID dla Murder Mystery 2
-local TELEPORT_PLACE_ID = 6557073879 -- <--- TUTAJ ZMIEŃ NA ID GRY, DO KTÓREJ CHCESZ TELEPORTOWAĆ BEZ PREMIUM!
+local GAMEPASS_ID = 1296972626
+local MM2_EXPERIENCE_ID = 142823291
+local TELEPORT_PLACE_ID = 123456789 -- <--- ZMIEŃ TO NA ID GRY, DO KTÓREJ CHCESZ TELEPORTOWAĆ GRACZA BEZ PREMIUM!
 
-print("--- SKRYPT UNIVERSAL SCRIPTS START ---") -- DEBUG
-print("Skrypt załadowany. ID Game Passa:", GAMEPASS_ID)
-print("Twoje UserID:", player.UserId)
-print("Aktualne Experience ID:", game.PlaceId)
-print("Oczekiwane MM2 Experience ID:", MM2_EXPERIENCE_ID)
-print("ID miejsca do teleportacji (dla braku Premium):", TELEPORT_PLACE_ID)
-print("---")
-
--- Zmienna globalna do przechowywania statusu Game Passa
 local hasGamePass = false
-local initialGamePassCheckDone = false -- Nowa zmienna do kontrolowania początkowych powiadomień
+local initialGamePassCheckDone = false
 
--- Zmienna do przechowywania ostatniej pozycji HideButton, gdy MainFrame jest ukryte
--- Domyślna pozycja w prawym górnym rogu ekranu, z małym marginesem
 local lastHideButtonPosition = UDim2.new(1, -55, 0, 10) 
 
 local function sendNotification(title, text)
     StarterGui:SetCore("SendNotification", {
         Title = title,
         Text = text,
-        Icon = "rbxassetid://102860171689689", -- ID obrazka wklejone ręcznie
+        Icon = "rbxassetid://102860171689689",
         Duration = 5
     })
 end
 
---- UI Instantiation ---
--- Instances (Zaktualizowane nazwy, aby pasowały do Twojego kodu)
-
 local ScreenGui = Instance.new("ScreenGui")
-local MainFrame = Instance.new("Frame") -- Zmieniono nazwę z Frame na MainFrame
+local MainFrame = Instance.new("Frame")
 local UICorner = Instance.new("UICorner")
-local TabsFrame = Instance.new("Frame") -- Zmieniono nazwę z Frame_2 na TabsFrame
-local HomeTabButton = Instance.new("TextButton") -- Zmieniono nazwę z HomeButton na HomeTabButton
+local TabsFrame = Instance.new("Frame")
+local HomeTabButton = Instance.new("TextButton")
 local UICorner_2 = Instance.new("UICorner")
 local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
-local PremiumTabButton = Instance.new("TextButton") -- Zmieniono nazwę z PremiumButton na PremiumTabButton
+local PremiumTabButton = Instance.new("TextButton")
 local UICorner_3 = Instance.new("UICorner")
 local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
@@ -61,7 +39,7 @@ local UICorner_4 = Instance.new("UICorner")
 local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
 local ScrollingFramePremium = Instance.new("ScrollingFrame")
 local UICorner_5 = Instance.new("UICorner")
-local SpectateButton_Premium = Instance.new("TextButton") -- Zmieniono nazwę ze SpectateButton na SpectateButton_Premium
+local SpectateButton_Premium = Instance.new("TextButton")
 local UICorner_6 = Instance.new("UICorner")
 local UITextSizeConstraint_3 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_4 = Instance.new("UIAspectRatioConstraint")
@@ -69,7 +47,7 @@ local MM2Button = Instance.new("TextButton")
 local UICorner_7 = Instance.new("UICorner")
 local UITextSizeConstraint_4 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_5 = Instance.new("UIAspectRatioConstraint")
-local FlyButton = Instance.new("TextButton") -- FlyButton z Twojego kodu był ConsoleButton w poprzednim
+local FlyButton = Instance.new("TextButton")
 local UICorner_8 = Instance.new("UICorner")
 local UITextSizeConstraint_5 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_6 = Instance.new("UIAspectRatioConstraint")
@@ -78,7 +56,7 @@ local UICorner_9 = Instance.new("UICorner")
 local UITextSizeConstraint_6 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_7 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_8 = Instance.new("UIAspectRatioConstraint")
-local TitleLabel = Instance.new("TextLabel") -- Zmieniono nazwę z TextLabel na TitleLabel
+local TitleLabel = Instance.new("TextLabel")
 local UITextSizeConstraint_7 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_9 = Instance.new("UIAspectRatioConstraint")
 local ScrollingFrameHome = Instance.new("ScrollingFrame")
@@ -91,7 +69,7 @@ local UICorner_11 = Instance.new("UICorner")
 local UITextSizeConstraint_9 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_11 = Instance.new("UIAspectRatioConstraint")
 local UICorner_12 = Instance.new("UICorner")
-local SpectateButton_Home = Instance.new("TextButton") -- Zmieniono nazwę ze SpectateButton_2 na SpectateButton_Home
+local SpectateButton_Home = Instance.new("TextButton")
 local UICorner_13 = Instance.new("UICorner")
 local UITextSizeConstraint_10 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_12 = Instance.new("UIAspectRatioConstraint")
@@ -106,9 +84,7 @@ local UIAspectRatioConstraint_14 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_15 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_16 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_17 = Instance.new("UIAspectRatioConstraint")
-local HideButton = Instance.new("ImageButton") -- Zmieniono nazwę z ImageButton na HideButton
-
--- Properties (dopasowane do Twojego kodu GUI)
+local HideButton = Instance.new("ImageButton")
 
 ScreenGui.Parent = player:WaitForChild("PlayerGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -192,7 +168,7 @@ ScrollingFramePremium.BorderColor3 = Color3.new(0, 0, 0)
 ScrollingFramePremium.BorderSizePixel = 0
 ScrollingFramePremium.Position = UDim2.new(0.239610985, 0, 0.1111193, 0)
 ScrollingFramePremium.Size = UDim2.new(0.733235598, 0, 0.864629686, 0)
-ScrollingFramePremium.CanvasSize = UDim2.new(0,0,1.5,0) -- Dodano CanvasSize, jeśli brakuje
+ScrollingFramePremium.CanvasSize = UDim2.new(0,0,1.5,0)
 ScrollingFramePremium.Visible = false
 
 UICorner_5.Parent = ScrollingFramePremium
@@ -230,7 +206,7 @@ MM2Button.TextColor3 = Color3.new(0, 0, 0)
 MM2Button.TextScaled = true
 MM2Button.TextSize = 14
 MM2Button.TextWrapped = true
-MM2Button.Visible = false -- Domyślnie niewidoczny
+MM2Button.Visible = false
 
 UICorner_7.Parent = MM2Button
 
@@ -240,7 +216,7 @@ UITextSizeConstraint_4.MaxTextSize = 37
 UIAspectRatioConstraint_5.Parent = MM2Button
 UIAspectRatioConstraint_5.AspectRatio = 3.9473683834075928
 
-FlyButton.Name = "Console Button" -- Zmieniono nazwę na "Console Button"
+FlyButton.Name = "Console Button"
 FlyButton.Parent = ScrollingFramePremium
 FlyButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 FlyButton.BorderColor3 = Color3.new(0, 0, 0)
@@ -314,7 +290,7 @@ ScrollingFrameHome.BorderColor3 = Color3.new(0, 0, 0)
 ScrollingFrameHome.BorderSizePixel = 0
 ScrollingFrameHome.Position = UDim2.new(0.239610985, 0, 0.113314532, 0)
 ScrollingFrameHome.Size = UDim2.new(0.733235598, 0, 0.864629686, 0)
-ScrollingFrameHome.CanvasSize = UDim2.new(0,0,1.5,0) -- Dodano CanvasSize, jeśli brakuje
+ScrollingFrameHome.CanvasSize = UDim2.new(0,0,1.5,0)
 
 UICorner_12.Parent = ScrollingFrameHome
 
@@ -346,7 +322,7 @@ ClicktptoolButton.BorderColor3 = Color3.new(0, 0, 0)
 ClicktptoolButton.Position = UDim2.new(0.340883315, 0, 0.019441355, 0)
 ClicktptoolButton.Size = UDim2.new(0, 150, 0, 38)
 ClicktptoolButton.Font = Enum.Font.SourceSans
-ClicktptoolButton.Text = "Click tp tool" -- Poprawiono literówkę z Twojego kodu (tp tool zamiast tp tool)
+ClicktptoolButton.Text = "Click tp tool"
 ClicktptoolButton.TextColor3 = Color3.new(0, 0, 0)
 ClicktptoolButton.TextScaled = true
 ClicktptoolButton.TextSize = 14
@@ -445,120 +421,84 @@ HideButton.Size = UDim2.new(0, 30, 0, 30)
 HideButton.ZIndex = 5
 HideButton.Draggable = true
 
-
---- Koniec UI Instantiation ---
-
-
---- Logika Skryptu ---
-
--- Funkcja do przełączania zakładek
 local function showTab(tabName)
-    print("DEBUG: Próbuję przełączyć na zakładkę:", tabName)
     ScrollingFrameHome.Visible = false
     ScrollingFramePremium.Visible = false
 
     if tabName == "Home" then
         ScrollingFrameHome.Visible = true
-        print("DEBUG: Zakładka Home ustawiona na Visible = true")
     elseif tabName == "Premium" then
         if hasGamePass then
             ScrollingFramePremium.Visible = true
-            print("DEBUG: Zakładka Premium ustawiona na Visible = true")
         else
-            -- Zamiast monitu o zakup, teleportujemy gracza
-            sendNotification("Universal Scripts", "Musisz posiadać Game Pass, aby uzyskać dostęp do tej zakładki! Teleportuję Cię do innej gry.")
-            print("DEBUG: Gracz nie ma Game Passa. Teleportuję do Place ID:", TELEPORT_PLACE_ID)
+            sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby uzyskać dostęp do tej zakładki!")
             TeleportService:Teleport(TELEPORT_PLACE_ID, player)
-            -- Ukrywamy GUI, bo gracz i tak zaraz opuści grę
             MainFrame.Visible = false 
         end
     end
 end
 
--- Funkcja do sprawdzania statusu Game Passa
 local function checkGamePassStatus()
-    print("DEBUG: Sprawdzam status Game Passa (ID:", GAMEPASS_ID, ")...")
     local success, result = pcall(function()
         return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
     end)
 
     if success then
         hasGamePass = result
-        print("DEBUG: Status Game Passa:", hasGamePass)
         if not initialGamePassCheckDone then
             if hasGamePass then
-                sendNotification("Universal Scripts", "Posiadasz Game Pass! Funkcje Premium odblokowane.")
+                sendNotification("Universal Scripts", "Posiadasz wersję premium! Funkcje Premium odblokowane.")
             else
-                sendNotification("Universal Scripts", "Nie posiadasz Game Passa. Kliknij zakładkę Premium, aby dowiedzieć się więcej.")
+                sendNotification("Universal Scripts", "Nie posiadasz wersji premium. Kliknij zakładkę Premium, aby dowiedzieć się więcej.")
             end
             initialGamePassCheckDone = true
         end
     else
-        warn("DEBUG: Błąd podczas sprawdzania Game Passa:", result)
-        sendNotification("Universal Scripts", "Nie można sprawdzić statusu Game Passa. Spróbuj ponownie.")
+        warn("Błąd podczas sprawdzania wersji premium:", result)
+        sendNotification("Universal Scripts", "Nie można sprawdzić statusu wersji premium. Spróbuj ponownie.")
     end
 end
 
--- Funkcja do aktualizacji widoczności przycisku MM2 Premium
 local function updateMM2ButtonVisibility()
     if game.PlaceId == MM2_EXPERIENCE_ID then
         MM2Button.Visible = true
-        print("DEBUG: Jesteś w MM2 Experience, przycisk MM2 (Premium) jest WIDOCZNY.")
     else
         MM2Button.Visible = false
-        print("DEBUG: Nie jesteś w MM2 Experience, przycisk MM2 (Premium) jest UKRYTY.")
     end
 end
 
--- Funkcja do dynamicznego pozycjonowania przycisku "X" (HideButton)
 local function updateHideButtonPosition()
     if MainFrame.Visible then
-        -- Gdy MainFrame jest widoczne, ustaw HideButton w prawym górnym rogu MainFrame
-        -- Używamy AbsolutePosition i AbsoluteSize dla dokładnego pozycjonowania
         local frameAbsolutePosition = MainFrame.AbsolutePosition
         local frameAbsoluteSize = MainFrame.AbsoluteSize
         local xButtonSize = HideButton.AbsoluteSize
 
-        local xOffsetFromFrameRight = 5 -- piksele od prawej krawędzi MainFrame
-        local yOffsetFromFrameTop = 5 -- piksele od górnej krawędzi MainFrame
+        local xOffsetFromFrameRight = 5
+        local yOffsetFromFrameTop = 5
 
         local newX = frameAbsolutePosition.X + frameAbsoluteSize.X - xButtonSize.X - xOffsetFromFrameRight
         local newY = frameAbsolutePosition.Y + yOffsetFromFrameTop
         HideButton.Position = UDim2.fromOffset(newX, newY)
 
-        -- Zapisz tę pozycję jako ostatnią znaną, gdy GUI jest widoczne
         lastHideButtonPosition = HideButton.Position
-        print("DEBUG: MainFrame widoczne. HideButton ustawiony na: ", HideButton.Position.X.Offset, HideButton.Position.Y.Offset)
     else
-        -- Gdy MainFrame jest niewidoczne, HideButton przyjmuje ostatnią zapisaną pozycję
-        -- Jeśli HideButton był przeciągany, jego ostatnia pozycja zostaje zachowana.
-        -- Jeśli nie, wraca do domyślnej pozycji (prawy górny róg ekranu).
         HideButton.Position = lastHideButtonPosition
-        print("DEBUG: MainFrame niewidoczne. HideButton ustawiony na zapisaną pozycję: ", HideButton.Position.X.Offset, HideButton.Position.Y.Offset)
     end
 end
 
-
--- Sprawdzenie statusu Game Passa przy starcie skryptu
 checkGamePassStatus()
 updateMM2ButtonVisibility()
--- Domyślnie pokaż zakładkę Home
 showTab("Home")
-updateHideButtonPosition() -- Ustaw początkową pozycję przycisku "X"
+updateHideButtonPosition()
 
--- Połączenie do zdarzenia PropertyChanged (dla HideButton.Position)
--- Zapisuje nową pozycję, gdy HideButton zostanie przeciągnięty
 HideButton.Changed:Connect(function(property)
     if property == "Position" then
-        if not MainFrame.Visible then -- Zapisuj nową pozycję tylko, gdy MainFrame jest ukryte
+        if not MainFrame.Visible then
             lastHideButtonPosition = HideButton.Position
-            -- print("DEBUG: HideButton Position zmienione na:", lastHideButtonPosition.X.Offset, lastHideButtonPosition.Y.Offset) -- Zbyt częste logowanie
         end
     end
 end)
 
-
--- Pomocnicza funkcja do uruchamiania skryptów i wysyłania powiadomień
 local function runScriptAndNotify(url, buttonName)
     local success, err = pcall(function()
         loadstring(game:HttpGet(url))()
@@ -571,162 +511,129 @@ local function runScriptAndNotify(url, buttonName)
     end
 end
 
--- Połączenia przycisków Home
 SpeedToolbutton.MouseButton1Click:Connect(function()
-    print("DEBUG: Kliknięto przycisk Speed Tool (Home)")
     runScriptAndNotify("https://pastebin.com/raw/X7B0HPc2", SpeedToolbutton.Text)
 end)
 
 ClicktptoolButton.MouseButton1Click:Connect(function()
-    print("DEBUG: Kliknięto przycisk Click tp tool (Home)")
     runScriptAndNotify("https://pastebin.com/raw/4KF2WJ9u", ClicktptoolButton.Text)
 end)
 
 SpectateButton_Home.MouseButton1Click:Connect(function()
-    print("DEBUG: Kliknięto przycisk Spectate (Home)")
     runScriptAndNotify("https://pastebin.com/raw/UFVLWQRw", SpectateButton_Home.Text)
 end)
 
 NoclipButton.MouseButton1Click:Connect(function()
-    print("DEBUG: Kliknięto przycisk Noclip (Home)")
     runScriptAndNotify("https://pastebin.com/raw/CnbYfaj1", NoclipButton.Text)
 end)
 
 FlingButton.MouseButton1Click:Connect(function()
-    print("DEBUG: Kliknięto przycisk Fling (Home)")
     runScriptAndNotify('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt', FlingButton.Text)
 end)
 
--- Połączenia przycisków Premium
 SpectateButton_Premium.MouseButton1Click:Connect(function()
-    print("DEBUG: Kliknięto przycisk Spectate (Premium). Sprawdzam Game Passa...")
     local success, currentHasGamePass = pcall(function()
         return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
     end)
 
     if success then
-        print("DEBUG: Wynik sprawdzenia Game Passa (Spectate):", currentHasGamePass)
         if currentHasGamePass then
             runScriptAndNotify("https://pastebin.com/raw/UFVLWQRw", SpectateButton_Premium.Text)
         else
-            -- Pozostawiamy monit o zakup dla pojedynczych funkcji Premium
-            sendNotification("Universal Scripts", "Musisz posiadać Game Pass, aby użyć tej funkcji!")
-            print("DEBUG: Wywołuję PromptGamePassPurchase dla Spectate.")
+            sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
             MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
         end
     else
-        warn("DEBUG: Błąd podczas sprawdzania Game Passa (Spectate):", currentHasGamePass)
-        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania Game Passa.")
+        warn("Błąd podczas sprawdzania wersji premium (Spectate):", currentHasGamePass)
+        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania wersji premium.")
     end
 end)
 
 MM2Button.MouseButton1Click:Connect(function()
-    print("DEBUG: Kliknięto przycisk MM2 (Premium). Sprawdzam Game Passa...")
     local success, currentHasGamePass = pcall(function()
         return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
     end)
 
     if success then
-        print("DEBUG: Wynik sprawdzenia Game Passa (MM2):", currentHasGamePass)
         if currentHasGamePass then
             runScriptAndNotify("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring", MM2Button.Text)
         else
-            sendNotification("Universal Scripts", "Musisz posiadać Game Pass, aby użyć tej funkcji!")
-            print("DEBUG: Wywołuję PromptGamePassPurchase dla MM2.")
+            sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
             MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
         end
     else
-        warn("DEBUG: Błąd podczas sprawdzania Game Passa (MM2):", currentHasGamePass)
-        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania Game Passa.")
+        warn("Błąd podczas sprawdzania wersji premium (MM2):", currentHasGamePass)
+        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania wersji premium.")
     end
 end)
 
 FlyButton.MouseButton1Click:Connect(function()
-    print("DEBUG: Kliknięto przycisk Console (Premium). Sprawdzam Game Passa...")
     local success, currentHasGamePass = pcall(function()
         return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
     end)
 
     if success then
-        print("DEBUG: Wynik sprawdzenia Game Passa (Console):", currentHasGamePass)
         if currentHasGamePass then
             runScriptAndNotify("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source", FlyButton.Text)
         else
-            sendNotification("Universal Scripts", "Musisz posiadać Game Pass, aby użyć tej funkcji!")
-            print("DEBUG: Wywołuję PromptGamePassPurchase dla Console.")
+            sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
             MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
         end
     else
-        warn("DEBUG: Błąd podczas sprawdzania Game Passa (Console):", currentHasGamePass)
-        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania Game Passa.")
+        warn("Błąd podczas sprawdzania wersji premium (Console):", currentHasGamePass)
+        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania wersji premium.")
     end
 end)
 
 Invisibiltybutton.MouseButton1Click:Connect(function()
-    print("DEBUG: Kliknięto przycisk Invisibilty (Premium). Sprawdzam Game Passa...")
     local success, currentHasGamePass = pcall(function()
         return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
     end)
 
     if success then
-        print("DEBUG: Wynik sprawdzenia Game Passa (Invisibilty):", currentHasGamePass)
         if currentHasGamePass then
             runScriptAndNotify('https://pastebin.com/raw/3Rnd9rHf', Invisibiltybutton.Text)
         else
-            sendNotification("Universal Scripts", "Musisz posiadać Game Pass, aby użyć tej funkcji!")
-            print("DEBUG: Wywołuję PromptGamePassPurchase dla Invisibilty.")
+            sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
             MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
         end
     else
-        warn("DEBUG: Błąd podczas sprawdzania Game Passa (Invisibilty):", currentHasGamePass)
-        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania Game Passa.")
+        warn("Błąd podczas sprawdzania wersji premium (Invisibilty):", currentHasGamePass)
+        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania wersji premium.")
     end
 end)
 
-
--- Logika przycisków przełączających zakładki
 HomeTabButton.MouseButton1Click:Connect(function()
-    print("DEBUG: Kliknięto przycisk Home. Przełączam na Home.")
     showTab("Home")
 end)
 
 PremiumTabButton.MouseButton1Click:Connect(function()
-    print("DEBUG: Kliknięto przycisk Premium. Sprawdzam Premium status przed przełączeniem.")
-    showTab("Premium") -- Funkcja showTab zajmie się logiką teleportacji/pokazania zakładki
+    showTab("Premium")
 end)
 
 HideButton.MouseButton1Click:Connect(function()
-    print("DEBUG: Kliknięto przycisk Hide. Zmieniam widoczność MainFrame.")
-    MainFrame.Visible = not MainFrame.Visible -- Ukrywa/pokazuje główną ramkę GUI
-    -- Nie wywołujemy tutaj updateHideButtonPosition bezpośrednio,
-    -- ponieważ MainFrame.VisibleChanged zajmie się tym
+    MainFrame.Visible = not MainFrame.Visible
 end)
 
--- Obsługa zdarzenia zmiany widoczności MainFrame
 MainFrame.VisibleChanged:Connect(function()
-    updateHideButtonPosition() -- Zawsze odświeżaj pozycję HideButton, gdy MainFrame zmienia widoczność
-end)
+    updateHideButtonPosition()
+})
 
-
--- Obsługa zdarzenia po zakończeniu próby zakupu Game Passa
 MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gamePassId, wasPurchased)
-    print("DEBUG: Zdarzenie PromptGamePassPurchaseFinished: userId=", userId, " gamePassId=", gamePassId, " wasPurchased=", wasPurchased)
     if userId == player.UserId and gamePassId == GAMEPASS_ID then
         if wasPurchased then
-            sendNotification("Universal Scripts", "Game Pass kupiony pomyślnie! Dziękujemy za zakup.")
+            sendNotification("Universal Scripts", "Wersja premium kupiona pomyślnie! Dziękujemy za zakup.")
             hasGamePass = true
-            showTab("Premium") -- Pokaż zakładkę Premium po zakupie
+            showTab("Premium")
         else
-            sendNotification("Universal Scripts", "Anulowano zakup Game Passa.")
+            sendNotification("Universal Scripts", "Anulowano zakup wersji premium.")
         end
     end
 end)
 
--- Początkowe powiadomienie
 spawn(function()
     task.wait(1)
     sendNotification("Universal Scripts", "Witaj w Universal Scripts! Skrypt załadowany.")
-    print("--- SKRYPT UNIVERSAL SCRIPTS ZAKOŃCZONO INICJALIZACJĘ ---") -- DEBUG
 end)
 
 task.wait(0.5)
