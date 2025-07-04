@@ -1,8 +1,8 @@
 --[[
 
-        Universal Scripts - Wersja z Zakładkami i Game Passem (Ostatnia Próba Naprawy)
+        Universal Scripts - Wersja z Zakładkami i Game Passem (Ostatnia, Ulepszona Próba Naprawy GUI)
         Autor: Gemini / Na podstawie Twoich wytycznych
-        Version 4.0.0
+        Version 5.1.0
 
 ]]
 
@@ -31,12 +31,17 @@ local function sendNotification(title, text)
     print("[Notification]: " .. title .. " - " .. text) -- Dodane do output, by widzieć, czy powiadomienia działają
 end
 
+print("Universal Scripts: Rozpoczęcie tworzenia GUI instancji...")
+
 -- Instancje GUI i ich konfiguracja (Uproszczone i Sprawdzone)
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "UniversalScriptsGui"
-ScreenGui.Parent = player:WaitForChild("PlayerGui")
+ScreenGui.ResetOnSpawn = false -- Ważne, żeby GUI nie znikało po odrodzeniu
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-ScreenGui.ResetOnSpawn = false
+
+-- Upewnij się, że PlayerGui jest dostępne zanim przypiszesz ScreenGui
+ScreenGui.Parent = player:WaitForChild("PlayerGui")
+print("Universal Scripts: ScreenGui sparentowany do PlayerGui.")
 
 local MainFrame = Instance.new("Frame")
 MainFrame.Name = "MainFrame"
@@ -44,10 +49,13 @@ MainFrame.Parent = ScreenGui
 MainFrame.BackgroundColor3 = Color3.new(0.172549, 0.172549, 0.172549)
 MainFrame.BorderColor3 = Color3.new(0, 0, 0)
 MainFrame.BorderSizePixel = 0
-MainFrame.Position = UDim2.new(0.212787732, 0, 0.244107679, 0)
-MainFrame.Size = UDim2.new(0.513162374, 0, 0.560262501, 0)
+-- Użyj proporcjonalnych rozmiarów i pozycji, aby GUI skalowało się na różnych ekranach
+MainFrame.AnchorPoint = Vector2.new(0.5, 0.5) -- Ustaw anchor point na środek
+MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0) -- Pozycjonuj na środku ekranu
+MainFrame.Size = UDim2.new(0.5, 0, 0.6, 0) -- Ustaw rozmiar na 50% szerokości i 60% wysokości ekranu
 MainFrame.Draggable = true
 MainFrame.Visible = true -- Upewnij się, że jest widoczny na start
+print("Universal Scripts: MainFrame utworzony i ustawiony jako widoczny.")
 
 local UICorner_MainFrame = Instance.new("UICorner")
 UICorner_MainFrame.Parent = MainFrame
@@ -59,8 +67,9 @@ TitleLabel.BackgroundColor3 = Color3.new(1, 1, 1)
 TitleLabel.BackgroundTransparency = 1
 TitleLabel.BorderColor3 = Color3.new(0, 0, 0)
 TitleLabel.BorderSizePixel = 0
-TitleLabel.Position = UDim2.new(0.425298363, 0, 0.0153667927, 0)
-TitleLabel.Size = UDim2.new(0, 290, 0, 33)
+TitleLabel.Position = UDim2.new(0.5, 0, 0.03, 0) -- Pozycja w górnej części frame
+TitleLabel.Size = UDim2.new(0.9, 0, 0.1, 0) -- Rozmiar proporcjonalny do frame
+TitleLabel.AnchorPoint = Vector2.new(0.5, 0)
 TitleLabel.Font = Enum.Font.LuckiestGuy
 TitleLabel.Text = "UNIVERSAL SCRIPTS"
 TitleLabel.TextColor3 = Color3.new(1, 1, 1)
@@ -74,8 +83,8 @@ HideButton.Parent = MainFrame
 HideButton.BackgroundColor3 = Color3.new(1, 0, 0)
 HideButton.BorderColor3 = Color3.new(0, 0, 0)
 HideButton.BorderSizePixel = 3
-HideButton.Position = UDim2.new(0.971717834, 0, -0.0485478677, 0)
-HideButton.Size = UDim2.new(0.0482946634, 0, 0.0802469105, 0)
+HideButton.Position = UDim2.new(1, -20, 0, 0) -- Pozycja w prawym górnym rogu frame (rozmiar 20x20 pikseli)
+HideButton.Size = UDim2.new(0, 20, 0, 20)
 HideButton.ZIndex = 2
 HideButton.Font = Enum.Font.Unknown
 HideButton.Text = "X"
@@ -94,11 +103,20 @@ TabsFrame.Parent = MainFrame
 TabsFrame.BackgroundColor3 = Color3.new(0.141176, 0.141176, 0.141176)
 TabsFrame.BorderColor3 = Color3.new(0, 0, 0)
 TabsFrame.BorderSizePixel = 0
-TabsFrame.Position = UDim2.new(0, 0, 3.34969492e-08, 0)
-TabsFrame.Size = UDim2.new(0, 169, 0, 455)
+TabsFrame.Position = UDim2.new(0, 0, 0.12, 0) -- Poniżej tytułu, na lewo
+TabsFrame.Size = UDim2.new(0.25, 0, 0.85, 0) -- 25% szerokości, 85% wysokości frame
+TabsFrame.ClipsDescendants = true -- Ważne dla UIListLayout
 
 local UICorner_TabsFrame = Instance.new("UICorner")
 UICorner_TabsFrame.Parent = TabsFrame
+
+-- Użycie UIListLayout do automatycznego ułożenia przycisków w TabsFrame
+local UIListLayout_Tabs = Instance.new("UIListLayout")
+UIListLayout_Tabs.Parent = TabsFrame
+UIListLayout_Tabs.Padding = UDim.new(0, 5) -- Odstęp między przyciskami
+UIListLayout_Tabs.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UIListLayout_Tabs.VerticalAlignment = Enum.VerticalAlignment.Top
+UIListLayout_Tabs.FillDirection = Enum.FillDirection.Vertical
 
 local HomeTabButton = Instance.new("TextButton")
 HomeTabButton.Name = "HomeTabButton"
@@ -106,8 +124,7 @@ HomeTabButton.Parent = TabsFrame
 HomeTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
 HomeTabButton.BorderColor3 = Color3.new(0, 0, 0)
 HomeTabButton.BorderSizePixel = 0
-HomeTabButton.Position = UDim2.new(0.0591715984, 0, 0.112087913, 0)
-HomeTabButton.Size = UDim2.new(0, 149, 0, 38)
+HomeTabButton.Size = UDim2.new(0.9, 0, 0, 38) -- Szerokość 90% TabsFrame, stała wysokość 38px
 HomeTabButton.Font = Enum.Font.SourceSans
 HomeTabButton.Text = "Home"
 HomeTabButton.TextColor3 = Color3.new(0, 0, 0)
@@ -124,8 +141,7 @@ PremiumTabButton.Parent = TabsFrame
 PremiumTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
 PremiumTabButton.BorderColor3 = Color3.new(0, 0, 0)
 PremiumTabButton.BorderSizePixel = 0
-PremiumTabButton.Position = UDim2.new(0.0591715984, 0, 0.237362638, 0)
-PremiumTabButton.Size = UDim2.new(0, 149, 0, 38)
+PremiumTabButton.Size = UDim2.new(0.9, 0, 0, 38) -- Szerokość 90% TabsFrame, stała wysokość 38px
 PremiumTabButton.Font = Enum.Font.SourceSans
 PremiumTabButton.Text = "Premium"
 PremiumTabButton.TextColor3 = Color3.new(0, 0, 0)
@@ -136,6 +152,7 @@ PremiumTabButton.TextWrapped = true
 local UICorner_PremiumTabButton = Instance.new("UICorner")
 UICorner_PremiumTabButton.Parent = PremiumTabButton
 
+-- Scrolling Frames
 local ScrollingFramePremium = Instance.new("ScrollingFrame")
 ScrollingFramePremium.Name = "ScrollingFramePremium"
 ScrollingFramePremium.Parent = MainFrame
@@ -143,81 +160,72 @@ ScrollingFramePremium.Active = true
 ScrollingFramePremium.BackgroundColor3 = Color3.new(0.231373, 0.231373, 0.231373)
 ScrollingFramePremium.BorderColor3 = Color3.new(0, 0, 0)
 ScrollingFramePremium.BorderSizePixel = 0
-ScrollingFramePremium.Position = UDim2.new(0.239610985, 0, 0.1111193, 0)
-ScrollingFramePremium.Size = UDim2.new(0.733235598, 0, 0.864629686, 0)
+ScrollingFramePremium.Position = UDim2.new(0.26, 0, 0.12, 0) -- Obok TabsFrame, poniżej tytułu
+ScrollingFramePremium.Size = UDim2.new(0.72, 0, 0.85, 0) -- Proporcjonalnie do MainFrame
+ScrollingFramePremium.CanvasSize = UDim2.new(0,0,2,0) -- Przykład: wystarczająco dużo miejsca na scrollowanie
 ScrollingFramePremium.Visible = false
 
 local UICorner_ScrollingFramePremium = Instance.new("UICorner")
 UICorner_ScrollingFramePremium.Parent = ScrollingFramePremium
 
+-- UIListLayout dla przycisków wewnątrz ScrollingFramePremium
+local UIListLayout_Premium = Instance.new("UIListLayout")
+UIListLayout_Premium.Parent = ScrollingFramePremium
+UIListLayout_Premium.Padding = UDim.new(0, 10)
+UIListLayout_Premium.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UIListLayout_Premium.VerticalAlignment = Enum.VerticalAlignment.Top
+UIListLayout_Premium.FillDirection = Enum.FillDirection.Vertical
+
+-- Przyciski Premium (skonfigurowane w UIListLayout)
 local SpectateButton_Premium = Instance.new("TextButton")
 SpectateButton_Premium.Name = "Spectate Button"
 SpectateButton_Premium.Parent = ScrollingFramePremium
 SpectateButton_Premium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 SpectateButton_Premium.BorderColor3 = Color3.new(0, 0, 0)
-SpectateButton_Premium.Position = UDim2.new(0.310600132, 0, 0.0242995247, 0)
-SpectateButton_Premium.Size = UDim2.new(0, 150, 0, 38)
+SpectateButton_Premium.Size = UDim2.new(0.9, 0, 0, 38)
 SpectateButton_Premium.Font = Enum.Font.SourceSans
 SpectateButton_Premium.Text = "Spectate"
 SpectateButton_Premium.TextColor3 = Color3.new(0, 0, 0)
 SpectateButton_Premium.TextScaled = true
 SpectateButton_Premium.TextSize = 14
 SpectateButton_Premium.TextWrapped = true
-
-local UICorner_SpectatePremium = Instance.new("UICorner")
-UICorner_SpectatePremium.Parent = SpectateButton_Premium
-local UITextSizeConstraint_SpectatePremium = Instance.new("UITextSizeConstraint")
-UITextSizeConstraint_SpectatePremium.Parent = SpectateButton_Premium
-UITextSizeConstraint_SpectatePremium.MaxTextSize = 37
-local UIAspectRatioConstraint_SpectatePremium = Instance.new("UIAspectRatioConstraint")
-UIAspectRatioConstraint_SpectatePremium.Parent = SpectateButton_Premium
-UIAspectRatioConstraint_SpectatePremium.AspectRatio = 3.9473683834075928
+Instance.new("UICorner").Parent = SpectateButton_Premium
+Instance.new("UITextSizeConstraint", SpectateButton_Premium).MaxTextSize = 37
+Instance.new("UIAspectRatioConstraint", SpectateButton_Premium).AspectRatio = 3.9473683834075928
 
 local MM2Button_Premium = Instance.new("TextButton")
 MM2Button_Premium.Name = "MM2 Button"
 MM2Button_Premium.Parent = ScrollingFramePremium
 MM2Button_Premium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 MM2Button_Premium.BorderColor3 = Color3.new(0, 0, 0)
-MM2Button_Premium.Position = UDim2.new(0.0327527486, 0, 0.0229296293, 0)
-MM2Button_Premium.Size = UDim2.new(0, 150, 0, 38)
+MM2Button_Premium.Size = UDim2.new(0.9, 0, 0, 38)
 MM2Button_Premium.Font = Enum.Font.SourceSans
 MM2Button_Premium.Text = "MM2"
 MM2Button_Premium.TextColor3 = Color3.new(0, 0, 0)
 MM2Button_Premium.TextScaled = true
 MM2Button_Premium.TextSize = 14
 MM2Button_Premium.TextWrapped = true
+Instance.new("UICorner").Parent = MM2Button_Premium
+Instance.new("UITextSizeConstraint", MM2Button_Premium).MaxTextSize = 37
+Instance.new("UIAspectRatioConstraint", MM2Button_Premium).AspectRatio = 3.9473683834075928
 
-local UICorner_MM2Premium = Instance.new("UICorner")
-UICorner_MM2Premium.Parent = MM2Button_Premium
-local UITextSizeConstraint_MM2Premium = Instance.new("UITextSizeConstraint")
-UITextSizeConstraint_MM2Premium.Parent = MM2Button_Premium
-UITextSizeConstraint_MM2Premium.MaxTextSize = 37
-local UIAspectRatioConstraint_MM2Premium = Instance.new("UIAspectRatioConstraint")
-UIAspectRatioConstraint_MM2Premium.Parent = MM2Button_Premium
-UIAspectRatioConstraint_MM2Premium.AspectRatio = 3.9473683834075928
-
-local ConsoleButton_Premium = Instance.new("TextButton")
-ConsoleButton_Premium.Name = "Console Button"
-ConsoleButton_Premium.Parent = ScrollingFramePremium
-ConsoleButton_Premium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
-ConsoleButton_Premium.BorderColor3 = Color3.new(0, 0, 0)
-ConsoleButton_Premium.Position = UDim2.new(0.594069064, 0, 0.0254483614, 0)
-ConsoleButton_Premium.Size = UDim2.new(0, 150, 0, 38)
-ConsoleButton_Premium.Font = Enum.Font.SourceSans
-ConsoleButton_Premium.Text = "Console"
-ConsoleButton_Premium.TextColor3 = Color3.new(0, 0, 0)
-ConsoleButton_Premium.TextScaled = true
-ConsoleButton_Premium.TextSize = 14
-ConsoleButton_Premium.TextWrapped = true
-
-local UICorner_ConsolePremium = Instance.new("UICorner")
-UICorner_ConsolePremium.Parent = ConsoleButton_Premium
-local UITextSizeConstraint_ConsolePremium = Instance.new("UITextSizeConstraint")
-UITextSizeConstraint_ConsolePremium.Parent = ConsoleButton_Premium
-UITextSizeConstraint_ConsolePremium.MaxTextSize = 37
-local UIAspectRatioConstraint_ConsolePremium = Instance.new("UIAspectRatioConstraint")
-UIAspectRatioConstraint_ConsolePremium.Parent = ConsoleButton_Premium
+local FlyButton_Premium = Instance.new("TextButton") -- Nazwa zmieniona na FlyButton_Premium
+FlyButton_Premium.Name = "Fly Button" -- Nazwa przycisku
+FlyButton_Premium.Parent = ScrollingFramePremium
+FlyButton_Premium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
+FlyButton_Premium.BorderColor3 = Color3.new(0, 0, 0)
+FlyButton_Premium.Size = UDim2.new(0.9, 0, 0, 38)
+FlyButton_Premium.Font = Enum.Font.SourceSans
+FlyButton_Premium.Text = "Fly" -- Tekst przycisku zmieniony na "Fly"
+FlyButton_Premium.TextColor3 = Color3.new(0, 0, 0)
+FlyButton_Premium.TextScaled = true
+FlyButton_Premium.TextSize = 14
+FlyButton_Premium.TextWrapped = true
+Instance.new("UICorner").Parent = FlyButton_Premium
+Instance.new("UITextSizeConstraint", FlyButton_Premium).MaxTextSize = 37
+Instance.new("UIAspectRatioConstraint", FlyButton_Premium).Parent = FlyButton_Premium
 UIAspectRatioConstraint_ConsolePremium.AspectRatio = 3.9473683834075928
+
 
 local ScrollingFrameHome = Instance.new("ScrollingFrame")
 ScrollingFrameHome.Name = "ScrollingFrameHome"
@@ -226,173 +234,136 @@ ScrollingFrameHome.Active = true
 ScrollingFrameHome.BackgroundColor3 = Color3.new(0.231373, 0.231373, 0.231373)
 ScrollingFrameHome.BorderColor3 = Color3.new(0, 0, 0)
 ScrollingFrameHome.BorderSizePixel = 0
-ScrollingFrameHome.Position = UDim2.new(0.239610985, 0, 0.113314532, 0)
-ScrollingFrameHome.Size = UDim2.new(0.733235598, 0, 0.864629686, 0)
+ScrollingFrameHome.Position = UDim2.new(0.26, 0, 0.12, 0) -- Obok TabsFrame, poniżej tytułu
+ScrollingFrameHome.Size = UDim2.new(0.72, 0, 0.85, 0)
+ScrollingFrameHome.CanvasSize = UDim2.new(0,0,2,0) -- Przykład: wystarczająco dużo miejsca na scrollowanie
 ScrollingFrameHome.Visible = true
 
 local UICorner_ScrollingFrameHome = Instance.new("UICorner")
 UICorner_ScrollingFrameHome.Parent = ScrollingFrameHome
 
+-- UIListLayout dla przycisków wewnątrz ScrollingFrameHome
+local UIListLayout_Home = Instance.new("UIListLayout")
+UIListLayout_Home.Parent = ScrollingFrameHome
+UIListLayout_Home.Padding = UDim.new(0, 10)
+UIListLayout_Home.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UIListLayout_Home.VerticalAlignment = Enum.VerticalAlignment.Top
+UIListLayout_Home.FillDirection = Enum.FillDirection.Vertical
+
+-- Przyciski Home (skonfigurowane w UIListLayout)
 local InvisibiltyButton = Instance.new("TextButton")
 InvisibiltyButton.Name = "Invisibilty button"
 InvisibiltyButton.Parent = ScrollingFrameHome
 InvisibiltyButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 InvisibiltyButton.BorderColor3 = Color3.new(0, 0, 0)
-InvisibiltyButton.Position = UDim2.new(0.0203835014, 0, 0.0204660892, 0)
-InvisibiltyButton.Size = UDim2.new(0, 150, 0, 38)
+InvisibiltyButton.Size = UDim2.new(0.9, 0, 0, 38)
 InvisibiltyButton.Font = Enum.Font.SourceSans
 InvisibiltyButton.Text = "Invisibilty"
 InvisibiltyButton.TextColor3 = Color3.new(0, 0, 0)
 InvisibiltyButton.TextScaled = true
 InvisibiltyButton.TextSize = 14
 InvisibiltyButton.TextWrapped = true
-
-local UICorner_Invisibilty = Instance.new("UICorner")
-UICorner_Invisibilty.Parent = InvisibiltyButton
-local UITextSizeConstraint_Invisibilty = Instance.new("UITextSizeConstraint")
-UITextSizeConstraint_Invisibilty.Parent = InvisibiltyButton
-UITextSizeConstraint_Invisibilty.MaxTextSize = 37
-local UIAspectRatioConstraint_Invisibilty = Instance.new("UIAspectRatioConstraint")
-UIAspectRatioConstraint_Invisibilty.Parent = InvisibiltyButton
-UIAspectRatioConstraint_Invisibilty.AspectRatio = 3.9473683834075928
+Instance.new("UICorner").Parent = InvisibiltyButton
+Instance.new("UITextSizeConstraint", InvisibiltyButton).MaxTextSize = 37
+Instance.new("UIAspectRatioConstraint", InvisibiltyButton).AspectRatio = 3.9473683834075928
 
 local SpeedToolButton = Instance.new("TextButton")
 SpeedToolButton.Name = "Speed Tool button"
 SpeedToolButton.Parent = ScrollingFrameHome
 SpeedToolButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 SpeedToolButton.BorderColor3 = Color3.new(0, 0, 0)
-SpeedToolButton.Position = UDim2.new(0.310867637, 0, 0.0204680897, 0)
-SpeedToolButton.Size = UDim2.new(0, 150, 0, 38)
+SpeedToolButton.Size = UDim2.new(0.9, 0, 0, 38)
 SpeedToolButton.Font = Enum.Font.SourceSans
 SpeedToolButton.Text = "Speed Tool"
 SpeedToolButton.TextColor3 = Color3.new(0, 0, 0)
 SpeedToolButton.TextScaled = true
 SpeedToolButton.TextSize = 14
 SpeedToolButton.TextWrapped = true
-
-local UICorner_SpeedTool = Instance.new("UICorner")
-UICorner_SpeedTool.Parent = SpeedToolButton
-local UITextSizeConstraint_SpeedTool = Instance.new("UITextSizeConstraint")
-UITextSizeConstraint_SpeedTool.Parent = SpeedToolButton
-UITextSizeConstraint_SpeedTool.MaxTextSize = 37
-local UIAspectRatioConstraint_SpeedTool = Instance.new("UIAspectRatioConstraint")
-UIAspectRatioConstraint_SpeedTool.Parent = SpeedToolButton
-UIAspectRatioConstraint_SpeedTool.AspectRatio = 3.9473683834075928
+Instance.new("UICorner").Parent = SpeedToolButton
+Instance.new("UITextSizeConstraint", SpeedToolButton).MaxTextSize = 37
+Instance.new("UIAspectRatioConstraint", SpeedToolButton).AspectRatio = 3.9473683834075928
 
 local ClicktpToolButton = Instance.new("TextButton")
 ClicktpToolButton.Name = "Click tp tool Button"
 ClicktpToolButton.Parent = ScrollingFrameHome
 ClicktpToolButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 ClicktpToolButton.BorderColor3 = Color3.new(0, 0, 0)
-ClicktpToolButton.Position = UDim2.new(0.613037944, 0, 0.0204786956, 0)
-ClicktpToolButton.Size = UDim2.new(0, 150, 0, 38)
+ClicktpToolButton.Size = UDim2.new(0.9, 0, 0, 38)
 ClicktpToolButton.Font = Enum.Font.SourceSans
 ClicktpToolButton.Text = "Click tp  tool"
 ClicktpToolButton.TextColor3 = Color3.new(0, 0, 0)
 ClicktpToolButton.TextScaled = true
 ClicktpToolButton.TextSize = 14
 ClicktpToolButton.TextWrapped = true
-
-local UICorner_Clicktp = Instance.new("UICorner")
-UICorner_Clicktp.Parent = ClicktpToolButton
-local UITextSizeConstraint_Clicktp = Instance.new("UITextSizeConstraint")
-UITextSizeConstraint_Clicktp.Parent = ClicktpToolButton
-UITextSizeConstraint_Clicktp.MaxTextSize = 35
-local UIAspectRatioConstraint_Clicktp = Instance.new("UIAspectRatioConstraint")
-UIAspectRatioConstraint_Clicktp.Parent = ClicktpToolButton
-UIAspectRatioConstraint_Clicktp.AspectRatio = 3.9473683834075928
+Instance.new("UICorner").Parent = ClicktpToolButton
+Instance.new("UITextSizeConstraint", ClicktpToolButton).MaxTextSize = 35
+Instance.new("UIAspectRatioConstraint", ClicktpToolButton).AspectRatio = 3.9473683834075928
 
 local SpectateButton_Home = Instance.new("TextButton")
 SpectateButton_Home.Name = "Spectate Button"
 SpectateButton_Home.Parent = ScrollingFrameHome
 SpectateButton_Home.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 SpectateButton_Home.BorderColor3 = Color3.new(0, 0, 0)
-SpectateButton_Home.Position = UDim2.new(0.0187618379, 0, 0.113576077, 0)
-SpectateButton_Home.Size = UDim2.new(0, 150, 0, 38)
+SpectateButton_Home.Size = UDim2.new(0.9, 0, 0, 38)
 SpectateButton_Home.Font = Enum.Font.SourceSans
 SpectateButton_Home.Text = "Spectate"
 SpectateButton_Home.TextColor3 = Color3.new(0, 0, 0)
 SpectateButton_Home.TextScaled = true
 SpectateButton_Home.TextSize = 14
 SpectateButton_Home.TextWrapped = true
-
-local UICorner_SpectateHome = Instance.new("UICorner")
-UICorner_SpectateHome.Parent = SpectateButton_Home
-local UITextSizeConstraint_SpectateHome = Instance.new("UITextSizeConstraint")
-UITextSizeConstraint_SpectateHome.Parent = SpectateButton_Home
-UITextSizeConstraint_SpectateHome.MaxTextSize = 37
-local UIAspectRatioConstraint_SpectateHome = Instance.new("UIAspectRatioConstraint")
-UIAspectRatioConstraint_SpectateHome.Parent = SpectateButton_Home
-UIAspectRatioConstraint_SpectateHome.AspectRatio = 3.9473683834075928
+Instance.new("UICorner").Parent = SpectateButton_Home
+Instance.new("UITextSizeConstraint", SpectateButton_Home).MaxTextSize = 37
+Instance.new("UIAspectRatioConstraint", SpectateButton_Home).AspectRatio = 3.9473683834075928
 
 local NoclipButton = Instance.new("TextButton")
 NoclipButton.Name = "Noclip Button"
 NoclipButton.Parent = ScrollingFrameHome
 NoclipButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 NoclipButton.BorderColor3 = Color3.new(0, 0, 0)
-NoclipButton.Position = UDim2.new(0.310309112, 0, 0.114643656, 0)
-NoclipButton.Size = UDim2.new(0, 150, 0, 38)
+NoclipButton.Size = UDim2.new(0.9, 0, 0, 38)
 NoclipButton.Font = Enum.Font.SourceSans
 NoclipButton.Text = "Noclip"
 NoclipButton.TextColor3 = Color3.new(0, 0, 0)
 NoclipButton.TextScaled = true
 NoclipButton.TextSize = 14
 NoclipButton.TextWrapped = true
-
-local UICorner_Noclip = Instance.new("UICorner")
-UICorner_Noclip.Parent = NoclipButton
-local UITextSizeConstraint_Noclip = Instance.new("UITextSizeConstraint")
-UITextSizeConstraint_Noclip.Parent = NoclipButton
-UITextSizeConstraint_Noclip.MaxTextSize = 37
-local UIAspectRatioConstraint_Noclip = Instance.new("UIAspectRatioConstraint")
-UIAspectRatioConstraint_Noclip.Parent = NoclipButton
-UIAspectRatioConstraint_Noclip.AspectRatio = 3.9473683834075928
+Instance.new("UICorner").Parent = NoclipButton
+Instance.new("UITextSizeConstraint", NoclipButton).MaxTextSize = 37
+Instance.new("UIAspectRatioConstraint", NoclipButton).AspectRatio = 3.9473683834075928
 
 local FlingButton = Instance.new("TextButton")
 FlingButton.Name = "Fling Button"
 FlingButton.Parent = ScrollingFrameHome
 FlingButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 FlingButton.BorderColor3 = Color3.new(0, 0, 0)
-FlingButton.Position = UDim2.new(0.019072989, 0, 0.200900108, 0)
-FlingButton.Size = UDim2.new(0, 150, 0, 38)
+FlingButton.Size = UDim2.new(0.9, 0, 0, 38)
 FlingButton.Font = Enum.Font.SourceSans
 FlingButton.Text = "Fling"
 FlingButton.TextColor3 = Color3.new(0, 0, 0)
 FlingButton.TextScaled = true
 FlingButton.TextSize = 14
 FlingButton.TextWrapped = true
-
-local UICorner_Fling = Instance.new("UICorner")
-UICorner_Fling.Parent = FlingButton
-local UITextSizeConstraint_Fling = Instance.new("UITextSizeConstraint")
-UITextSizeConstraint_Fling.Parent = FlingButton
-UITextSizeConstraint_Fling.MaxTextSize = 37
-local UIAspectRatioConstraint_Fling = Instance.new("UIAspectRatioConstraint")
-UIAspectRatioConstraint_Fling.Parent = FlingButton
-UIAspectRatioConstraint_Fling.AspectRatio = 3.9473683834075928
+Instance.new("UICorner").Parent = FlingButton
+Instance.new("UITextSizeConstraint", FlingButton).MaxTextSize = 37
+Instance.new("UIAspectRatioConstraint", FlingButton).AspectRatio = 3.9473683834075928
 
 local MM2Button_Home = Instance.new("TextButton")
 MM2Button_Home.Name = "MM2 Button"
 MM2Button_Home.Parent = ScrollingFrameHome
 MM2Button_Home.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 MM2Button_Home.BorderColor3 = Color3.new(0, 0, 0)
-MM2Button_Home.Position = UDim2.new(0.612092495, 0, 0.114739574, 0)
-MM2Button_Home.Size = UDim2.new(0, 150, 0, 38)
+MM2Button_Home.Size = UDim2.new(0.9, 0, 0, 38)
 MM2Button_Home.Font = Enum.Font.SourceSans
 MM2Button_Home.Text = "MM2"
 MM2Button_Home.TextColor3 = Color3.new(0, 0, 0)
 MM2Button_Home.TextScaled = true
 MM2Button_Home.TextSize = 14
 MM2Button_Home.TextWrapped = true
+Instance.new("UICorner").Parent = MM2Button_Home
+Instance.new("UITextSizeConstraint", MM2Button_Home).MaxTextSize = 37
+Instance.new("UIAspectRatioConstraint", MM2Button_Home).AspectRatio = 3.9473683834075928
 
-local UICorner_MM2Home = Instance.new("UICorner")
-UICorner_MM2Home.Parent = MM2Button_Home
-local UITextSizeConstraint_MM2Home = Instance.new("UITextSizeConstraint")
-UITextSizeConstraint_MM2Home.Parent = MM2Button_Home
-UITextSizeConstraint_MM2Home.MaxTextSize = 37
-local UIAspectRatioConstraint_MM2Home = Instance.new("UIAspectRatioConstraint")
-UIAspectRatioConstraint_MM2Home.Parent = MM2Button_Home
-UIAspectRatioConstraint_MM2Home.AspectRatio = 3.9473683834075928
+print("Universal Scripts: Wszystkie instancje GUI utworzone.")
 
 ---
 
@@ -410,7 +381,7 @@ local function showTab(tabName)
     elseif tabName == "Premium" then
         ScrollingFramePremium.Visible = true
     end
-    print("[Tab Switch]: Przełączono na zakładkę: " .. tabName) -- Dodano do output
+    print("[Tab Switch]: Przełączono na zakładkę: " .. tabName)
 end
 
 -- Inicjalne ustawienie: pokaż Home tab
@@ -434,6 +405,8 @@ else
     PremiumTabButton.Visible = false -- Ukryj na wszelki wypadek
     sendNotification("Universal Scripts", "Nie można sprawdzić Game Passa. Zakładka Premium ukryta.")
 end
+
+print("Universal Scripts: Sprawdzanie Game Passa zakończone.")
 
 -- Ładowanie skryptów (zmienione referencje przycisków na nowe nazwy)
 
@@ -484,9 +457,9 @@ MM2Button_Premium.MouseButton1Click:Connect(function()
     sendNotification("MM2 Script (Premium)", "Skrypt MM2 załadowany!")
 end)
 
-ConsoleButton_Premium.MouseButton1Click:Connect(function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
-    sendNotification("Console Tool (Premium)", "Skrypt konsoli załadowany!")
+FlyButton_Premium.MouseButton1Click:Connect(function() -- Zmieniono na FlyButton_Premium
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))() -- Pozostawiono skrypt infiniteyield, jeśli to było intencją dla "Fly"
+    sendNotification("Fly Tool (Premium)", "Skrypt Fly załadowany!") -- Zmieniono nazwę powiadomienia
 end)
 
 -- Obsługa przycisków zakładek
@@ -501,7 +474,7 @@ end)
 -- Obsługa przycisku ukrywania/pokazywania GUI
 HideButton.MouseButton1Click:Connect(function()
     MainFrame.Visible = not MainFrame.Visible
-    print("[Hide/Show]: GUI Visible: " .. tostring(MainFrame.Visible)) -- Dodano do output
+    print("[Hide/Show]: GUI Visible: " .. tostring(MainFrame.Visible))
 end)
 
 -- Powitalne powiadomienie po krótkiej chwili
@@ -512,4 +485,4 @@ end)
 
 -- Czekanie na załadowanie GUI
 task.wait(0.5)
-print("Universal Scripts: GUI załadowane i gotowe.") -- Dodano do output
+print("Universal Scripts: GUI załadowane i gotowe.")
