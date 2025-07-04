@@ -1,56 +1,25 @@
 --[[
-        Universal Scripts - Wersja z GUI stworzonym na podstawie dostarczonego kodu,
-        z precyzyjnym pozycjonowaniem przycisków, dynamiczną widocznością przycisku MM2 w Premium,
-        usuniętymi dopiskami "(Premium)" z nazw przycisków,
-        oraz PRZYCISKIEM "X" jako ImageButton, ZAWSZE W STAŁYM MIEJSCU, niezależnie od MainFrame.
-        Version 20.2
-        Zaktualizowano: Przycisk "X" jest ImageButton i nie "przykleja się" do MainFrame.
+
+        Gui2Lua™
+        10zOfficial
+        Version 1.0.1 (Zmodyfikowano dla stałego położenia ImageButton 'X' i funkcji przełączania)
+
 ]]
 
-local player = game.Players.LocalPlayer
-local UserInputService = game:GetService("UserInputService")
-local MarketplaceService = game:GetService("MarketplaceService")
-local StarterGui = game:GetService("StarterGui")
-local RunService = game:GetService("RunService")
 
-local GAMEPASS_ID = 1296972626 -- JEDYNE ID Game Passa dla całego skryptu
-local MM2_EXPERIENCE_ID = 142823291 -- Poprawne ID dla Murder Mystery 2
-
-print("--- SKRYPT UNIVERSAL SCRIPTS START ---") -- DEBUG
-print("Skrypt załadowany. ID Game Passa:", GAMEPASS_ID)
-print("Twoje UserID:", player.UserId)
-print("Aktualne Experience ID:", game.PlaceId)
-print("Oczekiwane MM2 Experience ID:", MM2_EXPERIENCE_ID)
-print("---")
-
--- Zmienna globalna do przechowywania statusu Game Passa
-local hasGamePass = false
-local initialGamePassCheckDone = false -- Nowa zmienna do kontrolowania początkowych powiadomień
-
-local function sendNotification(title, text)
-    StarterGui:SetCore("SendNotification", {
-        Title = title,
-        Text = text,
-        Icon = "rbxassetid://6022295536", -- Upewnij się, że to ID obrazu jest poprawne lub zmień na własne
-        Duration = 5
-    })
-end
-
--- UI Instantiation (POCHODZĄCA Z TWOJEGO KODU)
+-- Instancje
 
 local ScreenGui = Instance.new("ScreenGui")
-local Frame = Instance.new("Frame") -- Główna ramka GUI
+local Frame = Instance.new("Frame")
 local UICorner = Instance.new("UICorner")
-local HideButton = Instance.new("ImageButton") -- ZMIANA TUTAJ: Jest teraz ImageButton!
-local UIAspectRatioConstraint_HideButton = Instance.new("UIAspectRatioConstraint") -- Dodano dla HideButton
 local Frame_2 = Instance.new("Frame")
 local HomeButton = Instance.new("TextButton")
 local UICorner_2 = Instance.new("UICorner")
-local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
+local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
 local PremiumButton = Instance.new("TextButton")
 local UICorner_3 = Instance.new("UICorner")
-local UITextSizeConstraint_3 = Instance.new("UITextSizeConstraint")
+local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
 local UICorner_4 = Instance.new("UICorner")
 local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
@@ -58,91 +27,76 @@ local ScrollingFramePremium = Instance.new("ScrollingFrame")
 local UICorner_5 = Instance.new("UICorner")
 local SpectateButton = Instance.new("TextButton")
 local UICorner_6 = Instance.new("UICorner")
-local UITextSizeConstraint_4 = Instance.new("UITextSizeConstraint")
+local UITextSizeConstraint_3 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_4 = Instance.new("UIAspectRatioConstraint")
 local MM2Button = Instance.new("TextButton")
 local UICorner_7 = Instance.new("UICorner")
-local UITextSizeConstraint_5 = Instance.new("UITextSizeConstraint")
+local UITextSizeConstraint_4 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_5 = Instance.new("UIAspectRatioConstraint")
 local FlyButton = Instance.new("TextButton")
 local UICorner_8 = Instance.new("UICorner")
-local UITextSizeConstraint_6 = Instance.new("UITextSizeConstraint")
+local UITextSizeConstraint_5 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_6 = Instance.new("UIAspectRatioConstraint")
 local Invisibiltybutton = Instance.new("TextButton")
 local UICorner_9 = Instance.new("UICorner")
-local UITextSizeConstraint_7 = Instance.new("UITextSizeConstraint")
+local UITextSizeConstraint_6 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_7 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_8 = Instance.new("UIAspectRatioConstraint")
 local TextLabel = Instance.new("TextLabel")
-local UITextSizeConstraint_8 = Instance.new("UITextSizeConstraint")
+local UITextSizeConstraint_7 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_9 = Instance.new("UIAspectRatioConstraint")
 local ScrollingFrameHome = Instance.new("ScrollingFrame")
 local SpeedToolbutton = Instance.new("TextButton")
 local UICorner_10 = Instance.new("UICorner")
-local UITextSizeConstraint_9 = Instance.new("UITextSizeConstraint")
+local UITextSizeConstraint_8 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_10 = Instance.new("UIAspectRatioConstraint")
 local ClicktptoolButton = Instance.new("TextButton")
 local UICorner_11 = Instance.new("UICorner")
-local UITextSizeConstraint_10 = Instance.new("UITextSizeConstraint")
+local UITextSizeConstraint_9 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_11 = Instance.new("UIAspectRatioConstraint")
 local UICorner_12 = Instance.new("UICorner")
 local SpectateButton_2 = Instance.new("TextButton")
 local UICorner_13 = Instance.new("UICorner")
-local UITextSizeConstraint_11 = Instance.new("UITextSizeConstraint")
+local UITextSizeConstraint_10 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_12 = Instance.new("UIAspectRatioConstraint")
 local NoclipButton = Instance.new("TextButton")
 local UICorner_14 = Instance.new("UICorner")
-local UITextSizeConstraint_12 = Instance.new("UITextSizeConstraint")
+local UITextSizeConstraint_11 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_13 = Instance.new("UIAspectRatioConstraint")
 local FlingButton = Instance.new("TextButton")
 local UICorner_15 = Instance.new("UICorner")
-local UITextSizeConstraint_13 = Instance.new("UITextSizeConstraint")
+local UITextSizeConstraint_12 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_14 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_15 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_16 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_17 = Instance.new("UIAspectRatioConstraint")
 
--- Properties (POCHODZĄCE Z TWOJEGO KODU - Zmodyfikowano tylko parent i pozycję HideButton)
+-- **Zmodyfikowana instancja: zmieniono nazwę ImageButton na CloseButton dla czytelności**
+-- **Dodano UIAspectRatioConstraint dla CloseButton**
+local CloseButton = Instance.new("ImageButton") 
+local CloseButtonAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
 
-ScreenGui.Name = "UniversalScriptsGui"
-ScreenGui.Parent = player:WaitForChild("PlayerGui")
+
+-- Właściwości
+
+local Players = game:GetService("Players") -- Pobierz usługę Players
+local LocalPlayer = Players.LocalPlayer -- Pobierz lokalnego gracza
+
+ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-ScreenGui.ResetOnSpawn = false
+ScreenGui.ResetOnSpawn = false -- Upewnij się, że GUI pozostaje po odrodzeniu
 
-Frame.Name = "MainFrame"
 Frame.Parent = ScreenGui
 Frame.BackgroundColor3 = Color3.new(0.172549, 0.172549, 0.172549)
 Frame.BorderColor3 = Color3.new(0, 0, 0)
 Frame.BorderSizePixel = 0
 Frame.Position = UDim2.new(0.212787732, 0, 0.244107679, 0)
 Frame.Size = UDim2.new(0.513162374, 0, 0.560262501, 0)
-Frame.Draggable = true
-Frame.Visible = true
+Frame.Draggable = true -- Ustaw główną ramkę jako przeciągalną
+Frame.Visible = true -- Upewnij się, że główna ramka jest domyślnie widoczna
 
 UICorner.Parent = Frame
 
--- Zmodyfikowany HideButton - Parent na ScreenGui, NIE Draggable, ImageButton, stała pozycja
-HideButton.Name = "HideButton"
-HideButton.Parent = ScreenGui -- KLUCZOWA ZMIANA: Parent to ScreenGui
-HideButton.BackgroundColor3 = Color3.new(1, 0, 0) -- Nadal możesz mieć kolor tła
-HideButton.BackgroundTransparency = 1 -- ZMIANA TUTAJ: Tło przezroczyste, aby widoczny był obrazek
-HideButton.ImageTransparency = 0 -- Upewniamy się, że obrazek nie jest przezroczysty
-HideButton.BorderColor3 = Color3.new(0, 0, 0)
-HideButton.BorderSizePixel = 3
--- STAŁA POZYCJA PRZYCISKU "X" (prawy górny róg, z offsetem)
-HideButton.Position = UDim2.new(1, -50, 0, 5) -- Pozycja UDim2.new(X_skala, X_offset, Y_skala, Y_offset)
-HideButton.Size = UDim2.new(0, 40, 0, 40) -- Rozmiar w pikselach
-HideButton.ZIndex = 5 -- Wyższa wartość ZIndex, aby był zawsze na wierzchu
-HideButton.Image = "rbxassetid://109075000814284" -- Ustawiamy ID obrazka dla "X"
-HideButton.Draggable = false -- Wyłączamy przeciąganie dla X
-HideButton.ScaleType = Enum.ScaleType.Fit -- Upewnij się, że obrazek dobrze się skaluje
-
--- Dodajemy UIAspectRatioConstraint dla HideButton, aby obrazek X zachował proporcje
-UIAspectRatioConstraint_HideButton.Parent = HideButton
-UIAspectRatioConstraint_HideButton.AspectRatio = 1 -- Idealnie kwadratowy, bo X jest kwadratowy
-
-
-Frame_2.Name = "TabsFrame"
 Frame_2.Parent = Frame
 Frame_2.BackgroundColor3 = Color3.new(0.141176, 0.141176, 0.141176)
 Frame_2.BorderColor3 = Color3.new(0, 0, 0)
@@ -150,7 +104,7 @@ Frame_2.BorderSizePixel = 0
 Frame_2.Position = UDim2.new(0, 0, 3.34969492e-08, 0)
 Frame_2.Size = UDim2.new(0.21077837, 0, 0.998841524, 0)
 
-HomeButton.Name = "HomeTabButton"
+HomeButton.Name = "HomeButton"
 HomeButton.Parent = Frame_2
 HomeButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
 HomeButton.BorderColor3 = Color3.new(0, 0, 0)
@@ -166,13 +120,13 @@ HomeButton.TextWrapped = true
 
 UICorner_2.Parent = HomeButton
 
-UITextSizeConstraint_2.Parent = HomeButton
-UITextSizeConstraint_2.MaxTextSize = 37
+UITextSizeConstraint.Parent = HomeButton
+UITextSizeConstraint.MaxTextSize = 37
 
 UIAspectRatioConstraint.Parent = HomeButton
 UIAspectRatioConstraint.AspectRatio = 3.9210526943206787
 
-PremiumButton.Name = "PremiumTabButton"
+PremiumButton.Name = "PremiumButton"
 PremiumButton.Parent = Frame_2
 PremiumButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
 PremiumButton.BorderColor3 = Color3.new(0, 0, 0)
@@ -188,8 +142,8 @@ PremiumButton.TextWrapped = true
 
 UICorner_3.Parent = PremiumButton
 
-UITextSizeConstraint_3.Parent = PremiumButton
-UITextSizeConstraint_3.MaxTextSize = 37
+UITextSizeConstraint_2.Parent = PremiumButton
+UITextSizeConstraint_2.MaxTextSize = 37
 
 UIAspectRatioConstraint_2.Parent = PremiumButton
 UIAspectRatioConstraint_2.AspectRatio = 3.9210526943206787
@@ -207,12 +161,12 @@ ScrollingFramePremium.BorderColor3 = Color3.new(0, 0, 0)
 ScrollingFramePremium.BorderSizePixel = 0
 ScrollingFramePremium.Position = UDim2.new(0.239610985, 0, 0.1111193, 0)
 ScrollingFramePremium.Size = UDim2.new(0.733235598, 0, 0.864629686, 0)
-ScrollingFramePremium.CanvasSize = UDim2.new(0,0,1.5,0)
-ScrollingFramePremium.Visible = false
+ScrollingFramePremium.CanvasSize = UDim2.new(0,0,1.5,0) -- Dodano CanvasSize dla przewijania
+ScrollingFramePremium.Visible = false -- Domyślnie ukryte
 
 UICorner_5.Parent = ScrollingFramePremium
 
-SpectateButton.Name = "Spectate Button Premium"
+SpectateButton.Name = "Spectate Button"
 SpectateButton.Parent = ScrollingFramePremium
 SpectateButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 SpectateButton.BorderColor3 = Color3.new(0, 0, 0)
@@ -227,13 +181,13 @@ SpectateButton.TextWrapped = true
 
 UICorner_6.Parent = SpectateButton
 
-UITextSizeConstraint_4.Parent = SpectateButton
-UITextSizeConstraint_4.MaxTextSize = 37
+UITextSizeConstraint_3.Parent = SpectateButton
+UITextSizeConstraint_3.MaxTextSize = 37
 
 UIAspectRatioConstraint_4.Parent = SpectateButton
 UIAspectRatioConstraint_4.AspectRatio = 3.9473683834075928
 
-MM2Button.Name = "MM2 Button Premium"
+MM2Button.Name = "MM2 Button"
 MM2Button.Parent = ScrollingFramePremium
 MM2Button.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 MM2Button.BorderColor3 = Color3.new(0, 0, 0)
@@ -245,17 +199,16 @@ MM2Button.TextColor3 = Color3.new(0, 0, 0)
 MM2Button.TextScaled = true
 MM2Button.TextSize = 14
 MM2Button.TextWrapped = true
-MM2Button.Visible = false
 
 UICorner_7.Parent = MM2Button
 
-UITextSizeConstraint_5.Parent = MM2Button
-UITextSizeConstraint_5.MaxTextSize = 37
+UITextSizeConstraint_4.Parent = MM2Button
+UITextSizeConstraint_4.MaxTextSize = 37
 
 UIAspectRatioConstraint_5.Parent = MM2Button
 UIAspectRatioConstraint_5.AspectRatio = 3.9473683834075928
 
-FlyButton.Name = "Console Button Premium"
+FlyButton.Name = "Fly Button"
 FlyButton.Parent = ScrollingFramePremium
 FlyButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 FlyButton.BorderColor3 = Color3.new(0, 0, 0)
@@ -270,13 +223,13 @@ FlyButton.TextWrapped = true
 
 UICorner_8.Parent = FlyButton
 
-UITextSizeConstraint_6.Parent = FlyButton
-UITextSizeConstraint_6.MaxTextSize = 37
+UITextSizeConstraint_5.Parent = FlyButton
+UITextSizeConstraint_5.MaxTextSize = 37
 
 UIAspectRatioConstraint_6.Parent = FlyButton
 UIAspectRatioConstraint_6.AspectRatio = 3.9473683834075928
 
-Invisibiltybutton.Name = "Invisibilty Button Premium"
+Invisibiltybutton.Name = "Invisibilty button"
 Invisibiltybutton.Parent = ScrollingFramePremium
 Invisibiltybutton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 Invisibiltybutton.BorderColor3 = Color3.new(0, 0, 0)
@@ -291,8 +244,8 @@ Invisibiltybutton.TextWrapped = true
 
 UICorner_9.Parent = Invisibiltybutton
 
-UITextSizeConstraint_7.Parent = Invisibiltybutton
-UITextSizeConstraint_7.MaxTextSize = 37
+UITextSizeConstraint_6.Parent = Invisibiltybutton
+UITextSizeConstraint_6.MaxTextSize = 37
 
 UIAspectRatioConstraint_7.Parent = Invisibiltybutton
 UIAspectRatioConstraint_7.AspectRatio = 3.9473683834075928
@@ -300,7 +253,6 @@ UIAspectRatioConstraint_7.AspectRatio = 3.9473683834075928
 UIAspectRatioConstraint_8.Parent = ScrollingFramePremium
 UIAspectRatioConstraint_8.AspectRatio = 1.4926543235778809
 
-TextLabel.Name = "TitleLabel"
 TextLabel.Parent = Frame
 TextLabel.BackgroundColor3 = Color3.new(1, 1, 1)
 TextLabel.BackgroundTransparency = 1
@@ -315,8 +267,8 @@ TextLabel.TextScaled = true
 TextLabel.TextSize = 14
 TextLabel.TextWrapped = true
 
-UITextSizeConstraint_8.Parent = TextLabel
-UITextSizeConstraint_8.MaxTextSize = 31
+UITextSizeConstraint_7.Parent = TextLabel
+UITextSizeConstraint_7.MaxTextSize = 31
 
 UIAspectRatioConstraint_9.Parent = TextLabel
 UIAspectRatioConstraint_9.AspectRatio = 8.78787899017334
@@ -329,9 +281,9 @@ ScrollingFrameHome.BorderColor3 = Color3.new(0, 0, 0)
 ScrollingFrameHome.BorderSizePixel = 0
 ScrollingFrameHome.Position = UDim2.new(0.239610985, 0, 0.113314532, 0)
 ScrollingFrameHome.Size = UDim2.new(0.733235598, 0, 0.864629686, 0)
-ScrollingFrameHome.CanvasSize = UDim2.new(0,0,1.5,0)
+ScrollingFrameHome.CanvasSize = UDim2.new(0,0,1.5,0) -- Dodano CanvasSize dla przewijania
 
-SpeedToolbutton.Name = "Speed Tool button Home"
+SpeedToolbutton.Name = "Speed Tool button"
 SpeedToolbutton.Parent = ScrollingFrameHome
 SpeedToolbutton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 SpeedToolbutton.BorderColor3 = Color3.new(0, 0, 0)
@@ -346,13 +298,13 @@ SpeedToolbutton.TextWrapped = true
 
 UICorner_10.Parent = SpeedToolbutton
 
-UITextSizeConstraint_9.Parent = SpeedToolbutton
-UITextSizeConstraint_9.MaxTextSize = 37
+UITextSizeConstraint_8.Parent = SpeedToolbutton
+UITextSizeConstraint_8.MaxTextSize = 37
 
 UIAspectRatioConstraint_10.Parent = SpeedToolbutton
 UIAspectRatioConstraint_10.AspectRatio = 3.9473683834075928
 
-ClicktptoolButton.Name = "Click tp tool Button Home"
+ClicktptoolButton.Name = "Click tp tool Button"
 ClicktptoolButton.Parent = ScrollingFrameHome
 ClicktptoolButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 ClicktptoolButton.BorderColor3 = Color3.new(0, 0, 0)
@@ -367,15 +319,15 @@ ClicktptoolButton.TextWrapped = true
 
 UICorner_11.Parent = ClicktptoolButton
 
-UITextSizeConstraint_10.Parent = ClicktptoolButton
-UITextSizeConstraint_10.MaxTextSize = 35
+UITextSizeConstraint_9.Parent = ClicktptoolButton
+UITextSizeConstraint_9.MaxTextSize = 35
 
 UIAspectRatioConstraint_11.Parent = ClicktptoolButton
 UIAspectRatioConstraint_11.AspectRatio = 3.9473683834075928
 
 UICorner_12.Parent = ScrollingFrameHome
 
-SpectateButton_2.Name = "Spectate Button Home"
+SpectateButton_2.Name = "Spectate Button"
 SpectateButton_2.Parent = ScrollingFrameHome
 SpectateButton_2.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 SpectateButton_2.BorderColor3 = Color3.new(0, 0, 0)
@@ -390,13 +342,13 @@ SpectateButton_2.TextWrapped = true
 
 UICorner_13.Parent = SpectateButton_2
 
-UITextSizeConstraint_11.Parent = SpectateButton_2
-UITextSizeConstraint_11.MaxTextSize = 37
+UITextSizeConstraint_10.Parent = SpectateButton_2
+UITextSizeConstraint_10.MaxTextSize = 37
 
 UIAspectRatioConstraint_12.Parent = SpectateButton_2
 UIAspectRatioConstraint_12.AspectRatio = 3.9473683834075928
 
-NoclipButton.Name = "Noclip Button Home"
+NoclipButton.Name = "Noclip Button"
 NoclipButton.Parent = ScrollingFrameHome
 NoclipButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 NoclipButton.BorderColor3 = Color3.new(0, 0, 0)
@@ -411,13 +363,13 @@ NoclipButton.TextWrapped = true
 
 UICorner_14.Parent = NoclipButton
 
-UITextSizeConstraint_12.Parent = NoclipButton
-UITextSizeConstraint_12.MaxTextSize = 37
+UITextSizeConstraint_11.Parent = NoclipButton
+UITextSizeConstraint_11.MaxTextSize = 37
 
 UIAspectRatioConstraint_13.Parent = NoclipButton
 UIAspectRatioConstraint_13.AspectRatio = 3.9473683834075928
 
-FlingButton.Name = "Fling Button Home"
+FlingButton.Name = "Fling Button"
 FlingButton.Parent = ScrollingFrameHome
 FlingButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 FlingButton.BorderColor3 = Color3.new(0, 0, 0)
@@ -432,8 +384,8 @@ FlingButton.TextWrapped = true
 
 UICorner_15.Parent = FlingButton
 
-UITextSizeConstraint_13.Parent = FlingButton
-UITextSizeConstraint_13.MaxTextSize = 37
+UITextSizeConstraint_12.Parent = FlingButton
+UITextSizeConstraint_12.MaxTextSize = 37
 
 UIAspectRatioConstraint_14.Parent = FlingButton
 UIAspectRatioConstraint_14.AspectRatio = 3.9473683834075928
@@ -447,233 +399,63 @@ UIAspectRatioConstraint_16.AspectRatio = 1.7601344585418701
 UIAspectRatioConstraint_17.Parent = ScreenGui
 UIAspectRatioConstraint_17.AspectRatio = 1.9216867685317993
 
+-- **Zmodyfikowane Właściwości dla CloseButton (dawniej ImageButton)**
+CloseButton.Name = "CloseButton" -- Zmieniono nazwę dla czytelności
+CloseButton.Parent = ScreenGui -- Rodzicem jest ScreenGui, aby pozostał niezależny od MainFrame
+CloseButton.BackgroundColor3 = Color3.new(1, 0, 0) -- Czerwone tło dla przycisku "X"
+CloseButton.BackgroundTransparency = 1 -- Ustaw tło na przezroczyste, aby widoczny był tylko obrazek
+CloseButton.BorderColor3 = Color3.new(0, 0, 0)
+CloseButton.BorderSizePixel = 0
+-- **KLUCZOWA ZMIANA:** Stała pozycja w prawym górnym rogu ekranu
+CloseButton.Position = UDim2.new(1, -50, 0, 5) -- 50 pikseli od prawej krawędzi, 5 pikseli od górnej
+CloseButton.Size = UDim2.new(0, 40, 0, 40) -- Stały rozmiar w pikselach
+CloseButton.Image = "rbxassetid://109075000814284" -- **Używam ID obrazka "X", które podałeś wcześniej**
+CloseButton.ZIndex = 5 -- Zapewnia, że zawsze jest na wierzchu
+CloseButton.Draggable = false -- Zapobiega przeciąganiu przycisku "X"
 
--- Logika Skryptu
--- Funkcja do przełączania zakładek
+CloseButtonAspectRatioConstraint.Parent = CloseButton
+CloseButtonAspectRatioConstraint.AspectRatio = 1 -- Zapewnia, że obrazek "X" pozostaje kwadratowy
+
+
+---
+
+### Logika Skryptu
+
+---
+
+-- Funkcja do przełączania widoczności głównej ramki GUI
+CloseButton.MouseButton1Click:Connect(function()
+    Frame.Visible = not Frame.Visible -- Przełącza widoczność głównej ramki 'Frame'
+end)
+
+-- Przykładowa funkcja do przełączania zakładek (jeśli masz taką logikę)
 local function showTab(tabName)
-    print("DEBUG: Próbuję przełączyć na zakładkę:", tabName)
     ScrollingFrameHome.Visible = false
     ScrollingFramePremium.Visible = false
 
     if tabName == "Home" then
         ScrollingFrameHome.Visible = true
-        print("DEBUG: Zakładka Home ustawiona na Visible = true")
     elseif tabName == "Premium" then
-        if hasGamePass then
-            ScrollingFramePremium.Visible = true
-            print("DEBUG: Zakładka Premium ustawiona na Visible = true")
-        else
-            sendNotification("Universal Scripts", "Musisz posiadać Game Pass, aby uzyskać dostęp do tej zakładki! Otwieram okno zakupu.")
-            print("DEBUG: Próba dostępu do zakładki Premium bez Game Passa. Wywołuję PromptGamePassPurchase.")
-            MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
-        end
+        ScrollingFramePremium.Visible = true
+        -- Tutaj możesz dodać sprawdzanie Game Passa, jeśli masz taką funkcję
     end
 end
 
--- Funkcja do sprawdzania statusu Game Passa
-local function checkGamePassStatus()
-    print("DEBUG: Sprawdzam status Game Passa (ID:", GAMEPASS_ID, ")...")
-    local success, result = pcall(function()
-        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
-    end)
-
-    if success then
-        hasGamePass = result
-        print("DEBUG: Status Game Passa:", hasGamePass)
-        if not initialGamePassCheckDone then -- Sprawdzamy, czy początkowe powiadomienie już było
-            if hasGamePass then
-                sendNotification("Universal Scripts", "Posiadasz Game Pass! Funkcje Premium odblokowane.")
-            else
-                sendNotification("Universal Scripts", "Nie posiadasz Game Passa. Odwiedź zakładkę Premium, aby go kupić.")
-            end
-            initialGamePassCheckDone = true -- Ustawiamy flagę na true po pierwszym powiadomieniu
-        end
-    else
-        warn("DEBUG: Błąd podczas sprawdzania Game Passa:", result)
-        sendNotification("Universal Scripts", "Nie można sprawdzić statusu Game Passa. Spróbuj ponownie.")
-    end
-end
-
--- Funkcja do aktualizacji widoczności przycisku MM2 Premium
-local function updateMM2ButtonVisibility()
-    if game.PlaceId == MM2_EXPERIENCE_ID then
-        MM2Button.Visible = true
-        print("DEBUG: Jesteś w MM2 Experience, przycisk MM2 (Premium) jest WIDOCZNY.")
-    else
-        MM2Button.Visible = false
-        print("DEBUG: Nie jesteś w MM2 Experience, przycisk MM2 (Premium) jest UKRYTY.")
-    end
-end
-
--- Sprawdzenie statusu Game Passa przy starcie skryptu
-checkGamePassStatus()
-updateMM2ButtonVisibility()
--- Domyślnie pokaż zakładkę Home
-showTab("Home")
--- NIE WYWOŁUJEMY updateHideButtonPosition() w RenderStepped ani przy otwieraniu/zamykaniu MainFrame,
--- ponieważ HideButton ma stałą pozycję i nie musi być dynamicznie aktualizowany.
-
--- Pomocnicza funkcja do uruchamiania skryptów i wysyłania powiadomień
-local function runScriptAndNotify(url, buttonName)
-    local success, err = pcall(function()
-        loadstring(game:HttpGet(url))()
-    end)
-    if success then
-        sendNotification("Universal Scripts", "Skrypt '" .. buttonName .. "' załadowany!")
-    else
-        sendNotification("Universal Scripts", "Błąd ładowania skryptu '" .. buttonName .. "': " .. tostring(err))
-        warn("Błąd ładowania skryptu '" .. buttonName .. "':", err)
-    end
-end
-
--- Połączenia przycisków Home
-SpeedToolbutton.MouseButton1Click:Connect(function()
-    print("DEBUG: Kliknięto przycisk Speed Tool (Home)")
-    runScriptAndNotify("https://pastebin.com/raw/X7B0HPc2", SpeedToolbutton.Text)
-end)
-
-ClicktptoolButton.MouseButton1Click:Connect(function()
-    print("DEBUG: Kliknięto przycisk Click tp tool (Home)")
-    runScriptAndNotify("https://pastebin.com/raw/4KF2WJ9u", ClicktptoolButton.Text)
-end)
-
-SpectateButton_2.MouseButton1Click:Connect(function()
-    print("DEBUG: Kliknięto przycisk Spectate (Home)")
-    runScriptAndNotify("https://pastebin.com/raw/UFVLWQRw", SpectateButton_2.Text)
-end)
-
-NoclipButton.MouseButton1Click:Connect(function()
-    print("DEBUG: Kliknięto przycisk Noclip (Home)")
-    runScriptAndNotify("https://pastebin.com/raw/CnbYfaj1", NoclipButton.Text)
-end)
-
-FlingButton.MouseButton1Click:Connect(function()
-    print("DEBUG: Kliknięto przycisk Fling (Home)")
-    runScriptAndNotify('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt', FlingButton.Text)
-end)
-
--- Połączenia przycisków Premium
-SpectateButton.MouseButton1Click:Connect(function()
-    print("DEBUG: Kliknięto przycisk Spectate (Premium). Sprawdzam Game Passa...")
-    local success, currentHasGamePass = pcall(function()
-        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
-    end)
-
-    if success then
-        print("DEBUG: Wynik sprawdzenia Game Passa (Spectate):", currentHasGamePass)
-        if currentHasGamePass then
-            runScriptAndNotify("https://pastebin.com/raw/UFVLWQRw", SpectateButton.Text)
-        else
-            sendNotification("Universal Scripts", "Musisz posiadać Game Pass, aby użyć tej funkcji!")
-            print("DEBUG: Wywołuję PromptGamePassPurchase dla Spectate.")
-            MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
-        end
-    else
-        warn("DEBUG: Błąd podczas sprawdzania Game Passa (Spectate):", currentHasGamePass)
-        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania Game Passa.")
-    end
-end)
-
-MM2Button.MouseButton1Click:Connect(function()
-    print("DEBUG: Kliknięto przycisk MM2 (Premium). Sprawdzam Game Passa...")
-    local success, currentHasGamePass = pcall(function()
-        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
-    end)
-
-    if success then
-        print("DEBUG: Wynik sprawdzenia Game Passa (MM2):", currentHasGamePass)
-        if currentHasGamePass then
-            runScriptAndNotify("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring", MM2Button.Text)
-        else
-            sendNotification("Universal Scripts", "Musisz posiadać Game Pass, aby użyć tej funkcji!")
-            print("DEBUG: Wywołuję PromptGamePassPurchase dla MM2.")
-            MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
-        end
-    else
-        warn("DEBUG: Błąd podczas sprawdzania Game Passa (MM2):", currentHasGamePass)
-        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania Game Passa.")
-    end
-end)
-
-FlyButton.MouseButton1Click:Connect(function()
-    print("DEBUG: Kliknięto przycisk Console (Premium). Sprawdzam Game Passa...")
-    local success, currentHasGamePass = pcall(function()
-        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
-    end)
-
-    if success then
-        print("DEBUG: Wynik sprawdzenia Game Passa (Console):", currentHasGamePass)
-        if currentHasGamePass then
-            runScriptAndNotify("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source", FlyButton.Text)
-        else
-            sendNotification("Universal Scripts", "Musisz posiadać Game Pass, aby użyć tej funkcji!")
-            print("DEBUG: Wywołuję PromptGamePassPurchase dla Console.")
-            MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
-        end
-    else
-        warn("DEBUG: Błąd podczas sprawdzania Game Passa (Console):", currentHasGamePass)
-        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania Game Passa.")
-    end
-end)
-
-Invisibiltybutton.MouseButton1Click:Connect(function()
-    print("DEBUG: Kliknięto przycisk Invisibilty (Premium). Sprawdzam Game Passa...")
-    local success, currentHasGamePass = pcall(function()
-        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
-    end)
-
-    if success then
-        print("DEBUG: Wynik sprawdzenia Game Passa (Invisibilty):", currentHasGamePass)
-        if currentHasGamePass then
-            runScriptAndNotify('https://pastebin.com/raw/3Rnd9rHf', Invisibiltybutton.Text)
-        else
-            sendNotification("Universal Scripts", "Musisz posiadać Game Pass, aby użyć tej funkcji!")
-            print("DEBUG: Wywołuję PromptGamePassPurchase dla Invisibilty.")
-            MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
-        end
-    else
-        warn("DEBUG: Błąd podczas sprawdzania Game Passa (Invisibilty):", currentHasGamePass)
-        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania Game Passa.")
-    end
-end)
-
-
--- Logika przycisków przełączających zakładki
+-- Połączenia przycisków zakładek
 HomeButton.MouseButton1Click:Connect(function()
-    print("DEBUG: Kliknięto przycisk Home. Przełączam na Home.")
     showTab("Home")
 end)
 
 PremiumButton.MouseButton1Click:Connect(function()
-    print("DEBUG: Kliknięto przycisk Premium. Przełączam na Premium lub otwieram okno zakupu.")
     showTab("Premium")
 end)
 
-HideButton.MouseButton1Click:Connect(function()
-    print("DEBUG: Kliknięto przycisk Hide. Zmieniam widoczność MainFrame.")
-    Frame.Visible = not Frame.Visible -- Ukrywa/pokazuje główną ramkę GUI
-    -- Nie wywołujemy updateHideButtonPosition() tutaj, bo HideButton ma stałą pozycję.
-end)
+-- Domyślnie pokaż zakładkę Home przy starcie
+showTab("Home")
 
--- Obsługa zdarzenia po zakończeniu próby zakupu Game Passa
-MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gamePassId, wasPurchased)
-    print("DEBUG: Zdarzenie PromptGamePassPurchaseFinished: userId=", userId, " gamePassId=", gamePassId, " wasPurchased=", wasPurchased)
-    if userId == player.UserId and gamePassId == GAMEPASS_ID then
-        if wasPurchased then
-            sendNotification("Universal Scripts", "Game Pass kupiony pomyślnie! Dziękujemy za zakup.")
-            hasGamePass = true
-            showTab("Premium")
-        else
-            sendNotification("Universal Scripts", "Anulowano zakup Game Passa.")
-        end
-    end
-end)
-
--- Początkowe powiadomienie
-spawn(function()
-    task.wait(1)
-    sendNotification("Universal Scripts", "Witaj w Universal Scripts! Skrypt załadowany.")
-    print("--- SKRYPT UNIVERSAL SCRIPTS ZAKOŃCZONO INICJALIZACJĘ ---") -- DEBUG
-end)
-
-task.wait(0.5)
+-- (Tutaj możesz dodać swoją logikę dla pozostałych przycisków, np. Speed Tool, Click tp tool itp.)
+-- Przykład:
+-- SpeedToolbutton.MouseButton1Click:Connect(function()
+--     -- Wklej tutaj kod dla Speed Tool
+--     print("Aktywowano Speed Tool!")
+-- end)
