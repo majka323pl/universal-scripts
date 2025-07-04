@@ -196,8 +196,6 @@ PremiumTabButton.TextWrapped = true
 
 PremiumTabButtonUICorner.Parent = PremiumTabButton
 
--- Tutaj znajdował się usunięty przycisk BuyGamePassButton, aby używać tylko jednego ID.
-
 
 ScrollingFrameHome.Name = "ScrollingFrameHome"
 ScrollingFrameHome.Parent = MainFrame
@@ -415,8 +413,6 @@ local hasGamePass = false
 -- Funkcja do aktualizacji widoczności zakładek
 local function updateTabVisibility()
     print("DEBUG: Aktualizuję widoczność zakładki Premium. Posiada Game Pass:", hasGamePass)
-    -- W tej wersji przycisk "Premium" pełni podwójną funkcję.
-    -- Jego widoczność nie zmienia się, tylko jego zachowanie po kliknięciu.
 end
 
 -- Funkcja do sprawdzania statusu Game Passa
@@ -427,9 +423,9 @@ local function checkGamePassStatus()
     end)
 
     if success then
-        hasGamePass = result -- result to true/false
+        hasGamePass = result
         print("DEBUG: Status Game Passa:", hasGamePass)
-        updateTabVisibility() -- Zaktualizuj widoczność zakładki po sprawdzeniu statusu
+        updateTabVisibility()
         if hasGamePass then
             sendNotification("Universal Scripts", "Posiadasz Game Pass! Funkcje Premium odblokowane.")
         end
@@ -449,14 +445,13 @@ local function showTab(tabName)
         ScrollingFrameHome.Visible = true
         print("DEBUG: Zakładka Home ustawiona na Visible = true")
     elseif tabName == "Premium" then
-        -- Zakładka Premium może być pokazana tylko, jeśli gracz ma Game Passa
         if hasGamePass then
             ScrollingFramePremium.Visible = true
             print("DEBUG: Zakładka Premium ustawiona na Visible = true")
         else
             sendNotification("Universal Scripts", "Musisz posiadać Game Pass (ID: " .. GAMEPASS_ID .. "), aby uzyskać dostęp do tej zakładki! Otwieram okno zakupu.")
             print("DEBUG: Próba dostępu do zakładki Premium bez Game Passa. Wywołuję PromptGamePassPurchase.")
-            MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID) -- Otwórz okno zakupu
+            MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
         end
     end
 end
@@ -665,7 +660,7 @@ MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gameP
             sendNotification("Universal Scripts", "Anulowano zakup Game Passa (ID: " .. gamePassId .. ").")
         end
     end
-end)
+})
 
 -- Początkowe powiadomienie
 spawn(function()
