@@ -5,7 +5,7 @@
         usuniętymi dopiskami "(Premium)" z nazw przycisków,
         oraz DYNAMICZNIE POZYCJONOWANYM PRZYCISKIEM "X" jako bezpośrednie dziecko ScreenGui,
         ale podążającym za główną ramką, nawet jeśli jest ukryta.
-        Version 21.0
+        Version 22.0
 
 ]]
 
@@ -388,7 +388,7 @@ SpectateButton_2.Text = "Spectate"
 SpectateButton_2.TextColor3 = Color3.new(0, 0, 0)
 SpectateButton_2.TextScaled = true
 SpectateButton_2.TextSize = 14
-TextLabel.TextWrapped = true
+SpectateButton_2.TextWrapped = true
 
 UICorner_13.Parent = SpectateButton_2
 
