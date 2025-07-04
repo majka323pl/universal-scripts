@@ -3,9 +3,9 @@
         Universal Scripts - Wersja z GUI stworzonym na podstawie dostarczonego kodu,
         z precyzyjnym pozycjonowaniem przycisków, dynamiczną widocznością przycisku MM2 w Premium,
         usuniętymi dopiskami "(Premium)" z nazw przycisków,
-        oraz DYNAMICZNIE POZYCJONOWANYM PRZYCISKIEM "X" jako bezpośrednie dziecko ScreenGui,
-        ale podążającym za główną ramką, nawet jeśli jest ukryta.
-        Version 23.0
+        oraz DYNAMICZNIE POZYCJONOWANYM PRZYCISKIEM "X" w ODDZIELNYM ScreenGui,
+        podążającym za główną ramką, nawet jeśli jest ukryta, ale zawsze widocznym.
+        Version 24.0
 
 ]]
 
@@ -40,11 +40,10 @@ end
 
 -- UI Instantiation (POCHODZĄCA Z TWOJEGO KODU)
 
-local ScreenGui = Instance.new("ScreenGui")
+-- Główne ScreenGui dla całego interfejsu
+local MainScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame") -- Główna ramka GUI
 local UICorner = Instance.new("UICorner")
-local HideButton = Instance.new("TextButton") -- Przycisk "X"
-local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
 local Frame_2 = Instance.new("Frame")
 local HomeButton = Instance.new("TextButton")
 local UICorner_2 = Instance.new("UICorner")
@@ -104,15 +103,18 @@ local UIAspectRatioConstraint_15 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_16 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_17 = Instance.new("UIAspectRatioConstraint")
 
--- Properties (POCHODZĄCE Z TWOJEGO KODU - Zmodyfikowano tylko parent i pozycję HideButton)
+-- NOWY ScreenGui tylko dla przycisku "X"
+local XButtonGui = Instance.new("ScreenGui")
+local HideButton = Instance.new("TextButton") -- Przycisk "X"
 
-ScreenGui.Name = "UniversalScriptsGui"
-ScreenGui.Parent = player:WaitForChild("PlayerGui")
-ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-ScreenGui.ResetOnSpawn = false
+-- Properties dla MainScreenGui i jego dzieci
+MainScreenGui.Name = "UniversalScriptsGui"
+MainScreenGui.Parent = player:WaitForChild("PlayerGui")
+MainScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+MainScreenGui.ResetOnSpawn = false
 
 Frame.Name = "MainFrame"
-Frame.Parent = ScreenGui
+Frame.Parent = MainScreenGui
 Frame.BackgroundColor3 = Color3.new(0.172549, 0.172549, 0.172549)
 Frame.BorderColor3 = Color3.new(0, 0, 0)
 Frame.BorderSizePixel = 0
@@ -123,27 +125,32 @@ Frame.Visible = true
 
 UICorner.Parent = Frame
 
--- HideButton - Parent to ScreenGui, Draggable, i ZIndex
+-- Properties dla XButtonGui i HideButton
+XButtonGui.Name = "XButtonGui"
+XButtonGui.Parent = player:WaitForChild("PlayerGui")
+XButtonGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling -- Ważne, aby był na wierzchu
+XButtonGui.ResetOnSpawn = false -- Niech nie znika po śmierci
+
 HideButton.Name = "HideButton"
-HideButton.Parent = ScreenGui -- TO JEST KLUCZOWE! MUSI BYĆ DZIECKIEM ScreenGui
+HideButton.Parent = XButtonGui -- TERAZ JEST DZIECKIEM ODDZIELNEGO GUI!
 HideButton.BackgroundColor3 = Color3.new(1, 0, 0)
 HideButton.BorderColor3 = Color3.new(0, 0, 0)
 HideButton.BorderSizePixel = 3
--- Początkowa pozycja będzie ustawiona dynamicznie, ale potrzebujemy placeholder
-HideButton.Position = UDim2.new(0.5, 0, 0.5, 0) -- Pozycja tymczasowa
-HideButton.Size = UDim2.new(0.0482946634, 0, 0.0802469105, 0) -- Utrzymujemy Twój rozmiar
-HideButton.ZIndex = 3 -- Wyższa wartość ZIndex, aby był zawsze na wierzchu
+HideButton.Position = UDim2.new(0.5, 0, 0.5, 0) -- Pozycja tymczasowa, będzie dynamicznie aktualizowana
+HideButton.Size = UDim2.new(0.0482946634, 0, 0.0802469105, 0)
+HideButton.ZIndex = 5 -- Jeszcze wyższa wartość ZIndex, aby był zawsze na wierzchu WSZYSTKIEGO
 HideButton.Font = Enum.Font.Unknown
 HideButton.Text = "X"
 HideButton.TextColor3 = Color3.new(0, 0, 0)
 HideButton.TextScaled = true
 HideButton.TextSize = 14
 HideButton.TextWrapped = true
-HideButton.Draggable = true -- Nadal można go przeciągać
+HideButton.Draggable = true -- Można go przeciągać
 
 UITextSizeConstraint.Parent = HideButton
 UITextSizeConstraint.MaxTextSize = 28
 
+-- Kontynuacja Properties dla MainScreenGui i jego dzieci
 Frame_2.Name = "TabsFrame"
 Frame_2.Parent = Frame
 Frame_2.BackgroundColor3 = Color3.new(0.141176, 0.141176, 0.141176)
@@ -446,7 +453,7 @@ UIAspectRatioConstraint_15.AspectRatio = 1.4926543235778809
 UIAspectRatioConstraint_16.Parent = Frame
 UIAspectRatioConstraint_16.AspectRatio = 1.7601344585418701
 
-UIAspectRatioConstraint_17.Parent = ScreenGui
+UIAspectRatioConstraint_17.Parent = MainScreenGui -- WAŻNE: Tutaj zmieniamy nazwę na MainScreenGui
 UIAspectRatioConstraint_17.AspectRatio = 1.9216867685317993
 
 
@@ -515,32 +522,29 @@ local function updateHideButtonPosition()
 
     local targetX, targetY
 
+    -- Używamy AbsolutePosition i AbsoluteSize głównej ramki
+    local mainFrameAbsolutePosition = Frame.AbsolutePosition
+    local mainFrameAbsoluteSize = Frame.AbsoluteSize
+
     if Frame.Visible then
         -- Jeśli ramka jest widoczna, podążaj za jej prawym górnym rogiem
-        targetX = Frame.AbsolutePosition.X + Frame.AbsoluteSize.X - xOffset
-        targetY = Frame.AbsolutePosition.Y - yOffset
+        targetX = mainFrameAbsolutePosition.X + mainFrameAbsoluteSize.X - xOffset
+        targetY = mainFrameAbsolutePosition.Y - yOffset
     else
         -- Jeśli ramka jest ukryta, przycisk "X" powinien pojawić się w stałym, przewidywalnym miejscu.
         -- Używamy pozycji skalowanej (Scale) głównej ramki, aby zawsze był w tym samym miejscu na ekranie
-        -- względem jej DOMYŚLNEJ pozycji.
-        local screenWidth = ScreenGui.AbsoluteSize.X
-        local screenHeight = ScreenGui.AbsoluteSize.Y
+        -- względem jej DOMYŚLNEJ pozycji, gdy jest ukryta.
+        local screenWidth = MainScreenGui.AbsoluteSize.X -- Ważne, by używać rozmiaru całego ekranu
+        local screenHeight = MainScreenGui.AbsoluteSize.Y
 
-        -- Oblicz pozycję absolutną na podstawie UDim2 skalowanej pozycji początkowej MainFrame
-        -- WAŻNE: Tu zakładamy, że pozycja Frame.Position.X.Scale i Y.Scale to jego POZYCJA POCZĄTKOWA,
-        -- a nie aktualna, jeśli był przeciągany, kiedy był widoczny.
-        -- Aby 'X' wracał w ZAWSZE to samo miejsce, gdy MainFrame jest ukryty, musimy to oprzeć
-        -- o POZYCJĘ POCZĄTKOWĄ (design time) MainFrame, a nie jego ostatnią przeciągniętą pozycję.
-        -- Jeśli chcesz, żeby 'X' wracał w ostatnią przeciągniętą pozycję, kiedy MainFrame jest ukryty,
-        -- musiałbyś zapisać ostatnią pozycję MainFrame, zanim zostanie ukryty.
-        -- Na potrzeby tego rozwiązania, założymy stałą pozycję, która jest domyślną pozycją MainFrame.
-        local initialFramePosition = UDim2.new(0.212787732, 0, 0.244107679, 0) -- Twoja domyślna pozycja MainFrame
-        local initialFrameSize = UDim2.new(0.513162374, 0, 0.560262501, 0) -- Twój domyślny rozmiar MainFrame
+        -- Pobieramy domyślną skalowaną pozycję i rozmiar MainFrame
+        local initialFramePosition = UDim2.new(0.212787732, 0, 0.244107679, 0)
+        local initialFrameSize = UDim2.new(0.513162374, 0, 0.560262501, 0)
 
         local initialFrameAbsoluteX = screenWidth * initialFramePosition.X.Scale + initialFramePosition.X.Offset
         local initialFrameAbsoluteY = screenHeight * initialFramePosition.Y.Scale + initialFramePosition.Y.Offset
         local initialFrameAbsoluteWidth = screenWidth * initialFrameSize.X.Scale + initialFrameSize.X.Offset
-        local initialFrameAbsoluteHeight = screenHeight * initialFrameSize.Y.Scale + initialFrameSize.Y.Offset
+        -- local initialFrameAbsoluteHeight = screenHeight * initialFrameSize.Y.Scale + initialFrameSize.Y.Offset -- Niepotrzebne
 
         targetX = initialFrameAbsoluteX + initialFrameAbsoluteWidth - xOffset
         targetY = initialFrameAbsoluteY - yOffset
@@ -702,7 +706,7 @@ end)
 HideButton.MouseButton1Click:Connect(function()
     print("DEBUG: Kliknięto przycisk Hide. Zmieniam widoczność MainFrame.")
     Frame.Visible = not Frame.Visible -- Ukrywa/pokazuje główną ramkę GUI
-    -- HideButton pozostaje widoczny, bo nie jest dzieckiem Frame
+    -- HideButton jest w osobnym ScreenGui, więc zawsze pozostaje widoczny
 end)
 
 -- Obsługa zdarzenia po zakończeniu próby zakupu Game Passa
