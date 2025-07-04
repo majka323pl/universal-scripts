@@ -15,6 +15,7 @@ local RunService = game:GetService("RunService")
 
 local GAMEPASS_ID = 1296972626 -- JEDYNE ID Game Passa dla całego skryptu
 local MM2_EXPERIENCE_ID = 142823291 -- Poprawne ID dla Murder Mystery 2
+local IMAGE_ID = 109075000814284
 
 print("--- SKRYPT UNIVERSAL SCRIPTS START ---") -- DEBUG
 print("Skrypt załadowany. ID Game Passa:", GAMEPASS_ID)
@@ -35,7 +36,7 @@ local function sendNotification(title, text)
     StarterGui:SetCore("SendNotification", {
         Title = title,
         Text = text,
-        Icon = "rbxassetid://6022295536", -- Upewnij się, że to ID obrazu jest poprawne lub zmień na własne
+        Icon = "rbxassetid://(IMAGE_ID)", -- Upewnij się, że to ID obrazu jest poprawne lub zmień na własne
         Duration = 5
     })
 end
