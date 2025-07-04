@@ -10,7 +10,7 @@ local UserInputService = game:GetService("UserInputService")
 local MarketplaceService = game:GetService("MarketplaceService")
 local StarterGui = game:GetService("StarterGui")
 
-local PREMIUM_GAMEPASS_ID = 25909396 -- <<< Ustawiono Twoje ID Game Passa >>>
+local PREMIUM_GAMEPASS_ID = 1296972626 -- <<< Ustawiono Twoje ID Game Passa >>>
 
 print("--- SKRYPT UNIVERSAL SCRIPTS START ---") -- DEBUG
 print("Skrypt załadowany. ID Game Passa ustawione na:", PREMIUM_GAMEPASS_ID)
