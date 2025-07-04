@@ -15,7 +15,7 @@ local TeleportService = game:GetService("TeleportService") -- Dodano TeleportSer
 
 local GAMEPASS_ID = 1296972626 -- JEDYNE ID Game Passa dla całego skryptu
 local MM2_EXPERIENCE_ID = 142823291 -- Poprawne ID dla Murder Mystery 2
-local TELEPORT_PLACE_ID = 6557073879 -- <--- TUTAJ ZMIEŃ NA ID GRY, DO KTÓREJ CHCESZ TELEPORTOWAĆ BEZ PREMIUM!
+local TELEPORT_PLACE_ID = 2462888639 -- <--- TUTAJ ZMIEŃ NA ID GRY, DO KTÓREJ CHCESZ TELEPORTOWAĆ BEZ PREMIUM!
 
 print("--- SKRYPT UNIVERSAL SCRIPTS START ---") -- DEBUG
 print("Skrypt załadowany. ID Game Passa:", GAMEPASS_ID)
