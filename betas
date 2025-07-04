@@ -12,7 +12,7 @@ local TELEPORT_PLACE_ID = 123456789 -- <--- ZMIEŃ TO NA ID GRY, DO KTÓREJ CHCE
 local hasGamePass = false
 local initialGamePassCheckDone = false
 
-local lastHideButtonPosition = UDim2.new(1, -55, 0, 10) 
+local lastHideButtonPosition = UDim2.new(1, -55, 0, 10)
 
 local function sendNotification(title, text)
     StarterGui:SetCore("SendNotification", {
@@ -433,7 +433,7 @@ local function showTab(tabName)
         else
             sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby uzyskać dostęp do tej zakładki!")
             TeleportService:Teleport(TELEPORT_PLACE_ID, player)
-            MainFrame.Visible = false 
+            MainFrame.Visible = false
         end
     end
 end
