@@ -1,12 +1,3 @@
---[[
-
-        Universal Scripts - Wersja z GUI stworzonym na podstawie dostarczonego kodu,
-        z precyzyjnym pozycjonowaniem przycisków, dynamiczną widocznością przycisku MM2 w Premium,
-        oraz PRZYCISKIEM "X" jako INDEPENDENTNY ImageButton, który nie "przykleja się" do GUI.
-        Version 26.1 (Zaktualizowano ID obrazka dla przycisku 'X')
-
-]]
-
 local player = game.Players.LocalPlayer
 local UserInputService = game:GetService("UserInputService")
 local MarketplaceService = game:GetService("MarketplaceService")
