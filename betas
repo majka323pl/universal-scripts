@@ -70,7 +70,7 @@ local UIAspectRatioConstraint_14 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_15 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_16 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_17 = Instance.new("UIAspectRatioConstraint")
-local ImageButton = Instance.new("ImageButton")
+local ImageButton = Instance.new("ImageButton") -- To jest teraz ImageButton, tak jak w Twoim GUI.
 
 -- Properties
 
@@ -391,4 +391,4 @@ ImageButton.BorderColor3 = Color3.new(0, 0, 0)
 ImageButton.BorderSizePixel = 0
 ImageButton.Position = UDim2.new(0.707863092, 0, 0.214006022, 0)
 ImageButton.Size = UDim2.new(0, 52, 0, 52)
-ImageButton.Image = "rbxassetid://102860171689689"
+ImageButton.Image = "rbxassetid://102860171689689" -- Upewnij się, że to ID obrazu jest poprawne.
