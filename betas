@@ -1,7 +1,8 @@
 --[[
 
-        Universal Scripts - Version with Single Game Pass Logic
-        Version 11.0 (Single Game Pass ID: 1296972626, Premium Button handles purchase prompt)
+        Universal Scripts - Wersja z usprawnionymi powiadomieniami o załadowaniu skryptu,
+        rozdzielonymi funkcjami zakładek, ręcznym pozycjonowaniem przycisków i obsługą dotyku.
+        Version 14.0 (Single Game Pass ID: 1296972626)
 
 ]]
 
@@ -10,12 +11,16 @@ local UserInputService = game:GetService("UserInputService")
 local MarketplaceService = game:GetService("MarketplaceService")
 local StarterGui = game:GetService("StarterGui")
 
-local GAMEPASS_ID = 1296972626 -- <<< JEDYNE, OSTATECZNE ID Game Passa dla całego skryptu >>>
+local GAMEPASS_ID = 1296972626 -- JEDYNE ID Game Passa dla całego skryptu
 
 print("--- SKRYPT UNIVERSAL SCRIPTS START ---") -- DEBUG
-print("Skrypt załadowany. JEDYNE ID Game Passa:", GAMEPASS_ID)
+print("Skrypt załadowany. ID Game Passa:", GAMEPASS_ID)
 print("Twoje UserID:", player.UserId)
 print("---")
+
+-- Zmienna globalna do przechowywania statusu Game Passa
+local hasGamePass = false
+local initialGamePassCheckDone = false -- Nowa zmienna do kontrolowania początkowych powiadomień
 
 local function sendNotification(title, text)
     StarterGui:SetCore("SendNotification", {
@@ -26,7 +31,7 @@ local function sendNotification(title, text)
     })
 end
 
--- UI Instantiation (No changes needed here, copied for completeness)
+-- UI Instantiation
 local UniversalScreenGui = Instance.new("ScreenGui")
 local MainFrame = Instance.new("Frame")
 local MainFrameUICorner = Instance.new("UICorner")
@@ -49,6 +54,7 @@ local ScrollingFrameHomeUIAspectRatioConstraint = Instance.new("UIAspectRatioCon
 local ScrollingFramePremium = Instance.new("ScrollingFrame")
 local ScrollingFramePremiumUICorner = Instance.new("UICorner")
 
+-- Przyciski dla zakładki Home
 local InvisibiltyButtonHome = Instance.new("TextButton")
 local InvisibiltyButtonHomeUICorner = Instance.new("UICorner")
 local InvisibiltyButtonHomeUITextSizeConstraint = Instance.new("UITextSizeConstraint")
@@ -94,6 +100,7 @@ local HideButtonUITextSizeConstraint = Instance.new("UITextSizeConstraint")
 local HideButtonUIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
 local ScreenGuiUIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
 
+-- Przyciski dla zakładki Premium
 local SpectateButtonPremium = Instance.new("TextButton")
 local SpectateButtonPremiumUICorner = Instance.new("UICorner")
 local SpectateButtonPremiumUITextSizeConstraint = Instance.new("UITextSizeConstraint")
@@ -108,6 +115,7 @@ local FlyButtonPremium = Instance.new("TextButton")
 local FlyButtonPremiumUICorner = Instance.new("UICorner")
 local FlyButtonPremiumUITextSizeConstraint = Instance.new("UITextSizeConstraint")
 local FlyButtonPremiumUIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+
 
 UniversalScreenGui.Name = "UniversalScriptsGui"
 UniversalScreenGui.Parent = player:WaitForChild("PlayerGui")
@@ -188,7 +196,7 @@ PremiumTabButton.BorderColor3 = Color3.new(0, 0, 0)
 PremiumTabButton.BorderSizePixel = 0
 PremiumTabButton.Size = UDim2.new(0.9, 0, 0, 38)
 PremiumTabButton.Font = Enum.Font.SourceSans
-PremiumTabButton.Text = "Premium" -- Nazwa "Premium" zostaje
+PremiumTabButton.Text = "Premium"
 PremiumTabButton.TextColor3 = Color3.new(0, 0, 0)
 PremiumTabButton.TextScaled = true
 PremiumTabButton.TextSize = 14
@@ -212,12 +220,7 @@ ScrollingFrameHomeUICorner.Parent = ScrollingFrameHome
 ScrollingFrameHomeUIAspectRatioConstraint.Parent = ScrollingFrameHome
 ScrollingFrameHomeUIAspectRatioConstraint.AspectRatio = 2.0342466831207275
 
-local HomeListLayout = Instance.new("UIListLayout")
-HomeListLayout.Parent = ScrollingFrameHome
-HomeListLayout.Padding = UDim.new(0, 10)
-HomeListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-HomeListLayout.VerticalAlignment = Enum.VerticalAlignment.Top
-HomeListLayout.FillDirection = Enum.FillDirection.Vertical
+-- NIE MA UIListLayout dla ScrollingFrameHome, aby pozwolić na ręczne pozycjonowanie!
 
 ScrollingFramePremium.Name = "ScrollingFramePremium"
 ScrollingFramePremium.Parent = MainFrame
@@ -232,25 +235,23 @@ ScrollingFramePremium.Visible = false
 
 ScrollingFramePremiumUICorner.Parent = ScrollingFramePremium
 
-local PremiumListLayout = Instance.new("UIListLayout")
-PremiumListLayout.Parent = ScrollingFramePremium
-PremiumListLayout.Padding = UDim.new(0, 10)
-PremiumListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-PremiumListLayout.VerticalAlignment = Enum.VerticalAlignment.Top
-PremiumListLayout.FillDirection = Enum.FillDirection.Vertical
+-- NIE MA UIListLayout dla ScrollingFramePremium, aby pozwolić na ręczne pozycjonowanie!
 
+
+-- ***** PRZYCISKI ZAKŁADKI HOME - Ręczne pozycjonowanie *****
+-- Pamiętaj, aby edytować ich Position i Size w Roblox Studio!
 InvisibiltyButtonHome.Name = "Invisibilty button"
 InvisibiltyButtonHome.Parent = ScrollingFrameHome
 InvisibiltyButtonHome.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 InvisibiltyButtonHome.BorderColor3 = Color3.new(0, 0, 0)
 InvisibiltyButtonHome.Size = UDim2.new(0.9, 0, 0, 38)
+InvisibiltyButtonHome.Position = UDim2.new(0.05, 0, 0.02, 0) -- PRZYKŁADOWA POZYCJA
 InvisibiltyButtonHome.Font = Enum.Font.SourceSans
 InvisibiltyButtonHome.Text = "Invisibilty"
 InvisibiltyButtonHome.TextColor3 = Color3.new(0, 0, 0)
 InvisibiltyButtonHome.TextScaled = true
 InvisibiltyButtonHome.TextSize = 14
 InvisibiltyButtonHome.TextWrapped = true
-
 InvisibiltyButtonHomeUICorner.Parent = InvisibiltyButtonHome
 InvisibiltyButtonHomeUITextSizeConstraint.Parent = InvisibiltyButtonHome
 InvisibiltyButtonHomeUITextSizeConstraint.MaxTextSize = 37
@@ -262,13 +263,13 @@ SpeedToolButtonHome.Parent = ScrollingFrameHome
 SpeedToolButtonHome.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 SpeedToolButtonHome.BorderColor3 = Color3.new(0, 0, 0)
 SpeedToolButtonHome.Size = UDim2.new(0.9, 0, 0, 38)
+SpeedToolButtonHome.Position = UDim2.new(0.05, 0, 0.10, 0) -- PRZYKŁADOWA POZYCJA
 SpeedToolButtonHome.Font = Enum.Font.SourceSans
 SpeedToolButtonHome.Text = "Speed Tool"
 SpeedToolButtonHome.TextColor3 = Color3.new(0, 0, 0)
 SpeedToolButtonHome.TextScaled = true
 SpeedToolButtonHome.TextSize = 14
 SpeedToolButtonHome.TextWrapped = true
-
 SpeedToolButtonHomeUICorner.Parent = SpeedToolButtonHome
 SpeedToolButtonHomeUITextSizeConstraint.Parent = SpeedToolButtonHome
 SpeedToolButtonHomeUITextSizeConstraint.MaxTextSize = 37
@@ -280,13 +281,13 @@ ClicktpToolButtonHome.Parent = ScrollingFrameHome
 ClicktpToolButtonHome.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 ClicktpToolButtonHome.BorderColor3 = Color3.new(0, 0, 0)
 ClicktpToolButtonHome.Size = UDim2.new(0.9, 0, 0, 38)
+ClicktpToolButtonHome.Position = UDim2.new(0.05, 0, 0.18, 0) -- PRZYKŁADOWA POZYCJA
 ClicktpToolButtonHome.Font = Enum.Font.SourceSans
 ClicktpToolButtonHome.Text = "Click TP Tool"
 ClicktpToolButtonHome.TextColor3 = Color3.new(0, 0, 0)
 ClicktpToolButtonHome.TextScaled = true
 ClicktpToolButtonHome.TextSize = 14
 ClicktpToolButtonHome.TextWrapped = true
-
 ClicktpToolButtonHomeUICorner.Parent = ClicktpToolButtonHome
 ClicktpToolButtonHomeUITextSizeConstraint.Parent = ClicktpToolButtonHome
 ClicktpToolButtonHomeUITextSizeConstraint.MaxTextSize = 35
@@ -298,13 +299,13 @@ SpectateButtonHome.Parent = ScrollingFrameHome
 SpectateButtonHome.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 SpectateButtonHome.BorderColor3 = Color3.new(0, 0, 0)
 SpectateButtonHome.Size = UDim2.new(0.9, 0, 0, 38)
+SpectateButtonHome.Position = UDim2.new(0.05, 0, 0.26, 0) -- PRZYKŁADOWA POZYCJA
 SpectateButtonHome.Font = Enum.Font.SourceSans
 SpectateButtonHome.Text = "Spectate"
 SpectateButtonHome.TextColor3 = Color3.new(0, 0, 0)
 SpectateButtonHome.TextScaled = true
 SpectateButtonHome.TextSize = 14
 SpectateButtonHome.TextWrapped = true
-
 SpectateButtonHomeUICorner.Parent = SpectateButtonHome
 SpectateButtonHomeUITextSizeConstraint.Parent = SpectateButtonHome
 SpectateButtonHomeUITextSizeConstraint.MaxTextSize = 37
@@ -316,13 +317,13 @@ FlyButtonHome.Parent = ScrollingFrameHome
 FlyButtonHome.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 FlyButtonHome.BorderColor3 = Color3.new(0, 0, 0)
 FlyButtonHome.Size = UDim2.new(0.9, 0, 0, 38)
+FlyButtonHome.Position = UDim2.new(0.05, 0, 0.34, 0) -- PRZYKŁADOWA POZYCJA
 FlyButtonHome.Font = Enum.Font.SourceSans
 FlyButtonHome.Text = "Fly"
 FlyButtonHome.TextColor3 = Color3.new(0, 0, 0)
 FlyButtonHome.TextScaled = true
 FlyButtonHome.TextSize = 14
 FlyButtonHome.TextWrapped = true
-
 FlyButtonHomeUICorner.Parent = FlyButtonHome
 FlyButtonHomeUITextSizeConstraint.Parent = FlyButtonHome
 FlyButtonHomeUITextSizeConstraint.MaxTextSize = 37
@@ -334,13 +335,13 @@ NoclipButtonHome.Parent = ScrollingFrameHome
 NoclipButtonHome.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 NoclipButtonHome.BorderColor3 = Color3.new(0, 0, 0)
 NoclipButtonHome.Size = UDim2.new(0.9, 0, 0, 38)
+NoclipButtonHome.Position = UDim2.new(0.05, 0, 0.42, 0) -- PRZYKŁADOWA POZYCJA
 NoclipButtonHome.Font = Enum.Font.SourceSans
 NoclipButtonHome.Text = "Noclip"
 NoclipButtonHome.TextColor3 = Color3.new(0, 0, 0)
 NoclipButtonHome.TextScaled = true
 NoclipButtonHome.TextSize = 14
 NoclipButtonHome.TextWrapped = true
-
 NoclipButtonHomeUICorner.Parent = NoclipButtonHome
 NoclipButtonHomeUITextSizeConstraint.Parent = NoclipButtonHome
 NoclipButtonHomeUITextSizeConstraint.MaxTextSize = 37
@@ -352,13 +353,13 @@ FlingButtonHome.Parent = ScrollingFrameHome
 FlingButtonHome.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 FlingButtonHome.BorderColor3 = Color3.new(0, 0, 0)
 FlingButtonHome.Size = UDim2.new(0.9, 0, 0, 38)
+FlingButtonHome.Position = UDim2.new(0.05, 0, 0.50, 0) -- PRZYKŁADOWA POZYCJA
 FlingButtonHome.Font = Enum.Font.SourceSans
 FlingButtonHome.Text = "Fling"
 FlingButtonHome.TextColor3 = Color3.new(0, 0, 0)
 FlingButtonHome.TextScaled = true
 FlingButtonHome.TextSize = 14
 FlingButtonHome.TextWrapped = true
-
 FlingButtonHomeUICorner.Parent = FlingButtonHome
 FlingButtonHomeUITextSizeConstraint.Parent = FlingButtonHome
 FlingButtonHomeUITextSizeConstraint.MaxTextSize = 37
@@ -370,18 +371,75 @@ MM2ButtonHome.Parent = ScrollingFrameHome
 MM2ButtonHome.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 MM2ButtonHome.BorderColor3 = Color3.new(0, 0, 0)
 MM2ButtonHome.Size = UDim2.new(0.9, 0, 0, 38)
+MM2ButtonHome.Position = UDim2.new(0.05, 0, 0.58, 0) -- PRZYKŁADOWA POZYCJA
 MM2ButtonHome.Font = Enum.Font.SourceSans
 MM2ButtonHome.Text = "MM2"
 MM2ButtonHome.TextColor3 = Color3.new(0, 0, 0)
 MM2ButtonHome.TextScaled = true
 MM2ButtonHome.TextSize = 14
 MM2ButtonHome.TextWrapped = true
-
 MM2ButtonHomeUICorner.Parent = MM2ButtonHome
 MM2ButtonHomeUITextSizeConstraint.Parent = MM2ButtonHome
 MM2ButtonHomeUITextSizeConstraint.MaxTextSize = 37
 MM2ButtonHomeUIAspectRatioConstraint.Parent = MM2ButtonHome
 MM2ButtonHomeUIAspectRatioConstraint.AspectRatio = 3.9473683834075928
+
+
+-- ***** PRZYCISKI ZAKŁADKI PREMIUM - Ręczne pozycjonowanie *****
+SpectateButtonPremium.Name = "Spectate Button"
+SpectateButtonPremium.Parent = ScrollingFramePremium
+SpectateButtonPremium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
+SpectateButtonPremium.BorderColor3 = Color3.new(0, 0, 0)
+SpectateButtonPremium.Size = UDim2.new(0.9, 0, 0, 38)
+SpectateButtonPremium.Position = UDim2.new(0.05, 0, 0.02, 0) -- PRZYKŁADOWA POZYCJA
+SpectateButtonPremium.Font = Enum.Font.SourceSans
+SpectateButtonPremium.Text = "Spectate (Premium)"
+SpectateButtonPremium.TextColor3 = Color3.new(0, 0, 0)
+SpectateButtonPremium.TextScaled = true
+SpectateButtonPremium.TextSize = 14
+SpectateButtonPremium.TextWrapped = true
+SpectateButtonPremiumUICorner.Parent = SpectateButtonPremium
+SpectateButtonPremiumUITextSizeConstraint.Parent = SpectateButtonPremium
+SpectateButtonPremiumUITextSizeConstraint.MaxTextSize = 37
+SpectateButtonPremiumUIAspectRatioConstraint.Parent = SpectateButtonPremium
+SpectateButtonPremiumUIAspectRatioConstraint.AspectRatio = 3.9473683834075928
+
+MM2ButtonPremium.Name = "MM2 Button"
+MM2ButtonPremium.Parent = ScrollingFramePremium
+MM2ButtonPremium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
+MM2ButtonPremium.BorderColor3 = Color3.new(0, 0, 0)
+MM2ButtonPremium.Size = UDim2.new(0.9, 0, 0, 38)
+MM2ButtonPremium.Position = UDim2.new(0.05, 0, 0.10, 0) -- PRZYKŁADOWA POZYCJA
+MM2ButtonPremium.Font = Enum.Font.SourceSans
+MM2ButtonPremium.Text = "MM2 (Premium)"
+MM2ButtonPremium.TextColor3 = Color3.new(0, 0, 0)
+MM2ButtonPremium.TextScaled = true
+MM2ButtonPremium.TextSize = 14
+MM2ButtonPremium.TextWrapped = true
+MM2ButtonPremiumUICorner.Parent = MM2ButtonPremium
+MM2ButtonPremiumUITextSizeConstraint.Parent = MM2ButtonPremium
+MM2ButtonPremiumUITextSizeConstraint.MaxTextSize = 37
+MM2ButtonPremiumUIAspectRatioConstraint.Parent = MM2ButtonPremium
+MM2ButtonPremiumUIAspectRatioConstraint.AspectRatio = 3.9473683834075928
+
+FlyButtonPremium.Name = "Fly Button"
+FlyButtonPremium.Parent = ScrollingFramePremium
+FlyButtonPremium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
+FlyButtonPremium.BorderColor3 = Color3.new(0, 0, 0)
+FlyButtonPremium.Size = UDim2.new(0.9, 0, 0, 38)
+FlyButtonPremium.Position = UDim2.new(0.05, 0, 0.18, 0) -- PRZYKŁADOWA POZYCJA
+FlyButtonPremium.Font = Enum.Font.SourceSans
+FlyButtonPremium.Text = "Fly (Premium)"
+FlyButtonPremium.TextColor3 = Color3.new(0, 0, 0)
+FlyButtonPremium.TextScaled = true
+FlyButtonPremium.TextSize = 14
+FlyButtonPremium.TextWrapped = true
+FlyButtonPremiumUICorner.Parent = FlyButtonPremium
+FlyButtonPremiumUITextSizeConstraint.Parent = FlyButtonPremium
+FlyButtonPremiumUITextSizeConstraint.MaxTextSize = 37
+FlyButtonPremiumUIAspectRatioConstraint.Parent = FlyButtonPremium
+FlyButtonPremiumUIAspectRatioConstraint.AspectRatio = 3.9473683834075928
+
 
 HideButton.Name = "HideButton"
 HideButton.Parent = UniversalScreenGui
@@ -397,8 +455,7 @@ HideButton.TextColor3 = Color3.new(0, 0, 0)
 HideButton.TextScaled = true
 HideButton.TextSize = 14
 HideButton.TextWrapped = true
-HideButton.Draggable = true
-
+HideButton.Draggable = true -- Zachowano możliwość przeciągania
 HideButtonUITextSizeConstraint.Parent = HideButton
 HideButtonUITextSizeConstraint.MaxTextSize = 28
 HideButtonUIAspectRatioConstraint.Parent = HideButton
@@ -407,33 +464,6 @@ HideButtonUIAspectRatioConstraint.AspectRatio = 1.0689654350280762
 ScreenGuiUIAspectRatioConstraint.Parent = UniversalScreenGui
 ScreenGuiUIAspectRatioConstraint.AspectRatio = 1.7807486057281494
 
--- Zmienna globalna do przechowywania statusu Game Passa
-local hasGamePass = false
-
--- Funkcja do aktualizacji widoczności zakładek
-local function updateTabVisibility()
-    print("DEBUG: Aktualizuję widoczność zakładki Premium. Posiada Game Pass:", hasGamePass)
-end
-
--- Funkcja do sprawdzania statusu Game Passa
-local function checkGamePassStatus()
-    print("DEBUG: Sprawdzam status Game Passa (ID:", GAMEPASS_ID, ")...")
-    local success, result = pcall(function()
-        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
-    end)
-
-    if success then
-        hasGamePass = result
-        print("DEBUG: Status Game Passa:", hasGamePass)
-        updateTabVisibility()
-        if hasGamePass then
-            sendNotification("Universal Scripts", "Posiadasz Game Pass! Funkcje Premium odblokowane.")
-        end
-    else
-        warn("DEBUG: Błąd podczas sprawdzania Game Passa:", result)
-        sendNotification("Universal Scripts", "Nie można sprawdzić statusu Game Passa. Spróbuj ponownie.")
-    end
-end
 
 -- Funkcja do przełączania zakładek
 local function showTab(tabName)
@@ -449,10 +479,36 @@ local function showTab(tabName)
             ScrollingFramePremium.Visible = true
             print("DEBUG: Zakładka Premium ustawiona na Visible = true")
         else
-            sendNotification("Universal Scripts", "Musisz posiadać Game Pass (ID: " .. GAMEPASS_ID .. "), aby uzyskać dostęp do tej zakładki! Otwieram okno zakupu.")
+            -- Powiadomienie tylko wtedy, gdy próbujemy wejść na Premium bez GamePassa
+            sendNotification("Universal Scripts", "Musisz posiadać Game Pass, aby uzyskać dostęp do tej zakładki! Otwieram okno zakupu.")
             print("DEBUG: Próba dostępu do zakładki Premium bez Game Passa. Wywołuję PromptGamePassPurchase.")
-            MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
+            MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID) -- Otwórz okno zakupu
         end
+    end
+end
+
+-- Funkcja do sprawdzania statusu Game Passa
+local function checkGamePassStatus()
+    print("DEBUG: Sprawdzam status Game Passa (ID:", GAMEPASS_ID, ")...")
+    local success, result = pcall(function()
+        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
+    end)
+
+    if success then
+        hasGamePass = result
+        print("DEBUG: Status Game Passa:", hasGamePass)
+        if not initialGamePassCheckDone then -- Wyślij powiadomienie tylko raz na początku
+            if hasGamePass then
+                sendNotification("Universal Scripts", "Posiadasz Game Pass! Funkcje Premium odblokowane.")
+            else
+                sendNotification("Universal Scripts", "Nie posiadasz Game Passa. Odwiedź zakładkę Premium, aby go kupić.")
+            end
+            initialGamePassCheckDone = true
+        end
+    else
+        warn("DEBUG: Błąd podczas sprawdzania Game Passa:", result)
+        -- To powiadomienie zostaje, bo to błąd krytyczny
+        sendNotification("Universal Scripts", "Nie można sprawdzić statusu Game Passa. Spróbuj ponownie.")
     end
 end
 
@@ -461,74 +517,61 @@ checkGamePassStatus()
 -- Domyślnie pokaż zakładkę Home
 showTab("Home")
 
+-- Pomocnicza funkcja do uruchamiania skryptów i wysyłania powiadomień
+local function runScriptAndNotify(url, buttonName)
+    local success, err = pcall(function()
+        loadstring(game:HttpGet(url))()
+    end)
+    if success then
+        sendNotification("Universal Scripts", "Skrypt '" .. buttonName .. "' załadowany!")
+    else
+        sendNotification("Universal Scripts", "Błąd ładowania skryptu '" .. buttonName .. "': " .. tostring(err))
+        warn("Błąd ładowania skryptu '" .. buttonName .. "':", err)
+    end
+end
+
 -- Połączenia przycisków Home
 InvisibiltyButtonHome.MouseButton1Click:Connect(function()
     print("DEBUG: Kliknięto przycisk Niewidzialność (Home)")
-    loadstring(game:HttpGet('https://pastebin.com/raw/3Rnd9rHf'))()
-    sendNotification("Niewidzialność", "Skrypt niewidzialności załadowany!")
+    runScriptAndNotify('https://pastebin.com/raw/3Rnd9rHf', InvisibiltyButtonHome.Text)
 end)
 
 SpeedToolButtonHome.MouseButton1Click:Connect(function()
     print("DEBUG: Kliknięto przycisk Speed Tool (Home)")
-    loadstring(game:HttpGet("https://pastebin.com/raw/X7B0HPc2"))()
-    sendNotification("Narzędzie Prędkości", "Skrypt narzędzia prędkości załadowany!")
+    runScriptAndNotify("https://pastebin.com/raw/X7B0HPc2", SpeedToolButtonHome.Text)
 end)
 
 ClicktpToolButtonHome.MouseButton1Click:Connect(function()
     print("DEBUG: Kliknięto przycisk Click TP Tool (Home)")
-    loadstring(game:HttpGet("https://pastebin.com/raw/4KF2WJ9u"))()
-    sendNotification("Narzędzie Teleportacji", "Skrypt narzędzia teleportacji załadowany!")
+    runScriptAndNotify("https://pastebin.com/raw/4KF2WJ9u", ClicktpToolButtonHome.Text)
 end)
 
 SpectateButtonHome.MouseButton1Click:Connect(function()
     print("DEBUG: Kliknięto przycisk Spectate (Home)")
-    loadstring(game:HttpGet("https://pastebin.com/raw/UFVLWQRw"))()
-    sendNotification("Narzędzie Obserwacji", "Skrypt obserwacji załadowany!")
+    runScriptAndNotify("https://pastebin.com/raw/UFVLWQRw", SpectateButtonHome.Text)
 end)
 
 FlyButtonHome.MouseButton1Click:Connect(function()
     print("DEBUG: Kliknięto przycisk Fly (Home)")
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
-    sendNotification("Latanie", "Skrypt latania załadowany!")
+    runScriptAndNotify("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source", FlyButtonHome.Text)
 end)
 
 NoclipButtonHome.MouseButton1Click:Connect(function()
     print("DEBUG: Kliknięto przycisk Noclip (Home)")
-    loadstring(game:HttpGet("https://pastebin.com/raw/CnbYfaj1"))()
-    sendNotification("Noclip", "Skrypt Noclip załadowany!")
+    runScriptAndNotify("https://pastebin.com/raw/CnbYfaj1", NoclipButtonHome.Text)
 end)
 
 FlingButtonHome.MouseButton1Click:Connect(function()
     print("DEBUG: Kliknięto przycisk Fling (Home)")
-    loadstring(game:HttpGet(('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt'),true))()
-    sendNotification("Fling", "Skrypt Fling załadowany!")
+    runScriptAndNotify('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt', FlingButtonHome.Text)
 end)
 
 MM2ButtonHome.MouseButton1Click:Connect(function()
     print("DEBUG: Kliknięto przycisk MM2 (Home)")
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring"))()
-    sendNotification("Skrypt MM2", "Skrypt MM2 załadowany!")
+    runScriptAndNotify("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring", MM2ButtonHome.Text)
 end)
 
 -- Połączenia przycisków Premium (teraz sprawdzają jeden Game Pass)
-SpectateButtonPremium.Name = "Spectate Button"
-SpectateButtonPremium.Parent = ScrollingFramePremium
-SpectateButtonPremium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
-SpectateButtonPremium.BorderColor3 = Color3.new(0, 0, 0)
-SpectateButtonPremium.Size = UDim2.new(0.9, 0, 0, 38)
-SpectateButtonPremium.Font = Enum.Font.SourceSans
-SpectateButtonPremium.Text = "Spectate"
-SpectateButtonPremium.TextColor3 = Color3.new(0, 0, 0)
-SpectateButtonPremium.TextScaled = true
-SpectateButtonPremium.TextSize = 14
-SpectateButtonPremium.TextWrapped = true
-
-SpectateButtonPremiumUICorner.Parent = SpectateButtonPremium
-SpectateButtonPremiumUITextSizeConstraint.Parent = SpectateButtonPremium
-SpectateButtonPremiumUITextSizeConstraint.MaxTextSize = 37
-SpectateButtonPremiumUIAspectRatioConstraint.Parent = SpectateButtonPremium
-SpectateButtonPremiumUIAspectRatioConstraint.AspectRatio = 3.9473683834075928
-
 SpectateButtonPremium.MouseButton1Click:Connect(function()
     print("DEBUG: Kliknięto przycisk Spectate (Premium). Sprawdzam Game Passa...")
     local success, currentHasGamePass = pcall(function()
@@ -538,10 +581,9 @@ SpectateButtonPremium.MouseButton1Click:Connect(function()
     if success then
         print("DEBUG: Wynik sprawdzenia Game Passa (Spectate):", currentHasGamePass)
         if currentHasGamePass then
-            loadstring(game:HttpGet("https://pastebin.com/raw/UFVLWQRw"))()
-            sendNotification("Narzędzie Obserwacji", "Skrypt obserwacji załadowany!")
+            runScriptAndNotify("https://pastebin.com/raw/UFVLWQRw", SpectateButtonPremium.Text)
         else
-            sendNotification("Universal Scripts", "Musisz posiadać Game Pass (ID: " .. GAMEPASS_ID .. "), aby użyć tej funkcji!")
+            sendNotification("Universal Scripts", "Musisz posiadać Game Pass, aby użyć tej funkcji!")
             print("DEBUG: Wywołuję PromptGamePassPurchase dla Spectate.")
             MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
         end
@@ -550,24 +592,6 @@ SpectateButtonPremium.MouseButton1Click:Connect(function()
         sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania Game Passa.")
     end
 end)
-
-MM2ButtonPremium.Name = "MM2 Button"
-MM2ButtonPremium.Parent = ScrollingFramePremium
-MM2ButtonPremium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
-MM2ButtonPremium.BorderColor3 = Color3.new(0, 0, 0)
-MM2ButtonPremium.Size = UDim2.new(0.9, 0, 0, 38)
-MM2ButtonPremium.Font = Enum.Font.SourceSans
-MM2ButtonPremium.Text = "MM2"
-MM2ButtonPremium.TextColor3 = Color3.new(0, 0, 0)
-MM2ButtonPremium.TextScaled = true
-MM2ButtonPremium.TextSize = 14
-MM2ButtonPremium.TextWrapped = true
-
-MM2ButtonPremiumUICorner.Parent = MM2ButtonPremium
-MM2ButtonPremiumUITextSizeConstraint.Parent = MM2ButtonPremium
-MM2ButtonPremiumUITextSizeConstraint.MaxTextSize = 37
-MM2ButtonPremiumUIAspectRatioConstraint.Parent = MM2ButtonPremium
-MM2ButtonPremiumUIAspectRatioConstraint.AspectRatio = 3.9473683834075928
 
 MM2ButtonPremium.MouseButton1Click:Connect(function()
     print("DEBUG: Kliknięto przycisk MM2 (Premium). Sprawdzam Game Passa...")
@@ -578,10 +602,9 @@ MM2ButtonPremium.MouseButton1Click:Connect(function()
     if success then
         print("DEBUG: Wynik sprawdzenia Game Passa (MM2):", currentHasGamePass)
         if currentHasGamePass then
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring"))()
-            sendNotification("Skrypt MM2", "Skrypt MM2 załadowany!")
+            runScriptAndNotify("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring", MM2ButtonPremium.Text)
         else
-            sendNotification("Universal Scripts", "Musisz posiadać Game Pass (ID: " .. GAMEPASS_ID .. "), aby użyć tej funkcji!")
+            sendNotification("Universal Scripts", "Musisz posiadać Game Pass, aby użyć tej funkcji!")
             print("DEBUG: Wywołuję PromptGamePassPurchase dla MM2.")
             MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
         end
@@ -590,24 +613,6 @@ MM2ButtonPremium.MouseButton1Click:Connect(function()
         sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania Game Passa.")
     end
 end)
-
-FlyButtonPremium.Name = "Fly Button"
-FlyButtonPremium.Parent = ScrollingFramePremium
-FlyButtonPremium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
-FlyButtonPremium.BorderColor3 = Color3.new(0, 0, 0)
-FlyButtonPremium.Size = UDim2.new(0.9, 0, 0, 38)
-FlyButtonPremium.Font = Enum.Font.SourceSans
-FlyButtonPremium.Text = "Fly"
-FlyButtonPremium.TextColor3 = Color3.new(0, 0, 0)
-FlyButtonPremium.TextScaled = true
-FlyButtonPremium.TextSize = 14
-FlyButtonPremium.TextWrapped = true
-
-FlyButtonPremiumUICorner.Parent = FlyButtonPremium
-FlyButtonPremiumUITextSizeConstraint.Parent = FlyButtonPremium
-FlyButtonPremiumUITextSizeConstraint.MaxTextSize = 37
-FlyButtonPremiumUIAspectRatioConstraint.Parent = FlyButtonPremium
-FlyButtonPremiumUIAspectRatioConstraint.AspectRatio = 3.9473683834075928
 
 FlyButtonPremium.MouseButton1Click:Connect(function()
     print("DEBUG: Kliknięto przycisk Fly (Premium). Sprawdzam Game Passa...")
@@ -618,10 +623,9 @@ FlyButtonPremium.MouseButton1Click:Connect(function()
     if success then
         print("DEBUG: Wynik sprawdzenia Game Passa (Fly):", currentHasGamePass)
         if currentHasGamePass then
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
-            sendNotification("Latanie", "Skrypt latania załadowany!")
+            runScriptAndNotify("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source", FlyButtonPremium.Text)
         else
-            sendNotification("Universal Scripts", "Musisz posiadać Game Pass (ID: " .. GAMEPASS_ID .. "), aby użyć tej funkcji!")
+            sendNotification("Universal Scripts", "Musisz posiadać Game Pass, aby użyć tej funkcji!")
             print("DEBUG: Wywołuję PromptGamePassPurchase dla Fly.")
             MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
         end
@@ -639,7 +643,7 @@ end)
 
 PremiumTabButton.MouseButton1Click:Connect(function()
     print("DEBUG: Kliknięto przycisk Premium. Przełączam na Premium lub otwieram okno zakupu.")
-    showTab("Premium") -- Funkcja showTab teraz decyduje, czy pokazać zakładkę, czy wywołać prompt
+    showTab("Premium")
 end)
 
 HideButton.MouseButton1Click:Connect(function()
@@ -652,20 +656,19 @@ MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gameP
     print("DEBUG: Zdarzenie PromptGamePassPurchaseFinished: userId=", userId, " gamePassId=", gamePassId, " wasPurchased=", wasPurchased)
     if userId == player.UserId and gamePassId == GAMEPASS_ID then
         if wasPurchased then
-            sendNotification("Universal Scripts", "Game Pass (ID: " .. gamePassId .. ") kupiony pomyślnie! Dziękujemy za zakup.")
+            sendNotification("Universal Scripts", "Game Pass kupiony pomyślnie! Dziękujemy za zakup.")
             hasGamePass = true -- Zaktualizuj status
-            updateTabVisibility()
             showTab("Premium") -- Automatycznie przełącz na zakładkę Premium po zakupie
         else
-            sendNotification("Universal Scripts", "Anulowano zakup Game Passa (ID: " .. gamePassId .. ").")
+            sendNotification("Universal Scripts", "Anulowano zakup Game Passa.")
         end
     end
-})
+end)
 
 -- Początkowe powiadomienie
 spawn(function()
-    task.wait(2)
-    sendNotification("Universal Scripts", "Dzięki za używanie Universal Scripts! Witaj w nowej wersji!")
+    task.wait(1)
+    sendNotification("Universal Scripts", "Witaj w Universal Scripts! Skrypt załadowany.")
     print("--- SKRYPT UNIVERSAL SCRIPTS ZAKOŃCZONO INICJALIZACJĘ ---") -- DEBUG
 end)
 
