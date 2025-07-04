@@ -1,10 +1,3 @@
---[[
-
-        Universal Scripts - Version with Tabs and Game Pass
-        Version 7.3.0 (Premium button logic changed)
-
-]]
-
 local player = game.Players.LocalPlayer
 local UserInputService = game:GetService("UserInputService")
 local MarketplaceService = game:GetService("MarketplaceService")
@@ -454,34 +447,38 @@ HideButtonUIAspectRatioConstraint.AspectRatio = 1.0689654350280762
 ScreenGuiUIAspectRatioConstraint.Parent = UniversalScreenGui
 ScreenGuiUIAspectRatioConstraint.AspectRatio = 1.7807486057281494
 
-local function showTab(tabName)
-    ScrollingFrameHome.Visible = false
-    ScrollingFramePremium.Visible = false
+local hasGamePass = false -- Define hasGamePass globally or at the top of the script
+local function checkGamePass()
+    local success, result = pcall(function()
+        hasGamePass = MarketplaceService:UserOwnsGamePassAsync(player.UserId, PREMIUM_GAMEPASS_ID)
+    end)
 
+    if success then
+        if not hasGamePass then
+            sendNotification("Universal Scripts", "Premium Game Pass not found. Buy it to access Premium features!")
+        else
+            sendNotification("Universal Scripts", "You own Premium Game Pass! Premium features unlocked.")
+        end
+    else
+        warn("Error checking Game Pass:", result)
+        sendNotification("Universal Scripts", "Could not check Game Pass status.")
+    end
+end
+
+-- Function to switch tabs
+local function showTab(tabName)
     if tabName == "Home" then
         ScrollingFrameHome.Visible = true
+        ScrollingFramePremium.Visible = false
     elseif tabName == "Premium" then
+        ScrollingFrameHome.Visible = false
         ScrollingFramePremium.Visible = true
     end
 end
 
-showTab("Home")
-
-local hasGamePass = false
-local success, result = pcall(function()
-    hasGamePass = MarketplaceService:UserOwnsGamePassAsync(player.UserId, PREMIUM_GAMEPASS_ID)
-end)
-
-if success then
-    if not hasGamePass then
-        sendNotification("Universal Scripts", "Premium Game Pass not found. Buy it to access Premium features!")
-    else
-        sendNotification("Universal Scripts", "You own Premium Game Pass! Premium features unlocked.")
-    end
-else
-    warn("Error checking Game Pass:", result)
-    sendNotification("Universal Scripts", "Could not check Game Pass status.")
-end
+-- Initial checks and setup
+checkGamePass() -- Check Game Pass status on script start
+showTab("Home") -- Show Home tab by default
 
 InvisibiltyButtonHome.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet('https://pastebin.com/raw/3Rnd9rHf'))()
@@ -524,29 +521,36 @@ MM2ButtonHome.MouseButton1Click:Connect(function()
 end)
 
 SpectateButtonPremium.MouseButton1Click:Connect(function()
-    if hasGamePass then
+    -- Re-check Game Pass status just before allowing access to Premium features
+    local currentHasGamePass = MarketplaceService:UserOwnsGamePassAsync(player.UserId, PREMIUM_GAMEPASS_ID)
+    if currentHasGamePass then
         loadstring(game:HttpGet("https://pastebin.com/raw/UFVLWQRw"))()
         sendNotification("Spectate Tool (Premium)", "Spectate script loaded!")
     else
         sendNotification("Universal Scripts", "You must own the Premium Game Pass to use this feature!")
+        MarketplaceService:PromptGamePassPurchase(player, PREMIUM_GAMEPASS_ID) -- Offer purchase if not owned
     end
 end)
 
 MM2ButtonPremium.MouseButton1Click:Connect(function()
-    if hasGamePass then
+    local currentHasGamePass = MarketplaceService:UserOwnsGamePassAsync(player.UserId, PREMIUM_GAMEPASS_ID)
+    if currentHasGamePass then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring"))()
         sendNotification("MM2 Script (Premium)", "MM2 script loaded!")
     else
         sendNotification("Universal Scripts", "You must own the Premium Game Pass to use this feature!")
+        MarketplaceService:PromptGamePassPurchase(player, PREMIUM_GAMEPASS_ID)
     end
 end)
 
 FlyButtonPremium.MouseButton1Click:Connect(function()
-    if hasGamePass then
+    local currentHasGamePass = MarketplaceService:UserOwnsGamePassAsync(player.UserId, PREMIUM_GAMEPASS_ID)
+    if currentHasGamePass then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
         sendNotification("Fly Tool (Premium)", "Fly script loaded!")
     else
         sendNotification("Universal Scripts", "You must own the Premium Game Pass to use this feature!")
+        MarketplaceService:PromptGamePassPurchase(player, PREMIUM_GAMEPASS_ID)
     end
 end)
 
@@ -555,10 +559,12 @@ HomeTabButton.MouseButton1Click:Connect(function()
 end)
 
 PremiumTabButton.MouseButton1Click:Connect(function()
-    if hasGamePass then
+    -- Re-check Game Pass status every time the Premium button is clicked
+    local currentHasGamePass = MarketplaceService:UserOwnsGamePassAsync(player.UserId, PREMIUM_GAMEPASS_ID)
+    if currentHasGamePass then
         showTab("Premium")
+        sendNotification("Universal Scripts", "Switched to Premium tab.")
     else
-        -- Prompt player to buy the Game Pass
         MarketplaceService:PromptGamePassPurchase(player, PREMIUM_GAMEPASS_ID)
         sendNotification("Universal Scripts", "Premium Game Pass not found. Opening purchase window...")
     end
@@ -566,6 +572,17 @@ end)
 
 HideButton.MouseButton1Click:Connect(function()
     MainFrame.Visible = not MainFrame.Visible
+end)
+
+-- This event listens for successful Game Pass purchases
+MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gamePassId, wasPurchased)
+    if userId == player.UserId and gamePassId == PREMIUM_GAMEPASS_ID and wasPurchased then
+        hasGamePass = true -- Update the local variable
+        sendNotification("Universal Scripts", "Premium Game Pass purchased successfully! Enjoy your new features.")
+        showTab("Premium") -- Automatically switch to Premium tab after purchase
+    elseif userId == player.UserId and gamePassId == PREMIUM_GAMEPASS_ID and not wasPurchased then
+        sendNotification("Universal Scripts", "Premium Game Pass purchase cancelled.")
+    end
 end)
 
 spawn(function()
