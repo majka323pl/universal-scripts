@@ -1,11 +1,12 @@
 --[[
         Universal Scripts - Podmienione GUI z niezależnym, ruchomym przyciskiem "X" (ImageButton),
-        który chowa/pokazuje główne okno GUI.
+        który chowa/pokazuje główne okno GUI. Obsługa myszy i dotyku.
 ]]
 
 local player = game.Players.LocalPlayer
 local UserInputService = game:GetService("UserInputService")
 
+-- Tworzenie ScreenGui
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "UniversalScriptsGui"
 ScreenGui.Parent = player:WaitForChild("PlayerGui")
@@ -13,6 +14,7 @@ ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ScreenGui.ResetOnSpawn = false -- Ważne, aby GUI nie znikało po odrodzeniu
 ScreenGui.Enabled = true
 
+-- Tworzenie MainFrame (głównego okna GUI)
 local MainFrame = Instance.new("Frame")
 MainFrame.Name = "MainFrame"
 MainFrame.Parent = ScreenGui
@@ -26,6 +28,7 @@ MainFrame.Visible = true -- Domyślnie widoczne
 local MainFrame_UICorner = Instance.new("UICorner")
 MainFrame_UICorner.Parent = MainFrame
 
+-- Tworzenie TabsFrame
 local TabsFrame = Instance.new("Frame")
 TabsFrame.Name = "TabsFrame"
 TabsFrame.Parent = MainFrame
@@ -42,6 +45,7 @@ local TabsFrame_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint"
 TabsFrame_UIAspectRatioConstraint.Parent = TabsFrame
 TabsFrame_UIAspectRatioConstraint.AspectRatio = 0.37142857909202576
 
+-- Tworzenie przycisku Home
 local HomeButton = Instance.new("TextButton")
 HomeButton.Name = "HomeButton"
 HomeButton.Parent = TabsFrame
@@ -68,6 +72,7 @@ local HomeButton_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint
 HomeButton_UIAspectRatioConstraint.Parent = HomeButton
 HomeButton_UIAspectRatioConstraint.AspectRatio = 3.9210526943206787
 
+-- Tworzenie przycisku Premium
 local PremiumButton = Instance.new("TextButton")
 PremiumButton.Name = "PremiumButton"
 PremiumButton.Parent = TabsFrame
@@ -94,6 +99,7 @@ local PremiumButton_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstra
 PremiumButton_UIAspectRatioConstraint.Parent = PremiumButton
 PremiumButton_UIAspectRatioConstraint.AspectRatio = 3.9210526943206787
 
+-- Tworzenie ScrollingFramePremium
 local ScrollingFramePremium = Instance.new("ScrollingFrame")
 ScrollingFramePremium.Name = "ScrollingFramePremium"
 ScrollingFramePremium.Parent = MainFrame
@@ -113,6 +119,7 @@ local ScrollingFramePremium_UIAspectRatioConstraint = Instance.new("UIAspectRati
 ScrollingFramePremium_UIAspectRatioConstraint.Parent = ScrollingFramePremium
 ScrollingFramePremium_UIAspectRatioConstraint.AspectRatio = 1.4926543235778809
 
+-- Przyciski w ScrollingFramePremium
 local SpectateButton = Instance.new("TextButton")
 SpectateButton.Name = "SpectateButton"
 SpectateButton.Parent = ScrollingFramePremium
@@ -213,6 +220,7 @@ local Invisibiltybutton_UIAspectRatioConstraint = Instance.new("UIAspectRatioCon
 Invisibiltybutton_UIAspectRatioConstraint.Parent = Invisibiltybutton
 Invisibiltybutton_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
 
+-- Tworzenie TitleLabel
 local TitleLabel = Instance.new("TextLabel")
 TitleLabel.Name = "TitleLabel"
 TitleLabel.Parent = MainFrame
@@ -237,6 +245,7 @@ local TitleLabel_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint
 TitleLabel_UIAspectRatioConstraint.Parent = TitleLabel
 TitleLabel_UIAspectRatioConstraint.AspectRatio = 8.78787899017334
 
+-- Tworzenie ScrollingFrameHome
 local ScrollingFrameHome = Instance.new("ScrollingFrame")
 ScrollingFrameHome.Name = "ScrollingFrameHome"
 ScrollingFrameHome.Parent = MainFrame
@@ -256,6 +265,7 @@ local ScrollingFrameHome_UIAspectRatioConstraint = Instance.new("UIAspectRatioCo
 ScrollingFrameHome_UIAspectRatioConstraint.Parent = ScrollingFrameHome
 ScrollingFrameHome_UIAspectRatioConstraint.AspectRatio = 1.4926543235778809
 
+-- Przyciski w ScrollingFrameHome
 local SpeedToolbutton = Instance.new("TextButton")
 SpeedToolbutton.Name = "SpeedToolButton"
 SpeedToolbutton.Parent = ScrollingFrameHome
@@ -389,24 +399,52 @@ local ScreenGui_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint"
 ScreenGui_UIAspectRatioConstraint.Parent = ScreenGui
 ScreenGui_UIAspectRatioConstraint.AspectRatio = 1.9216867685317993
 
-local HideButton = Instance.new("ImageButton") -- To jest teraz ImageButton
+-- Tworzenie ImageButton (przycisk "X")
+local HideButton = Instance.new("ImageButton")
 HideButton.Name = "HideButton"
 HideButton.Parent = ScreenGui -- Ważne: jest dzieckiem ScreenGui, nie MainFrame
 HideButton.BackgroundColor3 = Color3.new(1, 1, 1)
 HideButton.BorderColor3 = Color3.new(0, 0, 0)
 HideButton.BorderSizePixel = 0
-HideButton.Position = UDim2.new(0.707863092, 0, 0.214006022, 0)
+HideButton.Position = UDim2.new(0.707863092, 0, 0.214006022, 0) -- Początkowa pozycja
 HideButton.Size = UDim2.new(0, 52, 0, 52)
 HideButton.Image = "rbxassetid://102860171689689" -- Upewnij się, że to ID obrazu jest poprawne
 HideButton.ZIndex = 2 -- Upewnij się, że jest nad innymi elementami
-HideButton.Draggable = true -- Sprawia, że przycisk jest ruchomy
 
--- Logic for showing/hiding GUI
+--- Logika działania GUI ---
+
+-- Funkcja do przełączania widoczności MainFrame
 HideButton.MouseButton1Click:Connect(function()
-    MainFrame.Visible = not MainFrame.Visible -- Przełącza widoczność MainFrame
+    MainFrame.Visible = not MainFrame.Visible -- Przełącza widoczność głównego okna GUI
 end)
 
--- Tab switching logic
+-- Logika przesuwania ImageButton (przycisk "X")
+local isDragging = false
+local dragStartPos = Vector2.new(0, 0)
+local buttonStartPos = UDim2.new(0, 0, 0, 0)
+
+HideButton.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        isDragging = true
+        dragStartPos = input.Position
+        buttonStartPos = HideButton.Position
+    end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+    if isDragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+        local delta = input.Position - dragStartPos
+        HideButton.Position = UDim2.new(0, buttonStartPos.X.Offset + delta.X, 0, buttonStartPos.Y.Offset + delta.Y)
+    end
+end)
+
+UserInputService.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        isDragging = false
+    end
+end)
+
+-- Logika przełączania zakładek
 HomeButton.MouseButton1Click:Connect(function()
     ScrollingFrameHome.Visible = true
     ScrollingFramePremium.Visible = false
@@ -417,6 +455,6 @@ PremiumButton.MouseButton1Click:Connect(function()
     ScrollingFramePremium.Visible = true
 end)
 
--- Domyślne wyświetlanie zakładki Home przy starcie
+-- Ustawienie domyślnej zakładki przy starcie skryptu
 ScrollingFrameHome.Visible = true
 ScrollingFramePremium.Visible = false
