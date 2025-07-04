@@ -462,7 +462,7 @@ local function showTab(tabName)
             ScrollingFramePremium.Visible = true
             print("DEBUG: Zakładka Premium ustawiona na Visible = true")
         else
-            sendNotification("Universal Scripts", "Musisz posiadać Game Pass, aby uzyskać dostęp do tej zakładki! Otwieram okno zakupu.")
+            sendNotification("Universal Scripts", "Musisz posiadać wersje Premium, aby uzyskać dostęp do tej zakładki!.")
             print("DEBUG: Próba dostępu do zakładki Premium bez Game Passa. Wywołuję PromptGamePassPurchase.")
             MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
         end
@@ -483,7 +483,7 @@ local function checkGamePassStatus()
             if hasGamePass then
                 sendNotification("Universal Scripts", "Posiadasz Game Pass! Funkcje Premium odblokowane.")
             else
-                sendNotification("Universal Scripts", "Nie posiadasz Game Passa. Odwiedź zakładkę Premium, aby go kupić.")
+                sendNotification("Universal Scripts", "Nie posiadasz wersji Premium. Wejdz na profil gry majka323pl's place i zakładke Passes/Przepustki aby go kupić.")
             end
             initialGamePassCheckDone = true
         end
