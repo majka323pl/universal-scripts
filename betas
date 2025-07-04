@@ -449,7 +449,7 @@ local function checkGamePassStatus()
             if hasGamePass then
                 sendNotification("Universal Scripts", "Posiadasz wersję premium! Funkcje Premium odblokowane.")
             else
-                sendNotification("Universal Scripts", "Nie posiadasz wersji premium. Kliknij zakładkę Premium, aby dowiedzieć się więcej.")
+                sendNotification("Universal Scripts", "Nie posiadasz wersji premium. Kliknij zakładkę Premium, aby przejść do zakupu.")
             end
             initialGamePassCheckDone = true
         end
