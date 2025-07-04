@@ -1,9 +1,16 @@
+--[[
+
+        Universal Scripts - Version with Tabs and Game Pass
+        Version 7.3.0 (Premium button logic changed)
+
+]]
+
 local player = game.Players.LocalPlayer
 local UserInputService = game:GetService("UserInputService")
 local MarketplaceService = game:GetService("MarketplaceService")
 local StarterGui = game:GetService("StarterGui")
 
-local PREMIUM_GAMEPASS_ID = 1296972626 -- <<< CHANGE THIS TO YOUR GAME PASS ID! >>>
+local PREMIUM_GAMEPASS_ID = 0 -- <<< CHANGE THIS TO YOUR GAME PASS ID! >>>
 
 local function sendNotification(title, text)
     StarterGui:SetCore("SendNotification", {
@@ -466,16 +473,14 @@ local success, result = pcall(function()
 end)
 
 if success then
-    PremiumTabButton.Visible = hasGamePass
     if not hasGamePass then
-        sendNotification("Universal Scripts", "Premium Game Pass not found. Premium tab hidden.")
+        sendNotification("Universal Scripts", "Premium Game Pass not found. Buy it to access Premium features!")
     else
-        sendNotification("Universal Scripts", "You own Premium Game Pass! Premium tab available.")
+        sendNotification("Universal Scripts", "You own Premium Game Pass! Premium features unlocked.")
     end
 else
     warn("Error checking Game Pass:", result)
-    PremiumTabButton.Visible = false
-    sendNotification("Universal Scripts", "Could not check Game Pass. Premium tab hidden.")
+    sendNotification("Universal Scripts", "Could not check Game Pass status.")
 end
 
 InvisibiltyButtonHome.MouseButton1Click:Connect(function()
@@ -553,7 +558,9 @@ PremiumTabButton.MouseButton1Click:Connect(function()
     if hasGamePass then
         showTab("Premium")
     else
-        sendNotification("Universal Scripts", "Purchase the Premium Game Pass to access this tab!")
+        -- Prompt player to buy the Game Pass
+        MarketplaceService:PromptGamePassPurchase(player, PREMIUM_GAMEPASS_ID)
+        sendNotification("Universal Scripts", "Premium Game Pass not found. Opening purchase window...")
     end
 end)
 
