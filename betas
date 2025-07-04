@@ -3,8 +3,8 @@
         Universal Scripts - Wersja z GUI stworzonym na podstawie dostarczonego kodu,
         z precyzyjnym pozycjonowaniem przycisków, dynamiczną widocznością przycisku MM2 w Premium,
         usuniętymi dopiskami "(Premium)" z nazw przycisków,
-        oraz PRZYWRÓCONYM I DYNAMICZNIE POZYCJONOWANYM PRZYCISKIEM "X" POZA GŁÓWNĄ RAMKĄ.
-        Version 19.0
+        oraz DYNAMICZNIE POZYCJONOWANYM PRZYCISKIEM "X" jako bezpośrednie dziecko ScreenGui.
+        Version 20.0
 
 ]]
 
@@ -514,12 +514,45 @@ local function updateHideButtonPosition()
     local frameAbsoluteSize = Frame.AbsoluteSize
     local xButtonSize = HideButton.AbsoluteSize
 
-    -- Oblicz pozycję X w skali ScreenGui
-    local newX = frameAbsolutePosition.X + frameAbsoluteSize.X - xButtonSize.X * 0.5 -- 0.5 to lekkie odsunięcie, można dostosować
-    local newY = frameAbsolutePosition.Y - xButtonSize.Y * 0.5 -- 0.5 to lekkie odsunięcie, można dostosować
+    -- Jeśli ramka jest widoczna, pozycja X będzie zależna od jej prawego górnego rogu.
+    -- Jeśli ramka jest ukryta, pozycja X zostanie ustawiona na początkowe, aby można było ją znowu pokazać.
+    -- Możesz dostosować te wartości offsetu (np. xButtonSize.X * 0.5) dla precyzyjniejszego umiejscowienia.
+    local xOffset = xButtonSize.X * 0.5 -- Odsunięcie od krawędzi
+    local yOffset = xButtonSize.Y * 0.5 -- Odsunięcie od krawędzi
 
-    HideButton.Position = UDim2.fromOffset(newX, newY)
+    if Frame.Visible then
+        local newX = frameAbsolutePosition.X + frameAbsoluteSize.X - xOffset
+        local newY = frameAbsolutePosition.Y - yOffset
+        HideButton.Position = UDim2.fromOffset(newX, newY)
+    else
+        -- Kiedy ramka jest ukryta, możemy ustawić X w stałym miejscu na ekranie
+        -- tak, aby był zawsze dostępny do przywrócenia GUI.
+        -- np. prawy górny róg ekranu, lub początkowa pozycja MainFrame.
+        -- Tutaj przyjmuję, że możesz chcieć go widzieć w prawym górnym rogu ekranu,
+        -- niezależnie od ostatniej pozycji głównego GUI.
+        -- Te wartości to UDim2.new(X_scale, X_offset, Y_scale, Y_offset)
+        -- Przykład: UDim2.new(0.95, 0, 0.05, 0)
+        -- Możesz dostosować, aby był tam, gdzie uważasz za "domyślne" miejsce ukrytego X
+        -- Najrozsądniej jest powrócić do domyślnej pozycji początkowej MainFrame,
+        -- i pozycjonować X względem niej, nawet gdy jest ukryta.
+        -- Bierzemy pod uwagę początkową pozycję ramki: UDim2.new(0.212787732, 0, 0.244107679, 0)
+        -- Obliczamy pozycję X bazując na oryginalnych wymiarach ramki i jej pozycji
+        local screenWidth = ScreenGui.AbsoluteSize.X
+        local screenHeight = ScreenGui.AbsoluteSize.Y
+
+        local initialFrameX_offset = screenWidth * Frame.Position.X.Scale + Frame.Position.X.Offset
+        local initialFrameY_offset = screenHeight * Frame.Position.Y.Scale + Frame.Position.Y.Offset
+
+        local initialFrameWidth_offset = screenWidth * Frame.Size.X.Scale + Frame.Size.X.Offset
+        local initialFrameHeight_offset = screenHeight * Frame.Size.Y.Scale + Frame.Size.Y.Offset
+
+        local newX_offset_hidden = initialFrameX_offset + initialFrameWidth_offset - xOffset
+        local newY_offset_hidden = initialFrameY_offset - yOffset
+        
+        HideButton.Position = UDim2.fromOffset(newX_offset_hidden, newY_offset_hidden)
+    end
 end
+
 
 -- Sprawdzenie statusu Game Passa przy starcie skryptu
 checkGamePassStatus()
@@ -529,10 +562,9 @@ showTab("Home")
 updateHideButtonPosition() -- Ustaw początkową pozycję przycisku "X"
 
 -- Połączenie do zdarzenia RenderStepped, aby aktualizować pozycję przycisku "X"
+-- Będzie aktualizować tylko wtedy, gdy główne GUI jest widoczne i jest przeciągane.
 RunService.RenderStepped:Connect(function()
-    if Frame.Visible then -- Aktualizuj pozycję "X" tylko jeśli główne GUI jest widoczne
-        updateHideButtonPosition()
-    end
+    updateHideButtonPosition() -- Zawsze aktualizuj pozycję, aby "X" był w odpowiednim miejscu
 end)
 
 
@@ -675,7 +707,7 @@ end)
 HideButton.MouseButton1Click:Connect(function()
     print("DEBUG: Kliknięto przycisk Hide. Zmieniam widoczność MainFrame.")
     Frame.Visible = not Frame.Visible -- Ukrywa/pokazuje główną ramkę GUI
-    HideButton.Visible = true -- Upewnij się, że przycisk X jest zawsze widoczny
+    -- HideButton.Visible = true jest redundantne, bo nigdy nie ustawiamy go na false
 end)
 
 -- Obsługa zdarzenia po zakończeniu próby zakupu Game Passa
