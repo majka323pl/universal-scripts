@@ -3,8 +3,8 @@
         z precyzyjnym pozycjonowaniem przycisków, dynamiczną widocznością przycisku MM2 w Premium,
         usuniętymi dopiskami "(Premium)" z nazw przycisków,
         oraz DYNAMICZNIE POZYCJONOWANYM PRZYCISKIEM "X" jako bezpośrednie dziecko ScreenGui.
-        Version 20.0
-        Zaktualizowano: Przycisk "X" jest teraz ImageButton, z poprawionym pozycjonowaniem i bez spamu powiadomieniami.
+        Version 20.1
+        Zaktualizowano: Przycisk "X" jest TERAZ ImageButton.
 ]]
 
 local player = game.Players.LocalPlayer
