@@ -2,17 +2,27 @@
 
         Gui2Lua™
         10zOfficial
-        Version 1.0.1 (Zmodyfikowano dla stałego położenia ImageButton 'X' i funkcji przełączania)
+        Wersja 3.0.0 (Czyste GUI, bez implementacji cheatów, gotowe na loadingstringi)
+
+        Ten skrypt tworzy i zarządza Universal GUI.
+        Przycisk "X" (CloseButton) jest stały i służy do ukrywania/pokazywania głównego okna.
+        Nie zawiera logiki dla przycisków funkcjonalnych (cheaty), tylko struktura GUI.
 
 ]]
 
+-- Usługi Roblox
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local UserInputService = game:GetService("UserInputService")
 
--- Instancje
+-- Zmienna do przechowywania stanu widoczności GUI
+local isGuiVisible = true
 
+-- Instancje GUI
 local ScreenGui = Instance.new("ScreenGui")
-local Frame = Instance.new("Frame")
+local Frame = Instance.new("Frame") -- Główna ramka GUI
 local UICorner = Instance.new("UICorner")
-local Frame_2 = Instance.new("Frame")
+local Frame_2 = Instance.new("Frame") -- Lewy panel z przyciskami Home/Premium
 local HomeButton = Instance.new("TextButton")
 local UICorner_2 = Instance.new("UICorner")
 local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
@@ -33,7 +43,7 @@ local MM2Button = Instance.new("TextButton")
 local UICorner_7 = Instance.new("UICorner")
 local UITextSizeConstraint_4 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_5 = Instance.new("UIAspectRatioConstraint")
-local FlyButton = Instance.new("TextButton")
+local FlyButton = Instance.new("TextButton") -- Zmieniono na "Console" w GUI
 local UICorner_8 = Instance.new("UICorner")
 local UITextSizeConstraint_5 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_6 = Instance.new("UIAspectRatioConstraint")
@@ -42,7 +52,7 @@ local UICorner_9 = Instance.new("UICorner")
 local UITextSizeConstraint_6 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_7 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_8 = Instance.new("UIAspectRatioConstraint")
-local TextLabel = Instance.new("TextLabel")
+local TextLabel = Instance.new("TextLabel") -- Tytuł "UNIVERSAL SCRIPTS"
 local UITextSizeConstraint_7 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_9 = Instance.new("UIAspectRatioConstraint")
 local ScrollingFrameHome = Instance.new("ScrollingFrame")
@@ -55,7 +65,7 @@ local UICorner_11 = Instance.new("UICorner")
 local UITextSizeConstraint_9 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_11 = Instance.new("UIAspectRatioConstraint")
 local UICorner_12 = Instance.new("UICorner")
-local SpectateButton_2 = Instance.new("TextButton")
+local SpectateButton_2 = Instance.new("TextButton") -- Druga instancja Spectate (na zakładce Home)
 local UICorner_13 = Instance.new("UICorner")
 local UITextSizeConstraint_10 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_12 = Instance.new("UIAspectRatioConstraint")
@@ -71,32 +81,31 @@ local UIAspectRatioConstraint_15 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_16 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_17 = Instance.new("UIAspectRatioConstraint")
 
--- **Zmodyfikowana instancja: zmieniono nazwę ImageButton na CloseButton dla czytelności**
--- **Dodano UIAspectRatioConstraint dla CloseButton**
-local CloseButton = Instance.new("ImageButton") 
+-- Przycisk zamykania/otwierania GUI (dawny "X")
+local CloseButton = Instance.new("ImageButton")
 local CloseButtonAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
 
 
--- Właściwości
-
-local Players = game:GetService("Players") -- Pobierz usługę Players
-local LocalPlayer = Players.LocalPlayer -- Pobierz lokalnego gracza
+-- Konfiguracja Właściwości
 
 ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-ScreenGui.ResetOnSpawn = false -- Upewnij się, że GUI pozostaje po odrodzeniu
+ScreenGui.ResetOnSpawn = false -- GUI pozostaje widoczne po odrodzeniu gracza
 
+-- Główna ramka GUI
+Frame.Name = "MainFrame" -- Zmieniono nazwę na MainFrame dla lepszej czytelności
 Frame.Parent = ScreenGui
 Frame.BackgroundColor3 = Color3.new(0.172549, 0.172549, 0.172549)
 Frame.BorderColor3 = Color3.new(0, 0, 0)
 Frame.BorderSizePixel = 0
 Frame.Position = UDim2.new(0.212787732, 0, 0.244107679, 0)
 Frame.Size = UDim2.new(0.513162374, 0, 0.560262501, 0)
-Frame.Draggable = true -- Ustaw główną ramkę jako przeciągalną
-Frame.Visible = true -- Upewnij się, że główna ramka jest domyślnie widoczna
+Frame.Draggable = true -- Włącz przeciąganie głównej ramki
+Frame.Visible = true -- Domyślnie widoczne
 
 UICorner.Parent = Frame
 
+-- Lewy panel z przyciskami
 Frame_2.Parent = Frame
 Frame_2.BackgroundColor3 = Color3.new(0.141176, 0.141176, 0.141176)
 Frame_2.BorderColor3 = Color3.new(0, 0, 0)
@@ -119,10 +128,8 @@ HomeButton.TextSize = 14
 HomeButton.TextWrapped = true
 
 UICorner_2.Parent = HomeButton
-
 UITextSizeConstraint.Parent = HomeButton
 UITextSizeConstraint.MaxTextSize = 37
-
 UIAspectRatioConstraint.Parent = HomeButton
 UIAspectRatioConstraint.AspectRatio = 3.9210526943206787
 
@@ -141,18 +148,16 @@ PremiumButton.TextSize = 14
 PremiumButton.TextWrapped = true
 
 UICorner_3.Parent = PremiumButton
-
 UITextSizeConstraint_2.Parent = PremiumButton
 UITextSizeConstraint_2.MaxTextSize = 37
-
 UIAspectRatioConstraint_2.Parent = PremiumButton
 UIAspectRatioConstraint_2.AspectRatio = 3.9210526943206787
 
 UICorner_4.Parent = Frame_2
-
 UIAspectRatioConstraint_3.Parent = Frame_2
 UIAspectRatioConstraint_3.AspectRatio = 0.37142857909202576
 
+-- Sekcja Premium
 ScrollingFramePremium.Name = "ScrollingFramePremium"
 ScrollingFramePremium.Parent = Frame
 ScrollingFramePremium.Active = true
@@ -161,7 +166,7 @@ ScrollingFramePremium.BorderColor3 = Color3.new(0, 0, 0)
 ScrollingFramePremium.BorderSizePixel = 0
 ScrollingFramePremium.Position = UDim2.new(0.239610985, 0, 0.1111193, 0)
 ScrollingFramePremium.Size = UDim2.new(0.733235598, 0, 0.864629686, 0)
-ScrollingFramePremium.CanvasSize = UDim2.new(0,0,1.5,0) -- Dodano CanvasSize dla przewijania
+ScrollingFramePremium.CanvasSize = UDim2.new(0, 0, 1.5, 0) -- Ważne dla przewijania!
 ScrollingFramePremium.Visible = false -- Domyślnie ukryte
 
 UICorner_5.Parent = ScrollingFramePremium
@@ -180,10 +185,8 @@ SpectateButton.TextSize = 14
 SpectateButton.TextWrapped = true
 
 UICorner_6.Parent = SpectateButton
-
 UITextSizeConstraint_3.Parent = SpectateButton
 UITextSizeConstraint_3.MaxTextSize = 37
-
 UIAspectRatioConstraint_4.Parent = SpectateButton
 UIAspectRatioConstraint_4.AspectRatio = 3.9473683834075928
 
@@ -201,14 +204,12 @@ MM2Button.TextSize = 14
 MM2Button.TextWrapped = true
 
 UICorner_7.Parent = MM2Button
-
 UITextSizeConstraint_4.Parent = MM2Button
 UITextSizeConstraint_4.MaxTextSize = 37
-
 UIAspectRatioConstraint_5.Parent = MM2Button
 UIAspectRatioConstraint_5.AspectRatio = 3.9473683834075928
 
-FlyButton.Name = "Fly Button"
+FlyButton.Name = "Console Button" -- Zmieniono nazwę zgodnie z tekstem przycisku
 FlyButton.Parent = ScrollingFramePremium
 FlyButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 FlyButton.BorderColor3 = Color3.new(0, 0, 0)
@@ -222,10 +223,8 @@ FlyButton.TextSize = 14
 FlyButton.TextWrapped = true
 
 UICorner_8.Parent = FlyButton
-
 UITextSizeConstraint_5.Parent = FlyButton
 UITextSizeConstraint_5.MaxTextSize = 37
-
 UIAspectRatioConstraint_6.Parent = FlyButton
 UIAspectRatioConstraint_6.AspectRatio = 3.9473683834075928
 
@@ -243,16 +242,15 @@ Invisibiltybutton.TextSize = 14
 Invisibiltybutton.TextWrapped = true
 
 UICorner_9.Parent = Invisibiltybutton
-
 UITextSizeConstraint_6.Parent = Invisibiltybutton
 UITextSizeConstraint_6.MaxTextSize = 37
-
 UIAspectRatioConstraint_7.Parent = Invisibiltybutton
 UIAspectRatioConstraint_7.AspectRatio = 3.9473683834075928
 
 UIAspectRatioConstraint_8.Parent = ScrollingFramePremium
 UIAspectRatioConstraint_8.AspectRatio = 1.4926543235778809
 
+-- Tytuł "UNIVERSAL SCRIPTS"
 TextLabel.Parent = Frame
 TextLabel.BackgroundColor3 = Color3.new(1, 1, 1)
 TextLabel.BackgroundTransparency = 1
@@ -269,10 +267,10 @@ TextLabel.TextWrapped = true
 
 UITextSizeConstraint_7.Parent = TextLabel
 UITextSizeConstraint_7.MaxTextSize = 31
-
 UIAspectRatioConstraint_9.Parent = TextLabel
 UIAspectRatioConstraint_9.AspectRatio = 8.78787899017334
 
+-- Sekcja Home
 ScrollingFrameHome.Name = "ScrollingFrameHome"
 ScrollingFrameHome.Parent = Frame
 ScrollingFrameHome.Active = true
@@ -281,7 +279,7 @@ ScrollingFrameHome.BorderColor3 = Color3.new(0, 0, 0)
 ScrollingFrameHome.BorderSizePixel = 0
 ScrollingFrameHome.Position = UDim2.new(0.239610985, 0, 0.113314532, 0)
 ScrollingFrameHome.Size = UDim2.new(0.733235598, 0, 0.864629686, 0)
-ScrollingFrameHome.CanvasSize = UDim2.new(0,0,1.5,0) -- Dodano CanvasSize dla przewijania
+ScrollingFrameHome.CanvasSize = UDim2.new(0, 0, 1.5, 0) -- Ważne dla przewijania!
 
 SpeedToolbutton.Name = "Speed Tool button"
 SpeedToolbutton.Parent = ScrollingFrameHome
@@ -297,10 +295,8 @@ SpeedToolbutton.TextSize = 14
 SpeedToolbutton.TextWrapped = true
 
 UICorner_10.Parent = SpeedToolbutton
-
 UITextSizeConstraint_8.Parent = SpeedToolbutton
 UITextSizeConstraint_8.MaxTextSize = 37
-
 UIAspectRatioConstraint_10.Parent = SpeedToolbutton
 UIAspectRatioConstraint_10.AspectRatio = 3.9473683834075928
 
@@ -318,16 +314,14 @@ ClicktptoolButton.TextSize = 14
 ClicktptoolButton.TextWrapped = true
 
 UICorner_11.Parent = ClicktptoolButton
-
 UITextSizeConstraint_9.Parent = ClicktptoolButton
 UITextSizeConstraint_9.MaxTextSize = 35
-
 UIAspectRatioConstraint_11.Parent = ClicktptoolButton
 UIAspectRatioConstraint_11.AspectRatio = 3.9473683834075928
 
 UICorner_12.Parent = ScrollingFrameHome
 
-SpectateButton_2.Name = "Spectate Button"
+SpectateButton_2.Name = "Spectate Button (Home)" -- Zmieniono nazwę, aby odróżnić od Premium
 SpectateButton_2.Parent = ScrollingFrameHome
 SpectateButton_2.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 SpectateButton_2.BorderColor3 = Color3.new(0, 0, 0)
@@ -341,10 +335,8 @@ SpectateButton_2.TextSize = 14
 SpectateButton_2.TextWrapped = true
 
 UICorner_13.Parent = SpectateButton_2
-
 UITextSizeConstraint_10.Parent = SpectateButton_2
 UITextSizeConstraint_10.MaxTextSize = 37
-
 UIAspectRatioConstraint_12.Parent = SpectateButton_2
 UIAspectRatioConstraint_12.AspectRatio = 3.9473683834075928
 
@@ -362,10 +354,8 @@ NoclipButton.TextSize = 14
 NoclipButton.TextWrapped = true
 
 UICorner_14.Parent = NoclipButton
-
 UITextSizeConstraint_11.Parent = NoclipButton
 UITextSizeConstraint_11.MaxTextSize = 37
-
 UIAspectRatioConstraint_13.Parent = NoclipButton
 UIAspectRatioConstraint_13.AspectRatio = 3.9473683834075928
 
@@ -383,10 +373,8 @@ FlingButton.TextSize = 14
 FlingButton.TextWrapped = true
 
 UICorner_15.Parent = FlingButton
-
 UITextSizeConstraint_12.Parent = FlingButton
 UITextSizeConstraint_12.MaxTextSize = 37
-
 UIAspectRatioConstraint_14.Parent = FlingButton
 UIAspectRatioConstraint_14.AspectRatio = 3.9473683834075928
 
@@ -399,49 +387,64 @@ UIAspectRatioConstraint_16.AspectRatio = 1.7601344585418701
 UIAspectRatioConstraint_17.Parent = ScreenGui
 UIAspectRatioConstraint_17.AspectRatio = 1.9216867685317993
 
--- **Zmodyfikowane Właściwości dla CloseButton (dawniej ImageButton)**
-CloseButton.Name = "CloseButton" -- Zmieniono nazwę dla czytelności
-CloseButton.Parent = ScreenGui -- Rodzicem jest ScreenGui, aby pozostał niezależny od MainFrame
-CloseButton.BackgroundColor3 = Color3.new(1, 0, 0) -- Czerwone tło dla przycisku "X"
-CloseButton.BackgroundTransparency = 1 -- Ustaw tło na przezroczyste, aby widoczny był tylko obrazek
+-- Przycisk zamykania/otwierania GUI (CloseButton) - KONFIGURACJA
+CloseButton.Name = "CloseButton"
+CloseButton.Parent = ScreenGui -- KLUCZOWE: Dziecko ScreenGui, nie Frame
+CloseButton.BackgroundColor3 = Color3.new(1, 0, 0) -- Czerwone tło
+CloseButton.BackgroundTransparency = 1 -- Przezroczyste tło, żeby widzieć tylko obrazek
 CloseButton.BorderColor3 = Color3.new(0, 0, 0)
 CloseButton.BorderSizePixel = 0
--- **KLUCZOWA ZMIANA:** Stała pozycja w prawym górnym rogu ekranu
-CloseButton.Position = UDim2.new(1, -50, 0, 5) -- 50 pikseli od prawej krawędzi, 5 pikseli od górnej
-CloseButton.Size = UDim2.new(0, 40, 0, 40) -- Stały rozmiar w pikselach
-CloseButton.Image = "rbxassetid://109075000814284" -- **Używam ID obrazka "X", które podałeś wcześniej**
-CloseButton.ZIndex = 5 -- Zapewnia, że zawsze jest na wierzchu
-CloseButton.Draggable = false -- Zapobiega przeciąganiu przycisku "X"
+-- STAŁA POZYCJA: Prawy górny róg ekranu
+CloseButton.Position = UDim2.new(1, -50, 0, 5) -- (Skala X, Offset X, Skala Y, Offset Y)
+CloseButton.Size = UDim2.new(0, 40, 0, 40) -- Stały rozmiar 40x40 pikseli
+CloseButton.Image = "rbxassetid://109075000814284" -- ID obrazka "X"
+CloseButton.ZIndex = 5 -- NAJWAŻNIEJSZE: Zawsze na wierzchu
+CloseButton.Draggable = false -- WYŁĄCZ PRZECIĄGANIE: Przycisk nie będzie się ruszał
 
 CloseButtonAspectRatioConstraint.Parent = CloseButton
-CloseButtonAspectRatioConstraint.AspectRatio = 1 -- Zapewnia, że obrazek "X" pozostaje kwadratowy
+CloseButtonAspectRatioConstraint.AspectRatio = 1 -- Zachowanie proporcji obrazka "X" (kwadrat)
 
 
 ---
 
-### Logika Skryptu
+## Logika Skryptu (Tylko GUI i przełączanie zakładek)
 
 ---
 
 -- Funkcja do przełączania widoczności głównej ramki GUI
-CloseButton.MouseButton1Click:Connect(function()
-    Frame.Visible = not Frame.Visible -- Przełącza widoczność głównej ramki 'Frame'
+local function toggleMainFrameVisibility()
+    isGuiVisible = not isGuiVisible
+    Frame.Visible = isGuiVisible
+end
+
+-- Połączenie przycisku CloseButton (X)
+CloseButton.MouseButton1Click:Connect(toggleMainFrameVisibility)
+
+-- Opcjonalnie: Przełączanie widoczności GUI klawiszem (np. F)
+UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
+    if input.KeyCode == Enum.KeyCode.F and not gameProcessedEvent then -- Klawisz F, i upewnij się, że gra go nie przetwarza (np. czat)
+        toggleMainFrameVisibility()
+    end
 end)
 
--- Przykładowa funkcja do przełączania zakładek (jeśli masz taką logikę)
+
+-- Funkcja do przełączania zakładek
 local function showTab(tabName)
+    -- Ukryj wszystkie ramki przewijania
     ScrollingFrameHome.Visible = false
     ScrollingFramePremium.Visible = false
 
+    -- Pokaż tylko wybraną ramkę
     if tabName == "Home" then
         ScrollingFrameHome.Visible = true
     elseif tabName == "Premium" then
+        -- TUTAJ BĘDZIESZ MUSIAŁ DODAĆ SWOJĄ LOGIKĘ DLA SEKCJJI PREMIUM (np. sprawdzanie GamePassa)
+        -- W przeciwnym razie, sekcja premium będzie widoczna bez żadnych specjalnych warunków.
         ScrollingFramePremium.Visible = true
-        -- Tutaj możesz dodać sprawdzanie Game Passa, jeśli masz taką funkcję
     end
 end
 
--- Połączenia przycisków zakładek
+-- Połączenia przycisków nawigacyjnych
 HomeButton.MouseButton1Click:Connect(function()
     showTab("Home")
 end)
@@ -450,12 +453,21 @@ PremiumButton.MouseButton1Click:Connect(function()
     showTab("Premium")
 end)
 
--- Domyślnie pokaż zakładkę Home przy starcie
+-- Ustaw domyślną zakładkę po załadowaniu GUI
 showTab("Home")
 
--- (Tutaj możesz dodać swoją logikę dla pozostałych przycisków, np. Speed Tool, Click tp tool itp.)
--- Przykład:
--- SpeedToolbutton.MouseButton1Click:Connect(function()
---     -- Wklej tutaj kod dla Speed Tool
---     print("Aktywowano Speed Tool!")
--- end)
+---
+
+### Instrukcje dla Loadingstringów i Funkcjonalności:
+
+---
+
+Ten skrypt stanowi **czystą podstawę GUI**. Jeśli planujesz używać go w loadingstringach i wczytywać funkcjonalności cheatów osobno, to będziesz potrzebował dodatkowych loadingstringów.
+
+**Przykład:**
+
+**Loadingstring 1 (Twój obecny skrypt GUI):**
+
+```lua
+-- Twój GUI Skrypt (ten, który właśnie Ci podałem)
+-- ... (cały kod powyżej) ...
