@@ -3,7 +3,7 @@
         z precyzyjnym pozycjonowaniem przycisków, dynamiczną widocznością przycisku MM2 w Premium,
         usuniętymi dopiskami "(Premium)" z nazw przycisków,
         oraz DYNAMICZNIE POZYCJONOWANYM PRZYCISKIEM "X" (jako ImageButton) jako bezpośrednie dziecko ScreenGui.
-        Version 20.1 - Poprawka działania wszystkich przycisków i HideButton jako ImageButton.
+        Version 20.2 - Naprawiono problem z brakiem pojawiania się GUI i upewniono się, że przyciski działają.
 ]]
 
 local player = game.Players.LocalPlayer
@@ -39,7 +39,7 @@ end
 
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "UniversalScriptsGui"
-ScreenGui.Parent = player:WaitForChild("PlayerGui")
+ScreenGui.Parent = player:WaitForChild("PlayerGui") -- Ważne: WaitForChild dla PlayerGui
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ScreenGui.ResetOnSpawn = false
 ScreenGui.Enabled = true
@@ -141,7 +141,7 @@ ScrollingFramePremium.Visible = false
 local UICorner_5 = Instance.new("UICorner")
 UICorner_5.Parent = ScrollingFramePremium
 
-local SpectateButton_Premium = Instance.new("TextButton") -- Zmieniona nazwa
+local SpectateButton_Premium = Instance.new("TextButton")
 SpectateButton_Premium.Name = "Spectate Button Premium"
 SpectateButton_Premium.Parent = ScrollingFramePremium
 SpectateButton_Premium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
@@ -334,7 +334,7 @@ local UIAspectRatioConstraint_11 = Instance.new("UIAspectRatioConstraint")
 UIAspectRatioConstraint_11.Parent = ClicktptoolButton
 UIAspectRatioConstraint_11.AspectRatio = 3.9473683834075928
 
-local SpectateButton_Home = Instance.new("TextButton") -- Zmieniona nazwa
+local SpectateButton_Home = Instance.new("TextButton")
 SpectateButton_Home.Name = "Spectate Button Home"
 SpectateButton_Home.Parent = ScrollingFrameHome
 SpectateButton_Home.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
@@ -440,7 +440,7 @@ HideButton.Draggable = true -- Ważne: Przeciągalny!
 --- Koniec UI Instantiation ---
 
 
--- Logika Skryptu (BEZ ZMIAN W FUNKCJACH, TYLKO KOREKTA REFERENCJI PRZYCISKÓW)
+-- Logika Skryptu
 -- Funkcja do przełączania zakładek
 local function showTab(tabName)
     print("DEBUG: Próbuję przełączyć na zakładkę:", tabName)
@@ -561,7 +561,7 @@ ClicktptoolButton.MouseButton1Click:Connect(function()
     runScriptAndNotify("https://pastebin.com/raw/4KF2WJ9u", ClicktptoolButton.Text)
 end)
 
-SpectateButton_Home.MouseButton1Click:Connect(function() -- Używamy zmiennej SpectateButton_Home
+SpectateButton_Home.MouseButton1Click:Connect(function()
     print("DEBUG: Kliknięto przycisk Spectate (Home)")
     runScriptAndNotify("https://pastebin.com/raw/UFVLWQRw", SpectateButton_Home.Text)
 end)
@@ -577,7 +577,7 @@ FlingButton.MouseButton1Click:Connect(function()
 end)
 
 -- Połączenia przycisków Premium
-SpectateButton_Premium.MouseButton1Click:Connect(function() -- Używamy zmiennej SpectateButton_Premium
+SpectateButton_Premium.MouseButton1Click:Connect(function()
     print("DEBUG: Kliknięto przycisk Spectate (Premium). Sprawdzam Game Passa...")
     local success, currentHasGamePass = pcall(function()
         return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
@@ -654,7 +654,6 @@ Invisibiltybutton.MouseButton1Click:Connect(function()
             sendNotification("Universal Scripts", "Musisz posiadać Game Pass, aby użyć tej funkcji!")
             print("DEBUG: Wywołuję PromptGamePassPurchase dla Invisibilty.")
             MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
-        CATCH_ERROR:
         end
     else
         warn("DEBUG: Błąd podczas sprawdzania Game Passa (Invisibilty):", currentHasGamePass)
