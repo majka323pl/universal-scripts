@@ -3,7 +3,7 @@
         z precyzyjnym pozycjonowaniem przycisków, dynamiczną widocznością przycisku MM2 w Premium,
         usuniętymi dopiskami "(Premium)" z nazw przycisków,
         oraz DYNAMICZNIE POZYCJONOWANYM PRZYCISKIEM "X" (jako ImageButton) jako bezpośrednie dziecko ScreenGui.
-        Version 20.2 - Naprawiono problem z brakiem pojawiania się GUI i upewniono się, że przyciski działają.
+        Version 20.3 - HideButton (ImageButton) jest teraz w pełni przesuwalny i nie resetuje pozycji.
 ]]
 
 local player = game.Players.LocalPlayer
@@ -25,6 +25,9 @@ print("---")
 -- Zmienna globalna do przechowywania statusu Game Passa
 local hasGamePass = false
 local initialGamePassCheckDone = false -- Nowa zmienna do kontrolowania początkowych powiadomień
+
+-- Zmienna do przechowywania ostatniej pozycji HideButton, gdy MainFrame jest ukryte
+local lastHideButtonPosition = UDim2.new(0.9, -50, 0, 20) -- Domyślna pozycja w prawym górnym rogu ekranu
 
 local function sendNotification(title, text)
     StarterGui:SetCore("SendNotification", {
@@ -499,27 +502,27 @@ end
 
 -- Funkcja do dynamicznego pozycjonowania przycisku "X" (HideButton)
 local function updateHideButtonPosition()
-    local frameAbsolutePosition = MainFrame.AbsolutePosition
-    local frameAbsoluteSize = MainFrame.AbsoluteSize
-    local xButtonSize = HideButton.AbsoluteSize
-
     if MainFrame.Visible then
-        -- Pozycjonowanie względem prawego górnego rogu MainFrame
-        local xOffsetFromFrameRight = 5 -- piksele
-        local yOffsetFromFrameTop = 5 -- piksele
+        -- Gdy MainFrame jest widoczne, ustaw HideButton w prawym górnym rogu MainFrame
+        -- Używamy AbsolutePosition i AbsoluteSize dla dokładnego pozycjonowania
+        local frameAbsolutePosition = MainFrame.AbsolutePosition
+        local frameAbsoluteSize = MainFrame.AbsoluteSize
+        local xButtonSize = HideButton.AbsoluteSize
+
+        local xOffsetFromFrameRight = 5 -- piksele od prawej krawędzi MainFrame
+        local yOffsetFromFrameTop = 5 -- piksele od górnej krawędzi MainFrame
 
         local newX = frameAbsolutePosition.X + frameAbsoluteSize.X - xButtonSize.X - xOffsetFromFrameRight
         local newY = frameAbsolutePosition.Y + yOffsetFromFrameTop
         HideButton.Position = UDim2.fromOffset(newX, newY)
-    else
-        -- Pozycjonowanie w stałym miejscu (np. prawy górny róg ekranu)
-        local screenWidth = ScreenGui.AbsoluteSize.X
-        local screenHeight = ScreenGui.AbsoluteSize.Y
-        local margin = 20 -- piksele
 
-        local newX = screenWidth - xButtonSize.X - margin
-        local newY = margin
-        HideButton.Position = UDim2.fromOffset(newX, newY)
+        -- Zapisz tę pozycję jako ostatnią znaną, gdy GUI jest widoczne
+        lastHideButtonPosition = HideButton.Position
+    else
+        -- Gdy MainFrame jest niewidoczne, HideButton przyjmuje ostatnią zapisaną pozycję
+        -- Jeśli HideButton był przeciągany, jego ostatnia pozycja zostaje zachowana.
+        -- Jeśli nie, wraca do domyślnej pozycji (prawy górny róg ekranu).
+        HideButton.Position = lastHideButtonPosition
     end
 end
 
@@ -531,9 +534,15 @@ updateMM2ButtonVisibility()
 showTab("Home")
 updateHideButtonPosition() -- Ustaw początkową pozycję przycisku "X"
 
--- Połączenie do zdarzenia RenderStepped, aby aktualizować pozycję przycisku "X"
-RunService.RenderStepped:Connect(function()
-    updateHideButtonPosition() -- Zawsze aktualizuj pozycję, aby "X" był w odpowiednim miejscu
+-- Połączenie do zdarzenia PropertyChanged (dla HideButton.Position)
+-- Zapisuje nową pozycję, gdy HideButton zostanie przeciągnięty
+HideButton.Changed:Connect(function(property)
+    if property == "Position" then
+        if not MainFrame.Visible then -- Zapisuj tylko, gdy MainFrame jest ukryte
+            lastHideButtonPosition = HideButton.Position
+            print("DEBUG: HideButton Position zmienione na:", lastHideButtonPosition.X.Offset, lastHideButtonPosition.Y.Offset)
+        end
+    end
 end)
 
 
@@ -676,8 +685,15 @@ end)
 HideButton.MouseButton1Click:Connect(function()
     print("DEBUG: Kliknięto przycisk Hide. Zmieniam widoczność MainFrame.")
     MainFrame.Visible = not MainFrame.Visible -- Ukrywa/pokazuje główną ramkę GUI
-    updateHideButtonPosition() -- Odśwież pozycję przycisku "X"
+    -- Nie wywołujemy tutaj updateHideButtonPosition bezpośrednio,
+    -- ponieważ MainFrame.VisibleChanged zajmie się tym
 end)
+
+-- Obsługa zdarzenia zmiany widoczności MainFrame
+MainFrame.VisibleChanged:Connect(function()
+    updateHideButtonPosition() -- Zawsze odświeżaj pozycję HideButton, gdy MainFrame zmienia widoczność
+end)
+
 
 -- Obsługa zdarzenia po zakończeniu próby zakupu Game Passa
 MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gamePassId, wasPurchased)
