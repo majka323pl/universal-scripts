@@ -4,7 +4,7 @@
         usuniętymi dopiskami "(Premium)" z nazw przycisków,
         oraz DYNAMICZNIE POZYCJONOWANYM PRZYCISKIEM "X" jako bezpośrednie dziecko ScreenGui.
         Version 20.0
-        Zaktualizowano: Przycisk "X" jest teraz ImageButton.
+        Zaktualizowano: Przycisk "X" jest teraz ImageButton, z poprawionym pozycjonowaniem i bez spamu powiadomieniami.
 ]]
 
 local player = game.Players.LocalPlayer
@@ -123,7 +123,7 @@ UICorner.Parent = Frame
 
 -- Zmodyfikowany HideButton - Parent na ScreenGui, NIE Draggable, ImageButton
 HideButton.Name = "HideButton"
-HideButton.Parent = ScreenGui -- Parent to ScreenGui
+HideButton.Parent = ScreenGui -- KLUCZOWA ZMIANA: Parent to ScreenGui
 HideButton.BackgroundColor3 = Color3.new(1, 0, 0) -- Nadal możesz mieć kolor tła
 HideButton.BackgroundTransparency = 1 -- ZMIANA TUTAJ: Tło przezroczyste, aby widoczny był obrazek
 HideButton.BorderColor3 = Color3.new(0, 0, 0)
@@ -476,13 +476,13 @@ local function checkGamePassStatus()
     if success then
         hasGamePass = result
         print("DEBUG: Status Game Passa:", hasGamePass)
-        if not initialGamePassCheckDone then
+        if not initialGamePassCheckDone then -- Sprawdzamy, czy początkowe powiadomienie już było
             if hasGamePass then
                 sendNotification("Universal Scripts", "Posiadasz Game Pass! Funkcje Premium odblokowane.")
             else
                 sendNotification("Universal Scripts", "Nie posiadasz Game Passa. Odwiedź zakładkę Premium, aby go kupić.")
             end
-            initialGamePassCheckDone = true
+            initialGamePassCheckDone = true -- Ustawiamy flagę na true po pierwszym powiadomieniu
         end
     else
         warn("DEBUG: Błąd podczas sprawdzania Game Passa:", result)
@@ -507,23 +507,23 @@ local function updateHideButtonPosition()
     local frameAbsoluteSize = Frame.AbsoluteSize
     local xButtonSize = HideButton.AbsoluteSize
 
-    local xOffset = xButtonSize.X * 0.5 -- Odsunięcie od krawędzi
-    local yOffset = xButtonSize.Y * 0.5 -- Odsunięcie od krawędzi
+    -- Mały margines od krawędzi
+    local marginX = 5
+    local marginY = 5
 
     if Frame.Visible then
-        local newX = frameAbsolutePosition.X + frameAbsoluteSize.X - xOffset
-        local newY = frameAbsolutePosition.Y - yOffset
+        -- Pozycjonujemy X względem prawego górnego rogu Frame
+        local newX = frameAbsolutePosition.X + frameAbsoluteSize.X - xButtonSize.X - marginX
+        local newY = frameAbsolutePosition.Y + marginY
         HideButton.Position = UDim2.fromOffset(newX, newY)
     else
-        -- Kiedy ramka jest ukryta, możemy ustawić X w stałym miejscu na ekranie
-        -- tak, aby był zawsze dostępny do przywrócenia GUI.
+        -- Pozycjonujemy X w prawym górnym rogu ekranu, gdy Frame jest ukryta
         local screenWidth = ScreenGui.AbsoluteSize.X
         local screenHeight = ScreenGui.AbsoluteSize.Y
 
-        -- Ustawiamy X w prawym górnym rogu ekranu, z niewielkim marginesem
-        -- Zmodyfikuj te wartości UDim2.new(scaleX, offsetX, scaleY, offsetY)
-        -- np. 0.95 dla X i 0.05 dla Y, aby był blisko prawego górnego rogu ekranu
-        HideButton.Position = UDim2.new(1, -xButtonSize.X - 5, 0, 5) -- Pozycja w prawym górnym rogu ekranu z marginesem 5px
+        local newX_hidden = screenWidth - xButtonSize.X - marginX
+        local newY_hidden = marginY
+        HideButton.Position = UDim2.fromOffset(newX_hidden, newY_hidden)
     end
 end
 
@@ -536,9 +536,10 @@ showTab("Home")
 updateHideButtonPosition() -- Ustaw początkową pozycję przycisku "X"
 
 -- Połączenie do zdarzenia RenderStepped, aby aktualizować pozycję przycisku "X"
--- Będzie aktualizować tylko wtedy, gdy główne GUI jest widoczne i jest przeciągane.
+-- Będzie aktualizować pozycję X za każdym razem, gdy cokolwiek się poruszy na ekranie,
+-- co jest idealne dla przeciąganej ramki.
 RunService.RenderStepped:Connect(function()
-    updateHideButtonPosition() -- Zawsze aktualizuj pozycję, aby "X" był w odpowiednim miejscu
+    updateHideButtonPosition()
 end)
 
 
@@ -681,8 +682,7 @@ end)
 HideButton.MouseButton1Click:Connect(function()
     print("DEBUG: Kliknięto przycisk Hide. Zmieniam widoczność MainFrame.")
     Frame.Visible = not Frame.Visible -- Ukrywa/pokazuje główną ramkę GUI
-    -- Poniższa linia jest redundantna, bo HideButton zawsze ma być widoczny.
-    -- HideButton.Visible = true 
+    updateHideButtonPosition() -- Po zmianie widoczności aktualizujemy pozycję "X"
 end)
 
 -- Obsługa zdarzenia po zakończeniu próby zakupu Game Passa
