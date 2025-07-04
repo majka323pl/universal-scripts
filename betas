@@ -1,7 +1,7 @@
 --[[
 
         Universal Scripts - Version with Tabs and Game Pass
-        Version 7.5.0 (Final fix for Premium button and tab switching)
+        Version 7.6.0 (Premium button labels simplified)
 
 ]]
 
@@ -10,7 +10,7 @@ local UserInputService = game:GetService("UserInputService")
 local MarketplaceService = game:GetService("MarketplaceService")
 local StarterGui = game:GetService("StarterGui")
 
-local PREMIUM_GAMEPASS_ID = 1296972626 -- <<< ZMIEŃ TO NA ID SWOJEGO GAME PASSA! >>>
+local PREMIUM_GAMEPASS_ID = 0 -- <<< ZMIEŃ TO NA ID SWOJEGO GAME PASSA! >>>
 
 local function sendNotification(title, text)
     StarterGui:SetCore("SendNotification", {
@@ -382,7 +382,7 @@ SpectateButtonPremium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863
 SpectateButtonPremium.BorderColor3 = Color3.new(0, 0, 0)
 SpectateButtonPremium.Size = UDim2.new(0.9, 0, 0, 38)
 SpectateButtonPremium.Font = Enum.Font.SourceSans
-SpectateButtonPremium.Text = "Spectate (Premium)"
+SpectateButtonPremium.Text = "Spectate" -- Zmieniono
 SpectateButtonPremium.TextColor3 = Color3.new(0, 0, 0)
 SpectateButtonPremium.TextScaled = true
 SpectateButtonPremium.TextSize = 14
@@ -400,7 +400,7 @@ MM2ButtonPremium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 MM2ButtonPremium.BorderColor3 = Color3.new(0, 0, 0)
 MM2ButtonPremium.Size = UDim2.new(0.9, 0, 0, 38)
 MM2ButtonPremium.Font = Enum.Font.SourceSans
-MM2ButtonPremium.Text = "MM2 (Premium)"
+MM2ButtonPremium.Text = "MM2" -- Zmieniono
 MM2ButtonPremium.TextColor3 = Color3.new(0, 0, 0)
 MM2ButtonPremium.TextScaled = true
 MM2ButtonPremium.TextSize = 14
@@ -418,7 +418,7 @@ FlyButtonPremium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 FlyButtonPremium.BorderColor3 = Color3.new(0, 0, 0)
 FlyButtonPremium.Size = UDim2.new(0.9, 0, 0, 38)
 FlyButtonPremium.Font = Enum.Font.SourceSans
-FlyButtonPremium.Text = "Fly (Premium)"
+FlyButtonPremium.Text = "Fly" -- Zmieniono
 FlyButtonPremium.TextColor3 = Color3.new(0, 0, 0)
 FlyButtonPremium.TextScaled = true
 FlyButtonPremium.TextSize = 14
@@ -537,7 +537,7 @@ end)
 SpectateButtonPremium.MouseButton1Click:Connect(function()
     if MarketplaceService:UserOwnsGamePassAsync(player.UserId, PREMIUM_GAMEPASS_ID) then -- Ponowne sprawdzenie
         loadstring(game:HttpGet("https://pastebin.com/raw/UFVLWQRw"))()
-        sendNotification("Narzędzie Obserwacji (Premium)", "Skrypt obserwacji załadowany!")
+        sendNotification("Narzędzie Obserwacji", "Skrypt obserwacji załadowany!")
     else
         sendNotification("Universal Scripts", "Musisz posiadać Game Pass Premium, aby użyć tej funkcji!")
         MarketplaceService:PromptGamePassPurchase(player, PREMIUM_GAMEPASS_ID)
@@ -547,7 +547,7 @@ end)
 MM2ButtonPremium.MouseButton1Click:Connect(function()
     if MarketplaceService:UserOwnsGamePassAsync(player.UserId, PREMIUM_GAMEPASS_ID) then -- Ponowne sprawdzenie
         loadstring(game:HttpGet("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring"))()
-        sendNotification("Skrypt MM2 (Premium)", "Skrypt MM2 załadowany!")
+        sendNotification("Skrypt MM2", "Skrypt MM2 załadowany!")
     else
         sendNotification("Universal Scripts", "Musisz posiadać Game Pass Premium, aby użyć tej funkcji!")
         MarketplaceService:PromptGamePassPurchase(player, PREMIUM_GAMEPASS_ID)
@@ -557,7 +557,7 @@ end)
 FlyButtonPremium.MouseButton1Click:Connect(function()
     if MarketplaceService:UserOwnsGamePassAsync(player.UserId, PREMIUM_GAMEPASS_ID) then -- Ponowne sprawdzenie
         loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
-        sendNotification("Latanie (Premium)", "Skrypt latania załadowany!")
+        sendNotification("Latanie", "Skrypt latania załadowany!")
     else
         sendNotification("Universal Scripts", "Musisz posiadać Game Pass Premium, aby użyć tej funkcji!")
         MarketplaceService:PromptGamePassPurchase(player, PREMIUM_GAMEPASS_ID)
