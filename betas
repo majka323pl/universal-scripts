@@ -1,8 +1,9 @@
 --[[
 
         Universal Scripts - Wersja z usprawnionymi powiadomieniami o załadowaniu skryptu,
-        rozdzielonymi funkcjami zakładek, ręcznym pozycjonowaniem przycisków i obsługą dotyku.
-        Version 14.0 (Single Game Pass ID: 1296972626)
+        rozdzielonymi funkcjami zakładek, ręcznym pozycjonowaniem przycisków, obsługą dotyku,
+        oraz dynamiczną widocznością przycisku MM2 w Premium.
+        Version 15.0 (Single Game Pass ID: 1296972626)
 
 ]]
 
@@ -10,12 +11,17 @@ local player = game.Players.LocalPlayer
 local UserInputService = game:GetService("UserInputService")
 local MarketplaceService = game:GetService("MarketplaceService")
 local StarterGui = game:GetService("StarterGui")
+local RunService = game:GetService("RunService")
 
 local GAMEPASS_ID = 1296972626 -- JEDYNE ID Game Passa dla całego skryptu
+-- Ustaw ID experience dla MM2. Zmień na faktyczne ID Murder Mystery 2 lub innego experience.
+local MM2_EXPERIENCE_ID = 926002167 -- Przykładowe ID dla Murder Mystery 2 (Może być nieaktualne, znajdź aktualne ID na stronie Roblox)
 
 print("--- SKRYPT UNIVERSAL SCRIPTS START ---") -- DEBUG
 print("Skrypt załadowany. ID Game Passa:", GAMEPASS_ID)
 print("Twoje UserID:", player.UserId)
+print("Aktualne Experience ID:", game.PlaceId)
+print("Oczekiwane MM2 Experience ID:", MM2_EXPERIENCE_ID)
 print("---")
 
 -- Zmienna globalna do przechowywania statusu Game Passa
@@ -245,7 +251,7 @@ InvisibiltyButtonHome.Parent = ScrollingFrameHome
 InvisibiltyButtonHome.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 InvisibiltyButtonHome.BorderColor3 = Color3.new(0, 0, 0)
 InvisibiltyButtonHome.Size = UDim2.new(0.9, 0, 0, 38)
-InvisibiltyButtonHome.Position = UDim2.new(0.05, 0, 0.02, 0) -- PRZYKŁADOWA POZYCJA
+InvisibiltyButtonHome.Position = UDim2.new(0.05, 0, 0.02, 0)
 InvisibiltyButtonHome.Font = Enum.Font.SourceSans
 InvisibiltyButtonHome.Text = "Invisibilty"
 InvisibiltyButtonHome.TextColor3 = Color3.new(0, 0, 0)
@@ -263,7 +269,7 @@ SpeedToolButtonHome.Parent = ScrollingFrameHome
 SpeedToolButtonHome.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 SpeedToolButtonHome.BorderColor3 = Color3.new(0, 0, 0)
 SpeedToolButtonHome.Size = UDim2.new(0.9, 0, 0, 38)
-SpeedToolButtonHome.Position = UDim2.new(0.05, 0, 0.10, 0) -- PRZYKŁADOWA POZYCJA
+SpeedToolButtonHome.Position = UDim2.new(0.05, 0, 0.10, 0)
 SpeedToolButtonHome.Font = Enum.Font.SourceSans
 SpeedToolButtonHome.Text = "Speed Tool"
 SpeedToolButtonHome.TextColor3 = Color3.new(0, 0, 0)
@@ -281,7 +287,7 @@ ClicktpToolButtonHome.Parent = ScrollingFrameHome
 ClicktpToolButtonHome.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 ClicktpToolButtonHome.BorderColor3 = Color3.new(0, 0, 0)
 ClicktpToolButtonHome.Size = UDim2.new(0.9, 0, 0, 38)
-ClicktpToolButtonHome.Position = UDim2.new(0.05, 0, 0.18, 0) -- PRZYKŁADOWA POZYCJA
+ClicktpToolButtonHome.Position = UDim2.new(0.05, 0, 0.18, 0)
 ClicktpToolButtonHome.Font = Enum.Font.SourceSans
 ClicktpToolButtonHome.Text = "Click TP Tool"
 ClicktpToolButtonHome.TextColor3 = Color3.new(0, 0, 0)
@@ -299,7 +305,7 @@ SpectateButtonHome.Parent = ScrollingFrameHome
 SpectateButtonHome.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 SpectateButtonHome.BorderColor3 = Color3.new(0, 0, 0)
 SpectateButtonHome.Size = UDim2.new(0.9, 0, 0, 38)
-SpectateButtonHome.Position = UDim2.new(0.05, 0, 0.26, 0) -- PRZYKŁADOWA POZYCJA
+SpectateButtonHome.Position = UDim2.new(0.05, 0, 0.26, 0)
 SpectateButtonHome.Font = Enum.Font.SourceSans
 SpectateButtonHome.Text = "Spectate"
 SpectateButtonHome.TextColor3 = Color3.new(0, 0, 0)
@@ -317,7 +323,7 @@ FlyButtonHome.Parent = ScrollingFrameHome
 FlyButtonHome.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 FlyButtonHome.BorderColor3 = Color3.new(0, 0, 0)
 FlyButtonHome.Size = UDim2.new(0.9, 0, 0, 38)
-FlyButtonHome.Position = UDim2.new(0.05, 0, 0.34, 0) -- PRZYKŁADOWA POZYCJA
+FlyButtonHome.Position = UDim2.new(0.05, 0, 0.34, 0)
 FlyButtonHome.Font = Enum.Font.SourceSans
 FlyButtonHome.Text = "Fly"
 FlyButtonHome.TextColor3 = Color3.new(0, 0, 0)
@@ -335,7 +341,7 @@ NoclipButtonHome.Parent = ScrollingFrameHome
 NoclipButtonHome.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 NoclipButtonHome.BorderColor3 = Color3.new(0, 0, 0)
 NoclipButtonHome.Size = UDim2.new(0.9, 0, 0, 38)
-NoclipButtonHome.Position = UDim2.new(0.05, 0, 0.42, 0) -- PRZYKŁADOWA POZYCJA
+NoclipButtonHome.Position = UDim2.new(0.05, 0, 0.42, 0)
 NoclipButtonHome.Font = Enum.Font.SourceSans
 NoclipButtonHome.Text = "Noclip"
 NoclipButtonHome.TextColor3 = Color3.new(0, 0, 0)
@@ -353,7 +359,7 @@ FlingButtonHome.Parent = ScrollingFrameHome
 FlingButtonHome.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 FlingButtonHome.BorderColor3 = Color3.new(0, 0, 0)
 FlingButtonHome.Size = UDim2.new(0.9, 0, 0, 38)
-FlingButtonHome.Position = UDim2.new(0.05, 0, 0.50, 0) -- PRZYKŁADOWA POZYCJA
+FlingButtonHome.Position = UDim2.new(0.05, 0, 0.50, 0)
 FlingButtonHome.Font = Enum.Font.SourceSans
 FlingButtonHome.Text = "Fling"
 FlingButtonHome.TextColor3 = Color3.new(0, 0, 0)
@@ -371,7 +377,7 @@ MM2ButtonHome.Parent = ScrollingFrameHome
 MM2ButtonHome.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 MM2ButtonHome.BorderColor3 = Color3.new(0, 0, 0)
 MM2ButtonHome.Size = UDim2.new(0.9, 0, 0, 38)
-MM2ButtonHome.Position = UDim2.new(0.05, 0, 0.58, 0) -- PRZYKŁADOWA POZYCJA
+MM2ButtonHome.Position = UDim2.new(0.05, 0, 0.58, 0)
 MM2ButtonHome.Font = Enum.Font.SourceSans
 MM2ButtonHome.Text = "MM2"
 MM2ButtonHome.TextColor3 = Color3.new(0, 0, 0)
@@ -391,9 +397,9 @@ SpectateButtonPremium.Parent = ScrollingFramePremium
 SpectateButtonPremium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 SpectateButtonPremium.BorderColor3 = Color3.new(0, 0, 0)
 SpectateButtonPremium.Size = UDim2.new(0.9, 0, 0, 38)
-SpectateButtonPremium.Position = UDim2.new(0.05, 0, 0.02, 0) -- PRZYKŁADOWA POZYCJA
+SpectateButtonPremium.Position = UDim2.new(0.05, 0, 0.02, 0)
 SpectateButtonPremium.Font = Enum.Font.SourceSans
-SpectateButtonPremium.Text = "Spectate (Premium)"
+SpectateButtonPremium.Text = "Spectate" -- Usunięto "(Premium)"
 SpectateButtonPremium.TextColor3 = Color3.new(0, 0, 0)
 SpectateButtonPremium.TextScaled = true
 SpectateButtonPremium.TextSize = 14
@@ -409,9 +415,9 @@ MM2ButtonPremium.Parent = ScrollingFramePremium
 MM2ButtonPremium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 MM2ButtonPremium.BorderColor3 = Color3.new(0, 0, 0)
 MM2ButtonPremium.Size = UDim2.new(0.9, 0, 0, 38)
-MM2ButtonPremium.Position = UDim2.new(0.05, 0, 0.10, 0) -- PRZYKŁADOWA POZYCJA
+MM2ButtonPremium.Position = UDim2.new(0.05, 0, 0.10, 0)
 MM2ButtonPremium.Font = Enum.Font.SourceSans
-MM2ButtonPremium.Text = "MM2 (Premium)"
+MM2ButtonPremium.Text = "MM2" -- Usunięto "(Premium)"
 MM2ButtonPremium.TextColor3 = Color3.new(0, 0, 0)
 MM2ButtonPremium.TextScaled = true
 MM2ButtonPremium.TextSize = 14
@@ -421,15 +427,16 @@ MM2ButtonPremiumUITextSizeConstraint.Parent = MM2ButtonPremium
 MM2ButtonPremiumUITextSizeConstraint.MaxTextSize = 37
 MM2ButtonPremiumUIAspectRatioConstraint.Parent = MM2ButtonPremium
 MM2ButtonPremiumUIAspectRatioConstraint.AspectRatio = 3.9473683834075928
+MM2ButtonPremium.Visible = false -- Domyślnie niewidoczny
 
 FlyButtonPremium.Name = "Fly Button"
 FlyButtonPremium.Parent = ScrollingFramePremium
 FlyButtonPremium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 FlyButtonPremium.BorderColor3 = Color3.new(0, 0, 0)
 FlyButtonPremium.Size = UDim2.new(0.9, 0, 0, 38)
-FlyButtonPremium.Position = UDim2.new(0.05, 0, 0.18, 0) -- PRZYKŁADOWA POZYCJA
+FlyButtonPremium.Position = UDim2.new(0.05, 0, 0.18, 0)
 FlyButtonPremium.Font = Enum.Font.SourceSans
-FlyButtonPremium.Text = "Fly (Premium)"
+FlyButtonPremium.Text = "Fly" -- Usunięto "(Premium)"
 FlyButtonPremium.TextColor3 = Color3.new(0, 0, 0)
 FlyButtonPremium.TextScaled = true
 FlyButtonPremium.TextSize = 14
@@ -455,7 +462,7 @@ HideButton.TextColor3 = Color3.new(0, 0, 0)
 HideButton.TextScaled = true
 HideButton.TextSize = 14
 HideButton.TextWrapped = true
-HideButton.Draggable = true -- Zachowano możliwość przeciągania
+HideButton.Draggable = true
 HideButtonUITextSizeConstraint.Parent = HideButton
 HideButtonUITextSizeConstraint.MaxTextSize = 28
 HideButtonUIAspectRatioConstraint.Parent = HideButton
@@ -479,10 +486,9 @@ local function showTab(tabName)
             ScrollingFramePremium.Visible = true
             print("DEBUG: Zakładka Premium ustawiona na Visible = true")
         else
-            -- Powiadomienie tylko wtedy, gdy próbujemy wejść na Premium bez GamePassa
             sendNotification("Universal Scripts", "Musisz posiadać Game Pass, aby uzyskać dostęp do tej zakładki! Otwieram okno zakupu.")
             print("DEBUG: Próba dostępu do zakładki Premium bez Game Passa. Wywołuję PromptGamePassPurchase.")
-            MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID) -- Otwórz okno zakupu
+            MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
         end
     end
 end
@@ -497,7 +503,7 @@ local function checkGamePassStatus()
     if success then
         hasGamePass = result
         print("DEBUG: Status Game Passa:", hasGamePass)
-        if not initialGamePassCheckDone then -- Wyślij powiadomienie tylko raz na początku
+        if not initialGamePassCheckDone then
             if hasGamePass then
                 sendNotification("Universal Scripts", "Posiadasz Game Pass! Funkcje Premium odblokowane.")
             else
@@ -507,13 +513,24 @@ local function checkGamePassStatus()
         end
     else
         warn("DEBUG: Błąd podczas sprawdzania Game Passa:", result)
-        -- To powiadomienie zostaje, bo to błąd krytyczny
         sendNotification("Universal Scripts", "Nie można sprawdzić statusu Game Passa. Spróbuj ponownie.")
+    end
+end
+
+-- Funkcja do aktualizacji widoczności przycisku MM2 Premium
+local function updateMM2ButtonVisibility()
+    if game.PlaceId == MM2_EXPERIENCE_ID then
+        MM2ButtonPremium.Visible = true
+        print("DEBUG: Jesteś w MM2 Experience, przycisk MM2 (Premium) jest WIDOCZNY.")
+    else
+        MM2ButtonPremium.Visible = false
+        print("DEBUG: Nie jesteś w MM2 Experience, przycisk MM2 (Premium) jest UKRYTY.")
     end
 end
 
 -- Sprawdzenie statusu Game Passa przy starcie skryptu
 checkGamePassStatus()
+updateMM2ButtonVisibility() -- Sprawdź widoczność MM2 przy starcie
 -- Domyślnie pokaż zakładkę Home
 showTab("Home")
 
@@ -571,7 +588,7 @@ MM2ButtonHome.MouseButton1Click:Connect(function()
     runScriptAndNotify("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring", MM2ButtonHome.Text)
 end)
 
--- Połączenia przycisków Premium (teraz sprawdzają jeden Game Pass)
+-- Połączenia przycisków Premium
 SpectateButtonPremium.MouseButton1Click:Connect(function()
     print("DEBUG: Kliknięto przycisk Spectate (Premium). Sprawdzam Game Passa...")
     local success, currentHasGamePass = pcall(function()
