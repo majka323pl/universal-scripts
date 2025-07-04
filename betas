@@ -1,7 +1,7 @@
 --[[
 
         Universal Scripts - Version with Tabs and Game Pass
-        Version 7.7.0 (Critical fix for Premium tab access without Game Pass)
+        Version 7.8.0 (Enhanced Debugging for Premium issue)
 
 ]]
 
@@ -11,6 +11,8 @@ local MarketplaceService = game:GetService("MarketplaceService")
 local StarterGui = game:GetService("StarterGui")
 
 local PREMIUM_GAMEPASS_ID = 1296972626 -- <<< ZMIEŃ TO NA ID SWOJEGO GAME PASSA! >>>
+
+print("Skrypt załadowany. ID Game Passa ustawione na:", PREMIUM_GAMEPASS_ID) -- DEBUG
 
 local function sendNotification(title, text)
     StarterGui:SetCore("SendNotification", {
@@ -454,18 +456,19 @@ HideButtonUIAspectRatioConstraint.AspectRatio = 1.0689654350280762
 ScreenGuiUIAspectRatioConstraint.Parent = UniversalScreenGui
 ScreenGuiUIAspectRatioConstraint.AspectRatio = 1.7807486057281494
 
--- Zmienna globalna do przechowywania statusu Game Passa
--- Najlepiej unikać bezpośredniego polegania na tej zmiennej dla krytycznych kontroli dostępu,
--- ponieważ status może się zmienić w trakcie sesji. Zawsze sprawdzaj bezpośrednio w MarketplaceService.
+-- Zmienna globalna do przechowywania statusu Game Passa przy starcie (tylko do powiadomienia)
 local hasGamePassAtStartup = false
 
 -- Funkcja do sprawdzania statusu Game Passa przy starcie (tylko do powiadomienia)
 local function checkGamePassStatusInitial()
+    print("Sprawdzam status Game Passa przy starcie...") -- DEBUG
     local success, result = pcall(function()
-        hasGamePassAtStartup = MarketplaceService:UserOwnsGamePassAsync(player.UserId, PREMIUM_GAMEPASS_ID)
+        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, PREMIUM_GAMEPASS_ID)
     end)
 
     if success then
+        hasGamePassAtStartup = result -- result to true/false z UserOwnsGamePassAsync
+        print("Status Game Passa przy starcie: ", hasGamePassAtStartup) -- DEBUG
         if not hasGamePassAtStartup then
             sendNotification("Universal Scripts", "Game Pass Premium nie znaleziony. Kup, aby uzyskać dostęp do funkcji Premium!")
         else
@@ -473,19 +476,22 @@ local function checkGamePassStatusInitial()
         end
     else
         warn("Błąd podczas sprawdzania Game Passa przy starcie:", result)
-        sendNotification("Universal Scripts", "Nie można sprawdzić statusu Game Passa.")
+        sendNotification("Universal Scripts", "Nie można sprawdzić statusu Game Passa przy starcie.")
     end
 end
 
 -- Funkcja do przełączania zakładek
 local function showTab(tabName)
+    print("Próbuję przełączyć na zakładkę:", tabName) -- DEBUG
     ScrollingFrameHome.Visible = false
     ScrollingFramePremium.Visible = false
 
     if tabName == "Home" then
         ScrollingFrameHome.Visible = true
+        print("Zakładka Home ustawiona na Visible = true") -- DEBUG
     elseif tabName == "Premium" then
         ScrollingFramePremium.Visible = true
+        print("Zakładka Premium ustawiona na Visible = true") -- DEBUG
     end
 end
 
@@ -496,109 +502,131 @@ showTab("Home")
 
 -- Połączenia przycisków Home
 InvisibiltyButtonHome.MouseButton1Click:Connect(function()
+    print("Kliknięto przycisk Niewidzialność (Home)") -- DEBUG
     loadstring(game:HttpGet('https://pastebin.com/raw/3Rnd9rHf'))()
     sendNotification("Niewidzialność", "Skrypt niewidzialności załadowany!")
 end)
 
 SpeedToolButtonHome.MouseButton1Click:Connect(function()
+    print("Kliknięto przycisk Speed Tool (Home)") -- DEBUG
     loadstring(game:HttpGet("https://pastebin.com/raw/X7B0HPc2"))()
     sendNotification("Narzędzie Prędkości", "Skrypt narzędzia prędkości załadowany!")
 end)
 
 ClicktpToolButtonHome.MouseButton1Click:Connect(function()
+    print("Kliknięto przycisk Click TP Tool (Home)") -- DEBUG
     loadstring(game:HttpGet("https://pastebin.com/raw/4KF2WJ9u"))()
     sendNotification("Narzędzie Teleportacji", "Skrypt narzędzia teleportacji załadowany!")
 end)
 
 SpectateButtonHome.MouseButton1Click:Connect(function()
+    print("Kliknięto przycisk Spectate (Home)") -- DEBUG
     loadstring(game:HttpGet("https://pastebin.com/raw/UFVLWQRw"))()
     sendNotification("Narzędzie Obserwacji", "Skrypt obserwacji załadowany!")
 end)
 
 FlyButtonHome.MouseButton1Click:Connect(function()
+    print("Kliknięto przycisk Fly (Home)") -- DEBUG
     loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
     sendNotification("Latanie", "Skrypt latania załadowany!")
 end)
 
 NoclipButtonHome.MouseButton1Click:Connect(function()
+    print("Kliknięto przycisk Noclip (Home)") -- DEBUG
     loadstring(game:HttpGet("https://pastebin.com/raw/CnbYfaj1"))()
     sendNotification("Noclip", "Skrypt Noclip załadowany!")
 end)
 
 FlingButtonHome.MouseButton1Click:Connect(function()
+    print("Kliknięto przycisk Fling (Home)") -- DEBUG
     loadstring(game:HttpGet(('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt'),true))()
     sendNotification("Fling", "Skrypt Fling załadowany!")
 end)
 
 MM2ButtonHome.MouseButton1Click:Connect(function()
+    print("Kliknięto przycisk MM2 (Home)") -- DEBUG
     loadstring(game:HttpGet("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring"))()
     sendNotification("Skrypt MM2", "Skrypt MM2 załadowany!")
 end)
 
 -- Połączenia przycisków Premium (z ponownym sprawdzeniem Game Passa)
 SpectateButtonPremium.MouseButton1Click:Connect(function()
-    -- **KRYTYCZNA ZMIANA: Czekaj na wynik MarketplaceService:UserOwnsGamePassAsync**
-    local success, currentHasGamePass = pcall(function()
-        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, PREMIUM_GAMEPASS_ID)
-    end)
-
-    if success and currentHasGamePass then
-        loadstring(game:HttpGet("https://pastebin.com/raw/UFVLWQRw"))()
-        sendNotification("Narzędzie Obserwacji", "Skrypt obserwacji załadowany!")
-    else
-        sendNotification("Universal Scripts", "Musisz posiadać Game Pass Premium, aby użyć tej funkcji!")
-        if success then -- Tylko jeśli pcall się powiódł, ale gracz nie ma Game Passa
-            MarketplaceService:PromptGamePassPurchase(player, PREMIUM_GAMEPASS_ID)
-        end
-    end
-end)
-
-MM2ButtonPremium.MouseButton1Click:Connect(function()
-    -- **KRYTYCZNA ZMIANA: Czekaj na wynik MarketplaceService:UserOwnsGamePassAsync**
-    local success, currentHasGamePass = pcall(function()
-        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, PREMIUM_GAMEPASS_ID)
-    end)
-
-    if success and currentHasGamePass then
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring"))()
-        sendNotification("Skrypt MM2", "Skrypt MM2 załadowany!")
-    else
-        sendNotification("Universal Scripts", "Musisz posiadać Game Pass Premium, aby użyć tej funkcji!")
-        if success then
-            MarketplaceService:PromptGamePassPurchase(player, PREMIUM_GAMEPASS_ID)
-        end
-    end
-end)
-
-FlyButtonPremium.MouseButton1Click:Connect(function()
-    -- **KRYTYCZNA ZMIANA: Czekaj na wynik MarketplaceService:UserOwnsGamePassAsync**
-    local success, currentHasGamePass = pcall(function()
-        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, PREMIUM_GAMEPASS_ID)
-    end)
-
-    if success and currentHasGamePass then
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
-        sendNotification("Latanie", "Skrypt latania załadowany!")
-    else
-        sendNotification("Universal Scripts", "Musisz posiadać Game Pass Premium, aby użyć tej funkcji!")
-        if success then
-            MarketplaceService:PromptGamePassPurchase(player, PREMIUM_GAMEPASS_ID)
-        end
-    end
-end)
-
--- Logika przycisków przełączających zakładki
-HomeTabButton.MouseButton1Click:Connect(function()
-    showTab("Home")
-end)
-
-PremiumTabButton.MouseButton1Click:Connect(function()
-    -- **KRYTYCZNA ZMIANA: Czekaj na wynik MarketplaceService:UserOwnsGamePassAsync**
+    print("Kliknięto przycisk Spectate (Premium). Sprawdzam Game Passa...") -- DEBUG
     local success, currentHasGamePass = pcall(function()
         return MarketplaceService:UserOwnsGamePassAsync(player.UserId, PREMIUM_GAMEPASS_ID)
     end)
 
     if success then
+        print("Wynik sprawdzenia Game Passa (Spectate):", currentHasGamePass) -- DEBUG
+        if currentHasGamePass then
+            loadstring(game:HttpGet("https://pastebin.com/raw/UFVLWQRw"))()
+            sendNotification("Narzędzie Obserwacji", "Skrypt obserwacji załadowany!")
+        else
+            sendNotification("Universal Scripts", "Musisz posiadać Game Pass Premium, aby użyć tej funkcji!")
+            MarketplaceService:PromptGamePassPurchase(player, PREMIUM_GAMEPASS_ID)
+        end
+    else
+        warn("Błąd podczas sprawdzania Game Passa (Spectate):", currentHasGamePass)
+        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania Game Passa.")
+    end
+end)
+
+MM2ButtonPremium.MouseButton1Click:Connect(function()
+    print("Kliknięto przycisk MM2 (Premium). Sprawdzam Game Passa...") -- DEBUG
+    local success, currentHasGamePass = pcall(function()
+        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, PREMIUM_GAMEPASS_ID)
+    end)
+
+    if success then
+        print("Wynik sprawdzenia Game Passa (MM2):", currentHasGamePass) -- DEBUG
+        if currentHasGamePass then
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring"))()
+            sendNotification("Skrypt MM2", "Skrypt MM2 załadowany!")
+        else
+            sendNotification("Universal Scripts", "Musisz posiadać Game Pass Premium, aby użyć tej funkcji!")
+            MarketplaceService:PromptGamePassPurchase(player, PREMIUM_GAMEPASS_ID)
+        end
+    else
+        warn("Błąd podczas sprawdzania Game Passa (MM2):", currentHasGamePass)
+        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania Game Passa.")
+    end
+end)
+
+FlyButtonPremium.MouseButton1Click:Connect(function()
+    print("Kliknięto przycisk Fly (Premium). Sprawdzam Game Passa...") -- DEBUG
+    local success, currentHasGamePass = pcall(function()
+        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, PREMIUM_GAMEPASS_ID)
+    end)
+
+    if success then
+        print("Wynik sprawdzenia Game Passa (Fly):", currentHasGamePass) -- DEBUG
+        if currentHasGamePass then
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+            sendNotification("Latanie", "Skrypt latania załadowany!")
+        else
+            sendNotification("Universal Scripts", "Musisz posiadać Game Pass Premium, aby użyć tej funkcji!")
+            MarketplaceService:PromptGamePassPurchase(player, PREMIUM_GAMEPASS_ID)
+        end
+    else
+        warn("Błąd podczas sprawdzania Game Passa (Fly):", currentHasGamePass)
+        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania Game Passa.")
+    end
+end)
+
+-- Logika przycisków przełączających zakładki
+HomeTabButton.MouseButton1Click:Connect(function()
+    print("Kliknięto przycisk Home. Przełączam na Home.") -- DEBUG
+    showTab("Home")
+end)
+
+PremiumTabButton.MouseButton1Click:Connect(function()
+    print("Kliknięto przycisk Premium. Sprawdzam Game Passa...") -- DEBUG
+    local success, currentHasGamePass = pcall(function()
+        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, PREMIUM_GAMEPASS_ID)
+    end)
+
+    if success then
+        print("Wynik sprawdzenia Game Passa (Premium Button):", currentHasGamePass) -- DEBUG
         if currentHasGamePass then
             showTab("Premium")
             sendNotification("Universal Scripts", "Przełączono na zakładkę Premium.")
@@ -612,19 +640,22 @@ PremiumTabButton.MouseButton1Click:Connect(function()
     end
 end)
 
-
 HideButton.MouseButton1Click:Connect(function()
+    print("Kliknięto przycisk Hide. Zmieniam widoczność MainFrame.") -- DEBUG
     MainFrame.Visible = not MainFrame.Visible
 end)
 
 -- Obsługa zdarzenia po zakończeniu próby zakupu Game Passa
 MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gamePassId, wasPurchased)
-    if userId == player.UserId and gamePassId == PREMIUM_GAMEPASS_ID and wasPurchased then
-        hasGamePassAtStartup = true -- Aktualizujemy tylko zmienną do celów informacyjnych
-        sendNotification("Universal Scripts", "Game Pass Premium kupiony pomyślnie! Ciesz się nowymi funkcjami.")
-        showTab("Premium") -- Automatycznie przełącz na zakładkę Premium po zakupie
-    elseif userId == player.UserId and gamePassId == PREMIUM_GAMEPASS_ID and not wasPurchased then
-        sendNotification("Universal Scripts", "Anulowano zakup Game Passa Premium.")
+    print("PromptGamePassPurchaseFinished zdarzenie: userId=", userId, " gamePassId=", gamePassId, " wasPurchased=", wasPurchased) -- DEBUG
+    if userId == player.UserId and gamePassId == PREMIUM_GAMEPASS_ID then
+        if wasPurchased then
+            hasGamePassAtStartup = true -- Aktualizujemy tylko zmienną do celów informacyjnych
+            sendNotification("Universal Scripts", "Game Pass Premium kupiony pomyślnie! Ciesz się nowymi funkcjami.")
+            showTab("Premium") -- Automatycznie przełącz na zakładkę Premium po zakupie
+        else
+            sendNotification("Universal Scripts", "Anulowano zakup Game Passa Premium.")
+        end
     end
 end)
 
