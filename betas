@@ -3,8 +3,7 @@
         z precyzyjnym pozycjonowaniem przycisków, dynamiczną widocznością przycisku MM2 w Premium,
         usuniętymi dopiskami "(Premium)" z nazw przycisków,
         oraz DYNAMICZNIE POZYCJONOWANYM PRZYCISKIEM "X" (jako ImageButton) jako bezpośrednie dziecko ScreenGui.
-        Version 20.8 - Upewnienie się, że nie ma błędów składniowych uniemożliwiających start.
-        Bezpośrednie ID obrazka 109075000814284.
+        Version 20.11 - Poprawiono ID obrazka dla powiadomień i HideButtona (wklejone ręcznie).
 ]]
 
 local player = game.Players.LocalPlayer
@@ -15,13 +14,13 @@ local RunService = game:GetService("RunService")
 
 local GAMEPASS_ID = 1296972626 -- JEDYNE ID Game Passa dla całego skryptu
 local MM2_EXPERIENCE_ID = 142823291 -- Poprawne ID dla Murder Mystery 2
+-- Wcześniej: local NEW_IMAGE_ID = "rbxassetid://102860171689689" -- Usunięto tę zmienną
 
 print("--- SKRYPT UNIVERSAL SCRIPTS START ---") -- DEBUG
 print("Skrypt załadowany. ID Game Passa:", GAMEPASS_ID)
 print("Twoje UserID:", player.UserId)
 print("Aktualne Experience ID:", game.PlaceId)
 print("Oczekiwane MM2 Experience ID:", MM2_EXPERIENCE_ID)
-print("ID Obrazka dla powiadomień/HideButton: 109075000814284")
 print("---")
 
 -- Zmienna globalna do przechowywania statusu Game Passa
@@ -36,7 +35,7 @@ local function sendNotification(title, text)
     StarterGui:SetCore("SendNotification", {
         Title = title,
         Text = text,
-        Icon = "rbxassetid://109075000814284", -- Bezpośrednie ID obrazka
+        Icon = "rbxassetid://102860171689689", -- ID obrazka wklejone ręcznie
         Duration = 5
     })
 end
@@ -435,9 +434,9 @@ HideButton.Parent = ScreenGui -- Bezpośrednie dziecko ScreenGui dla niezależno
 HideButton.BackgroundColor3 = Color3.new(1, 0, 0) -- Czerwone tło (możesz zmienić, jeśli Twój obrazek jest przezroczysty)
 HideButton.BorderColor3 = Color3.new(0, 0, 0)
 HideButton.BorderSizePixel = 3
-HideButton.Image = "rbxassetid://109075000814284" -- Bezpośrednie ID obrazka
+HideButton.Image = "rbxassetid://102860171689689" -- ID obrazka wklejone ręcznie
 HideButton.ImageColor3 = Color3.new(1, 1, 1) -- Kolor obrazu (biały, jeśli obraz jest czarny i chcesz, żeby był biały)
-HideButton.ScaleType = Enum.ScaleType.Fit -- Dopasuj obrazek do rozmiaru przycisku
+HideButton.ScaleType = Enum.ScaleType.Fit -- Dopasuj obrazek do rozmiar przycisku
 HideButton.Position = UDim2.new(0.5, 0, 0.5, 0) -- Pozycja tymczasowa (ustawi ją dynamicznie)
 HideButton.Size = UDim2.new(0.0482946634, 0, 0.0802469105, 0)
 HideButton.ZIndex = 5 -- Upewnij się, że jest na wierzchu
@@ -507,7 +506,7 @@ end
 -- Funkcja do dynamicznego pozycjonowania przycisku "X" (HideButton)
 local function updateHideButtonPosition()
     if MainFrame.Visible then
-        -- Gdy MainFrame jest widoczne, ustaw HideButton w prawym górnym rogu MainFrame
+        -- Gdy MainFrame jest widoczne, ustaw HideButton w prawym górnym roogu MainFrame
         -- Używamy AbsolutePosition i AbsoluteSize dla dokładnego pozycjonowania
         local frameAbsolutePosition = MainFrame.AbsolutePosition
         local frameAbsoluteSize = MainFrame.AbsoluteSize
