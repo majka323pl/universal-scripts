@@ -438,7 +438,7 @@ HideButton.Image = "rbxassetid://102860171689689" -- ID obrazka wklejone ręczni
 HideButton.ImageColor3 = Color3.new(1, 1, 1) -- Kolor obrazu (biały, jeśli obraz jest czarny i chcesz, żeby był biały)
 HideButton.ScaleType = Enum.ScaleType.Fit -- Dopasuj obrazek do rozmiar przycisku
 HideButton.Position = UDim2.new(0.707863092, 0, 0.214006022, 0) -- Początkowa pozycja z Twojego kodu
-HideButton.Size = UDim2.new(0, 30, 0, 30) -- ZMNIEJSZONO ROZMIAR TUTAJ
+HideButton.Size = UDim2.new(0, 20, 0, 20) -- ZMNIEJSZONO ROZMIAR TUTAJ
 HideButton.ZIndex = 5 -- Upewnij się, że jest na wierzchu
 HideButton.Draggable = true -- Ważne: Przeciągalny!
 
