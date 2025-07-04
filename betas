@@ -603,13 +603,13 @@ SpectateButton_Premium.MouseButton1Click:Connect(function()
         if currentHasGamePass then
             runScriptAndNotify("https://pastebin.com/raw/UFVLWQRw", SpectateButton_Premium.Text)
         else
-            sendNotification("Universal Scripts", "Musisz posiadać Game Pass, aby użyć tej funkcji!")
+            sendNotification("Universal Scripts", "Musisz posiadać Wersje Premium, aby użyć tej funkcji!")
             print("DEBUG: Wywołuję PromptGamePassPurchase dla Spectate.")
             MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
         end
     else
         warn("DEBUG: Błąd podczas sprawdzania Game Passa (Spectate):", currentHasGamePass)
-        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania Game Passa.")
+        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania czy masz wersje premium.")
     end
 end)
 
@@ -630,7 +630,7 @@ MM2Button.MouseButton1Click:Connect(function()
         end
     else
         warn("DEBUG: Błąd podczas sprawdzania Game Passa (MM2):", currentHasGamePass)
-        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania Game Passa.")
+        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania czy masz wersje Premium.")
     end
 end)
 
@@ -645,13 +645,13 @@ FlyButton.MouseButton1Click:Connect(function()
         if currentHasGamePass then
             runScriptAndNotify("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source", FlyButton.Text)
         else
-            sendNotification("Universal Scripts", "Musisz posiadać Game Pass, aby użyć tej funkcji!")
+            sendNotification("Universal Scripts", "Musisz posiadać wersje Premium, aby użyć tej funkcji!")
             print("DEBUG: Wywołuję PromptGamePassPurchase dla Console.")
             MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
         end
     else
         warn("DEBUG: Błąd podczas sprawdzania Game Passa (Console):", currentHasGamePass)
-        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania Game Passa.")
+        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania czy masz wersje Premium.")
     end
 end)
 
@@ -672,7 +672,7 @@ Invisibiltybutton.MouseButton1Click:Connect(function()
         end
     else
         warn("DEBUG: Błąd podczas sprawdzania Game Passa (Invisibilty):", currentHasGamePass)
-        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania Game Passa.")
+        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania czy masz wersje Premium.")
     end
 end)
 
@@ -706,11 +706,11 @@ MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gameP
     print("DEBUG: Zdarzenie PromptGamePassPurchaseFinished: userId=", userId, " gamePassId=", gamePassId, " wasPurchased=", wasPurchased)
     if userId == player.UserId and gamePassId == GAMEPASS_ID then
         if wasPurchased then
-            sendNotification("Universal Scripts", "Game Pass kupiony pomyślnie! Dziękujemy za zakup.")
+            sendNotification("Universal Scripts", "Wersja Premium kupiona pomyślnie! Dziękujemy za zakup.")
             hasGamePass = true
             showTab("Premium")
         else
-            sendNotification("Universal Scripts", "Anulowano zakup Game Passa.")
+            sendNotification("Universal Scripts", "Anulowano zakup Wersji Premium.")
         end
     end
 end)
