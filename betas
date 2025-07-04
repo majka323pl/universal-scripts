@@ -3,7 +3,7 @@
         z precyzyjnym pozycjonowaniem przycisków, dynamiczną widocznością przycisku MM2 w Premium,
         usuniętymi dopiskami "(Premium)" z nazw przycisków,
         oraz DYNAMICZNIE POZYCJONOWANYM PRZYCISKIEM "X" (jako ImageButton) jako bezpośrednie dziecko ScreenGui.
-        Version 20.3 - HideButton (ImageButton) jest teraz w pełni przesuwalny i nie resetuje pozycji.
+        Version 20.4 - HideButton (ImageButton) jest teraz w pełni przesuwalny, nie resetuje pozycji i obsługuje dotyk.
 ]]
 
 local player = game.Players.LocalPlayer
@@ -27,7 +27,8 @@ local hasGamePass = false
 local initialGamePassCheckDone = false -- Nowa zmienna do kontrolowania początkowych powiadomień
 
 -- Zmienna do przechowywania ostatniej pozycji HideButton, gdy MainFrame jest ukryte
-local lastHideButtonPosition = UDim2.new(0.9, -50, 0, 20) -- Domyślna pozycja w prawym górnym rogu ekranu
+-- Domyślna pozycja w prawym górnym rogu ekranu, z małym marginesem
+local lastHideButtonPosition = UDim2.new(1, -55, 0, 10) 
 
 local function sendNotification(title, text)
     StarterGui:SetCore("SendNotification", {
@@ -425,10 +426,10 @@ UIAspectRatioConstraint_17.Parent = ScreenGui
 UIAspectRatioConstraint_17.AspectRatio = 1.9216867685317993
 
 
--- Zmodyfikowany HideButton - teraz jako ImageButton
+-- Deklaracja HideButton jako ImageButton
 local HideButton = Instance.new("ImageButton")
 HideButton.Name = "HideButton"
-HideButton.Parent = ScreenGui -- Bezpośrednie dziecko ScreenGui
+HideButton.Parent = ScreenGui -- Bezpośrednie dziecko ScreenGui dla niezależności
 HideButton.BackgroundColor3 = Color3.new(1, 0, 0) -- Czerwone tło
 HideButton.BorderColor3 = Color3.new(0, 0, 0)
 HideButton.BorderSizePixel = 3
@@ -443,7 +444,8 @@ HideButton.Draggable = true -- Ważne: Przeciągalny!
 --- Koniec UI Instantiation ---
 
 
--- Logika Skryptu
+--- Logika Skryptu ---
+
 -- Funkcja do przełączania zakładek
 local function showTab(tabName)
     print("DEBUG: Próbuję przełączyć na zakładkę:", tabName)
@@ -518,11 +520,13 @@ local function updateHideButtonPosition()
 
         -- Zapisz tę pozycję jako ostatnią znaną, gdy GUI jest widoczne
         lastHideButtonPosition = HideButton.Position
+        print("DEBUG: MainFrame widoczne. HideButton ustawiony na: ", HideButton.Position.X.Offset, HideButton.Position.Y.Offset)
     else
         -- Gdy MainFrame jest niewidoczne, HideButton przyjmuje ostatnią zapisaną pozycję
         -- Jeśli HideButton był przeciągany, jego ostatnia pozycja zostaje zachowana.
         -- Jeśli nie, wraca do domyślnej pozycji (prawy górny róg ekranu).
         HideButton.Position = lastHideButtonPosition
+        print("DEBUG: MainFrame niewidoczne. HideButton ustawiony na zapisaną pozycję: ", HideButton.Position.X.Offset, HideButton.Position.Y.Offset)
     end
 end
 
@@ -538,9 +542,9 @@ updateHideButtonPosition() -- Ustaw początkową pozycję przycisku "X"
 -- Zapisuje nową pozycję, gdy HideButton zostanie przeciągnięty
 HideButton.Changed:Connect(function(property)
     if property == "Position" then
-        if not MainFrame.Visible then -- Zapisuj tylko, gdy MainFrame jest ukryte
+        if not MainFrame.Visible then -- Zapisuj nową pozycję tylko, gdy MainFrame jest ukryte
             lastHideButtonPosition = HideButton.Position
-            print("DEBUG: HideButton Position zmienione na:", lastHideButtonPosition.X.Offset, lastHideButtonPosition.Y.Offset)
+            -- print("DEBUG: HideButton Position zmienione na:", lastHideButtonPosition.X.Offset, lastHideButtonPosition.Y.Offset) -- Zbyt częste logowanie
         end
     end
 end)
