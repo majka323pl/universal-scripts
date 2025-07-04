@@ -7,7 +7,7 @@ local TeleportService = game:GetService("TeleportService")
 
 local GAMEPASS_ID = 1296972626
 local MM2_EXPERIENCE_ID = 142823291
-local TELEPORT_PLACE_ID = 123456789
+local TELEPORT_PLACE_ID = 6557073879
 
 local hasGamePass = false
 local initialGamePassCheckDone = false
