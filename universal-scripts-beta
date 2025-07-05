@@ -69,10 +69,11 @@ local UICorner_11 = Instance.new("UICorner")
 local UITextSizeConstraint_9 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_11 = Instance.new("UIAspectRatioConstraint")
 local UICorner_12 = Instance.new("UICorner")
-local SpectateButton_Home = Instance.new("TextButton")
-local UICorner_13 = Instance.new("UICorner")
-local UITextSizeConstraint_10 = Instance.new("UITextSizeConstraint")
-local UIAspectRatioConstraint_12 = Instance.new("UIAspectRatioConstraint")
+-- SpectateButton_Home został usunięty
+-- local SpectateButton_Home = Instance.new("TextButton")
+-- local UICorner_13 = Instance.new("UICorner")
+-- local UITextSizeConstraint_10 = Instance.new("UITextSizeConstraint")
+-- local UIAspectRatioConstraint_12 = Instance.new("UIAspectRatioConstraint")
 local NoclipButton = Instance.new("TextButton")
 local UICorner_14 = Instance.new("UICorner")
 local UITextSizeConstraint_11 = Instance.new("UITextSizeConstraint")
@@ -336,26 +337,27 @@ UITextSizeConstraint_9.MaxTextSize = 35
 UIAspectRatioConstraint_11.Parent = ClicktptoolButton
 UIAspectRatioConstraint_11.AspectRatio = 3.9473683834075928
 
-SpectateButton_Home.Name = "Spectate Button"
-SpectateButton_Home.Parent = ScrollingFrameHome
-SpectateButton_Home.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
-SpectateButton_Home.BorderColor3 = Color3.new(0, 0, 0)
-SpectateButton_Home.Position = UDim2.new(0.0527811497, 0, 0.0926060826, 0)
-SpectateButton_Home.Size = UDim2.new(0, 150, 0, 38)
-SpectateButton_Home.Font = Enum.Font.SourceSans
-SpectateButton_Home.Text = "Spectate"
-SpectateButton_Home.TextColor3 = Color3.new(0, 0, 0)
-SpectateButton_Home.TextScaled = true
-SpectateButton_Home.TextSize = 14
-SpectateButton_Home.TextWrapped = true
+-- SpectateButton_Home został usunięty
+-- SpectateButton_Home.Name = "Spectate Button"
+-- SpectateButton_Home.Parent = ScrollingFrameHome
+-- SpectateButton_Home.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
+-- SpectateButton_Home.BorderColor3 = Color3.new(0, 0, 0)
+-- SpectateButton_Home.Position = UDim2.new(0.0527811497, 0, 0.0926060826, 0)
+-- SpectateButton_Home.Size = UDim2.new(0, 150, 0, 38)
+-- SpectateButton_Home.Font = Enum.Font.SourceSans
+-- SpectateButton_Home.Text = "Spectate"
+-- SpectateButton_Home.TextColor3 = Color3.new(0, 0, 0)
+-- SpectateButton_Home.TextScaled = true
+-- SpectateButton_Home.TextSize = 14
+-- SpectateButton_Home.TextWrapped = true
 
-UICorner_13.Parent = SpectateButton_Home
+-- UICorner_13.Parent = SpectateButton_Home
 
-UITextSizeConstraint_10.Parent = SpectateButton_Home
-UITextSizeConstraint_10.MaxTextSize = 37
+-- UITextSizeConstraint_10.Parent = SpectateButton_Home
+-- UITextSizeConstraint_10.MaxTextSize = 37
 
-UIAspectRatioConstraint_12.Parent = SpectateButton_Home
-UIAspectRatioConstraint_12.AspectRatio = 3.9473683834075928
+-- UIAspectRatioConstraint_12.Parent = SpectateButton_Home
+-- UIAspectRatioConstraint_12.AspectRatio = 3.9473683834075928
 
 NoclipButton.Name = "Noclip Button"
 NoclipButton.Parent = ScrollingFrameHome
@@ -420,6 +422,15 @@ HideButton.Position = UDim2.new(0.707863092, 0, 0.214006022, 0)
 HideButton.Size = UDim2.new(0, 30, 0, 30)
 HideButton.ZIndex = 5
 HideButton.Draggable = true
+
+local function sendNotification(title, text)
+    StarterGui:SetCore("SendNotification", {
+        Title = title,
+        Text = text,
+        Icon = "rbxassetid://102860171689689",
+        Duration = 5
+    })
+end
 
 local function showTab(tabName)
     ScrollingFrameHome.Visible = false
@@ -519,9 +530,9 @@ ClicktptoolButton.MouseButton1Click:Connect(function()
     runScriptAndNotify("https://pastebin.com/raw/4KF2WJ9u", ClicktptoolButton.Text)
 end)
 
-SpectateButton_Home.MouseButton1Click:Connect(function()
-    runScriptAndNotify("https://pastebin.com/raw/UFVLWQRw", SpectateButton_Home.Text)
-end)
+-- SpectateButton_Home.MouseButton1Click:Connect(function() został usunięty
+--     runScriptAndNotify("https://pastebin.com/raw/UFVLWQRw", SpectateButton_Home.Text)
+-- end)
 
 NoclipButton.MouseButton1Click:Connect(function()
     runScriptAndNotify("https://pastebin.com/raw/CnbYfaj1", NoclipButton.Text)
@@ -617,7 +628,7 @@ end)
 
 MainFrame.VisibleChanged:Connect(function()
     updateHideButtonPosition()
-
+end) -- Dodane brakujące 'end' tutaj
 
 MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gamePassId, wasPurchased)
     if userId == player.UserId and gamePassId == GAMEPASS_ID then
@@ -637,5 +648,3 @@ spawn(function()
 end)
 
 task.wait(0.5)
-
-end)
