@@ -16,16 +16,19 @@ local lastHideButtonPosition = UDim2.new(1, -55, 0, 10)
 
 -- Funkcja do wysyłania powiadomień
 local function sendNotification(title, text)
-    StarterGui:SetCore("SendNotification", {
-        Title = title,
-        Text = text,
-        Icon = "rbxassetid://102860171689689",
-        Duration = 5
-    })
+    -- Zapewniamy, że StarterGui jest dostępne, choć zazwyczaj jest
+    if StarterGui then 
+        StarterGui:SetCore("SendNotification", {
+            Title = title,
+            Text = text,
+            Icon = "rbxassetid://102860171689689",
+            Duration = 5
+        })
+    end
 end
 
 -- Deklaracje instancji GUI
--- Tworzenie ScreenGui w PlayerGui (upewniamy się, że PlayerGui jest dostępne)
+-- Upewnij się, że PlayerGui jest dostępny przed tworzeniem ScreenGui
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Parent = localPlayer:WaitForChild("PlayerGui")
 ScreenGui.Name = "UniversalScriptsGUI"
@@ -428,10 +431,28 @@ HideButton.Size = UDim2.new(0, 30, 0, 30)
 HideButton.ZIndex = 5
 HideButton.Draggable = true
 
--- TitleLabel jest już zdefiniowany wyżej, więc ta sekcja była duplikatem
--- local TitleLabel = Instance.new("TextLabel") 
--- TitleLabel.Name = "TitleLabel"
--- ... (reszta właściwości)
+local TitleLabel = Instance.new("TextLabel")
+TitleLabel.Name = "TitleLabel"
+TitleLabel.Parent = MainFrame
+TitleLabel.BackgroundColor3 = Color3.new(1, 1, 1)
+TitleLabel.BackgroundTransparency = 1
+TitleLabel.BorderColor3 = Color3.new(0, 0, 0)
+TitleLabel.BorderSizePixel = 0
+TitleLabel.Position = UDim2.new(0.425298363, 0, 0.0153667927, 0)
+TitleLabel.Size = UDim2.new(0.3616907, 0, 0.0724434555, 0)
+TitleLabel.Font = Enum.Font.LuckiestGuy
+TitleLabel.Text = "UNIVERSAL SCRIPTS"
+TitleLabel.TextColor3 = Color3.new(1, 1, 1)
+TitleLabel.TextScaled = true
+TitleLabel.TextSize = 14
+TitleLabel.TextWrapped = true
+
+local TitleLabel_UITextSizeConstraint = Instance.new("UITextSizeConstraint")
+TitleLabel_UITextSizeConstraint.Parent = TitleLabel
+TitleLabel_UITextSizeConstraint.MaxTextSize = 31
+local TitleLabel_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+TitleLabel_UIAspectRatioConstraint.Parent = TitleLabel
+TitleLabel_UIAspectRatioConstraint.AspectRatio = 8.78787899017334
 
 ---
 ## Funkcje pomocnicze
@@ -449,10 +470,7 @@ local function showTab(tabName)
             ScrollingFramePremium.Visible = true
         else
             sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby uzyskać dostęp do tej zakładki!")
-            -- Opcjonalnie: Prompt do zakupu po kliknięciu zakładki Premium bez posiadania premium
             MarketplaceService:PromptGamePassPurchase(localPlayer, GAMEPASS_ID)
-            -- Nie teleportujemy od razu, dajemy użytkownikowi szansę na zakup w grze.
-            -- MainFrame.Visible = false -- Zostawiamy GUI widoczne, aby użytkownik mógł spróbować kupić.
         end
     end
 end
@@ -476,9 +494,9 @@ local function checkGamePassStatus()
     else
         warn("Błąd podczas sprawdzania wersji premium:", result)
         sendNotification("Universal Scripts", "Nie można sprawdzić statusu wersji premium. Spróbuj ponownie.")
-        -- Jeśli wystąpił błąd, załóżmy, że użytkownik nie ma GamePassa dla bezpieczeństwa
-        hasGamePass = false
+        hasGamePass = false -- Jeśli wystąpił błąd, załóżmy, że użytkownik nie ma GamePassa
     end
+    return success, result -- Zwracamy success i result dla lepszego debugowania
 end
 
 -- Funkcja do aktualizacji widoczności przycisków MM2 w zależności od ID gry
@@ -507,16 +525,13 @@ local function updateHideButtonPosition()
         HideButton.Position = UDim2.fromOffset(newX, newY)
 
         lastHideButtonPosition = HideButton.Position
-    else
-        -- Kiedy MainFrame jest niewidoczny, przycisk HideButton powinien być tam, gdzie był ostatnio
-        -- lub w swojej domyślnej pozycji, jeśli nigdy nie był widoczny.
-        -- lastHideButtonPosition już to obsługuje, więc nie trzeba zmieniać.
     end
 end
 
 -- Funkcja do uruchamiania skryptów z zewnętrznych źródeł
 local function runScriptAndNotify(url, buttonName)
     local success, err = pcall(function()
+        -- Ta linia jest problematyczna, jeśli loadstring jest zablokowany
         loadstring(game:HttpGet(url))()
     end)
     if success then
@@ -611,9 +626,6 @@ end)
 
 HideButton.MouseButton1Click:Connect(function()
     MainFrame.Visible = not MainFrame.Visible
-    -- Jeśli HideButton jest kliknięty, a MainFrame staje się niewidoczny,
-    -- to HideButton powinien być widoczny w ostatniej zapamiętanej pozycji.
-    -- Jeśli MainFrame staje się widoczny, HideButton powinien zostać zaktualizowany do jego rogu.
     updateHideButtonPosition()
 end)
 
@@ -641,7 +653,6 @@ RunService.Stepped:Connect(function()
         lastPlaceId = game.PlaceId
         updateMM2ButtonVisibility()
         -- Jeśli zakładka premium była aktywna i zmieniono grę, sprawdź dostęp ponownie
-        -- i ewentualnie przełącz na zakładkę Home, jeśli użytkownik nie ma dostępu.
         if ScrollingFramePremium.Visible then
             showTab("Premium") -- To spowoduje ponowne sprawdzenie dostępu
         end
@@ -678,17 +689,27 @@ end)
 
 -- Główna funkcja startowa uruchamiana po załadowaniu PlayerGui
 spawn(function()
-    localPlayer.PlayerGui.ChildAdded:Wait() -- Czekaj, aż PlayerGui zostanie w pełni załadowane
+    -- Użycie pcall do bezpieczniejszego waitForChild, choć rzadko potrzebne
+    local success, playerGui = pcall(function()
+        return localPlayer:WaitForChild("PlayerGui", 10) -- Czekaj do 10 sekund
+    end)
+
+    if not success or not playerGui then
+        warn("Błąd: PlayerGui nie znaleziono w wymaganym czasie.")
+        return -- Przerywamy wykonanie skryptu, jeśli GUI nie jest dostępne
+    end
+
     task.wait(1) -- Krótkie opóźnienie dla pewności
 
     sendNotification("Universal Scripts", "Witaj w Universal Scripts! Skrypt załadowany.")
-    checkGamePassStatus() -- Sprawdź status GamePassa przy starcie
+    
+    -- Uruchomienie checkGamePassStatus w osobnym wątku, aby nie blokować inicjalizacji GUI
+    task.spawn(checkGamePassStatus) 
+    
     updateMM2ButtonVisibility() -- Ustaw widoczność przycisków MM2
     showTab("Home") -- Domyślnie pokaż zakładkę Home
     updateHideButtonPosition() -- Ustaw początkową pozycję przycisku Hide
 
     -- Ustaw początkową pozycję HideButton po załadowaniu GUI
-    -- Domyślna pozycja jest podana w deklaracji, ale ta linia zapewnia, że zostanie przeliczona
-    -- na podstawie rozmiaru okna, jeśli GUI nie jest jeszcze widoczne.
     HideButton.Position = lastHideButtonPosition
 end)
