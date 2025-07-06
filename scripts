@@ -53,23 +53,19 @@ local MainFrameCorner = Instance.new("UICorner")
 MainFrameCorner.CornerRadius = UDim.new(0, 10) -- Większe zaokrąglenie
 MainFrameCorner.Parent = MainFrame
 
--- UIGridLayout dla MainFrame, aby ułożyć TitleLabel, TabsFrame i ContentFrame
--- Zapewnia kontrolę nad kolumnami i wierszami
-local MainFrameGridLayout = Instance.new("UIGridLayout")
-MainFrameGridLayout.Parent = MainFrame
-MainFrameGridLayout.FillDirection = Enum.FillDirection.Horizontal -- Układ poziomy dla kolumn
-MainFrameGridLayout.HorizontalAlignment = Enum.HorizontalAlignment.Left
-MainFrameGridLayout.VerticalAlignment = Enum.VerticalAlignment.Top
-MainFrameGridLayout.CellSize = UDim2.new(0.25, 0, 1, 0) -- Domylślny rozmiar komórek, zmienimy go dynamicznie
-MainFrameGridLayout.StartCorner = Enum.StartCorner.TopLeft
-MainFrameGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
-MainFrameGridLayout.Padding = UDim.new(0, 0) -- Brak odstępów między głównymi elementami
+-- UIListLayout dla MainFrame, aby ułożyć TitleLabel i ContentAndTabsWrapper pionowo
+local MainFrameLayout = Instance.new("UIListLayout")
+MainFrameLayout.Parent = MainFrame
+MainFrameLayout.FillDirection = Enum.FillDirection.Vertical
+MainFrameLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+MainFrameLayout.SortOrder = Enum.SortOrder.LayoutOrder
+MainFrameLayout.Padding = UDim.new(0,0) -- Bez odstępów
 
 -- TitleLabel
 local TitleLabel = Instance.new("TextLabel")
 TitleLabel.Name = "TitleLabel"
 TitleLabel.Parent = MainFrame
-TitleLabel.Size = UDim2.new(1, 0, 0.12, 0) -- Będzie rozciągać się na całą szerokość MainFrame (ustawione przez GridLayout)
+TitleLabel.Size = UDim2.new(1, 0, 0.12, 0) -- 12% wysokości MainFrame
 TitleLabel.BackgroundTransparency = 0
 TitleLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 TitleLabel.Text = "UNIVERSAL SCRIPTS"
@@ -83,15 +79,31 @@ local TitleLabelCorner = Instance.new("UICorner")
 TitleLabelCorner.CornerRadius = UDim.new(0, 10) -- Zaokrąglenie dla paska tytułowego
 TitleLabelCorner.Parent = TitleLabel
 
+-- Wrapper dla TabsFrame i ContentFrame (aby były obok siebie)
+local ContentAndTabsWrapper = Instance.new("Frame")
+ContentAndTabsWrapper.Name = "ContentAndTabsWrapper"
+ContentAndTabsWrapper.Parent = MainFrame
+ContentAndTabsWrapper.Size = UDim2.new(1, 0, 0.88, 0) -- Reszta wysokości MainFrame
+ContentAndTabsWrapper.BackgroundTransparency = 1 -- Przezroczyste tło dla wrappera
+ContentAndTabsWrapper.BorderSizePixel = 0
+ContentAndTabsWrapper.LayoutOrder = 2 -- Drugi element w layoucie
+
+local WrapperLayout = Instance.new("UIListLayout")
+WrapperLayout.Parent = ContentAndTabsWrapper
+WrapperLayout.FillDirection = Enum.FillDirection.Horizontal -- Układ poziomy dla zakładek i zawartości
+WrapperLayout.HorizontalAlignment = Enum.HorizontalAlignment.Left
+WrapperLayout.SortOrder = Enum.SortOrder.LayoutOrder
+WrapperLayout.Padding = UDim.new(0,0) -- Bez odstępów
+
 -- TabsFrame (ramka na przyciski zakładek)
 local TabsFrame = Instance.new("Frame")
 TabsFrame.Name = "TabsFrame"
-TabsFrame.Parent = MainFrame
-TabsFrame.Size = UDim2.new(0.25, 0, 0.88, 0) -- 25% szerokości MainFrame, 88% wysokości MainFrame
+TabsFrame.Parent = ContentAndTabsWrapper
+TabsFrame.Size = UDim2.new(0.25, 0, 1, 0) -- 25% szerokości wrappera, cała wysokość wrappera
 TabsFrame.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
 TabsFrame.BorderSizePixel = 0
 TabsFrame.Active = true
-TabsFrame.LayoutOrder = 2 -- Drugi element w layoucie
+TabsFrame.LayoutOrder = 1 -- Pierwszy w wrapperze
 
 local TabsFrameCorner = Instance.new("UICorner")
 TabsFrameCorner.CornerRadius = UDim.new(0, 10) -- Zaokrąglenie
@@ -136,12 +148,12 @@ Instance.new("UICorner", PremiumTabButton).CornerRadius = UDim.new(0, 5)
 -- ContentFrame (ramka na zawartość zakładek)
 local ContentFrame = Instance.new("Frame")
 ContentFrame.Name = "ContentFrame"
-ContentFrame.Parent = MainFrame
-ContentFrame.Size = UDim2.new(0.75, 0, 0.88, 0) -- 75% szerokości MainFrame, 88% wysokości MainFrame
+ContentFrame.Parent = ContentAndTabsWrapper
+ContentFrame.Size = UDim2.new(0.75, 0, 1, 0) -- 75% szerokości wrappera, cała wysokość wrappera
 ContentFrame.BackgroundColor3 = Color3.fromRGB(59, 59, 59)
 ContentFrame.BorderSizePixel = 0
 ContentFrame.Active = true
-ContentFrame.LayoutOrder = 3 -- Trzeci element w layoucie
+ContentFrame.LayoutOrder = 2 -- Drugi w wrapperze
 Instance.new("UICorner", ContentFrame).CornerRadius = UDim.new(0, 10) -- Większe zaokrąglenie
 
 -- ScrollingFrame dla Home
@@ -163,7 +175,7 @@ HomeGridLayout.FillDirection = Enum.FillDirection.Horizontal
 HomeGridLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 HomeGridLayout.VerticalAlignment = Enum.VerticalAlignment.Top
 HomeGridLayout.CellSize = UDim2.new(0.3, 0, 0.15, 0)
-HomeGridLayout.CellPadding = UDim2.new(0.05, 0, 0.05, 0)
+HomeGridLayout.CellPadding = UDim.new(0.05, 0, 0.05, 0)
 
 -- Przyciski dla Home (dodaj więcej, jeśli potrzebujesz)
 local SpeedToolbutton = Instance.new("TextButton")
@@ -355,7 +367,7 @@ HideButton.BackgroundColor3 = Color3.fromRGB(200, 0, 0) -- Czerwony
 HideButton.Image = "rbxassetid://102860171689689" -- Ikona krzyżyka lub inna
 HideButton.ImageColor3 = Color3.new(1, 1, 1)
 HideButton.ScaleType = Enum.ScaleType.Fit
-HideButton.BorderSizePixel = 3 -- Przywrócone obramowanie!
+HideButton.BorderSizePixel = 3 -- PRZYWRÓCONE OBRAMOWANIE!
 HideButton.BorderColor3 = Color3.fromRGB(0,0,0) -- Kolor obramowania
 HideButton.ZIndex = 5
 HideButton.Active = true
@@ -646,11 +658,6 @@ end)
 spawn(function()
     task.wait(1) -- Daj chwilę na załadowanie GUI
     
-    -- Dostosowanie siatki MainFrame
-    MainFrameGridLayout.CellSize = UDim2.new(1, 0, 0.12, 0) -- Rozmiar dla pierwszej komórki (TitleLabel)
-    MainFrameGridLayout.CellSize = UDim2.new(0.25, 0, 0.88, 0) -- Rozmiar dla drugiej komórki (TabsFrame)
-    MainFrameGridLayout.CellSize = UDim2.new(0.75, 0, 0.88, 0) -- Rozmiar dla trzeciej komórki (ContentFrame)
-
     checkGamePassStatus() -- Sprawdzamy Game Passa na start i wysyłamy pierwsze powiadomienie
     updateMM2ButtonVisibility() -- Aktualizujemy widoczność przycisków MM2 na start
     showTab("Home") -- Wyświetl zakładkę Home jako domyślną
