@@ -44,10 +44,6 @@ local SpectateButton_Premium = Instance.new("TextButton")
 local UICorner_6 = Instance.new("UICorner")
 local UITextSizeConstraint_3 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_4 = Instance.new("UIAspectRatioConstraint")
-local MM2Button = Instance.new("TextButton")
-local UICorner_7 = Instance.new("UICorner")
-local UITextSizeConstraint_4 = Instance.new("UITextSizeConstraint")
-local UIAspectRatioConstraint_5 = Instance.new("UIAspectRatioConstraint")
 local FlyButton = Instance.new("TextButton")
 local UICorner_8 = Instance.new("UICorner")
 local UITextSizeConstraint_5 = Instance.new("UITextSizeConstraint")
@@ -56,15 +52,21 @@ local Invisibiltybutton = Instance.new("TextButton")
 local UICorner_9 = Instance.new("UICorner")
 local UITextSizeConstraint_6 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_7 = Instance.new("UIAspectRatioConstraint")
-local GhostMM2Button = Instance.new("TextButton")
-local UICorner_GhostMM2 = Instance.new("UICorner")
-local UITextSizeConstraint_GhostMM2 = Instance.new("UITextSizeConstraint")
-local UIAspectRatioConstraint_GhostMM2 = Instance.new("UIAspectRatioConstraint")
 local FlingButton_Premium = Instance.new("TextButton")
 local UICorner_FlingPremium = Instance.new("UICorner")
 local UITextSizeConstraint_FlingPremium = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_FlingPremium = Instance.new("UIAspectRatioConstraint")
-local GAGButton = Instance.new("TextButton") -- Nowy przycisk GAG
+
+-- Przyciski specyficzne dla gier (teraz na dole w Premium)
+local MM2Button = Instance.new("TextButton")
+local UICorner_7 = Instance.new("UICorner")
+local UITextSizeConstraint_4 = Instance.new("UITextSizeConstraint")
+local UIAspectRatioConstraint_5 = Instance.new("UIAspectRatioConstraint")
+local GhostMM2Button = Instance.new("TextButton")
+local UICorner_GhostMM2 = Instance.new("UICorner")
+local UITextSizeConstraint_GhostMM2 = Instance.new("UITextSizeConstraint")
+local UIAspectRatioConstraint_GhostMM2 = Instance.new("UIAspectRatioConstraint")
+local GAGButton = Instance.new("TextButton")
 local UICorner_GAG = Instance.new("UICorner")
 local UITextSizeConstraint_GAG = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_GAG = Instance.new("UIAspectRatioConstraint")
@@ -180,13 +182,13 @@ ScrollingFramePremium.Visible = false
 
 UICorner_5.Parent = ScrollingFramePremium
 
--- Skalowane przyciski w sekcji Premium
+-- Standardowe przyciski Premium
 SpectateButton_Premium.Name = "Spectate Button Premium"
 SpectateButton_Premium.Parent = ScrollingFramePremium
 SpectateButton_Premium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 SpectateButton_Premium.BorderColor3 = Color3.new(0, 0, 0)
-SpectateButton_Premium.Position = UDim2.new(0.04, 0, 0.025, 0) -- Lewa kolumna, góra
-SpectateButton_Premium.Size = UDim2.new(0.45, 0, 0.08, 0) -- Skalowana szerokość i wysokość
+SpectateButton_Premium.Position = UDim2.new(0.04, 0, 0.025, 0)
+SpectateButton_Premium.Size = UDim2.new(0.45, 0, 0.08, 0)
 SpectateButton_Premium.Font = Enum.Font.SourceSans
 SpectateButton_Premium.Text = "Spectate"
 SpectateButton_Premium.TextColor3 = Color3.new(0, 0, 0)
@@ -200,32 +202,12 @@ UITextSizeConstraint_3.MaxTextSize = 37
 UIAspectRatioConstraint_4.Parent = SpectateButton_Premium
 UIAspectRatioConstraint_4.AspectRatio = 3.9473683834075928
 
-MM2Button.Name = "MM2 Button"
-MM2Button.Parent = ScrollingFramePremium
-MM2Button.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
-MM2Button.BorderColor3 = Color3.new(0, 0, 0)
-MM2Button.Position = UDim2.new(0.5, 0, 0.025, 0) -- Prawa kolumna, góra
-MM2Button.Size = UDim2.new(0.45, 0, 0.08, 0) -- Skalowana szerokość i wysokość
-MM2Button.Font = Enum.Font.SourceSans
-MM2Button.Text = "MM2"
-MM2Button.TextColor3 = Color3.new(0, 0, 0)
-MM2Button.TextScaled = true
-MM2Button.TextSize = 14
-MM2Button.TextWrapped = true
-MM2Button.Visible = false -- Domyślnie niewidoczny, tylko w MM2
-
-UICorner_7.Parent = MM2Button
-UITextSizeConstraint_4.Parent = MM2Button
-UITextSizeConstraint_4.MaxTextSize = 37
-UIAspectRatioConstraint_5.Parent = MM2Button
-UIAspectRatioConstraint_5.AspectRatio = 3.9473683834075928
-
 FlyButton.Name = "Console Button"
 FlyButton.Parent = ScrollingFramePremium
 FlyButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 FlyButton.BorderColor3 = Color3.new(0, 0, 0)
-FlyButton.Position = UDim2.new(0.04, 0, 0.125, 0) -- Lewa kolumna, drugi rząd
-FlyButton.Size = UDim2.new(0.45, 0, 0.08, 0) -- Skalowana szerokość i wysokość
+FlyButton.Position = UDim2.new(0.5, 0, 0.025, 0)
+FlyButton.Size = UDim2.new(0.45, 0, 0.08, 0)
 FlyButton.Font = Enum.Font.SourceSans
 FlyButton.Text = "Console"
 FlyButton.TextColor3 = Color3.new(0, 0, 0)
@@ -243,8 +225,8 @@ Invisibiltybutton.Name = "Invisibilty Button"
 Invisibiltybutton.Parent = ScrollingFramePremium
 Invisibiltybutton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 Invisibiltybutton.BorderColor3 = Color3.new(0, 0, 0)
-Invisibiltybutton.Position = UDim2.new(0.5, 0, 0.125, 0) -- Prawa kolumna, drugi rząd
-Invisibiltybutton.Size = UDim2.new(0.45, 0, 0.08, 0) -- Skalowana szerokość i wysokość
+Invisibiltybutton.Position = UDim2.new(0.04, 0, 0.125, 0)
+Invisibiltybutton.Size = UDim2.new(0.45, 0, 0.08, 0)
 Invisibiltybutton.Font = Enum.Font.SourceSans
 Invisibiltybutton.Text = "Invisibilty"
 Invisibiltybutton.TextColor3 = Color3.new(0, 0, 0)
@@ -258,33 +240,11 @@ UITextSizeConstraint_6.MaxTextSize = 37
 UIAspectRatioConstraint_7.Parent = Invisibiltybutton
 UIAspectRatioConstraint_7.AspectRatio = 3.9473683834075928
 
--- Nowy przycisk GhostMM2 ze skalowaniem
-GhostMM2Button.Name = "GhostMM2 Button"
-GhostMM2Button.Parent = ScrollingFramePremium
-GhostMM2Button.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
-GhostMM2Button.BorderColor3 = Color3.new(0, 0, 0)
-GhostMM2Button.Position = UDim2.new(0.04, 0, 0.225, 0) -- Lewa kolumna, trzeci rząd
-GhostMM2Button.Size = UDim2.new(0.45, 0, 0.08, 0) -- Skalowana szerokość i wysokość
-GhostMM2Button.Font = Enum.Font.SourceSans
-GhostMM2Button.Text = "GhostMM2"
-GhostMM2Button.TextColor3 = Color3.new(0, 0, 0)
-GhostMM2Button.TextScaled = true
-GhostMM2Button.TextSize = 14
-GhostMM2Button.TextWrapped = true
-GhostMM2Button.Visible = false -- Domyślnie niewidoczny
-
-UICorner_GhostMM2.Parent = GhostMM2Button
-UITextSizeConstraint_GhostMM2.Parent = GhostMM2Button
-UITextSizeConstraint_GhostMM2.MaxTextSize = 37
-UIAspectRatioConstraint_GhostMM2.Parent = GhostMM2Button
-UIAspectRatioConstraint_GhostMM2.AspectRatio = 3.9473683834075928
-
--- Przycisk Fling przeniesiony do Premium, skalowany
 FlingButton_Premium.Name = "Fling Button Premium"
 FlingButton_Premium.Parent = ScrollingFramePremium
 FlingButton_Premium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 FlingButton_Premium.BorderColor3 = Color3.new(0, 0, 0)
-FlingButton_Premium.Position = UDim2.new(0.5, 0, 0.225, 0) -- Prawa kolumna, trzeci rząd
+FlingButton_Premium.Position = UDim2.new(0.5, 0, 0.125, 0)
 FlingButton_Premium.Size = UDim2.new(0.45, 0, 0.08, 0)
 FlingButton_Premium.Font = Enum.Font.SourceSans
 FlingButton_Premium.Text = "Fling"
@@ -299,12 +259,52 @@ UITextSizeConstraint_FlingPremium.MaxTextSize = 37
 UIAspectRatioConstraint_FlingPremium.Parent = FlingButton_Premium
 UIAspectRatioConstraint_FlingPremium.AspectRatio = 3.9473683834075928
 
--- Nowy przycisk GAG ze skalowaniem
+-- Przyciski specyficzne dla gier - pozycjonowanie na dole listy
+MM2Button.Name = "MM2 Button"
+MM2Button.Parent = ScrollingFramePremium
+MM2Button.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
+MM2Button.BorderColor3 = Color3.new(0, 0, 0)
+MM2Button.Position = UDim2.new(0.04, 0, 0.80, 0) -- Pozycja na dole (możesz dostosować offset)
+MM2Button.Size = UDim2.new(0.45, 0, 0.08, 0)
+MM2Button.Font = Enum.Font.SourceSans
+MM2Button.Text = "MM2"
+MM2Button.TextColor3 = Color3.new(0, 0, 0)
+MM2Button.TextScaled = true
+MM2Button.TextSize = 14
+MM2Button.TextWrapped = true
+MM2Button.Visible = false
+
+UICorner_7.Parent = MM2Button
+UITextSizeConstraint_4.Parent = MM2Button
+UITextSizeConstraint_4.MaxTextSize = 37
+UIAspectRatioConstraint_5.Parent = MM2Button
+UIAspectRatioConstraint_5.AspectRatio = 3.9473683834075928
+
+GhostMM2Button.Name = "GhostMM2 Button"
+GhostMM2Button.Parent = ScrollingFramePremium
+GhostMM2Button.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
+GhostMM2Button.BorderColor3 = Color3.new(0, 0, 0)
+GhostMM2Button.Position = UDim2.new(0.5, 0, 0.80, 0) -- Pozycja na dole (możesz dostosować offset)
+GhostMM2Button.Size = UDim2.new(0.45, 0, 0.08, 0)
+GhostMM2Button.Font = Enum.Font.SourceSans
+GhostMM2Button.Text = "GhostMM2"
+GhostMM2Button.TextColor3 = Color3.new(0, 0, 0)
+GhostMM2Button.TextScaled = true
+GhostMM2Button.TextSize = 14
+GhostMM2Button.TextWrapped = true
+GhostMM2Button.Visible = false
+
+UICorner_GhostMM2.Parent = GhostMM2Button
+UITextSizeConstraint_GhostMM2.Parent = GhostMM2Button
+UITextSizeConstraint_GhostMM2.MaxTextSize = 37
+UIAspectRatioConstraint_GhostMM2.Parent = GhostMM2Button
+UIAspectRatioConstraint_GhostMM2.AspectRatio = 3.9473683834075928
+
 GAGButton.Name = "GAG Button"
 GAGButton.Parent = ScrollingFramePremium
 GAGButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 GAGButton.BorderColor3 = Color3.new(0, 0, 0)
-GAGButton.Position = UDim2.new(0.04, 0, 0.325, 0) -- Lewa kolumna, czwarty rząd
+GAGButton.Position = UDim2.new(0.04, 0, 0.90, 0) -- Kolejny przycisk na dole
 GAGButton.Size = UDim2.new(0.45, 0, 0.08, 0)
 GAGButton.Font = Enum.Font.SourceSans
 GAGButton.Text = "GAG"
@@ -312,13 +312,14 @@ GAGButton.TextColor3 = Color3.new(0, 0, 0)
 GAGButton.TextScaled = true
 GAGButton.TextSize = 14
 GAGButton.TextWrapped = true
-GAGButton.Visible = false -- Domyślnie niewidoczny, pojawia się w konkretnej grze
+GAGButton.Visible = false
 
 UICorner_GAG.Parent = GAGButton
 UITextSizeConstraint_GAG.Parent = GAGButton
 UITextSizeConstraint_GAG.MaxTextSize = 37
 UIAspectRatioConstraint_GAG.Parent = GAGButton
 UIAspectRatioConstraint_GAG.AspectRatio = 3.9473683834075928
+
 
 UIAspectRatioConstraint_8.Parent = ScrollingFramePremium
 UIAspectRatioConstraint_8.AspectRatio = 1.4926543235778809
@@ -356,7 +357,7 @@ ScrollingFrameHome.CanvasSize = UDim2.new(0,0,1.5,0)
 
 UICorner_12.Parent = ScrollingFrameHome
 
--- Przyciski w sekcji Home również ze skalowaniem
+-- Przyciski w sekcji Home
 SpeedToolbutton.Name = "Speed Tool button"
 SpeedToolbutton.Parent = ScrollingFrameHome
 SpeedToolbutton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
@@ -477,7 +478,7 @@ end
 local function updateSpecialButtonVisibility()
     MM2Button.Visible = (game.PlaceId == MM2_EXPERIENCE_ID)
     GhostMM2Button.Visible = (game.PlaceId == MM2_EXPERIENCE_ID)
-    GAGButton.Visible = (game.PlaceId == GAG_GAME_ID) -- Logika widoczności dla przycisku GAG
+    GAGButton.Visible = (game.PlaceId == GAG_GAME_ID)
 end
 
 local function updateHideButtonPosition()
@@ -608,7 +609,6 @@ FlingButton_Premium.MouseButton1Click:Connect(function()
     end
 end)
 
--- Obsługa kliknięcia dla nowego przycisku GAG
 GAGButton.MouseButton1Click:Connect(function()
     local success, currentHasGamePass = pcall(function()
         return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
