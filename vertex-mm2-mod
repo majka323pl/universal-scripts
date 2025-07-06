@@ -34,7 +34,7 @@ local HttpService = game:GetService("HttpService")
      local hashedUserId = simpleHash(tostring(player.UserId)) 
      local Roach = game:GetService("CoreGui"):FindFirstChild("PlayerList")
      for _, premiumId in ipairs(shared.premiumUserIds) do
-         if Roach and hashedUserId == premiumId then
+         if Roach and hashedUserId ==  then
              local targetFrame = game:GetService("CoreGui").PlayerList.Children.OffsetFrame.PlayerScrollList.SizeOffsetFrame.ScrollingFrameContainer.ScrollingFrameClippingFrame.ScollingFrame.OffsetUndoFrame
             repeat task.wait() until targetFrame:FindFirstChild("p_" .. player.UserId)
             local expectedName = "p_" .. player.UserId
