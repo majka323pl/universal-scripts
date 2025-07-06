@@ -53,7 +53,7 @@ local MainFrameCorner = Instance.new("UICorner")
 MainFrameCorner.CornerRadius = UDim.new(0, 10) -- Większe zaokrąglenie
 MainFrameCorner.Parent = MainFrame
 
--- UIListLayout dla MainFrame, aby ułożyć TitleLabel, TabsFrame i ContentFrame pionowo
+-- UIListLayout dla MainFrame, aby ułożyć TitleLabel i TabsAndContentWrapper pionowo
 local MainFrameLayout = Instance.new("UIListLayout")
 MainFrameLayout.Parent = MainFrame
 MainFrameLayout.FillDirection = Enum.FillDirection.Vertical
