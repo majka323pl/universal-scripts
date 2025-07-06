@@ -53,34 +53,61 @@ local MainFrameCorner = Instance.new("UICorner")
 MainFrameCorner.CornerRadius = UDim.new(0, 10) -- Większe zaokrąglenie
 MainFrameCorner.Parent = MainFrame
 
+-- Layout dla MainFrame, aby uporządkować TitleLabel, TabsFrame i ContentFrame
+local MainFrameLayout = Instance.new("UIListLayout")
+MainFrameLayout.Parent = MainFrame
+MainFrameLayout.FillDirection = Enum.FillDirection.Vertical
+MainFrameLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+MainFrameLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
 -- TitleLabel
 local TitleLabel = Instance.new("TextLabel")
 TitleLabel.Name = "TitleLabel"
 TitleLabel.Parent = MainFrame
-TitleLabel.Size = UDim2.new(1, 0, 0.12, 0) -- Nieco większa wysokość
-TitleLabel.Position = UDim2.new(0, 0, 0, 0)
+TitleLabel.Size = UDim2.new(1, 0, 0.12, 0) -- 12% wysokości MainFrame
+TitleLabel.BackgroundTransparency = 0
 TitleLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 TitleLabel.Text = "UNIVERSAL SCRIPTS"
 TitleLabel.Font = Enum.Font.LuckiestGuy
 TitleLabel.TextColor3 = Color3.new(1, 1, 1)
 TitleLabel.TextScaled = true
 TitleLabel.BorderSizePixel = 0
+TitleLabel.LayoutOrder = 1 -- Pierwszy element w layoucie
+
+local TitleLabelCorner = Instance.new("UICorner")
+TitleLabelCorner.CornerRadius = UDim.new(0, 10) -- Zaokrąglenie dla paska tytułowego
+TitleLabelCorner.Parent = TitleLabel
+
+-- Container dla TabsFrame i ContentFrame (żeby mogły być obok siebie)
+local BodyFrame = Instance.new("Frame")
+BodyFrame.Name = "BodyFrame"
+BodyFrame.Parent = MainFrame
+BodyFrame.Size = UDim2.new(1, 0, 0.88, 0) -- Reszta wysokości MainFrame
+BodyFrame.BackgroundColor3 = Color3.fromRGB(44, 44, 44) -- Taki sam kolor jak MainFrame
+BodyFrame.BorderSizePixel = 0
+BodyFrame.LayoutOrder = 2 -- Drugi element w layoucie
+
+local BodyListLayout = Instance.new("UIListLayout") -- Użyj UIListLayout do ułożenia TabsFrame i ContentFrame obok siebie
+BodyListLayout.Parent = BodyFrame
+BodyListLayout.FillDirection = Enum.FillDirection.Horizontal -- Układaj poziomo
+BodyListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Left
+BodyListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
 -- TabsFrame (ramka na przyciski zakładek)
 local TabsFrame = Instance.new("Frame")
 TabsFrame.Name = "TabsFrame"
-TabsFrame.Parent = MainFrame
-TabsFrame.Size = UDim2.new(0.25, 0, 0.88, 0) -- Reszta wysokości pod tytułem
-TabsFrame.Position = UDim2.new(0, 0, 0.12, 0) -- Startuje pod tytułem
+TabsFrame.Parent = BodyFrame
+TabsFrame.Size = UDim2.new(0.25, 0, 1, 0) -- 25% szerokości BodyFrame, cała wysokość
 TabsFrame.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
 TabsFrame.BorderSizePixel = 0
 TabsFrame.Active = true
+TabsFrame.LayoutOrder = 1 -- Pierwszy w BodyFrame
 
 local TabsFrameCorner = Instance.new("UICorner")
 TabsFrameCorner.CornerRadius = UDim.new(0, 10) -- Większe zaokrąglenie
 TabsFrameCorner.Parent = TabsFrame
 
--- Layout dla przycisków zakładek
+-- Layout dla przycisków zakładek w TabsFrame
 local TabsLayout = Instance.new("UIListLayout")
 TabsLayout.Parent = TabsFrame
 TabsLayout.FillDirection = Enum.FillDirection.Vertical
@@ -119,12 +146,12 @@ Instance.new("UICorner", PremiumTabButton).CornerRadius = UDim.new(0, 5)
 -- ContentFrame (ramka na zawartość zakładek)
 local ContentFrame = Instance.new("Frame")
 ContentFrame.Name = "ContentFrame"
-ContentFrame.Parent = MainFrame
-ContentFrame.Size = UDim2.new(0.75, 0, 0.88, 0) -- Reszta szerokości i wysokości pod tytułem
-ContentFrame.Position = UDim2.new(0.25, 0, 0.12, 0) -- Obok TabsFrame, pod tytułem
+ContentFrame.Parent = BodyFrame
+ContentFrame.Size = UDim2.new(0.75, 0, 1, 0) -- Reszta szerokości BodyFrame, cała wysokość
 ContentFrame.BackgroundColor3 = Color3.fromRGB(59, 59, 59)
 ContentFrame.BorderSizePixel = 0
 ContentFrame.Active = true
+ContentFrame.LayoutOrder = 2 -- Drugi w BodyFrame
 Instance.new("UICorner", ContentFrame).CornerRadius = UDim.new(0, 10) -- Większe zaokrąglenie
 
 -- ScrollingFrame dla Home
@@ -621,7 +648,6 @@ MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gameP
             showTab("Premium") -- Po zakupie przejdź na zakładkę Premium
         else
             sendNotification("Universal Scripts", "Anulowano zakup wersji premium.")
-        SaysendNotification("Universal Scripts", "Anulowano zakup wersji premium.")
         end
     end
 end)
