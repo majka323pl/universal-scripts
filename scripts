@@ -455,7 +455,6 @@ local function updateHideButtonVisibilityAndPosition()
     else
         HideButton.Visible = true -- Pokaż HideButton, gdy MainFrame jest ukryty
         -- Ustaw HideButton w stałym miejscu na ekranie, gdy MainFrame jest ukryty
-        -- Preferuję stałą pozycję, a nie zależną od MainFrame, gdy jest ukryty.
         HideButton.Position = lastHideButtonPosition
     end
 end
