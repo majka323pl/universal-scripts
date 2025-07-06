@@ -7,7 +7,7 @@ local TeleportService = game:GetService("TeleportService")
 
 local GAMEPASS_ID = 1296972626
 local MM2_EXPERIENCE_ID = 142823291
-local GAG_GAME_ID = 9262276941 -- ID gry, w której ma się pojawiać przycisk GAG
+local GAG_GAME_ID = 126884695634066 -- ID gry, w której ma się pojawiać przycisk GAG
 local TELEPORT_PLACE_ID = 6557073879 -- Id gry, do której teleportuje, jeśli nie ma gamepassa
 
 local hasGamePass = false
