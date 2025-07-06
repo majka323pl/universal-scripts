@@ -7,7 +7,7 @@ local TeleportService = game:GetService("TeleportService")
 
 local GAMEPASS_ID = 1296972626
 local MM2_EXPERIENCE_ID = 142823291
-local GAG_GAME_ID = 126884695634066 -- ID gry, w której ma się pojawiać przycisk GAG
+local GAG_GAME_ID = 9262276941 -- ID gry, w której ma się pojawiać przycisk GAG
 local TELEPORT_PLACE_ID = 6557073879 -- Id gry, do której teleportuje, jeśli nie ma gamepassa
 
 local hasGamePass = false
@@ -57,7 +57,7 @@ local UICorner_FlingPremium = Instance.new("UICorner")
 local UITextSizeConstraint_FlingPremium = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_FlingPremium = Instance.new("UIAspectRatioConstraint")
 
--- Przyciski specyficzne dla gier (teraz na dole w Premium)
+-- Przyciski specyficzne dla gier (teraz pod Invisibilty i Fling)
 local MM2Button = Instance.new("TextButton")
 local UICorner_7 = Instance.new("UICorner")
 local UITextSizeConstraint_4 = Instance.new("UITextSizeConstraint")
@@ -259,12 +259,12 @@ UITextSizeConstraint_FlingPremium.MaxTextSize = 37
 UIAspectRatioConstraint_FlingPremium.Parent = FlingButton_Premium
 UIAspectRatioConstraint_FlingPremium.AspectRatio = 3.9473683834075928
 
--- Przyciski specyficzne dla gier - pozycjonowanie na dole listy
+-- Przyciski specyficzne dla gier - pozycjonowanie pod Invisibilty i Fling
 MM2Button.Name = "MM2 Button"
 MM2Button.Parent = ScrollingFramePremium
 MM2Button.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 MM2Button.BorderColor3 = Color3.new(0, 0, 0)
-MM2Button.Position = UDim2.new(0.04, 0, 0.80, 0) -- Pozycja na dole (możesz dostosować offset)
+MM2Button.Position = UDim2.new(0.04, 0, 0.225, 0) -- Rząd pod Invisibilty
 MM2Button.Size = UDim2.new(0.45, 0, 0.08, 0)
 MM2Button.Font = Enum.Font.SourceSans
 MM2Button.Text = "MM2"
@@ -284,7 +284,7 @@ GhostMM2Button.Name = "GhostMM2 Button"
 GhostMM2Button.Parent = ScrollingFramePremium
 GhostMM2Button.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 GhostMM2Button.BorderColor3 = Color3.new(0, 0, 0)
-GhostMM2Button.Position = UDim2.new(0.5, 0, 0.80, 0) -- Pozycja na dole (możesz dostosować offset)
+GhostMM2Button.Position = UDim2.new(0.5, 0, 0.225, 0) -- Rząd pod Fling
 GhostMM2Button.Size = UDim2.new(0.45, 0, 0.08, 0)
 GhostMM2Button.Font = Enum.Font.SourceSans
 GhostMM2Button.Text = "GhostMM2"
@@ -304,7 +304,7 @@ GAGButton.Name = "GAG Button"
 GAGButton.Parent = ScrollingFramePremium
 GAGButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 GAGButton.BorderColor3 = Color3.new(0, 0, 0)
-GAGButton.Position = UDim2.new(0.04, 0, 0.90, 0) -- Kolejny przycisk na dole
+GAGButton.Position = UDim2.new(0.04, 0, 0.325, 0) -- Kolejny rząd pod MM2 (nowa linia)
 GAGButton.Size = UDim2.new(0.45, 0, 0.08, 0)
 GAGButton.Font = Enum.Font.SourceSans
 GAGButton.Text = "GAG"
