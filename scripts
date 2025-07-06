@@ -1,4 +1,3 @@
--- Usługi Roblox
 local player = game.Players.LocalPlayer
 local UserInputService = game:GetService("UserInputService")
 local MarketplaceService = game:GetService("MarketplaceService")
@@ -6,31 +5,26 @@ local StarterGui = game:GetService("StarterGui")
 local RunService = game:GetService("RunService")
 local TeleportService = game:GetService("TeleportService")
 
--- Konfiguracja
 local GAMEPASS_ID = 1296972626 -- WAŻNE: Upewnij się, że to jest POPRAWNE ID Twojego Game Passa!
 local MM2_EXPERIENCE_ID = 142823291 -- WAŻNE: Upewnij się, że to jest POPRAWNE ID gry Murder Mystery 2!
-local TELEPORT_PLACE_ID = 6557073879 -- Id gry, do której teleportuje, jeśli nie ma gamepassa (opcjonalne)
+local TELEPORT_PLACE_ID = 6557073879 -- Id gry, do której teleportuje (nieużywane do blokowania dostępu, tylko opcja)
 
--- Zmienne stanu
 local hasGamePass = false
-local initialGamePassCheckDone = false -- Zmienna do kontroli pierwszego powiadomienia o Game Passie
+local initialGamePassCheckDone = false -- Kontrola dla pierwszego powiadomienia o Game Passie
 local isMainFrameVisible = true -- Śledzi widoczność MainFrame
 
--- --- Funkcje pomocnicze ---
-local function sendNotification(title, text, iconAssetId)
-    local icon = iconAssetId or "rbxassetid://102860171689689" -- Domyślna ikona
+local function sendNotification(title, text)
     local success, err = pcall(function()
         StarterGui:SetCore("SendNotification", {
             Title = title,
             Text = text,
-            Icon = icon,
+            Icon = "rbxassetid://102860171689689",
             Duration = 5
         })
     end)
     if not success then
         warn("Nie udało się wysłać powiadomienia:", err)
     end
-    print("[NOTIFICATION] " .. title .. ": " .. text)
 end
 
 -- --- Tworzenie GUI ---
@@ -42,7 +36,6 @@ ScreenGui.Parent = player:WaitForChild("PlayerGui")
 ScreenGui.ResetOnSpawn = false
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ScreenGui.Enabled = true
-print("ScreenGui utworzony.")
 
 -- MainFrame (główne okno GUI)
 local MainFrame = Instance.new("Frame")
@@ -52,10 +45,9 @@ MainFrame.Size = UDim2.new(0.5, 0, 0.6, 0) -- Proporcjonalny rozmiar (50% szerok
 MainFrame.Position = UDim2.new(0.25, 0, 0.2, 0) -- Wyśrodkowanie na ekranie
 MainFrame.BackgroundColor3 = Color3.fromRGB(44, 44, 44)
 MainFrame.BorderSizePixel = 0
-MainFrame.Active = true -- Kluczowe dla interakcji!
-MainFrame.Draggable = true -- Możliwość przeciągania
+MainFrame.Active = true
+MainFrame.Draggable = true
 MainFrame.Visible = true
-print("MainFrame utworzony.")
 
 local MainFrameCorner = Instance.new("UICorner")
 MainFrameCorner.CornerRadius = UDim.new(0, 8)
@@ -71,9 +63,8 @@ TitleLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 TitleLabel.Text = "UNIVERSAL SCRIPTS"
 TitleLabel.Font = Enum.Font.LuckiestGuy
 TitleLabel.TextColor3 = Color3.new(1, 1, 1)
-TitleLabel.TextScaled = true -- Skaluje tekst do rozmiaru labela
+TitleLabel.TextScaled = true
 TitleLabel.BorderSizePixel = 0
-print("TitleLabel utworzony.")
 
 -- TabsFrame (ramka na przyciski zakładek)
 local TabsFrame = Instance.new("Frame")
@@ -84,7 +75,6 @@ TabsFrame.Position = UDim2.new(0, 0, 0.1, 0)
 TabsFrame.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
 TabsFrame.BorderSizePixel = 0
 TabsFrame.Active = true
-print("TabsFrame utworzony.")
 
 local TabsFrameCorner = Instance.new("UICorner")
 TabsFrameCorner.CornerRadius = UDim.new(0, 8)
@@ -97,7 +87,6 @@ TabsLayout.FillDirection = Enum.FillDirection.Vertical
 TabsLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 TabsLayout.Padding = UDim.new(0.02, 0) -- 2% odstępu między przyciskami
 TabsLayout.SortOrder = Enum.SortOrder.LayoutOrder
-print("TabsLayout utworzony.")
 
 -- HomeTabButton
 local HomeTabButton = Instance.new("TextButton")
@@ -110,11 +99,8 @@ HomeTabButton.TextScaled = true
 HomeTabButton.TextColor3 = Color3.new(0, 0, 0)
 HomeTabButton.BackgroundColor3 = Color3.fromRGB(70, 70, 70) -- Domyślnie podświetlony
 HomeTabButton.BorderSizePixel = 0
-HomeTabButton.LayoutOrder = 1 -- Kolejność w UIListLayout
-local HomeTabCorner = Instance.new("UICorner")
-HomeTabCorner.CornerRadius = UDim.new(0, 5)
-HomeTabCorner.Parent = HomeTabButton
-print("HomeTabButton utworzony.")
+HomeTabButton.LayoutOrder = 1
+Instance.new("UICorner", HomeTabButton).CornerRadius = UDim.new(0, 5)
 
 -- PremiumTabButton
 local PremiumTabButton = Instance.new("TextButton")
@@ -128,10 +114,7 @@ PremiumTabButton.TextColor3 = Color3.new(0, 0, 0)
 PremiumTabButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50) -- Domyślnie mniej podświetlony
 PremiumTabButton.BorderSizePixel = 0
 PremiumTabButton.LayoutOrder = 2
-local PremiumTabCorner = Instance.new("UICorner")
-PremiumTabCorner.CornerRadius = UDim.new(0, 5)
-PremiumTabCorner.Parent = PremiumTabButton
-print("PremiumTabButton utworzony.")
+Instance.new("UICorner", PremiumTabButton).CornerRadius = UDim.new(0, 5)
 
 -- ContentFrame (ramka na zawartość zakładek)
 local ContentFrame = Instance.new("Frame")
@@ -142,10 +125,7 @@ ContentFrame.Position = UDim2.new(0.25, 0, 0.1, 0) -- Obok TabsFrame, poniżej t
 ContentFrame.BackgroundColor3 = Color3.fromRGB(59, 59, 59)
 ContentFrame.BorderSizePixel = 0
 ContentFrame.Active = true
-local ContentFrameCorner = Instance.new("UICorner")
-ContentFrameCorner.CornerRadius = UDim.new(0, 8)
-ContentFrameCorner.Parent = ContentFrame
-print("ContentFrame utworzony.")
+Instance.new("UICorner", ContentFrame).CornerRadius = UDim.new(0, 8)
 
 -- ScrollingFrame dla Home
 local ScrollingFrameHome = Instance.new("ScrollingFrame")
@@ -157,11 +137,7 @@ ScrollingFrameHome.BorderSizePixel = 0
 ScrollingFrameHome.ScrollingDirection = Enum.ScrollingDirection.Y
 ScrollingFrameHome.Active = true
 ScrollingFrameHome.Visible = true -- Domyślnie widoczny
-print("ScrollingFrameHome utworzony.")
-
-local HomeFrameCorner = Instance.new("UICorner")
-HomeFrameCorner.CornerRadius = UDim.new(0, 8)
-HomeFrameCorner.Parent = ScrollingFrameHome
+Instance.new("UICorner", ScrollingFrameHome).CornerRadius = UDim.new(0, 8)
 
 local HomeGridLayout = Instance.new("UIGridLayout")
 HomeGridLayout.Parent = ScrollingFrameHome
@@ -169,9 +145,8 @@ HomeGridLayout.StartCorner = Enum.StartCorner.TopLeft
 HomeGridLayout.FillDirection = Enum.FillDirection.Horizontal
 HomeGridLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 HomeGridLayout.VerticalAlignment = Enum.VerticalAlignment.Top
-HomeGridLayout.CellSize = UDim2.new(0.3, 0, 0.15, 0) -- Zmienione: Przyciski są szersze niż wyższe
-HomeGridLayout.CellPadding = UDim2.new(0.05, 0, 0.05, 0) -- 5% odstępu
-print("HomeGridLayout utworzony.")
+HomeGridLayout.CellSize = UDim2.new(0.3, 0, 0.15, 0)
+HomeGridLayout.CellPadding = UDim2.new(0.05, 0, 0.05, 0)
 
 -- Przyciski dla Home (dodaj więcej, jeśli potrzebujesz)
 local SpeedToolbutton = Instance.new("TextButton")
@@ -184,10 +159,9 @@ SpeedToolbutton.TextScaled = true
 SpeedToolbutton.TextColor3 = Color3.new(0, 0, 0)
 SpeedToolbutton.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
 SpeedToolbutton.BorderSizePixel = 0
-local SpeedToolCorner = Instance.new("UICorner")
-SpeedToolCorner.CornerRadius = UDim.new(0, 5)
-SpeedToolCorner.Parent = SpeedToolbutton
-print("SpeedToolbutton utworzony.")
+Instance.new("UICorner", SpeedToolbutton).CornerRadius = UDim.new(0, 5)
+Instance.new("UITextSizeConstraint", SpeedToolbutton).MaxTextSize = 37
+Instance.new("UIAspectRatioConstraint", SpeedToolbutton).AspectRatio = 3.9210526943206787
 
 local ClicktptoolButton = Instance.new("TextButton")
 ClicktptoolButton.Name = "Click tp tool"
@@ -199,10 +173,9 @@ ClicktptoolButton.TextScaled = true
 ClicktptoolButton.TextColor3 = Color3.new(0, 0, 0)
 ClicktptoolButton.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
 ClicktptoolButton.BorderSizePixel = 0
-local ClicktpCorner = Instance.new("UICorner")
-ClicktpCorner.CornerRadius = UDim.new(0, 5)
-ClicktpCorner.Parent = ClicktptoolButton
-print("ClicktptoolButton utworzony.")
+Instance.new("UICorner", ClicktptoolButton).CornerRadius = UDim.new(0, 5)
+Instance.new("UITextSizeConstraint", ClicktptoolButton).MaxTextSize = 37
+Instance.new("UIAspectRatioConstraint", ClicktptoolButton).AspectRatio = 3.9210526943206787
 
 local SpectateButton_Home = Instance.new("TextButton")
 SpectateButton_Home.Name = "Spectate (Home)"
@@ -214,10 +187,9 @@ SpectateButton_Home.TextScaled = true
 SpectateButton_Home.TextColor3 = Color3.new(0, 0, 0)
 SpectateButton_Home.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
 SpectateButton_Home.BorderSizePixel = 0
-local SpectateHomeCorner = Instance.new("UICorner")
-SpectateHomeCorner.CornerRadius = UDim.new(0, 5)
-SpectateHomeCorner.Parent = SpectateButton_Home
-print("SpectateButton_Home utworzony.")
+Instance.new("UICorner", SpectateButton_Home).CornerRadius = UDim.new(0, 5)
+Instance.new("UITextSizeConstraint", SpectateButton_Home).MaxTextSize = 37
+Instance.new("UIAspectRatioConstraint", SpectateButton_Home).AspectRatio = 3.9210526943206787
 
 local NoclipButton = Instance.new("TextButton")
 NoclipButton.Name = "Noclip"
@@ -229,10 +201,9 @@ NoclipButton.TextScaled = true
 NoclipButton.TextColor3 = Color3.new(0, 0, 0)
 NoclipButton.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
 NoclipButton.BorderSizePixel = 0
-local NoclipCorner = Instance.new("UICorner")
-NoclipCorner.CornerRadius = UDim.new(0, 5)
-NoclipCorner.Parent = NoclipButton
-print("NoclipButton utworzony.")
+Instance.new("UICorner", NoclipButton).CornerRadius = UDim.new(0, 5)
+Instance.new("UITextSizeConstraint", NoclipButton).MaxTextSize = 37
+Instance.new("UIAspectRatioConstraint", NoclipButton).AspectRatio = 3.9210526943206787
 
 local FlingButton = Instance.new("TextButton")
 FlingButton.Name = "Fling"
@@ -244,10 +215,10 @@ FlingButton.TextScaled = true
 FlingButton.TextColor3 = Color3.new(0, 0, 0)
 FlingButton.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
 FlingButton.BorderSizePixel = 0
-local FlingCorner = Instance.new("UICorner")
-FlingCorner.CornerRadius = UDim.new(0, 5)
-FlingCorner.Parent = FlingButton
-print("FlingButton utworzony.")
+Instance.new("UICorner", FlingButton).CornerRadius = UDim.new(0, 5)
+Instance.new("UITextSizeConstraint", FlingButton).MaxTextSize = 37
+Instance.new("UIAspectRatioConstraint", FlingButton).AspectRatio = 3.9210526943206787
+
 
 -- ScrollingFrame dla Premium
 local ScrollingFramePremium = Instance.new("ScrollingFrame")
@@ -259,11 +230,7 @@ ScrollingFramePremium.BorderSizePixel = 0
 ScrollingFramePremium.ScrollingDirection = Enum.ScrollingDirection.Y
 ScrollingFramePremium.Active = true
 ScrollingFramePremium.Visible = false -- Domyślnie niewidoczny
-print("ScrollingFramePremium utworzony.")
-
-local PremiumFrameCorner = Instance.new("UICorner")
-PremiumFrameCorner.CornerRadius = UDim.new(0, 8)
-PremiumFrameCorner.Parent = ScrollingFramePremium
+Instance.new("UICorner", ScrollingFramePremium).CornerRadius = UDim.new(0, 8)
 
 local PremiumGridLayout = Instance.new("UIGridLayout")
 PremiumGridLayout.Parent = ScrollingFramePremium
@@ -271,25 +238,23 @@ PremiumGridLayout.StartCorner = Enum.StartCorner.TopLeft
 PremiumGridLayout.FillDirection = Enum.FillDirection.Horizontal
 PremiumGridLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 PremiumGridLayout.VerticalAlignment = Enum.VerticalAlignment.Top
-PremiumGridLayout.CellSize = UDim2.new(0.3, 0, 0.15, 0) -- Zmienione: Przyciski są szersze niż wyższe
+PremiumGridLayout.CellSize = UDim2.new(0.3, 0, 0.15, 0)
 PremiumGridLayout.CellPadding = UDim2.new(0.05, 0, 0.05, 0)
-print("PremiumGridLayout utworzony.")
 
 -- Przyciski dla Premium
 local SpectateButton_Premium = Instance.new("TextButton")
 SpectateButton_Premium.Name = "Spectate (Premium)"
 SpectateButton_Premium.Parent = ScrollingFramePremium
 SpectateButton_Premium.Size = UDim2.new(1, 0, 1, 0)
-SpectateButton_Premium.Text = "Spectate" -- Usunięto dopisek "(Premium)"
+SpectateButton_Premium.Text = "Spectate"
 SpectateButton_Premium.Font = Enum.Font.SourceSans
 SpectateButton_Premium.TextScaled = true
 SpectateButton_Premium.TextColor3 = Color3.new(0, 0, 0)
 SpectateButton_Premium.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
 SpectateButton_Premium.BorderSizePixel = 0
-local SpectatePremiumCorner = Instance.new("UICorner")
-SpectatePremiumCorner.CornerRadius = UDim.new(0, 5)
-SpectatePremiumCorner.Parent = SpectateButton_Premium
-print("SpectateButton_Premium utworzony.")
+Instance.new("UICorner", SpectateButton_Premium).CornerRadius = UDim.new(0, 5)
+Instance.new("UITextSizeConstraint", SpectateButton_Premium).MaxTextSize = 37
+Instance.new("UIAspectRatioConstraint", SpectateButton_Premium).AspectRatio = 3.9210526943206787
 
 local MM2Button = Instance.new("TextButton")
 MM2Button.Name = "MM2"
@@ -302,10 +267,9 @@ MM2Button.TextColor3 = Color3.new(0, 0, 0)
 MM2Button.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
 MM2Button.BorderSizePixel = 0
 MM2Button.Visible = false -- Będzie widoczny tylko w MM2
-local MM2Corner = Instance.new("UICorner")
-MM2Corner.CornerRadius = UDim.new(0, 5)
-MM2Corner.Parent = MM2Button
-print("MM2Button utworzony.")
+Instance.new("UICorner", MM2Button).CornerRadius = UDim.new(0, 5)
+Instance.new("UITextSizeConstraint", MM2Button).MaxTextSize = 37
+Instance.new("UIAspectRatioConstraint", MM2Button).AspectRatio = 3.9210526943206787
 
 local FlyButton = Instance.new("TextButton")
 FlyButton.Name = "Console"
@@ -317,10 +281,9 @@ FlyButton.TextScaled = true
 FlyButton.TextColor3 = Color3.new(0, 0, 0)
 FlyButton.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
 FlyButton.BorderSizePixel = 0
-local FlyCorner = Instance.new("UICorner")
-FlyCorner.CornerRadius = UDim.new(0, 5)
-FlyCorner.Parent = FlyButton
-print("FlyButton utworzony.")
+Instance.new("UICorner", FlyButton).CornerRadius = UDim.new(0, 5)
+Instance.new("UITextSizeConstraint", FlyButton).MaxTextSize = 37
+Instance.new("UIAspectRatioConstraint", FlyButton).AspectRatio = 3.9210526943206787
 
 local Invisibiltybutton = Instance.new("TextButton")
 Invisibiltybutton.Name = "Invisibilty"
@@ -332,10 +295,9 @@ Invisibiltybutton.TextScaled = true
 Invisibiltybutton.TextColor3 = Color3.new(0, 0, 0)
 Invisibiltybutton.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
 Invisibiltybutton.BorderSizePixel = 0
-local InvisibilityCorner = Instance.new("UICorner")
-InvisibilityCorner.CornerRadius = UDim.new(0, 5)
-InvisibilityCorner.Parent = Invisibiltybutton
-print("Invisibiltybutton utworzony.")
+Instance.new("UICorner", Invisibiltybutton).CornerRadius = UDim.new(0, 5)
+Instance.new("UITextSizeConstraint", Invisibiltybutton).MaxTextSize = 37
+Instance.new("UIAspectRatioConstraint", Invisibiltybutton).AspectRatio = 3.9210526943206787
 
 local GhostMM2Button = Instance.new("TextButton")
 GhostMM2Button.Name = "GhostMM2"
@@ -348,12 +310,10 @@ GhostMM2Button.TextColor3 = Color3.new(0, 0, 0)
 GhostMM2Button.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
 GhostMM2Button.BorderSizePixel = 0
 GhostMM2Button.Visible = false -- Będzie widoczny tylko w MM2
-local GhostMM2Corner = Instance.new("UICorner")
-GhostMM2Corner.CornerRadius = UDim.new(0, 5)
-GhostMM2Corner.Parent = GhostMM2Button
-print("GhostMM2Button utworzony.")
+Instance.new("UICorner", GhostMM2Button).CornerRadius = UDim.new(0, 5)
+Instance.new("UITextSizeConstraint", GhostMM2Button).MaxTextSize = 37
+Instance.new("UIAspectRatioConstraint", GhostMM2Button).AspectRatio = 3.9210526943206787
 
--- NOWY GUZIK: Admin Panel Button
 local AdminPanelButton = Instance.new("TextButton")
 AdminPanelButton.Name = "Admin Panel"
 AdminPanelButton.Parent = ScrollingFramePremium
@@ -364,10 +324,9 @@ AdminPanelButton.TextScaled = true
 AdminPanelButton.TextColor3 = Color3.new(0, 0, 0)
 AdminPanelButton.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
 AdminPanelButton.BorderSizePixel = 0
-local AdminPanelCorner = Instance.new("UICorner")
-AdminPanelCorner.CornerRadius = UDim.new(0, 5)
-AdminPanelCorner.Parent = AdminPanelButton
-print("AdminPanelButton utworzony.")
+Instance.new("UICorner", AdminPanelButton).CornerRadius = UDim.new(0, 5)
+Instance.new("UITextSizeConstraint", AdminPanelButton).MaxTextSize = 37
+Instance.new("UIAspectRatioConstraint", AdminPanelButton).AspectRatio = 3.9210526943206787
 
 
 -- HideButton (przycisk do ukrywania/pokazywania GUI)
@@ -381,17 +340,13 @@ HideButton.ImageColor3 = Color3.new(1, 1, 1)
 HideButton.ScaleType = Enum.ScaleType.Fit
 HideButton.BorderSizePixel = 0
 HideButton.ZIndex = 5
-HideButton.Active = true -- Kluczowe dla interakcji!
-HideButton.Draggable = true -- Przycisk jest też przeciągalny
+HideButton.Active = true
+HideButton.Draggable = true
 HideButton.Visible = false -- Domyślnie ukryty, pokaże się po ukryciu MainFrame
-print("HideButton utworzony.")
-
 
 -- --- Funkcje i logika skryptu ---
 
 local function showTab(tabName)
-    print("showTab: Przełączam na zakładkę: " .. tabName)
-    -- Ukryj wszystkie ramki zawartości
     ScrollingFrameHome.Visible = false
     ScrollingFramePremium.Visible = false
 
@@ -423,7 +378,6 @@ local function showTab(tabName)
                 MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID) -- Prośba o zakup
                 -- Opcjonalnie: teleportuj gracza, jeśli nie ma Game Passa
                 -- TeleportService:Teleport(TELEPORT_PLACE_ID, player)
-                -- MainFrame.Visible = false
             end
         else
             warn("Błąd podczas sprawdzania wersji premium (showTab):", result)
@@ -433,7 +387,6 @@ local function showTab(tabName)
 end
 
 local function checkGamePassStatus()
-    print("Sprawdzam status Game Passa...")
     local success, result = pcall(function()
         return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
     end)
@@ -448,7 +401,6 @@ local function checkGamePassStatus()
             end
             initialGamePassCheckDone = true
         end
-        print("Sprawdzenie Game Passa zakończone. Posiada Game Pass: " .. tostring(hasGamePass))
     else
         warn("Błąd podczas sprawdzania wersji premium (checkGamePassStatus):", result)
         sendNotification("Universal Scripts", "Nie można sprawdzić statusu wersji premium. Spróbuj ponownie.")
@@ -456,15 +408,12 @@ local function checkGamePassStatus()
 end
 
 local function updateMM2ButtonVisibility()
-    print("Aktualizuję widoczność przycisków MM2. Obecne PlaceId: " .. game.PlaceId)
     if game.PlaceId == MM2_EXPERIENCE_ID then
         MM2Button.Visible = true
         GhostMM2Button.Visible = true
-        print("Przyciski MM2 i GhostMM2 widoczne.")
     else
         MM2Button.Visible = false
         GhostMM2Button.Visible = false
-        print("Przyciski MM2 i GhostMM2 ukryte.")
     end
 end
 
@@ -474,26 +423,12 @@ local function updateHideButtonVisibilityAndPosition()
     else
         HideButton.Visible = true -- Pokaż HideButton, gdy MainFrame jest ukryty
         -- Ustaw HideButton w stałym miejscu na ekranie, gdy MainFrame jest ukryty
-        -- Na przykład, w prawym górnym rogu ekranu z marginesem
         HideButton.Position = UDim2.new(1, -HideButton.Size.X.Offset - 10, 0, 10) -- 10px od prawej, 10px od góry
     end
-
-    -- Pozycjonowanie HideButton, gdy MainFrame jest widoczny (dla przeciągania MainFrame)
-    if isMainFrameVisible then
-        HideButton.Position = UDim2.new(
-            MainFrame.Position.X.Scale + MainFrame.Size.X.Scale, -- X scale (do prawego boku MainFrame)
-            -HideButton.Size.X.Offset / 2, -- X offset (przesunięcie w lewo o połowę własnej szerokości, aby był centrycznie na krawędzi)
-            MainFrame.Position.Y.Scale, -- Y scale (do górnego boku MainFrame)
-            0 -- Y offset
-        )
-    end
-    print("Widoczność i pozycja HideButton zaktualizowana.")
 end
 
-
 -- Funkcja do ładowania i uruchamiania skryptów z URL
-local function runScriptFromURL(url, buttonName)
-    print("runScriptFromURL: Próbuję załadować skrypt: " .. buttonName .. " z URL: " .. url)
+local function runScriptAndNotify(url, buttonName)
     local scriptContent = nil
     local successHttpGet, errHttpGet = pcall(function()
         scriptContent = game:HttpGet(url)
@@ -542,43 +477,28 @@ end)
 HideButton.MouseButton1Click:Connect(function()
     isMainFrameVisible = not isMainFrameVisible
     MainFrame.Visible = isMainFrameVisible
-    updateHideButtonVisibilityAndPosition() -- Aktualizuj widoczność i pozycję HideButton
-end)
-
--- Aktualizuj pozycję HideButton, gdy MainFrame się rusza lub zmienia rozmiar
--- Używamy Changed na Position i Size, a także MouseDrag
-MainFrame.Changed:Connect(function(property)
-    if property == "Position" or property == "Size" then
-        if isMainFrameVisible then -- Tylko jeśli MainFrame jest widoczny
-            updateHideButtonVisibilityAndPosition()
-        end
-    end
-end)
-MainFrame.MouseDrag:Connect(function()
-    if isMainFrameVisible then -- Tylko jeśli MainFrame jest widoczny
-        updateHideButtonVisibilityAndPosition()
-    end
+    updateHideButtonVisibilityAndPosition()
 end)
 
 -- Event Listeners for Home Tab Buttons
 SpeedToolbutton.MouseButton1Click:Connect(function()
-    runScriptFromURL("https://pastebin.com/raw/X7B0HPc2", SpeedToolbutton.Text)
+    runScriptAndNotify("https://pastebin.com/raw/X7B0HPc2", SpeedToolbutton.Text)
 end)
 
 ClicktptoolButton.MouseButton1Click:Connect(function()
-    runScriptFromURL("https://pastebin.com/raw/4KF2WJ9u", ClicktptoolButton.Text)
+    runScriptAndNotify("https://pastebin.com/raw/4KF2WJ9u", ClicktptoolButton.Text)
 end)
 
 SpectateButton_Home.MouseButton1Click:Connect(function()
-    runScriptFromURL("https://pastebin.com/raw/UFVLWQRw", SpectateButton_Home.Text)
+    runScriptAndNotify("https://pastebin.com/raw/UFVLWQRw", SpectateButton_Home.Text)
 end)
 
 NoclipButton.MouseButton1Click:Connect(function()
-    runScriptFromURL("https://pastebin.com/raw/CnbYfaj1", NoclipButton.Text)
+    runScriptAndNotify("https://pastebin.com/raw/CnbYfaj1", NoclipButton.Text)
 end)
 
 FlingButton.MouseButton1Click:Connect(function()
-    runScriptFromURL('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt', FlingButton.Text)
+    runScriptAndNotify('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt', FlingButton.Text)
 end)
 
 -- Event Listeners for Premium Tab Buttons (with GamePass check)
@@ -589,7 +509,7 @@ SpectateButton_Premium.MouseButton1Click:Connect(function()
 
     if success then
         if currentHasGamePass then
-            runScriptFromURL("https://pastebin.com/raw/UFVLWQRw", SpectateButton_Premium.Text)
+            runScriptAndNotify("https://pastebin.com/raw/UFVLWQRw", SpectateButton_Premium.Text)
         else
             sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
             MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
@@ -607,7 +527,7 @@ MM2Button.MouseButton1Click:Connect(function()
 
     if success then
         if currentHasGamePass then
-            runScriptFromURL("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring", MM2Button.Text)
+            runScriptAndNotify("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring", MM2Button.Text)
         else
             sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
             MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
@@ -625,7 +545,7 @@ FlyButton.MouseButton1Click:Connect(function()
 
     if success then
         if currentHasGamePass then
-            runScriptFromURL("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source", FlyButton.Text)
+            runScriptAndNotify("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source", FlyButton.Text)
         else
             sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
             MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
@@ -643,7 +563,7 @@ Invisibiltybutton.MouseButton1Click:Connect(function()
 
     if success then
         if currentHasGamePass then
-            runScriptFromURL('https://pastebin.com/raw/3Rnd9rHf', Invisibiltybutton.Text)
+            runScriptAndNotify('https://pastebin.com/raw/3Rnd9rHf', Invisibiltybutton.Text)
         else
             sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
             MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
@@ -661,7 +581,7 @@ GhostMM2Button.MouseButton1Click:Connect(function()
 
     if success then
         if currentHasGamePass then
-            runScriptFromURL("https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Murder%20Mystery", GhostMM2Button.Text)
+            runScriptAndNotify("https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Murder%20Mystery", GhostMM2Button.Text)
         else
             sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
             MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
@@ -672,7 +592,6 @@ GhostMM2Button.MouseButton1Click:Connect(function()
     end
 end)
 
--- NOWY GUZIK Admin Panel
 AdminPanelButton.MouseButton1Click:Connect(function()
     local success, currentHasGamePass = pcall(function()
         return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
@@ -681,8 +600,7 @@ AdminPanelButton.MouseButton1Click:Connect(function()
     if success then
         if currentHasGamePass then
             -- TUTAJ WSTAW PRAWIDŁOWY URL DO SKRYPTU ADMIN PANEL
-            -- PRZYKŁAD: runScriptFromURL("https://pastebin.com/raw/TwójAdminPanelURL", AdminPanelButton.Text)
-            runScriptFromURL("https://pastebin.com/raw/EXAMPLE_ADMIN_PANEL_URL", AdminPanelButton.Text) -- PAMIĘTAJ ABY ZMIENIĆ TEN URL!
+            runScriptAndNotify("https://pastebin.com/raw/EXAMPLE_ADMIN_PANEL_URL", AdminPanelButton.Text) -- PAMIĘTAJ ABY ZMIENIĆ TEN URL!
         else
             sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
             MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
