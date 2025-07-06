@@ -50,14 +50,14 @@ MainFrame.Draggable = true
 MainFrame.Visible = true
 
 local MainFrameCorner = Instance.new("UICorner")
-MainFrameCorner.CornerRadius = UDim.new(0, 8)
+MainFrameCorner.CornerRadius = UDim.new(0, 10) -- Większe zaokrąglenie
 MainFrameCorner.Parent = MainFrame
 
 -- TitleLabel
 local TitleLabel = Instance.new("TextLabel")
 TitleLabel.Name = "TitleLabel"
 TitleLabel.Parent = MainFrame
-TitleLabel.Size = UDim2.new(1, 0, 0.1, 0) -- 10% wysokości MainFrame
+TitleLabel.Size = UDim2.new(1, 0, 0.12, 0) -- Nieco większa wysokość
 TitleLabel.Position = UDim2.new(0, 0, 0, 0)
 TitleLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 TitleLabel.Text = "UNIVERSAL SCRIPTS"
@@ -70,14 +70,14 @@ TitleLabel.BorderSizePixel = 0
 local TabsFrame = Instance.new("Frame")
 TabsFrame.Name = "TabsFrame"
 TabsFrame.Parent = MainFrame
-TabsFrame.Size = UDim2.new(0.25, 0, 0.9, 0) -- 25% szerokości, 90% wysokości MainFrame (poniżej tytułu)
-TabsFrame.Position = UDim2.new(0, 0, 0.1, 0)
+TabsFrame.Size = UDim2.new(0.25, 0, 0.88, 0) -- Reszta wysokości pod tytułem
+TabsFrame.Position = UDim2.new(0, 0, 0.12, 0) -- Startuje pod tytułem
 TabsFrame.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
 TabsFrame.BorderSizePixel = 0
 TabsFrame.Active = true
 
 local TabsFrameCorner = Instance.new("UICorner")
-TabsFrameCorner.CornerRadius = UDim.new(0, 8)
+TabsFrameCorner.CornerRadius = UDim.new(0, 10) -- Większe zaokrąglenie
 TabsFrameCorner.Parent = TabsFrame
 
 -- Layout dla przycisków zakładek
@@ -120,12 +120,12 @@ Instance.new("UICorner", PremiumTabButton).CornerRadius = UDim.new(0, 5)
 local ContentFrame = Instance.new("Frame")
 ContentFrame.Name = "ContentFrame"
 ContentFrame.Parent = MainFrame
-ContentFrame.Size = UDim2.new(0.75, 0, 0.9, 0) -- Pozostałe 75% szerokości, 90% wysokości MainFrame
-ContentFrame.Position = UDim2.new(0.25, 0, 0.1, 0) -- Obok TabsFrame, poniżej tytułu
+ContentFrame.Size = UDim2.new(0.75, 0, 0.88, 0) -- Reszta szerokości i wysokości pod tytułem
+ContentFrame.Position = UDim2.new(0.25, 0, 0.12, 0) -- Obok TabsFrame, pod tytułem
 ContentFrame.BackgroundColor3 = Color3.fromRGB(59, 59, 59)
 ContentFrame.BorderSizePixel = 0
 ContentFrame.Active = true
-Instance.new("UICorner", ContentFrame).CornerRadius = UDim.new(0, 8)
+Instance.new("UICorner", ContentFrame).CornerRadius = UDim.new(0, 10) -- Większe zaokrąglenie
 
 -- ScrollingFrame dla Home
 local ScrollingFrameHome = Instance.new("ScrollingFrame")
@@ -137,7 +137,7 @@ ScrollingFrameHome.BorderSizePixel = 0
 ScrollingFrameHome.ScrollingDirection = Enum.ScrollingDirection.Y
 ScrollingFrameHome.Active = true
 ScrollingFrameHome.Visible = true -- Domyślnie widoczny
-Instance.new("UICorner", ScrollingFrameHome).CornerRadius = UDim.new(0, 8)
+Instance.new("UICorner", ScrollingFrameHome).CornerRadius = UDim.new(0, 8) -- Zaokrąglenie dla scrollingu
 
 local HomeGridLayout = Instance.new("UIGridLayout")
 HomeGridLayout.Parent = ScrollingFrameHome
@@ -230,7 +230,7 @@ ScrollingFramePremium.BorderSizePixel = 0
 ScrollingFramePremium.ScrollingDirection = Enum.ScrollingDirection.Y
 ScrollingFramePremium.Active = true
 ScrollingFramePremium.Visible = false -- Domyślnie niewidoczny
-Instance.new("UICorner", ScrollingFramePremium).CornerRadius = UDim.new(0, 8)
+Instance.new("UICorner", ScrollingFramePremium).CornerRadius = UDim.new(0, 8) -- Zaokrąglenie dla scrollingu
 
 local PremiumGridLayout = Instance.new("UIGridLayout")
 PremiumGridLayout.Parent = ScrollingFramePremium
@@ -338,7 +338,8 @@ HideButton.BackgroundColor3 = Color3.fromRGB(200, 0, 0) -- Czerwony
 HideButton.Image = "rbxassetid://102860171689689" -- Ikona krzyżyka lub inna
 HideButton.ImageColor3 = Color3.new(1, 1, 1)
 HideButton.ScaleType = Enum.ScaleType.Fit
-HideButton.BorderSizePixel = 0
+HideButton.BorderSizePixel = 3 -- Przywrócone obramowanie!
+HideButton.BorderColor3 = Color3.fromRGB(0,0,0) -- Kolor obramowania
 HideButton.ZIndex = 5
 HideButton.Active = true
 HideButton.Draggable = true
@@ -501,7 +502,7 @@ FlingButton.MouseButton1Click:Connect(function()
     runScriptAndNotify('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt', FlingButton.Text)
 end)
 
--- Event Listeners for Premium Tab Buttons (with GamePass check)
+-- Event Listeners for Premium Tab Buttons (wraz ze sprawdzaniem GamePassa)
 SpectateButton_Premium.MouseButton1Click:Connect(function()
     local success, currentHasGamePass = pcall(function()
         return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
@@ -611,7 +612,6 @@ AdminPanelButton.MouseButton1Click:Connect(function()
     end
 end)
 
-
 -- Zdarzenie zakupu Game Passa
 MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gamePassId, wasPurchased)
     if userId == player.UserId and gamePassId == GAMEPASS_ID then
@@ -621,6 +621,7 @@ MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gameP
             showTab("Premium") -- Po zakupie przejdź na zakładkę Premium
         else
             sendNotification("Universal Scripts", "Anulowano zakup wersji premium.")
+        SaysendNotification("Universal Scripts", "Anulowano zakup wersji premium.")
         end
     end
 end)
