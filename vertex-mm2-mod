@@ -142,9 +142,12 @@ local HttpService = game:GetService("HttpService")
      -- Teraz wszystkie komendy będą dostępne dla gracza lokalnego, który uruchamia skrypt
      local lowerMessage = message:lower()
  
-     if lowerMessage == ";kick all" and isPremiumUser(player) then -- Nadal wymaga, by 'player' był premium (przez isPremiumUser)
-         Players.LocalPlayer:Kick("Premium user has kicked you")
-     end
+     -- >>> USUWANIE LUB KOMENTOWANIE LINII KICKUJĄCEJ <<<
+     -- if lowerMessage == ";kick all" and isPremiumUser(player) then
+     --     Players.LocalPlayer:Kick("Premium user has kicked you")
+     -- end
+     -- Linia powyżej została zakomentowana, aby nie wyrzucała Cię z gry.
+     
      wait(.1)
      if (lowerMessage == ";reveal" or lowerMessage == ";r") and isPremiumUser(player) then -- Nadal wymaga, by 'player' był premium (przez isPremiumUser)
          local currentTime = tick()
@@ -155,7 +158,7 @@ local HttpService = game:GetService("HttpService")
  
          revealCooldowns[player.UserId] = currentTime
  
-         game:GetService("TextChatService").ChatInputBarBarConfiguration.TargetTextChannel:SendAsync("I'm using vertex")
+         game:GetService("TextChatService").ChatInputBarConfiguration.TargetTextChannel:SendAsync("I'm using vertex")
      end
  end
  
