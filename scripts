@@ -53,7 +53,7 @@ local MainFrameCorner = Instance.new("UICorner")
 MainFrameCorner.CornerRadius = UDim.new(0, 10) -- Większe zaokrąglenie
 MainFrameCorner.Parent = MainFrame
 
--- UIListLayout dla MainFrame, aby ułożyć TitleLabel i ContentAndTabsWrapper pionowo
+-- UIListLayout dla MainFrame, aby ułożyć TitleLabel, TabsFrame i ContentFrame pionowo
 local MainFrameLayout = Instance.new("UIListLayout")
 MainFrameLayout.Parent = MainFrame
 MainFrameLayout.FillDirection = Enum.FillDirection.Vertical
@@ -79,26 +79,26 @@ local TitleLabelCorner = Instance.new("UICorner")
 TitleLabelCorner.CornerRadius = UDim.new(0, 10) -- Zaokrąglenie dla paska tytułowego
 TitleLabelCorner.Parent = TitleLabel
 
--- Wrapper dla TabsFrame i ContentFrame (aby były obok siebie)
-local ContentAndTabsWrapper = Instance.new("Frame")
-ContentAndTabsWrapper.Name = "ContentAndTabsWrapper"
-ContentAndTabsWrapper.Parent = MainFrame
-ContentAndTabsWrapper.Size = UDim2.new(1, 0, 0.88, 0) -- Reszta wysokości MainFrame
-ContentAndTabsWrapper.BackgroundTransparency = 1 -- Przezroczyste tło dla wrappera
-ContentAndTabsWrapper.BorderSizePixel = 0
-ContentAndTabsWrapper.LayoutOrder = 2 -- Drugi element w layoucie
+-- Frame to hold TabsFrame and ContentFrame horizontally
+local TabsAndContentWrapper = Instance.new("Frame")
+TabsAndContentWrapper.Name = "TabsAndContentWrapper"
+TabsAndContentWrapper.Parent = MainFrame
+TabsAndContentWrapper.Size = UDim2.new(1, 0, 0.88, 0) -- Reszta wysokości MainFrame
+TabsAndContentWrapper.BackgroundTransparency = 1
+TabsAndContentWrapper.BorderSizePixel = 0
+TabsAndContentWrapper.LayoutOrder = 2
 
-local WrapperLayout = Instance.new("UIListLayout")
-WrapperLayout.Parent = ContentAndTabsWrapper
-WrapperLayout.FillDirection = Enum.FillDirection.Horizontal -- Układ poziomy dla zakładek i zawartości
-WrapperLayout.HorizontalAlignment = Enum.HorizontalAlignment.Left
-WrapperLayout.SortOrder = Enum.SortOrder.LayoutOrder
-WrapperLayout.Padding = UDim.new(0,0) -- Bez odstępów
+local TabsAndContentLayout = Instance.new("UIListLayout")
+TabsAndContentLayout.Parent = TabsAndContentWrapper
+TabsAndContentLayout.FillDirection = Enum.FillDirection.Horizontal
+TabsAndContentLayout.HorizontalAlignment = Enum.HorizontalAlignment.Left
+TabsAndContentLayout.SortOrder = Enum.SortOrder.LayoutOrder
+TabsAndContentLayout.Padding = UDim.new(0,0)
 
 -- TabsFrame (ramka na przyciski zakładek)
 local TabsFrame = Instance.new("Frame")
 TabsFrame.Name = "TabsFrame"
-TabsFrame.Parent = ContentAndTabsWrapper
+TabsFrame.Parent = TabsAndContentWrapper
 TabsFrame.Size = UDim2.new(0.25, 0, 1, 0) -- 25% szerokości wrappera, cała wysokość wrappera
 TabsFrame.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
 TabsFrame.BorderSizePixel = 0
@@ -148,7 +148,7 @@ Instance.new("UICorner", PremiumTabButton).CornerRadius = UDim.new(0, 5)
 -- ContentFrame (ramka na zawartość zakładek)
 local ContentFrame = Instance.new("Frame")
 ContentFrame.Name = "ContentFrame"
-ContentFrame.Parent = ContentAndTabsWrapper
+ContentFrame.Parent = TabsAndContentWrapper
 ContentFrame.Size = UDim2.new(0.75, 0, 1, 0) -- 75% szerokości wrappera, cała wysokość wrappera
 ContentFrame.BackgroundColor3 = Color3.fromRGB(59, 59, 59)
 ContentFrame.BorderSizePixel = 0
