@@ -29,12 +29,10 @@ local UICorner = Instance.new("UICorner")
 local TabsFrame = Instance.new("Frame")
 local HomeTabButton = Instance.new("TextButton")
 local UICorner_2 = Instance.new("UICorner")
--- Usunięto UITextSizeConstraint i UIAspectRatioConstraint dla HomeTabButton, bo UIListLayout zarządza pozycją i TextScaled skalowaniem tekstu
 local PremiumTabButton = Instance.new("TextButton")
 local UICorner_3 = Instance.new("UICorner")
--- Usunięto UITextSizeConstraint i UIAspectRatioConstraint dla PremiumTabButton
 local UICorner_4 = Instance.new("UICorner")
-local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint") -- To może zostać dla proporcji TabsFrame
+local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
 local ScrollingFramePremium = Instance.new("ScrollingFrame")
 local UICorner_5 = Instance.new("UICorner")
 
@@ -46,7 +44,7 @@ TabsLayout.Padding = UDim.new(0.05, 0) -- Dodajemy odstępy między przyciskami
 TabsLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 TabsLayout.VerticalAlignment = Enum.VerticalAlignment.Top
 
--- Dodajemy UIGridLayout do ScrollingFramePremium, aby przyciski były skalowane i układane automatycznie
+-- Dodajemy UIGridLayout do ScrollingFramePremium
 local PremiumGridLayout = Instance.new("UIGridLayout")
 PremiumGridLayout.Parent = ScrollingFramePremium
 PremiumGridLayout.StartCorner = Enum.StartCorner.TopLeft
@@ -56,7 +54,7 @@ PremiumGridLayout.VerticalAlignment = Enum.VerticalAlignment.Top
 PremiumGridLayout.CellSize = UDim2.new(0.3, 0, 0.1, 0) -- Skalowane rozmiary komórek (przyciski będą zajmować 30% szerokości ramki i 10% wysokości)
 PremiumGridLayout.CellPadding = UDim2.new(0.05, 0, 0.05, 0) -- Odstępy między przyciskami
 
--- DODANE: UIGridLayout do ScrollingFrameHome
+-- Dodajemy UIGridLayout do ScrollingFrameHome
 local HomeGridLayout = Instance.new("UIGridLayout")
 HomeGridLayout.Parent = ScrollingFrameHome
 HomeGridLayout.StartCorner = Enum.StartCorner.TopLeft
@@ -68,38 +66,29 @@ HomeGridLayout.CellPadding = UDim2.new(0.05, 0, 0.05, 0) -- Odstępy między prz
 
 local SpectateButton_Premium = Instance.new("TextButton")
 local UICorner_6 = Instance.new("UICorner")
--- Usunięto UITextSizeConstraint i UIAspectRatioConstraint dla SpectateButton_Premium
 local MM2Button = Instance.new("TextButton")
 local UICorner_7 = Instance.new("UICorner")
--- Usunięto UITextSizeConstraint i UIAspectRatioConstraint dla MM2Button
 local FlyButton = Instance.new("TextButton")
 local UICorner_8 = Instance.new("UICorner")
--- Usunięto UITextSizeConstraint i UIAspectRatioConstraint dla FlyButton
 local Invisibiltybutton = Instance.new("TextButton")
 local UICorner_9 = Instance.new("UICorner")
--- Usunięto UITextSizeConstraint i UIAspectRatioConstraint dla Invisibiltybutton
-local UIAspectRatioConstraint_8 = Instance.new("UIAspectRatioConstraint") -- Może zostać dla ogólnych proporcji ramki
+local UIAspectRatioConstraint_8 = Instance.new("UIAspectRatioConstraint")
 local TitleLabel = Instance.new("TextLabel")
 local UITextSizeConstraint_7 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_9 = Instance.new("UIAspectRatioConstraint")
 local ScrollingFrameHome = Instance.new("ScrollingFrame")
 local SpeedToolbutton = Instance.new("TextButton")
 local UICorner_10 = Instance.new("UICorner")
--- Usunięto UITextSizeConstraint i UIAspectRatioConstraint dla SpeedToolbutton
 local ClicktptoolButton = Instance.new("TextButton")
 local UICorner_11 = Instance.new("UICorner")
--- Usunięto UITextSizeConstraint i UIAspectRatioConstraint dla ClicktptoolButton
 local UICorner_12 = Instance.new("UICorner")
 local SpectateButton_Home = Instance.new("TextButton")
 local UICorner_13 = Instance.new("UICorner")
--- Usunięto UITextSizeConstraint i UIAspectRatioConstraint dla SpectateButton_Home
 local NoclipButton = Instance.new("TextButton")
 local UICorner_14 = Instance.new("UICorner")
--- Usunięto UITextSizeConstraint i UIAspectRatioConstraint dla NoclipButton
 local FlingButton = Instance.new("TextButton")
 local UICorner_15 = Instance.new("UICorner")
--- Usunięto UITextSizeConstraint i UIAspectRatioConstraint dla FlingButton
-local UIAspectRatioConstraint_15 = Instance.new("UIAspectRatioConstraint") -- Może zostać dla ogólnych proporcji ramki
+local UIAspectRatioConstraint_15 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_16 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_17 = Instance.new("UIAspectRatioConstraint")
 local HideButton = Instance.new("ImageButton")
@@ -107,7 +96,7 @@ local HideButton = Instance.new("ImageButton")
 -- NOWY PRZYCISK GHOSTMM2
 local GhostMM2Button = Instance.new("TextButton")
 local UICorner_GhostMM2 = Instance.new("UICorner")
--- Usunięto UITextSizeConstraint i UIAspectRatioConstraint dla GhostMM2Button
+
 
 ScreenGui.Parent = player:WaitForChild("PlayerGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -139,14 +128,14 @@ HomeTabButton.Parent = TabsFrame
 HomeTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
 HomeTabButton.BorderColor3 = Color3.new(0, 0, 0)
 HomeTabButton.BorderSizePixel = 0
-HomeTabButton.Size = UDim2.new(0.881656826, 0, 0.083516486, 0) -- Ustawienie rozmiaru, pozycja będzie kontrolowana przez UIListLayout
+HomeTabButton.Size = UDim2.new(0.881656826, 0, 0.083516486, 0)
 HomeTabButton.Font = Enum.Font.SourceSans
 HomeTabButton.Text = "Home"
 HomeTabButton.TextColor3 = Color3.new(0, 0, 0)
 HomeTabButton.TextScaled = true
 HomeTabButton.TextSize = 14
 HomeTabButton.TextWrapped = true
-HomeTabButton.LayoutOrder = 1 -- Ważne dla UIListLayout
+HomeTabButton.LayoutOrder = 1
 
 UICorner_2.Parent = HomeTabButton
 
@@ -155,14 +144,14 @@ PremiumTabButton.Parent = TabsFrame
 PremiumTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
 PremiumTabButton.BorderColor3 = Color3.new(0, 0, 0)
 PremiumTabButton.BorderSizePixel = 0
-PremiumTabButton.Size = UDim2.new(0.881656826, 0, 0.083516486, 0) -- Ustawienie rozmiaru, pozycja będzie kontrolowana przez UIListLayout
+PremiumTabButton.Size = UDim2.new(0.881656826, 0, 0.083516486, 0)
 PremiumTabButton.Font = Enum.Font.SourceSans
 PremiumTabButton.Text = "Premium"
 PremiumTabButton.TextColor3 = Color3.new(0, 0, 0)
 PremiumTabButton.TextScaled = true
 PremiumTabButton.TextSize = 14
 PremiumTabButton.TextWrapped = true
-PremiumTabButton.LayoutOrder = 2 -- Ważne dla UIListLayout
+PremiumTabButton.LayoutOrder = 2
 
 UICorner_3.Parent = PremiumTabButton
 
@@ -187,14 +176,14 @@ SpectateButton_Premium.Name = "Spectate Button Premium"
 SpectateButton_Premium.Parent = ScrollingFramePremium
 SpectateButton_Premium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 SpectateButton_Premium.BorderColor3 = Color3.new(0, 0, 0)
-SpectateButton_Premium.Size = UDim2.new(1, 0, 1, 0) -- Skalowany rozmiar, aby pasował do komórki UIGridLayout
+SpectateButton_Premium.Size = UDim2.new(1, 0, 1, 0)
 SpectateButton_Premium.Font = Enum.Font.SourceSans
 SpectateButton_Premium.Text = "Spectate"
 SpectateButton_Premium.TextColor3 = Color3.new(0, 0, 0)
 SpectateButton_Premium.TextScaled = true
 SpectateButton_Premium.TextSize = 14
 SpectateButton_Premium.TextWrapped = true
-SpectateButton_Premium.LayoutOrder = 1 -- Ważne dla UIGridLayout
+SpectateButton_Premium.LayoutOrder = 1
 
 UICorner_6.Parent = SpectateButton_Premium
 
@@ -202,7 +191,7 @@ MM2Button.Name = "MM2 Button"
 MM2Button.Parent = ScrollingFramePremium
 MM2Button.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 MM2Button.BorderColor3 = Color3.new(0, 0, 0)
-MM2Button.Size = UDim2.new(1, 0, 1, 0) -- Skalowany rozmiar
+MM2Button.Size = UDim2.new(1, 0, 1, 0)
 MM2Button.Font = Enum.Font.SourceSans
 MM2Button.Text = "MM2"
 MM2Button.TextColor3 = Color3.new(0, 0, 0)
@@ -210,7 +199,7 @@ MM2Button.TextScaled = true
 MM2Button.TextSize = 14
 MM2Button.TextWrapped = true
 MM2Button.Visible = false
-MM2Button.LayoutOrder = 2 -- Ważne dla UIGridLayout
+MM2Button.LayoutOrder = 2
 
 UICorner_7.Parent = MM2Button
 
@@ -218,14 +207,14 @@ FlyButton.Name = "Console Button"
 FlyButton.Parent = ScrollingFramePremium
 FlyButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 FlyButton.BorderColor3 = Color3.new(0, 0, 0)
-FlyButton.Size = UDim2.new(1, 0, 1, 0) -- Skalowany rozmiar
+FlyButton.Size = UDim2.new(1, 0, 1, 0)
 FlyButton.Font = Enum.Font.SourceSans
 FlyButton.Text = "Console"
 FlyButton.TextColor3 = Color3.new(0, 0, 0)
 FlyButton.TextScaled = true
 FlyButton.TextSize = 14
 FlyButton.TextWrapped = true
-FlyButton.LayoutOrder = 3 -- Ważne dla UIGridLayout
+FlyButton.LayoutOrder = 3
 
 UICorner_8.Parent = FlyButton
 
@@ -233,14 +222,14 @@ Invisibiltybutton.Name = "Invisibilty Button"
 Invisibiltybutton.Parent = ScrollingFramePremium
 Invisibiltybutton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 Invisibiltybutton.BorderColor3 = Color3.new(0, 0, 0)
-Invisibiltybutton.Size = UDim2.new(1, 0, 1, 0) -- Skalowany rozmiar
+Invisibiltybutton.Size = UDim2.new(1, 0, 1, 0)
 Invisibiltybutton.Font = Enum.Font.SourceSans
 Invisibiltybutton.Text = "Invisibilty"
 Invisibiltybutton.TextColor3 = Color3.new(0, 0, 0)
 Invisibiltybutton.TextScaled = true
 Invisibiltybutton.TextSize = 14
 Invisibiltybutton.TextWrapped = true
-Invisibiltybutton.LayoutOrder = 4 -- Ważne dla UIGridLayout
+Invisibiltybutton.LayoutOrder = 4
 
 UICorner_9.Parent = Invisibiltybutton
 
@@ -249,15 +238,15 @@ GhostMM2Button.Name = "GhostMM2Button"
 GhostMM2Button.Parent = ScrollingFramePremium
 GhostMM2Button.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 GhostMM2Button.BorderColor3 = Color3.new(0, 0, 0)
-GhostMM2Button.Size = UDim2.new(1, 0, 1, 0) -- Skalowany rozmiar
+GhostMM2Button.Size = UDim2.new(1, 0, 1, 0)
 GhostMM2Button.Font = Enum.Font.SourceSans
 GhostMM2Button.Text = "GhostMM2"
 GhostMM2Button.TextColor3 = Color3.new(0, 0, 0)
 GhostMM2Button.TextScaled = true
 GhostMM2Button.TextSize = 14
 GhostMM2Button.TextWrapped = true
-GhostMM2Button.Visible = false -- Domyślnie niewidoczny, zostanie pokazany tylko w MM2
-GhostMM2Button.LayoutOrder = 5 -- Ważne dla UIGridLayout
+GhostMM2Button.Visible = false
+GhostMM2Button.LayoutOrder = 5
 
 UICorner_GhostMM2.Parent = GhostMM2Button
 
@@ -296,18 +285,19 @@ ScrollingFrameHome.CanvasSize = UDim2.new(0,0,1.5,0)
 
 UICorner_12.Parent = ScrollingFrameHome
 
+-- Upewniamy się, że Parent dla przycisków w Home jest poprawnie ustawiony
 SpeedToolbutton.Name = "Speed Tool button"
 SpeedToolbutton.Parent = ScrollingFrameHome
 SpeedToolbutton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 SpeedToolbutton.BorderColor3 = Color3.new(0, 0, 0)
-SpeedToolbutton.Size = UDim2.new(1, 0, 1, 0) -- Skalowany rozmiar
+SpeedToolbutton.Size = UDim2.new(1, 0, 1, 0)
 SpeedToolbutton.Font = Enum.Font.SourceSans
 SpeedToolbutton.Text = "Speed Tool"
 SpeedToolbutton.TextColor3 = Color3.new(0, 0, 0)
 SpeedToolbutton.TextScaled = true
 SpeedToolbutton.TextSize = 14
 SpeedToolbutton.TextWrapped = true
-SpeedToolbutton.LayoutOrder = 1 -- Ważne dla UIGridLayout
+SpeedToolbutton.LayoutOrder = 1
 
 UICorner_10.Parent = SpeedToolbutton
 
@@ -315,14 +305,14 @@ ClicktptoolButton.Name = "Click tp tool Button"
 ClicktptoolButton.Parent = ScrollingFrameHome
 ClicktptoolButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 ClicktptoolButton.BorderColor3 = Color3.new(0, 0, 0)
-ClicktptoolButton.Size = UDim2.new(1, 0, 1, 0) -- Skalowany rozmiar
+ClicktptoolButton.Size = UDim2.new(1, 0, 1, 0)
 ClicktptoolButton.Font = Enum.Font.SourceSans
 ClicktptoolButton.Text = "Click tp tool"
 ClicktptoolButton.TextColor3 = Color3.new(0, 0, 0)
 ClicktptoolButton.TextScaled = true
 ClicktptoolButton.TextSize = 14
 ClicktptoolButton.TextWrapped = true
-ClicktptoolButton.LayoutOrder = 2 -- Ważne dla UIGridLayout
+ClicktptoolButton.LayoutOrder = 2
 
 UICorner_11.Parent = ClicktptoolButton
 
@@ -330,14 +320,14 @@ SpectateButton_Home.Name = "Spectate Button"
 SpectateButton_Home.Parent = ScrollingFrameHome
 SpectateButton_Home.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 SpectateButton_Home.BorderColor3 = Color3.new(0, 0, 0)
-SpectateButton_Home.Size = UDim2.new(1, 0, 1, 0) -- Skalowany rozmiar
+SpectateButton_Home.Size = UDim2.new(1, 0, 1, 0)
 SpectateButton_Home.Font = Enum.Font.SourceSans
 SpectateButton_Home.Text = "Spectate"
 SpectateButton_Home.TextColor3 = Color3.new(0, 0, 0)
 SpectateButton_Home.TextScaled = true
 SpectateButton_Home.TextSize = 14
 SpectateButton_Home.TextWrapped = true
-SpectateButton_Home.LayoutOrder = 3 -- Ważne dla UIGridLayout
+SpectateButton_Home.LayoutOrder = 3
 
 UICorner_13.Parent = SpectateButton_Home
 
@@ -345,14 +335,14 @@ NoclipButton.Name = "Noclip Button"
 NoclipButton.Parent = ScrollingFrameHome
 NoclipButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 NoclipButton.BorderColor3 = Color3.new(0, 0, 0)
-NoclipButton.Size = UDim2.new(1, 0, 1, 0) -- Skalowany rozmiar
+NoclipButton.Size = UDim2.new(1, 0, 1, 0)
 NoclipButton.Font = Enum.Font.SourceSans
 NoclipButton.Text = "Noclip"
 NoclipButton.TextColor3 = Color3.new(0, 0, 0)
 NoclipButton.TextScaled = true
 NoclipButton.TextSize = 14
 NoclipButton.TextWrapped = true
-NoclipButton.LayoutOrder = 4 -- Ważne dla UIGridLayout
+NoclipButton.LayoutOrder = 4
 
 UICorner_14.Parent = NoclipButton
 
@@ -360,14 +350,14 @@ FlingButton.Name = "Fling Button"
 FlingButton.Parent = ScrollingFrameHome
 FlingButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 FlingButton.BorderColor3 = Color3.new(0, 0, 0)
-FlingButton.Size = UDim2.new(1, 0, 1, 0) -- Skalowany rozmiar
+FlingButton.Size = UDim2.new(1, 0, 1, 0)
 FlingButton.Font = Enum.Font.SourceSans
 FlingButton.Text = "Fling"
 FlingButton.TextColor3 = Color3.new(0, 0, 0)
 FlingButton.TextScaled = true
 FlingButton.TextSize = 14
 FlingButton.TextWrapped = true
-FlingButton.LayoutOrder = 5 -- Ważne dla UIGridLayout
+FlingButton.LayoutOrder = 5
 
 UICorner_15.Parent = FlingButton
 
@@ -434,10 +424,10 @@ end
 local function updateMM2ButtonVisibility()
     if game.PlaceId == MM2_EXPERIENCE_ID then
         MM2Button.Visible = true
-        GhostMM2Button.Visible = true -- Ustaw widoczność nowego przycisku GhostMM2Button
+        GhostMM2Button.Visible = true
     else
         MM2Button.Visible = false
-        GhostMM2Button.Visible = false -- Ukryj nowy przycisk GhostMM2Button
+        GhostMM2Button.Visible = false
     end
 end
 
