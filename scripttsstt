@@ -7,8 +7,8 @@ local TeleportService = game:GetService("TeleportService")
 
 local GAMEPASS_ID = 1296972626
 local MM2_EXPERIENCE_ID = 142823291
-local GAG_GAME_ID = 9262276941 -- ID gry, w której ma się pojawiać przycisk GAG
-local TELEPORT_PLACE_ID = 6557073879 -- Id gry, do której teleportuje, jeśli nie ma gamepassa
+local GAG_GAME_ID = 9262276941
+local TELEPORT_PLACE_ID = 6557073879
 
 local hasGamePass = false
 local initialGamePassCheckDone = false
@@ -57,7 +57,6 @@ local UICorner_FlingPremium = Instance.new("UICorner")
 local UITextSizeConstraint_FlingPremium = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_FlingPremium = Instance.new("UIAspectRatioConstraint")
 
--- Przyciski specyficzne dla gier (teraz pod Invisibilty i Fling)
 local MM2Button = Instance.new("TextButton")
 local UICorner_7 = Instance.new("UICorner")
 local UITextSizeConstraint_4 = Instance.new("UITextSizeConstraint")
@@ -182,7 +181,6 @@ ScrollingFramePremium.Visible = false
 
 UICorner_5.Parent = ScrollingFramePremium
 
--- Standardowe przyciski Premium
 SpectateButton_Premium.Name = "Spectate Button Premium"
 SpectateButton_Premium.Parent = ScrollingFramePremium
 SpectateButton_Premium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
@@ -259,12 +257,11 @@ UITextSizeConstraint_FlingPremium.MaxTextSize = 37
 UIAspectRatioConstraint_FlingPremium.Parent = FlingButton_Premium
 UIAspectRatioConstraint_FlingPremium.AspectRatio = 3.9473683834075928
 
--- Przyciski specyficzne dla gier - pozycjonowanie pod Invisibilty i Fling
 MM2Button.Name = "MM2 Button"
 MM2Button.Parent = ScrollingFramePremium
 MM2Button.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 MM2Button.BorderColor3 = Color3.new(0, 0, 0)
-MM2Button.Position = UDim2.new(0.04, 0, 0.225, 0) -- Rząd pod Invisibilty
+MM2Button.Position = UDim2.new(0.04, 0, 0.225, 0)
 MM2Button.Size = UDim2.new(0.45, 0, 0.08, 0)
 MM2Button.Font = Enum.Font.SourceSans
 MM2Button.Text = "MM2"
@@ -284,7 +281,7 @@ GhostMM2Button.Name = "GhostMM2 Button"
 GhostMM2Button.Parent = ScrollingFramePremium
 GhostMM2Button.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 GhostMM2Button.BorderColor3 = Color3.new(0, 0, 0)
-GhostMM2Button.Position = UDim2.new(0.5, 0, 0.225, 0) -- Rząd pod Fling
+GhostMM2Button.Position = UDim2.new(0.5, 0, 0.225, 0)
 GhostMM2Button.Size = UDim2.new(0.45, 0, 0.08, 0)
 GhostMM2Button.Font = Enum.Font.SourceSans
 GhostMM2Button.Text = "GhostMM2"
@@ -304,7 +301,7 @@ GAGButton.Name = "GAG Button"
 GAGButton.Parent = ScrollingFramePremium
 GAGButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 GAGButton.BorderColor3 = Color3.new(0, 0, 0)
-GAGButton.Position = UDim2.new(0.04, 0, 0.325, 0) -- Kolejny rząd pod MM2 (nowa linia)
+GAGButton.Position = UDim2.new(0.04, 0, 0.325, 0)
 GAGButton.Size = UDim2.new(0.45, 0, 0.08, 0)
 GAGButton.Font = Enum.Font.SourceSans
 GAGButton.Text = "GAG"
@@ -357,7 +354,6 @@ ScrollingFrameHome.CanvasSize = UDim2.new(0,0,1.5,0)
 
 UICorner_12.Parent = ScrollingFrameHome
 
--- Przyciski w sekcji Home
 SpeedToolbutton.Name = "Speed Tool button"
 SpeedToolbutton.Parent = ScrollingFrameHome
 SpeedToolbutton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
@@ -449,7 +445,7 @@ local function showTab(tabName)
         else
             sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby uzyskać dostęp do tej zakładki!")
             TeleportService:Teleport(TELEPORT_PLACE_ID, player)
-            MainFrame.Visible = false -- Ukryj GUI po teleportacji
+            MainFrame.Visible = false
         end
     end
 end
@@ -698,5 +694,4 @@ end)
 
 task.wait(0.5)
 
--- Upewnij się, że MainFrame jest widoczny po załadowaniu skryptu
 MainFrame.Visible = true
