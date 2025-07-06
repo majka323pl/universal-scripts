@@ -177,12 +177,13 @@ ScrollingFramePremium.Visible = false
 
 UICorner_5.Parent = ScrollingFramePremium
 
+-- Skalowane przyciski w sekcji Premium
 SpectateButton_Premium.Name = "Spectate Button Premium"
 SpectateButton_Premium.Parent = ScrollingFramePremium
 SpectateButton_Premium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 SpectateButton_Premium.BorderColor3 = Color3.new(0, 0, 0)
-SpectateButton_Premium.Position = UDim2.new(0.0435483381, 0, 0.0257404726, 0)
-SpectateButton_Premium.Size = UDim2.new(0, 150, 0, 38)
+SpectateButton_Premium.Position = UDim2.new(0.04, 0, 0.025, 0) -- Lewa kolumna, góra
+SpectateButton_Premium.Size = UDim2.new(0.45, 0, 0.08, 0) -- Skalowana szerokość i wysokość
 SpectateButton_Premium.Font = Enum.Font.SourceSans
 SpectateButton_Premium.Text = "Spectate"
 SpectateButton_Premium.TextColor3 = Color3.new(0, 0, 0)
@@ -191,10 +192,8 @@ SpectateButton_Premium.TextSize = 14
 SpectateButton_Premium.TextWrapped = true
 
 UICorner_6.Parent = SpectateButton_Premium
-
 UITextSizeConstraint_3.Parent = SpectateButton_Premium
 UITextSizeConstraint_3.MaxTextSize = 37
-
 UIAspectRatioConstraint_4.Parent = SpectateButton_Premium
 UIAspectRatioConstraint_4.AspectRatio = 3.9473683834075928
 
@@ -202,8 +201,8 @@ MM2Button.Name = "MM2 Button"
 MM2Button.Parent = ScrollingFramePremium
 MM2Button.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 MM2Button.BorderColor3 = Color3.new(0, 0, 0)
-MM2Button.Position = UDim2.new(0.619586229, 0, 0.0255702417, 0)
-MM2Button.Size = UDim2.new(0, 150, 0, 38)
+MM2Button.Position = UDim2.new(0.5, 0, 0.025, 0) -- Prawa kolumna, góra
+MM2Button.Size = UDim2.new(0.45, 0, 0.08, 0) -- Skalowana szerokość i wysokość
 MM2Button.Font = Enum.Font.SourceSans
 MM2Button.Text = "MM2"
 MM2Button.TextColor3 = Color3.new(0, 0, 0)
@@ -213,10 +212,8 @@ MM2Button.TextWrapped = true
 MM2Button.Visible = false -- Domyślnie niewidoczny, tylko w MM2
 
 UICorner_7.Parent = MM2Button
-
 UITextSizeConstraint_4.Parent = MM2Button
 UITextSizeConstraint_4.MaxTextSize = 37
-
 UIAspectRatioConstraint_5.Parent = MM2Button
 UIAspectRatioConstraint_5.AspectRatio = 3.9473683834075928
 
@@ -224,8 +221,8 @@ FlyButton.Name = "Console Button"
 FlyButton.Parent = ScrollingFramePremium
 FlyButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 FlyButton.BorderColor3 = Color3.new(0, 0, 0)
-FlyButton.Position = UDim2.new(0.328718245, 0, 0.0258589424, 0)
-FlyButton.Size = UDim2.new(0, 150, 0, 38)
+FlyButton.Position = UDim2.new(0.04, 0, 0.125, 0) -- Lewa kolumna, drugi rząd
+FlyButton.Size = UDim2.new(0.45, 0, 0.08, 0) -- Skalowana szerokość i wysokość
 FlyButton.Font = Enum.Font.SourceSans
 FlyButton.Text = "Console"
 FlyButton.TextColor3 = Color3.new(0, 0, 0)
@@ -234,10 +231,8 @@ FlyButton.TextSize = 14
 FlyButton.TextWrapped = true
 
 UICorner_8.Parent = FlyButton
-
 UITextSizeConstraint_5.Parent = FlyButton
 UITextSizeConstraint_5.MaxTextSize = 37
-
 UIAspectRatioConstraint_6.Parent = FlyButton
 UIAspectRatioConstraint_6.AspectRatio = 3.9473683834075928
 
@@ -245,8 +240,8 @@ Invisibiltybutton.Name = "Invisibilty Button"
 Invisibiltybutton.Parent = ScrollingFramePremium
 Invisibiltybutton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 Invisibiltybutton.BorderColor3 = Color3.new(0, 0, 0)
-Invisibiltybutton.Position = UDim2.new(0.042496033, 0, 0.0955808759, 0)
-Invisibiltybutton.Size = UDim2.new(0, 150, 0, 38)
+Invisibiltybutton.Position = UDim2.new(0.5, 0, 0.125, 0) -- Prawa kolumna, drugi rząd
+Invisibiltybutton.Size = UDim2.new(0.45, 0, 0.08, 0) -- Skalowana szerokość i wysokość
 Invisibiltybutton.Font = Enum.Font.SourceSans
 Invisibiltybutton.Text = "Invisibilty"
 Invisibiltybutton.TextColor3 = Color3.new(0, 0, 0)
@@ -255,20 +250,18 @@ Invisibiltybutton.TextSize = 14
 Invisibiltybutton.TextWrapped = true
 
 UICorner_9.Parent = Invisibiltybutton
-
 UITextSizeConstraint_6.Parent = Invisibiltybutton
 UITextSizeConstraint_6.MaxTextSize = 37
-
 UIAspectRatioConstraint_7.Parent = Invisibiltybutton
 UIAspectRatioConstraint_7.AspectRatio = 3.9473683834075928
 
--- Nowy przycisk GhostMM2
+-- Nowy przycisk GhostMM2 ze skalowaniem
 GhostMM2Button.Name = "GhostMM2 Button"
 GhostMM2Button.Parent = ScrollingFramePremium
 GhostMM2Button.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 GhostMM2Button.BorderColor3 = Color3.new(0, 0, 0)
-GhostMM2Button.Position = UDim2.new(0.328718245, 0, 0.0955808759, 0) -- Pozycja obok Invisibilty
-GhostMM2Button.Size = UDim2.new(0, 150, 0, 38)
+GhostMM2Button.Position = UDim2.new(0.04, 0, 0.225, 0) -- Lewa kolumna, trzeci rząd
+GhostMM2Button.Size = UDim2.new(0.45, 0, 0.08, 0) -- Skalowana szerokość i wysokość
 GhostMM2Button.Font = Enum.Font.SourceSans
 GhostMM2Button.Text = "GhostMM2"
 GhostMM2Button.TextColor3 = Color3.new(0, 0, 0)
@@ -319,12 +312,13 @@ ScrollingFrameHome.CanvasSize = UDim2.new(0,0,1.5,0)
 
 UICorner_12.Parent = ScrollingFrameHome
 
+-- Przyciski w sekcji Home również ze skalowaniem
 SpeedToolbutton.Name = "Speed Tool button"
 SpeedToolbutton.Parent = ScrollingFrameHome
 SpeedToolbutton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 SpeedToolbutton.BorderColor3 = Color3.new(0, 0, 0)
-SpeedToolbutton.Position = UDim2.new(0.0518765114, 0, 0.017869316, 0)
-SpeedToolbutton.Size = UDim2.new(0, 150, 0, 38)
+SpeedToolbutton.Position = UDim2.new(0.04, 0, 0.025, 0)
+SpeedToolbutton.Size = UDim2.new(0.45, 0, 0.08, 0)
 SpeedToolbutton.Font = Enum.Font.SourceSans
 SpeedToolbutton.Text = "Speed Tool"
 SpeedToolbutton.TextColor3 = Color3.new(0, 0, 0)
@@ -333,10 +327,8 @@ SpeedToolbutton.TextSize = 14
 SpeedToolbutton.TextWrapped = true
 
 UICorner_10.Parent = SpeedToolbutton
-
 UITextSizeConstraint_8.Parent = SpeedToolbutton
 UITextSizeConstraint_8.MaxTextSize = 37
-
 UIAspectRatioConstraint_10.Parent = SpeedToolbutton
 UIAspectRatioConstraint_10.AspectRatio = 3.9473683834075928
 
@@ -344,8 +336,8 @@ ClicktptoolButton.Name = "Click tp tool Button"
 ClicktptoolButton.Parent = ScrollingFrameHome
 ClicktptoolButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 ClicktptoolButton.BorderColor3 = Color3.new(0, 0, 0)
-ClicktptoolButton.Position = UDim2.new(0.340883315, 0, 0.019441355, 0)
-ClicktptoolButton.Size = UDim2.new(0, 150, 0, 38)
+ClicktptoolButton.Position = UDim2.new(0.5, 0, 0.025, 0)
+ClicktptoolButton.Size = UDim2.new(0.45, 0, 0.08, 0)
 ClicktptoolButton.Font = Enum.Font.SourceSans
 ClicktptoolButton.Text = "Click tp tool"
 ClicktptoolButton.TextColor3 = Color3.new(0, 0, 0)
@@ -354,10 +346,8 @@ ClicktptoolButton.TextSize = 14
 ClicktptoolButton.TextWrapped = true
 
 UICorner_11.Parent = ClicktptoolButton
-
 UITextSizeConstraint_9.Parent = ClicktptoolButton
 UITextSizeConstraint_9.MaxTextSize = 35
-
 UIAspectRatioConstraint_11.Parent = ClicktptoolButton
 UIAspectRatioConstraint_11.AspectRatio = 3.9473683834075928
 
@@ -365,8 +355,8 @@ SpectateButton_Home.Name = "Spectate Button"
 SpectateButton_Home.Parent = ScrollingFrameHome
 SpectateButton_Home.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 SpectateButton_Home.BorderColor3 = Color3.new(0, 0, 0)
-SpectateButton_Home.Position = UDim2.new(0.0527811497, 0, 0.0926060826, 0)
-SpectateButton_Home.Size = UDim2.new(0, 150, 0, 38)
+SpectateButton_Home.Position = UDim2.new(0.04, 0, 0.125, 0)
+SpectateButton_Home.Size = UDim2.new(0.45, 0, 0.08, 0)
 SpectateButton_Home.Font = Enum.Font.SourceSans
 SpectateButton_Home.Text = "Spectate"
 SpectateButton_Home.TextColor3 = Color3.new(0, 0, 0)
@@ -375,10 +365,8 @@ SpectateButton_Home.TextSize = 14
 SpectateButton_Home.TextWrapped = true
 
 UICorner_13.Parent = SpectateButton_Home
-
 UITextSizeConstraint_10.Parent = SpectateButton_Home
 UITextSizeConstraint_10.MaxTextSize = 37
-
 UIAspectRatioConstraint_12.Parent = SpectateButton_Home
 UIAspectRatioConstraint_12.AspectRatio = 3.9473683834075928
 
@@ -386,8 +374,8 @@ NoclipButton.Name = "Noclip Button"
 NoclipButton.Parent = ScrollingFrameHome
 NoclipButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 NoclipButton.BorderColor3 = Color3.new(0, 0, 0)
-NoclipButton.Position = UDim2.new(0.654442132, 0, 0.017869316, 0)
-NoclipButton.Size = UDim2.new(0, 150, 0, 38)
+NoclipButton.Position = UDim2.new(0.5, 0, 0.125, 0)
+NoclipButton.Size = UDim2.new(0.45, 0, 0.08, 0)
 NoclipButton.Font = Enum.Font.SourceSans
 NoclipButton.Text = "Noclip"
 NoclipButton.TextColor3 = Color3.new(0, 0, 0)
@@ -396,10 +384,8 @@ NoclipButton.TextSize = 14
 NoclipButton.TextWrapped = true
 
 UICorner_14.Parent = NoclipButton
-
 UITextSizeConstraint_11.Parent = NoclipButton
 UITextSizeConstraint_11.MaxTextSize = 37
-
 UIAspectRatioConstraint_13.Parent = NoclipButton
 UIAspectRatioConstraint_13.AspectRatio = 3.9473683834075928
 
@@ -407,8 +393,8 @@ FlingButton.Name = "Fling Button"
 FlingButton.Parent = ScrollingFrameHome
 FlingButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 FlingButton.BorderColor3 = Color3.new(0, 0, 0)
-FlingButton.Position = UDim2.new(0.339192569, 0, 0.0893465802, 0)
-FlingButton.Size = UDim2.new(0, 150, 0, 38)
+FlingButton.Position = UDim2.new(0.04, 0, 0.225, 0)
+FlingButton.Size = UDim2.new(0.45, 0, 0.08, 0)
 FlingButton.Font = Enum.Font.SourceSans
 FlingButton.Text = "Fling"
 FlingButton.TextColor3 = Color3.new(0, 0, 0)
@@ -417,10 +403,8 @@ FlingButton.TextSize = 14
 FlingButton.TextWrapped = true
 
 UICorner_15.Parent = FlingButton
-
 UITextSizeConstraint_12.Parent = FlingButton
 UITextSizeConstraint_12.MaxTextSize = 37
-
 UIAspectRatioConstraint_14.Parent = FlingButton
 UIAspectRatioConstraint_14.AspectRatio = 3.9473683834075928
 
