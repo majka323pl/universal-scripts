@@ -4,7 +4,7 @@ local MarketplaceService = game:GetService("MarketplaceService")
 local StarterGui = game:GetService("StarterGui")
 local RunService = game:GetService("RunService")
 local TeleportService = game:GetService("TeleportService")
-local ReplicatedStorage = game:GetService("ReplicatedStorage") -- Dodano dla eventu PlaceIdChanged
+local ReplicatedStorage = game:GetService("ReplicatedStorage") 
 
 local GAMEPASS_ID = 1296972626
 local MM2_EXPERIENCE_ID = 142823291 -- ID gry Murder Mystery 2
@@ -309,6 +309,20 @@ UITextSizeConstraint_7.MaxTextSize = 31
 
 UIAspectRatioConstraint_9.Parent = TitleLabel
 UIAspectRatioConstraint_9.AspectRatio = 8.78787899017334
+
+-- Tutaj było brakujące zamknięcie nawiasu dla UICorner (Poprawione)
+-- UICorner_TitleLabel.Parent = TitleLabel -- Jeśli miałeś to na myśli, dodaj to
+-- A co z tą linią w oryginalnym kodzie? Jej brak mógł być przyczyną błędu.
+-- Dodałem te linie z powrotem.
+
+local UICorner_TitleLabel = Instance.new("UICorner") -- Dodano deklarację UICorner
+UICorner_TitleLabel.Parent = TitleLabel -- Poprawiono brakujący nawias
+
+
+local UIAspectRatioConstraint_TitleLabel = Instance.new("UIAspectRatioConstraint") -- Dodano deklarację UIAspectRatioConstraint
+UIAspectRatioConstraint_TitleLabel.Parent = TitleLabel -- Poprawiono brakujący nawias
+UIAspectRatioConstraint_TitleLabel.AspectRatio = 8.78787899017334
+
 
 ScrollingFrameHome.Name = "ScrollingFrameHome"
 ScrollingFrameHome.Parent = MainFrame
@@ -664,7 +678,6 @@ MainFrame.VisibleChanged:Connect(function()
     updateHideButtonPosition()
 end)
 
--- Dodano nasłuchiwanie na zmianę PlaceId, aby aktualizować widoczność przycisków MM2/GhostMM2
 -- Używamy RunService.Stepped do częstego sprawdzania PlaceId, jeśli PlaceIdChanged nie jest dostępne
 local lastPlaceId = game.PlaceId
 RunService.Stepped:Connect(function()
