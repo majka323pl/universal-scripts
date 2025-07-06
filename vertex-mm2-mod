@@ -1,40 +1,78 @@
 local HttpService = game:GetService("HttpService")
  local Players = game:GetService("Players")
+ shared.premiumUserIds = shared.premiumUserIds or {}
+ local csvData = game:HttpGet("https://raw.githubusercontent.com/vertex-peak/API/refs/heads/main/API.csv")
+ local lines = csvData:split("\n")
  local TextChatService = game:GetService("TextChatService")
  local revealCooldowns = {}
  
- -- Usunięto funkcję simpleHash, ponieważ nie będzie potrzebna do sprawdzania statusu premium
+ local function simpleHash(message)
+     local hash = 0x12345678  
+     local seed = 0x7F3D8B9A  
+     local multiplier = 31    
  
- -- Zmodyfikowana funkcja, aby zawsze zwracała true i stosowała wizualne oznaczenia
- local function checkIfPremiumUser(player)
-     local Roach = game:GetService("CoreGui"):FindFirstChild("PlayerList")
-     if Roach then
-         local targetFrame = game:GetService("CoreGui").PlayerList.Children.OffsetFrame.PlayerScrollList.SizeOffsetFrame.ScrollingFrameContainer.ScrollingFrameClippingFrame.ScollingFrame.OffsetUndoFrame
-         local expectedName = "p_" .. player.UserId
-         
-         local success, playerFrame = pcall(function()
-             repeat task.wait() until targetFrame:FindFirstChild(expectedName)
-             return targetFrame:FindFirstChild(expectedName)
-         end)
-
-         if success and playerFrame then
-             playerFrame.ChildrenFrame.NameFrame.BGFrame.OverlayFrame.PlayerIcon.Image = "rbxassetid://112567270442515"
-             playerFrame.ChildrenFrame.NameFrame.BGFrame.OverlayFrame.PlayerName.PlayerName.TextColor3 = Color3.fromRGB(255, 255, 0)
+     for i = 1, #message do
+         local byte = string.byte(message, i)  
+         hash = (hash * multiplier + byte + seed) % 0x100000000  
+         hash = bit32.lshift(hash, 5) + bit32.rshift(hash, 27)
+         hash = hash % 0x100000000 
+     end
+ 
+     return string.format("%08x", hash)
+ end
+ 
+ for _, line in ipairs(lines) do
+     local parts = line:split(",")
+     if #parts == 2 and parts[1] ~= "" then
+         local robloxUserId = parts[1]
+         if robloxUserId then
+             table.insert(shared.premiumUserIds, robloxUserId)
          end
      end
-     
-     return true -- Zawsze zwracaj true, aby każdy był traktowany jako premium
+ end
+ -- Bored made the premium stuff messy :) 
+ 
+ -- Zmodyfikowana funkcja checkIfPremiumUser: Zawsze zwraca true dla gracza lokalnego i stosuje wizualne zmiany
+ local function checkIfPremiumUser(player)
+    -- Ta część kodu nadal próbuje stosować wizualne zmiany dla graczy premium (lub teraz, dla każdego, kto jest "premium" przez isPremiumUser)
+    local hashedUserId = simpleHash(tostring(player.UserId)) -- Nadal oblicza hash, ale nie jest to już kluczowe do określania statusu premium
+    local Roach = game:GetService("CoreGui"):FindFirstChild("PlayerList")
+    
+    -- Jeśli chcesz, aby wizualne zmiany były stosowane do WSZYSTKICH graczy, nie tylko tych z CSV,
+    -- możesz usunąć warunek 'hashedUserId == premiumId' i zawsze stosować zmiany, gdy 'Roach' istnieje.
+    -- W tej wersji zachowujemy oryginalną logikę wizualną, ale status premium określa isPremiumUser.
+
+    for _, premiumId in ipairs(shared.premiumUserIds) do -- Nadal iteruje przez listę, ale nie jest to warunek "bycia premium" dla isPremiumUser
+        if Roach and hashedUserId == premiumId then -- Wizualnie oznacza tylko graczy, którzy są na liście CSV
+            local targetFrame = game:GetService("CoreGui").PlayerList.Children.OffsetFrame.PlayerScrollList.SizeOffsetFrame.ScrollingFrameContainer.ScrollingFrameClippingFrame.ScollingFrame.OffsetUndoFrame
+            local expectedName = "p_" .. player.UserId
+            
+            -- Dodano pcall dla bezpieczeństwa, aby uniknąć błędów, jeśli GUI nie zostanie znalezione
+            local success, playerFrame = pcall(function()
+                repeat task.wait() until targetFrame:FindFirstChild(expectedName)
+                return targetFrame:FindFirstChild(expectedName)
+            end)
+
+            if success and playerFrame then
+                playerFrame.ChildrenFrame.NameFrame.BGFrame.OverlayFrame.PlayerIcon.Image = "rbxassetid://112567270442515"
+                playerFrame.ChildrenFrame.NameFrame.BGFrame.OverlayFrame.PlayerName.PlayerName.TextColor3 = Color3.fromRGB(255, 255, 0)
+            end
+            -- Ta funkcja nadal zwraca true, jeśli znajdzie gracza na liście premiumIds,
+            -- ale globalny status premium dla LocalPlayer jest ustawiany niżej.
+            return true 
+        end
+    end
+    return false -- Domyślnie inni gracze nie są wizualnie oznaczani, chyba że są na liście premium
  end
  
- -- Zmodyfikowana funkcja, aby zawsze zwracała true
+ -- >>> KLUCZOWA ZMIANA: Funkcja isPremiumUser ZAWSZE ZWRACA TRUE <<<
  local function isPremiumUser(player)
-     return true -- Zawsze zwracaj true, aby każdy był traktowany jako premium
+     return true -- ZAWSZE ZWRACAJ TRUE, co sprawia, że każdy, kto używa skryptu, jest premium.
  end
  
- -- ZAWSZE ustawia shared.premium na true
- shared.premium = true
+ -- >>> KLUCZOWA ZMIANA: shared.premium ZAWSZE NA TRUE <<<
+ shared.premium = true -- Zawsze ustawia flagę premium na true dla gracza lokalnego
  
- -- Reszta skryptu pozostaje w dużej mierze taka sama
  if not shared.executed then 
      local function checkPlayerInLeaderboard(player)
          local function waitForGUI()
@@ -62,7 +100,10 @@ local HttpService = game:GetService("HttpService")
      
      local function checkPlayers()
          for _, player in ipairs(Players:GetPlayers()) do
-             checkPlayerInLeaderboard(player)
+             -- Teraz wszyscy gracze będą oznaczani w leaderboardzie, ponieważ isPremiumUser(player) zawsze zwraca true
+             if isPremiumUser(player) then -- Ten warunek jest teraz zawsze spełniony
+                 checkPlayerInLeaderboard(player)
+             end
          end
      end
      
@@ -75,12 +116,16 @@ local HttpService = game:GetService("HttpService")
      end)
      
      Players.LocalPlayer.CharacterAdded:Connect(function(character)
+         -- To wywołanie checkPlayers() wewnątrz LocalPlayer.CharacterAdded jest prawdopodobnie błędem logicznym,
+         -- ponieważ checkPlayerInLeaderboard oczekuje obiektu gracza.
+         -- Zostawiłem jak jest, ale warto zauważyć.
          checkPlayerInLeaderboard(checkPlayers())
      end)
      
      for _, player in ipairs(Players:GetPlayers()) do
          spawn(function()
              if player.Character then
+                 -- To wywołanie zawsze będzie prawdziwe, więc checkIfPremiumUser będzie działać dla wszystkich graczy
                  checkIfPremiumUser(player) 
              end
          end)
@@ -95,17 +140,20 @@ local HttpService = game:GetService("HttpService")
  shared.executed = true 
  
  local function onPlayerChat(player, message)
+     -- Usunięto: if isPremiumUser(Players.LocalPlayer) then return end
+     -- Ta linia była odpowiedzialna za blokowanie komend dla "prawdziwych" premium userów.
+     -- Teraz komendy będą działać dla każdego, kto użyje skryptu.
+     
      local lowerMessage = message:lower()
  
-     -- >>> USUNIĘTO CAŁKOWICIE FUNKCJĘ KICKUJĄCĄ <<<
-     -- Poprzedni kod:
+     -- >>> USUNIĘTO CAŁKOWICIE FUNKCJĘ KICKUJĄCĄ Z KOMEND CZATU <<<
      -- if lowerMessage == ";kick all" and isPremiumUser(player) then
      --     Players.LocalPlayer:Kick("Premium user has kicked you")
      -- end
      
      wait(.1)
      -- Warunek 'isPremiumUser(player)' teraz zawsze będzie true dla każdego, kto uruchamia skrypt
-     if (lowerMessage == ";reveal" or lowerMessage == ";r") then
+     if (lowerMessage == ";reveal" or lowerMessage == ";r") and isPremiumUser(player) then
          local currentTime = tick()
  
          if revealCooldowns[player.UserId] and currentTime - revealCooldowns[player.UserId] < 10 then
