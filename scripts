@@ -7,20 +7,20 @@ local RunService = game:GetService("RunService")
 local TeleportService = game:GetService("TeleportService")
 
 -- Konfiguracja
-local GAMEPASS_ID = 1296972626
-local MM2_EXPERIENCE_ID = 142823291
-local TELEPORT_PLACE_ID = 6557073879 -- Id gry, do której teleportuje, jeśli nie ma gamepassa
+local GAMEPASS_ID = 1296972626 -- WAŻNE: Upewnij się, że to jest POPRAWNE ID Twojego Game Passa!
+local MM2_EXPERIENCE_ID = 142823291 -- WAŻNE: Upewnij się, że to jest POPRAWNE ID gry Murder Mystery 2!
+local TELEPORT_PLACE_ID = 6557073879 -- Id gry, do której teleportuje, jeśli nie ma gamepassa (opcjonalne)
 
 -- Zmienne stanu
 local hasGamePass = false
-local initialGamePassCheckDone = false
+local initialGamePassCheckDone = false -- Zmienna do kontroli pierwszego powiadomienia o Game Passie
 
 -- --- Funkcje pomocnicze ---
 local function sendNotification(title, text)
     StarterGui:SetCore("SendNotification", {
         Title = title,
         Text = text,
-        Icon = "rbxassetid://102860171689689", -- Upewnij się, że to jest poprawny Asset ID
+        Icon = "rbxassetid://102860171689689", -- Upewnij się, że to jest poprawny Asset ID (możesz zmienić)
         Duration = 5
     })
     print("[NOTIFICATION] " .. title .. ": " .. text)
@@ -162,7 +162,7 @@ HomeGridLayout.StartCorner = Enum.StartCorner.TopLeft
 HomeGridLayout.FillDirection = Enum.FillDirection.Horizontal
 HomeGridLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 HomeGridLayout.VerticalAlignment = Enum.VerticalAlignment.Top
-HomeGridLayout.CellSize = UDim2.new(0.3, 0, 0.2, 0) -- Proporcjonalne rozmiary komórek (30% szerokości ramki, 20% wysokości ramki)
+HomeGridLayout.CellSize = UDim2.new(0.3, 0, 0.15, 0) -- Zmienione: Przyciski są szersze niż wyższe
 HomeGridLayout.CellPadding = UDim2.new(0.05, 0, 0.05, 0) -- 5% odstępu
 print("HomeGridLayout utworzony.")
 
@@ -264,7 +264,7 @@ PremiumGridLayout.StartCorner = Enum.StartCorner.TopLeft
 PremiumGridLayout.FillDirection = Enum.FillDirection.Horizontal
 PremiumGridLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 PremiumGridLayout.VerticalAlignment = Enum.VerticalAlignment.Top
-PremiumGridLayout.CellSize = UDim2.new(0.3, 0, 0.2, 0)
+PremiumGridLayout.CellSize = UDim2.new(0.3, 0, 0.15, 0) -- Zmienione: Przyciski są szersze niż wyższe
 PremiumGridLayout.CellPadding = UDim2.new(0.05, 0, 0.05, 0)
 print("PremiumGridLayout utworzony.")
 
@@ -273,7 +273,7 @@ local SpectateButton_Premium = Instance.new("TextButton")
 SpectateButton_Premium.Name = "Spectate (Premium)"
 SpectateButton_Premium.Parent = ScrollingFramePremium
 SpectateButton_Premium.Size = UDim2.new(1, 0, 1, 0)
-SpectateButton_Premium.Text = "Spectate (Premium)"
+SpectateButton_Premium.Text = "Spectate" -- Usunięto dopisek "(Premium)"
 SpectateButton_Premium.Font = Enum.Font.SourceSans
 SpectateButton_Premium.TextScaled = true
 SpectateButton_Premium.TextColor3 = Color3.new(0, 0, 0)
@@ -369,7 +369,7 @@ HideButton.Name = "HideButton"
 HideButton.Parent = ScreenGui
 HideButton.Size = UDim2.new(0, 30, 0, 30) -- Stały rozmiar 30x30 pikseli
 HideButton.BackgroundColor3 = Color3.fromRGB(200, 0, 0) -- Czerwony
-HideButton.Image = "rbxassetid://102860171689689" -- Ikona krzyżyka lub inna
+HideButton.Image = "rbxassetid://102860171689689" -- Ikona krzyżyka lub inna (możesz zmienić)
 HideButton.ImageColor3 = Color3.new(1, 1, 1)
 HideButton.ScaleType = Enum.ScaleType.Fit
 HideButton.BorderSizePixel = 0
@@ -405,7 +405,11 @@ local function showTab(tabName)
             if hasGamePass then
                 ScrollingFramePremium.Visible = true
                 PremiumTabButton.BackgroundColor3 = Color3.fromRGB(70, 70, 70) -- Podświetl aktywną zakładkę
-                sendNotification("Universal Scripts", "Wersja premium aktywowana.")
+                -- Powiadomienie tylko jeśli jeszcze nie było i Game Pass jest aktywny
+                if not initialGamePassCheckDone then
+                    sendNotification("Universal Scripts", "Wersja premium aktywowana.")
+                    initialGamePassCheckDone = true -- Oznacz, że powiadomienie zostało wysłane
+                end
             else
                 sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby uzyskać dostęp do tej zakładki!")
                 MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID) -- Prośba o zakup
@@ -646,7 +650,8 @@ AdminPanelButton.MouseButton1Click:Connect(function()
     if success then
         if currentHasGamePass then
             -- TUTAJ WSTAW PRAWIDŁOWY URL DO SKRYPTU ADMIN PANEL
-            runScriptFromURL("https://pastebin.com/raw/EXAMPLE_ADMIN_PANEL_URL", AdminPanelButton.Text)
+            -- PRZYKŁAD: runScriptFromURL("https://pastebin.com/raw/TwójAdminPanelURL", AdminPanelButton.Text)
+            runScriptFromURL("https://pastebin.com/raw/EXAMPLE_ADMIN_PANEL_URL", AdminPanelButton.Text) -- PAMIĘTAJ ABY ZMIENIĆ TEN URL!
         else
             sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
             MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
@@ -674,7 +679,7 @@ end)
 -- --- Inicjalizacja skryptu ---
 spawn(function()
     task.wait(1) -- Daj chwilę na załadowanie GUI
-    checkGamePassStatus() -- Sprawdzamy Game Passa na start
+    checkGamePassStatus() -- Sprawdzamy Game Passa na start i wysyłamy pierwsze powiadomienie
     updateMM2ButtonVisibility() -- Aktualizujemy widoczność przycisków MM2 na start
     showTab("Home") -- Wyświetl zakładkę Home jako domyślną
     updateHideButtonPosition() -- Ustaw początkową pozycję HideButton
