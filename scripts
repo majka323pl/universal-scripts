@@ -36,11 +36,11 @@ local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
 local ScrollingFramePremium = Instance.new("ScrollingFrame")
 local UICorner_5 = Instance.new("UICorner")
 
--- Dodajemy UIListLayout do TabsFrame, aby przyciski były skalowane i układane automatycznie
+-- Dodajemy UIListLayout do TabsFrame
 local TabsLayout = Instance.new("UIListLayout")
 TabsLayout.Parent = TabsFrame
 TabsLayout.SortOrder = Enum.SortOrder.LayoutOrder
-TabsLayout.Padding = UDim.new(0.05, 0) -- Dodajemy odstępy między przyciskami
+TabsLayout.Padding = UDim.new(0.05, 0)
 TabsLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 TabsLayout.VerticalAlignment = Enum.VerticalAlignment.Top
 
@@ -55,6 +55,7 @@ PremiumGridLayout.CellSize = UDim2.new(0.3, 0, 0.1, 0) -- Skalowane rozmiary kom
 PremiumGridLayout.CellPadding = UDim2.new(0.05, 0, 0.05, 0) -- Odstępy między przyciskami
 
 -- Dodajemy UIGridLayout do ScrollingFrameHome
+local ScrollingFrameHome = Instance.new("ScrollingFrame") -- Deklarujemy ScrollingFrameHome tutaj
 local HomeGridLayout = Instance.new("UIGridLayout")
 HomeGridLayout.Parent = ScrollingFrameHome
 HomeGridLayout.StartCorner = Enum.StartCorner.TopLeft
@@ -76,7 +77,7 @@ local UIAspectRatioConstraint_8 = Instance.new("UIAspectRatioConstraint")
 local TitleLabel = Instance.new("TextLabel")
 local UITextSizeConstraint_7 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_9 = Instance.new("UIAspectRatioConstraint")
-local ScrollingFrameHome = Instance.new("ScrollingFrame")
+
 local SpeedToolbutton = Instance.new("TextButton")
 local UICorner_10 = Instance.new("UICorner")
 local ClicktptoolButton = Instance.new("TextButton")
@@ -274,18 +275,19 @@ UIAspectRatioConstraint_9.Parent = TitleLabel
 UIAspectRatioConstraint_9.AspectRatio = 8.78787899017334
 
 ScrollingFrameHome.Name = "ScrollingFrameHome"
-ScrollingFrameHome.Parent = MainFrame
+ScrollingFrameHome.Parent = MainFrame -- WAŻNE: Upewniamy się, że ScrollingFrameHome jest dzieckiem MainFrame
 ScrollingFrameHome.Active = true
 ScrollingFrameHome.BackgroundColor3 = Color3.new(0.231373, 0.231373, 0.231373)
 ScrollingFrameHome.BorderColor3 = Color3.new(0, 0, 0)
 ScrollingFrameHome.BorderSizePixel = 0
 ScrollingFrameHome.Position = UDim2.new(0.239610985, 0, 0.113314532, 0)
 ScrollingFrameHome.Size = UDim2.new(0.733235598, 0, 0.864629686, 0)
-ScrollingFrameHome.CanvasSize = UDim2.new(0,0,1.5,0)
+-- CanvasSize zostanie ustawiony dynamicznie po dodaniu przycisków
+ScrollingFrameHome.Visible = true -- Domyślnie widoczny, bo jest aktywną zakładką
 
 UICorner_12.Parent = ScrollingFrameHome
 
--- Upewniamy się, że Parent dla przycisków w Home jest poprawnie ustawiony
+-- Przyciski dla zakładki HOME (upewniamy się, że Parent jest poprawnie ustawiony)
 SpeedToolbutton.Name = "Speed Tool button"
 SpeedToolbutton.Parent = ScrollingFrameHome
 SpeedToolbutton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
@@ -360,6 +362,8 @@ FlingButton.TextWrapped = true
 FlingButton.LayoutOrder = 5
 
 UICorner_15.Parent = FlingButton
+
+-- Usunięto zbędne UIAspectRatioConstraint z przycisków, UIGridLayout i TextScaled wystarczą
 
 UIAspectRatioConstraint_15.Parent = ScrollingFrameHome
 UIAspectRatioConstraint_15.AspectRatio = 1.4926543235778809
@@ -450,10 +454,37 @@ local function updateHideButtonPosition()
     end
 end
 
+-- Dynamiczne ustawienie CanvasSize dla ScrollingFrameHome
+local function updateCanvasSizeHome()
+    local children = ScrollingFrameHome:GetChildren()
+    local buttonCount = 0
+    for _, child in ipairs(children) do
+        if child:IsA("TextButton") then -- Liczymy tylko przyciski, które są pod UIGridLayout
+            buttonCount = buttonCount + 1
+        end
+    end
+
+    local layout = HomeGridLayout
+    if layout and layout.ClassName == "UIGridLayout" then
+        local columns = math.floor(ScrollingFrameHome.AbsoluteSize.X / (layout.AbsoluteCellSize.X + layout.AbsoluteCellPadding.X))
+        if columns == 0 then columns = 1 end -- Zapobiegamy dzieleniu przez zero
+        local rows = math.ceil(buttonCount / columns)
+        local totalHeight = (rows * (layout.AbsoluteCellSize.Y + layout.AbsoluteCellPadding.Y)) - layout.AbsoluteCellPadding.Y
+        ScrollingFrameHome.CanvasSize = UDim2.new(0, 0, 0, totalHeight)
+    end
+end
+
+-- Wywołujemy updateCanvasSizeHome po dodaniu wszystkich przycisków i po każdej zmianie rozmiaru ramki
+MainFrame.SizeChanged:Connect(function()
+    updateHideButtonPosition()
+    updateCanvasSizeHome() -- Aktualizuj CanvasSize również przy zmianie rozmiaru MainFrame
+end)
+
 checkGamePassStatus()
 updateMM2ButtonVisibility()
 showTab("Home")
 updateHideButtonPosition()
+updateCanvasSizeHome() -- Początkowe wywołanie
 
 HideButton.Changed:Connect(function(property)
     if property == "Position" then
@@ -589,10 +620,12 @@ end)
 
 HomeTabButton.MouseButton1Click:Connect(function()
     showTab("Home")
+    updateCanvasSizeHome() -- Upewnij się, że CanvasSize jest poprawny po przełączeniu na Home
 end)
 
 PremiumTabButton.MouseButton1Click:Connect(function()
     showTab("Premium")
+    -- Nie potrzebujemy updateCanvasSize tutaj, jeśli premium ma stały canvas size lub też dynamiczny
 end)
 
 HideButton.MouseButton1Click:Connect(function()
@@ -601,6 +634,9 @@ end)
 
 MainFrame.VisibleChanged:Connect(function()
     updateHideButtonPosition()
+    if MainFrame.Visible and ScrollingFrameHome.Visible then
+        updateCanvasSizeHome() -- Zaktualizuj CanvasSize, gdy MainFrame stanie się widoczny i Home jest aktywny
+    end
 end)
 
 MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gamePassId, wasPurchased)
