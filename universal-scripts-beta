@@ -26,14 +26,12 @@ end
 
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "UniversalScriptsGUI"
-ScreenGui.Parent = player:WaitForChild("PlayerGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ScreenGui.ResetOnSpawn = false
 ScreenGui.Enabled = true
 
 local MainFrame = Instance.new("Frame")
 MainFrame.Name = "MainFrame"
-MainFrame.Parent = ScreenGui
 MainFrame.BackgroundColor3 = Color3.new(0.172549, 0.172549, 0.172549)
 MainFrame.BorderColor3 = Color3.new(0, 0, 0)
 MainFrame.BorderSizePixel = 0
@@ -430,7 +428,6 @@ ScreenGui_UIAspectRatioConstraint.AspectRatio = 1.9216867685317993
 
 local HideButton = Instance.new("ImageButton")
 HideButton.Name = "HideButton"
-HideButton.Parent = ScreenGui
 HideButton.BackgroundColor3 = Color3.new(1, 0, 0)
 HideButton.BorderColor3 = Color3.new(0, 0, 0)
 HideButton.BorderSizePixel = 3
@@ -639,18 +636,13 @@ end)
 
 HideButton.MouseButton1Click:Connect(function()
     MainFrame.Visible = not MainFrame.Visible
-    updateHideButtonPosition()
-end)
-
-MainFrame.Change.Position:Connect(function()
-    if MainFrame.Visible then
-        updateHideButtonPosition()
-    end
 end)
 
 MainFrame.VisibleChanged:Connect(function()
     updateHideButtonPosition()
 end)
+
+RunService.RenderStepped:Connect(updateHideButtonPosition)
 
 local lastPlaceId = game.PlaceId
 RunService.Stepped:Connect(function()
@@ -684,7 +676,11 @@ MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gameP
 end)
 
 spawn(function()
-    task.wait(3)
+    player.PlayerGui.ChildAdded:Wait()
+    ScreenGui.Parent = player.PlayerGui
+    HideButton.Parent = ScreenGui -- Upewnij się, że HideButton jest przypisany do ScreenGui
+
+    task.wait(5)
     sendNotification("Universal Scripts", "Witaj w Universal Scripts! Skrypt załadowany.")
     checkGamePassStatus()
     updateMM2ButtonVisibility()
