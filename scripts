@@ -55,7 +55,7 @@ local Invisibiltybutton = Instance.new("TextButton")
 local UICorner_Invisibility = Instance.new("UICorner")
 local GhostMM2Button = Instance.new("TextButton")
 local UICorner_GhostMM2 = Instance.new("UICorner")
-local UIAspectRatioConstraint_PremiumButtons = Instance.new("UIAspectRatioConstraint")
+-- Removed UIAspectRatioConstraint_PremiumButtons as UIGridLayout manages sizing
 
 local ScrollingFrameHome = Instance.new("ScrollingFrame")
 local UICorner_HomeFrame = Instance.new("UICorner")
@@ -71,7 +71,7 @@ local NoclipButton = Instance.new("TextButton")
 local UICorner_Noclip = Instance.new("UICorner")
 local FlingButton = Instance.new("TextButton")
 local UICorner_Fling = Instance.new("UICorner")
-local UIAspectRatioConstraint_HomeButtons = Instance.new("UIAspectRatioConstraint")
+-- Removed UIAspectRatioConstraint_HomeButtons as UIGridLayout manages sizing
 
 local UIAspectRatioConstraint_MainFrame = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_ScreenGui = Instance.new("UIAspectRatioConstraint")
@@ -93,6 +93,7 @@ MainFrame.Position = UDim2.new(0.212787732, 0, 0.244107679, 0)
 MainFrame.Size = UDim2.new(0.513162374, 0, 0.560262501, 0)
 MainFrame.Draggable = true
 MainFrame.Visible = true
+MainFrame.Active = true -- IMPORTANT: Ensure MainFrame is active to receive input
 UICorner.Parent = MainFrame
 
 TabsFrame.Name = "TabsFrame"
@@ -102,6 +103,7 @@ TabsFrame.BorderColor3 = Color3.new(0, 0, 0)
 TabsFrame.BorderSizePixel = 0
 TabsFrame.Position = UDim2.new(0, 0, 3.349695e-8, 0)
 TabsFrame.Size = UDim2.new(0.21077837, 0, 0.998841524, 0)
+TabsFrame.Active = true -- Ensure TabsFrame is active
 TabsLayout.Parent = TabsFrame -- IMPORTANT: Set parent for the layout
 TabsLayout.SortOrder = Enum.SortOrder.LayoutOrder
 TabsLayout.Padding = UDim.new(0.05, 0)
@@ -128,7 +130,7 @@ UICorner_HomeTab.Parent = HomeTabButton
 
 PremiumTabButton.Name = "PremiumTabButton"
 PremiumTabButton.Parent = TabsFrame
-PremiumTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
+PremiumTabButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863) -- Default to less highlighted
 PremiumTabButton.BorderColor3 = Color3.new(0, 0, 0)
 PremiumTabButton.BorderSizePixel = 0
 PremiumTabButton.Size = UDim2.new(0.881656826, 0, 0.083516486, 0)
@@ -252,13 +254,10 @@ GhostMM2Button.Visible = false
 GhostMM2Button.LayoutOrder = 5
 UICorner_GhostMM2.Parent = GhostMM2Button
 
-UIAspectRatioConstraint_PremiumButtons.Parent = ScrollingFramePremium
-UIAspectRatioConstraint_PremiumButtons.AspectRatio = 1.4926543235778809
-
 -- ScrollingFrameHome Setup
 ScrollingFrameHome.Name = "ScrollingFrameHome"
 ScrollingFrameHome.Parent = MainFrame
-ScrollingFrameHome.Active = true
+ScrollingFrameHome.Active = true -- IMPORTANT: Ensure ScrollingFrameHome is active
 ScrollingFrameHome.BackgroundColor3 = Color3.new(0.231373, 0.231373, 0.231373)
 ScrollingFrameHome.BorderColor3 = Color3.new(0, 0, 0)
 ScrollingFrameHome.BorderSizePixel = 0
@@ -345,9 +344,6 @@ FlingButton.TextWrapped = true
 FlingButton.LayoutOrder = 5
 UICorner_Fling.Parent = FlingButton
 
-UIAspectRatioConstraint_HomeButtons.Parent = ScrollingFrameHome
-UIAspectRatioConstraint_HomeButtons.AspectRatio = 1.4926543235778809
-
 UIAspectRatioConstraint_MainFrame.Parent = MainFrame
 UIAspectRatioConstraint_MainFrame.AspectRatio = 1.7601344585418701
 
@@ -366,21 +362,25 @@ HideButton.Position = UDim2.new(0.707863092, 0, 0.214006022, 0)
 HideButton.Size = UDim2.new(0, 30, 0, 30)
 HideButton.ZIndex = 5
 HideButton.Draggable = true
+HideButton.Active = true -- Ensure HideButton is active to receive input
 
--- Functions
-local function showTab(tabName)
+---
+## Funkcje i logika skryptu
+---
+
+Local function showTab(tabName)
     ScrollingFrameHome.Visible = false
     ScrollingFramePremium.Visible = false
 
     if tabName == "Home" then
         ScrollingFrameHome.Visible = true
-        HomeTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
-        PremiumTabButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
+        HomeTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608) -- Highlight Home
+        PremiumTabButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863) -- Unhighlight Premium
     elseif tabName == "Premium" then
         if hasGamePass then
             ScrollingFramePremium.Visible = true
-            PremiumTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
-            HomeTabButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
+            PremiumTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608) -- Highlight Premium
+            HomeTabButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863) -- Unhighlight Home
         else
             sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby uzyskać dostęp do tej zakładki!")
             TeleportService:Teleport(TELEPORT_PLACE_ID, player)
@@ -389,7 +389,7 @@ local function showTab(tabName)
     end
 end
 
-local function checkGamePassStatus()
+Local function checkGamePassStatus()
     local success, result = pcall(function()
         return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
     end)
@@ -410,7 +410,7 @@ local function checkGamePassStatus()
     end
 end
 
-local function updateMM2ButtonVisibility()
+Local function updateMM2ButtonVisibility()
     if game.PlaceId == MM2_EXPERIENCE_ID then
         MM2Button.Visible = true
         GhostMM2Button.Visible = true
@@ -420,7 +420,7 @@ local function updateMM2ButtonVisibility()
     end
 end
 
-local function updateHideButtonPosition()
+Local function updateHideButtonPosition()
     if MainFrame.Visible then
         local frameAbsolutePosition = MainFrame.AbsolutePosition
         local frameAbsoluteSize = MainFrame.AbsoluteSize
@@ -457,7 +457,8 @@ local function updateCanvasSizeHome()
         local cellSizeY = layout.AbsoluteCellSize.Y
         local cellPaddingY = layout.AbsoluteCellPadding.Y
 
-        local columns = math.max(1, math.floor(frameWidth / (cellSizeX + cellPaddingX))) -- Ensure at least 1 column
+        -- Calculate columns based on actual size, ensure at least 1 column
+        local columns = math.max(1, math.floor(frameWidth / (cellSizeX + cellPaddingX)))
         local rows = math.ceil(buttonCount / columns)
 
         local totalHeight = (rows * (cellSizeY + cellPaddingY)) - cellPaddingY
@@ -465,6 +466,10 @@ local function updateCanvasSizeHome()
         ScrollingFrameHome.CanvasSize = UDim2.new(0, 0, 0, totalHeight + layout.AbsoluteCellPadding.Y)
     end
 end
+
+---
+## Podpięcie zdarzeń i inicjalizacja
+---
 
 -- Connect events and initial setup
 MainFrame.SizeChanged:Connect(function()
@@ -500,27 +505,33 @@ end
 
 -- Event Listeners for Home Tab Buttons
 SpeedToolbutton.MouseButton1Click:Connect(function()
+    print("SpeedToolbutton clicked") -- Debug print
     runScriptAndNotify("https://pastebin.com/raw/X7B0HPc2", SpeedToolbutton.Text)
 end)
 
 ClicktptoolButton.MouseButton1Click:Connect(function()
+    print("ClicktptoolButton clicked") -- Debug print
     runScriptAndNotify("https://pastebin.com/raw/4KF2WJ9u", ClicktptoolButton.Text)
 end)
 
 SpectateButton_Home.MouseButton1Click:Connect(function()
+    print("SpectateButton_Home clicked") -- Debug print
     runScriptAndNotify("https://pastebin.com/raw/UFVLWQRw", SpectateButton_Home.Text)
 end)
 
 NoclipButton.MouseButton1Click:Connect(function()
+    print("NoclipButton clicked") -- Debug print
     runScriptAndNotify("https://pastebin.com/raw/CnbYfaj1", NoclipButton.Text)
 end)
 
 FlingButton.MouseButton1Click:Connect(function()
+    print("FlingButton clicked") -- Debug print
     runScriptAndNotify('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt', FlingButton.Text)
 end)
 
 -- Event Listeners for Premium Tab Buttons (with GamePass check)
 SpectateButton_Premium.MouseButton1Click:Connect(function()
+    print("SpectateButton_Premium clicked") -- Debug print
     local success, currentHasGamePass = pcall(function()
         return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
     end)
@@ -539,6 +550,7 @@ SpectateButton_Premium.MouseButton1Click:Connect(function()
 end)
 
 MM2Button.MouseButton1Click:Connect(function()
+    print("MM2Button clicked") -- Debug print
     local success, currentHasGamePass = pcall(function()
         return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
     end)
@@ -557,6 +569,7 @@ MM2Button.MouseButton1Click:Connect(function()
 end)
 
 FlyButton.MouseButton1Click:Connect(function()
+    print("FlyButton clicked") -- Debug print
     local success, currentHasGamePass = pcall(function()
         return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
     end)
@@ -575,6 +588,7 @@ FlyButton.MouseButton1Click:Connect(function()
 end)
 
 Invisibiltybutton.MouseButton1Click:Connect(function()
+    print("Invisibiltybutton clicked") -- Debug print
     local success, currentHasGamePass = pcall(function()
         return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
     end)
@@ -593,6 +607,7 @@ Invisibiltybutton.MouseButton1Click:Connect(function()
 end)
 
 GhostMM2Button.MouseButton1Click:Connect(function()
+    print("GhostMM2Button clicked") -- Debug print
     local success, currentHasGamePass = pcall(function()
         return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
     end)
@@ -612,14 +627,17 @@ end)
 
 -- Tab Button Click Events
 HomeTabButton.MouseButton1Click:Connect(function()
+    print("HomeTabButton clicked") -- Debug print
     showTab("Home")
 end)
 
 PremiumTabButton.MouseButton1Click:Connect(function()
+    print("PremiumTabButton clicked") -- Debug print
     showTab("Premium")
 end)
 
 HideButton.MouseButton1Click:Connect(function()
+    print("HideButton clicked") -- Debug print
     MainFrame.Visible = not MainFrame.Visible
 end)
 
