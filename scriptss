@@ -59,6 +59,11 @@ local GhostMM2Button = Instance.new("TextButton") -- Nowy przycisk GhostMM2
 local UICorner_GhostMM2 = Instance.new("UICorner")
 local UITextSizeConstraint_GhostMM2 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_GhostMM2 = Instance.new("UIAspectRatioConstraint")
+local FlingButton_Premium = Instance.new("TextButton") -- Fling przeniesiony do Premium
+local UICorner_FlingPremium = Instance.new("UICorner")
+local UITextSizeConstraint_FlingPremium = Instance.new("UITextSizeConstraint")
+local UIAspectRatioConstraint_FlingPremium = Instance.new("UIAspectRatioConstraint")
+
 local UIAspectRatioConstraint_8 = Instance.new("UIAspectRatioConstraint")
 local TitleLabel = Instance.new("TextLabel")
 local UITextSizeConstraint_7 = Instance.new("UITextSizeConstraint")
@@ -73,18 +78,12 @@ local UICorner_11 = Instance.new("UICorner")
 local UITextSizeConstraint_9 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_11 = Instance.new("UIAspectRatioConstraint")
 local UICorner_12 = Instance.new("UICorner")
-local SpectateButton_Home = Instance.new("TextButton")
-local UICorner_13 = Instance.new("UICorner")
-local UITextSizeConstraint_10 = Instance.new("UITextSizeConstraint")
-local UIAspectRatioConstraint_12 = Instance.new("UIAspectRatioConstraint")
+-- Usunięto SpectateButton_Home
 local NoclipButton = Instance.new("TextButton")
 local UICorner_14 = Instance.new("UICorner")
 local UITextSizeConstraint_11 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_13 = Instance.new("UIAspectRatioConstraint")
-local FlingButton = Instance.new("TextButton")
-local UICorner_15 = Instance.new("UICorner")
-local UITextSizeConstraint_12 = Instance.new("UITextSizeConstraint")
-local UIAspectRatioConstraint_14 = Instance.new("UIAspectRatioConstraint")
+-- Usunięto FlingButton z Home
 local UIAspectRatioConstraint_15 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_16 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_17 = Instance.new("UIAspectRatioConstraint")
@@ -103,7 +102,7 @@ MainFrame.BorderSizePixel = 0
 MainFrame.Position = UDim2.new(0.212787732, 0, 0.244107679, 0)
 MainFrame.Size = UDim2.new(0.513162374, 0, 0.560262501, 0)
 MainFrame.Draggable = true
-MainFrame.Visible = true -- Upewnienie się, że MainFrame jest widoczny
+MainFrame.Visible = true
 
 UICorner.Parent = MainFrame
 
@@ -276,6 +275,26 @@ UITextSizeConstraint_GhostMM2.MaxTextSize = 37
 UIAspectRatioConstraint_GhostMM2.Parent = GhostMM2Button
 UIAspectRatioConstraint_GhostMM2.AspectRatio = 3.9473683834075928
 
+-- Przycisk Fling przeniesiony do Premium, skalowany
+FlingButton_Premium.Name = "Fling Button Premium"
+FlingButton_Premium.Parent = ScrollingFramePremium
+FlingButton_Premium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
+FlingButton_Premium.BorderColor3 = Color3.new(0, 0, 0)
+FlingButton_Premium.Position = UDim2.new(0.5, 0, 0.225, 0) -- Prawa kolumna, trzeci rząd
+FlingButton_Premium.Size = UDim2.new(0.45, 0, 0.08, 0)
+FlingButton_Premium.Font = Enum.Font.SourceSans
+FlingButton_Premium.Text = "Fling"
+FlingButton_Premium.TextColor3 = Color3.new(0, 0, 0)
+FlingButton_Premium.TextScaled = true
+FlingButton_Premium.TextSize = 14
+FlingButton_Premium.TextWrapped = true
+
+UICorner_FlingPremium.Parent = FlingButton_Premium
+UITextSizeConstraint_FlingPremium.Parent = FlingButton_Premium
+UITextSizeConstraint_FlingPremium.MaxTextSize = 37
+UIAspectRatioConstraint_FlingPremium.Parent = FlingButton_Premium
+UIAspectRatioConstraint_FlingPremium.AspectRatio = 3.9473683834075928
+
 UIAspectRatioConstraint_8.Parent = ScrollingFramePremium
 UIAspectRatioConstraint_8.AspectRatio = 1.4926543235778809
 
@@ -351,30 +370,16 @@ UITextSizeConstraint_9.MaxTextSize = 35
 UIAspectRatioConstraint_11.Parent = ClicktptoolButton
 UIAspectRatioConstraint_11.AspectRatio = 3.9473683834075928
 
-SpectateButton_Home.Name = "Spectate Button"
-SpectateButton_Home.Parent = ScrollingFrameHome
-SpectateButton_Home.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
-SpectateButton_Home.BorderColor3 = Color3.new(0, 0, 0)
-SpectateButton_Home.Position = UDim2.new(0.04, 0, 0.125, 0)
-SpectateButton_Home.Size = UDim2.new(0.45, 0, 0.08, 0)
-SpectateButton_Home.Font = Enum.Font.SourceSans
-SpectateButton_Home.Text = "Spectate"
-SpectateButton_Home.TextColor3 = Color3.new(0, 0, 0)
-SpectateButton_Home.TextScaled = true
-SpectateButton_Home.TextSize = 14
-SpectateButton_Home.TextWrapped = true
-
-UICorner_13.Parent = SpectateButton_Home
-UITextSizeConstraint_10.Parent = SpectateButton_Home
-UITextSizeConstraint_10.MaxTextSize = 37
-UIAspectRatioConstraint_12.Parent = SpectateButton_Home
-UIAspectRatioConstraint_12.AspectRatio = 3.9473683834075928
+-- Usunięto SpectateButton_Home z definicji GUI
+-- SpectateButton_Home.Name = "Spectate Button"
+-- SpectateButton_Home.Parent = ScrollingFrameHome
+-- ...
 
 NoclipButton.Name = "Noclip Button"
 NoclipButton.Parent = ScrollingFrameHome
 NoclipButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 NoclipButton.BorderColor3 = Color3.new(0, 0, 0)
-NoclipButton.Position = UDim2.new(0.5, 0, 0.125, 0)
+NoclipButton.Position = UDim2.new(0.04, 0, 0.125, 0) -- Przeniesiono Noclip wyżej, aby wypełnić lukę
 NoclipButton.Size = UDim2.new(0.45, 0, 0.08, 0)
 NoclipButton.Font = Enum.Font.SourceSans
 NoclipButton.Text = "Noclip"
@@ -389,24 +394,10 @@ UITextSizeConstraint_11.MaxTextSize = 37
 UIAspectRatioConstraint_13.Parent = NoclipButton
 UIAspectRatioConstraint_13.AspectRatio = 3.9473683834075928
 
-FlingButton.Name = "Fling Button"
-FlingButton.Parent = ScrollingFrameHome
-FlingButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
-FlingButton.BorderColor3 = Color3.new(0, 0, 0)
-FlingButton.Position = UDim2.new(0.04, 0, 0.225, 0)
-FlingButton.Size = UDim2.new(0.45, 0, 0.08, 0)
-FlingButton.Font = Enum.Font.SourceSans
-FlingButton.Text = "Fling"
-FlingButton.TextColor3 = Color3.new(0, 0, 0)
-FlingButton.TextScaled = true
-FlingButton.TextSize = 14
-FlingButton.TextWrapped = true
-
-UICorner_15.Parent = FlingButton
-UITextSizeConstraint_12.Parent = FlingButton
-UITextSizeConstraint_12.MaxTextSize = 37
-UIAspectRatioConstraint_14.Parent = FlingButton
-UIAspectRatioConstraint_14.AspectRatio = 3.9473683834075928
+-- Usunięto FlingButton z Home
+-- FlingButton.Name = "Fling Button"
+-- FlingButton.Parent = ScrollingFrameHome
+-- ...
 
 UIAspectRatioConstraint_15.Parent = ScrollingFrameHome
 UIAspectRatioConstraint_15.AspectRatio = 1.4926543235778809
@@ -530,17 +521,19 @@ ClicktptoolButton.MouseButton1Click:Connect(function()
     runScriptAndNotify("https://pastebin.com/raw/4KF2WJ9u", ClicktptoolButton.Text)
 end)
 
-SpectateButton_Home.MouseButton1Click:Connect(function()
-    runScriptAndNotify("https://pastebin.com/raw/UFVLWQRw", SpectateButton_Home.Text)
-end)
+-- Usunięto obsługę kliknięcia dla SpectateButton_Home
+-- SpectateButton_Home.MouseButton1Click:Connect(function()
+--    runScriptAndNotify("https://pastebin.com/raw/UFVLWQRw", SpectateButton_Home.Text)
+-- end)
 
 NoclipButton.MouseButton1Click:Connect(function()
     runScriptAndNotify("https://pastebin.com/raw/CnbYfaj1", NoclipButton.Text)
 end)
 
-FlingButton.MouseButton1Click:Connect(function()
-    runScriptAndNotify('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt', FlingButton.Text)
-end)
+-- Usunięto obsługę kliknięcia dla FlingButton z Home
+-- FlingButton.MouseButton1Click:Connect(function()
+--    runScriptAndNotify('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt', FlingButton.Text)
+-- end)
 
 SpectateButton_Premium.MouseButton1Click:Connect(function()
     local success, currentHasGamePass = pcall(function()
@@ -597,6 +590,26 @@ GhostMM2Button.MouseButton1Click:Connect(function()
         sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania wersji premium.")
     end
 end)
+
+-- Obsługa kliknięcia dla FlingButton w sekcji Premium
+FlingButton_Premium.MouseButton1Click:Connect(function()
+    local success, currentHasGamePass = pcall(function()
+        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
+    end)
+
+    if success then
+        if currentHasGamePass then
+            runScriptAndNotify('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt', FlingButton_Premium.Text)
+        else
+            sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
+            MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
+        end
+    else
+        warn("Błąd podczas sprawdzania wersji premium (Fling):", currentHasGamePass)
+        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania wersji premium.")
+    end
+end)
+
 
 FlyButton.MouseButton1Click:Connect(function()
     local success, currentHasGamePass = pcall(function()
