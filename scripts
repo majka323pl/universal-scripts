@@ -53,18 +53,23 @@ local MainFrameCorner = Instance.new("UICorner")
 MainFrameCorner.CornerRadius = UDim.new(0, 10) -- Większe zaokrąglenie
 MainFrameCorner.Parent = MainFrame
 
--- Layout dla MainFrame, aby uporządkować TitleLabel, TabsFrame i ContentFrame
-local MainFrameLayout = Instance.new("UIListLayout")
-MainFrameLayout.Parent = MainFrame
-MainFrameLayout.FillDirection = Enum.FillDirection.Vertical
-MainFrameLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-MainFrameLayout.SortOrder = Enum.SortOrder.LayoutOrder
+-- UIGridLayout dla MainFrame, aby ułożyć TitleLabel, TabsFrame i ContentFrame
+-- Zapewnia kontrolę nad kolumnami i wierszami
+local MainFrameGridLayout = Instance.new("UIGridLayout")
+MainFrameGridLayout.Parent = MainFrame
+MainFrameGridLayout.FillDirection = Enum.FillDirection.Horizontal -- Układ poziomy dla kolumn
+MainFrameGridLayout.HorizontalAlignment = Enum.HorizontalAlignment.Left
+MainFrameGridLayout.VerticalAlignment = Enum.VerticalAlignment.Top
+MainFrameGridLayout.CellSize = UDim2.new(0.25, 0, 1, 0) -- Domylślny rozmiar komórek, zmienimy go dynamicznie
+MainFrameGridLayout.StartCorner = Enum.StartCorner.TopLeft
+MainFrameGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
+MainFrameGridLayout.Padding = UDim.new(0, 0) -- Brak odstępów między głównymi elementami
 
 -- TitleLabel
 local TitleLabel = Instance.new("TextLabel")
 TitleLabel.Name = "TitleLabel"
 TitleLabel.Parent = MainFrame
-TitleLabel.Size = UDim2.new(1, 0, 0.12, 0) -- 12% wysokości MainFrame
+TitleLabel.Size = UDim2.new(1, 0, 0.12, 0) -- Będzie rozciągać się na całą szerokość MainFrame (ustawione przez GridLayout)
 TitleLabel.BackgroundTransparency = 0
 TitleLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 TitleLabel.Text = "UNIVERSAL SCRIPTS"
@@ -78,33 +83,18 @@ local TitleLabelCorner = Instance.new("UICorner")
 TitleLabelCorner.CornerRadius = UDim.new(0, 10) -- Zaokrąglenie dla paska tytułowego
 TitleLabelCorner.Parent = TitleLabel
 
--- Container dla TabsFrame i ContentFrame (żeby mogły być obok siebie)
-local BodyFrame = Instance.new("Frame")
-BodyFrame.Name = "BodyFrame"
-BodyFrame.Parent = MainFrame
-BodyFrame.Size = UDim2.new(1, 0, 0.88, 0) -- Reszta wysokości MainFrame
-BodyFrame.BackgroundColor3 = Color3.fromRGB(44, 44, 44) -- Taki sam kolor jak MainFrame
-BodyFrame.BorderSizePixel = 0
-BodyFrame.LayoutOrder = 2 -- Drugi element w layoucie
-
-local BodyListLayout = Instance.new("UIListLayout") -- Użyj UIListLayout do ułożenia TabsFrame i ContentFrame obok siebie
-BodyListLayout.Parent = BodyFrame
-BodyListLayout.FillDirection = Enum.FillDirection.Horizontal -- Układaj poziomo
-BodyListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Left
-BodyListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-
 -- TabsFrame (ramka na przyciski zakładek)
 local TabsFrame = Instance.new("Frame")
 TabsFrame.Name = "TabsFrame"
-TabsFrame.Parent = BodyFrame
-TabsFrame.Size = UDim2.new(0.25, 0, 1, 0) -- 25% szerokości BodyFrame, cała wysokość
+TabsFrame.Parent = MainFrame
+TabsFrame.Size = UDim2.new(0.25, 0, 0.88, 0) -- 25% szerokości MainFrame, 88% wysokości MainFrame
 TabsFrame.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
 TabsFrame.BorderSizePixel = 0
 TabsFrame.Active = true
-TabsFrame.LayoutOrder = 1 -- Pierwszy w BodyFrame
+TabsFrame.LayoutOrder = 2 -- Drugi element w layoucie
 
 local TabsFrameCorner = Instance.new("UICorner")
-TabsFrameCorner.CornerRadius = UDim.new(0, 10) -- Większe zaokrąglenie
+TabsFrameCorner.CornerRadius = UDim.new(0, 10) -- Zaokrąglenie
 TabsFrameCorner.Parent = TabsFrame
 
 -- Layout dla przycisków zakładek w TabsFrame
@@ -146,12 +136,12 @@ Instance.new("UICorner", PremiumTabButton).CornerRadius = UDim.new(0, 5)
 -- ContentFrame (ramka na zawartość zakładek)
 local ContentFrame = Instance.new("Frame")
 ContentFrame.Name = "ContentFrame"
-ContentFrame.Parent = BodyFrame
-ContentFrame.Size = UDim2.new(0.75, 0, 1, 0) -- Reszta szerokości BodyFrame, cała wysokość
+ContentFrame.Parent = MainFrame
+ContentFrame.Size = UDim2.new(0.75, 0, 0.88, 0) -- 75% szerokości MainFrame, 88% wysokości MainFrame
 ContentFrame.BackgroundColor3 = Color3.fromRGB(59, 59, 59)
 ContentFrame.BorderSizePixel = 0
 ContentFrame.Active = true
-ContentFrame.LayoutOrder = 2 -- Drugi w BodyFrame
+ContentFrame.LayoutOrder = 3 -- Trzeci element w layoucie
 Instance.new("UICorner", ContentFrame).CornerRadius = UDim.new(0, 10) -- Większe zaokrąglenie
 
 -- ScrollingFrame dla Home
@@ -266,7 +256,7 @@ PremiumGridLayout.FillDirection = Enum.FillDirection.Horizontal
 PremiumGridLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 PremiumGridLayout.VerticalAlignment = Enum.VerticalAlignment.Top
 PremiumGridLayout.CellSize = UDim2.new(0.3, 0, 0.15, 0)
-PremiumGridLayout.CellPadding = UDim2.new(0.05, 0, 0.05, 0)
+PremiumGridLayout.CellPadding = UDim.new(0.05, 0, 0.05, 0)
 
 -- Przyciski dla Premium
 local SpectateButton_Premium = Instance.new("TextButton")
@@ -655,6 +645,12 @@ end)
 -- --- Inicjalizacja skryptu ---
 spawn(function()
     task.wait(1) -- Daj chwilę na załadowanie GUI
+    
+    -- Dostosowanie siatki MainFrame
+    MainFrameGridLayout.CellSize = UDim2.new(1, 0, 0.12, 0) -- Rozmiar dla pierwszej komórki (TitleLabel)
+    MainFrameGridLayout.CellSize = UDim2.new(0.25, 0, 0.88, 0) -- Rozmiar dla drugiej komórki (TabsFrame)
+    MainFrameGridLayout.CellSize = UDim2.new(0.75, 0, 0.88, 0) -- Rozmiar dla trzeciej komórki (ContentFrame)
+
     checkGamePassStatus() -- Sprawdzamy Game Passa na start i wysyłamy pierwsze powiadomienie
     updateMM2ButtonVisibility() -- Aktualizujemy widoczność przycisków MM2 na start
     showTab("Home") -- Wyświetl zakładkę Home jako domyślną
