@@ -29,14 +29,12 @@ local UICorner = Instance.new("UICorner")
 local TabsFrame = Instance.new("Frame")
 local HomeTabButton = Instance.new("TextButton")
 local UICorner_2 = Instance.new("UICorner")
-local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
-local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+-- Usunięto UITextSizeConstraint i UIAspectRatioConstraint dla HomeTabButton, bo UIListLayout zarządza pozycją i TextScaled skalowaniem tekstu
 local PremiumTabButton = Instance.new("TextButton")
 local UICorner_3 = Instance.new("UICorner")
-local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
-local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
+-- Usunięto UITextSizeConstraint i UIAspectRatioConstraint dla PremiumTabButton
 local UICorner_4 = Instance.new("UICorner")
-local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
+local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint") -- To może zostać dla proporcji TabsFrame
 local ScrollingFramePremium = Instance.new("ScrollingFrame")
 local UICorner_5 = Instance.new("UICorner")
 
@@ -58,7 +56,7 @@ PremiumGridLayout.VerticalAlignment = Enum.VerticalAlignment.Top
 PremiumGridLayout.CellSize = UDim2.new(0.3, 0, 0.1, 0) -- Skalowane rozmiary komórek (przyciski będą zajmować 30% szerokości ramki i 10% wysokości)
 PremiumGridLayout.CellPadding = UDim2.new(0.05, 0, 0.05, 0) -- Odstępy między przyciskami
 
--- Dodajemy UIGridLayout do ScrollingFrameHome
+-- DODANE: UIGridLayout do ScrollingFrameHome
 local HomeGridLayout = Instance.new("UIGridLayout")
 HomeGridLayout.Parent = ScrollingFrameHome
 HomeGridLayout.StartCorner = Enum.StartCorner.TopLeft
@@ -70,47 +68,38 @@ HomeGridLayout.CellPadding = UDim2.new(0.05, 0, 0.05, 0) -- Odstępy między prz
 
 local SpectateButton_Premium = Instance.new("TextButton")
 local UICorner_6 = Instance.new("UICorner")
-local UITextSizeConstraint_3 = Instance.new("UITextSizeConstraint")
-local UIAspectRatioConstraint_4 = Instance.new("UIAspectRatioConstraint")
+-- Usunięto UITextSizeConstraint i UIAspectRatioConstraint dla SpectateButton_Premium
 local MM2Button = Instance.new("TextButton")
 local UICorner_7 = Instance.new("UICorner")
-local UITextSizeConstraint_4 = Instance.new("UITextSizeConstraint")
-local UIAspectRatioConstraint_5 = Instance.new("UIAspectRatioConstraint")
+-- Usunięto UITextSizeConstraint i UIAspectRatioConstraint dla MM2Button
 local FlyButton = Instance.new("TextButton")
 local UICorner_8 = Instance.new("UICorner")
-local UITextSizeConstraint_5 = Instance.new("UITextSizeConstraint")
-local UIAspectRatioConstraint_6 = Instance.new("UIAspectRatioConstraint")
+-- Usunięto UITextSizeConstraint i UIAspectRatioConstraint dla FlyButton
 local Invisibiltybutton = Instance.new("TextButton")
 local UICorner_9 = Instance.new("UICorner")
-local UITextSizeConstraint_6 = Instance.new("UITextSizeConstraint")
-local UIAspectRatioConstraint_7 = Instance.new("UIAspectRatioConstraint")
-local UIAspectRatioConstraint_8 = Instance.new("UIAspectRatioConstraint")
+-- Usunięto UITextSizeConstraint i UIAspectRatioConstraint dla Invisibiltybutton
+local UIAspectRatioConstraint_8 = Instance.new("UIAspectRatioConstraint") -- Może zostać dla ogólnych proporcji ramki
 local TitleLabel = Instance.new("TextLabel")
 local UITextSizeConstraint_7 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_9 = Instance.new("UIAspectRatioConstraint")
 local ScrollingFrameHome = Instance.new("ScrollingFrame")
 local SpeedToolbutton = Instance.new("TextButton")
 local UICorner_10 = Instance.new("UICorner")
-local UITextSizeConstraint_8 = Instance.new("UITextSizeConstraint")
-local UIAspectRatioConstraint_10 = Instance.new("UIAspectRatioConstraint")
+-- Usunięto UITextSizeConstraint i UIAspectRatioConstraint dla SpeedToolbutton
 local ClicktptoolButton = Instance.new("TextButton")
 local UICorner_11 = Instance.new("UICorner")
-local UITextSizeConstraint_9 = Instance.new("UITextSizeConstraint")
-local UIAspectRatioConstraint_11 = Instance.new("UIAspectRatioConstraint")
+-- Usunięto UITextSizeConstraint i UIAspectRatioConstraint dla ClicktptoolButton
 local UICorner_12 = Instance.new("UICorner")
 local SpectateButton_Home = Instance.new("TextButton")
 local UICorner_13 = Instance.new("UICorner")
-local UITextSizeConstraint_10 = Instance.new("UITextSizeConstraint")
-local UIAspectRatioConstraint_12 = Instance.new("UIAspectRatioConstraint")
+-- Usunięto UITextSizeConstraint i UIAspectRatioConstraint dla SpectateButton_Home
 local NoclipButton = Instance.new("TextButton")
 local UICorner_14 = Instance.new("UICorner")
-local UITextSizeConstraint_11 = Instance.new("UITextSizeConstraint")
-local UIAspectRatioConstraint_13 = Instance.new("UIAspectRatioConstraint")
+-- Usunięto UITextSizeConstraint i UIAspectRatioConstraint dla NoclipButton
 local FlingButton = Instance.new("TextButton")
 local UICorner_15 = Instance.new("UICorner")
-local UITextSizeConstraint_12 = Instance.new("UITextSizeConstraint")
-local UIAspectRatioConstraint_14 = Instance.new("UIAspectRatioConstraint")
-local UIAspectRatioConstraint_15 = Instance.new("UIAspectRatioConstraint")
+-- Usunięto UITextSizeConstraint i UIAspectRatioConstraint dla FlingButton
+local UIAspectRatioConstraint_15 = Instance.new("UIAspectRatioConstraint") -- Może zostać dla ogólnych proporcji ramki
 local UIAspectRatioConstraint_16 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_17 = Instance.new("UIAspectRatioConstraint")
 local HideButton = Instance.new("ImageButton")
@@ -118,9 +107,7 @@ local HideButton = Instance.new("ImageButton")
 -- NOWY PRZYCISK GHOSTMM2
 local GhostMM2Button = Instance.new("TextButton")
 local UICorner_GhostMM2 = Instance.new("UICorner")
-local UITextSizeConstraint_GhostMM2 = Instance.new("UITextSizeConstraint")
-local UIAspectRatioConstraint_GhostMM2 = Instance.new("UIAspectRatioConstraint")
-
+-- Usunięto UITextSizeConstraint i UIAspectRatioConstraint dla GhostMM2Button
 
 ScreenGui.Parent = player:WaitForChild("PlayerGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -162,10 +149,6 @@ HomeTabButton.TextWrapped = true
 HomeTabButton.LayoutOrder = 1 -- Ważne dla UIListLayout
 
 UICorner_2.Parent = HomeTabButton
-UITextSizeConstraint.Parent = HomeTabButton
-UITextSizeConstraint.MaxTextSize = 37
-UIAspectRatioConstraint.Parent = HomeTabButton
-UIAspectRatioConstraint.AspectRatio = 3.9210526943206787
 
 PremiumTabButton.Name = "PremiumTabButton"
 PremiumTabButton.Parent = TabsFrame
@@ -182,10 +165,6 @@ PremiumTabButton.TextWrapped = true
 PremiumTabButton.LayoutOrder = 2 -- Ważne dla UIListLayout
 
 UICorner_3.Parent = PremiumTabButton
-UITextSizeConstraint_2.Parent = PremiumTabButton
-UITextSizeConstraint_2.MaxTextSize = 37
-UIAspectRatioConstraint_2.Parent = PremiumTabButton
-UIAspectRatioConstraint_2.AspectRatio = 3.9210526943206787
 
 UICorner_4.Parent = TabsFrame
 UIAspectRatioConstraint_3.Parent = TabsFrame
@@ -218,10 +197,6 @@ SpectateButton_Premium.TextWrapped = true
 SpectateButton_Premium.LayoutOrder = 1 -- Ważne dla UIGridLayout
 
 UICorner_6.Parent = SpectateButton_Premium
-UITextSizeConstraint_3.Parent = SpectateButton_Premium
-UITextSizeConstraint_3.MaxTextSize = 37
-UIAspectRatioConstraint_4.Parent = SpectateButton_Premium
-UIAspectRatioConstraint_4.AspectRatio = 3.9473683834075928
 
 MM2Button.Name = "MM2 Button"
 MM2Button.Parent = ScrollingFramePremium
@@ -238,10 +213,6 @@ MM2Button.Visible = false
 MM2Button.LayoutOrder = 2 -- Ważne dla UIGridLayout
 
 UICorner_7.Parent = MM2Button
-UITextSizeConstraint_4.Parent = MM2Button
-UITextSizeConstraint_4.MaxTextSize = 37
-UIAspectRatioConstraint_5.Parent = MM2Button
-UIAspectRatioConstraint_5.AspectRatio = 3.9473683834075928
 
 FlyButton.Name = "Console Button"
 FlyButton.Parent = ScrollingFramePremium
@@ -257,10 +228,6 @@ FlyButton.TextWrapped = true
 FlyButton.LayoutOrder = 3 -- Ważne dla UIGridLayout
 
 UICorner_8.Parent = FlyButton
-UITextSizeConstraint_5.Parent = FlyButton
-UITextSizeConstraint_5.MaxTextSize = 37
-UIAspectRatioConstraint_6.Parent = FlyButton
-UIAspectRatioConstraint_6.AspectRatio = 3.9473683834075928
 
 Invisibiltybutton.Name = "Invisibilty Button"
 Invisibiltybutton.Parent = ScrollingFramePremium
@@ -276,10 +243,6 @@ Invisibiltybutton.TextWrapped = true
 Invisibiltybutton.LayoutOrder = 4 -- Ważne dla UIGridLayout
 
 UICorner_9.Parent = Invisibiltybutton
-UITextSizeConstraint_6.Parent = Invisibiltybutton
-UITextSizeConstraint_6.MaxTextSize = 37
-UIAspectRatioConstraint_7.Parent = Invisibiltybutton
-UIAspectRatioConstraint_7.AspectRatio = 3.9473683834075928
 
 -- Konfiguracja nowego przycisku GhostMM2
 GhostMM2Button.Name = "GhostMM2Button"
@@ -297,10 +260,6 @@ GhostMM2Button.Visible = false -- Domyślnie niewidoczny, zostanie pokazany tylk
 GhostMM2Button.LayoutOrder = 5 -- Ważne dla UIGridLayout
 
 UICorner_GhostMM2.Parent = GhostMM2Button
-UITextSizeConstraint_GhostMM2.Parent = GhostMM2Button
-UITextSizeConstraint_GhostMM2.MaxTextSize = 37
-UIAspectRatioConstraint_GhostMM2.Parent = GhostMM2Button
-UIAspectRatioConstraint_GhostMM2.AspectRatio = 3.9473683834075928
 
 UIAspectRatioConstraint_8.Parent = ScrollingFramePremium
 UIAspectRatioConstraint_8.AspectRatio = 1.4926543235778809
@@ -351,10 +310,6 @@ SpeedToolbutton.TextWrapped = true
 SpeedToolbutton.LayoutOrder = 1 -- Ważne dla UIGridLayout
 
 UICorner_10.Parent = SpeedToolbutton
-UITextSizeConstraint_8.Parent = SpeedToolbutton
-UITextSizeConstraint_8.MaxTextSize = 37
-UIAspectRatioConstraint_10.Parent = SpeedToolbutton
-UIAspectRatioConstraint_10.AspectRatio = 3.9473683834075928
 
 ClicktptoolButton.Name = "Click tp tool Button"
 ClicktptoolButton.Parent = ScrollingFrameHome
@@ -370,10 +325,6 @@ ClicktptoolButton.TextWrapped = true
 ClicktptoolButton.LayoutOrder = 2 -- Ważne dla UIGridLayout
 
 UICorner_11.Parent = ClicktptoolButton
-UITextSizeConstraint_9.Parent = ClicktptoolButton
-UITextSizeConstraint_9.MaxTextSize = 35
-UIAspectRatioConstraint_11.Parent = ClicktptoolButton
-UIAspectRatioConstraint_11.AspectRatio = 3.9473683834075928
 
 SpectateButton_Home.Name = "Spectate Button"
 SpectateButton_Home.Parent = ScrollingFrameHome
@@ -389,10 +340,6 @@ SpectateButton_Home.TextWrapped = true
 SpectateButton_Home.LayoutOrder = 3 -- Ważne dla UIGridLayout
 
 UICorner_13.Parent = SpectateButton_Home
-UITextSizeConstraint_10.Parent = SpectateButton_Home
-UITextSizeConstraint_10.MaxTextSize = 37
-UIAspectRatioConstraint_12.Parent = SpectateButton_Home
-UIAspectRatioConstraint_12.AspectRatio = 3.9473683834075928
 
 NoclipButton.Name = "Noclip Button"
 NoclipButton.Parent = ScrollingFrameHome
@@ -408,10 +355,6 @@ NoclipButton.TextWrapped = true
 NoclipButton.LayoutOrder = 4 -- Ważne dla UIGridLayout
 
 UICorner_14.Parent = NoclipButton
-UITextSizeConstraint_11.Parent = NoclipButton
-UITextSizeConstraint_11.MaxTextSize = 37
-UIAspectRatioConstraint_13.Parent = NoclipButton
-UIAspectRatioConstraint_13.AspectRatio = 3.9473683834075928
 
 FlingButton.Name = "Fling Button"
 FlingButton.Parent = ScrollingFrameHome
@@ -427,10 +370,6 @@ FlingButton.TextWrapped = true
 FlingButton.LayoutOrder = 5 -- Ważne dla UIGridLayout
 
 UICorner_15.Parent = FlingButton
-UITextSizeConstraint_12.Parent = FlingButton
-UITextSizeConstraint_12.MaxTextSize = 37
-UIAspectRatioConstraint_14.Parent = FlingButton
-UIAspectRatioConstraint_14.AspectRatio = 3.9473683834075928
 
 UIAspectRatioConstraint_15.Parent = ScrollingFrameHome
 UIAspectRatioConstraint_15.AspectRatio = 1.4926543235778809
