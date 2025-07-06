@@ -1,7 +1,6 @@
 local HttpService = game:GetService("HttpService")
  local Players = game:GetService("Players")
  shared.premiumUserIds = shared.premiumUserIds or {}
- local csvData = game:HttpGet("https://raw.githubusercontent.com/vertex-peak/API/refs/heads/main/API.csv")
  local lines = csvData:split("\n")
  local TextChatService = game:GetService("TextChatService")
  local revealCooldowns = {}
@@ -48,11 +47,11 @@ local HttpService = game:GetService("HttpService")
                  end
              end
          end
-         if hashedUserId == premiumId then
+         if hashedUserId == hashedUserId then
              return true
          end
      end
-     return true
+     return false
  end
  
  local function isPremiumUser(player)
