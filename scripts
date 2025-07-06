@@ -1,3 +1,6 @@
+-- Debugging: Initial print to confirm script execution start
+print("Skrypt rozpoczyna wykonywanie.")
+
 local player = game.Players.LocalPlayer
 local UserInputService = game:GetService("UserInputService")
 local MarketplaceService = game:GetService("MarketplaceService")
@@ -15,6 +18,8 @@ local initialGamePassCheckDone = false
 local lastHideButtonPosition = UDim2.new(1, -55, 0, 10)
 
 local function sendNotification(title, text)
+    -- Debugging: Print notification content
+    print("Sending notification: " .. title .. " - " .. text)
     StarterGui:SetCore("SendNotification", {
         Title = title,
         Text = text,
@@ -55,7 +60,6 @@ local Invisibiltybutton = Instance.new("TextButton")
 local UICorner_Invisibility = Instance.new("UICorner")
 local GhostMM2Button = Instance.new("TextButton")
 local UICorner_GhostMM2 = Instance.new("UICorner")
--- Removed UIAspectRatioConstraint_PremiumButtons as UIGridLayout manages sizing
 
 local ScrollingFrameHome = Instance.new("ScrollingFrame")
 local UICorner_HomeFrame = Instance.new("UICorner")
@@ -71,7 +75,6 @@ local NoclipButton = Instance.new("TextButton")
 local UICorner_Noclip = Instance.new("UICorner")
 local FlingButton = Instance.new("TextButton")
 local UICorner_Fling = Instance.new("UICorner")
--- Removed UIAspectRatioConstraint_HomeButtons as UIGridLayout manages sizing
 
 local UIAspectRatioConstraint_MainFrame = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_ScreenGui = Instance.new("UIAspectRatioConstraint")
@@ -83,6 +86,7 @@ ScreenGui.Parent = player:WaitForChild("PlayerGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ScreenGui.ResetOnSpawn = false
 ScreenGui.Enabled = true
+print("ScreenGui created and parented.")
 
 MainFrame.Name = "MainFrame"
 MainFrame.Parent = ScreenGui
@@ -95,6 +99,8 @@ MainFrame.Draggable = true
 MainFrame.Visible = true
 MainFrame.Active = true -- IMPORTANT: Ensure MainFrame is active to receive input
 UICorner.Parent = MainFrame
+print("MainFrame created and parented.")
+
 
 TabsFrame.Name = "TabsFrame"
 TabsFrame.Parent = MainFrame
@@ -112,6 +118,7 @@ TabsLayout.VerticalAlignment = Enum.VerticalAlignment.Top
 UICorner_TabsFrame.Parent = TabsFrame
 UIAspectRatioConstraint_TabsFrame.Parent = TabsFrame
 UIAspectRatioConstraint_TabsFrame.AspectRatio = 0.37142857909202576
+print("TabsFrame created and parented.")
 
 HomeTabButton.Name = "HomeTabButton"
 HomeTabButton.Parent = TabsFrame
@@ -127,6 +134,7 @@ HomeTabButton.TextSize = 14
 HomeTabButton.TextWrapped = true
 HomeTabButton.LayoutOrder = 1
 UICorner_HomeTab.Parent = HomeTabButton
+print("HomeTabButton created and parented.")
 
 PremiumTabButton.Name = "PremiumTabButton"
 PremiumTabButton.Parent = TabsFrame
@@ -142,6 +150,7 @@ PremiumTabButton.TextSize = 14
 PremiumTabButton.TextWrapped = true
 PremiumTabButton.LayoutOrder = 2
 UICorner_PremiumTab.Parent = PremiumTabButton
+print("PremiumTabButton created and parented.")
 
 TitleLabel.Name = "TitleLabel"
 TitleLabel.Parent = MainFrame
@@ -161,6 +170,7 @@ UITextSizeConstraint_Title.Parent = TitleLabel
 UITextSizeConstraint_Title.MaxTextSize = 31
 UIAspectRatioConstraint_Title.Parent = TitleLabel
 UIAspectRatioConstraint_Title.AspectRatio = 8.78787899017334
+print("TitleLabel created and parented.")
 
 -- ScrollingFramePremium Setup
 ScrollingFramePremium.Name = "ScrollingFramePremium"
@@ -181,6 +191,7 @@ PremiumGridLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 PremiumGridLayout.VerticalAlignment = Enum.VerticalAlignment.Top
 PremiumGridLayout.CellSize = UDim2.new(0.3, 0, 0.1, 0)
 PremiumGridLayout.CellPadding = UDim2.new(0.05, 0, 0.05, 0)
+print("ScrollingFramePremium created and parented.")
 
 SpectateButton_Premium.Name = "Spectate Button Premium"
 SpectateButton_Premium.Parent = ScrollingFramePremium
@@ -195,6 +206,7 @@ SpectateButton_Premium.TextSize = 14
 SpectateButton_Premium.TextWrapped = true
 SpectateButton_Premium.LayoutOrder = 1
 UICorner_SpectatePremium.Parent = SpectateButton_Premium
+print("SpectateButton_Premium created and parented.")
 
 MM2Button.Name = "MM2 Button"
 MM2Button.Parent = ScrollingFramePremium
@@ -210,6 +222,7 @@ MM2Button.TextWrapped = true
 MM2Button.Visible = false
 MM2Button.LayoutOrder = 2
 UICorner_MM2.Parent = MM2Button
+print("MM2Button created and parented.")
 
 FlyButton.Name = "Console Button"
 FlyButton.Parent = ScrollingFramePremium
@@ -224,6 +237,7 @@ FlyButton.TextSize = 14
 FlyButton.TextWrapped = true
 FlyButton.LayoutOrder = 3
 UICorner_Fly.Parent = FlyButton
+print("FlyButton created and parented.")
 
 Invisibiltybutton.Name = "Invisibilty Button"
 Invisibiltybutton.Parent = ScrollingFramePremium
@@ -238,6 +252,7 @@ Invisibiltybutton.TextSize = 14
 Invisibiltybutton.TextWrapped = true
 Invisibiltybutton.LayoutOrder = 4
 UICorner_Invisibility.Parent = Invisibiltybutton
+print("Invisibiltybutton created and parented.")
 
 GhostMM2Button.Name = "GhostMM2Button"
 GhostMM2Button.Parent = ScrollingFramePremium
@@ -253,6 +268,7 @@ GhostMM2Button.TextWrapped = true
 GhostMM2Button.Visible = false
 GhostMM2Button.LayoutOrder = 5
 UICorner_GhostMM2.Parent = GhostMM2Button
+print("GhostMM2Button created and parented.")
 
 -- ScrollingFrameHome Setup
 ScrollingFrameHome.Name = "ScrollingFrameHome"
@@ -273,6 +289,7 @@ HomeGridLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 HomeGridLayout.VerticalAlignment = Enum.VerticalAlignment.Top
 HomeGridLayout.CellSize = UDim2.new(0.3, 0, 0.1, 0)
 HomeGridLayout.CellPadding = UDim2.new(0.05, 0, 0.05, 0)
+print("ScrollingFrameHome created and parented.")
 
 SpeedToolbutton.Name = "Speed Tool button"
 SpeedToolbutton.Parent = ScrollingFrameHome
@@ -287,6 +304,7 @@ SpeedToolbutton.TextSize = 14
 SpeedToolbutton.TextWrapped = true
 SpeedToolbutton.LayoutOrder = 1
 UICorner_SpeedTool.Parent = SpeedToolbutton
+print("SpeedToolbutton created and parented.")
 
 ClicktptoolButton.Name = "Click tp tool Button"
 ClicktptoolButton.Parent = ScrollingFrameHome
@@ -301,6 +319,7 @@ ClicktptoolButton.TextSize = 14
 ClicktptoolButton.TextWrapped = true
 ClicktptoolButton.LayoutOrder = 2
 UICorner_Clicktp.Parent = ClicktptoolButton
+print("ClicktptoolButton created and parented.")
 
 SpectateButton_Home.Name = "Spectate Button"
 SpectateButton_Home.Parent = ScrollingFrameHome
@@ -315,6 +334,7 @@ SpectateButton_Home.TextSize = 14
 SpectateButton_Home.TextWrapped = true
 SpectateButton_Home.LayoutOrder = 3
 UICorner_SpectateHome.Parent = SpectateButton_Home
+print("SpectateButton_Home created and parented.")
 
 NoclipButton.Name = "Noclip Button"
 NoclipButton.Parent = ScrollingFrameHome
@@ -329,6 +349,7 @@ NoclipButton.TextSize = 14
 NoclipButton.TextWrapped = true
 NoclipButton.LayoutOrder = 4
 UICorner_Noclip.Parent = NoclipButton
+print("NoclipButton created and parented.")
 
 FlingButton.Name = "Fling Button"
 FlingButton.Parent = ScrollingFrameHome
@@ -343,6 +364,7 @@ FlingButton.TextSize = 14
 FlingButton.TextWrapped = true
 FlingButton.LayoutOrder = 5
 UICorner_Fling.Parent = FlingButton
+print("FlingButton created and parented.")
 
 UIAspectRatioConstraint_MainFrame.Parent = MainFrame
 UIAspectRatioConstraint_MainFrame.AspectRatio = 1.7601344585418701
@@ -363,12 +385,14 @@ HideButton.Size = UDim2.new(0, 30, 0, 30)
 HideButton.ZIndex = 5
 HideButton.Draggable = true
 HideButton.Active = true -- Ensure HideButton is active to receive input
+print("HideButton created and parented.")
 
 ---
 ## Funkcje i logika skryptu
 ---
 
-Local function showTab(tabName)
+local function showTab(tabName)
+    print("showTab called with: " .. tabName) -- Debug print
     ScrollingFrameHome.Visible = false
     ScrollingFramePremium.Visible = false
 
@@ -389,7 +413,8 @@ Local function showTab(tabName)
     end
 end
 
-Local function checkGamePassStatus()
+local function checkGamePassStatus()
+    print("Checking Game Pass status...") -- Debug print
     local success, result = pcall(function()
         return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
     end)
@@ -404,23 +429,27 @@ Local function checkGamePassStatus()
             end
             initialGamePassCheckDone = true
         end
+        print("Game Pass check successful. Has Game Pass: " .. tostring(hasGamePass)) -- Debug print
     else
         warn("Błąd podczas sprawdzania wersji premium:", result)
         sendNotification("Universal Scripts", "Nie można sprawdzić statusu wersji premium. Spróbuj ponownie.")
     end
 end
 
-Local function updateMM2ButtonVisibility()
+local function updateMM2ButtonVisibility()
+    print("Updating MM2 button visibility. Current PlaceId: " .. game.PlaceId) -- Debug print
     if game.PlaceId == MM2_EXPERIENCE_ID then
         MM2Button.Visible = true
         GhostMM2Button.Visible = true
+        print("MM2 and GhostMM2 buttons visible.")
     else
         MM2Button.Visible = false
         GhostMM2Button.Visible = false
+        print("MM2 and GhostMM2 buttons hidden.")
     end
 end
 
-Local function updateHideButtonPosition()
+local function updateHideButtonPosition()
     if MainFrame.Visible then
         local frameAbsolutePosition = MainFrame.AbsolutePosition
         local frameAbsoluteSize = MainFrame.AbsoluteSize
@@ -437,6 +466,7 @@ Local function updateHideButtonPosition()
     else
         HideButton.Position = lastHideButtonPosition
     end
+    -- print("HideButton position updated.") -- Can be chatty, uncomment if needed
 end
 
 -- Dynamiczne ustawienie CanvasSize dla ScrollingFrameHome
@@ -464,6 +494,7 @@ local function updateCanvasSizeHome()
         local totalHeight = (rows * (cellSizeY + cellPaddingY)) - cellPaddingY
         -- Add some extra padding at the bottom if needed
         ScrollingFrameHome.CanvasSize = UDim2.new(0, 0, 0, totalHeight + layout.AbsoluteCellPadding.Y)
+        -- print("CanvasSize for Home updated to: " .. tostring(ScrollingFrameHome.CanvasSize)) -- Debug print
     end
 end
 
@@ -473,6 +504,7 @@ end
 
 -- Connect events and initial setup
 MainFrame.SizeChanged:Connect(function()
+    print("MainFrame.SizeChanged event fired.") -- Debug print
     updateHideButtonPosition()
     updateCanvasSizeHome()
 end)
@@ -492,8 +524,14 @@ HideButton.Changed:Connect(function(property)
 end)
 
 local function runScriptAndNotify(url, buttonName)
+    print("Attempting to run script: " .. buttonName .. " from " .. url) -- Debug print
     local success, err = pcall(function()
-        loadstring(game:HttpGet(url))()
+        local scriptContent = game:HttpGet(url)
+        if scriptContent then
+            loadstring(scriptContent)()
+        else
+            error("Failed to get script content from URL: " .. url)
+        end
     end)
     if success then
         sendNotification("Universal Scripts", "Skrypt '" .. buttonName .. "' załadowany!")
@@ -642,6 +680,7 @@ HideButton.MouseButton1Click:Connect(function()
 end)
 
 MainFrame.VisibleChanged:Connect(function()
+    print("MainFrame.VisibleChanged event fired. MainFrame.Visible: " .. tostring(MainFrame.Visible)) -- Debug print
     updateHideButtonPosition()
     if MainFrame.Visible and ScrollingFrameHome.Visible then
         updateCanvasSizeHome()
@@ -666,4 +705,6 @@ spawn(function()
     sendNotification("Universal Scripts", "Witaj w Universal Scripts! Skrypt załadowany.")
 end)
 
+-- Short delay to allow GUI to render before initial operations
 task.wait(0.5)
+print("Skrypt zakończył inicjalizację.") -- Debug print at the very end
