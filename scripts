@@ -12,6 +12,7 @@ local TELEPORT_PLACE_ID = 6557073879 -- Id gry, do której teleportuje (nieużyw
 local hasGamePass = false
 local initialGamePassCheckDone = false -- Kontrola dla pierwszego powiadomienia o Game Passie
 local isMainFrameVisible = true -- Śledzi widoczność MainFrame
+local lastHideButtonPosition = UDim2.new(1, -55, 0, 10) -- Domyślna pozycja HideButton, gdy MainFrame jest ukryty
 
 local function sendNotification(title, text)
     local success, err = pcall(function()
@@ -218,7 +219,7 @@ SpectateButton_Home.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
 SpectateButton_Home.BorderSizePixel = 0
 Instance.new("UICorner", SpectateButton_Home).CornerRadius = UDim.new(0, 5)
 Instance.new("UITextSizeConstraint", SpectateButton_Home).MaxTextSize = 37
-Instance.new("UIAspectRatioConstraint", SpectateButton_Home).AspectRatio = 3.9210526943206787
+Instance.new("UIAspectRatioConstraint", SpectateButton_Home).AspectRatio = 3.9473683834075928
 
 local NoclipButton = Instance.new("TextButton")
 NoclipButton.Name = "Noclip"
@@ -232,7 +233,7 @@ NoclipButton.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
 NoclipButton.BorderSizePixel = 0
 Instance.new("UICorner", NoclipButton).CornerRadius = UDim.new(0, 5)
 Instance.new("UITextSizeConstraint", NoclipButton).MaxTextSize = 37
-Instance.new("UIAspectRatioConstraint", NoclipButton).AspectRatio = 3.9210526943206787
+Instance.new("UIAspectRatioConstraint", NoclipButton).AspectRatio = 3.9473683834075928
 
 local FlingButton = Instance.new("TextButton")
 FlingButton.Name = "Fling"
@@ -246,7 +247,7 @@ FlingButton.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
 FlingButton.BorderSizePixel = 0
 Instance.new("UICorner", FlingButton).CornerRadius = UDim.new(0, 5)
 Instance.new("UITextSizeConstraint", FlingButton).MaxTextSize = 37
-Instance.new("UIAspectRatioConstraint", FlingButton).AspectRatio = 3.9210526943206787
+Instance.new("UIAspectRatioConstraint", FlingButton).AspectRatio = 3.9473683834075928
 
 
 -- ScrollingFrame dla Premium
@@ -283,7 +284,7 @@ SpectateButton_Premium.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
 SpectateButton_Premium.BorderSizePixel = 0
 Instance.new("UICorner", SpectateButton_Premium).CornerRadius = UDim.new(0, 5)
 Instance.new("UITextSizeConstraint", SpectateButton_Premium).MaxTextSize = 37
-Instance.new("UIAspectRatioConstraint", SpectateButton_Premium).AspectRatio = 3.9210526943206787
+Instance.new("UIAspectRatioConstraint", SpectateButton_Premium).AspectRatio = 3.9473683834075928
 
 local MM2Button = Instance.new("TextButton")
 MM2Button.Name = "MM2"
@@ -298,7 +299,7 @@ MM2Button.BorderSizePixel = 0
 MM2Button.Visible = false -- Będzie widoczny tylko w MM2
 Instance.new("UICorner", MM2Button).CornerRadius = UDim.new(0, 5)
 Instance.new("UITextSizeConstraint", MM2Button).MaxTextSize = 37
-Instance.new("UIAspectRatioConstraint", MM2Button).AspectRatio = 3.9210526943206787
+Instance.new("UIAspectRatioConstraint", MM2Button).AspectRatio = 3.9473683834075928
 
 local FlyButton = Instance.new("TextButton")
 FlyButton.Name = "Console"
@@ -312,7 +313,7 @@ FlyButton.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
 FlyButton.BorderSizePixel = 0
 Instance.new("UICorner", FlyButton).CornerRadius = UDim.new(0, 5)
 Instance.new("UITextSizeConstraint", FlyButton).MaxTextSize = 37
-Instance.new("UIAspectRatioConstraint", FlyButton).AspectRatio = 3.9210526943206787
+Instance.new("UIAspectRatioConstraint", FlyButton).AspectRatio = 3.9473683834075928
 
 local Invisibiltybutton = Instance.new("TextButton")
 Invisibiltybutton.Name = "Invisibilty"
@@ -326,7 +327,7 @@ Invisibiltybutton.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
 Invisibiltybutton.BorderSizePixel = 0
 Instance.new("UICorner", Invisibiltybutton).CornerRadius = UDim.new(0, 5)
 Instance.new("UITextSizeConstraint", Invisibiltybutton).MaxTextSize = 37
-Instance.new("UIAspectRatioConstraint", Invisibiltybutton).AspectRatio = 3.9210526943206787
+Instance.new("UIAspectRatioConstraint", Invisibiltybutton).AspectRatio = 3.9473683834075928
 
 local GhostMM2Button = Instance.new("TextButton")
 GhostMM2Button.Name = "GhostMM2"
@@ -341,7 +342,7 @@ GhostMM2Button.BorderSizePixel = 0
 GhostMM2Button.Visible = false -- Będzie widoczny tylko w MM2
 Instance.new("UICorner", GhostMM2Button).CornerRadius = UDim.new(0, 5)
 Instance.new("UITextSizeConstraint", GhostMM2Button).MaxTextSize = 37
-Instance.new("UIAspectRatioConstraint", GhostMM2Button).AspectRatio = 3.9210526943206787
+Instance.new("UIAspectRatioConstraint", GhostMM2Button).AspectRatio = 3.9473683834075928
 
 local AdminPanelButton = Instance.new("TextButton")
 AdminPanelButton.Name = "Admin Panel"
@@ -355,7 +356,7 @@ AdminPanelButton.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
 AdminPanelButton.BorderSizePixel = 0
 Instance.new("UICorner", AdminPanelButton).CornerRadius = UDim.new(0, 5)
 Instance.new("UITextSizeConstraint", AdminPanelButton).MaxTextSize = 37
-Instance.new("UIAspectRatioConstraint", AdminPanelButton).AspectRatio = 3.9210526943206787
+Instance.new("UIAspectRatioConstraint", AdminPanelButton).AspectRatio = 3.9473683834075928
 
 
 -- HideButton (przycisk do ukrywania/pokazywania GUI)
@@ -367,12 +368,13 @@ HideButton.BackgroundColor3 = Color3.fromRGB(200, 0, 0) -- Czerwony
 HideButton.Image = "rbxassetid://102860171689689" -- Ikona krzyżyka lub inna
 HideButton.ImageColor3 = Color3.new(1, 1, 1)
 HideButton.ScaleType = Enum.ScaleType.Fit
-HideButton.BorderSizePixel = 3 -- PRZYWRÓCONE OBRAMOWANIE!
+HideButton.BorderSizePixel = 3
 HideButton.BorderColor3 = Color3.fromRGB(0,0,0) -- Kolor obramowania
 HideButton.ZIndex = 5
 HideButton.Active = true
 HideButton.Draggable = true
 HideButton.Visible = false -- Domyślnie ukryty, pokaże się po ukryciu MainFrame
+
 
 -- --- Funkcje i logika skryptu ---
 
@@ -453,7 +455,8 @@ local function updateHideButtonVisibilityAndPosition()
     else
         HideButton.Visible = true -- Pokaż HideButton, gdy MainFrame jest ukryty
         -- Ustaw HideButton w stałym miejscu na ekranie, gdy MainFrame jest ukryty
-        HideButton.Position = UDim2.new(1, -HideButton.Size.X.Offset - 10, 0, 10) -- 10px od prawej, 10px od góry
+        -- Preferuję stałą pozycję, a nie zależną od MainFrame, gdy jest ukryty.
+        HideButton.Position = lastHideButtonPosition
     end
 end
 
@@ -509,6 +512,14 @@ HideButton.MouseButton1Click:Connect(function()
     MainFrame.Visible = isMainFrameVisible
     updateHideButtonVisibilityAndPosition()
 end)
+
+-- Zapisz pozycję HideButton, gdy jest przenoszony, ale tylko jeśli MainFrame jest ukryty
+HideButton.Changed:Connect(function(property)
+    if property == "Position" and not MainFrame.Visible then
+        lastHideButtonPosition = HideButton.Position
+    end
+end)
+
 
 -- Event Listeners for Home Tab Buttons
 SpeedToolbutton.MouseButton1Click:Connect(function()
@@ -640,6 +651,7 @@ AdminPanelButton.MouseButton1Click:Connect(function()
         sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania wersji premium.")
     end
 end)
+
 
 -- Zdarzenie zakupu Game Passa
 MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gamePassId, wasPurchased)
