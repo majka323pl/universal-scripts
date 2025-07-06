@@ -103,7 +103,7 @@ MainFrame.BorderSizePixel = 0
 MainFrame.Position = UDim2.new(0.212787732, 0, 0.244107679, 0)
 MainFrame.Size = UDim2.new(0.513162374, 0, 0.560262501, 0)
 MainFrame.Draggable = true
-MainFrame.Visible = true
+MainFrame.Visible = true -- Upewnienie się, że MainFrame jest widoczny
 
 UICorner.Parent = MainFrame
 
@@ -668,3 +668,6 @@ spawn(function()
 end)
 
 task.wait(0.5)
+
+-- Upewnij się, że MainFrame jest widoczny po załadowaniu skryptu
+MainFrame.Visible = true
