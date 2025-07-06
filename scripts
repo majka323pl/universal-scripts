@@ -1,4 +1,4 @@
-local player = game.Players.LocalPlayer
+local localPlayer = game.Players.LocalPlayer
 local UserInputService = game:GetService("UserInputService")
 local MarketplaceService = game:GetService("MarketplaceService")
 local StarterGui = game:GetService("StarterGui")
@@ -7,13 +7,14 @@ local TeleportService = game:GetService("TeleportService")
 
 local GAMEPASS_ID = 1296972626
 local MM2_EXPERIENCE_ID = 142823291
-local TELEPORT_PLACE_ID = 6557073879 
+local TELEPORT_PLACE_ID = 6557073879
 
 local hasGamePass = false
 local initialGamePassCheckDone = false
 
 local lastHideButtonPosition = UDim2.new(1, -55, 0, 10)
 
+-- Funkcja do wysyłania powiadomień
 local function sendNotification(title, text)
     StarterGui:SetCore("SendNotification", {
         Title = title,
@@ -23,9 +24,10 @@ local function sendNotification(title, text)
     })
 end
 
--- Deklaracje instancji GUI - Upewnij się, że są zgodne z Twoim oryginalnym działającym skryptem
+-- Deklaracje instancji GUI
+-- Tworzenie ScreenGui w PlayerGui (upewniamy się, że PlayerGui jest dostępne)
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Parent = player:WaitForChild("PlayerGui")
+ScreenGui.Parent = localPlayer:WaitForChild("PlayerGui")
 ScreenGui.Name = "UniversalScriptsGUI"
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ScreenGui.ResetOnSpawn = false
@@ -426,30 +428,16 @@ HideButton.Size = UDim2.new(0, 30, 0, 30)
 HideButton.ZIndex = 5
 HideButton.Draggable = true
 
-local TitleLabel = Instance.new("TextLabel") -- Przeniesione na koniec deklaracji
-TitleLabel.Name = "TitleLabel"
-TitleLabel.Parent = MainFrame
-TitleLabel.BackgroundColor3 = Color3.new(1, 1, 1)
-TitleLabel.BackgroundTransparency = 1
-TitleLabel.BorderColor3 = Color3.new(0, 0, 0)
-TitleLabel.BorderSizePixel = 0
-TitleLabel.Position = UDim2.new(0.425298363, 0, 0.0153667927, 0)
-TitleLabel.Size = UDim2.new(0.3616907, 0, 0.0724434555, 0)
-TitleLabel.Font = Enum.Font.LuckiestGuy
-TitleLabel.Text = "UNIVERSAL SCRIPTS"
-TitleLabel.TextColor3 = Color3.new(1, 1, 1)
-TitleLabel.TextScaled = true
-TitleLabel.TextSize = 14
-TitleLabel.TextWrapped = true
+-- TitleLabel jest już zdefiniowany wyżej, więc ta sekcja była duplikatem
+-- local TitleLabel = Instance.new("TextLabel") 
+-- TitleLabel.Name = "TitleLabel"
+-- ... (reszta właściwości)
 
-local TitleLabel_UITextSizeConstraint = Instance.new("UITextSizeConstraint")
-TitleLabel_UITextSizeConstraint.Parent = TitleLabel
-TitleLabel_UITextSizeConstraint.MaxTextSize = 31
-local TitleLabel_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
-TitleLabel_UIAspectRatioConstraint.Parent = TitleLabel
-TitleLabel_UIAspectRatioConstraint.AspectRatio = 8.78787899017334
+---
+## Funkcje pomocnicze
+---
 
-
+-- Funkcja do przełączania widoczności zakładek
 local function showTab(tabName)
     ScrollingFrameHome.Visible = false
     ScrollingFramePremium.Visible = false
@@ -461,15 +449,18 @@ local function showTab(tabName)
             ScrollingFramePremium.Visible = true
         else
             sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby uzyskać dostęp do tej zakładki!")
-            TeleportService:Teleport(TELEPORT_PLACE_ID, player)
-            MainFrame.Visible = false
+            -- Opcjonalnie: Prompt do zakupu po kliknięciu zakładki Premium bez posiadania premium
+            MarketplaceService:PromptGamePassPurchase(localPlayer, GAMEPASS_ID)
+            -- Nie teleportujemy od razu, dajemy użytkownikowi szansę na zakup w grze.
+            -- MainFrame.Visible = false -- Zostawiamy GUI widoczne, aby użytkownik mógł spróbować kupić.
         end
     end
 end
 
+-- Funkcja do sprawdzania statusu GamePassa
 local function checkGamePassStatus()
     local success, result = pcall(function()
-        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
+        return MarketplaceService:UserOwnsGamePassAsync(localPlayer.UserId, GAMEPASS_ID)
     end)
 
     if success then
@@ -485,19 +476,23 @@ local function checkGamePassStatus()
     else
         warn("Błąd podczas sprawdzania wersji premium:", result)
         sendNotification("Universal Scripts", "Nie można sprawdzić statusu wersji premium. Spróbuj ponownie.")
+        -- Jeśli wystąpił błąd, załóżmy, że użytkownik nie ma GamePassa dla bezpieczeństwa
+        hasGamePass = false
     end
 end
 
+-- Funkcja do aktualizacji widoczności przycisków MM2 w zależności od ID gry
 local function updateMM2ButtonVisibility()
     if game.PlaceId == MM2_EXPERIENCE_ID then
         MM2Button.Visible = true
-        GhostMM2Button.Visible = true -- Dodano! Teraz GhostMM2Button też będzie widoczny w MM2
+        GhostMM2Button.Visible = true
     else
         MM2Button.Visible = false
         GhostMM2Button.Visible = false
     end
 end
 
+-- Funkcja do aktualizacji pozycji przycisku ukrywania GUI
 local function updateHideButtonPosition()
     if MainFrame.Visible then
         local frameAbsolutePosition = MainFrame.AbsolutePosition
@@ -513,10 +508,13 @@ local function updateHideButtonPosition()
 
         lastHideButtonPosition = HideButton.Position
     else
-        HideButton.Position = lastHideButtonPosition
+        -- Kiedy MainFrame jest niewidoczny, przycisk HideButton powinien być tam, gdzie był ostatnio
+        -- lub w swojej domyślnej pozycji, jeśli nigdy nie był widoczny.
+        -- lastHideButtonPosition już to obsługuje, więc nie trzeba zmieniać.
     end
 end
 
+-- Funkcja do uruchamiania skryptów z zewnętrznych źródeł
 local function runScriptAndNotify(url, buttonName)
     local success, err = pcall(function()
         loadstring(game:HttpGet(url))()
@@ -528,6 +526,10 @@ local function runScriptAndNotify(url, buttonName)
         warn("Błąd ładowania skryptu '" .. buttonName .. "':", err)
     end
 end
+
+---
+## Połączenia przycisków i zdarzeń
+---
 
 -- Połączenia przycisków Home
 SpeedToolbutton.MouseButton1Click:Connect(function()
@@ -550,95 +552,50 @@ FlingButton.MouseButton1Click:Connect(function()
     runScriptAndNotify('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt', FlingButton.Text)
 end)
 
--- Połączenia przycisków Premium
+-- Połączenia przycisków Premium - Zawsze sprawdzaj hasGamePass przed wykonaniem akcji
 SpectateButton_Premium.MouseButton1Click:Connect(function()
-    local success, currentHasGamePass = pcall(function()
-        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
-    end)
-
-    if success then
-        if currentHasGamePass then
-            runScriptAndNotify("https://pastebin.com/raw/UFVLWQRw", SpectateButton_Premium.Text)
-        else
-            sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
-            MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
-        end
+    if hasGamePass then
+        runScriptAndNotify("https://pastebin.com/raw/UFVLWQRw", SpectateButton_Premium.Text)
     else
-        warn("Błąd podczas sprawdzania wersji premium (Spectate):", currentHasGamePass)
-        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania wersji premium.")
+        sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
+        MarketplaceService:PromptGamePassPurchase(localPlayer, GAMEPASS_ID)
     end
 end)
 
 MM2Button.MouseButton1Click:Connect(function()
-    local success, currentHasGamePass = pcall(function()
-        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
-    end)
-
-    if success then
-        if currentHasGamePass then
-            runScriptAndNotify("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring", MM2Button.Text)
-        else
-            sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
-            MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
-        end
+    if hasGamePass then
+        runScriptAndNotify("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring", MM2Button.Text)
     else
-        warn("Błąd podczas sprawdzania wersji premium (MM2):", currentHasGamePass)
-        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania wersji premium.")
+        sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
+        MarketplaceService:PromptGamePassPurchase(localPlayer, GAMEPASS_ID)
     end
 end)
 
 FlyButton.MouseButton1Click:Connect(function()
-    local success, currentHasGamePass = pcall(function()
-        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
-    end)
-
-    if success then
-        if currentHasGamePass then
-            runScriptAndNotify("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source", FlyButton.Text)
-        else
-            sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
-            MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
-        end
+    if hasGamePass then
+        runScriptAndNotify("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source", FlyButton.Text)
     else
-        warn("Błąd podczas sprawdzania wersji premium (Console):", currentHasGamePass)
-        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania wersji premium.")
+        sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
+        MarketplaceService:PromptGamePassPurchase(localPlayer, GAMEPASS_ID)
     end
 end)
 
 Invisibiltybutton.MouseButton1Click:Connect(function()
-    local success, currentHasGamePass = pcall(function()
-        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
-    end)
-
-    if success then
-        if currentHasGamePass then
-            runScriptAndNotify('https://pastebin.com/raw/3Rnd9rHf', Invisibiltybutton.Text)
-        else
-            sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
-            MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
-        end
+    if hasGamePass then
+        runScriptAndNotify('https://pastebin.com/raw/3Rnd9rHf', Invisibiltybutton.Text)
     else
-        warn("Błąd podczas sprawdzania wersji premium (Invisibilty):", currentHasGamePass)
-        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania wersji premium.")
+        sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
+        MarketplaceService:PromptGamePassPurchase(localPlayer, GAMEPASS_ID)
     end
 end)
 
 -- LOGIKA DLA NOWEGO GHOSTMM2 BUTTON
 GhostMM2Button.MouseButton1Click:Connect(function()
-    local success, currentHasGamePass = pcall(function()
-        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
-    end)
-
-    if success then
-        if currentHasGamePass then
-            runScriptAndNotify("https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Murder%20Mystery", GhostMM2Button.Text)
-        else
-            sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
-            MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
-        end
+    if hasGamePass then
+        runScriptAndNotify("https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Murder%20Mystery", GhostMM2Button.Text)
     else
-        warn("Błąd podczas sprawdzania wersji premium (GhostMM2):", currentHasGamePass)
-        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania wersji premium.")
+        sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
+        MarketplaceService:PromptGamePassPurchase(localPlayer, GAMEPASS_ID)
     end
 end)
 
@@ -654,15 +611,21 @@ end)
 
 HideButton.MouseButton1Click:Connect(function()
     MainFrame.Visible = not MainFrame.Visible
+    -- Jeśli HideButton jest kliknięty, a MainFrame staje się niewidoczny,
+    -- to HideButton powinien być widoczny w ostatniej zapamiętanej pozycji.
+    -- Jeśli MainFrame staje się widoczny, HideButton powinien zostać zaktualizowany do jego rogu.
+    updateHideButtonPosition()
 end)
 
+-- Obserwuj zmianę widoczności MainFrame, aby zaktualizować pozycję HideButton
 MainFrame.VisibleChanged:Connect(function()
     updateHideButtonPosition()
 end)
 
+-- Obserwuj zmianę pozycji HideButton, aby zapamiętać ostatnią pozycję
 HideButton.Changed:Connect(function(property)
     if property == "Position" then
-        if not MainFrame.Visible then
+        if not MainFrame.Visible then -- Zapamiętuj pozycję tylko gdy MainFrame jest ukryty
             lastHideButtonPosition = HideButton.Position
         end
     end
@@ -678,14 +641,15 @@ RunService.Stepped:Connect(function()
         lastPlaceId = game.PlaceId
         updateMM2ButtonVisibility()
         -- Jeśli zakładka premium była aktywna i zmieniono grę, sprawdź dostęp ponownie
+        -- i ewentualnie przełącz na zakładkę Home, jeśli użytkownik nie ma dostępu.
         if ScrollingFramePremium.Visible then
-            showTab("Premium")
+            showTab("Premium") -- To spowoduje ponowne sprawdzenie dostępu
         end
     end
 end)
 
 -- Dodatkowe sprawdzenia po załadowaniu postaci i gry
-player.CharacterAdded:Connect(function()
+localPlayer.CharacterAdded:Connect(function()
     updateMM2ButtonVisibility()
 end)
 
@@ -693,25 +657,38 @@ game.Loaded:Connect(function()
     updateMM2ButtonVisibility()
 end)
 
+-- Obsługa ukończenia zakupu GamePassa
 MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gamePassId, wasPurchased)
-    if userId == player.UserId and gamePassId == GAMEPASS_ID then
+    if userId == localPlayer.UserId and gamePassId == GAMEPASS_ID then
         if wasPurchased then
             sendNotification("Universal Scripts", "Wersja premium kupiona pomyślnie! Dziękujemy za zakup.")
             hasGamePass = true
-            showTab("Premium")
+            showTab("Premium") -- Pokaż zakładkę Premium, jeśli zakupiono
         else
-            sendNotification("Universal Scripts", "Anulowano zakup wersji premium.")
+            sendNotification("Universal Scripts", "Anulowano zakup wersji premium lub wystąpił błąd.")
+            hasGamePass = false -- Upewnij się, że status jest poprawny
+            showTab("Home") -- Przełącz na zakładkę Home, jeśli anulowano/nie powiodło się
         end
     end
 end)
 
+---
+## Inicjalizacja skryptu
+---
+
 -- Główna funkcja startowa uruchamiana po załadowaniu PlayerGui
 spawn(function()
-    player.PlayerGui.ChildAdded:Wait() -- Czekaj, aż PlayerGui zostanie w pełni załadowane
+    localPlayer.PlayerGui.ChildAdded:Wait() -- Czekaj, aż PlayerGui zostanie w pełni załadowane
     task.wait(1) -- Krótkie opóźnienie dla pewności
+
     sendNotification("Universal Scripts", "Witaj w Universal Scripts! Skrypt załadowany.")
-    checkGamePassStatus()
-    updateMM2ButtonVisibility()
+    checkGamePassStatus() -- Sprawdź status GamePassa przy starcie
+    updateMM2ButtonVisibility() -- Ustaw widoczność przycisków MM2
     showTab("Home") -- Domyślnie pokaż zakładkę Home
     updateHideButtonPosition() -- Ustaw początkową pozycję przycisku Hide
+
+    -- Ustaw początkową pozycję HideButton po załadowaniu GUI
+    -- Domyślna pozycja jest podana w deklaracji, ale ta linia zapewnia, że zostanie przeliczona
+    -- na podstawie rozmiaru okna, jeśli GUI nie jest jeszcze widoczne.
+    HideButton.Position = lastHideButtonPosition
 end)
