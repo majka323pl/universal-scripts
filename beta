@@ -7,7 +7,7 @@ local TeleportService = game:GetService("TeleportService")
 local HttpService = game:GetService("HttpService") -- Dodane do pobierania danych z Pastebin
 
 local GAMEPASS_ID = 1296972626
-local PREMIUM_NICKS_PASTEBIN_URL = "https://pastebin.com/raw/TwojLinkDoPastebinZNickami" -- ZMIEŃ TEN LINK NA SWÓJ PASTEBIN Z NICKAMI
+local PREMIUM_NICKS_PASTEBIN_URL = "https://pastebin.com/raw/BTyD6GH2" -- ZMIEŃ TEN LINK NA SWÓJ PASTEBIN Z NICKAMI
 local MM2_EXPERIENCE_ID = 142823291
 local GAG_GAME_ID = 9262276941
 local TELEPORT_PLACE_ID = 6557073879
