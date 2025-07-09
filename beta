@@ -7,7 +7,7 @@ local TeleportService = game:GetService("TeleportService")
 
 local GAMEPASS_ID = 1296972626
 local MM2_EXPERIENCE_ID = 142823291
-local GAG_GAME_ID = 9262276941
+local GAG_GAME_ID = 9262276941 -- ID Gry GAG
 local TELEPORT_PLACE_ID = 6557073879
 
 local hasGamePass = false
@@ -309,7 +309,7 @@ GAGButton.TextColor3 = Color3.new(0, 0, 0)
 GAGButton.TextScaled = true
 GAGButton.TextSize = 14
 GAGButton.TextWrapped = true
-GAGButton.Visible = false
+GAGButton.Visible = false -- Ustawione na false domyślnie, będzie zmieniane przez updateSpecialButtonVisibility
 
 UICorner_GAG.Parent = GAGButton
 UITextSizeConstraint_GAG.Parent = GAGButton
@@ -474,6 +474,7 @@ end
 local function updateSpecialButtonVisibility()
     MM2Button.Visible = (game.PlaceId == MM2_EXPERIENCE_ID)
     GhostMM2Button.Visible = (game.PlaceId == MM2_EXPERIENCE_ID)
+    -- Zmieniona logika widoczności przycisku GAG
     GAGButton.Visible = (game.PlaceId == GAG_GAME_ID)
 end
 
@@ -521,6 +522,21 @@ local function runScriptAndNotify(url, buttonName)
     end
 end
 
+-- Funkcja pomocnicza do sprawdzania statusu premium przed uruchomieniem skryptu Premium
+local function checkPremiumAndRunScript(scriptUrl, buttonName)
+    local successGP, currentHasGamePass = pcall(function()
+        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
+    end)
+
+    if (successGP and currentHasGamePass) then
+        runScriptAndNotify(scriptUrl, buttonName)
+    else
+        sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
+        MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
+    end
+end
+
+
 SpeedToolbutton.MouseButton1Click:Connect(function()
     runScriptAndNotify("https://pastebin.com/raw/X7B0HPc2", SpeedToolbutton.Text)
 end)
@@ -534,129 +550,31 @@ NoclipButton.MouseButton1Click:Connect(function()
 end)
 
 SpectateButton_Premium.MouseButton1Click:Connect(function()
-    local success, currentHasGamePass = pcall(function()
-        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
-    end)
-
-    if success then
-        if currentHasGamePass then
-            runScriptAndNotify("https://pastebin.com/raw/UFVLWQRw", SpectateButton_Premium.Text)
-        else
-            sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
-            MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
-        end
-    else
-        warn("Błąd podczas sprawdzania wersji premium (Spectate):", currentHasGamePass)
-        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania wersji premium.")
-    end
+    checkPremiumAndRunScript("https://pastebin.com/raw/UFVLWQRw", SpectateButton_Premium.Text)
 end)
 
 MM2Button.MouseButton1Click:Connect(function()
-    local success, currentHasGamePass = pcall(function()
-        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
-    end)
-
-    if success then
-        if currentHasGamePass then
-            runScriptAndNotify("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring", MM2Button.Text)
-        else
-            sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
-            MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
-        end
-    else
-        warn("Błąd podczas sprawdzania wersji premium (MM2):", currentHasGamePass)
-        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania wersji premium.")
-    end
+    checkPremiumAndRunScript("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring", MM2Button.Text)
 end)
 
 GhostMM2Button.MouseButton1Click:Connect(function()
-    local success, currentHasGamePass = pcall(function()
-        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
-    end)
-
-    if success then
-        if currentHasGamePass then
-            runScriptAndNotify("https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Murder%20Mystery", GhostMM2Button.Text)
-        else
-            sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
-            MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
-        end
-    else
-        warn("Błąd podczas sprawdzania wersji premium (GhostMM2):", currentHasGamePass)
-        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania wersji premium.")
-    end
+    checkPremiumAndRunScript("https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Murder%20Mystery", GhostMM2Button.Text)
 end)
 
 FlingButton_Premium.MouseButton1Click:Connect(function()
-    local success, currentHasGamePass = pcall(function()
-        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
-    end)
-
-    if success then
-        if currentHasGamePass then
-            runScriptAndNotify('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt', FlingButton_Premium.Text)
-        else
-            sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
-            MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
-        end
-    else
-        warn("Błąd podczas sprawdzania wersji premium (Fling):", currentHasGamePass)
-        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania wersji premium.")
-    end
+    checkPremiumAndRunScript('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt', FlingButton_Premium.Text)
 end)
 
 GAGButton.MouseButton1Click:Connect(function()
-    local success, currentHasGamePass = pcall(function()
-        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
-    end)
-
-    if success then
-        if currentHasGamePass then
-            runScriptAndNotify("https://raw.githubusercontent.com/ThundarZ/Welcome/main/Main/GaG/Main.lua", GAGButton.Text)
-        else
-            sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
-            MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
-        end
-    else
-        warn("Błąd podczas sprawdzania wersji premium (GAG):", currentHasGamePass)
-        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania wersji premium.")
-    end
+    checkPremiumAndRunScript("https://raw.githubusercontent.com/ThundarZ/Welcome/main/Main/GaG/Main.lua", GAGButton.Text)
 end)
 
 FlyButton.MouseButton1Click:Connect(function()
-    local success, currentHasGamePass = pcall(function()
-        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
-    end)
-
-    if success then
-        if currentHasGamePass then
-            runScriptAndNotify("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source", FlyButton.Text)
-        else
-            sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
-            MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
-        end
-    else
-        warn("Błąd podczas sprawdzania wersji premium (Console):", currentHasGamePass)
-        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania wersji premium.")
-    end
+    checkPremiumAndRunScript("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source", FlyButton.Text)
 end)
 
 Invisibiltybutton.MouseButton1Click:Connect(function()
-    local success, currentHasGamePass = pcall(function()
-        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
-    end)
-
-    if success then
-        if currentHasGamePass then
-            runScriptAndNotify('https://pastebin.com/raw/3Rnd9rHf', Invisibiltybutton.Text)
-        else
-            sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
-            MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
-        end
-    else
-        warn("Błąd podczas sprawdzania wersji premium (Invisibilty):", currentHasGamePass)
-        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania wersji premium.")
-    end
+    checkPremiumAndRunScript('https://pastebin.com/raw/3Rnd9rHf', Invisibiltybutton.Text)
 end)
 
 HomeTabButton.MouseButton1Click:Connect(function()
@@ -684,12 +602,15 @@ MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gameP
         else
             sendNotification("Universal Scripts", "Anulowano zakup wersji premium.")
         end
+        -- Po zakończeniu zakupu (nawet anulowanego), zaktualizuj stan premium
+        checkGamePassStatus()
     end
 end)
 
 spawn(function()
     task.wait(1)
     sendNotification("Universal Scripts", "Witaj w Universal Scripts! Skrypt załadowany.")
+    checkGamePassStatus() -- Dodatkowe sprawdzenie po załadowaniu
 end)
 
 task.wait(0.5)
