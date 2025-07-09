@@ -471,8 +471,6 @@ local function checkGamePassStatus()
     end
 end
 
-local lastPlaceId = game.PlaceId -- Dodano zmienną do śledzenia ostatniego PlaceId
-
 local function updateSpecialButtonVisibility()
     MM2Button.Visible = (game.PlaceId == MM2_EXPERIENCE_ID)
     GhostMM2Button.Visible = (game.PlaceId == MM2_EXPERIENCE_ID)
@@ -499,7 +497,7 @@ local function updateHideButtonPosition()
 end
 
 checkGamePassStatus()
-updateSpecialButtonVisibility() -- Pierwsze wywołanie przy starcie
+updateSpecialButtonVisibility()
 showTab("Home")
 updateHideButtonPosition()
 
@@ -582,7 +580,7 @@ GhostMM2Button.MouseButton1Click:Connect(function()
         else
             sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
             MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
-        }
+        end
     else
         warn("Błąd podczas sprawdzania wersji premium (GhostMM2):", currentHasGamePass)
         sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania wersji premium.")
@@ -686,14 +684,6 @@ MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gameP
         else
             sendNotification("Universal Scripts", "Anulowano zakup wersji premium.")
         end
-    end
-end)
-
--- Nowa pętla do ciągłego sprawdzania PlaceId
-RunService.Stepped:Connect(function()
-    if game.PlaceId ~= lastPlaceId then
-        lastPlaceId = game.PlaceId
-        updateSpecialButtonVisibility()
     end
 end)
 
