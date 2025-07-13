@@ -22,59 +22,6 @@ local cachedLink, cachedTime = "", 0;
 local HttpService = game:GetService("HttpService")
 
 -- Funkcja do wysyłania powiadomień (dostosowana do Twojego stylu)
-local function sendNotification(title, text)
-    StarterGui:SetCore("SendNotification", {
-        Title = title,
-        Text = text,
-        Icon = "rbxassetid://102860171689689", -- Możesz użyć swojej ikony
-        Duration = 5
-    })
-end
-
--- Funkcja sprawdzająca status GamePassa
-local function checkGamePassStatus()
-    local success, result = pcall(function()
-        -- Ręcznie wprowadzasz ID GamePassa tutaj:
-        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, 1296972626) 
-    end)
-
-    if success then
-        hasGamePass = result
-        if not initialGamePassCheckDone then
-            if hasGamePass then
-                sendNotification("Klucz", "Wykryto GamePass Premium! Pomijam system kluczy.")
-            else
-                sendNotification("Klucz", "Brak GamePassa Premium. Wymagany klucz.")
-            end
-            initialGamePassCheckDone = true
-        end
-    else
-        warn("Błąd podczas sprawdzania GamePass Premium:", result)
-        sendNotification("Klucz", "Nie można sprawdzić statusu GamePass Premium. Spróbuj ponownie.")
-    end
-    return hasGamePass
-end
-
--- Nasłuchiwanie na zakończenie próby zakupu GamePassa
-MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gamePassId, wasPurchased)
-    -- Ręcznie wprowadzasz ID GamePassa tutaj:
-    if userId == player.UserId and gamePassId == 1296972626 then 
-        if wasPurchased then
-            sendNotification("Klucz", "GamePass Premium kupiony pomyślnie! Ładowanie skryptu...")
-            hasGamePass = true
-            -- Zniszcz GUI keysystemu, jeśli istnieje i jest widoczne
-            if _G.ScreenGui and _G.ScreenGui.Parent then 
-                _G.ScreenGui:Destroy()
-            end
-            -- Uruchom główny skrypt po zakupie GamePassa (ręcznie wprowadzasz URL tutaj):
-            loadstring(game:HttpGet("https://pastebin.com/raw/DTrES0c6"))()
-        else
-            sendNotification("Klucz", "Anulowano zakup GamePass Premium.")
-        end
-        checkGamePassStatus() -- Upewnij się, że status jest zaktualizowany
-    end
-end)
-
 
 function lEncode(data)
     return HttpService:JSONEncode(data)
@@ -323,18 +270,11 @@ local getFlag = function(name)
     end
 end
 
----
-### **Logika GamePassa i Keysystemu**
----
+--Logika GamePassa i Keysystemu
 
 -- Sprawdź status GamePassa na początku
 local playerHasGamePass = checkGamePassStatus()
 
-if playerHasGamePass then
-    -- Gracz ma GamePassa, pomijamy keysystem i od razu ładujemy skrypt premium.
-    -- Możesz edytować URL skryptu bezpośrednio tutaj:
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/scripts"))() 
-elseif
     -- Gracz nie ma GamePassa, pokazujemy keysystem GUI
     sendNotification("Klucz", "Wykryto brak GamePassa Premium. Proszę wprowadzić klucz.")
     task.spawn(function()
