@@ -1,11 +1,18 @@
-local service = ;--Set your Platoboost Id
-local secret = ""; --Set Your Platoboost Api key
+local service = 0; --Set your Platoboost Id (Zmień to na swoje ID z Platoboost!)
+local secret = ""; --Set Your Platoboost Api key (Zmień to na swój klucz API z Platoboost!)
 local useNonce = true;
-local onMessage = function(message) game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", { Text = message; }) end;
+
+-- Zapewnienie, że onMessage jest funkcją i działa
+local onMessage = function(message)
+    local StarterGui = game:GetService("StarterGui")
+    if StarterGui then
+        StarterGui:SetCore("ChatMakeSystemMessage", { Text = message; })
+    end
+end;
 
 local player = game.Players.LocalPlayer
 local MarketplaceService = game:GetService("MarketplaceService")
-local StarterGui = game:GetService("StarterGui") 
+local StarterGui = game:GetService("StarterGui")
 
 --- KONFIGURACJA ---
 local GAMEPASS_ID = 1296972626 -- <-- TUTAJ WPROWADŹ ID SWOJEGO GAMEPASSA!
@@ -15,27 +22,40 @@ local GAMEPASS_ID = 1296972626 -- <-- TUTAJ WPROWADŹ ID SWOJEGO GAMEPASSA!
 local hasGamePass = false
 local initialGamePassCheckDone = false -- Flaga, aby powiadomienie o statusie GamePassa pojawiło się tylko raz
 
-repeat task.wait(1) until game:IsLoaded() or game.Players.LocalPlayer;
+repeat task.wait(1) until game:IsLoaded() and player; -- Upewnij się, że gracz i gra są załadowane
 
 local requestSending = false;
-local fSetClipboard, fRequest, fStringChar, fToString, fStringSub, fOsTime, fMathRandom, fMathFloor, fGetHwid = setclipboard or toclipboard, request or http_request, string.char, tostring, string.sub, os.time, math.random, math.floor, gethwid or function() return game:GetService("Players").LocalPlayer.UserId end
+
+-- Fallbacki dla środowisk, które mogą nie mieć wbudowanych funkcji
+local fSetClipboard = setclipboard or toclipboard or function(text) warn("setclipboard/toclipboard not found!"); end
+local fRequest = request or http_request or function(options) warn("request/http_request not found!"); return {StatusCode = 0, Body = "{}"}; end
+local fStringChar = string.char
+local fToString = tostring
+local fStringSub = string.sub
+local fOsTime = os.time
+local fMathRandom = math.random
+local fMathFloor = math.floor
+local fGetHwid = gethwid or function() return player.UserId end -- Używamy UserId jako HWID jeśli gethwid nie istnieje
+
 local cachedLink, cachedTime = "", 0;
 local HttpService = game:GetService("HttpService")
 
 -- Funkcja do wysyłania powiadomień
 local function sendNotification(title, text)
-    StarterGui:SetCore("SendNotification", {
-        Title = title,
-        Text = text,
-        Icon = "rbxassetid://102860171689689", -- Możesz użyć swojej ikony asset ID
-        Duration = 5
-    })
+    if StarterGui then
+        StarterGui:SetCore("SendNotification", {
+            Title = title,
+            Text = text,
+            Icon = "rbxassetid://102860171689689", -- Możesz użyć swojej ikony asset ID
+            Duration = 5
+        })
+    end
 end
 
 -- Funkcja sprawdzająca status GamePassa
 local function checkGamePassStatus()
     local success, result = pcall(function()
-        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID) 
+        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
     end)
 
     if success then
@@ -57,16 +77,16 @@ end
 
 -- Nasłuchiwanie na zakończenie próby zakupu GamePassa (gdy gracz kupi w trakcie gry)
 MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gamePassId, wasPurchased)
-    if userId == player.UserId and gamePassId == GAMEPASS_ID then 
+    if userId == player.UserId and gamePassId == GAMEPASS_ID then
         if wasPurchased then
             sendNotification("Klucz", "GamePass Premium kupiony pomyślnie! Ładowanie skryptu...")
             hasGamePass = true
             -- Zniszcz GUI keysystemu, jeśli istnieje i jest widoczne
-            if _G.ScreenGui and _G.ScreenGui.Parent then 
+            if _G.ScreenGui and _G.ScreenGui.Parent then
                 _G.ScreenGui:Destroy()
             end
-            -- Uruchom główny skrypt po zakupie GamePassa 
-            -- <--- TUTAJ WPROWADŹ URL SWOJEGO GŁÓWNEGO SKRYPTU! (np. "https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/scripts")
+            -- Uruchom główny skrypt po zakupie GamePassa
+            -- <--- TUTAJ WPROWADŹ URL SWOJEGO GŁÓWNEGO SKRYPTU! (np. "https://pastebin.com/raw/DTrES0c6")
             loadstring(game:HttpGet("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/scripts"))()
         else
             sendNotification("Klucz", "Anulowano zakup GamePass Premium.")
@@ -80,29 +100,30 @@ function lEncode(data)
     return HttpService:JSONEncode(data)
 end
 function lDecode(data)
-    return HttpService:JSONDecode(data)
+    local success, decoded = pcall(HttpService.JSONDecode, HttpService, data)
+    if success then
+        return decoded
+    else
+        warn("Failed to decode JSON:", decoded)
+        return nil
+    end
 end
+
 local function lDigest(input)
     local inputStr = tostring(input)
-    
-    local hash = {}
-    for i = 1, #inputStr do
-        table.insert(hash, string.byte(inputStr, i))
-    end
-
     local hashHex = ""
-    for _, byte in ipairs(hash) do
-        hashHex = hashHex .. string.format("%02x", byte)
+    for i = 1, #inputStr do
+        hashHex = hashHex .. string.format("%02x", string.byte(inputStr, i))
     end
-    
     return hashHex
 end
+
 local host = "https://api.platoboost.com";
 local hostResponse = fRequest({
     Url = host .. "/public/connectivity",
     Method = "GET"
 });
-if hostResponse.StatusCode ~= 200 or hostResponse.StatusCode ~= 429 then
+if hostResponse.StatusCode ~= 200 and hostResponse.StatusCode ~= 429 then -- Poprawiona logika warunku
     host = "https://api.platoboost.net";
 end
 
@@ -122,24 +143,23 @@ function cacheLink()
 
         if response.StatusCode == 200 then
             local decoded = lDecode(response.Body);
-
-            if decoded.success == true then
+            if decoded and decoded.success == true then
                 cachedLink = decoded.data.url;
                 cachedTime = fOsTime();
                 return true, cachedLink;
             else
-                onMessage(decoded.message);
-                return false, decoded.message;
+                onMessage(decoded and decoded.message or "Unknown error caching link.");
+                return false, decoded and decoded.message or "Unknown error caching link.";
             end
         elseif response.StatusCode == 429 then
             local msg = "you are being rate limited, please wait 20 seconds and try again.";
             onMessage(msg);
             return false, msg;
+        else
+            local msg = "Failed to cache link. Status code: " .. response.StatusCode;
+            onMessage(msg);
+            return false, msg;
         end
-
-        local msg = "Failed to cache link.";
-        onMessage(msg);
-        return false, msg;
     else
         return true, cachedLink;
     end
@@ -169,16 +189,18 @@ end
 
 local copyLink = function()
     local success, link = cacheLink();
-    
+
     if success then
-        print("SetClipBoard")
         fSetClipboard(link);
+        sendNotification("Klucz", "Link do klucza został skopiowany do schowka!")
+    else
+        sendNotification("Klucz", "Nie udało się skopiować linku. Spróbuj ponownie później.")
     end
 end
 
 local redeemKey = function(key)
     local nonce = generateNonce();
-    local endpoint = host .. "/public/redeem/" .. tostring(service);
+    local endpoint = host .. "/public/redeem/" .. fToString(service);
 
     local body = {
         identifier = lDigest(fGetHwid()),
@@ -200,7 +222,7 @@ local redeemKey = function(key)
 
     if response.StatusCode == 200 then
         local decoded = lDecode(response.Body);
-        if decoded.success == true then
+        if decoded and decoded.success == true then
             if decoded.data.valid == true then
                 if useNonce then
                     if decoded.data.hash == lDigest("true" .. "-" .. nonce .. "-" .. secret) then
@@ -208,7 +230,7 @@ local redeemKey = function(key)
                     else
                         onMessage("failed to verify integrity.");
                         return false;
-                    end    
+                    end
                 else
                     return true;
                 end
@@ -217,11 +239,11 @@ local redeemKey = function(key)
                 return false;
             end
         else
-            if string.sub(decoded.message, 1, 27) == "unique constraint violation" then
+            if decoded and fStringSub(decoded.message, 1, 27) == "unique constraint violation" then
                 onMessage("you already have an active key, please wait for it to expire before redeeming it.");
                 return false;
             else
-                onMessage(decoded.message);
+                onMessage(decoded and decoded.message or "Unknown error redeeming key.");
                 return false;
             end
         end
@@ -229,8 +251,8 @@ local redeemKey = function(key)
         onMessage("you are being rate limited, please wait 20 seconds and try again.");
         return false;
     else
-        onMessage("server returned an invalid status code, please try again later.");
-        return false;    
+        onMessage("server returned an invalid status code, please try again later. Status: " .. response.StatusCode);
+        return false;
     end
 end
 
@@ -244,7 +266,7 @@ local verifyKey = function(key)
     end
 
     local nonce = generateNonce();
-    local endpoint = host .. "/public/whitelist/" .. tostring(service) .. "?identifier=" .. lDigest(fGetHwid()) .. "&key=" .. key;
+    local endpoint = host .. "/public/whitelist/" .. fToString(service) .. "?identifier=" .. lDigest(fGetHwid()) .. "&key=" .. key;
 
     if useNonce then
         endpoint = endpoint .. "&nonce=" .. nonce;
@@ -258,7 +280,7 @@ local verifyKey = function(key)
 
     if response.StatusCode == 200 then
         local decoded = lDecode(response.Body);
-        if decoded.success == true then
+        if decoded and decoded.success == true then
             if decoded.data.valid == true then
                 if useNonce then
                     return true;
@@ -266,7 +288,7 @@ local verifyKey = function(key)
                     return true;
                 end
             else
-                if string.sub(key, 1, 4) == "FREE_" then
+                if fStringSub(key, 1, 4) == "FREE_" then
                     return redeemKey(key);
                 else
                     onMessage("key is invalid.");
@@ -274,14 +296,14 @@ local verifyKey = function(key)
                 end
             end
         else
-            onMessage(decoded.message);
+            onMessage(decoded and decoded.message or "Unknown error verifying key.");
             return false;
         end
     elseif response.StatusCode == 429 then
         onMessage("you are being rate limited, please wait 20 seconds and try again.");
         return false;
     else
-        onMessage("server returned an invalid status code, please try again later.");
+        onMessage("server returned an invalid status code, please try again later. Status: " .. response.StatusCode);
         return false;
     end
 end
@@ -289,7 +311,7 @@ end
 
 local getFlag = function(name)
     local nonce = generateNonce();
-    local endpoint = host .. "/public/flag/" .. tostring(service) .. "?name=" .. name;
+    local endpoint = host .. "/public/flag/" .. fToString(service) .. "?name=" .. name;
 
     if useNonce then
         endpoint = endpoint .. "&nonce=" .. nonce;
@@ -302,9 +324,9 @@ local getFlag = function(name)
 
     if response.StatusCode == 200 then
         local decoded = lDecode(response.Body);
-        if decoded.success == true then
+        if decoded and decoded.success == true then
             if useNonce then
-                if decoded.data.hash == lDigest(tostring(decoded.data.value) .. "-" .. nonce .. "-" .. secret) then
+                if decoded.data.hash == lDigest(fToString(decoded.data.value) .. "-" .. nonce .. "-" .. secret) then
                     return decoded.data.value;
                 else
                     onMessage("failed to verify integrity.");
@@ -314,7 +336,7 @@ local getFlag = function(name)
                 return decoded.data.value;
             end
         else
-            onMessage(decoded.message);
+            onMessage(decoded and decoded.message or "Unknown error getting flag.");
             return nil;
         end
     else
@@ -323,7 +345,7 @@ local getFlag = function(name)
 end
 
 ---
-### **Logika GamePassa i Keysystemu**
+--- **Logika GamePassa i Keysystemu** ---
 ---
 
 -- Sprawdź status GamePassa na początku
@@ -332,12 +354,13 @@ local playerHasGamePass = checkGamePassStatus()
 if playerHasGamePass then
     -- Gracz ma GamePassa, pomijamy keysystem i od razu ładujemy skrypt premium.
     -- <--- TUTAJ WPROWADŹ URL SWOJEGO GŁÓWNEGO SKRYPTU! (np. "https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/scripts")
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/scripts"))() 
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/scripts"))()
 else
     -- Gracz nie ma GamePassa, pokazujemy keysystem GUI
     sendNotification("Klucz", "Wykryto brak GamePassa Premium. Proszę wprowadzić klucz.")
     task.spawn(function()
         _G.ScreenGui = Instance.new("ScreenGui") -- Używamy _G.ScreenGui, aby była globalna
+        _G.ScreenGui.Name = "PlatoboostKeySystem" -- Nadaj nazwę dla łatwiejszego zarządzania
         local Frame = Instance.new("Frame")
         local Topbar = Instance.new("Frame")
         local Exit = Instance.new("TextButton")
@@ -346,27 +369,27 @@ else
         local Getkey = Instance.new("TextButton")
         local Checkkey = Instance.new("TextButton")
         local TextBox = Instance.new("TextBox")
-        local TextLabel = Instance.new("TextLabel") 
-        
+        local TextLabel = Instance.new("TextLabel")
+
         _G.ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
         _G.ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-        
+
         Frame.Parent = _G.ScreenGui
         Frame.BackgroundColor3 = Color3.fromRGB(76, 76, 76)
         Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
         Frame.BorderSizePixel = 0
         Frame.Position = UDim2.new(0.286729872, 0, 0.295880139, 0)
         Frame.Size = UDim2.new(0, 359, 0, 217)
-        Frame.Active = true 
-        Frame.Draggable = true 
-        
+        Frame.Active = true
+        Frame.Draggable = true
+
         Topbar.Name = "Topbar"
         Topbar.Parent = Frame
         Topbar.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
         Topbar.BorderColor3 = Color3.fromRGB(0, 0, 0)
         Topbar.BorderSizePixel = 0
         Topbar.Size = UDim2.new(0, 359, 0, 27)
-        
+
         Exit.Name = "Exit"
         Exit.Parent = Topbar
         Exit.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
@@ -381,7 +404,7 @@ else
         Exit.TextScaled = true
         Exit.TextSize = 14.000
         Exit.TextWrapped = true
-        
+
         minimize.Name = "minimize"
         minimize.Parent = Topbar
         minimize.BackgroundColor3 = Color3.fromRGB(85, 255, 0)
@@ -396,7 +419,7 @@ else
         minimize.TextScaled = true
         minimize.TextSize = 14.000
         minimize.TextWrapped = true
-        
+
         Frame_2.Parent = Frame
         Frame_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         Frame_2.BackgroundTransparency = 1.000
@@ -404,7 +427,7 @@ else
         Frame_2.BorderSizePixel = 0
         Frame_2.Position = UDim2.new(0, 0, 0.124423966, 0)
         Frame_2.Size = UDim2.new(0, 359, 0, 189)
-        
+
         Getkey.Name = "Getkey"
         Getkey.Parent = Frame_2
         Getkey.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -418,7 +441,7 @@ else
         Getkey.TextScaled = true
         Getkey.TextSize = 14.000
         Getkey.TextWrapped = true
-        
+
         Checkkey.Name = "Checkkey"
         Checkkey.Parent = Frame_2
         Checkkey.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -432,7 +455,7 @@ else
         Checkkey.TextScaled = true
         Checkkey.TextSize = 14.000
         Checkkey.TextWrapped = true
-        
+
         TextBox.Parent = Frame_2
         TextBox.BackgroundColor3 = Color3.fromRGB(139, 139, 139)
         TextBox.BackgroundTransparency = 0.600
@@ -447,7 +470,7 @@ else
         TextBox.TextScaled = true
         TextBox.TextSize = 14.000
         TextBox.TextWrapped = true
-        
+
         TextLabel = Instance.new("TextLabel")
         TextLabel.Parent = Frame_2
         TextLabel.BackgroundColor3 = Color3.fromRGB(211, 211, 211)
@@ -465,7 +488,7 @@ else
         TextLabel.TextStrokeTransparency = 0.830
         TextLabel.TextTransparency = 0.550
         TextLabel.TextWrapped = true
-        
+
         TextBox:GetPropertyChangedSignal("Text"):Connect(function()
             if TextBox.Text == "" then
                 TextLabel.Text = "In Put Your Key"
@@ -473,7 +496,7 @@ else
                 TextLabel.Text = TextBox.Text
             end
         end)
-        
+
         Checkkey.MouseButton1Down:Connect(function()
             if TextBox and TextBox.Text then
                 local Verify = verifyKey(TextBox.Text)
@@ -482,30 +505,30 @@ else
                     -- <--- TUTAJ WPROWADŹ URL SWOJEGO GŁÓWNEGO SKRYPTU! (np. "https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/scripts")
                     loadstring(game:HttpGet("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/scripts"))()
                     if _G.ScreenGui then
-                        _G.ScreenGui:Destroy() 
+                        _G.ScreenGui:Destroy()
                     end
                 else
+                    sendNotification("Klucz", "Wprowadzony klucz jest nieprawidłowy.")
                     print("Key Is invalid")
                 end
             end
         end)
-        
+
         Getkey.MouseButton1Down:Connect(function()
             copyLink()
-            sendNotification("Klucz", "Link do klucza został skopiowany do schowka!")
         end)
-        
+
         Exit.MouseButton1Down:Connect(function()
             if _G.ScreenGui then
                 _G.ScreenGui:Destroy()
             end
         end)
-        
+
         minimize.MouseButton1Down:Connect(function()
             if _G.ScreenGui then
                 _G.ScreenGui.Enabled = false
             end
         end)
-        
+
     end)
 end
