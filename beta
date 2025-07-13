@@ -1,5 +1,5 @@
-local service = 0; --Set your Platoboost Id (Zmień to na swoje ID z Platoboost!)
-local secret = ""; --Set Your Platoboost Api key (Zmień to na swój klucz API z Platoboost!)
+local service = 5027; --Set your Platoboost Id (Zmień to na swoje ID z Platoboost!)
+local secret = "66a95f80-0154-4eb3-9f2a-9457c55ea11b"; --Set Your Platoboost Api key (Zmień to na swój klucz API z Platoboost!)
 local useNonce = true;
 
 -- Zapewnienie, że onMessage jest funkcją i działa
