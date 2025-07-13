@@ -1,5 +1,5 @@
-local service = 5027;--Set your Platoboost Id
-local secret = "66a95f80-0154-4eb3-9f2a-9457c55ea11b"; --Set Your Platoboost Api key
+local service = ;--Set your Platoboost Id
+local secret = ""; --Set Your Platoboost Api key
 local useNonce = true;
 local onMessage = function(message) game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", { Text = message; }) end;
 
@@ -10,9 +10,9 @@ local StarterGui = game:GetService("StarterGui")
 -- UŻYWAMY ID GAMEPASSA Z UNIVERSAL SCRIPTS: 1296972626
 local GAMEPASS_ID = 1296972626 
 
--- URL SKRYPTU GŁÓWNEGO, KTÓRY MA SIĘ URUCHOMIĆ DLA POSIADACZY GAMEPASSA ORAZ DLA ZWERYFIFIKOWANYCH KLUCZY
--- ZMIENNA GLOBALNA DLA CAŁEGO SKRYPTU
-_G.MAIN_SCRIPT_URL = "https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/scripts" 
+-- URL SKRYPTU GŁÓWNEGO, KTÓRY MA SIĘ URUCHOMIĆ DLA POSIADACZY GAMEPASSA ORAZ DLA ZWERYFIKOWANYCH KLUCZY
+-- ZMIENNA GLOBALNA DLA CAŁEGO SKRYPTU (bez _G. prefixu)
+MAIN_SCRIPT_URL = "https://pastebin.com/raw/DTrES0c6" 
 
 local hasGamePass = false
 local initialGamePassCheckDone = false -- Flaga, aby powiadomienie pojawiło się tylko raz
@@ -68,7 +68,7 @@ MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gameP
                 _G.ScreenGui:Destroy()
             end
             -- Uruchom główny skrypt po zakupie GamePassa
-            loadstring(game:HttpGet(_G.MAIN_SCRIPT_URL))()
+            loadstring(game:HttpGet(MAIN_SCRIPT_URL))()
         else
             sendNotification("Klucz", "Anulowano zakup GamePass Premium.")
         end
@@ -334,12 +334,12 @@ local playerHasGamePass = checkGamePassStatus()
 if playerHasGamePass then
     -- Gracz ma GamePassa, pomijamy keysystem i od razu ładujemy skrypt premium.
     -- Ta linia ładuje skrypt dla posiadaczy GamePassa:
-    loadstring(game:HttpGet(_G.MAIN_SCRIPT_URL))() 
+    loadstring(game:HttpGet(MAIN_SCRIPT_URL))() 
 else
     -- Gracz nie ma GamePassa, pokazujemy keysystem GUI
     sendNotification("Klucz", "Wykryto brak GamePassa Premium. Proszę wprowadzić klucz.")
     task.spawn(function()
-        _G.ScreenGui = Instance.new("ScreenGui") -- Ustawienie zmiennej globalnej
+        _G.ScreenGui = Instance.new("ScreenGui") -- Używamy _G.ScreenGui, aby była globalna
         local Frame = Instance.new("Frame")
         local Topbar = Instance.new("Frame")
         local Exit = Instance.new("TextButton")
@@ -478,7 +478,7 @@ else
                 local Verify = verifyKey(TextBox.Text)
                 if Verify then
                     -- Klucz poprawny, ładujemy główny skrypt i niszczymy GUI.
-                    loadstring(game:HttpGet(_G.MAIN_SCRIPT_URL))()
+                    loadstring(game:HttpGet(MAIN_SCRIPT_URL))()
                     if _G.ScreenGui then
                         _G.ScreenGui:Destroy() 
                     end
