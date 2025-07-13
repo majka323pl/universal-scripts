@@ -1,8 +1,7 @@
-local service = 5027; --Set your Platoboost Id (Zmień to na swoje ID z Platoboost!)
-local secret = "66a95f80-0154-4eb3-9f2a-9457c55ea11b"; --Set Your Platoboost Api key (Zmień to na swój klucz API z Platoboost!)
+local service = 5027; 
+local secret = "66a95f80-0154-4eb3-9f2a-9457c55ea11b"; 
 local useNonce = true;
 
--- Zapewnienie, że onMessage jest funkcją i działa
 local onMessage = function(message)
     local StarterGui = game:GetService("StarterGui")
     if StarterGui then
@@ -14,19 +13,15 @@ local player = game.Players.LocalPlayer
 local MarketplaceService = game:GetService("MarketplaceService")
 local StarterGui = game:GetService("StarterGui")
 
---- KONFIGURACJA ---
 local GAMEPASS_ID = 1296972626 -- <-- TUTAJ WPROWADŹ ID SWOJEGO GAMEPASSA!
---------------------
 
--- Flagi i inicjalizacja
-local hasGamePass = false
-local initialGamePassCheckDone = false -- Flaga, aby powiadomienie o statusie Premium pojawiło się tylko raz
+local hasPremium = false
+local initialPremiumCheckDone = false
 
-repeat task.wait(1) until game:IsLoaded() and player; -- Upewnij się, że gracz i gra są załadowane
+repeat task.wait(1) until game:IsLoaded() and player;
 
 local requestSending = false;
 
--- Fallbacki dla środowisk, które mogą nie mieć wbudowanych funkcji
 local fSetClipboard = setclipboard or toclipboard or function(text) warn("setclipboard/toclipboard not found!"); end
 local fRequest = request or http_request or function(options) warn("request/http_request not found!"); return {StatusCode = 0, Body = "{}"}; end
 local fStringChar = string.char
@@ -35,63 +30,58 @@ local fStringSub = string.sub
 local fOsTime = os.time
 local fMathRandom = math.random
 local fMathFloor = math.floor
-local fGetHwid = gethwid or function() return player.UserId end -- Używamy UserId jako HWID jeśli gethwid nie istnieje
+local fGetHwid = gethwid or function() return player.UserId end
 
 local cachedLink, cachedTime = "", 0;
 local HttpService = game:GetService("HttpService")
 
--- Funkcja do wysyłania powiadomień
 local function sendNotification(title, text)
     if StarterGui then
         StarterGui:SetCore("SendNotification", {
             Title = title,
             Text = text,
-            Icon = "rbxassetid://102860171689689", -- Możesz użyć swojej ikony asset ID
+            Icon = "rbxassetid://102860171689689",
             Duration = 5
         })
     end
 end
 
--- Funkcja sprawdzająca status Premium
-local function checkGamePassStatus()
+local function checkPremiumStatus()
     local success, result = pcall(function()
         return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
     end)
 
     if success then
-        hasGamePass = result
-        if not initialGamePassCheckDone then
-            if hasGamePass then
+        hasPremium = result
+        if not initialPremiumCheckDone then
+            if hasPremium then
                 sendNotification("Klucz", "Wykryto Premium! Pomijam system kluczy.")
             else
                 sendNotification("Klucz", "Brak Premium. Wymagany klucz.")
             end
-            initialGamePassCheckDone = true
+            initialPremiumCheckDone = true
         end
     else
         warn("Błąd podczas sprawdzania statusu Premium:", result)
         sendNotification("Klucz", "Nie można sprawdzić statusu Premium. Spróbuj ponownie.")
     end
-    return hasGamePass
+    return hasPremium
 end
 
--- Nasłuchiwanie na zakończenie próby zakupu Premium (gdy gracz kupi w trakcie gry)
 MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gamePassId, wasPurchased)
     if userId == player.UserId and gamePassId == GAMEPASS_ID then
         if wasPurchased then
             sendNotification("Klucz", "Premium kupione pomyślnie! Ładowanie skryptu...")
-            hasGamePass = true
-            -- Zniszcz GUI keysystemu, jeśli istnieje i jest widoczne
+            hasPremium = true
             if _G.ScreenGui and _G.ScreenGui.Parent then
                 _G.ScreenGui:Destroy()
             end
-            -- Uruchom główny skrypt po zakupie Premium
-            -- <--- TUTAJ WPROWADŹ URL SWOJEGO GŁÓWNEGO SKRYPTU! (np. "https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/scripts")
+            -- <--- TUTAJ WPROWADŹ URL SWOJEGO GŁÓWNEGO SKRYPTU!
             loadstring(game:HttpGet("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/scripts"))()
         else
             sendNotification("Klucz", "Anulowano zakup Premium.")
         end
-        checkGamePassStatus() -- Upewnij się, że status jest zaktualizowany
+        checkPremiumStatus()
     end
 end)
 
@@ -123,7 +113,7 @@ local hostResponse = fRequest({
     Url = host .. "/public/connectivity",
     Method = "GET"
 });
-if hostResponse.StatusCode ~= 200 and hostResponse.StatusCode ~= 429 then -- Poprawiona logika warunku
+if hostResponse.StatusCode ~= 200 and hostResponse.StatusCode ~= 429 then
     host = "https://api.platoboost.net";
 end
 
@@ -149,23 +139,22 @@ function cacheLink()
                 return true, cachedLink;
             else
                 onMessage(decoded and decoded.message or "Unknown error caching link.");
-                return false, decoded and decoded.message or "Unknown error caching link.";
+                return false;
             end
         elseif response.StatusCode == 429 then
             local msg = "you are being rate limited, please wait 20 seconds and try again.";
             onMessage(msg);
-            return false, msg;
+            return false;
         else
             local msg = "Failed to cache link. Status code: " .. response.StatusCode;
             onMessage(msg);
-            return false, msg;
+            return false;
         end
     else
         return true, cachedLink;
     end
 end
 
--- Wywołanie cacheLink na początku skryptu, aby spróbować pobrać link do klucza
 cacheLink();
 
 local generateNonce = function()
@@ -344,23 +333,16 @@ local getFlag = function(name)
     end
 end
 
----
---- **Logika Premium i Keysystemu** ---
----
+local playerHasPremium = checkPremiumStatus()
 
--- Sprawdź status Premium na początku
-local playerHasGamePass = checkGamePassStatus()
-
-if playerHasGamePass then
-    -- Gracz ma Premium, pomijamy keysystem i od razu ładujemy skrypt.
-    -- <--- TUTAJ WPROWADŹ URL SWOJEGO GŁÓWNEGO SKRYPTU! (np. "https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/scripts")
+if playerHasPremium then
+    -- <--- TUTAJ WPROWADŹ URL SWOJEGO GŁÓWNEGO SKRYPTU!
     loadstring(game:HttpGet("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/scripts"))()
 else
-    -- Gracz nie ma Premium, pokazujemy keysystem GUI
     sendNotification("Klucz", "Wykryto brak Premium. Proszę wprowadzić klucz.")
     task.spawn(function()
-        _G.ScreenGui = Instance.new("ScreenGui") -- Używamy _G.ScreenGui, aby była globalna
-        _G.ScreenGui.Name = "PlatoboostKeySystem" -- Nadaj nazwę dla łatwiejszego zarządzania
+        _G.ScreenGui = Instance.new("ScreenGui")
+        _G.ScreenGui.Name = "PlatoboostKeySystem"
         local Frame = Instance.new("Frame")
         local Topbar = Instance.new("Frame")
         local Exit = Instance.new("TextButton")
@@ -436,7 +418,7 @@ else
         Getkey.Position = UDim2.new(0.317548752, 0, 0.523809552, 0)
         Getkey.Size = UDim2.new(0, 130, 0, 32)
         Getkey.Font = Enum.Font.SourceSans
-        Getkey.Text = "Getkey"
+        Getkey.Text = "Skopiuj link"
         Getkey.TextColor3 = Color3.fromRGB(255, 255, 255)
         Getkey.TextScaled = true
         Getkey.TextSize = 14.000
@@ -450,7 +432,7 @@ else
         Checkkey.Position = UDim2.new(0.317548752, 0, 0.767195761, 0)
         Checkkey.Size = UDim2.new(0, 130, 0, 32)
         Checkkey.Font = Enum.Font.SourceSans
-        Checkkey.Text = "CheckKey"
+        Checkkey.Text = "Sprawdź klucz"
         Checkkey.TextColor3 = Color3.fromRGB(255, 255, 255)
         Checkkey.TextScaled = true
         Checkkey.TextSize = 14.000
@@ -464,30 +446,12 @@ else
         TextBox.Position = UDim2.new(0.0779944286, 0, 0.137566134, 0)
         TextBox.Size = UDim2.new(0, 304, 0, 42)
         TextBox.Font = Enum.Font.SourceSans
-        TextBox.Text = ""
+        TextBox.Text = "Wpisz tutaj swój klucz"
         TextBox.TextTransparency = 1
         TextBox.TextColor3 = Color3.fromRGB(0, 0, 0)
         TextBox.TextScaled = true
         TextBox.TextSize = 14.000
         TextBox.TextWrapped = true
-
-        TextLabel = Instance.new("TextLabel")
-        TextLabel.Parent = Frame_2
-        TextLabel.BackgroundColor3 = Color3.fromRGB(211, 211, 211)
-        TextLabel.BackgroundTransparency = 1.000
-        TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-        TextLabel.BorderSizePixel = 0
-        TextLabel.Position = UDim2.new(0.0779944286, 0, 0.137566134, 0)
-        TextLabel.Size = UDim2.new(0, 304, 0, 42)
-        TextLabel.ZIndex = 2
-        TextLabel.Font = Enum.Font.SourceSans
-        TextLabel.Text = "In Put Your Key"
-        TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
-        TextLabel.TextScaled = true
-        TextLabel.TextSize = 14.000
-        TextLabel.TextStrokeTransparency = 0.830
-        TextLabel.TextTransparency = 0.550
-        TextLabel.TextWrapped = true
 
         TextBox:GetPropertyChangedSignal("Text"):Connect(function()
             if TextBox.Text == "" then
@@ -501,15 +465,13 @@ else
             if TextBox and TextBox.Text then
                 local Verify = verifyKey(TextBox.Text)
                 if Verify then
-                    -- Klucz poprawny, ładujemy główny skrypt i niszczymy GUI.
-                    -- <--- TUTAJ WPROWADŹ URL SWOJEGO GŁÓWNEGO SKRYPTU! (np. "https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/scripts")
+                    -- <--- TUTAJ WPROWADŹ URL SWOJEGO GŁÓWNEGO SKRYPTU!
                     loadstring(game:HttpGet("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/scripts"))()
                     if _G.ScreenGui then
                         _G.ScreenGui:Destroy()
                     end
                 else
                     sendNotification("Klucz", "Wprowadzony klucz jest nieprawidłowy.")
-                    print("Key Is invalid")
                 end
             end
         end)
