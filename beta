@@ -1,5 +1,5 @@
-local service = ;--Set your Platoboost Id
-local secret = ""; --Set Your Platoboost Api key
+local service = 5027;--Set your Platoboost Id
+local secret = "66a95f80-0154-4eb3-9f2a-9457c55ea11b"; --Set Your Platoboost Api key
 local useNonce = true;
 local onMessage = function(message) game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", { Text = message; }) end;
 
@@ -9,6 +9,10 @@ local StarterGui = game:GetService("StarterGui")
 
 -- UŻYWAMY ID GAMEPASSA Z UNIVERSAL SCRIPTS: 1296972626
 local GAMEPASS_ID = 1296972626 
+
+-- URL SKRYPTU GŁÓWNEGO, KTÓRY MA SIĘ URUCHOMIĆ DLA POSIADACZY GAMEPASSA ORAZ DLA ZWERYFIFIKOWANYCH KLUCZY
+-- ZMIENNA GLOBALNA DLA CAŁEGO SKRYPTU
+_G.MAIN_SCRIPT_URL = "https://pastebin.com/raw/DTrES0c6" 
 
 local hasGamePass = false
 local initialGamePassCheckDone = false -- Flaga, aby powiadomienie pojawiło się tylko raz
@@ -57,14 +61,14 @@ end
 MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gamePassId, wasPurchased)
     if userId == player.UserId and gamePassId == GAMEPASS_ID then
         if wasPurchased then
-            sendNotification("Klucz", "GamePass Premium kupiony pomyślnie! Pomijam system kluczy.")
+            sendNotification("Klucz", "GamePass Premium kupiony pomyślnie! Ładowanie skryptu...")
             hasGamePass = true
             -- Zniszcz GUI keysystemu, jeśli istnieje i jest widoczne
-            if ScreenGui and ScreenGui.Parent then 
-                ScreenGui:Destroy()
+            if _G.ScreenGui and _G.ScreenGui.Parent then 
+                _G.ScreenGui:Destroy()
             end
-            -- Uruchom główny skrypt
-            loadstring(game:HttpGet("https://pastebin.com/raw/DTrES0c6"))()
+            -- Uruchom główny skrypt po zakupie GamePassa
+            loadstring(game:HttpGet(_G.MAIN_SCRIPT_URL))()
         else
             sendNotification("Klucz", "Anulowano zakup GamePass Premium.")
         end
@@ -320,22 +324,22 @@ local getFlag = function(name)
     end
 end
 
--- ================================================================
--- GŁÓWNA LOGIKA STARTOWA Z SPRAWDZANIEM GAMEPASSA
--- ================================================================
+---
+### **Logika GamePassa i Keysystemu**
+---
 
 -- Sprawdź status GamePassa na początku
 local playerHasGamePass = checkGamePassStatus()
 
 if playerHasGamePass then
-    -- Gracz ma GamePassa, pomijamy keysystem i od razu ładujemy skrypt
-    sendNotification("Klucz", "GamePass Premium wykryty! Ładowanie skryptu...")
-    loadstring(game:HttpGet("https://pastebin.com/raw/DTrES0c6"))()
+    -- Gracz ma GamePassa, pomijamy keysystem i od razu ładujemy skrypt premium.
+    -- Ta linia ładuje skrypt dla posiadaczy GamePassa:
+    loadstring(game:HttpGet(_G.MAIN_SCRIPT_URL))() 
 else
     -- Gracz nie ma GamePassa, pokazujemy keysystem GUI
     sendNotification("Klucz", "Wykryto brak GamePassa Premium. Proszę wprowadzić klucz.")
     task.spawn(function()
-        local ScreenGui = Instance.new("ScreenGui")
+        _G.ScreenGui = Instance.new("ScreenGui") -- Ustawienie zmiennej globalnej
         local Frame = Instance.new("Frame")
         local Topbar = Instance.new("Frame")
         local Exit = Instance.new("TextButton")
@@ -344,19 +348,19 @@ else
         local Getkey = Instance.new("TextButton")
         local Checkkey = Instance.new("TextButton")
         local TextBox = Instance.new("TextBox")
-        local TextLabel = Instance.new("TextLabel") -- Zmienna lokalna, aby była dostępna w zasięgu GUI
+        local TextLabel = Instance.new("TextLabel") 
         
-        ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-        ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+        _G.ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+        _G.ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
         
-        Frame.Parent = ScreenGui
+        Frame.Parent = _G.ScreenGui
         Frame.BackgroundColor3 = Color3.fromRGB(76, 76, 76)
         Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
         Frame.BorderSizePixel = 0
         Frame.Position = UDim2.new(0.286729872, 0, 0.295880139, 0)
         Frame.Size = UDim2.new(0, 359, 0, 217)
-        Frame.Active = true -- Dodaj to, aby przeciąganie działało
-        Frame.Draggable = true -- Dodaj to, aby przeciąganie działało
+        Frame.Active = true 
+        Frame.Draggable = true 
         
         Topbar.Name = "Topbar"
         Topbar.Parent = Frame
@@ -440,20 +444,19 @@ else
         TextBox.Size = UDim2.new(0, 304, 0, 42)
         TextBox.Font = Enum.Font.SourceSans
         TextBox.Text = "Type here Key"
-        TextBox.TextTransparency = 0 -- Zmieniono na 0, aby tekst był widoczny
+        TextBox.TextTransparency = 0 
         TextBox.TextColor3 = Color3.fromRGB(0, 0, 0)
         TextBox.TextScaled = true
         TextBox.TextSize = 14.000
         TextBox.TextWrapped = true
 
-        -- Label do wyświetlania tekstu z TextBoxa (jeśli go nie masz, usuń tę część)
         TextLabel = Instance.new("TextLabel")
         TextLabel.Parent = Frame_2
         TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         TextLabel.BackgroundTransparency = 1.000
         TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
         TextLabel.BorderSizePixel = 0
-        TextLabel.Position = UDim2.new(0.0779944286, 0, 0.35, 0) -- Pozycja do poprawy
+        TextLabel.Position = UDim2.new(0.0779944286, 0, 0.35, 0)
         TextLabel.Size = UDim2.new(0, 304, 0, 30)
         TextLabel.Font = Enum.Font.SourceSans
         TextLabel.Text = "In Put Your Key"
@@ -474,10 +477,10 @@ else
             if TextBox and TextBox.Text then
                 local Verify = verifyKey(TextBox.Text)
                 if Verify then
-                    -- Klucz poprawny lub GamePass (jeśli dodasz logikę prompt gamepass w GUI)
-                    loadstring(game:HttpGet("https://pastebin.com/raw/DTrES0c6"))()
-                    if ScreenGui then
-                        ScreenGui:Destroy() -- Zniszcz GUI po pomyślnym sprawdzeniu
+                    -- Klucz poprawny, ładujemy główny skrypt i niszczymy GUI.
+                    loadstring(game:HttpGet(_G.MAIN_SCRIPT_URL))()
+                    if _G.ScreenGui then
+                        _G.ScreenGui:Destroy() 
                     end
                 else
                     print("Key Is invalid")
@@ -491,14 +494,14 @@ else
         end)
         
         Exit.MouseButton1Down:Connect(function()
-            if ScreenGui then
-                ScreenGui:Destroy()
+            if _G.ScreenGui then
+                _G.ScreenGui:Destroy()
             end
         end)
         
         minimize.MouseButton1Down:Connect(function()
-            if ScreenGui then
-                ScreenGui.Enabled = false
+            if _G.ScreenGui then
+                _G.ScreenGui.Enabled = false
             end
         end)
         
