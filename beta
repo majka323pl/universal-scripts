@@ -20,7 +20,7 @@ local GAMEPASS_ID = 1296972626 -- <-- TUTAJ WPROWADŹ ID SWOJEGO GAMEPASSA!
 
 -- Flagi i inicjalizacja
 local hasGamePass = false
-local initialGamePassCheckDone = false -- Flaga, aby powiadomienie o statusie GamePassa pojawiło się tylko raz
+local initialGamePassCheckDone = false -- Flaga, aby powiadomienie o statusie Premium pojawiło się tylko raz
 
 repeat task.wait(1) until game:IsLoaded() and player; -- Upewnij się, że gracz i gra są załadowane
 
@@ -52,7 +52,7 @@ local function sendNotification(title, text)
     end
 end
 
--- Funkcja sprawdzająca status GamePassa
+-- Funkcja sprawdzająca status Premium
 local function checkGamePassStatus()
     local success, result = pcall(function()
         return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
@@ -62,34 +62,34 @@ local function checkGamePassStatus()
         hasGamePass = result
         if not initialGamePassCheckDone then
             if hasGamePass then
-                sendNotification("Klucz", "Wykryto GamePass Premium! Pomijam system kluczy.")
+                sendNotification("Klucz", "Wykryto Premium! Pomijam system kluczy.")
             else
-                sendNotification("Klucz", "Brak GamePassa Premium. Wymagany klucz.")
+                sendNotification("Klucz", "Brak Premium. Wymagany klucz.")
             end
             initialGamePassCheckDone = true
         end
     else
-        warn("Błąd podczas sprawdzania GamePass Premium:", result)
-        sendNotification("Klucz", "Nie można sprawdzić statusu GamePass Premium. Spróbuj ponownie.")
+        warn("Błąd podczas sprawdzania statusu Premium:", result)
+        sendNotification("Klucz", "Nie można sprawdzić statusu Premium. Spróbuj ponownie.")
     end
     return hasGamePass
 end
 
--- Nasłuchiwanie na zakończenie próby zakupu GamePassa (gdy gracz kupi w trakcie gry)
+-- Nasłuchiwanie na zakończenie próby zakupu Premium (gdy gracz kupi w trakcie gry)
 MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gamePassId, wasPurchased)
     if userId == player.UserId and gamePassId == GAMEPASS_ID then
         if wasPurchased then
-            sendNotification("Klucz", "GamePass Premium kupiony pomyślnie! Ładowanie skryptu...")
+            sendNotification("Klucz", "Premium kupione pomyślnie! Ładowanie skryptu...")
             hasGamePass = true
             -- Zniszcz GUI keysystemu, jeśli istnieje i jest widoczne
             if _G.ScreenGui and _G.ScreenGui.Parent then
                 _G.ScreenGui:Destroy()
             end
-            -- Uruchom główny skrypt po zakupie GamePassa
-            -- <--- TUTAJ WPROWADŹ URL SWOJEGO GŁÓWNEGO SKRYPTU! (np. "https://pastebin.com/raw/DTrES0c6")
+            -- Uruchom główny skrypt po zakupie Premium
+            -- <--- TUTAJ WPROWADŹ URL SWOJEGO GŁÓWNEGO SKRYPTU! (np. "https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/scripts")
             loadstring(game:HttpGet("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/scripts"))()
         else
-            sendNotification("Klucz", "Anulowano zakup GamePass Premium.")
+            sendNotification("Klucz", "Anulowano zakup Premium.")
         end
         checkGamePassStatus() -- Upewnij się, że status jest zaktualizowany
     end
@@ -345,19 +345,19 @@ local getFlag = function(name)
 end
 
 ---
---- **Logika GamePassa i Keysystemu** ---
+--- **Logika Premium i Keysystemu** ---
 ---
 
--- Sprawdź status GamePassa na początku
+-- Sprawdź status Premium na początku
 local playerHasGamePass = checkGamePassStatus()
 
 if playerHasGamePass then
-    -- Gracz ma GamePassa, pomijamy keysystem i od razu ładujemy skrypt premium.
+    -- Gracz ma Premium, pomijamy keysystem i od razu ładujemy skrypt.
     -- <--- TUTAJ WPROWADŹ URL SWOJEGO GŁÓWNEGO SKRYPTU! (np. "https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/scripts")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/scripts"))()
 else
-    -- Gracz nie ma GamePassa, pokazujemy keysystem GUI
-    sendNotification("Klucz", "Wykryto brak GamePassa Premium. Proszę wprowadzić klucz.")
+    -- Gracz nie ma Premium, pokazujemy keysystem GUI
+    sendNotification("Klucz", "Wykryto brak Premium. Proszę wprowadzić klucz.")
     task.spawn(function()
         _G.ScreenGui = Instance.new("ScreenGui") -- Używamy _G.ScreenGui, aby była globalna
         _G.ScreenGui.Name = "PlatoboostKeySystem" -- Nadaj nazwę dla łatwiejszego zarządzania
