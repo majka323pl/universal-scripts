@@ -12,7 +12,7 @@ local GAMEPASS_ID = 1296972626
 
 -- URL SKRYPTU GŁÓWNEGO, KTÓRY MA SIĘ URUCHOMIĆ DLA POSIADACZY GAMEPASSA ORAZ DLA ZWERYFIFIKOWANYCH KLUCZY
 -- ZMIENNA GLOBALNA DLA CAŁEGO SKRYPTU
-_G.MAIN_SCRIPT_URL = "https://pastebin.com/raw/DTrES0c6" 
+_G.MAIN_SCRIPT_URL = "https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/scripts" 
 
 local hasGamePass = false
 local initialGamePassCheckDone = false -- Flaga, aby powiadomienie pojawiło się tylko raz
