@@ -478,7 +478,7 @@ else
                 if Verify then
                     -- Klucz poprawny, ładujemy główny skrypt i niszczymy GUI.
                     -- Możesz edytować URL skryptu bezpośrednio tutaj:
-                    loadstring(game:HttpGet("https://pastebin.com/raw/DTrES0c6"))()
+                    loadstring(game:HttpGet("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/scripts"))()
                     if _G.ScreenGui then
                         _G.ScreenGui:Destroy() 
                     end
