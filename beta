@@ -13,7 +13,7 @@ local player = game.Players.LocalPlayer
 local MarketplaceService = game:GetService("MarketplaceService")
 local StarterGui = game:GetService("StarterGui")
 
-local GAMEPASS_ID = 1296972626 -- <-- TUTAJ WPROWADŹ ID SWOJEGO GAMEPASSA!
+local GAMEPASS_ID = 1296972626
 
 local hasPremium = false
 local initialPremiumCheckDone = false
@@ -447,7 +447,7 @@ else
         TextBox.Size = UDim2.new(0, 304, 0, 42)
         TextBox.Font = Enum.Font.SourceSans
         TextBox.Text = "Wpisz tutaj swój klucz"
-        TextBox.TextTransparency = 1
+        TextBox.TextTransparency = 0
         TextBox.TextColor3 = Color3.fromRGB(0, 0, 0)
         TextBox.TextScaled = true
         TextBox.TextSize = 14.000
