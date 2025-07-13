@@ -333,7 +333,7 @@ local playerHasGamePass = checkGamePassStatus()
 if playerHasGamePass then
     -- Gracz ma GamePassa, pomijamy keysystem i od razu ładujemy skrypt premium.
     -- Możesz edytować URL skryptu bezpośrednio tutaj:
-    loadstring(game:HttpGet("https://pastebin.com/raw/DTrES0c6"))() 
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/scripts"))() 
 else
     -- Gracz nie ma GamePassa, pokazujemy keysystem GUI
     sendNotification("Klucz", "Wykryto brak GamePassa Premium. Proszę wprowadzić klucz.")
