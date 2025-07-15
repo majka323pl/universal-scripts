@@ -1,57 +1,265 @@
--- Umieść ten skrypt w StarterPlayerScripts
+--[[
 
-local Players = game:GetService("Players")
+		Gui2Lua™
+		10zOfficial
+		Version 1.0.0
+
+]]
+
+
+-- Instances
+
+local invisibility = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local InvisButton = Instance.new("TextButton")
+local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
+local UICorner_2 = Instance.new("UICorner")
+local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+local TextLabel = Instance.new("TextLabel")
+local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
+local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
+local HitboxButton = Instance.new("TextButton")
+local UITextSizeConstraint_3 = Instance.new("UITextSizeConstraint")
+local UICorner_3 = Instance.new("UICorner")
+local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
+
+-- Properties
+
+invisibility.Name = "invisibility"
+invisibility.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+invisibility.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = invisibility
+Frame.BackgroundColor3 = Color3.new(0, 0, 0)
+Frame.BackgroundTransparency = 0.5
+Frame.BorderColor3 = Color3.new(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.723941326, 0, 0.397817135, 0)
+Frame.Size = UDim2.new(0.255599916, 0, 0.241994679, 0)
+
+UICorner.Parent = Frame
+
+InvisButton.Name = "InvisButton"
+InvisButton.Parent = Frame
+InvisButton.BackgroundColor3 = Color3.new(1, 1, 1)
+InvisButton.BorderColor3 = Color3.new(0, 0, 0)
+InvisButton.BorderSizePixel = 0
+InvisButton.Position = UDim2.new(0.220994383, 0, 0.248904765, 0)
+InvisButton.Size = UDim2.new(0.521209776, 0, 0.255717337, 0)
+InvisButton.Font = Enum.Font.FredokaOne
+InvisButton.Text = "Invisibility"
+InvisButton.TextColor3 = Color3.new(0, 0, 0)
+InvisButton.TextScaled = true
+InvisButton.TextSize = 14
+InvisButton.TextWrapped = true
+
+UITextSizeConstraint.Parent = InvisButton
+UITextSizeConstraint.MaxTextSize = 49
+
+UICorner_2.Parent = InvisButton
+
+UIAspectRatioConstraint.Parent = InvisButton
+UIAspectRatioConstraint.AspectRatio = 4.054054260253906
+
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.new(1, 1, 1)
+TextLabel.BackgroundTransparency = 1
+TextLabel.BorderColor3 = Color3.new(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(0.146408826, 0, 0.0361990221, 0)
+TextLabel.Size = UDim2.new(0.722744226, 0, 0.12440303, 0)
+TextLabel.Font = Enum.Font.Unknown
+TextLabel.Text = "Universal Scripts Invisibility"
+TextLabel.TextColor3 = Color3.new(0.996078, 0.996078, 0.996078)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 5
+TextLabel.TextWrapped = true
+
+UITextSizeConstraint_2.Parent = TextLabel
+UITextSizeConstraint_2.MaxTextSize = 21
+
+UIAspectRatioConstraint_2.Parent = Frame
+UIAspectRatioConstraint_2.AspectRatio = 1.9890109300613403
+
+HitboxButton.Name = "HitboxButton"
+HitboxButton.Parent = Frame
+HitboxButton.BackgroundColor3 = Color3.new(1, 1, 1)
+HitboxButton.BorderColor3 = Color3.new(0, 0, 0)
+HitboxButton.BorderSizePixel = 0
+HitboxButton.Position = UDim2.new(0.220994249, 0, 0.604329467, 0)
+HitboxButton.Size = UDim2.new(0.521209776, 0, 0.255717337, 0)
+HitboxButton.Font = Enum.Font.FredokaOne
+HitboxButton.Text = "HitBox: ON"
+HitboxButton.TextColor3 = Color3.new(0, 0, 0)
+HitboxButton.TextScaled = true
+HitboxButton.TextSize = 14
+HitboxButton.TextWrapped = true
+
+UITextSizeConstraint_3.Parent = HitboxButton
+UITextSizeConstraint_3.MaxTextSize = 49
+
+UICorner_3.Parent = HitboxButton
+
+UIAspectRatioConstraint_3.Parent = HitboxButton
+UIAspectRatioConstraint_3.AspectRatio = 4.054054260253906
+
+-- Scripts
+
+local function GPEBBF_fake_script() -- InvisButton.LocalScript 
+	local script = Instance.new('LocalScript', InvisButton)
+
+	Button.MouseButton1Click:Connect(
+		function()
+			if debounce == false then
+				if toggled == true then
+					debounce = true
+					game:GetService("TweenService"):Create(
+						Toggle,
+						TweenInfo.new(0.25),
+						{ImageColor3 = Color3.fromRGB(200, 200, 200)}
+					):Play()
+					game:GetService("TweenService"):Create(Circle, TweenInfo.new(0.25), {Position = UDim2.new(0, 2, 0, 2)}):Play(
+	
+					)
+					wait(0.25)
+					debounce = false
+					toggled = false
+	
+					game.Players.LocalPlayer.Character.Humanoid.Health = 0
+				elseif toggled == false then
+					debounce = true
+					game:GetService("TweenService"):Create(
+						Toggle,
+						TweenInfo.new(0.25),
+						{ImageColor3 = Color3.fromRGB(64, 200, 114)}
+					):Play()
+					game:GetService("TweenService"):Create(
+						Circle,
+						TweenInfo.new(0.25),
+						{Position = UDim2.new(1, -20, 0, 2)}
+					):Play()
+					wait(0.25)
+					debounce = false
+					toggled = true
+					for i, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+						if v.Name == "Root" or v.Name == "RootJoint" then
+							v:Destroy()
+						end
+					end
+				end
+			end
+		end
+	)
+end
+coroutine.wrap(GPEBBF_fake_script)()
+local function YGFA_fake_script() -- HitboxButton.LocalScript 
+	local script = Instance.new('LocalScript', HitboxButton)
+
+	local Players = game:GetService("Players")
+	local LocalPlayer = Players.LocalPlayer
+	
+	-- Funkcja wyłączająca hitboxy
+	local function disableHitboxes()
+		local character = LocalPlayer.Character
+		if not character then
+			character = LocalPlayer.CharacterAdded:Wait()
+		end
+	
+		for _, part in ipairs(character:GetDescendants()) do
+			if part:IsA("BasePart") then
+				part.CanCollide = false
+				-- Możesz także ustawić Transparency na 1, aby gracz był niewidzialny
+				-- part.Transparency = 1
+			end
+		end
+		print("Hitboxy gracza wyłączone!")
+	end
+	
+	-- Wywołaj funkcję, aby wyłączyć hitboxy, gdy gracz się załaduje
+	LocalPlayer.CharacterAdded:Connect(disableHitboxes)
+	
+	-- Jeśli gracz już jest załadowany, wyłącz hitboxy od razu
+	if LocalPlayer.Character then
+		disableHitboxes()
+	end
+end
+coroutine.wrap(YGFA_fake_script)()
+
+
+
+
 local UserInputService = game:GetService("UserInputService")
+local runService = (game:GetService("RunService"))
 
-local localPlayer = Players.LocalPlayer
-local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
+local gui = Main
 
-local transparencyValue = 0.8 -- Przezroczystość dla gracza lokalnego (80% widoczności)
-local invisibleTransparency = 1 -- Całkowita przezroczystość dla innych graczy
+local dragging
+local dragInput
+local dragStart
+local startPos
 
-local isInvisible = false
-
--- Funkcja do zmiany przezroczystości
-local function setTransparency(targetCharacter, transparency)
-    for _, part in ipairs(targetCharacter:GetDescendants()) do
-        if part:IsA("BasePart") or part:IsA("Decal") or part:IsA("MeshPart") then
-            part.Transparency = transparency
-        end
-    end
+function Lerp(a, b, m)
+	return a + (b - a) * m
 end
 
--- Obsługa kliknięcia przycisku (np. klawisza 'V')
-UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
-    if input.KeyCode == Enum.KeyCode.V and not gameProcessedEvent then -- Możesz zmienić 'V' na inny klawisz
-        isInvisible = not isInvisible
+local lastMousePos
+local lastGoalPos
+local DRAG_SPEED = (8) -- // The speed of the UI darg.
+function Update(dt)
+	if not (startPos) then
+		return
+	end
+	if not (dragging) and (lastGoalPos) then
+		gui.Position =
+			UDim2.new(
+				startPos.X.Scale,
+				Lerp(gui.Position.X.Offset, lastGoalPos.X.Offset, dt * DRAG_SPEED),
+				startPos.Y.Scale,
+				Lerp(gui.Position.Y.Offset, lastGoalPos.Y.Offset, dt * DRAG_SPEED)
+			)
+		return
+	end
 
-        if isInvisible then
-            -- Ustaw przezroczystość dla gracza lokalnego
-            setTransparency(character, transparencyValue)
+	local delta = (lastMousePos - UserInputService:GetMouseLocation())
+	local xGoal = (startPos.X.Offset - delta.X)
+	local yGoal = (startPos.Y.Offset - delta.Y)
+	lastGoalPos = UDim2.new(startPos.X.Scale, xGoal, startPos.Y.Scale, yGoal)
+	gui.Position =
+		UDim2.new(
+			startPos.X.Scale,
+			Lerp(gui.Position.X.Offset, xGoal, dt * DRAG_SPEED),
+			startPos.Y.Scale,
+			Lerp(gui.Position.Y.Offset, yGoal, dt * DRAG_SPEED)
+		)
+end
 
-            -- Stwórz RemoteEvent, aby poinformować serwer o zmianie przezroczystości dla innych graczy
-            local remoteEvent = Instance.new("RemoteEvent")
-            remoteEvent.Name = "SetInvisibleEvent"
-            remoteEvent.Parent = game.ReplicatedStorage
+gui.InputBegan:Connect(
+	function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragStart = input.Position
+			startPos = gui.Position
+			lastMousePos = UserInputService:GetMouseLocation()
 
-            remoteEvent:FireServer(invisibleTransparency) -- Poinformuj serwer o pełnej niewidzialności dla innych
-            
-            print("Stałeś się niewidzialny dla innych graczy!")
-        else
-            -- Przywróć pełną widoczność dla gracza lokalnego
-            setTransparency(character, 0)
+			input.Changed:Connect(
+				function()
+					if input.UserInputState == Enum.UserInputState.End then
+						dragging = false
+					end
+				end
+			)
+		end
+	end
+)
 
-            -- Poinformuj serwer o przywróceniu widoczności
-            local remoteEvent = game.ReplicatedStorage:FindFirstChild("SetInvisibleEvent")
-            if remoteEvent then
-                remoteEvent:FireServer(0)
-            end
+gui.InputChanged:Connect(
+	function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			dragInput = input
+		end
+	end
+)
 
-            print("Jesteś ponownie widoczny dla wszystkich.")
-        end
-    end
-end)
+runService.Heartbeat:Connect(Update)
 
--- ********************************************************************************
--- Pamiętaj, aby dodać skrypt serwerowy do ServerScriptService!
--- ********************************************************************************
