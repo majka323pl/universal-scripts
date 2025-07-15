@@ -1,0 +1,57 @@
+-- Umieść ten skrypt w StarterPlayerScripts
+
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+
+local localPlayer = Players.LocalPlayer
+local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
+
+local transparencyValue = 0.8 -- Przezroczystość dla gracza lokalnego (80% widoczności)
+local invisibleTransparency = 1 -- Całkowita przezroczystość dla innych graczy
+
+local isInvisible = false
+
+-- Funkcja do zmiany przezroczystości
+local function setTransparency(targetCharacter, transparency)
+    for _, part in ipairs(targetCharacter:GetDescendants()) do
+        if part:IsA("BasePart") or part:IsA("Decal") or part:IsA("MeshPart") then
+            part.Transparency = transparency
+        end
+    end
+end
+
+-- Obsługa kliknięcia przycisku (np. klawisza 'V')
+UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
+    if input.KeyCode == Enum.KeyCode.V and not gameProcessedEvent then -- Możesz zmienić 'V' na inny klawisz
+        isInvisible = not isInvisible
+
+        if isInvisible then
+            -- Ustaw przezroczystość dla gracza lokalnego
+            setTransparency(character, transparencyValue)
+
+            -- Stwórz RemoteEvent, aby poinformować serwer o zmianie przezroczystości dla innych graczy
+            local remoteEvent = Instance.new("RemoteEvent")
+            remoteEvent.Name = "SetInvisibleEvent"
+            remoteEvent.Parent = game.ReplicatedStorage
+
+            remoteEvent:FireServer(invisibleTransparency) -- Poinformuj serwer o pełnej niewidzialności dla innych
+            
+            print("Stałeś się niewidzialny dla innych graczy!")
+        else
+            -- Przywróć pełną widoczność dla gracza lokalnego
+            setTransparency(character, 0)
+
+            -- Poinformuj serwer o przywróceniu widoczności
+            local remoteEvent = game.ReplicatedStorage:FindFirstChild("SetInvisibleEvent")
+            if remoteEvent then
+                remoteEvent:FireServer(0)
+            end
+
+            print("Jesteś ponownie widoczny dla wszystkich.")
+        end
+    end
+end)
+
+-- ********************************************************************************
+-- Pamiętaj, aby dodać skrypt serwerowy do ServerScriptService!
+-- ********************************************************************************
