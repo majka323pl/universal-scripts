@@ -1,14 +1,215 @@
+-- Załadowanie Orion Library
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/jensonhirst/Orion/main/source')))()
-local Window = OrionLib:MakeWindow({Name = "Title of the library", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
 
---[[
-Name = <string> - The name of the UI.
-HidePremium = <bool> - Whether or not the user details shows Premium status or not.
-SaveConfig = <bool> - Toggles the config saving in the UI.
-ConfigFolder = <string> - The name of the folder where the configs are saved.
-IntroEnabled = <bool> - Whether or not to show the intro animation.
-IntroText = <string> - Text to show in the intro animation.
-IntroIcon = <string> - URL to the image you want to use in the intro animation.
-Icon = <string> - URL to the image you want displayed on the window.
-CloseCallback = <function> - Function to execute when the window is closed.
-]]
+-- Tworzenie głównego okna Script Huba
+local Window = OrionLib:MakeWindow({
+    Name = "Admin Hub - Twoja Gra",
+    HidePremium = false,
+    SaveConfig = true,
+    ConfigFolder = "AdminHubConfig" -- Folder do zapisu konfiguracji
+})
+
+---
+
+-- ### Zakładka: Gracze ###
+local PlayersTab = Window:MakeTab({
+    Name = "Gracze",
+    Icon = "rbxassetid://4483345998" -- Przykładowa ikona
+})
+
+-- Sekcja: Podstawowe Akcje
+local PlayerActionsSection = PlayersTab:AddSection({
+    Name = "Akcje Graczy"
+})
+
+PlayerActionsSection:AddTextbox({
+    Name = "Nazwa Gracza",
+    Default = "Gracz123",
+    TextDisappear = true,
+    Callback = function(Value)
+        _G.TargetPlayer = Value -- Zapisz nazwę gracza do globalnej zmiennej
+    end
+})
+
+PlayerActionsSection:AddButton({
+    Name = "Kick Gracza",
+    Callback = function()
+        if _G.TargetPlayer and game.Players[_G.TargetPlayer] then
+            game.Players[_G.TargetPlayer]:Kick("Zostałeś wyrzucony przez administratora.")
+            OrionLib:MakeNotification({Name = "Wyrzucono!", Content = "Gracz " .. _G.TargetPlayer .. " został wyrzucony.", Image = "rbxassetid://4483345998", Time = 3})
+        else
+            OrionLib:MakeNotification({Name = "Błąd!", Content = "Gracz nie znaleziony lub nie podano nazwy.", Image = "rbxassetid://4483345998", Time = 3})
+        end
+    end
+})
+
+PlayerActionsSection:AddButton({
+    Name = "Ban Gracza (przykład)",
+    Callback = function()
+        if _G.TargetPlayer then
+            -- Tutaj wstaw kod do banowania gracza (np. zapis do DataStore lub wysłanie do serwera)
+            OrionLib:MakeNotification({Name = "Ban!", Content = "Gracz " .. _G.TargetPlayer .. " został zbanowany (przykładowo).", Image = "rbxassetid://4483345998", Time = 3})
+        else
+            OrionLib:MakeNotification({Name = "Błąd!", Content = "Nie podano nazwy gracza do zbanowania.", Image = "rbxassetid://4483345998", Time = 3})
+        end
+    end
+})
+
+---
+
+-- ### Zakładka: Środowisko ###
+local EnvironmentTab = Window:MakeTab({
+    Name = "Środowisko",
+    Icon = "rbxassetid://4483345998" -- Przykładowa ikona
+})
+
+-- Sekcja: Ustawienia Czasu
+local TimeSection = EnvironmentTab:AddSection({
+    Name = "Ustawienia Czasu"
+})
+
+local DayNightToggle = TimeSection:AddToggle({
+    Name = "Włącz Cykl Dnia/Nocy",
+    Default = true,
+    Save = true,
+    Flag = "dayNightCycle",
+    Callback = function(Value)
+        if Value then
+            game.Lighting.ClockTime = 12 -- Ustaw dzień, lub uruchom swój cykl
+            OrionLib:MakeNotification({Name = "Cykl Czasu", Content = "Cykl dnia/nocy WŁĄCZONY.", Image = "rbxassetid://4483345998", Time = 2})
+        else
+            game.Lighting.ClockTime = 0 -- Ustaw noc, lub zatrzymaj swój cykl
+            OrionLib:MakeNotification({Name = "Cykl Czasu", Content = "Cykl dnia/nocy WYŁĄCZONY.", Image = "rbxassetid://4483345998", Time = 2})
+        end
+    end
+})
+
+local TimeSlider = TimeSection:AddSlider({
+    Name = "Ustaw Godzinę",
+    Min = 0,
+    Max = 24,
+    Default = 12,
+    Color = Color3.fromRGB(80, 180, 255),
+    Increment = 0.1,
+    ValueName = "godzina",
+    Save = true,
+    Flag = "gameTime",
+    Callback = function(Value)
+        game.Lighting.ClockTime = Value
+    end
+})
+
+-- Sekcja: Pogoda
+local WeatherSection = EnvironmentTab:AddSection({
+    Name = "Ustawienia Pogody"
+})
+
+WeatherSection:AddDropdown({
+    Name = "Typ Pogody",
+    Default = "Słonecznie",
+    Options = {"Słonecznie", "Deszczowo", "Burza", "Śnieg"},
+    Save = true,
+    Flag = "weatherType",
+    Callback = function(Value)
+        if Value == "Słonecznie" then
+            -- Przykładowe akcje: Usuń efekty deszczu/śniegu
+            OrionLib:MakeNotification({Name = "Pogoda", Content = "Ustawiono: Słonecznie.", Image = "rbxassetid://4483345998", Time = 2})
+        elseif Value == "Deszczowo" then
+            -- Przykładowe akcje: Włącz efekt deszczu
+            OrionLib:MakeNotification({Name = "Pogoda", Content = "Ustawiono: Deszczowo.", Image = "rbxassetid://4483345998", Time = 2})
+        -- Dodaj więcej warunków dla innych opcji pogodowych
+        end
+    end
+})
+
+---
+
+-- ### Zakładka: Narzędzia ###
+local ToolsTab = Window:MakeTab({
+    Name = "Narzędzia",
+    Icon = "rbxassetid://4483345998" -- Przykładowa ikona
+})
+
+-- Sekcja: Narzędzia Ogólne
+local GeneralToolsSection = ToolsTab:AddSection({
+    Name = "Ogólne Narzędzia"
+})
+
+GeneralToolsSection:AddButton({
+    Name = "Teleportuj do Spawn",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        if player.Character and game.Workspace.SpawnLocation then
+            player.Character:SetPrimaryPartCFrame(game.Workspace.SpawnLocation.CFrame)
+            OrionLib:MakeNotification({Name = "Teleport", Content = "Teleportowano do spawnu.", Image = "rbxassetid://4483345998", Time = 2})
+        end
+    end
+})
+
+GeneralToolsSection:AddToggle({
+    Name = "Noclip (przykład)",
+    Default = false,
+    Save = true,
+    Flag = "noclipToggle",
+    Callback = function(Value)
+        -- Tutaj wstaw kod do włączania/wyłączania noclip
+        -- Pamiętaj, że noclip po stronie klienta nie jest bezpieczny!
+        OrionLib:MakeNotification({Name = "Noclip", Content = "Noclip " .. (Value and "WŁĄCZONY" or "WYŁĄCZONY") .. ".", Image = "rbxassetid://4483345998", Time = 2})
+    end
+})
+
+GeneralToolsSection:AddLabel("Informacje o serwerze:")
+GeneralToolsSection:AddParagraph("Serwer ID", game.JobId)
+GeneralToolsSection:AddParagraph("Liczba graczy", #game.Players:GetPlayers())
+
+---
+
+-- ### Zakładka: Ustawienia ###
+local SettingsTab = Window:MakeTab({
+    Name = "Ustawienia",
+    Icon = "rbxassetid://4483345998" -- Przykładowa ikona
+})
+
+-- Sekcja: Interfejs
+local UISettingsSection = SettingsTab:AddSection({
+    Name = "Interfejs Użytkownika"
+})
+
+UISettingsSection:AddColorpicker({
+    Name = "Kolor GUI",
+    Default = Color3.fromRGB(0, 120, 255), -- Domyślny niebieski
+    Save = true,
+    Flag = "guiColor",
+    Callback = function(Value)
+        -- Tutaj mógłbyś zmienić kolor elementów GUI, jeśli biblioteka to wspiera globalnie
+        -- Lub zapisać wartość, aby użyć jej gdzie indziej
+        OrionLib:MakeNotification({Name = "Kolor", Content = "Zmieniono kolor GUI.", Image = "rbxassetid://4483345998", Time = 2})
+    end
+})
+
+local ToggleKeybind = UISettingsSection:AddBind({
+    Name = "Ukryj/Pokaż GUI",
+    Default = Enum.KeyCode.RightControl, -- Domyślnie Prawy Ctrl
+    Hold = false,
+    Save = true,
+    Flag = "toggleKeybind",
+    Callback = function()
+        -- Logika ukrywania/pokazywania okna
+        Window.Enabled = not Window.Enabled
+        OrionLib:MakeNotification({Name = "Widoczność GUI", Content = "Przełączono widoczność interfejsu.", Image = "rbxassetid://4483345998", Time = 2})
+    end
+})
+
+---
+
+-- ### Zakończenie skryptu (wymagane przez Orion Library) ###
+OrionLib:Init()
+
+-- Dodatkowe powiadomienie po uruchomieniu
+wait(1) -- Krótka pauza, żeby animacja intro się zakończyła
+OrionLib:MakeNotification({
+    Name = "Admin Hub Włączony!",
+    Content = "Pomyślnie załadowano Admin Hub dla " .. game.Players.LocalPlayer.Name .. ".",
+    Image = "rbxassetid://4483345998",
+    Time = 5
+})
