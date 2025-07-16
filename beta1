@@ -63,10 +63,11 @@ local Slider = PlayerTab:CreateSlider({
    end,
 })
 
-local Button = PlayerTab:CreateButton({
+local Button = PLayerTab:CreateButton({
    Name = "Infinity Jumo",
    Callback = function()
-   game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+   game:GetService("UserInputService").JumpRequest:Connect(function()
+        game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
    end,
 })
 
