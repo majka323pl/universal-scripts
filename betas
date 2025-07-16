@@ -41,7 +41,7 @@ local PlayerTab = Window:CreateTab("Player", 4483362458) -- Title, Image
 
 local Slider = PlayerTab:CreateSlider({
    Name = "Speed",
-   Range = {16, 100},
+   Range = {16, 500},
    Increment = 10,
    Suffix = "Speed",
    CurrentValue = 16,
@@ -53,7 +53,7 @@ local Slider = PlayerTab:CreateSlider({
 
 local Slider = PlayerTab:CreateSlider({
    Name = "JumpPower",
-   Range = {16, 100},
+   Range = {16, 1000},
    Increment = 10,
    Suffix = "JumpPower",
    CurrentValue = 16,
@@ -64,14 +64,9 @@ local Slider = PlayerTab:CreateSlider({
 })
 
 local Button = PLayerTab:CreateButton({
-   Name = "Infinity Jump",
+   Name = "Infinity Jumo",
    Callback = function()
-   local infiniteJumpEnable = true 
-
-         game:GetService("UserInputService").JumpRequest:Connect(function()
-    if infiniteJumpEnabled then
-        game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
-        
+   loadstring(game:HttpGet('https://pastebin.com/raw/VFf36ZAX'))()
    end,
 })
 
