@@ -34,7 +34,6 @@ OrionLib:MakeNotification({
 	Time = 5
 })
 
---[[
 Title = <string> - The title of the notification.
 Content = <string> - The content of the notification.
 Image = <string> - The icon of the notification.
