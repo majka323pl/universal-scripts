@@ -1,0 +1,84 @@
+-- Załaduj Orion Library
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+-- Utwórz okno
+local Window = OrionLib:MakeWindow({Name = "Przykładowe GUI", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+-- Utwórz zakładkę
+local Tab = Window:MakeTab({
+	Name = "Główna",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+-- Utwórz sekcję
+local Section = Tab:AddSection({
+	Name = "Funkcje"
+})
+
+-- Dodaj przycisk
+Tab:AddButton({
+	Name = "Wydrukuj wiadomość",
+	Callback = function()
+        print("Witaj w Orion GUI!")
+  	end    
+})
+
+-- Dodaj przełącznik
+Tab:AddToggle({
+	Name = "Przełącznik przykładowy",
+	Default = false,
+	Callback = function(Value)
+		print("Przełącznik:", Value)
+	end    
+})
+
+-- Dodaj slider
+Tab:AddSlider({
+	Name = "Przesuń wartość",
+	Min = 0,
+	Max = 100,
+	Default = 50,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "%",
+	Callback = function(Value)
+		print("Slider ustawiony na:", Value)
+	end    
+})
+
+-- Dodaj pole tekstowe
+Tab:AddTextbox({
+	Name = "Wpisz tekst",
+	Default = "Hello!",
+	TextDisappear = true,
+	Callback = function(Value)
+		print("Wpisałeś:", Value)
+	end	  
+})
+
+-- Dodaj dropdown
+Tab:AddDropdown({
+	Name = "Wybierz opcję",
+	Default = "Opcja 1",
+	Options = {"Opcja 1", "Opcja 2", "Opcja 3"},
+	Callback = function(Value)
+		print("Wybrałeś:", Value)
+	end    
+})
+
+-- Dodaj powiadomienie po uruchomieniu
+OrionLib:MakeNotification({
+	Name = "Witaj!",
+	Content = "GUI zostało załadowane poprawnie",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+
+-- Funkcja do zamknięcia GUI
+Tab:AddButton({
+	Name = "Zamknij GUI",
+	Callback = function()
+		OrionLib:Destroy()
+	end    
+})
