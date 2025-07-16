@@ -1,1 +1,74 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/jensonhirst/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Beta", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+local Name = Beta
 
+Name = "..Name.." - The name of the UI.
+HidePremium = false - Whether or not the user details shows Premium status or not.
+SaveConfig = false - Toggles the config saving in the UI.
+ConfigFolder =   The name of the folder where the configs are saved.
+IntroEnabled = true - Whether or not to show the intro animation.
+IntroText = "Welcome on ..Name" - Text to show in the intro animation.
+--IntroIcon = < - URL to the image you want to use in the intro animation.
+--Icon = <string> - URL to the image you want displayed on the window.
+--CloseCallback = <function> - Function to execute when the window is closed.
+
+local Tab = Window:MakeTab({
+	Name = "Home",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+
+--Name = <string> - The name of the tab.
+--Icon = <string> - The icon of the tab.
+PremiumOnly = false
+
+local Section = Tab:AddSection({
+	Name = "Test"
+})
+
+OrionLib:MakeNotification({
+	Name = "Powiadomienie",
+	Content = "idk what will it say??",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+
+--[[
+Title = <string> - The title of the notification.
+Content = <string> - The content of the notification.
+Image = <string> - The icon of the notification.
+Time = <number> - The duration of the notfication.
+
+Tab:AddButton({
+	Name = "Infinity Jump",
+	Callback = function()
+      		game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+  	end    
+})
+
+Name = Infinity Jump
+Callback = Makes u infinity jumping
+
+Tab:AddSlider({
+	Name = "Speed",
+	Min = 16,
+	Max = 400,
+	Default = 5,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "Speed",
+	Callback = function(Value)
+		character.Humanoid.WalkSpeed = (value)
+	end    
+})
+
+--[[
+Name = <string> - The name of the slider.
+Min = <number> - The minimal value of the slider.
+Max = <number> - The maxium value of the slider.
+Increment = <number> - How much the slider will change value when dragging.
+Default = <number> - The default value of the slider.
+ValueName = <string> - The text after the value number.
+Callback = <function> - The function of the slider.
+]]
