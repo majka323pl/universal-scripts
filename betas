@@ -1,8 +1,7 @@
-local Name = Beta
 local player = Players.LocalPlayer
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/jensonhirst/Orion/main/source')))()
 
-local Window = OrionLib:MakeWindow({Name = "..Name..", HidePremium = false, SaveConfig = true, ConfigFolder = "Name..Config"})
+local Window = OrionLib:MakeWindow({Name = "Name", HidePremium = false, SaveConfig = true, ConfigFolder = "Config"})
 
 local PlayerTab = Window:MakeTab({
 	Name = "Player",
