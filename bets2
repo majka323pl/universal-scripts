@@ -1,8 +1,7 @@
-
-local name = Beta
+local player = Players.LocalPlayer
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/jensonhirst/Orion/main/source')))()
 
-local Window = OrionLib:MakeWindow({Name = "..name..", HidePremium = false, SaveConfig = true, ConfigFolder = "Config"})
+local Window = OrionLib:MakeWindow({Name = "Universal Beta", HidePremium = false, SaveConfig = true, ConfigFolder = " Config"})
 
 local PlayerTab = Window:MakeTab({
 	Name = "Player",
@@ -26,4 +25,11 @@ PlayerTab:AddSlider({
 		local plr = game.Players:FindFirstChild("Humanoid")
         plr.Walkspeed = Value
 	end    
+})
+
+PlayerTab:AddButton({
+	Name = "Button!",
+	Callback = function()
+      		game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+  	end    
 })
