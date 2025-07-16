@@ -1,0 +1,19 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/jensonhirst/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Beta", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+local Name = Beta
+
+Name = "..Name.." - The name of the UI.
+HidePremium = false - Whether or not the user details shows Premium status or not.
+SaveConfig = false - Toggles the config saving in the UI.
+ConfigFolder =   The name of the folder where the configs are saved.
+IntroEnabled = true - Whether or not to show the intro animation.
+IntroText = "Welcome on ..Name" - Text to show in the intro animation.
+--IntroIcon = < - URL to the image you want to use in the intro animation.
+--Icon = <string> - URL to the image you want displayed on the window.
+--CloseCallback = <function> - Function to execute when the window is closed.
+
+local Tab = Window:MakeTab({
+	Name = "Home",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
