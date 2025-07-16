@@ -22,7 +22,6 @@ PlayerTab:AddSlider({
 	Increment = 1,
 	ValueName = "speed",
 	Callback = function(Value)
-		local plr = game.Players:FingFirstChild("Humanoid")
-        plr.Walkspeed = Value
+	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
 	end    
 })
