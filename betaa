@@ -63,7 +63,7 @@ local Slider = PlayerTab:CreateSlider({
    end,
 })
 
-local Button = PLayerTab:CreateButton({
+local Button = PlayerTab:CreateButton({
    Name = "Infinity Jumo",
    Callback = function()
    loadstring(game:HttpGet('https://pastebin.com/raw/VFf36ZAX'))()
