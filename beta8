@@ -1,4 +1,3 @@
-
 local player = game.Players.LocalPlayer
 local UserInputService = game:GetService("UserInputService")
 local MarketplaceService = game:GetService("MarketplaceService")
@@ -11,7 +10,7 @@ local MM2_EXPERIENCE_ID = 142823291
 local GAG_GAME_ID = 9262276941 
 local TELEPORT_PLACE_ID = 6557073879 
 
--- URL dla logów aktualizacji (TERAZ Z TWOIM LINKIEM)
+-- URL dla logów aktualizacji
 local UPDATE_LOGS_URL = "https://pastebin.com/raw/hrimZdcv" 
 
 local hasGamePass = false
@@ -672,7 +671,8 @@ UpdateLogsTextLabel.Name = "UpdateLogsTextLabel"
 UpdateLogsTextLabel.Parent = UpdateLogsScrollingFrame
 UpdateLogsTextLabel.BackgroundColor3 = Color3.new(1, 1, 1)
 UpdateLogsTextLabel.BackgroundTransparency = 1
-UpdateLogsTextLabel.Size = UDim2.new(0.95, 0, 1, 0) -- Długość CanvasSize dopasuje wysokość
+UpdateLogsTextLabel.Size = UDim2.new(0.95, 0, 0, 0) -- Ustawienie wysokości na 0, aby UIAutomaticSize działało
+UpdateLogsTextLabel.AutomaticSize = Enum.AutomaticSize.Y -- Klucz do automatycznej wysokości
 UpdateLogsTextLabel.Position = UDim2.new(0.025, 0, 0, 0)
 UpdateLogsTextLabel.Font = Enum.Font.SourceSans
 UpdateLogsTextLabel.Text = "Ładowanie logów aktualizacji..."
@@ -775,16 +775,14 @@ local function showTab(tabName)
 
         if successHttpGet and scriptContent then
             UpdateLogsTextLabel.Text = scriptContent
-            -- Dynamiczne dostosowanie CanvasSize na podstawie treści
-            -- Wymaga, aby TextLabel miał automatyczne obliczanie rozmiaru (TextScaled = true lub TextBounds)
-            -- Aby to działało poprawnie, TextLabel powinien mieć Size.X (szerokość) ustawioną, a Size.Y ustawioną na 0 lub auto.
-            -- Następnie CanvasSize ScrollingFrame'a powinna być dostosowana do TextBounds.Y TextLabel'a.
-            
-            -- W tym przypadku, skoro TextLabel ma fixed size (0.95, 0, 1, 0), musimy dostosować CanvasSize
-            -- na podstawie jego obliczonej wysokości tekstu.
-            UpdateLogsTextLabel.Size = UDim2.new(0.95, 0, UpdateLogsTextLabel.TextBounds.Y / UpdateLogsScrollingFrame.AbsoluteSize.Y, 0)
-            UpdateLogsScrollingFrame.CanvasSize = UDim2.new(0,0, UpdateLogsTextLabel.TextBounds.Y / UpdateLogsScrollingFrame.AbsoluteSize.Y + 0.1, 0) -- Dodajemy trochę marginesu
-            -- Możesz też użyć UIAutomaticSize dla TextLabel'a
+            -- Upewnij się, że tekst jest ustawiony przed dostosowaniem CanvasSize
+            -- Poczekaj na automatyczne dostosowanie wysokości TextLabel przez AutomaticSize
+            task.wait(0.1) -- Krótka pauza, aby AutomaticSize mógł zadziałać
+
+            -- Dostosuj CanvasSize ScrollingFrame'a na podstawie nowej wysokości TextLabel'a
+            local contentHeight = UpdateLogsTextLabel.AbsoluteSize.Y
+            -- Dodaj margines, aby uniknąć ucinania tekstu
+            UpdateLogsScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, contentHeight + 20) 
         else
             UpdateLogsTextLabel.Text = "Nie udało się załadować logów aktualizacji: " .. (errHttpGet or "Nieznany błąd.")
             warn("Błąd pobierania logów aktualizacji:", errHttpGet)
