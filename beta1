@@ -8,25 +8,24 @@ local TeleportService = game:GetService("TeleportService")
 local GAMEPASS_ID = 1296972626
 local MM2_EXPERIENCE_ID = 142823291 -- ID gry Murder Mystery 2
 local GAG_GAME_ID = 9262276941 -- ID gry "Gabby's Dollhouse" (przykładowo, jeśli to jest gra "GAG")
-local TELEPORT_PLACE_ID = 6557073879 -- ID miejsca, do którego teleportuje przy braku gamepassa (np. do sklepu z gamepassem)
-local NEW_GAME_TELEPORT_ID = 176219356 -- Nowe ID gry do teleportacji z przycisku "Teleport to New Game"
+local TELEPORT_PLACE_ID = 6557073879 -- ID miejsca, do którego teleportuje przy braku gamepassa LUB z przycisku "Teleport to Premium Shop"
 
 local hasGamePass = false
-local initialGamePassCheckDone = false
+local initialGamePassCheckDone = false -- Do kontroli początkowego powiadomienia o GamePassie
 
-local lastHideButtonPosition = UDim2.new(1, -55, 0, 10)
+local lastHideButtonPosition = UDim2.new(1, -55, 0, 10) -- Pozycja dla przycisku ukrywania
 
--- Funkcja sendNotification z oryginalną formą i poprawnym tytułem
+-- Funkcja sendNotification: Zmieniona, by była używana bardziej oszczędnie
 local function sendNotification(text)
     StarterGui:SetCore("SendNotification", {
-        Title = "Universal Scripts", -- Używamy stałego nagłówka "Universal Scripts"
+        Title = "Universal Scripts",
         Text = text,
         Icon = "rbxassetid://102860171689689",
-        Duration = 5 -- Zachowano Duration = 5
+        Duration = 5
     })
 end
 
--- Deklaracje instancji GUI
+-- Deklaracje instancji GUI (bez zmian, bo układ jest ok)
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Parent = player:WaitForChild("PlayerGui")
 ScreenGui.Name = "UniversalScriptsGUI"
@@ -146,7 +145,7 @@ ScrollingFramePremium.BorderColor3 = Color3.new(0, 0, 0)
 ScrollingFramePremium.BorderSizePixel = 0
 ScrollingFramePremium.Position = UDim2.new(0.239610985, 0, 0.1111193, 0)
 ScrollingFramePremium.Size = UDim2.new(0.733235598, 0, 0.864629686, 0)
-ScrollingFramePremium.CanvasSize = UDim2.new(0,0,1.5,0) -- Domyślny CanvasSize
+ScrollingFramePremium.CanvasSize = UDim2.new(0,0,1.5,0)
 ScrollingFramePremium.Visible = false
 
 local ScrollingFramePremium_UICorner = Instance.new("UICorner")
@@ -333,7 +332,7 @@ ScrollingFrameHome.BorderColor3 = Color3.new(0, 0, 0)
 ScrollingFrameHome.BorderSizePixel = 0
 ScrollingFrameHome.Position = UDim2.new(0.239610985, 0, 0.113314532, 0)
 ScrollingFrameHome.Size = UDim2.new(0.733235598, 0, 0.864629686, 0)
-ScrollingFrameHome.CanvasSize = UDim2.new(0,0,1.7,0) -- Zwiększono CanvasSize, aby pomieścić więcej przycisków
+ScrollingFrameHome.CanvasSize = UDim2.new(0,0,1.7,0)
 
 local ScrollingFrameHome_UICorner = Instance.new("UICorner")
 ScrollingFrameHome_UICorner.Parent = ScrollingFrameHome
@@ -525,28 +524,29 @@ local FlyButtonHome_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstra
 FlyButtonHome_UIAspectRatioConstraint.Parent = FlyButtonHome
 FlyButtonHome_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
 
-local TeleportToNewGameButton = Instance.new("TextButton")
-TeleportToNewGameButton.Name = "Teleport To Game Button"
-TeleportToNewGameButton.Parent = ScrollingFrameHome
-TeleportToNewGameButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
-TeleportToNewGameButton.BorderColor3 = Color3.new(0, 0, 0)
-TeleportToNewGameButton.Position = UDim2.new(0.665799975, 0, 0.219113797, 0)
-TeleportToNewGameButton.Size = UDim2.new(0.28, 0, 0.06, 0)
-TeleportToNewGameButton.Font = Enum.Font.SourceSans
-TeleportToNewGameButton.Text = "Teleport to New Game"
-TeleportToNewGameButton.TextColor3 = Color3.new(0, 0, 0)
-TeleportToNewGameButton.TextScaled = true
-TeleportToNewGameButton.TextSize = 14
-TeleportToNewGameButton.TextWrapped = true
+-- Zmieniono nazwę na "Teleport to Premium Shop"
+local TeleportToPremiumShopButton = Instance.new("TextButton")
+TeleportToPremiumShopButton.Name = "Teleport To Premium Shop Button"
+TeleportToPremiumShopButton.Parent = ScrollingFrameHome
+TeleportToPremiumShopButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
+TeleportToPremiumShopButton.BorderColor3 = Color3.new(0, 0, 0)
+TeleportToPremiumShopButton.Position = UDim2.new(0.665799975, 0, 0.219113797, 0)
+TeleportToPremiumShopButton.Size = UDim2.new(0.28, 0, 0.06, 0)
+TeleportToPremiumShopButton.Font = Enum.Font.SourceSans
+TeleportToPremiumShopButton.Text = "Teleport to Premium Shop"
+TeleportToPremiumShopButton.TextColor3 = Color3.new(0, 0, 0)
+TeleportToPremiumShopButton.TextScaled = true
+TeleportToPremiumShopButton.TextSize = 14
+TeleportToPremiumShopButton.TextWrapped = true
 
-local TeleportToNewGameButton_UICorner = Instance.new("UICorner")
-TeleportToNewGameButton_UICorner.Parent = TeleportToNewGameButton
-local TeleportToNewGameButton_UITextSizeConstraint = Instance.new("UITextSizeConstraint")
-TeleportToNewGameButton_UITextSizeConstraint.Parent = TeleportToNewGameButton
-TeleportToNewGameButton_UITextSizeConstraint.MaxTextSize = 37
-local TeleportToNewGameButton_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
-TeleportToNewGameButton_UIAspectRatioConstraint.Parent = TeleportToNewGameButton
-TeleportToNewGameButton_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
+local TeleportToPremiumShopButton_UICorner = Instance.new("UICorner")
+TeleportToPremiumShopButton_UICorner.Parent = TeleportToPremiumShopButton
+local TeleportToPremiumShopButton_UITextSizeConstraint = Instance.new("UITextSizeConstraint")
+TeleportToPremiumShopButton_UITextSizeConstraint.Parent = TeleportToPremiumShopButton
+TeleportToPremiumShopButton_UITextSizeConstraint.MaxTextSize = 37
+local TeleportToPremiumShopButton_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+TeleportToPremiumShopButton_UIAspectRatioConstraint.Parent = TeleportToPremiumShopButton
+TeleportToPremiumShopButton_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
 
 
 local MainFrame_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
@@ -658,7 +658,6 @@ local function showTab(tabName)
     if tabName == "Home" then
         ScrollingFrameHome.Visible = true
         HomeTabButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5) -- Podświetl aktywny przycisk
-        sendNotification("Witaj na zakładce Home!")
     elseif tabName == "Premium" then
         local success, result = pcall(function()
             return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
@@ -669,20 +668,25 @@ local function showTab(tabName)
             if hasGamePass then
                 ScrollingFramePremium.Visible = true
                 PremiumTabButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5) -- Podświetl aktywny przycisk
-                sendNotification("Wersja premium aktywowana. Funkcje premium dostępne.")
             else
-                -- Jeśli nie ma GamePassa, otwórz zakładkę Premium i teleportuj
+                -- Jeśli nie ma GamePassa, otwórz zakładkę Premium, spróbuj prompować zakup, a potem teleportuj
                 ScrollingFramePremium.Visible = true -- Pokazujemy zakładkę, nawet bez GamePassa
                 PremiumTabButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5) -- Podświetlamy, bo zakładka jest wybrana
-                sendNotification("Nie posiadasz wersji premium. Zostaniesz teleportowany do sklepu!")
-                task.wait(2) -- Daj użytkownikowi czas na przeczytanie powiadomienia
-                local teleportSuccess, teleportErr = pcall(function()
-                    TeleportService:Teleport(TELEPORT_PLACE_ID, player)
+                
+                -- Prośba o zakup GamePassa
+                local promptSuccess, promptErr = pcall(function()
+                    MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
                 end)
-                if not teleportSuccess then
-                    warn("Błąd teleportacji:", teleportErr)
-                    sendNotification("Nie udało się teleportować. Spróbuj ponownie.")
+                if not promptSuccess then
+                    warn("Błąd podczas próby wyświetlenia prośby o zakup GamePassa:", promptErr)
+                    sendNotification("Błąd: Nie można wyświetlić prośby o zakup GamePassa.")
                 end
+                
+                -- Ważne: Teleportacja nastąpi po PromptGamePassPurchaseFinished, jeśli zakup zostanie anulowany.
+                -- Tutaj nie wywołujemy teleportacji od razu, tylko czekamy na wynik PromptGamePassPurchase.
+                -- Jeśli skrypt w oryginalnej wersji teleportował od razu, to możemy to zrobić, ale jest to mniej user-friendly.
+                -- Zakładam, że chcesz, aby najpierw była próba zakupu, a potem teleportacja, jeśli nie zakupiono.
+                -- Jeśli chcesz od razu teleportować, zmień poniższą logikę.
             end
         else
             warn("Błąd podczas sprawdzania wersji premium (showTab):", result)
@@ -691,19 +695,19 @@ local function showTab(tabName)
     elseif tabName == "Executor" then
         ExecutorFrame.Visible = true
         ExecutorTabButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5) -- Podświetl aktywny przycisk
-        sendNotification("Przeszedłeś do zakładki Executor. Wklej kod i naciśnij Execute.")
     end
-    updateGameSpecificButtonsVisibility() -- Upewnij się, że przyciski specyficzne dla gry są aktualizowane po zmianie zakładki
+    -- Zawsze aktualizuj widoczność przycisków po zmianie zakładki, aby odzwierciedlić GamePlaceId
+    updateGameSpecificButtonsVisibility() 
 end
 
-local function checkGamePassStatus()
+local function checkGamePassStatus(showNotification)
     local success, result = pcall(function()
         return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
     end)
 
     if success then
         hasGamePass = result
-        if not initialGamePassCheckDone then
+        if showNotification and not initialGamePassCheckDone then
             if hasGamePass then
                 sendNotification("Posiadasz wersję premium! Funkcje Premium odblokowane.")
             else
@@ -713,29 +717,23 @@ local function checkGamePassStatus()
         end
     else
         warn("Błąd podczas sprawdzania wersji premium:", result)
-        sendNotification("Nie można sprawdzić statusu wersji premium. Spróbuj ponownie.")
+        if showNotification then
+            sendNotification("Nie można sprawdzić statusu wersji premium. Spróbuj ponownie.")
+        end
     end
 end
 
--- Nowa, poprawiona funkcja do zarządzania widocznością przycisków specyficznych dla gry
+-- Poprawiona funkcja do zarządzania widocznością przycisków specyficznych dla gry
 local function updateGameSpecificButtonsVisibility()
     local currentPlaceId = game.PlaceId
 
-    if ScrollingFramePremium.Visible then -- Tylko jeśli zakładka Premium jest widoczna
-        if currentPlaceId == MM2_EXPERIENCE_ID then
-            MM2Button.Visible = true
-            GhostMM2Button.Visible = true
-        else
-            MM2Button.Visible = false
-            GhostMM2Button.Visible = false
-        end
-
-        if currentPlaceId == GAG_GAME_ID then
-            GAGButton.Visible = true
-        else
-            GAGButton.Visible = false
-        end
-    else -- Jeśli zakładka Premium nie jest widoczna, ukryj wszystkie przyciski specyficzne dla gier
+    -- Te przyciski są widoczne TYLKO jeśli zakładka Premium jest otwarta ORAZ jesteśmy w odpowiedniej grze.
+    if ScrollingFramePremium.Visible then
+        MM2Button.Visible = (currentPlaceId == MM2_EXPERIENCE_ID)
+        GhostMM2Button.Visible = (currentPlaceId == MM2_EXPERIENCE_ID)
+        GAGButton.Visible = (currentPlaceId == GAG_GAME_ID)
+    else
+        -- Jeśli zakładka Premium nie jest widoczna, wszystkie te przyciski są ukryte.
         MM2Button.Visible = false
         GhostMM2Button.Visible = false
         GAGButton.Visible = false
@@ -842,16 +840,17 @@ FlyButtonHome.MouseButton1Click:Connect(function()
     runScriptAndNotify("https://pastebin.com/raw/xuSMWfDu", FlyButtonHome.Text)
 end)
 
-TeleportToNewGameButton.MouseButton1Click:Connect(function()
+-- Poprawiony przycisk "Teleport to Premium Shop"
+TeleportToPremiumShopButton.MouseButton1Click:Connect(function()
     local success, err = pcall(function()
-        TeleportService:Teleport(NEW_GAME_TELEPORT_ID, player)
+        TeleportService:Teleport(TELEPORT_PLACE_ID, player)
     end)
 
     if success then
-        sendNotification("Teleportacja do nowej gry rozpoczęta!")
+        sendNotification("Teleportacja do sklepu premium rozpoczęta!")
     else
-        sendNotification("Błąd teleportacji: " .. tostring(err))
-        warn("Błąd teleportacji:", err)
+        sendNotification("Błąd teleportacji do sklepu premium: " .. tostring(err))
+        warn("Błąd teleportacji do sklepu premium:", err)
     end
 end)
 
@@ -929,6 +928,7 @@ MainFrame.VisibleChanged:Connect(function()
     updateHideButtonPosition()
 end)
 
+-- Obsługa zakończenia zakupu GamePassa
 MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gamePassId, wasPurchased)
     if userId == player.UserId and gamePassId == GAMEPASS_ID then
         if wasPurchased then
@@ -937,27 +937,40 @@ MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gameP
             -- Nie teleportujemy, jeśli kupiono, ale odświeżamy widok przycisków
             updateGameSpecificButtonsVisibility()
         else
-            sendNotification("Anulowano zakup wersji premium.")
-            -- W przypadku anulowania, pozostajemy w tej samej grze, ale zachowujemy logikę teleportacji przy ponownym kliknięciu zakładki Premium
+            sendNotification("Anulowano zakup wersji premium. Teleportuję do sklepu premium...")
+            -- Teleportacja po anulowaniu zakupu
+            task.wait(2) -- Krótka pauza na powiadomienie
+            local teleportSuccess, teleportErr = pcall(function()
+                TeleportService:Teleport(TELEPORT_PLACE_ID, player)
+            end)
+            if not teleportSuccess then
+                warn("Błąd teleportacji po anulowaniu zakupu:", teleportErr)
+                sendNotification("Nie udało się teleportować po anulowaniu zakupu. Spróbuj ponownie.")
+            end
         end
-        checkGamePassStatus() -- Zaktualizuj status gamepassa
+        checkGamePassStatus(false) -- Zaktualizuj status gamepassa bez dodatkowych powiadomień
     end
 end)
 
+-- Dodano nasłuchiwanie na zmianę widoczności ScrollingFramePremium, aby aktualizować przyciski.
+-- To jest kluczowe dla poprawnego wyświetlania MM2/GhostMM2/GAG.
+ScrollingFramePremium.VisibleChanged:Connect(function()
+    updateGameSpecificButtonsVisibility()
+end)
+
 --- Inicjalizacja i uruchomienie ---
-checkGamePassStatus()
+checkGamePassStatus(true) -- Sprawdź status GamePassa i wyświetl powiadomienie tylko raz na początku
 updateGameSpecificButtonsVisibility() -- Wywołaj na start, aby ustawić widoczność przycisków
 showTab("Home") -- Domyślnie pokaż zakładkę Home
 updateHideButtonPosition()
 
--- Sprawdź i zaktualizuj widoczność przycisków, jeśli PlaceId się zmieni (choć rzadko się to dzieje bez teleportacji)
--- Możesz rozważyć wywołanie tego w Player.CharacterAdded, jeśli chcesz, aby było to aktywne po spawnie.
-RunService.Stepped:Connect(updateGameSpecificButtonsVisibility)
+-- Ta linia jest zbędna, ponieważ updateGameSpecificButtonsVisibility() jest wywoływana przy każdej zmianie zakładki Premium.
+-- RunService.Stepped:Connect(updateGameSpecificButtonsVisibility)
 
 spawn(function()
     task.wait(1)
     sendNotification("Witaj w Universal Scripts! Skrypt załadowany.")
-    checkGamePassStatus() -- Upewnij się, że gamepass jest sprawdzany po załadowaniu GUI
+    checkGamePassStatus(false) -- Ponowne sprawdzenie bez powiadomień, jeśli już było
 end)
 
 task.wait(0.5)
