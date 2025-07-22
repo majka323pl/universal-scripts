@@ -10,7 +10,7 @@ local MM2_EXPERIENCE_ID = 142823291
 local GAG_GAME_ID = 9262276941 
 local TELEPORT_PLACE_ID = 6557073879 
 
--- URL dla logów aktualizacji
+-- URL dla logów aktualizacji - TO JEST NOWA LINIA
 local UPDATE_LOGS_URL = "https://pastebin.com/raw/hrimZdcv" 
 
 local hasGamePass = false
@@ -137,14 +137,14 @@ local ExecutorTabButton_UIAspectRatioConstraint = Instance.new("UIAspectRatioCon
 ExecutorTabButton_UIAspectRatioConstraint.Parent = ExecutorTabButton
 ExecutorTabButton_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
 
--- UpdateLogsTabButton
+-- UpdateLogsTabButton - TO JEST NOWY PRZYCISK ZAKŁADKI
 local UpdateLogsTabButton = Instance.new("TextButton")
 UpdateLogsTabButton.Name = "UpdateLogsTabButton"
 UpdateLogsTabButton.Parent = TabsFrame
 UpdateLogsTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
 UpdateLogsTabButton.BorderColor3 = Color3.new(0, 0, 0)
 UpdateLogsTabButton.BorderSizePixel = 0
-UpdateLogsTabButton.Position = UDim2.new(0.0591715984, 0, 0.487912089, 0) 
+UpdateLogsTabButton.Position = UDim2.new(0.0591715984, 0, 0.487912089, 0) -- Umieszczony pod Executor
 UpdateLogsTabButton.Size = UDim2.new(0.881656826, 0, 0.083516486, 0)
 UpdateLogsTabButton.Font = Enum.Font.SourceSans
 UpdateLogsTabButton.Text = "Update Logs"
@@ -638,7 +638,7 @@ ClearButton.TextColor3 = Color3.new(0, 0, 0)
 ClearButton.TextScaled = true
 Instance.new("UICorner", ClearButton)
 
---- ELEMENTY GUI DLA ZAKŁADKI UPDATE LOGS ---
+--- NOWE ELEMENTY GUI DLA ZAKŁADKI UPDATE LOGS ---
 local UpdateLogsFrame = Instance.new("Frame")
 UpdateLogsFrame.Name = "UpdateLogsFrame"
 UpdateLogsFrame.Parent = MainFrame
@@ -647,7 +647,7 @@ UpdateLogsFrame.BorderColor3 = Color3.new(0, 0, 0)
 UpdateLogsFrame.BorderSizePixel = 0
 UpdateLogsFrame.Position = UDim2.new(0.239610985, 0, 0.113314532, 0)
 UpdateLogsFrame.Size = UDim2.new(0.733235598, 0, 0.864629686, 0)
-UpdateLogsFrame.Visible = false
+UpdateLogsFrame.Visible = false -- Domyślnie niewidoczna
 
 local UpdateLogsFrame_UICorner = Instance.new("UICorner")
 UpdateLogsFrame_UICorner.Parent = UpdateLogsFrame
@@ -660,7 +660,7 @@ UpdateLogsScrollingFrame.BackgroundColor3 = Color3.new(0.231373, 0.231373, 0.231
 UpdateLogsScrollingFrame.BorderColor3 = Color3.new(0, 0, 0)
 UpdateLogsScrollingFrame.BorderSizePixel = 0
 UpdateLogsScrollingFrame.Size = UDim2.new(1, 0, 1, 0)
-UpdateLogsScrollingFrame.CanvasSize = UDim2.new(0, 0, 2, 0) -- Może wymagać dostosowania w zależności od długości logów
+UpdateLogsScrollingFrame.CanvasSize = UDim2.new(0, 0, 2, 0) -- Początkowo duży CanvasSize, zostanie dostosowany
 UpdateLogsScrollingFrame.ScrollBarImageColor3 = Color3.new(0.5, 0.5, 0.5)
 UpdateLogsScrollingFrame.ScrollBarTransparency = 0.5
 UpdateLogsScrollingFrame.HorizontalScrollBarInset = Enum.ScrollBarInset.None
@@ -723,13 +723,13 @@ local function showTab(tabName)
     ScrollingFrameHome.Visible = false
     ScrollingFramePremium.Visible = false
     ExecutorFrame.Visible = false 
-    UpdateLogsFrame.Visible = false 
+    UpdateLogsFrame.Visible = false -- UKRYJ NOWĄ RAMKĘ
 
     -- Zresetuj kolory wszystkich przycisków zakładek
     HomeTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
     PremiumTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
     ExecutorTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608) 
-    UpdateLogsTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608) 
+    UpdateLogsTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608) -- ZRESETUJ KOLOR NOWEGO PRZYCISKU
 
     if tabName == "Home" then
         ScrollingFrameHome.Visible = true
@@ -764,10 +764,11 @@ local function showTab(tabName)
     elseif tabName == "Executor" then 
         ExecutorFrame.Visible = true
         ExecutorTabButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
-    elseif tabName == "UpdateLogs" then 
+    elseif tabName == "UpdateLogs" then -- NOWA LOGIKA DLA ZAKŁADKI UPDATE LOGS
         UpdateLogsFrame.Visible = true
         UpdateLogsTabButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
         
+        -- Pobierz zawartość logów z Pastebin
         local scriptContent = nil
         local successHttpGet, errHttpGet = pcall(function()
             scriptContent = game:HttpGet(UPDATE_LOGS_URL)
@@ -968,7 +969,7 @@ ExecutorTabButton.MouseButton1Click:Connect(function()
     showTab("Executor")
 end)
 
-UpdateLogsTabButton.MouseButton1Click:Connect(function() 
+UpdateLogsTabButton.MouseButton1Click:Connect(function() -- NOWE POŁĄCZENIE DLA PRZYCISKU UPDATE LOGS
     showTab("UpdateLogs")
 end)
 
