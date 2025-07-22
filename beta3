@@ -6,10 +6,9 @@ local RunService = game:GetService("RunService")
 local TeleportService = game:GetService("TeleportService")
 
 local GAMEPASS_ID = 1296972626
--- MM2_EXPERIENCE_ID i GAG_GAME_ID są tu obecne, ale NIE SĄ UŻYWANE do logiki widoczności przycisków w premium
 local MM2_EXPERIENCE_ID = 142823291 
 local GAG_GAME_ID = 9262276941 
-local TELEPORT_PLACE_ID = 6557073879 -- ID miejsca, do którego teleportuje, jeśli gracz nie ma premium
+local TELEPORT_PLACE_ID = 6557073879 
 
 local hasGamePass = false
 local initialGamePassCheckDone = false 
@@ -25,7 +24,7 @@ local function sendNotification(text)
     })
 end
 
--- Deklaracje instancji GUI (Oryginalne + dodany Executor)
+-- Deklaracje instancji GUI
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Parent = player:WaitForChild("PlayerGui")
 ScreenGui.Name = "UniversalScriptsGUI"
@@ -110,7 +109,7 @@ local PremiumTabButton_UIAspectRatioConstraint = Instance.new("UIAspectRatioCons
 PremiumTabButton_UIAspectRatioConstraint.Parent = PremiumTabButton
 PremiumTabButton_UIAspectRatioConstraint.AspectRatio = 3.9210526943206787
 
--- ExecutorTabButton (NOWY)
+-- ExecutorTabButton
 local ExecutorTabButton = Instance.new("TextButton")
 ExecutorTabButton.Name = "ExecutorTabButton"
 ExecutorTabButton.Parent = TabsFrame
@@ -146,7 +145,7 @@ ScrollingFramePremium.BorderSizePixel = 0
 ScrollingFramePremium.Position = UDim2.new(0.239610985, 0, 0.1111193, 0)
 ScrollingFramePremium.Size = UDim2.new(0.733235598, 0, 0.864629686, 0)
 ScrollingFramePremium.CanvasSize = UDim2.new(0,0,1.5,0)
-ScrollingFramePremium.Visible = false -- Domyślnie ukryte, pokazywane tylko po kliknięciu zakładki Premium
+ScrollingFramePremium.Visible = false 
 
 local ScrollingFramePremium_UICorner = Instance.new("UICorner")
 ScrollingFramePremium_UICorner.Parent = ScrollingFramePremium
@@ -177,7 +176,6 @@ local SpectateButton_Premium_UIAspectRatioConstraint = Instance.new("UIAspectRat
 SpectateButton_Premium_UIAspectRatioConstraint.Parent = SpectateButton_Premium
 SpectateButton_Premium_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
 
--- MM2Button (BEZ ZMIAN W WIDOCZNOŚCI)
 local MM2Button = Instance.new("TextButton")
 MM2Button.Name = "MM2 Button"
 MM2Button.Parent = ScrollingFramePremium
@@ -248,7 +246,6 @@ local Invisibiltybutton_UIAspectRatioConstraint = Instance.new("UIAspectRatioCon
 Invisibiltybutton_UIAspectRatioConstraint.Parent = Invisibiltybutton
 Invisibiltybutton_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
 
--- GhostMM2Button (BEZ ZMIAN W WIDOCZNOŚCI)
 local GhostMM2Button = Instance.new("TextButton")
 GhostMM2Button.Name = "GhostMM2 Button"
 GhostMM2Button.Parent = ScrollingFramePremium
@@ -272,7 +269,6 @@ local GhostMM2Button_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstr
 GhostMM2Button_UIAspectRatioConstraint.Parent = GhostMM2Button
 GhostMM2Button_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
 
--- GAGButton (BEZ ZMIAN W WIDOCZNOŚCI)
 local GAGButton = Instance.new("TextButton")
 GAGButton.Name = "GAG Button"
 GAGButton.Parent = ScrollingFramePremium
@@ -290,7 +286,7 @@ GAGButton.TextWrapped = true
 local GAGButton_UICorner = Instance.new("UICorner")
 GAGButton_UICorner.Parent = GAGButton
 local GAGButton_UITextSizeConstraint = Instance.new("UITextSizeConstraint")
-GAGButton_UITextSizeConstraint.Parent = GAGButton
+GAGButton_UICorner.Parent = GAGButton
 GAGButton_UITextSizeConstraint.MaxTextSize = 37
 local GAGButton_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
 GAGButton_UIAspectRatioConstraint.Parent = GAGButton
@@ -552,7 +548,7 @@ ExecutorFrame.BorderColor3 = Color3.new(0, 0, 0)
 ExecutorFrame.BorderSizePixel = 0
 ExecutorFrame.Position = UDim2.new(0.239610985, 0, 0.113314532, 0)
 ExecutorFrame.Size = UDim2.new(0.733235598, 0, 0.864629686, 0)
-ExecutorFrame.Visible = false -- Domyślnie ukryte, pokazywane tylko po kliknięciu zakładki Executor
+ExecutorFrame.Visible = false 
 
 local ExecutorFrame_UICorner = Instance.new("UICorner")
 ExecutorFrame_UICorner.Parent = ExecutorFrame
@@ -616,20 +612,42 @@ Instance.new("UICorner", ClearButton)
 
 --- Funkcje i logika skryptu ---
 
+-- Funkcja do aktualizacji widoczności przycisków specyficznych dla gry
+local function updateGameSpecificButtonsVisibility()
+    local currentPlaceId = game.PlaceId
+
+    -- Domyślnie ukryj wszystkie trzy przyciski
+    MM2Button.Visible = false
+    GhostMM2Button.Visible = false
+    GAGButton.Visible = false
+
+    if currentPlaceId == MM2_EXPERIENCE_ID then
+        -- Jeśli jesteśmy w MM2
+        MM2Button.Visible = true
+        GhostMM2Button.Visible = true
+        GAGButton.Visible = false -- GAG ukryty w MM2
+    elseif currentPlaceId == GAG_GAME_ID then
+        -- Jeśli jesteśmy w grze GAG
+        GAGButton.Visible = true
+        MM2Button.Visible = false
+        GhostMM2Button.Visible = false
+    end
+end
+
 local function showTab(tabName)
     -- Ukryj wszystkie ramki treści
     ScrollingFrameHome.Visible = false
     ScrollingFramePremium.Visible = false
-    ExecutorFrame.Visible = false -- Ukryj ramkę Executor
+    ExecutorFrame.Visible = false 
 
     -- Zresetuj kolory wszystkich przycisków zakładek
     HomeTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
     PremiumTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
-    ExecutorTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608) -- Zresetuj kolor przycisku Executor
+    ExecutorTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608) 
 
     if tabName == "Home" then
         ScrollingFrameHome.Visible = true
-        HomeTabButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5) -- Podświetl aktywny przycisk
+        HomeTabButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5) 
     elseif tabName == "Premium" then
         local success, result = pcall(function()
             return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
@@ -639,9 +657,9 @@ local function showTab(tabName)
             hasGamePass = result
             if hasGamePass then
                 ScrollingFramePremium.Visible = true
-                PremiumTabButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5) -- Podświetl aktywny przycisk
+                PremiumTabButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5) 
+                updateGameSpecificButtonsVisibility() -- Wywołaj aktualizację widoczności po otwarciu Premium
             else
-                -- Oryginalna logika: jeśli nie ma GamePassa, teleportuj
                 sendNotification("Nie posiadasz wersji premium. Teleportuję...")
                 local teleportSuccess, teleportErr = pcall(function()
                     TeleportService:Teleport(TELEPORT_PLACE_ID, player)
@@ -650,16 +668,14 @@ local function showTab(tabName)
                     warn("Błąd teleportacji przy braku GamePassa:", teleportErr)
                     sendNotification("Błąd teleportacji: " .. tostring(teleportErr))
                 end
-                -- Ważne: NIE otwieramy zakładki Premium, jeśli gracza teleportujemy
-                -- Pozostawiamy aktywną poprzednią zakładkę (lub domyślnie Home)
-                showTab("Home") -- Powrót do zakładki Home po teleportacji
+                showTab("Home") 
             end
         else
             warn("Błąd podczas sprawdzania wersji premium (showTab):", result)
             sendNotification("Nie można sprawdzić statusu wersji premium. Spróbuj ponownie.")
-            showTab("Home") -- Wróć do Home w razie błędu
+            showTab("Home") 
         end
-    elseif tabName == "Executor" then -- Nowa logika dla Executor
+    elseif tabName == "Executor" then 
         ExecutorFrame.Visible = true
         ExecutorTabButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
     end
@@ -688,7 +704,7 @@ local function checkGamePassStatus(showNotification)
     end
 end
 
--- Przywrócona oryginalna funkcja runScriptAndNotify
+-- Funkcja do uruchamiania skryptów z linków
 local function runScriptAndNotify(url, buttonName)
     local scriptContent = nil
     local successHttpGet, errHttpGet = pcall(function()
@@ -777,7 +793,7 @@ FlyButtonHome.MouseButton1Click:Connect(function()
 end)
 
 
---- Połączenia przycisków Premium (wszystkie widoczne, brak specjalnej logiki widoczności) ---
+--- Połączenia przycisków Premium ---
 SpectateButton_Premium.MouseButton1Click:Connect(function()
     runScriptAndNotify("https://pastebin.com/raw/UFVLWQRw", SpectateButton_Premium.Text)
 end)
@@ -802,7 +818,7 @@ GAGButton.MouseButton1Click:Connect(function()
     runScriptAndNotify("https://raw.githubusercontent.com/ThundarZ/Welcome/main/Main/GaG/Main.lua", GAGButton.Text)
 end)
 
---- Połączenia przycisków Executor (NOWE) ---
+--- Połączenia przycisków Executor ---
 ExecuteButton.MouseButton1Click:Connect(function()
     local code = ExecutorTextBox.Text
     if code and #code > 0 and code ~= ExecutorTextBox.PlaceholderText then
@@ -839,7 +855,7 @@ PremiumTabButton.MouseButton1Click:Connect(function()
     showTab("Premium")
 end)
 
-ExecutorTabButton.MouseButton1Click:Connect(function() -- Nowy przycisk dla Executor
+ExecutorTabButton.MouseButton1Click:Connect(function() 
     showTab("Executor")
 end)
 
@@ -852,8 +868,8 @@ MainFrame.VisibleChanged:Connect(function()
 end)
 
 --- Inicjalizacja i uruchomienie ---
-checkGamePassStatus(true) -- Sprawdź status GamePassa i wyświetl powiadomienie tylko raz na początku
-showTab("Home") -- Domyślnie pokaż zakładkę Home
+checkGamePassStatus(true) 
+showTab("Home") 
 updateHideButtonPosition()
 
 spawn(function()
