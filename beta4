@@ -277,49 +277,13 @@ Instance.new("UICorner", FlingButton_Premium)
 Instance.new("UITextSizeConstraint", FlingButton_Premium).MaxTextSize = 37
 Instance.new("UIAspectRatioConstraint", FlingButton_Premium).AspectRatio = 3.9473683834075928
 
--- PRZYCISK: Kill Aura (Premium)
-local KillAuraButton_Premium = Instance.new("TextButton")
-KillAuraButton_Premium.Name = "Kill Aura Button Premium"
-KillAuraButton_Premium.Parent = ScrollingFramePremium
-KillAuraButton_Premium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
-KillAuraButton_Premium.BorderColor3 = Color3.new(0, 0, 0)
-KillAuraButton_Premium.Position = UDim2.new(0.04, 0, 0.225, 0) -- Adjust position
-KillAuraButton_Premium.Size = UDim2.new(0.45, 0, 0.08, 0)
-KillAuraButton_Premium.Font = Enum.Font.SourceSans
-KillAuraButton_Premium.Text = "Kill Aura"
-KillAuraButton_Premium.TextColor3 = Color3.new(0, 0, 0)
-KillAuraButton_Premium.TextScaled = true
-KillAuraButton_Premium.TextSize = 14
-KillAuraButton_Premium.TextWrapped = true
-Instance.new("UICorner", KillAuraButton_Premium)
-Instance.new("UITextSizeConstraint", KillAuraButton_Premium).MaxTextSize = 37
-Instance.new("UIAspectRatioConstraint", KillAuraButton_Premium).AspectRatio = 3.9473683834075928
-
--- PRZYCISK: Infinite Yield (Premium)
-local InfiniteYieldButton_Premium = Instance.new("TextButton")
-InfiniteYieldButton_Premium.Name = "Infinite Yield Button Premium"
-InfiniteYieldButton_Premium.Parent = ScrollingFramePremium
-InfiniteYieldButton_Premium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
-InfiniteYieldButton_Premium.BorderColor3 = Color3.new(0, 0, 0)
-InfiniteYieldButton_Premium.Position = UDim2.new(0.5, 0, 0.225, 0) -- Adjust position
-InfiniteYieldButton_Premium.Size = UDim2.new(0.45, 0, 0.08, 0)
-InfiniteYieldButton_Premium.Font = Enum.Font.SourceSans
-InfiniteYieldButton_Premium.Text = "Infinite Yield"
-InfiniteYieldButton_Premium.TextColor3 = Color3.new(0, 0, 0)
-InfiniteYieldButton_Premium.TextScaled = true
-InfiniteYieldButton_Premium.TextSize = 14
-InfiniteYieldButton_Premium.TextWrapped = true
-Instance.new("UICorner", InfiniteYieldButton_Premium)
-Instance.new("UITextSizeConstraint", InfiniteYieldButton_Premium).MaxTextSize = 37
-Instance.new("UIAspectRatioConstraint", InfiniteYieldButton_Premium).AspectRatio = 3.9473683834075928
-
 -- PRZYCISK: MM2 (Specyficzny dla gry)
 local MM2Button = Instance.new("TextButton")
 MM2Button.Name = "MM2 Button"
 MM2Button.Parent = ScrollingFramePremium
 MM2Button.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 MM2Button.BorderColor3 = Color3.new(0, 0, 0)
-MM2Button.Position = UDim2.new(0.04, 0, 0.325, 0) -- Adjust position
+MM2Button.Position = UDim2.new(0.04, 0, 0.225, 0) -- Adjust position
 MM2Button.Size = UDim2.new(0.45, 0, 0.08, 0)
 MM2Button.Font = Enum.Font.SourceSans
 MM2Button.Text = "MM2"
@@ -338,7 +302,7 @@ GhostMM2Button.Name = "GhostMM2 Button"
 GhostMM2Button.Parent = ScrollingFramePremium
 GhostMM2Button.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 GhostMM2Button.BorderColor3 = Color3.new(0, 0, 0)
-GhostMM2Button.Position = UDim2.new(0.5, 0, 0.325, 0) -- Adjust position
+GhostMM2Button.Position = UDim2.new(0.5, 0, 0.225, 0) -- Adjust position
 GhostMM2Button.Size = UDim2.new(0.45, 0, 0.08, 0)
 GhostMM2Button.Font = Enum.Font.SourceSans
 GhostMM2Button.Text = "GhostMM2"
@@ -357,7 +321,7 @@ GAGButton.Name = "GAG Button"
 GAGButton.Parent = ScrollingFramePremium
 GAGButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 GAGButton.BorderColor3 = Color3.new(0, 0, 0)
-GAGButton.Position = UDim2.new(0.04, 0, 0.425, 0) -- Adjust position
+GAGButton.Position = UDim2.new(0.04, 0, 0.325, 0) -- Adjust position
 GAGButton.Size = UDim2.new(0.45, 0, 0.08, 0)
 GAGButton.Font = Enum.Font.SourceSans
 GAGButton.Text = "GAG"
@@ -369,96 +333,6 @@ GAGButton.Visible = false -- Domyślnie ukryte
 Instance.new("UICorner", GAGButton)
 Instance.new("UITextSizeConstraint", GAGButton).MaxTextSize = 37
 Instance.new("UIAspectRatioConstraint", GAGButton).AspectRatio = 3.9473683834075928
-
--- PRZYCISK: Pet Simulator X (Premium)
-local PetSimulatorXButton_Premium = Instance.new("TextButton")
-PetSimulatorXButton_Premium.Name = "Pet Simulator X Button Premium"
-PetSimulatorXButton_Premium.Parent = ScrollingFramePremium
-PetSimulatorXButton_Premium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
-PetSimulatorXButton_Premium.BorderColor3 = Color3.new(0, 0, 0)
-PetSimulatorXButton_Premium.Position = UDim2.new(0.5, 0, 0.425, 0) -- Adjust position
-PetSimulatorXButton_Premium.Size = UDim2.new(0.45, 0, 0.08, 0)
-PetSimulatorXButton_Premium.Font = Enum.Font.SourceSans
-PetSimulatorXButton_Premium.Text = "Pet Simulator X"
-PetSimulatorXButton_Premium.TextColor3 = Color3.new(0, 0, 0)
-PetSimulatorXButton_Premium.TextScaled = true
-PetSimulatorXButton_Premium.TextSize = 14
-PetSimulatorXButton_Premium.TextWrapped = true
-Instance.new("UICorner", PetSimulatorXButton_Premium)
-Instance.new("UITextSizeConstraint", PetSimulatorXButton_Premium).MaxTextSize = 37
-Instance.new("UIAspectRatioConstraint", PetSimulatorXButton_Premium).AspectRatio = 3.9473683834075928
-
--- PRZYCISK: Break In (Premium)
-local BreakInButton_Premium = Instance.new("TextButton")
-BreakInButton_Premium.Name = "Break In Button Premium"
-BreakInButton_Premium.Parent = ScrollingFramePremium
-BreakInButton_Premium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
-BreakInButton_Premium.BorderColor3 = Color3.new(0, 0, 0)
-BreakInButton_Premium.Position = UDim2.new(0.04, 0, 0.525, 0) -- Adjust position
-BreakInButton_Premium.Size = UDim2.new(0.45, 0, 0.08, 0)
-BreakInButton_Premium.Font = Enum.Font.SourceSans
-BreakInButton_Premium.Text = "Break In"
-BreakInButton_Premium.TextColor3 = Color3.new(0, 0, 0)
-BreakInButton_Premium.TextScaled = true
-BreakInButton_Premium.TextSize = 14
-BreakInButton_Premium.TextWrapped = true
-Instance.new("UICorner", BreakInButton_Premium)
-Instance.new("UITextSizeConstraint", BreakInButton_Premium).MaxTextSize = 37
-Instance.new("UIAspectRatioConstraint", BreakInButton_Premium).AspectRatio = 3.9473683834075928
-
--- PRZYCISK: Adopt Me (Premium)
-local AdoptMeButton_Premium = Instance.new("TextButton")
-AdoptMeButton_Premium.Name = "Adopt Me Button Premium"
-AdoptMeButton_Premium.Parent = ScrollingFramePremium
-AdoptMeButton_Premium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
-AdoptMeButton_Premium.BorderColor3 = Color3.new(0, 0, 0)
-AdoptMeButton_Premium.Position = UDim2.new(0.5, 0, 0.525, 0) -- Adjust position
-AdoptMeButton_Premium.Size = UDim2.new(0.45, 0, 0.08, 0)
-AdoptMeButton_Premium.Font = Enum.Font.SourceSans
-AdoptMeButton_Premium.Text = "Adopt Me"
-AdoptMeButton_Premium.TextColor3 = Color3.new(0, 0, 0)
-AdoptMeButton_Premium.TextScaled = true
-AdoptMeButton_Premium.TextSize = 14
-AdoptMeButton_Premium.TextWrapped = true
-Instance.new("UICorner", AdoptMeButton_Premium)
-Instance.new("UITextSizeConstraint", AdoptMeButton_Premium).MaxTextSize = 37
-Instance.new("UIAspectRatioConstraint", AdoptMeButton_Premium).AspectRatio = 3.9473683834075928
-
--- PRZYCISK: Blox Fruits (Premium)
-local BloxFruitsButton_Premium = Instance.new("TextButton")
-BloxFruitsButton_Premium.Name = "Blox Fruits Button Premium"
-BloxFruitsButton_Premium.Parent = ScrollingFramePremium
-BloxFruitsButton_Premium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
-BloxFruitsButton_Premium.BorderColor3 = Color3.new(0, 0, 0)
-BloxFruitsButton_Premium.Position = UDim2.new(0.04, 0, 0.625, 0) -- Adjust position
-BloxFruitsButton_Premium.Size = UDim2.new(0.45, 0, 0.08, 0)
-BloxFruitsButton_Premium.Font = Enum.Font.SourceSans
-BloxFruitsButton_Premium.Text = "Blox Fruits"
-BloxFruitsButton_Premium.TextColor3 = Color3.new(0, 0, 0)
-BloxFruitsButton_Premium.TextScaled = true
-BloxFruitsButton_Premium.TextSize = 14
-BloxFruitsButton_Premium.TextWrapped = true
-Instance.new("UICorner", BloxFruitsButton_Premium)
-Instance.new("UITextSizeConstraint", BloxFruitsButton_Premium).MaxTextSize = 37
-Instance.new("UIAspectRatioConstraint", BloxFruitsButton_Premium).AspectRatio = 3.9473683834075928
-
--- PRZYCISK: Da Hood (Premium)
-local DaHoodButton_Premium = Instance.new("TextButton")
-DaHoodButton_Premium.Name = "Da Hood Button Premium"
-DaHoodButton_Premium.Parent = ScrollingFramePremium
-DaHoodButton_Premium.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
-DaHoodButton_Premium.BorderColor3 = Color3.new(0, 0, 0)
-DaHoodButton_Premium.Position = UDim2.new(0.5, 0, 0.625, 0) -- Adjust position
-DaHoodButton_Premium.Size = UDim2.new(0.45, 0, 0.08, 0)
-DaHoodButton_Premium.Font = Enum.Font.SourceSans
-DaHoodButton_Premium.Text = "Da Hood"
-DaHoodButton_Premium.TextColor3 = Color3.new(0, 0, 0)
-DaHoodButton_Premium.TextScaled = true
-DaHoodButton_Premium.TextSize = 14
-DaHoodButton_Premium.TextWrapped = true
-Instance.new("UICorner", DaHoodButton_Premium)
-Instance.new("UITextSizeConstraint", DaHoodButton_Premium).MaxTextSize = 37
-Instance.new("UIAspectRatioConstraint", DaHoodButton_Premium).AspectRatio = 3.9473683834075928
 
 local TitleLabel = Instance.new("TextLabel")
 TitleLabel.Name = "TitleLabel"
@@ -593,77 +467,6 @@ Instance.new("UICorner", FlyButtonHome)
 Instance.new("UITextSizeConstraint", FlyButtonHome).MaxTextSize = 37
 Instance.new("UIAspectRatioConstraint", FlyButtonHome).AspectRatio = 3.9473683834075928
 
--- PRZYCISK: Server Hop (Home)
-local ServerHopButton = Instance.new("TextButton")
-ServerHopButton.Name = "Server Hop Button"
-ServerHopButton.Parent = ScrollingFrameHome
-ServerHopButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
-ServerHopButton.BorderColor3 = Color3.new(0, 0, 0)
-ServerHopButton.Position = UDim2.new(0.04, 0, 0.325, 0) -- Adjust position
-ServerHopButton.Size = UDim2.new(0.45, 0, 0.08, 0)
-ServerHopButton.Font = Enum.Font.SourceSans
-ServerHopButton.Text = "Server Hop"
-ServerHopButton.TextColor3 = Color3.new(0, 0, 0)
-ServerHopButton.TextScaled = true
-ServerHopButton.TextSize = 14
-ServerHopButton.TextWrapped = true
-Instance.new("UICorner", ServerHopButton)
-Instance.new("UITextSizeConstraint", ServerHopButton).MaxTextSize = 37
-Instance.new("UIAspectRatioConstraint", ServerHopButton).AspectRatio = 3.9473683834075928
-
--- PRZYCISK: Crash Server (Home)
-local CrashServerButton = Instance.new("TextButton")
-CrashServerButton.Name = "Crash Server Button"
-CrashServerButton.Parent = ScrollingFrameHome
-CrashServerButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
-CrashServerButton.BorderColor3 = Color3.new(0, 0, 0)
-CrashServerButton.Position = UDim2.new(0.5, 0, 0.325, 0) -- Adjust position
-CrashServerButton.Size = UDim2.new(0.45, 0, 0.08, 0)
-CrashServerButton.Font = Enum.Font.SourceSans
-CrashServerButton.Text = "Crash Server"
-CrashServerButton.TextColor3 = Color3.new(0, 0, 0)
-CrashServerButton.TextScaled = true
-CrashServerButton.TextSize = 14
-CrashServerButton.TextWrapped = true
-Instance.new("UICorner", CrashServerButton)
-Instance.new("UITextSizeConstraint", CrashServerButton).MaxTextSize = 37
-Instance.new("UIAspectRatioConstraint", CrashServerButton).AspectRatio = 3.9473683834075928
-
--- PRZYCISK: Bypass Chat Filter (Home)
-local BypassChatFilterButton = Instance.new("TextButton")
-BypassChatFilterButton.Name = "Bypass Chat Filter Button"
-BypassChatFilterButton.Parent = ScrollingFrameHome
-BypassChatFilterButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
-BypassChatFilterButton.BorderColor3 = Color3.new(0, 0, 0)
-BypassChatFilterButton.Position = UDim2.new(0.04, 0, 0.425, 0) -- Adjust position
-BypassChatFilterButton.Size = UDim2.new(0.45, 0, 0.08, 0)
-BypassChatFilterButton.Font = Enum.Font.SourceSans
-BypassChatFilterButton.Text = "Bypass Chat Filter"
-BypassChatFilterButton.TextColor3 = Color3.new(0, 0, 0)
-BypassChatFilterButton.TextScaled = true
-BypassChatFilterButton.TextSize = 14
-BypassChatFilterButton.TextWrapped = true
-Instance.new("UICorner", BypassChatFilterButton)
-Instance.new("UITextSizeConstraint", BypassChatFilterButton).MaxTextSize = 37
-Instance.new("UIAspectRatioConstraint", BypassChatFilterButton).AspectRatio = 3.9473683834075928
-
--- PRZYCISK: Grab Knife (Home)
-local GrabKnifeButton = Instance.new("TextButton")
-GrabKnifeButton.Name = "Grab Knife Button"
-GrabKnifeButton.Parent = ScrollingFrameHome
-GrabKnifeButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
-GrabKnifeButton.BorderColor3 = Color3.new(0, 0, 0)
-GrabKnifeButton.Position = UDim2.new(0.5, 0, 0.425, 0) -- Adjust position
-GrabKnifeButton.Size = UDim2.new(0.45, 0, 0.08, 0)
-GrabKnifeButton.Font = Enum.Font.SourceSans
-GrabKnifeButton.Text = "Grab Knife"
-GrabKnifeButton.TextColor3 = Color3.new(0, 0, 0)
-GrabKnifeButton.TextScaled = true
-GrabKnifeButton.TextSize = 14
-GrabKnifeButton.TextWrapped = true
-Instance.new("UICorner", GrabKnifeButton)
-Instance.new("UITextSizeConstraint", GrabKnifeButton).MaxTextSize = 37
-Instance.new("UIAspectRatioConstraint", GrabKnifeButton).AspectRatio = 3.9473683834075928
 
 --- NOWE ELEMENTY GUI DLA ZAKŁADKI EXECUTOR ---
 local ExecutorFrame = Instance.new("Frame")
@@ -961,22 +764,6 @@ FlyButtonHome.MouseButton1Click:Connect(function()
     runScriptAndNotify("https://pastebin.com/raw/xuSMWfDu", FlyButtonHome.Text)
 end)
 
-ServerHopButton.MouseButton1Click:Connect(function()
-    runScriptAndNotify("https://pastebin.com/raw/aV9jQ1dJ", ServerHopButton.Text) -- Przykładowy URL
-end)
-
-CrashServerButton.MouseButton1Click:Connect(function()
-    runScriptAndNotify("https://pastebin.com/raw/exampleCrashServer", CrashServerButton.Text) -- Przykładowy URL
-end)
-
-BypassChatFilterButton.MouseButton1Click:Connect(function()
-    runScriptAndNotify("https://pastebin.com/raw/exampleBypassChatFilter", BypassChatFilterButton.Text) -- Przykładowy URL
-end)
-
-GrabKnifeButton.MouseButton1Click:Connect(function()
-    runScriptAndNotify("https://pastebin.com/raw/exampleGrabKnife", GrabKnifeButton.Text) -- Przykładowy URL
-end)
-
 -- Premium Tab Buttons
 SpectateButton_Premium.MouseButton1Click:Connect(function()
     checkPremiumAndRunScript("https://pastebin.com/raw/UFVLWQRw", SpectateButton_Premium.Text)
@@ -994,14 +781,6 @@ FlingButton_Premium.MouseButton1Click:Connect(function()
     checkPremiumAndRunScript('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt', FlingButton_Premium.Text)
 end)
 
-KillAuraButton_Premium.MouseButton1Click:Connect(function()
-    checkPremiumAndRunScript("https://pastebin.com/raw/exampleKillAura", KillAuraButton_Premium.Text) -- Przykładowy URL
-end)
-
-InfiniteYieldButton_Premium.MouseButton1Click:Connect(function()
-    checkPremiumAndRunScript("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source", InfiniteYieldButton_Premium.Text) -- To samo co Console, ale to jest oryginalne przypisanie
-end)
-
 MM2Button.MouseButton1Click:Connect(function()
     checkPremiumAndRunScript("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring", MM2Button.Text)
 end)
@@ -1012,26 +791,6 @@ end)
 
 GAGButton.MouseButton1Click:Connect(function()
     checkPremiumAndRunScript("https://raw.githubusercontent.com/ThundarZ/Welcome/main/Main/GaG/Main.lua", GAGButton.Text)
-end)
-
-PetSimulatorXButton_Premium.MouseButton1Click:Connect(function()
-    checkPremiumAndRunScript("https://pastebin.com/raw/examplePetSimulatorX", PetSimulatorXButton_Premium.Text) -- Przykładowy URL
-end)
-
-BreakInButton_Premium.MouseButton1Click:Connect(function()
-    checkPremiumAndRunScript("https://pastebin.com/raw/exampleBreakIn", BreakInButton_Premium.Text) -- Przykładowy URL
-end)
-
-AdoptMeButton_Premium.MouseButton1Click:Connect(function()
-    checkPremiumAndRunScript("https://pastebin.com/raw/exampleAdoptMe", AdoptMeButton_Premium.Text) -- Przykładowy URL
-end)
-
-BloxFruitsButton_Premium.MouseButton1Click:Connect(function()
-    checkPremiumAndRunScript("https://pastebin.com/raw/exampleBloxFruits", BloxFruitsButton_Premium.Text) -- Przykładowy URL
-end)
-
-DaHoodButton_Premium.MouseButton1Click:Connect(function()
-    checkPremiumAndRunScript("https://pastebin.com/raw/exampleDaHood", DaHoodButton_Premium.Text) -- Przykładowy URL
 end)
 
 -- Obsługa zmiany widoczności MainFrame i MarketplaceService.PromptGamePassPurchaseFinished
