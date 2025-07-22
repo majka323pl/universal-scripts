@@ -1,3 +1,4 @@
+
 local player = game.Players.LocalPlayer
 local UserInputService = game:GetService("UserInputService")
 local MarketplaceService = game:GetService("MarketplaceService")
@@ -9,6 +10,9 @@ local GAMEPASS_ID = 1296972626
 local MM2_EXPERIENCE_ID = 142823291 
 local GAG_GAME_ID = 9262276941 
 local TELEPORT_PLACE_ID = 6557073879 
+
+-- URL dla logów aktualizacji (TERAZ Z TWOIM LINKIEM)
+local UPDATE_LOGS_URL = "https://pastebin.com/raw/hrimZdcv" 
 
 local hasGamePass = false
 local initialGamePassCheckDone = false 
@@ -134,6 +138,31 @@ local ExecutorTabButton_UIAspectRatioConstraint = Instance.new("UIAspectRatioCon
 ExecutorTabButton_UIAspectRatioConstraint.Parent = ExecutorTabButton
 ExecutorTabButton_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
 
+-- UpdateLogsTabButton
+local UpdateLogsTabButton = Instance.new("TextButton")
+UpdateLogsTabButton.Name = "UpdateLogsTabButton"
+UpdateLogsTabButton.Parent = TabsFrame
+UpdateLogsTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
+UpdateLogsTabButton.BorderColor3 = Color3.new(0, 0, 0)
+UpdateLogsTabButton.BorderSizePixel = 0
+UpdateLogsTabButton.Position = UDim2.new(0.0591715984, 0, 0.487912089, 0) 
+UpdateLogsTabButton.Size = UDim2.new(0.881656826, 0, 0.083516486, 0)
+UpdateLogsTabButton.Font = Enum.Font.SourceSans
+UpdateLogsTabButton.Text = "Update Logs"
+UpdateLogsTabButton.TextColor3 = Color3.new(0, 0, 0)
+UpdateLogsTabButton.TextScaled = true
+UpdateLogsTabButton.TextSize = 14
+UpdateLogsTabButton.TextWrapped = true
+
+local UpdateLogsTabButton_UICorner = Instance.new("UICorner")
+UpdateLogsTabButton_UICorner.Parent = UpdateLogsTabButton
+local UpdateLogsTabButton_UITextSizeConstraint = Instance.new("UITextSizeConstraint")
+UpdateLogsTabButton_UITextSizeConstraint.Parent = UpdateLogsTabButton
+UpdateLogsTabButton_UITextSizeConstraint.MaxTextSize = 37
+local UpdateLogsTabButton_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+UpdateLogsTabButton_UIAspectRatioConstraint.Parent = UpdateLogsTabButton
+UpdateLogsTabButton_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
+
 
 local ScrollingFramePremium = Instance.new("ScrollingFrame")
 ScrollingFramePremium.Name = "ScrollingFramePremium"
@@ -177,12 +206,12 @@ SpectateButton_Premium_UIAspectRatioConstraint.Parent = SpectateButton_Premium
 SpectateButton_Premium_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
 
 -- Zmienione pozycje Invisibility i MM2
-local Invisibiltybutton = Instance.new("TextButton") -- Ten będzie teraz w pierwszej linii, pierwsza kolumna
+local Invisibiltybutton = Instance.new("TextButton") 
 Invisibiltybutton.Name = "Invisibilty Button"
 Invisibiltybutton.Parent = ScrollingFramePremium
 Invisibiltybutton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 Invisibiltybutton.BorderColor3 = Color3.new(0, 0, 0)
-Invisibiltybutton.Position = UDim2.new(0.046162136, 0, 0.0384799093, 0) -- Pozycja u góry
+Invisibiltybutton.Position = UDim2.new(0.046162136, 0, 0.0384799093, 0) 
 Invisibiltybutton.Size = UDim2.new(0.28, 0, 0.06, 0)
 Invisibiltybutton.Font = Enum.Font.SourceSans
 Invisibiltybutton.Text = "Invisibilty"
@@ -200,12 +229,12 @@ local Invisibiltybutton_UIAspectRatioConstraint = Instance.new("UIAspectRatioCon
 Invisibiltybutton_UIAspectRatioConstraint.Parent = Invisibiltybutton
 Invisibiltybutton_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
 
-local MM2Button = Instance.new("TextButton") -- Ten będzie teraz na dole, w miejscu dawnego Invisibility
+local MM2Button = Instance.new("TextButton") 
 MM2Button.Name = "MM2 Button"
 MM2Button.Parent = ScrollingFramePremium
 MM2Button.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 MM2Button.BorderColor3 = Color3.new(0, 0, 0)
-MM2Button.Position = UDim2.new(0.046162136, 0, 0.128796837, 0) -- Pozycja na dole (w miejscu dawnego Invisibilty)
+MM2Button.Position = UDim2.new(0.046162136, 0, 0.128796837, 0) 
 MM2Button.Size = UDim2.new(0.28, 0, 0.06, 0)
 MM2Button.Font = Enum.Font.SourceSans
 MM2Button.Text = "MM2"
@@ -252,7 +281,7 @@ GhostMM2Button.Name = "GhostMM2 Button"
 GhostMM2Button.Parent = ScrollingFramePremium
 GhostMM2Button.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 GhostMM2Button.BorderColor3 = Color3.new(0, 0, 0)
-GhostMM2Button.Position = UDim2.new(0.353348672, 0, 0.128796837, 0) -- Pozycja GhostMM2 pozostaje taka sama
+GhostMM2Button.Position = UDim2.new(0.353348672, 0, 0.128796837, 0) 
 GhostMM2Button.Size = UDim2.new(0.28, 0, 0.06, 0)
 GhostMM2Button.Font = Enum.Font.SourceSans
 GhostMM2Button.Text = "GhostMM2"
@@ -540,7 +569,7 @@ HideButton.Size = UDim2.new(0, 30, 0, 30)
 HideButton.ZIndex = 5
 HideButton.Draggable = true
 
---- NOWE ELEMENTY GUI DLA ZAKŁADKI EXECUTOR ---
+--- ELEMENTY GUI DLA ZAKŁADKI EXECUTOR ---
 local ExecutorFrame = Instance.new("Frame")
 ExecutorFrame.Name = "ExecutorFrame"
 ExecutorFrame.Parent = MainFrame
@@ -610,6 +639,55 @@ ClearButton.TextColor3 = Color3.new(0, 0, 0)
 ClearButton.TextScaled = true
 Instance.new("UICorner", ClearButton)
 
+--- ELEMENTY GUI DLA ZAKŁADKI UPDATE LOGS ---
+local UpdateLogsFrame = Instance.new("Frame")
+UpdateLogsFrame.Name = "UpdateLogsFrame"
+UpdateLogsFrame.Parent = MainFrame
+UpdateLogsFrame.BackgroundColor3 = Color3.new(0.231373, 0.231373, 0.231373)
+UpdateLogsFrame.BorderColor3 = Color3.new(0, 0, 0)
+UpdateLogsFrame.BorderSizePixel = 0
+UpdateLogsFrame.Position = UDim2.new(0.239610985, 0, 0.113314532, 0)
+UpdateLogsFrame.Size = UDim2.new(0.733235598, 0, 0.864629686, 0)
+UpdateLogsFrame.Visible = false
+
+local UpdateLogsFrame_UICorner = Instance.new("UICorner")
+UpdateLogsFrame_UICorner.Parent = UpdateLogsFrame
+
+local UpdateLogsScrollingFrame = Instance.new("ScrollingFrame")
+UpdateLogsScrollingFrame.Name = "UpdateLogsScrollingFrame"
+UpdateLogsScrollingFrame.Parent = UpdateLogsFrame
+UpdateLogsScrollingFrame.Active = true
+UpdateLogsScrollingFrame.BackgroundColor3 = Color3.new(0.231373, 0.231373, 0.231373)
+UpdateLogsScrollingFrame.BorderColor3 = Color3.new(0, 0, 0)
+UpdateLogsScrollingFrame.BorderSizePixel = 0
+UpdateLogsScrollingFrame.Size = UDim2.new(1, 0, 1, 0)
+UpdateLogsScrollingFrame.CanvasSize = UDim2.new(0, 0, 2, 0) -- Może wymagać dostosowania w zależności od długości logów
+UpdateLogsScrollingFrame.ScrollBarImageColor3 = Color3.new(0.5, 0.5, 0.5)
+UpdateLogsScrollingFrame.ScrollBarTransparency = 0.5
+UpdateLogsScrollingFrame.HorizontalScrollBarInset = Enum.ScrollBarInset.None
+UpdateLogsScrollingFrame.VerticalScrollBarInset = Enum.ScrollBarInset.None
+
+local UpdateLogsTextLabel = Instance.new("TextLabel")
+UpdateLogsTextLabel.Name = "UpdateLogsTextLabel"
+UpdateLogsTextLabel.Parent = UpdateLogsScrollingFrame
+UpdateLogsTextLabel.BackgroundColor3 = Color3.new(1, 1, 1)
+UpdateLogsTextLabel.BackgroundTransparency = 1
+UpdateLogsTextLabel.Size = UDim2.new(0.95, 0, 1, 0) -- Długość CanvasSize dopasuje wysokość
+UpdateLogsTextLabel.Position = UDim2.new(0.025, 0, 0, 0)
+UpdateLogsTextLabel.Font = Enum.Font.SourceSans
+UpdateLogsTextLabel.Text = "Ładowanie logów aktualizacji..."
+UpdateLogsTextLabel.TextColor3 = Color3.new(1, 1, 1) -- Biały tekst
+UpdateLogsTextLabel.TextSize = 18
+UpdateLogsTextLabel.TextWrapped = true
+UpdateLogsTextLabel.TextXAlignment = Enum.TextXAlignment.Left
+UpdateLogsTextLabel.TextYAlignment = Enum.TextYAlignment.Top
+
+local UpdateLogsTextLabel_UIListLayout = Instance.new("UIListLayout")
+UpdateLogsTextLabel_UIListLayout.Parent = UpdateLogsScrollingFrame
+UpdateLogsTextLabel_UIListLayout.Padding = UDim.new(0, 10)
+UpdateLogsTextLabel_UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UpdateLogsTextLabel_UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Top
+
 
 --- Funkcje i logika skryptu ---
 
@@ -645,11 +723,13 @@ local function showTab(tabName)
     ScrollingFrameHome.Visible = false
     ScrollingFramePremium.Visible = false
     ExecutorFrame.Visible = false 
+    UpdateLogsFrame.Visible = false 
 
     -- Zresetuj kolory wszystkich przycisków zakładek
     HomeTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
     PremiumTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
     ExecutorTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608) 
+    UpdateLogsTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608) 
 
     if tabName == "Home" then
         ScrollingFrameHome.Visible = true
@@ -664,7 +744,7 @@ local function showTab(tabName)
             if hasGamePass then
                 ScrollingFramePremium.Visible = true
                 PremiumTabButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5) 
-                updateGameSpecificButtonsVisibility() -- Wywołaj aktualizację widoczności po otwarciu Premium
+                updateGameSpecificButtonsVisibility() 
             else
                 sendNotification("Nie posiadasz wersji premium. Teleportuję...")
                 local teleportSuccess, teleportErr = pcall(function()
@@ -684,6 +764,31 @@ local function showTab(tabName)
     elseif tabName == "Executor" then 
         ExecutorFrame.Visible = true
         ExecutorTabButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
+    elseif tabName == "UpdateLogs" then 
+        UpdateLogsFrame.Visible = true
+        UpdateLogsTabButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
+        
+        local scriptContent = nil
+        local successHttpGet, errHttpGet = pcall(function()
+            scriptContent = game:HttpGet(UPDATE_LOGS_URL)
+        end)
+
+        if successHttpGet and scriptContent then
+            UpdateLogsTextLabel.Text = scriptContent
+            -- Dynamiczne dostosowanie CanvasSize na podstawie treści
+            -- Wymaga, aby TextLabel miał automatyczne obliczanie rozmiaru (TextScaled = true lub TextBounds)
+            -- Aby to działało poprawnie, TextLabel powinien mieć Size.X (szerokość) ustawioną, a Size.Y ustawioną na 0 lub auto.
+            -- Następnie CanvasSize ScrollingFrame'a powinna być dostosowana do TextBounds.Y TextLabel'a.
+            
+            -- W tym przypadku, skoro TextLabel ma fixed size (0.95, 0, 1, 0), musimy dostosować CanvasSize
+            -- na podstawie jego obliczonej wysokości tekstu.
+            UpdateLogsTextLabel.Size = UDim2.new(0.95, 0, UpdateLogsTextLabel.TextBounds.Y / UpdateLogsScrollingFrame.AbsoluteSize.Y, 0)
+            UpdateLogsScrollingFrame.CanvasSize = UDim2.new(0,0, UpdateLogsTextLabel.TextBounds.Y / UpdateLogsScrollingFrame.AbsoluteSize.Y + 0.1, 0) -- Dodajemy trochę marginesu
+            -- Możesz też użyć UIAutomaticSize dla TextLabel'a
+        else
+            UpdateLogsTextLabel.Text = "Nie udało się załadować logów aktualizacji: " .. (errHttpGet or "Nieznany błąd.")
+            warn("Błąd pobierania logów aktualizacji:", errHttpGet)
+        end
     end
 end
 
@@ -863,6 +968,10 @@ end)
 
 ExecutorTabButton.MouseButton1Click:Connect(function() 
     showTab("Executor")
+end)
+
+UpdateLogsTabButton.MouseButton1Click:Connect(function() 
+    showTab("UpdateLogs")
 end)
 
 HideButton.MouseButton1Click:Connect(function()
