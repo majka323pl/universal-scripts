@@ -176,12 +176,36 @@ local SpectateButton_Premium_UIAspectRatioConstraint = Instance.new("UIAspectRat
 SpectateButton_Premium_UIAspectRatioConstraint.Parent = SpectateButton_Premium
 SpectateButton_Premium_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
 
-local MM2Button = Instance.new("TextButton")
+-- Zmienione pozycje MM2Button i Invisibiltybutton
+local Invisibiltybutton = Instance.new("TextButton") -- Ten będzie teraz w pierwszej kolumnie
+Invisibiltybutton.Name = "Invisibilty Button"
+Invisibiltybutton.Parent = ScrollingFramePremium
+Invisibiltybutton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
+Invisibiltybutton.BorderColor3 = Color3.new(0, 0, 0)
+Invisibiltybutton.Position = UDim2.new(0.046162136, 0, 0.0384799093, 0) -- Nowa pozycja (pierwsza kolumna)
+Invisibiltybutton.Size = UDim2.new(0.28, 0, 0.06, 0)
+Invisibiltybutton.Font = Enum.Font.SourceSans
+Invisibiltybutton.Text = "Invisibilty"
+Invisibiltybutton.TextColor3 = Color3.new(0, 0, 0)
+Invisibiltybutton.TextScaled = true
+Invisibiltybutton.TextSize = 14
+Invisibiltybutton.TextWrapped = true
+
+local Invisibiltybutton_UICorner = Instance.new("UICorner")
+Invisibiltybutton_UICorner.Parent = Invisibiltybutton
+local Invisibiltybutton_UITextSizeConstraint = Instance.new("UITextSizeConstraint")
+Invisibiltybutton_UITextSizeConstraint.Parent = Invisibiltybutton
+Invisibiltybutton_UITextSizeConstraint.MaxTextSize = 37
+local Invisibiltybutton_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+Invisibiltybutton_UIAspectRatioConstraint.Parent = Invisibiltybutton
+Invisibiltybutton_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
+
+local MM2Button = Instance.new("TextButton") -- Ten będzie teraz w drugiej kolumnie
 MM2Button.Name = "MM2 Button"
 MM2Button.Parent = ScrollingFramePremium
 MM2Button.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 MM2Button.BorderColor3 = Color3.new(0, 0, 0)
-MM2Button.Position = UDim2.new(0.046162136, 0, 0.0384799093, 0)
+MM2Button.Position = UDim2.new(0.353348672, 0, 0.0384799093, 0) -- Nowa pozycja (druga kolumna)
 MM2Button.Size = UDim2.new(0.28, 0, 0.06, 0)
 MM2Button.Font = Enum.Font.SourceSans
 MM2Button.Text = "MM2"
@@ -198,6 +222,7 @@ MM2Button_UITextSizeConstraint.MaxTextSize = 37
 local MM2Button_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
 MM2Button_UIAspectRatioConstraint.Parent = MM2Button
 MM2Button_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
+
 
 local FlyButton = Instance.new("TextButton")
 FlyButton.Name = "Console Button"
@@ -222,36 +247,12 @@ local FlyButton_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint"
 FlyButton_UIAspectRatioConstraint.Parent = FlyButton
 FlyButton_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
 
-
-local Invisibiltybutton = Instance.new("TextButton")
-Invisibiltybutton.Name = "Invisibilty Button"
-Invisibiltybutton.Parent = ScrollingFramePremium
-Invisibiltybutton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
-Invisibiltybutton.BorderColor3 = Color3.new(0, 0, 0)
-Invisibiltybutton.Position = UDim2.new(0.046162136, 0, 0.128796837, 0)
-Invisibiltybutton.Size = UDim2.new(0.28, 0, 0.06, 0)
-Invisibiltybutton.Font = Enum.Font.SourceSans
-Invisibiltybutton.Text = "Invisibilty"
-Invisibiltybutton.TextColor3 = Color3.new(0, 0, 0)
-Invisibiltybutton.TextScaled = true
-Invisibiltybutton.TextSize = 14
-Invisibiltybutton.TextWrapped = true
-
-local Invisibiltybutton_UICorner = Instance.new("UICorner")
-Invisibiltybutton_UICorner.Parent = Invisibiltybutton
-local Invisibiltybutton_UITextSizeConstraint = Instance.new("UITextSizeConstraint")
-Invisibiltybutton_UITextSizeConstraint.Parent = Invisibiltybutton
-Invisibiltybutton_UITextSizeConstraint.MaxTextSize = 37
-local Invisibiltybutton_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
-Invisibiltybutton_UIAspectRatioConstraint.Parent = Invisibiltybutton
-Invisibiltybutton_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
-
 local GhostMM2Button = Instance.new("TextButton")
 GhostMM2Button.Name = "GhostMM2 Button"
 GhostMM2Button.Parent = ScrollingFramePremium
 GhostMM2Button.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 GhostMM2Button.BorderColor3 = Color3.new(0, 0, 0)
-GhostMM2Button.Position = UDim2.new(0.353348672, 0, 0.128796837, 0)
+GhostMM2Button.Position = UDim2.new(0.046162136, 0, 0.128796837, 0) -- Nowa pozycja (druga linia, pierwsza kolumna)
 GhostMM2Button.Size = UDim2.new(0.28, 0, 0.06, 0)
 GhostMM2Button.Font = Enum.Font.SourceSans
 GhostMM2Button.Text = "GhostMM2"
@@ -274,7 +275,7 @@ GAGButton.Name = "GAG Button"
 GAGButton.Parent = ScrollingFramePremium
 GAGButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 GAGButton.BorderColor3 = Color3.new(0, 0, 0)
-GAGButton.Position = UDim2.new(0.665799975, 0, 0.128796837, 0)
+GAGButton.Position = UDim2.new(0.353348672, 0, 0.128796837, 0) -- Nowa pozycja (druga linia, druga kolumna)
 GAGButton.Size = UDim2.new(0.28, 0, 0.06, 0)
 GAGButton.Font = Enum.Font.SourceSans
 GAGButton.Text = "GAG"
@@ -622,15 +623,20 @@ local function updateGameSpecificButtonsVisibility()
     GAGButton.Visible = false
 
     if currentPlaceId == MM2_EXPERIENCE_ID then
-        -- Jeśli jesteśmy w MM2
+        -- Jeśli jesteśmy w MM2, pokaż MM2 i GhostMM2, ukryj GAG
         MM2Button.Visible = true
         GhostMM2Button.Visible = true
-        GAGButton.Visible = false -- GAG ukryty w MM2
+        GAGButton.Visible = false 
     elseif currentPlaceId == GAG_GAME_ID then
-        -- Jeśli jesteśmy w grze GAG
+        -- Jeśli jesteśmy w grze GAG, pokaż GAG, ukryj MM2 i GhostMM2
         GAGButton.Visible = true
         MM2Button.Visible = false
         GhostMM2Button.Visible = false
+    else
+        -- W każdej innej grze, ukryj wszystkie trzy
+        MM2Button.Visible = false
+        GhostMM2Button.Visible = false
+        GAGButton.Visible = false
     end
 end
 
