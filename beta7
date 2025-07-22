@@ -371,7 +371,7 @@ ScrollingFrameHome.BorderColor3 = Color3.new(0, 0, 0)
 ScrollingFrameHome.BorderSizePixel = 0
 ScrollingFrameHome.Position = UDim2.new(0.239610985, 0, 0.113314532, 0)
 ScrollingFrameHome.Size = UDim2.new(0.733235598, 0, 0.864629686, 0)
-ScrollingFrameHome.CanvasSize = UDim2.new(0,0,0,550) -- TA LINIA ZOSTAŁA ZMIENIONA
+ScrollingFrameHome.CanvasSize = UDim2.new(0,0,0,300) -- TA LINIA ZOSTAŁA ZMIENIONA NA 300
 ScrollingFrameHome.Visible = true -- Domyślna widoczność
 
 local ScrollingFrameHome_UICorner = Instance.new("UICorner")
