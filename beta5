@@ -13,10 +13,21 @@ local TELEPORT_PLACE_ID = 6557073879
 
 -- RĘCZNIE WPROWADZANE LOGI AKTUALIZACJI
 local MANUAL_UPDATE_LOGS = [[
---- UPDATE LOGS ---
-[22.07.2025] Wersja v2.5
--Dodano Nowe zakładki Executor,UpdateLogs
--Nowy Executor umożliwia ci wywołanie skryptu bez używania Executora!
+--- Dziennik Zmian ---
+[22.07.2025] Wersja 1.2
+- Dodano nową zakładkę "Logs" dla ręcznych aktualizacji.
+- Usunięto automatyczne pobieranie logów z Pastebin z zakładki "Home".
+- Zoptymalizowano działanie GUI.
+
+[15.07.2025] Wersja 1.1
+- Poprawiono błędy w funkcji Spectate.
+- Zwiększono stabilność Anti-Fling.
+
+[08.07.2025] Wersja 1.0
+- Pierwsze wydanie skryptu Universal Scripts.
+- Dostępne funkcje: Speed Tool, Click TP, Spectate, Noclip, Fling, Infinity Jump, Anti-Fling, Fly.
+- Wprowadzono system Premium z GamePass.
+- Dodano funkcję Executor.
 ]]
 
 local hasGamePass = false
@@ -143,30 +154,30 @@ local ExecutorTabButton_UIAspectRatioConstraint = Instance.new("UIAspectRatioCon
 ExecutorTabButton_UIAspectRatioConstraint.Parent = ExecutorTabButton
 ExecutorTabButton_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
 
--- NOWA ZAKŁADKA "LOGS"
-local LogsTabButton = Instance.new("TextButton")
-LogsTabButton.Name = "LogsTabButton"
-LogsTabButton.Parent = TabsFrame
-LogsTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
-LogsTabButton.BorderColor3 = Color3.new(0, 0, 0)
-LogsTabButton.BorderSizePixel = 0
-LogsTabButton.Position = UDim2.new(0.0591715984, 0, 0.487912089, 0) -- Pozycja pod Executorem
-LogsTabButton.Size = UDim2.new(0.881656826, 0, 0.083516486, 0)
-LogsTabButton.Font = Enum.Font.SourceSans
-LogsTabButton.Text = "Logs"
-LogsTabButton.TextColor3 = Color3.new(0, 0, 0)
-LogsTabButton.TextScaled = true
-LogsTabButton.TextSize = 14
-LogsTabButton.TextWrapped = true
+-- NOWA ZAKŁADKA "UPDATE LOGS" (dla ręcznie wprowadzanych logów)
+local UpdateLogsTabButton = Instance.new("TextButton")
+UpdateLogsTabButton.Name = "UpdateLogsTabButton"
+UpdateLogsTabButton.Parent = TabsFrame
+UpdateLogsTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
+UpdateLogsTabButton.BorderColor3 = Color3.new(0, 0, 0)
+UpdateLogsTabButton.BorderSizePixel = 0
+UpdateLogsTabButton.Position = UDim2.new(0.0591715984, 0, 0.487912089, 0) -- Pozycja pod Executorem
+UpdateLogsTabButton.Size = UDim2.new(0.881656826, 0, 0.083516486, 0)
+UpdateLogsTabButton.Font = Enum.Font.SourceSans
+UpdateLogsTabButton.Text = "Update Logs"
+UpdateLogsTabButton.TextColor3 = Color3.new(0, 0, 0)
+UpdateLogsTabButton.TextScaled = true
+UpdateLogsTabButton.TextSize = 14
+UpdateLogsTabButton.TextWrapped = true
 
-local LogsTabButton_UICorner = Instance.new("UICorner")
-LogsTabButton_UICorner.Parent = LogsTabButton
-local LogsTabButton_UITextSizeConstraint = Instance.new("UITextSizeConstraint")
-LogsTabButton_UITextSizeConstraint.Parent = LogsTabButton
-LogsTabButton_UITextSizeConstraint.MaxTextSize = 37
-local LogsTabButton_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
-LogsTabButton_UIAspectRatioConstraint.Parent = LogsTabButton
-LogsTabButton_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
+local UpdateLogsTabButton_UICorner = Instance.new("UICorner")
+UpdateLogsTabButton_UICorner.Parent = UpdateLogsTabButton
+local UpdateLogsTabButton_UITextSizeConstraint = Instance.new("UITextSizeConstraint")
+UpdateLogsTabButton_UITextSizeConstraint.Parent = UpdateLogsTabButton
+UpdateLogsTabButton_UITextSizeConstraint.MaxTextSize = 37
+local UpdateLogsTabButton_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+UpdateLogsTabButton_UIAspectRatioConstraint.Parent = UpdateLogsTabButton
+UpdateLogsTabButton_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
 
 
 local ScrollingFramePremium = Instance.new("ScrollingFrame")
@@ -360,7 +371,8 @@ ScrollingFrameHome.BorderColor3 = Color3.new(0, 0, 0)
 ScrollingFrameHome.BorderSizePixel = 0
 ScrollingFrameHome.Position = UDim2.new(0.239610985, 0, 0.113314532, 0)
 ScrollingFrameHome.Size = UDim2.new(0.733235598, 0, 0.864629686, 0)
-ScrollingFrameHome.CanvasSize = UDim2.new(0,0,0.3,0) -- ***** TUTAJ ZMIENIONE! *****
+ScrollingFrameHome.CanvasSize = UDim2.new(0, 0, 0.3, 0) -- PRZYWRÓCONA POPRAWNA WARTOŚĆ
+ScrollingFrameHome.Visible = true -- Domyślna widoczność
 
 local ScrollingFrameHome_UICorner = Instance.new("UICorner")
 ScrollingFrameHome_UICorner.Parent = ScrollingFrameHome
@@ -644,37 +656,37 @@ ClearButton.TextColor3 = Color3.new(0, 0, 0)
 ClearButton.TextScaled = true
 Instance.new("UICorner", ClearButton)
 
---- NOWE ELEMENTY GUI DLA ZAKŁADKI LOGS (RĘCZNE LOGI) ---
-local ManualLogsFrame = Instance.new("ScrollingFrame")
-ManualLogsFrame.Name = "ManualLogsFrame"
-ManualLogsFrame.Parent = MainFrame
-ManualLogsFrame.Active = true
-ManualLogsFrame.BackgroundColor3 = Color3.new(0.231373, 0.231373, 0.231373)
-ManualLogsFrame.BorderColor3 = Color3.new(0, 0, 0)
-ManualLogsFrame.BorderSizePixel = 0
-ManualLogsFrame.Position = UDim2.new(0.239610985, 0, 0.113314532, 0)
-ManualLogsFrame.Size = UDim2.new(0.733235598, 0, 0.864629686, 0)
-ManualLogsFrame.Visible = false
-ManualLogsFrame.CanvasSize = UDim2.new(0,0,1.5,0) -- Dostosuj, jeśli logi będą bardzo długie
+--- ELEMENTY GUI DLA ZAKŁADKI UPDATE LOGS (RĘCZNE LOGI) ---
+local UpdateLogsFrame = Instance.new("ScrollingFrame")
+UpdateLogsFrame.Name = "UpdateLogsFrame"
+UpdateLogsFrame.Parent = MainFrame
+UpdateLogsFrame.Active = true
+UpdateLogsFrame.BackgroundColor3 = Color3.new(0.231373, 0.231373, 0.231373)
+UpdateLogsFrame.BorderColor3 = Color3.new(0, 0, 0)
+UpdateLogsFrame.BorderSizePixel = 0
+UpdateLogsFrame.Position = UDim2.new(0.239610985, 0, 0.113314532, 0)
+UpdateLogsFrame.Size = UDim2.new(0.733235598, 0, 0.864629686, 0)
+UpdateLogsFrame.Visible = false
+UpdateLogsFrame.CanvasSize = UDim2.new(0,0,1.5,0) -- Dostosuj, jeśli logi będą bardzo długie
 
-local ManualLogsFrame_UICorner = Instance.new("UICorner")
-ManualLogsFrame_UICorner.Parent = ManualLogsFrame
+local UpdateLogsFrame_UICorner = Instance.new("UICorner")
+UpdateLogsFrame_UICorner.Parent = UpdateLogsFrame
 
-local ManualLogsText = Instance.new("TextLabel")
-ManualLogsText.Name = "ManualLogsText"
-ManualLogsText.Parent = ManualLogsFrame
-ManualLogsText.BackgroundColor3 = Color3.new(1, 1, 1)
-ManualLogsText.BackgroundTransparency = 1
-ManualLogsText.Position = UDim2.new(0.05, 0, 0.02, 0) -- Lekki margines
-ManualLogsText.Size = UDim2.new(0.9, 0, 0.96, 0) -- Pokryj większość ramki
-ManualLogsText.Font = Enum.Font.SourceSans
-ManualLogsText.TextXAlignment = Enum.TextXAlignment.Left
-ManualLogsText.TextYAlignment = Enum.TextYAlignment.Top
-ManualLogsText.Text = MANUAL_UPDATE_LOGS -- Tutaj wstawiamy ręcznie wpisane logi
-ManualLogsText.TextColor3 = Color3.new(1, 1, 1)
-ManualLogsText.TextScaled = false -- Ważne, aby tekst nie skalował się do ramki, tylko używał TextSize
-ManualLogsText.TextSize = 16 -- Stały rozmiar tekstu
-ManualLogsText.TextWrapped = true
+local UpdateLogsText = Instance.new("TextLabel")
+UpdateLogsText.Name = "UpdateLogsText"
+UpdateLogsText.Parent = UpdateLogsFrame
+UpdateLogsText.BackgroundColor3 = Color3.new(1, 1, 1)
+UpdateLogsText.BackgroundTransparency = 1
+UpdateLogsText.Position = UDim2.new(0.05, 0, 0.02, 0) -- Lekki margines
+UpdateLogsText.Size = UDim2.new(0.9, 0, 0.96, 0) -- Pokryj większość ramki
+UpdateLogsText.Font = Enum.Font.SourceSans
+UpdateLogsText.TextXAlignment = Enum.TextXAlignment.Left
+UpdateLogsText.TextYAlignment = Enum.TextYAlignment.Top
+UpdateLogsText.Text = MANUAL_UPDATE_LOGS -- Tutaj wstawiamy ręcznie wpisane logi
+UpdateLogsText.TextColor3 = Color3.new(1, 1, 1)
+UpdateLogsText.TextScaled = false -- Ważne, aby tekst nie skalował się do ramki, tylko używał TextSize
+UpdateLogsText.TextSize = 16 -- Stały rozmiar tekstu
+UpdateLogsText.TextWrapped = true
 
 --- Funkcje i logika skryptu ---
 
@@ -711,13 +723,13 @@ local function showTab(tabName)
     ScrollingFrameHome.Visible = false
     ScrollingFramePremium.Visible = false
     ExecutorFrame.Visible = false
-    ManualLogsFrame.Visible = false -- Nowa ramka logów
+    UpdateLogsFrame.Visible = false -- Ramka logów aktualizacji
 
     -- Zresetuj kolory wszystkich przycisków zakładek
     HomeTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
     PremiumTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
     ExecutorTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
-    LogsTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608) -- Nowy przycisk logów
+    UpdateLogsTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608) -- Przycisk logów aktualizacji
 
     if tabName == "Home" then
         ScrollingFrameHome.Visible = true
@@ -752,9 +764,9 @@ local function showTab(tabName)
     elseif tabName == "Executor" then
         ExecutorFrame.Visible = true
         ExecutorTabButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
-    elseif tabName == "Logs" then -- Nowa zakładka "Logs"
-        ManualLogsFrame.Visible = true
-        LogsTabButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
+    elseif tabName == "UpdateLogs" then -- Nowa zakładka "UpdateLogs"
+        UpdateLogsFrame.Visible = true
+        UpdateLogsTabButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
     end
 end
 
@@ -794,8 +806,8 @@ ExecutorTabButton.MouseButton1Click:Connect(function()
     showTab("Executor")
 end)
 
-LogsTabButton.MouseButton1Click:Connect(function() -- Obsługa nowej zakładki Logs
-    showTab("Logs")
+UpdateLogsTabButton.MouseButton1Click:Connect(function() -- Obsługa nowej zakładki Update Logs
+    showTab("UpdateLogs")
 end)
 
 -- Obsługa przycisku ukrywania/pokazywania GUI
