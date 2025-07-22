@@ -13,21 +13,10 @@ local TELEPORT_PLACE_ID = 6557073879
 
 -- RĘCZNIE WPROWADZANE LOGI AKTUALIZACJI
 local MANUAL_UPDATE_LOGS = [[
---- Dziennik Zmian ---
-[22.07.2025] Wersja 1.2
-- Dodano nową zakładkę "Logs" dla ręcznych aktualizacji.
-- Usunięto automatyczne pobieranie logów z Pastebin z zakładki "Home".
-- Zoptymalizowano działanie GUI.
-
-[15.07.2025] Wersja 1.1
-- Poprawiono błędy w funkcji Spectate.
-- Zwiększono stabilność Anti-Fling.
-
-[08.07.2025] Wersja 1.0
-- Pierwsze wydanie skryptu Universal Scripts.
-- Dostępne funkcje: Speed Tool, Click TP, Spectate, Noclip, Fling, Infinity Jump, Anti-Fling, Fly.
-- Wprowadzono system Premium z GamePass.
-- Dodano funkcję Executor.
+--- UPDATE LOGS ---
+[22.07.2025] Wersja v2.5
+-Dodano Nowe zakładki Executor,UpdateLogs
+-Nowy Executor umożliwia ci wywołanie skryptu bez używania Executora!
 ]]
 
 local hasGamePass = false
