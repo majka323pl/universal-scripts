@@ -6,8 +6,8 @@ local RunService = game:GetService("RunService")
 local TeleportService = game:GetService("TeleportService")
 
 local GAMEPASS_ID = 1296972626
-local MM2_EXPERIENCE_ID = 142823291 -- ID gry Murder Mystery 2
-local GAG_GAME_ID = 9262276941 -- ID gry "Gabby's Dollhouse" (przykładowo, jeśli to jest gra "GAG")
+local MM2_EXPERIENCE_ID = 142823291 -- ID gry Murder Mystery 2 (Nie używane do logiki widoczności)
+local GAG_GAME_ID = 9262276941 -- ID gry "Gabby's Dollhouse" (Nie używane do logiki widoczności)
 local TELEPORT_PLACE_ID = 6557073879 -- ID miejsca, do którego teleportuje, jeśli gracz nie ma premium
 
 local hasGamePass = false
@@ -190,7 +190,7 @@ MM2Button.TextColor3 = Color3.new(0, 0, 0)
 MM2Button.TextScaled = true
 MM2Button.TextSize = 14
 MM2Button.TextWrapped = true
--- MM2Button.Visible = false -- USUNIĘTE!
+-- MM2Button.Visible = false -- TO BYŁ BŁĄD, USUNIĘTE!
 
 local MM2Button_UICorner = Instance.new("UICorner")
 MM2Button_UICorner.Parent = MM2Button
@@ -262,7 +262,7 @@ GhostMM2Button.TextColor3 = Color3.new(0, 0, 0)
 GhostMM2Button.TextScaled = true
 GhostMM2Button.TextSize = 14
 GhostMM2Button.TextWrapped = true
--- GhostMM2Button.Visible = false -- USUNIĘTE!
+-- GhostMM2Button.Visible = false -- TO BYŁ BŁĄD, USUNIĘTE!
 
 local GhostMM2Button_UICorner = Instance.new("UICorner")
 GhostMM2Button_UICorner.Parent = GhostMM2Button
@@ -287,7 +287,7 @@ GAGButton.TextColor3 = Color3.new(0, 0, 0)
 GAGButton.TextScaled = true
 GAGButton.TextSize = 14
 GAGButton.TextWrapped = true
--- GAGButton.Visible = false -- USUNIĘTE!
+-- GAGButton.Visible = false -- TO BYŁ BŁĄD, USUNIĘTE!
 
 local GAGButton_UICorner = Instance.new("UICorner")
 GAGButton_UICorner.Parent = GAGButton
@@ -779,7 +779,7 @@ FlyButtonHome.MouseButton1Click:Connect(function()
 end)
 
 
---- Połączenia przycisków Premium (zgodnie z oryginałem) ---
+--- Połączenia przycisków Premium (zgodnie z oryginałem - BEZ MOICH ZMIAN WIDOCZNOŚCI) ---
 SpectateButton_Premium.MouseButton1Click:Connect(function()
     runScriptAndNotify("https://pastebin.com/raw/UFVLWQRw", SpectateButton_Premium.Text)
 end)
