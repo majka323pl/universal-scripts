@@ -4,7 +4,7 @@ local MarketplaceService = game:GetService("MarketplaceService")
 local StarterGui = game:GetService("StarterGui")
 local RunService = game:GetService("RunService")
 local TeleportService = game:GetService("TeleportService")
-local HttpService = game:GetService("HttpService") -- Dodane, aby użyć HttpService do pobierania skryptów
+local HttpService = game:GetService("HttpService")
 
 local GAMEPASS_ID = 1296972626
 local MM2_EXPERIENCE_ID = 142823291
@@ -47,10 +47,8 @@ end
 --- Funkcje do pobierania i wykonywania skryptów z URL ---
 local function runScriptAndNotify(url, buttonName)
     local success, err = pcall(function()
-        -- Używamy game:HttpGet, aby pobrać zawartość skryptu
-        local scriptContent = game:HttpGet(url, true) -- true dla opcji nocache, jeśli dostępna w executorze
+        local scriptContent = game:HttpGet(url, true)
         if scriptContent and scriptContent:len() > 0 then
-            -- Używamy loadstring do wykonania pobranego skryptu
             local loadedFunction = loadstring(scriptContent)
             if loadedFunction then
                 local execSuccess, execErr = pcall(loadedFunction)
@@ -182,7 +180,7 @@ UpdateLogsTabButton.Parent = TabsFrame
 UpdateLogsTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
 UpdateLogsTabButton.BorderColor3 = Color3.new(0, 0, 0)
 UpdateLogsTabButton.BorderSizePixel = 0
-UpdateLogsTabButton.Position = UDim2.new(0.0591715984, 0, 0.487912089, 0) -- Pozycja pod Executorem
+UpdateLogsTabButton.Position = UDim2.new(0.0591715984, 0, 0.487912089, 0)
 UpdateLogsTabButton.Size = UDim2.new(0.881656826, 0, 0.083516486, 0)
 UpdateLogsTabButton.Font = Enum.Font.SourceSans
 UpdateLogsTabButton.Text = "Update Logs"
@@ -292,7 +290,7 @@ MM2Button.TextColor3 = Color3.new(0, 0, 0)
 MM2Button.TextScaled = true
 MM2Button.TextSize = 14
 MM2Button.TextWrapped = true
-MM2Button.Visible = false
+MM2Button.Visible = false -- Domyślnie ukryte
 Instance.new("UICorner", MM2Button)
 Instance.new("UITextSizeConstraint", MM2Button).MaxTextSize = 37
 Instance.new("UIAspectRatioConstraint", MM2Button).AspectRatio = 3.9473683834075928
@@ -310,7 +308,7 @@ GhostMM2Button.TextColor3 = Color3.new(0, 0, 0)
 GhostMM2Button.TextScaled = true
 GhostMM2Button.TextSize = 14
 GhostMM2Button.TextWrapped = true
-GhostMM2Button.Visible = false
+GhostMM2Button.Visible = false -- Domyślnie ukryte
 Instance.new("UICorner", GhostMM2Button)
 Instance.new("UITextSizeConstraint", GhostMM2Button).MaxTextSize = 37
 Instance.new("UIAspectRatioConstraint", GhostMM2Button).AspectRatio = 3.9473683834075928
@@ -328,7 +326,7 @@ GAGButton.TextColor3 = Color3.new(0, 0, 0)
 GAGButton.TextScaled = true
 GAGButton.TextSize = 14
 GAGButton.TextWrapped = true
-GAGButton.Visible = false
+GAGButton.Visible = false -- Domyślnie ukryte
 Instance.new("UICorner", GAGButton)
 Instance.new("UITextSizeConstraint", GAGButton).MaxTextSize = 37
 Instance.new("UIAspectRatioConstraint", GAGButton).AspectRatio = 3.9473683834075928
@@ -450,11 +448,11 @@ Instance.new("UITextSizeConstraint", AntiFlingButton).MaxTextSize = 37
 Instance.new("UIAspectRatioConstraint", AntiFlingButton).AspectRatio = 3.9473683834075928
 
 local FlyButtonHome = Instance.new("TextButton")
-FlyButtonHome.Name = "Fly Button Home" -- Nazwa nowego przycisku
+FlyButtonHome.Name = "Fly Button Home"
 FlyButtonHome.Parent = ScrollingFrameHome
 FlyButtonHome.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
 FlyButtonHome.BorderColor3 = Color3.new(0, 0, 0)
-FlyButtonHome.Position = UDim2.new(0.5, 0, 0.225, 0) -- Pozycja obok Anti-Fling
+FlyButtonHome.Position = UDim2.new(0.5, 0, 0.225, 0)
 FlyButtonHome.Size = UDim2.new(0.45, 0, 0.08, 0)
 FlyButtonHome.Font = Enum.Font.SourceSans
 FlyButtonHome.Text = "Fly"
@@ -545,7 +543,7 @@ UpdateLogsFrame.BorderSizePixel = 0
 UpdateLogsFrame.Position = UDim2.new(0.239610985, 0, 0.113314532, 0)
 UpdateLogsFrame.Size = UDim2.new(0.733235598, 0, 0.864629686, 0)
 UpdateLogsFrame.Visible = false
-UpdateLogsFrame.CanvasSize = UDim2.new(0,0,1.5,0) -- Dostosuj, jeśli logi będą bardzo długie
+UpdateLogsFrame.CanvasSize = UDim2.new(0,0,1.5,0)
 Instance.new("UICorner", UpdateLogsFrame)
 
 local UpdateLogsText = Instance.new("TextLabel")
@@ -553,15 +551,15 @@ UpdateLogsText.Name = "UpdateLogsText"
 UpdateLogsText.Parent = UpdateLogsFrame
 UpdateLogsText.BackgroundColor3 = Color3.new(1, 1, 1)
 UpdateLogsText.BackgroundTransparency = 1
-UpdateLogsText.Position = UDim2.new(0.05, 0, 0.02, 0) -- Lekki margines
-UpdateLogsText.Size = UDim2.new(0.9, 0, 0.96, 0) -- Pokryj większość ramki
+UpdateLogsText.Position = UDim2.new(0.05, 0, 0.02, 0)
+UpdateLogsText.Size = UDim2.new(0.9, 0, 0.96, 0)
 UpdateLogsText.Font = Enum.Font.SourceSans
 UpdateLogsText.TextXAlignment = Enum.TextXAlignment.Left
 UpdateLogsText.TextYAlignment = Enum.TextYAlignment.Top
-UpdateLogsText.Text = MANUAL_UPDATE_LOGS -- Tutaj wstawiamy ręcznie wpisane logi
+UpdateLogsText.Text = MANUAL_UPDATE_LOGS
 UpdateLogsText.TextColor3 = Color3.new(1, 1, 1)
-UpdateLogsText.TextScaled = false -- Ważne, aby tekst nie skalował się do ramki, tylko używał TextSize
-UpdateLogsText.TextSize = 16 -- Stały rozmiar tekstu
+UpdateLogsText.TextScaled = false
+UpdateLogsText.TextSize = 16
 UpdateLogsText.TextWrapped = true
 
 Instance.new("UIAspectRatioConstraint", MainFrame).AspectRatio = 1.7601344585418701
@@ -609,7 +607,7 @@ local function showTab(tabName)
             if hasGamePass then
                 ScrollingFramePremium.Visible = true
                 PremiumTabButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
-                -- updateSpecialButtonVisibility() -- Wywołaj aktualizację widoczności po otwarciu Premium
+                -- NIE WYWOŁUJ updateSpecialButtonVisibility TUTAJ, to robi checkGamePassStatus()
             else
                 sendNotification("Universal Scripts", "Nie posiadasz wersji premium. Teleportuję...")
                 local teleportSuccess, teleportErr = pcall(function()
@@ -619,7 +617,7 @@ local function showTab(tabName)
                     warn("Błąd teleportacji przy braku GamePassa:", teleportErr)
                     sendNotification("Universal Scripts", "Błąd teleportacji: " .. tostring(teleportErr))
                 end
-                showTab("Home")
+                showTab("Home") -- Wróć do Home, jeśli nie ma premium
             end
         else
             warn("Błąd podczas sprawdzania wersji premium (showTab):", result)
@@ -650,6 +648,8 @@ local function checkGamePassStatus()
             end
             initialGamePassCheckDone = true
         end
+        -- !!! WAŻNA POPRAWKA: Wywołanie updateSpecialButtonVisibility() tutaj
+        updateSpecialButtonVisibility()
     else
         warn("Błąd podczas sprawdzania wersji premium:", result)
         sendNotification("Universal Scripts", "Nie można sprawdzić statusu wersji premium. Spróbuj ponownie.")
@@ -657,6 +657,7 @@ local function checkGamePassStatus()
 end
 
 local function updateSpecialButtonVisibility()
+    -- !!! WAŻNA POPRAWKA: Upewnij się, że przyciski są widoczne/ukryte niezależnie od zakładki
     MM2Button.Visible = (game.PlaceId == MM2_EXPERIENCE_ID)
     GhostMM2Button.Visible = (game.PlaceId == MM2_EXPERIENCE_ID)
     GAGButton.Visible = (game.PlaceId == GAG_GAME_ID)
@@ -713,7 +714,6 @@ ExecuteButton.MouseButton1Click:Connect(function()
     local scriptToExecute = ExecutorTextBox.Text
     if scriptToExecute and scriptToExecute:len() > 0 then
         local success, err = pcall(function()
-            -- WAŻNE: To jest `loadstring` dla executora
             local func = loadstring(scriptToExecute)
             if func then
                 func()
@@ -746,22 +746,9 @@ ClicktptoolButton.MouseButton1Click:Connect(function()
     runScriptAndNotify("https://pastebin.com/raw/4KF2WJ9u", ClicktptoolButton.Text)
 end)
 
--- Spectate w Home (teraz to jest samodzielny przycisk, nie premium)
--- Musisz zdecydować, czy chcesz Spectate jako osobną funkcję czy ładowany z URL.
--- Zakładam, że chcesz go w sekcji premium z URL. Jeśli nie, usuń ten komentarz i odkomentuj poniższy.
--- SpectateButton_Home.MouseButton1Click:Connect(function()
---     runScriptAndNotify("https://pastebin.com/raw/UFVLWQRw", "Spectate")
--- end)
-
 NoclipButton.MouseButton1Click:Connect(function()
     runScriptAndNotify("https://pastebin.com/raw/CnbYfaj1", NoclipButton.Text)
 end)
-
--- Twoja logika fling była w Home (FlingButton), ale podałeś też FlingButton_Premium.
--- Jeśli chcesz, żeby fling był w Home i ładował z URL, odkomentuj poniższe:
--- FlingButton.MouseButton1Click:Connect(function()
---     runScriptAndNotify('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt', "Fling")
--- end)
 
 InfinityJumpButton.MouseButton1Click:Connect(function()
     runScriptAndNotify("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/infinity-jump", InfinityJumpButton.Text)
@@ -814,11 +801,11 @@ MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gameP
         if wasPurchased then
             sendNotification("Universal Scripts", "Wersja premium kupiona pomyślnie! Dziękujemy za zakup.")
             hasGamePass = true
-            showTab("Premium")
+            showTab("Premium") -- Przejdź do zakładki Premium po zakupie
         else
             sendNotification("Universal Scripts", "Anulowano zakup wersji premium.")
         end
-        checkGamePassStatus()
+        checkGamePassStatus() -- Sprawdź status ponownie po zakończeniu transakcji
     end
 end)
 
@@ -849,8 +836,7 @@ end)
 spawn(function()
     task.wait(1)
     sendNotification("Universal Scripts", "Witaj w Universal Scripts! Skrypt załadowany.")
-    checkGamePassStatus()
-    updateSpecialButtonVisibility() -- Upewnij się, że widoczność przycisków jest aktualizowana na starcie
+    checkGamePassStatus() -- Sprawdzanie GamePassa i aktualizacja widoczności MM2/GAG
     showTab("Home") -- Pokaż domyślną zakładkę
     updateHideButtonPosition()
 end)
@@ -863,12 +849,12 @@ game.Players.PlayerAdded:Connect(function(addedPlayer)
     if addedPlayer == player then
         -- Daj czas na załadowanie postaci po respawnie
         task.wait(1)
-        updateSpecialButtonVisibility() -- Aktualizuj widoczność przycisków specyficznych dla gry
-        -- Możesz też zresetować stan GUI do zakładki "Home"
-        showTab("Home")
+        updateSpecialButtonVisibility() -- Aktualizuj widoczność przycisków specyficznych dla gry po respawnie
+        showTab("Home") -- Możesz zresetować stan GUI do zakładki "Home"
     end
 end)
 
+-- WAŻNA POPRAWKA: Wywołuj updateSpecialButtonVisibility() również po wczytaniu gry
 game.Loaded:Connect(function()
     updateSpecialButtonVisibility()
 end)
