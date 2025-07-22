@@ -6,8 +6,9 @@ local RunService = game:GetService("RunService")
 local TeleportService = game:GetService("TeleportService")
 
 local GAMEPASS_ID = 1296972626
-local MM2_EXPERIENCE_ID = 142823291 -- ID gry Murder Mystery 2 (Nie używane do logiki widoczności)
-local GAG_GAME_ID = 9262276941 -- ID gry "Gabby's Dollhouse" (Nie używane do logiki widoczności)
+-- MM2_EXPERIENCE_ID i GAG_GAME_ID są tu obecne, ale NIE SĄ UŻYWANE do logiki widoczności przycisków w premium
+local MM2_EXPERIENCE_ID = 142823291 
+local GAG_GAME_ID = 9262276941 
 local TELEPORT_PLACE_ID = 6557073879 -- ID miejsca, do którego teleportuje, jeśli gracz nie ma premium
 
 local hasGamePass = false
@@ -145,7 +146,7 @@ ScrollingFramePremium.BorderSizePixel = 0
 ScrollingFramePremium.Position = UDim2.new(0.239610985, 0, 0.1111193, 0)
 ScrollingFramePremium.Size = UDim2.new(0.733235598, 0, 0.864629686, 0)
 ScrollingFramePremium.CanvasSize = UDim2.new(0,0,1.5,0)
-ScrollingFramePremium.Visible = false
+ScrollingFramePremium.Visible = false -- Domyślnie ukryte, pokazywane tylko po kliknięciu zakładki Premium
 
 local ScrollingFramePremium_UICorner = Instance.new("UICorner")
 ScrollingFramePremium_UICorner.Parent = ScrollingFramePremium
@@ -176,7 +177,7 @@ local SpectateButton_Premium_UIAspectRatioConstraint = Instance.new("UIAspectRat
 SpectateButton_Premium_UIAspectRatioConstraint.Parent = SpectateButton_Premium
 SpectateButton_Premium_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
 
--- MM2Button (Przywrócona oryginalna logika widoczności - czyli brak jawnego ustawiania Visible na false)
+-- MM2Button (BEZ ZMIAN W WIDOCZNOŚCI)
 local MM2Button = Instance.new("TextButton")
 MM2Button.Name = "MM2 Button"
 MM2Button.Parent = ScrollingFramePremium
@@ -190,7 +191,6 @@ MM2Button.TextColor3 = Color3.new(0, 0, 0)
 MM2Button.TextScaled = true
 MM2Button.TextSize = 14
 MM2Button.TextWrapped = true
--- MM2Button.Visible = false -- TO BYŁ BŁĄD, USUNIĘTE!
 
 local MM2Button_UICorner = Instance.new("UICorner")
 MM2Button_UICorner.Parent = MM2Button
@@ -248,7 +248,7 @@ local Invisibiltybutton_UIAspectRatioConstraint = Instance.new("UIAspectRatioCon
 Invisibiltybutton_UIAspectRatioConstraint.Parent = Invisibiltybutton
 Invisibiltybutton_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
 
--- GhostMM2Button (Przywrócona oryginalna logika widoczności)
+-- GhostMM2Button (BEZ ZMIAN W WIDOCZNOŚCI)
 local GhostMM2Button = Instance.new("TextButton")
 GhostMM2Button.Name = "GhostMM2 Button"
 GhostMM2Button.Parent = ScrollingFramePremium
@@ -262,7 +262,6 @@ GhostMM2Button.TextColor3 = Color3.new(0, 0, 0)
 GhostMM2Button.TextScaled = true
 GhostMM2Button.TextSize = 14
 GhostMM2Button.TextWrapped = true
--- GhostMM2Button.Visible = false -- TO BYŁ BŁĄD, USUNIĘTE!
 
 local GhostMM2Button_UICorner = Instance.new("UICorner")
 GhostMM2Button_UICorner.Parent = GhostMM2Button
@@ -273,7 +272,7 @@ local GhostMM2Button_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstr
 GhostMM2Button_UIAspectRatioConstraint.Parent = GhostMM2Button
 GhostMM2Button_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
 
--- GAGButton (Przywrócona oryginalna logika widoczności)
+-- GAGButton (BEZ ZMIAN W WIDOCZNOŚCI)
 local GAGButton = Instance.new("TextButton")
 GAGButton.Name = "GAG Button"
 GAGButton.Parent = ScrollingFramePremium
@@ -287,7 +286,6 @@ GAGButton.TextColor3 = Color3.new(0, 0, 0)
 GAGButton.TextScaled = true
 GAGButton.TextSize = 14
 GAGButton.TextWrapped = true
--- GAGButton.Visible = false -- TO BYŁ BŁĄD, USUNIĘTE!
 
 local GAGButton_UICorner = Instance.new("UICorner")
 GAGButton_UICorner.Parent = GAGButton
@@ -545,7 +543,7 @@ HideButton.Size = UDim2.new(0, 30, 0, 30)
 HideButton.ZIndex = 5
 HideButton.Draggable = true
 
---- NOWE ELEMENTY GUI DLA ZAKŁADKI EXECUTOR (Dodane do oryginalnego skryptu) ---
+--- NOWE ELEMENTY GUI DLA ZAKŁADKI EXECUTOR ---
 local ExecutorFrame = Instance.new("Frame")
 ExecutorFrame.Name = "ExecutorFrame"
 ExecutorFrame.Parent = MainFrame
@@ -554,7 +552,7 @@ ExecutorFrame.BorderColor3 = Color3.new(0, 0, 0)
 ExecutorFrame.BorderSizePixel = 0
 ExecutorFrame.Position = UDim2.new(0.239610985, 0, 0.113314532, 0)
 ExecutorFrame.Size = UDim2.new(0.733235598, 0, 0.864629686, 0)
-ExecutorFrame.Visible = false
+ExecutorFrame.Visible = false -- Domyślnie ukryte, pokazywane tylko po kliknięciu zakładki Executor
 
 local ExecutorFrame_UICorner = Instance.new("UICorner")
 ExecutorFrame_UICorner.Parent = ExecutorFrame
@@ -616,7 +614,7 @@ ClearButton.TextScaled = true
 Instance.new("UICorner", ClearButton)
 
 
---- Funkcje i logika skryptu (Oryginalne + dodany Executor) ---
+--- Funkcje i logika skryptu ---
 
 local function showTab(tabName)
     -- Ukryj wszystkie ramki treści
@@ -745,7 +743,7 @@ local function updateHideButtonPosition()
 end
 
 
---- Połączenia przycisków Home (zgodnie z oryginałem) ---
+--- Połączenia przycisków Home ---
 SpeedToolbutton.MouseButton1Click:Connect(function()
     runScriptAndNotify("https://pastebin.com/raw/X7B0HPc2", SpeedToolbutton.Text)
 end)
@@ -779,7 +777,7 @@ FlyButtonHome.MouseButton1Click:Connect(function()
 end)
 
 
---- Połączenia przycisków Premium (zgodnie z oryginałem - BEZ MOICH ZMIAN WIDOCZNOŚCI) ---
+--- Połączenia przycisków Premium (wszystkie widoczne, brak specjalnej logiki widoczności) ---
 SpectateButton_Premium.MouseButton1Click:Connect(function()
     runScriptAndNotify("https://pastebin.com/raw/UFVLWQRw", SpectateButton_Premium.Text)
 end)
@@ -832,7 +830,7 @@ ClearButton.MouseButton1Click:Connect(function()
 end)
 
 
---- Połączenia zakładek i przycisku Hide (zgodnie z oryginałem + Executor) ---
+--- Połączenia zakładek i przycisku Hide ---
 HomeTabButton.MouseButton1Click:Connect(function()
     showTab("Home")
 end)
