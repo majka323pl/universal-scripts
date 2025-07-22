@@ -4,11 +4,16 @@ local MarketplaceService = game:GetService("MarketplaceService")
 local StarterGui = game:GetService("StarterGui")
 local RunService = game:GetService("RunService")
 local TeleportService = game:GetService("TeleportService")
+local HttpService = game:GetService("HttpService") -- Dodano HttpService
 
 local GAMEPASS_ID = 1296972626
 local MM2_EXPERIENCE_ID = 142823291
 local GAG_GAME_ID = 9262276941
 local TELEPORT_PLACE_ID = 6557073879
+
+-- TUTAJ WPISZ URL DO SWOJEGO PASTEBIN Z UPDATE LOGS
+-- UPEWNIJ SIĘ, ŻE TO JEST RAW URL (np. z pastebin.com/raw/TwojKod)
+local UPDATE_LOGS_URL = "https://pastebin.com/raw/hrimZdcv" -- TWÓJ URL ZOSTAŁ DODANY TUTAJ!
 
 local hasGamePass = false
 local initialGamePassCheckDone = false
@@ -645,7 +650,7 @@ UpdateLogsText.Size = UDim2.new(0.9, 0, 0.7, 0)
 UpdateLogsText.Font = Enum.Font.SourceSans
 UpdateLogsText.TextXAlignment = Enum.TextXAlignment.Left
 UpdateLogsText.TextYAlignment = Enum.TextYAlignment.Top
-UpdateLogsText.Text = "22.07.2025:\n- Dodano sekcję Update Logs."
+UpdateLogsText.Text = "Ładowanie dziennika zmian..." -- Początkowy tekst
 UpdateLogsText.TextColor3 = Color3.new(1, 1, 1)
 UpdateLogsText.TextScaled = true
 UpdateLogsText.TextSize = 16
@@ -680,6 +685,24 @@ local function updateGameSpecificButtonsVisibility()
     end
 end
 
+-- Nowa funkcja do pobierania i aktualizowania Update Logs
+local function fetchUpdateLogs()
+    UpdateLogsText.Text = "Ładowanie dziennika zmian..."
+    local success, response = pcall(function()
+        return HttpService:GetAsync(UPDATE_LOGS_URL)
+    end)
+
+    if success then
+        UpdateLogsText.Text = response
+        sendNotification("Dziennik zmian załadowany pomyślnie.")
+    else
+        warn("Błąd podczas pobierania dziennika zmian:", response)
+        UpdateLogsText.Text = "Nie udało się załadować dziennika zmian.\nBłąd: " .. tostring(response)
+        sendNotification("Błąd: Nie udało się załadować dziennika zmian.")
+    end
+end
+
+
 local function showTab(tabName)
     -- Ukryj wszystkie ramki treści
     ScrollingFrameHome.Visible = false
@@ -694,6 +717,7 @@ local function showTab(tabName)
     if tabName == "Home" then
         ScrollingFrameHome.Visible = true
         HomeTabButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
+        fetchUpdateLogs() -- Spróbuj pobrać logi za każdym razem, gdy wracasz do Home
     elseif tabName == "Premium" then
         local success, result = pcall(function()
             return MarketplaceService:UserOwnsGamePassAsync(localPlayer.UserId, GAMEPASS_ID)
@@ -896,11 +920,11 @@ ClearButton.MouseButton1Click:Connect(function()
 end)
 
 -- Początkowe ustawienia
-showTab("Home")
+showTab("Home") -- Wywołanie showTab("Home") od razu spróbuje pobrać logi
 checkGamePassStatus(false) -- Sprawdź GamePassa bez pokazywania powiadomienia na początku
 updateGameSpecificButtonsVisibility() -- Ustaw widoczność przycisków po starcie
 
--- Upewnij się, że lokalPlayer jest poprawnie zainicjowany
+-- Upewnij się, że localPlayer jest poprawnie zainicjowany
 localPlayer.CharacterAdded:Connect(function(character)
     if not initialGamePassCheckDone then
         checkGamePassStatus(true)
