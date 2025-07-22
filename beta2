@@ -14,13 +14,13 @@ local initialGamePassCheckDone = false
 
 local lastHideButtonPosition = UDim2.new(1, -55, 0, 10)
 
--- Zmiana: Funkcja sendNotification wraca do oryginalnej formy
-local function sendNotification(title, text)
+-- Funkcja sendNotification wraca do oryginalnej formy z poprawnym tytułem
+local function sendNotification(text)
     StarterGui:SetCore("SendNotification", {
-        Title = title,
+        Title = "Universal Scripts", -- Używamy stałego nagłówka "Universal Scripts"
         Text = text,
         Icon = "rbxassetid://102860171689689",
-        Duration = 5 -- Zachowano Duration = 5, jak w Twoim oryginalnym skrypcie dla wszystkich powiadomień.
+        Duration = 5 -- Zachowano Duration = 5
     })
 end
 
@@ -132,7 +132,7 @@ ExecutorTabButton_UITextSizeConstraint.Parent = ExecutorTabButton
 ExecutorTabButton_UITextSizeConstraint.MaxTextSize = 37
 local ExecutorTabButton_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
 ExecutorTabButton_UIAspectRatioConstraint.Parent = ExecutorTabButton
-ExecutorTabButton_UIAspectRatioConstraint.AspectRatio = 3.9210526943206787
+ExecutorTabButton_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
 
 
 local ScrollingFramePremium = Instance.new("ScrollingFrame")
@@ -575,21 +575,21 @@ local function showTab(tabName)
                 ScrollingFramePremium.Visible = true
                 PremiumTabButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5) -- Podświetlony
                 if not initialGamePassCheckDone then
-                    sendNotification("Universal Scripts", "Wersja premium aktywowana.")
+                    sendNotification("Wersja premium aktywowana.")
                     initialGamePassCheckDone = true
                 end
             else
-                sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby uzyskać dostęp do tej zakładki!")
+                sendNotification("Musisz posiadać wersję premium, aby uzyskać dostęp do tej zakładki!")
                 MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID) 
             end
         else
             warn("Błąd podczas sprawdzania wersji premium (showTab):", result)
-            sendNotification("Universal Scripts", "Nie można sprawdzić statusu wersji premium. Spróbuj ponownie.")
+            sendNotification("Nie można sprawdzić statusu wersji premium. Spróbuj ponownie.")
         end
     elseif tabName == "Executor" then
         ExecutorFrame.Visible = true
         ExecutorTabButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5) -- Podświetlony
-        sendNotification("Universal Scripts", "Przeszedłeś do zakładki Executor. Wklej kod i naciśnij Execute.")
+        sendNotification("Przeszedłeś do zakładki Executor. Wklej kod i naciśnij Execute.")
     end
 end
 
@@ -602,15 +602,15 @@ local function checkGamePassStatus()
         hasGamePass = result
         if not initialGamePassCheckDone then
             if hasGamePass then
-                sendNotification("Universal Scripts", "Posiadasz wersję premium! Funkcje Premium odblokowane.")
+                sendNotification("Posiadasz wersję premium! Funkcje Premium odblokowane.")
             else
-                sendNotification("Universal Scripts", "Nie posiadasz wersji premium. Kliknij zakładkę Premium, aby przejść do zakupu.")
+                sendNotification("Nie posiadasz wersji premium. Kliknij zakładkę Premium, aby przejść do zakupu.")
             end
             initialGamePassCheckDone = true
         end
     else
         warn("Błąd podczas sprawdzania wersji premium:", result)
-        sendNotification("Universal Scripts", "Nie można sprawdzić statusu wersji premium. Spróbuj ponownie.")
+        sendNotification("Nie można sprawdzić statusu wersji premium. Spróbuj ponownie.")
     end
 end
 
@@ -651,29 +651,29 @@ local function runScriptAndNotify(url, buttonName)
     end)
 
     if not successHttpGet then
-        sendNotification("Universal Scripts", "Błąd pobierania skryptu '" .. buttonName .. "': " .. tostring(errHttpGet))
+        sendNotification("Błąd pobierania skryptu '" .. buttonName .. "': " .. tostring(errHttpGet))
         warn("Błąd HTTP pobierania skryptu '" .. buttonName .. "':", errHttpGet)
         return
     end
 
     if not scriptContent or #scriptContent == 0 then
-        sendNotification("Universal Scripts", "Pobrany skrypt '" .. buttonName .. "' jest pusty lub nieprawidłowy.")
+        sendNotification("Pobrany skrypt '" .. buttonName .. "' jest pusty lub nieprawidłowy.")
         warn("Pobrany skrypt '" .. buttonName .. "' jest pusty.")
         return
     end
 
     local func, loadErr = loadstring(scriptContent)
     if not func then
-        sendNotification("Universal Scripts", "Błąd parsowania skryptu '" .. buttonName .. "': " .. tostring(loadErr))
+        sendNotification("Błąd parsowania skryptu '" .. buttonName .. "': " .. tostring(loadErr))
         warn("Błąd loadstring dla skryptu '" .. buttonName .. "':", loadErr)
         return
     end
 
     local successRun, runErr = pcall(func)
     if successRun then
-        sendNotification("Universal Scripts", "Skrypt '" .. buttonName .. "' załadowany i uruchomiony!")
+        sendNotification("Skrypt '" .. buttonName .. "' załadowany i uruchomiony!")
     else
-        sendNotification("Universal Scripts", "Błąd uruchamiania skryptu '" .. buttonName .. "': " .. tostring(runErr))
+        sendNotification("Błąd uruchamiania skryptu '" .. buttonName .. "': " .. tostring(runErr))
         warn("Błąd wykonania skryptu '" .. buttonName .. "':", runErr)
     end
 end
@@ -709,12 +709,12 @@ local function runPremiumScript(url, buttonName)
         if currentHasGamePass then
             runScriptAndNotify(url, buttonName)
         else
-            sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
+            sendNotification("Musisz posiadać wersję premium, aby użyć tej funkcji!")
             MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
         end
     else
         warn("Błąd podczas sprawdzania wersji premium (" .. buttonName .. "):", currentHasGamePass)
-        sendNotification("Universal Scripts", "Wystąpił błąd podczas sprawdzania wersji premium.")
+        sendNotification("Wystąpił błąd podczas sprawdzania wersji premium.")
     end
 end
 
@@ -748,25 +748,25 @@ ExecuteButton.MouseButton1Click:Connect(function()
             
             if func then
                 func() -- Wykonaj skompilowany kod
-                sendNotification("Universal Scripts", "Kod wykonany pomyślnie!") -- Zmieniono na Universal Scripts
+                sendNotification("Kod wykonany pomyślnie!")
             else
-                sendNotification("Universal Scripts", "Błąd składni w kodzie. Sprawdź konsolę Output.") -- Zmieniono na Universal Scripts, usunięto duration
+                sendNotification("Błąd składni w kodzie. Sprawdź konsolę Output.")
                 warn("Błąd składni w kodzie (loadstring):", errorMessage)
             end
         end)
 
         if not success then
-            sendNotification("Universal Scripts", "Wystąpił błąd podczas wykonywania kodu: " .. tostring(errorMessage) .. ". Sprawdź konsolę Output.") -- Zmieniono na Universal Scripts, usunięto duration
+            sendNotification("Wystąpił błąd podczas wykonywania kodu: " .. tostring(errorMessage) .. ". Sprawdź konsolę Output.")
             warn("Błąd podczas wykonywania kodu:", errorMessage)
         end
     else
-        sendNotification("Universal Scripts", "Pole tekstowe jest puste. Wpisz jakiś kod do wykonania.") -- Zmieniono na Universal Scripts, usunięto duration
+        sendNotification("Pole tekstowe jest puste. Wpisz jakiś kod do wykonania.")
     end
 end)
 
 ClearButton.MouseButton1Click:Connect(function()
     ExecutorTextBox.Text = ""
-    sendNotification("Universal Scripts", "Pole tekstowe wyczyszczone.") -- Zmieniono na Universal Scripts
+    sendNotification("Pole tekstowe wyczyszczone.")
 end)
 
 
@@ -808,12 +808,10 @@ RunService.Stepped:Connect(function()
     if game.PlaceId ~= lastPlaceId then
         lastPlaceId = game.PlaceId
         updateMM2ButtonVisibility()
-        -- WAŻNE: Jeśli zakładka premium była aktywna i zmieniono grę,
-        -- a przyciski MM2/GhostMM2 miałyby zniknąć, przełącz na zakładkę Home.
-        -- To zapobiegnie sytuacji, gdzie użytkownik widzi pustą zakładkę Premium.
+        -- Jeśli zakładka Premium jest aktywna, ale przyciski MM2/GhostMM2 stały się niewidoczne, przełącz na Home
         if ScrollingFramePremium.Visible and not (MM2Button.Visible or GhostMM2Button.Visible) then
             showTab("Home") 
-            sendNotification("Universal Scripts", "Zmieniono grę. Zakładka Premium przełączona na Home, aby odświeżyć widoczność przycisków.")
+            sendNotification("Zmieniono grę. Zakładka Premium przełączona na Home, aby odświeżyć widoczność przycisków.")
         end
     end
 end)
@@ -830,11 +828,11 @@ end)
 MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gamePassId, wasPurchased)
     if userId == player.UserId and gamePassId == GAMEPASS_ID then
         if wasPurchased then
-            sendNotification("Universal Scripts", "Wersja premium kupiona pomyślnie! Dziękujemy za zakup.")
+            sendNotification("Wersja premium kupiona pomyślnie! Dziękujemy za zakup.")
             hasGamePass = true
             showTab("Premium")
         else
-            sendNotification("Universal Scripts", "Anulowano zakup wersji premium.")
+            sendNotification("Anulowano zakup wersji premium.")
         end
     end
 end)
@@ -843,7 +841,7 @@ end)
 spawn(function()
     player.PlayerGui.ChildAdded:Wait() -- Czekaj, aż PlayerGui zostanie w pełni załadowane
     task.wait(1) -- Krótkie opóźnienie dla pewności
-    sendNotification("Universal Scripts", "Witaj w Universal Scripts! Skrypt załadowany.")
+    sendNotification("Witaj w Universal Scripts! Skrypt załadowany.")
     checkGamePassStatus()
     updateMM2ButtonVisibility()
     showTab("Home") -- Domyślnie pokaż zakładkę Home
