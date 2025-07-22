@@ -14,7 +14,7 @@ local TELEPORT_PLACE_ID = 6557073879
 -- RĘCZNIE WPROWADZANE LOGI AKTUALIZACJI
 local MANUAL_UPDATE_LOGS = [[
 --- UPDATE LOGS ---
-[22.07.2025] Wersja 1.2
+[22.07.2025] Wersja v2.5
 -Dodano Nowe zakładki Executor,UpdateLogs
 -Nowy Executor umożliwia ci wywołanie skryptu bez używania Executora!
 ]]
