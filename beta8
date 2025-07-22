@@ -4,6 +4,7 @@ local MarketplaceService = game:GetService("MarketplaceService")
 local StarterGui = game:GetService("StarterGui")
 local RunService = game:GetService("RunService")
 local TeleportService = game:GetService("TeleportService")
+local Players = game:GetService("Players")
 local HttpService = game:GetService("HttpService") -- HttpService nadal jest, ale nie używany do logów
 
 local GAMEPASS_ID = 1296972626
@@ -33,7 +34,19 @@ local MANUAL_UPDATE_LOGS = [[
 local hasGamePass = false
 local initialGamePassCheckDone = false
 
-local lastHideButtonPosition = UDim2.new(1, -55, 0, 10)
+-- ZMIENNE STANU DLA FUNKCJI
+local isNoclipEnabled = false
+local isInfinityJumpEnabled = false
+local currentSpeedMultiplier = 16 -- Domyślna prędkość gracza
+local isFlyEnabled = false
+local flySpeed = 50
+local spectateTarget = nil
+local isAntiFlingEnabled = false
+local isFlingEnabled = false
+local isHidden = false -- Dla Invisibility
+local isMM2Ghost = false -- Dla GhostMM2 (MM2)
+local isGag = false -- Dla GAG (tylko w GAG game)
+
 
 local function sendNotification(text)
     StarterGui:SetCore("SendNotification", {
@@ -371,7 +384,7 @@ ScrollingFrameHome.BorderColor3 = Color3.new(0, 0, 0)
 ScrollingFrameHome.BorderSizePixel = 0
 ScrollingFrameHome.Position = UDim2.new(0.239610985, 0, 0.113314532, 0)
 ScrollingFrameHome.Size = UDim2.new(0.733235598, 0, 0.864629686, 0)
-ScrollingFrameHome.CanvasSize = UDim2.new(0,0,0,300) -- TA LINIA ZOSTAŁA ZMIENIONA NA 300
+ScrollingFrameHome.CanvasSize = UDim2.new(0,0,0,300)
 ScrollingFrameHome.Visible = true -- Domyślna widoczność
 
 local ScrollingFrameHome_UICorner = Instance.new("UICorner")
@@ -581,10 +594,10 @@ HideButton.BorderSizePixel = 3
 HideButton.Image = "rbxassetid://102860171689689"
 HideButton.ImageColor3 = Color3.new(1, 1, 1)
 HideButton.ScaleType = Enum.ScaleType.Fit
-HideButton.Position = UDim2.new(0.707863092, 0, 0.214006022, 0)
+HideButton.Position = UDim2.new(0.707863092, 0, 0.214006022, 0) -- POCZĄTKOWA POZYCJA PRZYCISKU (gracz może ją zmienić)
 HideButton.Size = UDim2.new(0, 30, 0, 30)
 HideButton.ZIndex = 5
-HideButton.Draggable = true
+HideButton.Draggable = true -- WAŻNE: Włączone przeciąganie przez gracza!
 
 --- NOWE ELEMENTY GUI DLA ZAKŁADKI EXECUTOR ---
 local ExecutorFrame = Instance.new("Frame")
@@ -717,7 +730,6 @@ local function updateGameSpecificButtonsVisibility()
     end
 end
 
-
 local function showTab(tabName)
     -- Ukryj wszystkie ramki treści
     ScrollingFrameHome.Visible = false
@@ -813,106 +825,438 @@ end)
 -- Obsługa przycisku ukrywania/pokazywania GUI
 HideButton.MouseButton1Click:Connect(function()
     MainFrame.Visible = not MainFrame.Visible
+
     if MainFrame.Visible then
-        HideButton.Position = lastHideButtonPosition
         HideButton.BackgroundColor3 = Color3.new(1, 0, 0) -- Czerwony, gdy GUI jest widoczne
     else
-        lastHideButtonPosition = HideButton.Position -- Zapisz ostatnią pozycję
-        HideButton.Position = UDim2.new(1, -55, 0, 10) -- Stała pozycja w prawym górnym rogu
         HideButton.BackgroundColor3 = Color3.new(0, 1, 0) -- Zielony, gdy GUI jest ukryte
     end
 end)
 
--- Funkcje dla przycisków (do rozbudowania)
+
+--- FUNKCJE SKRYPTU ---
+
+-- Speed Tool
 SpeedToolbutton.MouseButton1Click:Connect(function()
-    sendNotification("Funkcja Speed Tool aktywowana!")
-    -- Tu dodaj logikę Speed Tool
-end)
-
-ClicktptoolButton.MouseButton1Click:Connect(function()
-    sendNotification("Funkcja Click TP Tool aktywowana!")
-    -- Tu dodaj logikę Click TP Tool
-end)
-
-SpectateButton_Home.MouseButton1Click:Connect(function()
-    sendNotification("Funkcja Spectate aktywowana!")
-    -- Tu dodaj logikę Spectate
-end)
-
-NoclipButton.MouseButton1Click:Connect(function()
-    sendNotification("Funkcja Noclip aktywowana!")
-    -- Tu dodaj logikę Noclip
-end)
-
-FlingButton.MouseButton1Click:Connect(function()
-    sendNotification("Funkcja Fling aktywowana!")
-    -- Tu dodaj logikę Fling
-end)
-
-InfinityJumpButton.MouseButton1Click:Connect(function()
-    sendNotification("Funkcja Infinity Jump aktywowana!")
-    -- Tu dodaj logikę Infinity Jump
-end)
-
-AntiFlingButton.MouseButton1Click:Connect(function()
-    sendNotification("Funkcja Anti-Fling aktywowana!")
-    -- Tu dodaj logikę Anti-Fling
-end)
-
-FlyButtonHome.MouseButton1Click:Connect(function()
-    sendNotification("Funkcja Fly aktywowana!")
-    -- Tu dodaj logikę Fly
-end)
-
-SpectateButton_Premium.MouseButton1Click:Connect(function()
-    if hasGamePass then
-        sendNotification("Funkcja Spectate (Premium) aktywowana!")
-        -- Tu dodaj logikę Spectate dla premium
+    local character = localPlayer.Character
+    if character then
+        local humanoid = character:FindFirstChildOfClass("Humanoid")
+        if humanoid then
+            if humanoid.WalkSpeed == 16 then
+                humanoid.WalkSpeed = 50 -- Zwiększ prędkość
+                sendNotification("Speed Tool: Włączony (50)")
+            else
+                humanoid.WalkSpeed = 16 -- Przywróć domyślną
+                sendNotification("Speed Tool: Wyłączony")
+            end
+        end
     else
-        sendNotification("Potrzebujesz GamePassa Premium, aby użyć tej funkcji.")
+        sendNotification("Błąd: Nie znaleziono postaci gracza.")
     end
 end)
 
+-- Click TP Tool
+ClicktptoolButton.MouseButton1Click:Connect(function()
+    local mouse = localPlayer:GetMouse()
+    localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(mouse.Hit.p) + Vector3.new(0, 5, 0)
+    sendNotification("Teleportowano do miejsca kliknięcia!")
+end)
+
+-- Spectate
+local spectateConnection = nil
+SpectateButton_Home.MouseButton1Click:Connect(function()
+    if spectateTarget then
+        -- Stop spectating
+        localPlayer.Character.Humanoid.PlatformStand = false
+        localPlayer.Character.Humanoid.Sit = false
+        localPlayer.CameraMode = Enum.CameraMode.Classic
+        game.Workspace.CurrentCamera.CameraSubject = localPlayer.Character.Humanoid
+        spectateTarget = nil
+        if spectateConnection then
+            spectateConnection:Disconnect()
+            spectateConnection = nil
+        end
+        sendNotification("Spectate: Wyłączony.")
+    else
+        -- Start spectating
+        local targetPlayer = nil
+        local foundPlayers = {}
+        for i, player in pairs(Players:GetPlayers()) do
+            if player ~= localPlayer and player.Character and player.Character:FindFirstChild("Humanoid") then
+                table.insert(foundPlayers, player)
+            end
+        end
+
+        if #foundPlayers > 0 then
+            targetPlayer = foundPlayers[math.random(1, #foundPlayers)]
+            spectateTarget = targetPlayer
+            localPlayer.CameraMode = Enum.CameraMode.LockFirstPerson -- Zmienia perspektywę na 1-osobową
+            game.Workspace.CurrentCamera.CameraSubject = spectateTarget.Character.Humanoid
+            localPlayer.Character.Humanoid.PlatformStand = true -- Unieruchamia gracza
+            localPlayer.Character.Humanoid.Sit = true -- Zapobiega lataniu w niektórych grach
+
+            spectateConnection = RunService.RenderStepped:Connect(function()
+                if spectateTarget and spectateTarget.Character and spectateTarget.Character:FindFirstChild("Humanoid") then
+                    game.Workspace.CurrentCamera.CFrame = spectateTarget.Character.HumanoidRootPart.CFrame * CFrame.new(0,0, -20) -- Dostosuj odległość kamery
+                    -- Można też użyć game.Workspace.CurrentCamera.CameraSubject = spectateTarget.Character.Humanoid
+                else
+                    sendNotification("Cel obserwacji zniknął. Spectate wyłączony.")
+                    SpectateButton_Home.MouseButton1Click:Fire() -- Wyłącz spectate
+                end
+            end)
+            sendNotification("Spectate: Włączony. Obserwujesz: " .. spectateTarget.Name)
+        else
+            sendNotification("Brak innych graczy do obserwowania.")
+        end
+    end
+end)
+
+
+-- Noclip
+local noclipConnection = nil
+NoclipButton.MouseButton1Click:Connect(function()
+    isNoclipEnabled = not isNoclipEnabled
+    local character = localPlayer.Character
+    if character then
+        for _, part in pairs(character:GetChildren()) do
+            if part:IsA("BasePart") then
+                part.CanCollide = not isNoclipEnabled
+            end
+        end
+        local humanoid = character:FindFirstChildOfClass("Humanoid")
+        if humanoid then
+            humanoid.WalkSpeed = isNoclipEnabled and 30 or 16 -- Zwiększ prędkość podczas noclip
+        end
+
+        if isNoclipEnabled then
+            noclipConnection = RunService.Heartbeat:Connect(function()
+                if isNoclipEnabled and character and character:FindFirstChild("HumanoidRootPart") then
+                    character.HumanoidRootPart.CFrame = character.HumanoidRootPart.CFrame + localPlayer.Character.Humanoid.MoveDirection * humanoid.WalkSpeed * (1/60) -- Przesuwanie
+                end
+            end)
+            sendNotification("Noclip: Włączony.")
+        else
+            if noclipConnection then
+                noclipConnection:Disconnect()
+                noclipConnection = nil
+            end
+            sendNotification("Noclip: Wyłączony.")
+        end
+    else
+        sendNotification("Błąd: Nie znaleziono postaci gracza.")
+    end
+end)
+
+-- Fling (podstawowy)
+FlingButton.MouseButton1Click:Connect(function()
+    isFlingEnabled = not isFlingEnabled
+    if isFlingEnabled then
+        sendNotification("Fling: Włączony. Kliknij gracza, aby go podnieść.")
+        local mouse = localPlayer:GetMouse()
+        local clickConnection = mouse.Button1Down:Connect(function()
+            if isFlingEnabled and mouse.Target and mouse.Target.Parent and mouse.Target.Parent:FindFirstChildOfClass("Humanoid") then
+                local targetHumanoidRootPart = mouse.Target.Parent:FindFirstChild("HumanoidRootPart")
+                if targetHumanoidRootPart then
+                    local targetHumanoid = mouse.Target.Parent:FindFirstChildOfClass("Humanoid")
+                    if targetHumanoid and targetHumanoid.Health > 0 then
+                        local flingVector = Vector3.new(0, 100, 0) * 50 -- Duża siła w górę
+                        targetHumanoidRootPart.Velocity = flingVector
+                        targetHumanoidRootPart.RotVelocity = Vector3.new(math.random(-50, 50), math.random(-50, 50), math.random(-50, 50))
+                        sendNotification("Podniesiono gracza: " .. mouse.Target.Parent.Name)
+                    end
+                end
+            end
+        end)
+        -- Disconnect after some time or if fling is disabled
+        localPlayer.Character.Humanoid.Died:Connect(function()
+            if clickConnection then clickConnection:Disconnect() end
+            isFlingEnabled = false
+            sendNotification("Fling wyłączony (śmierć gracza).")
+        end)
+        -- Możesz dodać timeout dla clickConnection jeśli chcesz, aby fling włączał się na jakiś czas
+    else
+        sendNotification("Fling: Wyłączony.")
+    end
+end)
+
+
+-- Infinity Jump
+local jumpConnection = nil
+InfinityJumpButton.MouseButton1Click:Connect(function()
+    isInfinityJumpEnabled = not isInfinityJumpEnabled
+    if isInfinityJumpEnabled then
+        jumpConnection = UserInputService.InputBegan:Connect(function(input, gameProcessed)
+            if not gameProcessed and input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == Enum.KeyCode.Space then
+                if localPlayer.Character and localPlayer.Character:FindFirstChildOfClass("Humanoid") then
+                    localPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping)
+                end
+            end
+        end)
+        sendNotification("Infinity Jump: Włączony.")
+    else
+        if jumpConnection then
+            jumpConnection:Disconnect()
+            jumpConnection = nil
+        end
+        sendNotification("Infinity Jump: Wyłączony.")
+    end
+end)
+
+-- Anti-Fling
+local antiFlingConnection = nil
+AntiFlingButton.MouseButton1Click:Connect(function()
+    isAntiFlingEnabled = not isAntiFlingEnabled
+    if isAntiFlingEnabled then
+        antiFlingConnection = RunService.Stepped:Connect(function()
+            local character = localPlayer.Character
+            if character and character:FindFirstChild("HumanoidRootPart") then
+                local rootPart = character.HumanoidRootPart
+                if rootPart.Velocity.Magnitude > 20 or rootPart.RotVelocity.Magnitude > 10 then -- Prog siły
+                    rootPart.Velocity = Vector3.new(0, rootPart.Velocity.Y, 0) -- Usuń horyzontalną prędkość, zachowaj pionową
+                    rootPart.RotVelocity = Vector3.new(0, 0, 0) -- Usuń obroty
+                    -- Możesz też dodatkowo resetować CFrame co jakiś czas, jeśli jest duży problem z flingiem
+                    -- rootPart.CFrame = CFrame.new(rootPart.Position)
+                end
+            end
+        end)
+        sendNotification("Anti-Fling: Włączony.")
+    else
+        if antiFlingConnection then
+            antiFlingConnection:Disconnect()
+            antiFlingConnection = nil
+        end
+        sendNotification("Anti-Fling: Wyłączony.")
+    end
+end)
+
+
+-- Fly
+local flyConnection = nil
+FlyButtonHome.MouseButton1Click:Connect(function()
+    isFlyEnabled = not isFlyEnabled
+    local character = localPlayer.Character
+    if character and character:FindFirstChildOfClass("Humanoid") then
+        local humanoid = character:FindFirstChildOfClass("Humanoid")
+        if isFlyEnabled then
+            humanoid.PlatformStand = true
+            flyConnection = UserInputService.InputChanged:Connect(function(input, gameProcessed)
+                if not gameProcessed then
+                    local rootPart = character:FindFirstChild("HumanoidRootPart")
+                    if rootPart then
+                        local moveVector = Vector3.new(0, 0, 0)
+                        if input.KeyCode == Enum.KeyCode.W then moveVector = moveVector + game.Workspace.CurrentCamera.CFrame.lookVector end
+                        if input.KeyCode == Enum.KeyCode.S then moveVector = moveVector - game.Workspace.CurrentCamera.CFrame.lookVector end
+                        if input.KeyCode == Enum.KeyCode.A then moveVector = moveVector - game.Workspace.CurrentCamera.CFrame.rightVector end
+                        if input.KeyCode == Enum.KeyCode.D then moveVector = moveVector + game.Workspace.CurrentCamera.CFrame.rightVector end
+                        if input.KeyCode == Enum.KeyCode.Space then moveVector = moveVector + Vector3.new(0, 1, 0) end
+                        if input.KeyCode == Enum.KeyCode.LeftControl then moveVector = moveVector - Vector3.new(0, 1, 0) end
+
+                        -- Upewnij się, że wektor ruchu jest znormalizowany, aby utrzymać stałą prędkość
+                        if moveVector.Magnitude > 0 then
+                            rootPart.CFrame = rootPart.CFrame + moveVector.Unit * flySpeed
+                        end
+                    end
+                end
+            end)
+            sendNotification("Fly: Włączony.")
+        else
+            if flyConnection then
+                flyConnection:Disconnect()
+                flyConnection = nil
+            end
+            humanoid.PlatformStand = false
+            sendNotification("Fly: Wyłączony.")
+        end
+    else
+        sendNotification("Błąd: Nie znaleziono postaci gracza.")
+    end
+end)
+
+
+-- Premium Functions
+
+-- Invisibility (Premium)
 Invisibiltybutton.MouseButton1Click:Connect(function()
     if hasGamePass then
-        sendNotification("Funkcja Invisibility (Premium) aktywowana!")
-        -- Tu dodaj logikę Invisibility dla premium
+        isHidden = not isHidden
+        local character = localPlayer.Character
+        if character then
+            for _, part in pairs(character:GetChildren()) do
+                if part:IsA("BasePart") then
+                    part.Transparency = isHidden and 1 or 0
+                elseif part:IsA("Accessory") or part:IsA("Shirt") or part:IsA("Pants") then
+                    part.Transparency = isHidden and 1 or 0 -- Ukryj akcesoria, koszule, spodnie
+                end
+            end
+            local humanoid = character:FindFirstChildOfClass("Humanoid")
+            if humanoid then
+                humanoid.HealthDisplayDistance = isHidden and 0 or 100 -- Ukryj pasek zdrowia
+                humanoid.NameDisplayDistance = isHidden and 0 or 100 -- Ukryj nazwę
+            end
+            sendNotification("Invisibility: " .. (isHidden and "Włączona" or "Wyłączona"))
+        else
+            sendNotification("Błąd: Nie znaleziono postaci gracza.")
+        end
     else
         sendNotification("Potrzebujesz GamePassa Premium, aby użyć tej funkcji.")
     end
 end)
 
+-- MM2 (Premium) - Teleport do MM2
 MM2Button.MouseButton1Click:Connect(function()
     if hasGamePass then
-        sendNotification("Funkcja MM2 (Premium) aktywowana!")
-        -- Tu dodaj logikę MM2 dla premium
+        if game.PlaceId ~= MM2_EXPERIENCE_ID then
+            local teleportSuccess, teleportErr = pcall(function()
+                TeleportService:Teleport(MM2_EXPERIENCE_ID, localPlayer)
+            end)
+            if teleportSuccess then
+                sendNotification("Teleportuję do MM2...")
+            else
+                sendNotification("Błąd teleportacji do MM2: " .. tostring(teleportErr))
+            end
+        else
+            sendNotification("Już jesteś w grze MM2!")
+        end
     else
         sendNotification("Potrzebujesz GamePassa Premium, aby użyć tej funkcji.")
     end
 end)
 
-FlyButton.MouseButton1Click:Connect(function()
-    if hasGamePass then
-        sendNotification("Funkcja Console (Premium) aktywowana!")
-        -- Tu dodaj logikę Console dla premium
-    else
-        sendNotification("Potrzebujesz GamePassa Premium, aby użyć tej funkcji.")
-    end
-end)
-
+-- GhostMM2 (Premium, w MM2)
 GhostMM2Button.MouseButton1Click:Connect(function()
     if hasGamePass then
-        sendNotification("Funkcja GhostMM2 (Premium) aktywowana!")
-        -- Tu dodaj logikę GhostMM2 dla premium
+        if game.PlaceId == MM2_EXPERIENCE_ID then
+            isMM2Ghost = not isMM2Ghost
+            local character = localPlayer.Character
+            if character then
+                local humanoid = character:FindFirstChildOfClass("Humanoid")
+                if humanoid then
+                    if isMM2Ghost then
+                        humanoid.WalkSpeed = 0
+                        humanoid.JumpPower = 0
+                        for _, part in pairs(character:GetChildren()) do
+                            if part:IsA("BasePart") then
+                                part.CanCollide = false -- Wyłącz kolizje
+                                part.Transparency = 0.5 -- Ustaw półprzezroczystość
+                            end
+                        end
+                        sendNotification("GhostMM2: Włączony. Jesteś duchem.")
+                    else
+                        humanoid.WalkSpeed = 16
+                        humanoid.JumpPower = 50
+                        for _, part in pairs(character:GetChildren()) do
+                            if part:IsA("BasePart") then
+                                part.CanCollide = true -- Włącz kolizje
+                                part.Transparency = 0 -- Przywróć pełną widoczność
+                            end
+                        end
+                        sendNotification("GhostMM2: Wyłączony. Powrót do normalnego stanu.")
+                    end
+                end
+            else
+                sendNotification("Błąd: Nie znaleziono postaci gracza.")
+            end
+        else
+            sendNotification("Ta funkcja działa tylko w grze MM2.")
+        end
     else
         sendNotification("Potrzebujesz GamePassa Premium, aby użyć tej funkcji.")
     end
 end)
 
+-- GAG (Premium, w GAG game)
 GAGButton.MouseButton1Click:Connect(function()
     if hasGamePass then
-        sendNotification("Funkcja GAG (Premium) aktywowana!")
-        -- Tu dodaj logikę GAG dla premium
+        if game.PlaceId == GAG_GAME_ID then
+            isGag = not isGag
+            local character = localPlayer.Character
+            if character then
+                local humanoid = character:FindFirstChildOfClass("Humanoid")
+                if humanoid then
+                    if isGag then
+                        -- Przykład prostej funkcji "GAG" (możesz ją rozbudować)
+                        -- Np. wyłączanie sterowania, blokowanie ruchu, itp.
+                        humanoid.WalkSpeed = 0
+                        humanoid.JumpPower = 0
+                        sendNotification("GAG: Włączony. Zostałeś uciszony.")
+                    else
+                        humanoid.WalkSpeed = 16
+                        humanoid.JumpPower = 50
+                        sendNotification("GAG: Wyłączony. Możesz się ruszać.")
+                    end
+                end
+            else
+                sendNotification("Błąd: Nie znaleziono postaci gracza.")
+            end
+        else
+            sendNotification("Ta funkcja działa tylko w grze GAG.")
+        end
+    else
+        sendNotification("Potrzebujesz GamePassa Premium, aby użyć tej funkcji.")
+    end
+end)
+
+
+-- Spectate Premium (można rozszerzyć o wybór gracza, np. przez textbox)
+SpectateButton_Premium.MouseButton1Click:Connect(function()
+    if hasGamePass then
+        if spectateTarget then
+            -- Stop spectating
+            localPlayer.Character.Humanoid.PlatformStand = false
+            localPlayer.Character.Humanoid.Sit = false
+            localPlayer.CameraMode = Enum.CameraMode.Classic
+            game.Workspace.CurrentCamera.CameraSubject = localPlayer.Character.Humanoid
+            spectateTarget = nil
+            if spectateConnection then
+                spectateConnection:Disconnect()
+                spectateConnection = nil
+            end
+            sendNotification("Spectate (Premium): Wyłączony.")
+        else
+            -- Start spectating
+            local targetPlayer = nil
+            local foundPlayers = {}
+            for i, player in pairs(Players:GetPlayers()) do
+                if player ~= localPlayer and player.Character and player.Character:FindFirstChild("Humanoid") then
+                    table.insert(foundPlayers, player)
+                end
+            end
+
+            if #foundPlayers > 0 then
+                targetPlayer = foundPlayers[math.random(1, #foundPlayers)] -- Na razie losowy wybór
+                spectateTarget = targetPlayer
+                localPlayer.CameraMode = Enum.CameraMode.LockFirstPerson
+                game.Workspace.CurrentCamera.CameraSubject = spectateTarget.Character.Humanoid
+                localPlayer.Character.Humanoid.PlatformStand = true
+                localPlayer.Character.Humanoid.Sit = true
+
+                spectateConnection = RunService.RenderStepped:Connect(function()
+                    if spectateTarget and spectateTarget.Character and spectateTarget.Character:FindFirstChild("Humanoid") then
+                        game.Workspace.CurrentCamera.CFrame = spectateTarget.Character.HumanoidRootPart.CFrame * CFrame.new(0,0, -20)
+                    else
+                        sendNotification("Cel obserwacji zniknął. Spectate (Premium) wyłączony.")
+                        SpectateButton_Premium.MouseButton1Click:Fire()
+                    end
+                end)
+                sendNotification("Spectate (Premium): Włączony. Obserwujesz: " .. spectateTarget.Name)
+            else
+                sendNotification("Brak innych graczy do obserwowania.")
+            end
+        end
+    else
+        sendNotification("Potrzebujesz GamePassa Premium, aby użyć tej funkcji.")
+    end
+end)
+
+
+-- Console (Premium) - Przykład: proste wykonanie komendy w konsoli deweloperskiej
+FlyButton.MouseButton1Click:Connect(function() -- FlyButton użyty jako "Console Button"
+    if hasGamePass then
+        sendNotification("Funkcja Console (Premium) aktywowana!")
+        -- Możesz tutaj zaimplementować wysłanie komendy do konsoli deweloperskiej
+        -- np. za pomocą 'debug.profilebegin()' 'debug.profileend()' lub po prostu logować wiadomości
+        -- Pamiętaj, że dostęp do pełnej konsoli deweloperskiej jest ograniczony w LocalScripcie ze względów bezpieczeństwa Roblox
+        warn("Wywołano funkcję 'Console'. Pełna konsola deweloperska jest ograniczona.")
     else
         sendNotification("Potrzebujesz GamePassa Premium, aby użyć tej funkcji.")
     end
@@ -953,6 +1297,20 @@ localPlayer.CharacterAdded:Connect(function(character)
         checkGamePassStatus(true)
     end
     updateGameSpecificButtonsVisibility()
+    -- Resetuj stan funkcji po odrodzeniu
+    isNoclipEnabled = false
+    isInfinityJumpEnabled = false
+    isFlyEnabled = false
+    isFlingEnabled = false
+    isAntiFlingEnabled = false
+    isHidden = false
+    isMM2Ghost = false
+    isGag = false
+    if localPlayer.Character and localPlayer.Character:FindFirstChildOfClass("Humanoid") then
+        localPlayer.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = 16
+        localPlayer.Character:FindFirstChildOfClass("Humanoid").JumpPower = 50
+    end
+    sendNotification("Stan skryptów zresetowany po odrodzeniu.")
 end)
 
 game.Players.PlayerAdded:Connect(function(playerAdded)
