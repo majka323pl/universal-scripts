@@ -4,16 +4,20 @@ local MarketplaceService = game:GetService("MarketplaceService")
 local StarterGui = game:GetService("StarterGui")
 local RunService = game:GetService("RunService")
 local TeleportService = game:GetService("TeleportService")
-local HttpService = game:GetService("HttpService") -- Dodano HttpService
+local HttpService = game:GetService("HttpService") -- HttpService nadal jest, ale nie używany do logów
 
 local GAMEPASS_ID = 1296972626
 local MM2_EXPERIENCE_ID = 142823291
 local GAG_GAME_ID = 9262276941
 local TELEPORT_PLACE_ID = 6557073879
 
--- TUTAJ WPISZ URL DO SWOJEGO PASTEBIN Z UPDATE LOGS
--- UPEWNIJ SIĘ, ŻE TO JEST RAW URL (np. z pastebin.com/raw/TwojKod)
-local UPDATE_LOGS_URL = "https://pastebin.com/raw/hrimZdcv" -- TWÓJ URL ZOSTAŁ DODANY TUTAJ!
+-- RĘCZNIE WPROWADZANE LOGI AKTUALIZACJI
+local MANUAL_UPDATE_LOGS = [[
+--- UPDATE LOGS ---
+[22.07.2025] Wersja 1.2
+-Dodano Nowe zakładki Executor,UpdateLogs
+-Nowy Executor umożliwia ci wywołanie skryptu bez używania Executora!
+]]
 
 local hasGamePass = false
 local initialGamePassCheckDone = false
@@ -138,6 +142,31 @@ ExecutorTabButton_UITextSizeConstraint.MaxTextSize = 37
 local ExecutorTabButton_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
 ExecutorTabButton_UIAspectRatioConstraint.Parent = ExecutorTabButton
 ExecutorTabButton_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
+
+-- NOWA ZAKŁADKA "LOGS"
+local LogsTabButton = Instance.new("TextButton")
+LogsTabButton.Name = "LogsTabButton"
+LogsTabButton.Parent = TabsFrame
+LogsTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
+LogsTabButton.BorderColor3 = Color3.new(0, 0, 0)
+LogsTabButton.BorderSizePixel = 0
+LogsTabButton.Position = UDim2.new(0.0591715984, 0, 0.487912089, 0) -- Pozycja pod Executorem
+LogsTabButton.Size = UDim2.new(0.881656826, 0, 0.083516486, 0)
+LogsTabButton.Font = Enum.Font.SourceSans
+LogsTabButton.Text = "Logs"
+LogsTabButton.TextColor3 = Color3.new(0, 0, 0)
+LogsTabButton.TextScaled = true
+LogsTabButton.TextSize = 14
+LogsTabButton.TextWrapped = true
+
+local LogsTabButton_UICorner = Instance.new("UICorner")
+LogsTabButton_UICorner.Parent = LogsTabButton
+local LogsTabButton_UITextSizeConstraint = Instance.new("UITextSizeConstraint")
+LogsTabButton_UITextSizeConstraint.Parent = LogsTabButton
+LogsTabButton_UITextSizeConstraint.MaxTextSize = 37
+local LogsTabButton_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+LogsTabButton_UIAspectRatioConstraint.Parent = LogsTabButton
+LogsTabButton_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
 
 
 local ScrollingFramePremium = Instance.new("ScrollingFrame")
@@ -331,7 +360,7 @@ ScrollingFrameHome.BorderColor3 = Color3.new(0, 0, 0)
 ScrollingFrameHome.BorderSizePixel = 0
 ScrollingFrameHome.Position = UDim2.new(0.239610985, 0, 0.113314532, 0)
 ScrollingFrameHome.Size = UDim2.new(0.733235598, 0, 0.864629686, 0)
-ScrollingFrameHome.CanvasSize = UDim2.new(0,0,1.7,0)
+ScrollingFrameHome.CanvasSize = UDim2.new(0,0,0,0) -- Zmieniono CanvasSize, bo logi są w osobnej zakładce
 
 local ScrollingFrameHome_UICorner = Instance.new("UICorner")
 ScrollingFrameHome_UICorner.Parent = ScrollingFrameHome
@@ -615,46 +644,37 @@ ClearButton.TextColor3 = Color3.new(0, 0, 0)
 ClearButton.TextScaled = true
 Instance.new("UICorner", ClearButton)
 
---- NOWE ELEMENTY GUI DLA ZAKŁADKI UPDATE LOGS ---
-local UpdateLogsFrame = Instance.new("Frame")
-UpdateLogsFrame.Name = "UpdateLogsFrame"
-UpdateLogsFrame.Parent = ScrollingFrameHome
-UpdateLogsFrame.BackgroundColor3 = Color3.new(0.19, 0.19, 0.19)
-UpdateLogsFrame.BorderColor3 = Color3.new(0, 0, 0)
-UpdateLogsFrame.BorderSizePixel = 1
-UpdateLogsFrame.Position = UDim2.new(0.046162136, 0, 0.309430778, 0) -- Umieść pod istniejącymi przyciskami
-UpdateLogsFrame.Size = UDim2.new(0.907675743, 0, 0.3, 0) -- Dostosuj rozmiar
-Instance.new("UICorner", UpdateLogsFrame)
+--- NOWE ELEMENTY GUI DLA ZAKŁADKI LOGS (RĘCZNE LOGI) ---
+local ManualLogsFrame = Instance.new("ScrollingFrame")
+ManualLogsFrame.Name = "ManualLogsFrame"
+ManualLogsFrame.Parent = MainFrame
+ManualLogsFrame.Active = true
+ManualLogsFrame.BackgroundColor3 = Color3.new(0.231373, 0.231373, 0.231373)
+ManualLogsFrame.BorderColor3 = Color3.new(0, 0, 0)
+ManualLogsFrame.BorderSizePixel = 0
+ManualLogsFrame.Position = UDim2.new(0.239610985, 0, 0.113314532, 0)
+ManualLogsFrame.Size = UDim2.new(0.733235598, 0, 0.864629686, 0)
+ManualLogsFrame.Visible = false
+ManualLogsFrame.CanvasSize = UDim2.new(0,0,1.5,0) -- Dostosuj, jeśli logi będą bardzo długie
 
-local UpdateLogsTitle = Instance.new("TextLabel")
-UpdateLogsTitle.Name = "UpdateLogsTitle"
-UpdateLogsTitle.Parent = UpdateLogsFrame
-UpdateLogsTitle.BackgroundColor3 = Color3.new(1, 1, 1)
-UpdateLogsTitle.BackgroundTransparency = 1
-UpdateLogsTitle.Position = UDim2.new(0, 0, 0, 0)
-UpdateLogsTitle.Size = UDim2.new(1, 0, 0.2, 0)
-UpdateLogsTitle.Font = Enum.Font.SourceSansBold
-UpdateLogsTitle.Text = "Update Logs:"
-UpdateLogsTitle.TextColor3 = Color3.new(1, 1, 1)
-UpdateLogsTitle.TextScaled = true
-UpdateLogsTitle.TextSize = 20
-UpdateLogsTitle.TextWrapped = true
+local ManualLogsFrame_UICorner = Instance.new("UICorner")
+ManualLogsFrame_UICorner.Parent = ManualLogsFrame
 
-local UpdateLogsText = Instance.new("TextLabel")
-UpdateLogsText.Name = "UpdateLogsText"
-UpdateLogsText.Parent = UpdateLogsFrame
-UpdateLogsText.BackgroundColor3 = Color3.new(1, 1, 1)
-UpdateLogsText.BackgroundTransparency = 1
-UpdateLogsText.Position = UDim2.new(0.05, 0, 0.25, 0)
-UpdateLogsText.Size = UDim2.new(0.9, 0, 0.7, 0)
-UpdateLogsText.Font = Enum.Font.SourceSans
-UpdateLogsText.TextXAlignment = Enum.TextXAlignment.Left
-UpdateLogsText.TextYAlignment = Enum.TextYAlignment.Top
-UpdateLogsText.Text = "Ładowanie dziennika zmian..." -- Początkowy tekst
-UpdateLogsText.TextColor3 = Color3.new(1, 1, 1)
-UpdateLogsText.TextScaled = true
-UpdateLogsText.TextSize = 16
-UpdateLogsText.TextWrapped = true
+local ManualLogsText = Instance.new("TextLabel")
+ManualLogsText.Name = "ManualLogsText"
+ManualLogsText.Parent = ManualLogsFrame
+ManualLogsText.BackgroundColor3 = Color3.new(1, 1, 1)
+ManualLogsText.BackgroundTransparency = 1
+ManualLogsText.Position = UDim2.new(0.05, 0, 0.02, 0) -- Lekki margines
+ManualLogsText.Size = UDim2.new(0.9, 0, 0.96, 0) -- Pokryj większość ramki
+ManualLogsText.Font = Enum.Font.SourceSans
+ManualLogsText.TextXAlignment = Enum.TextXAlignment.Left
+ManualLogsText.TextYAlignment = Enum.TextYAlignment.Top
+ManualLogsText.Text = MANUAL_UPDATE_LOGS -- Tutaj wstawiamy ręcznie wpisane logi
+ManualLogsText.TextColor3 = Color3.new(1, 1, 1)
+ManualLogsText.TextScaled = false -- Ważne, aby tekst nie skalował się do ramki, tylko używał TextSize
+ManualLogsText.TextSize = 16 -- Stały rozmiar tekstu
+ManualLogsText.TextWrapped = true
 
 --- Funkcje i logika skryptu ---
 
@@ -685,39 +705,23 @@ local function updateGameSpecificButtonsVisibility()
     end
 end
 
--- Nowa funkcja do pobierania i aktualizowania Update Logs
-local function fetchUpdateLogs()
-    UpdateLogsText.Text = "Ładowanie dziennika zmian..."
-    local success, response = pcall(function()
-        return HttpService:GetAsync(UPDATE_LOGS_URL)
-    end)
-
-    if success then
-        UpdateLogsText.Text = response
-        sendNotification("Dziennik zmian załadowany pomyślnie.")
-    else
-        warn("Błąd podczas pobierania dziennika zmian:", response)
-        UpdateLogsText.Text = "Nie udało się załadować dziennika zmian.\nBłąd: " .. tostring(response)
-        sendNotification("Błąd: Nie udało się załadować dziennika zmian.")
-    end
-end
-
 
 local function showTab(tabName)
     -- Ukryj wszystkie ramki treści
     ScrollingFrameHome.Visible = false
     ScrollingFramePremium.Visible = false
     ExecutorFrame.Visible = false
+    ManualLogsFrame.Visible = false -- Nowa ramka logów
 
     -- Zresetuj kolory wszystkich przycisków zakładek
     HomeTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
     PremiumTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
     ExecutorTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
+    LogsTabButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608) -- Nowy przycisk logów
 
     if tabName == "Home" then
         ScrollingFrameHome.Visible = true
         HomeTabButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
-        fetchUpdateLogs() -- Spróbuj pobrać logi za każdym razem, gdy wracasz do Home
     elseif tabName == "Premium" then
         local success, result = pcall(function()
             return MarketplaceService:UserOwnsGamePassAsync(localPlayer.UserId, GAMEPASS_ID)
@@ -748,6 +752,9 @@ local function showTab(tabName)
     elseif tabName == "Executor" then
         ExecutorFrame.Visible = true
         ExecutorTabButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
+    elseif tabName == "Logs" then -- Nowa zakładka "Logs"
+        ManualLogsFrame.Visible = true
+        LogsTabButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
     end
 end
 
@@ -785,6 +792,10 @@ end)
 
 ExecutorTabButton.MouseButton1Click:Connect(function()
     showTab("Executor")
+end)
+
+LogsTabButton.MouseButton1Click:Connect(function() -- Obsługa nowej zakładki Logs
+    showTab("Logs")
 end)
 
 -- Obsługa przycisku ukrywania/pokazywania GUI
@@ -920,7 +931,7 @@ ClearButton.MouseButton1Click:Connect(function()
 end)
 
 -- Początkowe ustawienia
-showTab("Home") -- Wywołanie showTab("Home") od razu spróbuje pobrać logi
+showTab("Home")
 checkGamePassStatus(false) -- Sprawdź GamePassa bez pokazywania powiadomienia na początku
 updateGameSpecificButtonsVisibility() -- Ustaw widoczność przycisków po starcie
 
