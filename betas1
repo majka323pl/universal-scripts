@@ -176,7 +176,7 @@ local SpectateButton_Premium_UIAspectRatioConstraint = Instance.new("UIAspectRat
 SpectateButton_Premium_UIAspectRatioConstraint.Parent = SpectateButton_Premium
 SpectateButton_Premium_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
 
--- MM2Button (Oryginalna pozycja i widoczność)
+-- MM2Button (Przywrócona oryginalna logika widoczności - czyli brak jawnego ustawiania Visible na false)
 local MM2Button = Instance.new("TextButton")
 MM2Button.Name = "MM2 Button"
 MM2Button.Parent = ScrollingFramePremium
@@ -190,7 +190,7 @@ MM2Button.TextColor3 = Color3.new(0, 0, 0)
 MM2Button.TextScaled = true
 MM2Button.TextSize = 14
 MM2Button.TextWrapped = true
--- MM2Button.Visible = false -- Usunięta moja logika widoczności, powrót do oryginalnego stanu
+-- MM2Button.Visible = false -- USUNIĘTE!
 
 local MM2Button_UICorner = Instance.new("UICorner")
 MM2Button_UICorner.Parent = MM2Button
@@ -248,7 +248,7 @@ local Invisibiltybutton_UIAspectRatioConstraint = Instance.new("UIAspectRatioCon
 Invisibiltybutton_UIAspectRatioConstraint.Parent = Invisibiltybutton
 Invisibiltybutton_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
 
--- GhostMM2Button (Oryginalna pozycja i widoczność)
+-- GhostMM2Button (Przywrócona oryginalna logika widoczności)
 local GhostMM2Button = Instance.new("TextButton")
 GhostMM2Button.Name = "GhostMM2 Button"
 GhostMM2Button.Parent = ScrollingFramePremium
@@ -262,7 +262,7 @@ GhostMM2Button.TextColor3 = Color3.new(0, 0, 0)
 GhostMM2Button.TextScaled = true
 GhostMM2Button.TextSize = 14
 GhostMM2Button.TextWrapped = true
--- GhostMM2Button.Visible = false -- Usunięta moja logika widoczności, powrót do oryginalnego stanu
+-- GhostMM2Button.Visible = false -- USUNIĘTE!
 
 local GhostMM2Button_UICorner = Instance.new("UICorner")
 GhostMM2Button_UICorner.Parent = GhostMM2Button
@@ -273,7 +273,7 @@ local GhostMM2Button_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstr
 GhostMM2Button_UIAspectRatioConstraint.Parent = GhostMM2Button
 GhostMM2Button_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
 
--- GAGButton (Oryginalna pozycja i widoczność)
+-- GAGButton (Przywrócona oryginalna logika widoczności)
 local GAGButton = Instance.new("TextButton")
 GAGButton.Name = "GAG Button"
 GAGButton.Parent = ScrollingFramePremium
@@ -287,7 +287,7 @@ GAGButton.TextColor3 = Color3.new(0, 0, 0)
 GAGButton.TextScaled = true
 GAGButton.TextSize = 14
 GAGButton.TextWrapped = true
--- GAGButton.Visible = false -- Usunięta moja logika widoczności, powrót do oryginalnego stanu
+-- GAGButton.Visible = false -- USUNIĘTE!
 
 local GAGButton_UICorner = Instance.new("UICorner")
 GAGButton_UICorner.Parent = GAGButton
@@ -523,40 +523,6 @@ local FlyButtonHome_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstra
 FlyButtonHome_UIAspectRatioConstraint.Parent = FlyButtonHome
 FlyButtonHome_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
 
--- ODCZYTANY GUZIK "Teleport to New Game" (przeniesiony z powrotem do Home, jeśli tam był w pierwotnym skrypcie, zgodnie z Twoimi oczekiwaniami)
--- Ponieważ stwierdziłeś, że go nie było w oryginale, usuwam go stąd i NIE DODAJĘ go ponownie.
--- Jeśli jednak istniał w oryginale i po prostu pisałeś o jego przeniesieniu/usunięciu, daj znać.
--- Na podstawie Twoich ostatnich słów: "W ORGINALNYM SKRYPCIE JEST GUZIK TELEPORT TO NEW GAME" -
--- jeśli go nie ma, to go nie ma. Jeśli jest, to powiedz, gdzie był.
--- Zgodnie z tym co napisałeś w pierwszej wiadomości: "guzik teleport to new game"
--- i późniejszą "I TO TEŻ NIE POWINIEN ZNAJDOWAĆ SIĘ GUZIK DO TELEPORTACJI ZA TO ODPOWIADA PRZYCISK PREMIUM JEŚLI GRACZ NIE MA PREMIUM TELEPORTUJE GO DO GRY INNEJ"
--- oraz "MIAŁEŚ ZROBIĆ TYLKO DO ORGINALNEGO SKRYPTU EXECUTOR I NIC WIĘCEJ POZA TYM WEŚ ORGINALNY SKRYPT I DODAJ DO NIEGO EXECUTOR I TYLE NIC WIĘCEJ ORGINALNY SKRYPT NIE WYMAGA POPRAWEK"
--- Rozumiem, że "Teleport to New Game" w ogóle nie powinien istnieć w zakładce Home, bo nie było go w oryginalnym skrypcie.
--- Poniższy kod jest usunięty:
--- local TeleportToNewGameButton = Instance.new("TextButton")
--- TeleportToNewGameButton.Name = "Teleport To New Game Button"
--- TeleportToNewGameButton.Parent = ScrollingFrameHome
--- TeleportToNewGameButton.BackgroundColor3 = Color3.new(0.356863, 0.356863, 0.356863)
--- TeleportToNewGameButton.BorderColor3 = Color3.new(0, 0, 0)
--- TeleportToNewGameButton.Position = UDim2.new(0.665799975, 0, 0.219113797, 0)
--- TeleportToNewGameButton.Size = UDim2.new(0.28, 0, 0.06, 0)
--- TeleportToNewGameButton.Font = Enum.Font.SourceSans
--- TeleportToNewGameButton.Text = "Teleport to New Game"
--- TeleportToNewGameButton.TextColor3 = Color3.new(0, 0, 0)
--- TeleportToNewGameButton.TextScaled = true
--- TeleportToNewGameButton.TextSize = 14
--- TeleportToNewGameButton.TextWrapped = true
---
--- local TeleportToNewGameButton_UICorner = Instance.new("UICorner")
--- TeleportToNewGameButton_UICorner.Parent = TeleportToNewGameButton
--- local TeleportToNewGameButton_UITextSizeConstraint = Instance.new("UITextSizeConstraint")
--- TeleportToNewGameButton_UITextSizeConstraint.Parent = TeleportToNewGameButton
--- TeleportToNewGameButton_UITextSizeConstraint.MaxTextSize = 37
--- local TeleportToNewGameButton_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
--- TeleportToNewGameButton_UIAspectRatioConstraint.Parent = TeleportToNewGameButton
--- TeleportToNewGameButton_UIAspectRatioConstraint.AspectRatio = 3.9473683834075928
-
-
 local MainFrame_UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
 MainFrame_UIAspectRatioConstraint.Parent = MainFrame
 MainFrame_UIAspectRatioConstraint.AspectRatio = 1.7601344585418701
@@ -699,9 +665,6 @@ local function showTab(tabName)
         ExecutorFrame.Visible = true
         ExecutorTabButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
     end
-    -- Usunięta moja logika aktualizująca widoczność przycisków specyficznych dla gry.
-    -- Oryginalny skrypt tego nie miał i zakładał, że te przyciski są zawsze widoczne w zakładce Premium
-    -- (lub ich widoczność jest zarządzana gdzie indziej, poza tym fragmentem kodu).
 end
 
 local function checkGamePassStatus(showNotification)
@@ -762,9 +725,6 @@ local function runScriptAndNotify(url, buttonName)
     end
 end
 
--- Usunięta funkcja runPremiumScript, ponieważ oryginalny skrypt nie miał takiej logiki.
--- Przyciski premium po prostu wywołują runScriptAndNotify(), jeśli zakładka Premium jest otwarta.
-
 local function updateHideButtonPosition()
     if MainFrame.Visible then
         local frameAbsolutePosition = MainFrame.AbsolutePosition
@@ -818,7 +778,6 @@ FlyButtonHome.MouseButton1Click:Connect(function()
     runScriptAndNotify("https://pastebin.com/raw/xuSMWfDu", FlyButtonHome.Text)
 end)
 
--- Przycisk "Teleport to New Game" w zakładce Home - usunięty zgodnie z Twoim potwierdzeniem, że go nie było w oryginale.
 
 --- Połączenia przycisków Premium (zgodnie z oryginałem) ---
 SpectateButton_Premium.MouseButton1Click:Connect(function()
@@ -894,30 +853,8 @@ MainFrame.VisibleChanged:Connect(function()
     updateHideButtonPosition()
 end)
 
--- Obsługa zakończenia zakupu GamePassa - USUNIĘTA. Ta logika nie była w oryginalnym skrypcie.
--- MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gamePassId, wasPurchased)
---     if userId == player.UserId and gamePassId == GAMEPASS_ID then
---         if wasPurchased then
---             sendNotification("Wersja premium kupiona pomyślnie! Dziękujemy za zakup.")
---             hasGamePass = true
---         else
---             sendNotification("Anulowano zakup wersji premium.")
---             -- Oryginalny skrypt nie teleportował ponownie po anulowaniu, tylko przy pierwszym kliknięciu
---         end
---         checkGamePassStatus(false)
---     end
--- end)
-
--- Usunięta moja logika aktualizująca widoczność przycisków specyficznych dla gry przy zmianie widoczności ScrollingFramePremium.
--- Oryginalny skrypt tego nie miał.
--- ScrollingFramePremium.VisibleChanged:Connect(function()
---     updateGameSpecificButtonsVisibility()
--- end)
-
-
 --- Inicjalizacja i uruchomienie ---
 checkGamePassStatus(true) -- Sprawdź status GamePassa i wyświetl powiadomienie tylko raz na początku
--- updateGameSpecificButtonsVisibility() -- Usunięte, bo oryginalny skrypt tego nie robił
 showTab("Home") -- Domyślnie pokaż zakładkę Home
 updateHideButtonPosition()
 
