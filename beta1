@@ -14,12 +14,13 @@ local initialGamePassCheckDone = false
 
 local lastHideButtonPosition = UDim2.new(1, -55, 0, 10)
 
+-- Zmiana: Funkcja sendNotification wraca do oryginalnej formy
 local function sendNotification(title, text)
     StarterGui:SetCore("SendNotification", {
         Title = title,
         Text = text,
         Icon = "rbxassetid://102860171689689",
-        Duration = 5
+        Duration = 5 -- Zachowano Duration = 5, jak w Twoim oryginalnym skrypcie dla wszystkich powiadomień.
     })
 end
 
@@ -579,10 +580,7 @@ local function showTab(tabName)
                 end
             else
                 sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby uzyskać dostęp do tej zakładki!")
-                -- PromptGamePassPurchase otwiera okno zakupu, nie teleportuje
                 MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID) 
-                -- Jeśli chcesz teleportować, musisz to zrobić w PromptGamePassPurchaseFinished
-                -- MainFrame.Visible = false -- Zostawiam zakomentowane, by nie zasłaniało okna zakupu
             end
         else
             warn("Błąd podczas sprawdzania wersji premium (showTab):", result)
@@ -616,6 +614,7 @@ local function checkGamePassStatus()
     end
 end
 
+-- Zmieniona funkcja updateMM2ButtonVisibility
 local function updateMM2ButtonVisibility()
     if game.PlaceId == MM2_EXPERIENCE_ID then
         MM2Button.Visible = true
@@ -663,7 +662,6 @@ local function runScriptAndNotify(url, buttonName)
         return
     end
 
-    -- Zakładamy, że loadstring działa
     local func, loadErr = loadstring(scriptContent)
     if not func then
         sendNotification("Universal Scripts", "Błąd parsowania skryptu '" .. buttonName .. "': " .. tostring(loadErr))
@@ -750,25 +748,25 @@ ExecuteButton.MouseButton1Click:Connect(function()
             
             if func then
                 func() -- Wykonaj skompilowany kod
-                sendNotification("Executor", "Kod wykonany pomyślnie!")
+                sendNotification("Universal Scripts", "Kod wykonany pomyślnie!") -- Zmieniono na Universal Scripts
             else
-                sendNotification("Executor", "Błąd składni w kodzie. Sprawdź konsolę Output.", 8)
+                sendNotification("Universal Scripts", "Błąd składni w kodzie. Sprawdź konsolę Output.") -- Zmieniono na Universal Scripts, usunięto duration
                 warn("Błąd składni w kodzie (loadstring):", errorMessage)
             end
         end)
 
         if not success then
-            sendNotification("Executor", "Wystąpił błąd podczas wykonywania kodu: " .. tostring(errorMessage) .. ". Sprawdź konsolę Output.", 8)
+            sendNotification("Universal Scripts", "Wystąpił błąd podczas wykonywania kodu: " .. tostring(errorMessage) .. ". Sprawdź konsolę Output.") -- Zmieniono na Universal Scripts, usunięto duration
             warn("Błąd podczas wykonywania kodu:", errorMessage)
         end
     else
-        sendNotification("Executor", "Pole tekstowe jest puste. Wpisz jakiś kod do wykonania.", 5)
+        sendNotification("Universal Scripts", "Pole tekstowe jest puste. Wpisz jakiś kod do wykonania.") -- Zmieniono na Universal Scripts, usunięto duration
     end
 end)
 
 ClearButton.MouseButton1Click:Connect(function()
     ExecutorTextBox.Text = ""
-    sendNotification("Executor", "Pole tekstowe wyczyszczone.")
+    sendNotification("Universal Scripts", "Pole tekstowe wyczyszczone.") -- Zmieniono na Universal Scripts
 end)
 
 
@@ -810,9 +808,12 @@ RunService.Stepped:Connect(function()
     if game.PlaceId ~= lastPlaceId then
         lastPlaceId = game.PlaceId
         updateMM2ButtonVisibility()
-        -- Jeśli zakładka premium była aktywna i zmieniono grę, sprawdź dostęp ponownie
-        if ScrollingFramePremium.Visible then
-            showTab("Premium")
+        -- WAŻNE: Jeśli zakładka premium była aktywna i zmieniono grę,
+        -- a przyciski MM2/GhostMM2 miałyby zniknąć, przełącz na zakładkę Home.
+        -- To zapobiegnie sytuacji, gdzie użytkownik widzi pustą zakładkę Premium.
+        if ScrollingFramePremium.Visible and not (MM2Button.Visible or GhostMM2Button.Visible) then
+            showTab("Home") 
+            sendNotification("Universal Scripts", "Zmieniono grę. Zakładka Premium przełączona na Home, aby odświeżyć widoczność przycisków.")
         end
     end
 end)
