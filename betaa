@@ -575,6 +575,7 @@ local function runScriptAndNotify(url, buttonName)
         return
     end
 
+    -- Użyj loadstring bez dodatkowych sprawdzeń, zakładając, że działa
     local func, loadErr = loadstring(scriptContent)
     if not func then
         sendNotification("Universal Scripts", "Błąd parsowania skryptu '" .. buttonName .. "': " .. tostring(loadErr))
@@ -690,18 +691,21 @@ ExecuteButton.MouseButton1Click:Connect(function()
     if codeToExecute and codeToExecute ~= "" then
         local success, errorMessage = pcall(function()
             local func = loadstring(codeToExecute) -- Kompiluje tekst jako funkcję Lua
-
+            
+            -- Sprawdzamy, czy funkcja została poprawnie skompilowana
             if func then
-                func()
+                func() -- Wykonaj skompilowany kod
                 sendNotification("Executor", "Kod wykonany pomyślnie!", 3)
             else
+                -- loadstring zwrócił nil i błąd, co oznacza błąd składni
                 sendNotification("Executor", "Błąd składni w kodzie. Sprawdź konsolę Output.", 8)
                 warn("Błąd składni w kodzie (loadstring):", errorMessage)
             end
         end)
 
         if not success then
-            sendNotification("Executor", "Wystąpił błąd podczas wykonywania kodu. Sprawdź konsolę Output.", 8)
+            -- Błąd wystąpił podczas pcall (czyli podczas wykonania func())
+            sendNotification("Executor", "Wystąpił błąd podczas wykonywania kodu: " .. tostring(errorMessage) .. ". Sprawdź konsolę Output.", 8)
             warn("Błąd podczas wykonywania kodu:", errorMessage)
         end
     else
