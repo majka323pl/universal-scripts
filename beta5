@@ -7,8 +7,8 @@ local TeleportService = game:GetService("TeleportService")
 local HttpService = game:GetService("HttpService")
 
 local GAMEPASS_ID = 1296972626
-local MM2_EXPERIENCE_ID = 142823291
-local GAG_GAME_ID = 9262276941
+local MM2_EXPERIENCE_ID = 142823291 -- Murder Mystery 2 PlaceId
+local GAG_GAME_ID = 9262276941     -- Guess A Game PlaceId
 local TELEPORT_PLACE_ID = 6557073879
 
 local hasGamePass = false
@@ -19,6 +19,13 @@ local lastHideButtonPosition = UDim2.new(1, -55, 0, 10)
 -- RĘCZNIE WPROWADZANE LOGI AKTUALIZACJI
 local MANUAL_UPDATE_LOGS = [[
 --- Dziennik Zmian ---
+[23.07.2025] Wersja 1.3
+- Zaimplementowano nową, własną mechanikę sprawdzania gry.
+- Dynamiczna widoczność przycisków MM2, GhostMM2 i GAG w zakładce Premium.
+- Przycisk MM2 i GhostMM2 widoczne tylko w grze Murder Mystery 2.
+- Przycisk GAG widoczny tylko w grze Guess A Game.
+- Wszystkie trzy przyciski ukryte w innych grach.
+
 [22.07.2025] Wersja 1.2
 - Dodano nową zakładkę "Logs" dla ręcznych aktualizacji.
 - Usunięto automatyczne pobieranie logów z Pastebin z zakładki "Home".
@@ -651,18 +658,32 @@ local function checkGamePassStatus()
             end
             initialGamePassCheckDone = true
         end
-        updateSpecialButtonVisibility()
+        -- Już nie wywołujemy updateSpecialButtonVisibility() tutaj, tylko updateGameSpecificButtons()
+        -- updateSpecialButtonVisibility()
     else
         warn("Błąd podczas sprawdzania wersji premium:", result)
         sendNotification("Universal Scripts", "Nie można sprawdzić statusu wersji premium. Spróbuj ponownie.")
     end
 end
 
-local function updateSpecialButtonVisibility()
-    -- !!! WAŻNA POPRAWKA: Upewnij się, że przyciski są widoczne/ukryte niezależnie od zakładki
-    MM2Button.Visible = (game.PlaceId == MM2_EXPERIENCE_ID)
-    GhostMM2Button.Visible = (game.PlaceId == MM2_EXPERIENCE_ID)
-    GAGButton.Visible = (game.PlaceId == GAG_GAME_ID)
+-- NOWA FUNKCJA: Własna mechanika sprawdzania gry i aktualizacji widoczności przycisków
+local function updateGameSpecificButtons()
+    local currentPlaceId = game.PlaceId
+
+    -- Domyślne ukrycie wszystkich przycisków specyficznych dla gry
+    MM2Button.Visible = false
+    GhostMM2Button.Visible = false
+    GAGButton.Visible = false
+
+    -- Logika widoczności
+    if currentPlaceId == MM2_EXPERIENCE_ID then
+        -- Jesteśmy w MM2
+        MM2Button.Visible = true
+        GhostMM2Button.Visible = true
+    elseif currentPlaceId == GAG_GAME_ID then
+        -- Jesteśmy w GAG
+        GAGButton.Visible = true
+    end
 end
 
 local function updateHideButtonPosition()
@@ -838,7 +859,8 @@ end)
 spawn(function()
     task.wait(1)
     sendNotification("Universal Scripts", "Witaj w Universal Scripts! Skrypt załadowany.")
-    checkGamePassStatus() -- Sprawdzanie GamePassa i aktualizacja widoczności MM2/GAG
+    checkGamePassStatus()
+    updateGameSpecificButtons() -- Wywołanie nowej funkcji
     showTab("Home") -- Pokaż domyślną zakładkę
     updateHideButtonPosition()
 end)
@@ -851,12 +873,12 @@ game.Players.PlayerAdded:Connect(function(addedPlayer)
     if addedPlayer == player then
         -- Daj czas na załadowanie postaci po respawnie
         task.wait(1)
-        updateSpecialButtonVisibility() -- Aktualizuj widoczność przycisków specyficznych dla gry po respawnie
+        updateGameSpecificButtons() -- Aktualizuj widoczność przycisków specyficznych dla gry po respawnie
         showTab("Home") -- Możesz zresetować stan GUI do zakładki "Home"
     end
 end)
 
--- WAŻNA POPRAWKA: Wywołuj updateSpecialButtonVisibility() również po wczytaniu gry
+-- WAŻNA POPRAWKA: Wywołuj updateGameSpecificButtons() również po wczytaniu gry
 game.Loaded:Connect(function()
-    updateSpecialButtonVisibility()
+    updateGameSpecificButtons()
 end)
