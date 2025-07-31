@@ -1,0 +1,26 @@
+-- Symulowany złośliwy GUI (do testowania antycheata)
+local CoreGui = game:GetService("CoreGui")
+
+-- Ukrywamy GUI w CoreGui, żeby ominąć PlayerGui
+local fakeGui = Instance.new("ScreenGui")
+fakeGui.Name = "ZlosliwyGUI_" .. tostring(math.random(1000,9999))
+fakeGui.ResetOnSpawn = false
+fakeGui.IgnoreGuiInset = true
+fakeGui.DisplayOrder = 999
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 200, 0, 100)
+frame.Position = UDim2.new(0.5, -100, 0.5, -50)
+frame.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+frame.Parent = fakeGui
+
+local label = Instance.new("TextLabel")
+label.Text = "To jest test exploita"
+label.Size = UDim2.new(1, 0, 1, 0)
+label.BackgroundTransparency = 1
+label.TextColor3 = Color3.new(1,1,1)
+label.TextScaled = true
+label.Parent = frame
+
+-- Dodajemy GUI do CoreGui
+fakeGui.Parent = CoreGui
