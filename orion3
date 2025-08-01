@@ -1,14 +1,13 @@
 -- Załaduj Orion (upewnij się, że pochodzi z bezpiecznego repo)
 local Orion = loadstring(game:HttpGet("https://raw.githubusercontent.com/jensonhirst/Orion/main/Orion.lua"))()
 
--- Główne GUI (zapisane w jednej linii)
+-- Główne GUI
 local Window = Orion:MakeWindow({Name = "99 Nights i Forest Script", HidePremium = false, SaveConfig = true, ConfigFolder = "ForestScriptConfig"})
 
 -- Sekcja Automatyzacji
 local AutoTab = Window:MakeTab({
     Name = "Auto Farm",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
+    Icon = "rbxassetid://4483345998"
 })
 
 AutoTab:AddToggle({
@@ -21,8 +20,7 @@ AutoTab:AddToggle({
 -- Sekcja ESP
 local EspTab = Window:MakeTab({
     Name = "ESP",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
+    Icon = "rbxassetid://4483345998"
 })
 
 EspTab:AddToggle({
@@ -35,8 +33,7 @@ EspTab:AddToggle({
 -- Sekcja walki
 local CombatTab = Window:MakeTab({
     Name = "Combat",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
+    Icon = "rbxassetid://4483345998"
 })
 
 CombatTab:AddToggle({
@@ -46,26 +43,29 @@ CombatTab:AddToggle({
     Flag = "KillAura"
 })
 
--- Pętle robocze
-spawn(function()
-    while task.wait(0.5) do
+-- Główna pętla robocza
+task.spawn(function()
+    while true do
+        task.wait(0.5)
         local character = game.Players.LocalPlayer.Character
-        if not character or not character.PrimaryPart then continue end
-        
+        if not character or not character:FindFirstChild("HumanoidRootPart") then continue end
+
+        local humanoidRootPart = character.HumanoidRootPart
+
         -- Logika Auto Chopa
         if Orion.Flags.AutoChop.Value then
-            local nearestTree, minDistance = nil, math.huge
-            for _, tree in ipairs(workspace:GetDescendants()) do
-                if tree.Name == "TreePart" and tree:IsA("BasePart") then
-                    local distance = (tree.Position - character.PrimaryPart.Position).Magnitude
-                    if distance < minDistance then
+            local nearestTree = nil
+            local minDistance = math.huge
+            for _, obj in ipairs(workspace:GetDescendants()) do
+                if obj.Name:lower():find("tree") and obj:IsA("BasePart") then
+                    local distance = (obj.Position - humanoidRootPart.Position).Magnitude
+                    if distance < minDistance and distance < 50 then
                         minDistance = distance
-                        nearestTree = tree
+                        nearestTree = obj
                     end
                 end
             end
-
-            if nearestTree and minDistance < 50 then
+            if nearestTree then
                 local clickDetector = nearestTree:FindFirstChildOfClass("ClickDetector")
                 if clickDetector then
                     fireclickdetector(clickDetector)
@@ -76,11 +76,10 @@ spawn(function()
         -- Logika ESP
         if Orion.Flags.ESP.Value then
             for _, obj in ipairs(workspace:GetDescendants()) do
-                if (obj.Name == "Chest" or obj.Name == "Resource") and not obj:FindFirstChild("Highlight") then
-                    local hl = Instance.new("Highlight")
+                if (obj.Name:lower():find("chest") or obj.Name:lower():find("resource")) and not obj:FindFirstChild("Highlight") then
+                    local hl = Instance.new("Highlight", obj)
                     hl.FillColor = Color3.new(0, 1, 0)
                     hl.OutlineColor = Color3.new(1, 1, 1)
-                    hl.Parent = obj
                 end
             end
         else
@@ -91,27 +90,41 @@ spawn(function()
                 end
             end
         end
-
+        
         -- Logika Kill Aura
         if Orion.Flags.KillAura.Value then
-            local nearestMob, minDistance = nil, math.huge
-            for _, mob in ipairs(workspace:GetDescendants()) do
-                local humanoid = mob:FindFirstChildOfClass("Humanoid")
-                local primaryPart = mob:FindFirstChild("PrimaryPart")
-                if humanoid and humanoid.Health > 0 and primaryPart then
-                    local distance = (primaryPart.Position - character.PrimaryPart.Position).Magnitude
-                    if distance < minDistance then
+            local nearestMob = nil
+            local minDistance = math.huge
+            for _, obj in ipairs(workspace:GetDescendants()) do
+                local humanoid = obj:FindFirstChildOfClass("Humanoid")
+                if humanoid and humanoid.Health > 0 and obj:FindFirstChild("HumanoidRootPart") then
+                    local distance = (obj.HumanoidRootPart.Position - humanoidRootPart.Position).Magnitude
+                    if distance < minDistance and distance < 15 then
                         minDistance = distance
-                        nearestMob = mob
+                        nearestMob = obj
                     end
                 end
             end
-
-            if nearestMob and minDistance < 10 then
-                -- Ta część wymaga dopasowania do konkretnej gry, ponieważ bezpośrednie zmiany HP na kliencie są zazwyczaj blokowane.
+            
+            if nearestMob then
                 local humanoid = nearestMob:FindFirstChildOfClass("Humanoid")
                 if humanoid then
-                    humanoid:TakeDamage(10)
+                    -- Ta część wymaga wysłania zdarzenia do serwera.
+                    -- Poniżej znajdziesz kilka możliwych wariantów, które musisz przetestować:
+                    
+                    -- Wariant 1: Użycie RemoteEvent
+                    -- local remoteEvent = game:GetService("ReplicatedStorage").TwojeRemoteEvent
+                    -- remoteEvent:FireServer(nearestMob)
+                    
+                    -- Wariant 2: Atak poprzez aktywowanie narzędzia
+                    -- game:GetService("Players").LocalPlayer.Character.Humanoid:EquipTool(toolName)
+                    -- game:GetService("Players").LocalPlayer.Character.Humanoid:MoveTo(nearestMob.HumanoidRootPart.Position)
+                    -- task.wait(0.2)
+                    -- local humanoid = character:FindFirstChildOfClass("Humanoid")
+                    -- humanoid:ChangeState(Enum.HumanoidStateType.Running)
+                    
+                    -- Wariant 3: Wpisanie komendy na czacie
+                    -- game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(":attack "..nearestMob.Name, "All")
                 end
             end
         end
