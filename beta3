@@ -707,7 +707,7 @@ end)
 
 GameButton.MouseButton1Click:Connect(function()
     local gameId = game.PlaceId
-    local url = "https://raw.githubusercontent.com/majka323pl/universal-scripts/main/game_scripts/" .. tostring(gameId)
+    local url = "https://raw.githubusercontent.com/majka323pl/universal-scripts/main/game_scripts/" .. gameId
     checkPremiumAndRunScript(url, GameButton.Text)
 end)
 
