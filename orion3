@@ -1,13 +1,8 @@
 -- Załaduj Orion (upewnij się, że pochodzi z bezpiecznego repo)
 local Orion = loadstring(game:HttpGet("https://raw.githubusercontent.com/jensonhirst/Orion/main/Orion.lua"))()
 
--- Główne GUI
-local Window = Orion:MakeWindow({
-    Name = "99 Nights i Forest Script",
-    HidePremium = false,
-    SaveConfig = true,
-    ConfigFolder = "ForestScriptConfig"
-})
+-- Główne GUI (zapisane w jednej linii)
+local Window = Orion:MakeWindow({Name = "99 Nights i Forest Script", HidePremium = false, SaveConfig = true, ConfigFolder = "ForestScriptConfig"})
 
 -- Sekcja Automatyzacji
 local AutoTab = Window:MakeTab({
@@ -113,8 +108,7 @@ spawn(function()
             end
 
             if nearestMob and minDistance < 10 then
-                -- Wskazówka: Bezpośrednia zmiana HP na kliencie nie zadziała w większości gier.
-                -- Ta część wymaga wysłania zdarzenia do serwera (np. poprzez RemoteEvent).
+                -- Ta część wymaga dopasowania do konkretnej gry, ponieważ bezpośrednie zmiany HP na kliencie są zazwyczaj blokowane.
                 local humanoid = nearestMob:FindFirstChildOfClass("Humanoid")
                 if humanoid then
                     humanoid:TakeDamage(10)
