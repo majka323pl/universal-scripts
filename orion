@@ -1,0 +1,94 @@
+-- Załaduj Orion (upewnij się, że pochodzi z bezpiecznego repo)
+local Orion = loadstring(game:HttpGet("https://raw.githubusercontent.com/jensonhirst/Orion/main/Orion.lua"))()
+
+-- Główne GUI
+local Window = Orion:MakeWindow({
+    Name = "99 Nights i Forest Script",
+    HidePremium = false,
+    SaveConfig = true,
+    ConfigFolder = "ForestScriptConfig"
+})
+
+-- Sekcja Automatyzacji
+local AutoTab = Window:MakeTab({
+    Name = "Auto Farm",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local autoFarmToggle = AutoTab:AddToggle({
+    Name = "Auto Chop Wood",
+    Default = false,
+    Callback = function(value)
+        _G.autoChop = value
+    end
+})
+
+-- ESP Section
+local EspTab = Window:MakeTab({
+    Name = "ESP",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local espToggle = EspTab:AddToggle({
+    Name = "Enable ESP for Resources",
+    Default = false,
+    Callback = function(value)
+        _G.espEnabled = value
+    end
+})
+
+-- Combat tab
+local CombatTab = Window:MakeTab({
+    Name = "Combat",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local killAuraToggle = CombatTab:AddToggle({
+    Name = "Kill Aura",
+    Default = false,
+    Callback = function(value)
+        _G.killAura = value
+    end
+})
+
+-- Worker loops
+spawn(function()
+    while wait(1) do
+        if _G.autoChop then
+            for _, tree in ipairs(workspace.Trees:GetChildren()) do
+                if (tree.Position - game.Players.LocalPlayer.Character.PrimaryPart.Position).Magnitude < 50 then
+                    -- przykładowe narzędzie: chop
+                    game.Players.LocalPlayer.Character.Humanoid:EquipTool(tree)
+                    fireclickdetector(tree.ClickDetector)
+                end
+            end
+        end
+        if _G.espEnabled then
+            for _, obj in ipairs(workspace:GetDescendants()) do
+                if obj.Name == "Chest" or obj.Name == "Resource" then
+                    if not obj:FindFirstChild("Highlight") then
+                        local hl = Instance.new("Highlight", obj)
+                        hl.FillColor = Color3.new(0,1,0)
+                        hl.OutlineColor = Color3.new(1,1,1)
+                    end
+                end
+            end
+        end
+        if _G.killAura then
+            for _, mob in ipairs(workspace.Mobs:GetChildren()) do
+                if mob:FindFirstChild("Humanoid") and mob.Humanoid.Health > 0 then
+                    local dist = (mob.PrimaryPart.Position - game.Players.LocalPlayer.Character.PrimaryPart.Position).Magnitude
+                    if dist < 10 then
+                        game.Players.LocalPlayer.Character.Humanoid:EquipTool(mob.PrimaryPart)
+                        mob.Humanoid:TakeDamage(10)
+                    end
+                end
+            end
+        end
+    end
+end)
+
+Orion:Init()
