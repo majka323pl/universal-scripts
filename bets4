@@ -1,3 +1,9 @@
+--[
+--     Gui2Lua™
+--     10zOfficial
+--     Version 1.0.0
+--]
+
 -- Instances (Your GUI as provided, with added HideButton)
 local player = game.Players.LocalPlayer
 local MarketplaceService = game:GetService("MarketplaceService")
@@ -35,8 +41,9 @@ local NoclipButton = Instance.new("TextButton")
 local UICorner_9 = Instance.new("UICorner")
 local SpeedTool = Instance.new("TextButton")
 local UICorner_10 = Instance.new("UICorner")
-local GameButton = Instance.new("TextButton") -- Przycisk Game został przeniesiony do HomeFrame
-local UICorner_18 = Instance.new("UICorner") -- jego UICorner również
+-- Przeniesiono deklaracje GameButton i jego UICorner do sekcji HomeFrame
+local GameButton = Instance.new("TextButton")
+local UICorner_18 = Instance.new("UICorner")
 
 local PremiumFrame = Instance.new("ScrollingFrame")
 local ConsoleButton = Instance.new("TextButton")
@@ -53,6 +60,7 @@ local SpectateButton = Instance.new("TextButton")
 local UICorner_16 = Instance.new("UICorner")
 local GAGButton = Instance.new("TextButton")
 local UICorner_17 = Instance.new("UICorner")
+
 local ExecutorFrame = Instance.new("Frame")
 local TextBox = Instance.new("TextBox")
 local UICorner_19 = Instance.new("UICorner")
@@ -295,13 +303,13 @@ SpeedTool.TextWrapped = true
 UICorner_10.Parent = SpeedTool
 UICorner_10.CornerRadius = UDim.new(0, 5)
 
--- NOWY PRZYCISK GAME W HOME
+-- Przycisk Game przeniesiony do HomeFrame
 GameButton.Name = "GameButton"
 GameButton.Parent = HomeFrame
 GameButton.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
 GameButton.BorderColor3 = Color3.new(0, 0, 0)
 GameButton.BorderSizePixel = 0
-GameButton.Position = UDim2.new(0.47, 0, 0.12, 0) -- Nowa pozycja, aby pasowała do układu
+GameButton.Position = UDim2.new(0.47, 0, 0.12, 0) -- Nowa pozycja w HomeFrame
 GameButton.Size = UDim2.new(0.22, 0, 0.08, 0)
 GameButton.Font = Enum.Font.FredokaOne
 GameButton.Text = "Game"
@@ -522,7 +530,7 @@ TextBox_2.BorderSizePixel = 0
 TextBox_2.Position = UDim2.new(0.0252824463, 0, 0.0331428982, 0)
 TextBox_2.Size = UDim2.new(0.950478315, 0, 0.935812354, 0)
 TextBox_2.Font = Enum.Font.SourceSans
-TextBox_2.Text = "                                  --- Update Logs---\n[23.07.2025] Wersja 2.5 - Wersja beta\nJest nowa zakładka Updatel Logs!\nJest dodana nowa funkcja Executor która nie wymaga Premium!, teraz już nie musisz używać swojego Executora bo masz go pod ręką!\nZostał usunięty Keysystem, bo okazał się problematyczny.\n[28.07.2025] Wersja 2.6 - Wersja stable\nNaprawiono błędy z wersji beta!\nZostał dodany nowy  interfejs graficzny!"
+TextBox_2.Text = "       --- Update Logs---\n[23.07.2025] Wersja 2.5 - Wersja beta\nJest nowa zakładka Update Logs!\nJest dodana nowa funkcja Executor która nie wymaga Premium!, teraz już nie musisz używać swojego Executora bo masz go pod ręką!\nZostał usunięty Keysystem, bo okazał się problematyczny.\n[28.07.2025] Wersja 2.6 - Wersja stable\nNaprawiono błędy z wersji beta!\nZostał dodany nowy  interfejs graficzny!"
 TextBox_2.TextColor3 = Color3.new(1, 1, 1)
 TextBox_2.TextScaled = true
 TextBox_2.TextSize = 14
@@ -566,201 +574,199 @@ HideButton.Draggable = true
 
 -- Functions
 local function sendNotification(title, text)
-    StarterGui:SetCore("SendNotification", {
-        Title = title,
-        Text = text,
-        Icon = "rbxassetid://102860171689689",
-        Duration = 5
-    })
+    StarterGui:SetCore("SendNotification", {
+        Title = title,
+        Text = text,
+        Icon = "rbxassetid://102860171689689",
+        Duration = 5
+    })
 end
 
 local function showFrame(frameName)
-    HomeFrame.Visible = false
-    PremiumFrame.Visible = false
-    ExecutorFrame.Visible = false
-    UpdateLogsFrame.Visible = false
+    HomeFrame.Visible = false
+    PremiumFrame.Visible = false
+    ExecutorFrame.Visible = false
+    UpdateLogsFrame.Visible = false
 
-    if frameName == "Home" then
-        HomeFrame.Visible = true
-    elseif frameName == "Premium" then
-        if hasGamePass then
-            PremiumFrame.Visible = true
-        else
-            sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby uzyskać dostęp do tej zakładki!")
-            MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
-        end
-    elseif frameName == "Executor" then
-        ExecutorFrame.Visible = true
-    elseif frameName == "UpdateLogs" then
-        UpdateLogsFrame.Visible = true
-    end
+    if frameName == "Home" then
+        HomeFrame.Visible = true
+    elseif frameName == "Premium" then
+        if hasGamePass then
+            PremiumFrame.Visible = true
+        else
+            sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby uzyskać dostęp do tej zakładki!")
+            MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
+        end
+    elseif frameName == "Executor" then
+        ExecutorFrame.Visible = true
+    elseif frameName == "UpdateLogs" then
+        UpdateLogsFrame.Visible = true
+    end
 end
 
 local function checkGamePassStatus()
-    local success, result = pcall(function()
-        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
-    end)
+    local success, result = pcall(function()
+        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
+    end)
 
-    if success then
-        hasGamePass = result
-        if not initialGamePassCheckDone then
-            if hasGamePass then
-                sendNotification("Universal Scripts", "Posiadasz wersję premium! Funkcje Premium odblokowane.")
-            else
-                sendNotification("Universal Scripts", "Nie posiadasz wersji premium. Kliknij zakładkę Premium, aby uzyskać dostęp do funkcji.")
-            end
-            initialGamePassCheckDone = true
-        end
-    else
-        warn("Błąd podczas sprawdzania wersji premium:", result)
-        sendNotification("Universal Scripts", "Nie można sprawdzić statusu wersji premium. Spróbuj ponownie.")
-    end
+    if success then
+        hasGamePass = result
+        if not initialGamePassCheckDone then
+            if hasGamePass then
+                sendNotification("Universal Scripts", "Posiadasz wersję premium! Funkcje Premium odblokowane.")
+            else
+                sendNotification("Universal Scripts", "Nie posiadasz wersji premium. Kliknij zakładkę Premium, aby uzyskać dostęp do funkcji.")
+            end
+            initialGamePassCheckDone = true
+        end
+    else
+        warn("Błąd podczas sprawdzania wersji premium:", result)
+        sendNotification("Universal Scripts", "Nie można sprawdzić statusu wersji premium. Spróbuj ponownie.")
+    end
 end
 
 local function runScriptAndNotify(url, buttonName)
-    local success, err = pcall(function()
-        local scriptContent = game:HttpGet(url, true)
-        if scriptContent then
-            loadstring(scriptContent)()
-        else
-            error("Nie można pobrać zawartości skryptu.")
-        end
-    end)
-    if success then
-        sendNotification("Universal Scripts", "Skrypt '" .. buttonName .. "' załadowany!")
-    else
-        sendNotification("Universal Scripts", "Błąd ładowania skryptu '" .. buttonName .. "': " .. tostring(err))
-        warn("Błąd ładowania skryptu '" .. buttonName .. "':", err)
-    end
+    local success, err = pcall(function()
+        local scriptContent = game:HttpGet(url, true)
+        if scriptContent then
+            loadstring(scriptContent)()
+        else
+            error("Nie można pobrać zawartości skryptu.")
+        end
+    end)
+    if success then
+        sendNotification("Universal Scripts", "Skrypt '" .. buttonName .. "' załadowany!")
+    else
+        sendNotification("Universal Scripts", "Błąd ładowania skryptu '" .. buttonName .. "': " .. tostring(err))
+        warn("Błąd ładowania skryptu '" .. buttonName .. "':", err)
+    end
 end
 
 local function checkPremiumAndRunScript(scriptUrl, buttonName)
-    local successGP, currentHasGamePass = pcall(function()
-        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
-    end)
+    local successGP, currentHasGamePass = pcall(function()
+        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
+    end)
 
-    if (successGP and currentHasGamePass) then
-        runScriptAndNotify(scriptUrl, buttonName)
-    else
-        sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
-        MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
-    end
+    if (successGP and currentHasGamePass) then
+        runScriptAndNotify(scriptUrl, buttonName)
+    else
+        sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
+        MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
+    end
 end
 
 -- Button connections (Home Frame)
 AntiFlingButton.MouseButton1Click:Connect(function()
-    runScriptAndNotify("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/anty-fling", AntiFlingButton.Text)
+    runScriptAndNotify("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/anty-fling", AntiFlingButton.Text)
 end)
 
 ClickTPToolButton.MouseButton1Click:Connect(function()
-    runScriptAndNotify("https://pastebin.com/raw/4KF2WJ9u", ClickTPToolButton.Text)
+    runScriptAndNotify("https://pastebin.com/raw/4KF2WJ9u", ClickTPToolButton.Text)
 end)
 
 FlyButton.MouseButton1Click:Connect(function()
-    runScriptAndNotify("https://pastebin.com/raw/xuSMWfDu", FlyButton.Text)
+    runScriptAndNotify("https://pastebin.com/raw/xuSMWfDu", FlyButton.Text)
 end)
 
 InfJumpButton.MouseButton1Click:Connect(function()
-    runScriptAndNotify("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/infinity-jump", InfJumpButton.Text)
+    runScriptAndNotify("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/infinity-jump", InfJumpButton.Text)
 end)
 
 NoclipButton.MouseButton1Click:Connect(function()
-    runScriptAndNotify("https://pastebin.com/raw/CnbYfaj1", NoclipButton.Text)
+    runScriptAndNotify("https://pastebin.com/raw/CnbYfaj1", NoclipButton.Text)
 end)
 
 SpeedTool.MouseButton1Click:Connect(function()
-    runScriptAndNotify("https://pastebin.com/raw/X7B0HPc2", SpeedTool.Text)
+    runScriptAndNotify("https://pastebin.com/raw/X7B0HPc2", SpeedTool.Text)
 end)
 
--- Nowy event dla przycisku Game
 GameButton.MouseButton1Click:Connect(function()
-    local gameId = game.PlaceId
-    local url = "https://raw.githubusercontent.com/majka323pl/universal-scripts/main/game_scripts/" .. gameId
-    runScriptAndNotify(url, GameButton.Text)
+    local gameId = game.PlaceId
+    local url = "https://raw.githubusercontent.com/majka323pl/universal-scripts/main/game_scripts/" .. gameId
+    runScriptAndNotify(url, GameButton.Text)
 end)
 
 -- Button connections (Premium Frame)
 ConsoleButton.MouseButton1Click:Connect(function()
-    checkPremiumAndRunScript("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source", ConsoleButton.Text)
+    checkPremiumAndRunScript("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source", ConsoleButton.Text)
 end)
 
 FlingButton.MouseButton1Click:Connect(function()
-    checkPremiumAndRunScript('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt', FlingButton.Text)
+    checkPremiumAndRunScript('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt', FlingButton.Text)
 end)
 
 GhostMM2Button.MouseButton1Click:Connect(function()
-    checkPremiumAndRunScript("https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Murder%20Mystery", GhostMM2Button.Text)
+    checkPremiumAndRunScript("https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Murder%20Mystery", GhostMM2Button.Text)
 end)
 
 InvisibilityButton.MouseButton1Click:Connect(function()
-    checkPremiumAndRunScript('https://pastebin.com/raw/3Rnd9rHf', InvisibilityButton.Text)
+    checkPremiumAndRunScript('https://pastebin.com/raw/3Rnd9rHf', InvisibilityButton.Text)
 end)
 
 MM2Button.MouseButton1Click:Connect(function()
-    checkPremiumAndRunScript("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring", MM2Button.Text)
+    checkPremiumAndRunScript("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring", MM2Button.Text)
 end)
 
 SpectateButton.MouseButton1Click:Connect(function()
-    checkPremiumAndRunScript("https://pastebin.com/raw/UFVLWQRw", SpectateButton.Text)
+    checkPremiumAndRunScript("https://pastebin.com/raw/UFVLWQRw", SpectateButton.Text)
 end)
 
 GAGButton.MouseButton1Click:Connect(function()
-    checkPremiumAndRunScript("https://raw.githubusercontent.com/ThundarZ/Welcome/main/Main/GaG/Main.lua", GAGButton.Text)
+    checkPremiumAndRunScript("https://raw.githubusercontent.com/ThundarZ/Welcome/main/Main/GaG/Main.lua", GAGButton.Text)
 end)
-
 
 -- Button connections (Executor Frame)
 ExecuteButton.MouseButton1Click:Connect(function()
-    local scriptContent = TextBox.Text
-    local success, err = pcall(function()
-        loadstring(scriptContent)()
-    end)
-    if success then
-        sendNotification("Executor", "Skrypt wykonany pomyślnie!")
-    else
-        sendNotification("Executor", "Błąd wykonania skryptu: " .. tostring(err))
-        warn("Błąd wykonania skryptu:", err)
-    end
+    local scriptContent = TextBox.Text
+    local success, err = pcall(function()
+        loadstring(scriptContent)()
+    end)
+    if success then
+        sendNotification("Executor", "Skrypt wykonany pomyślnie!")
+    else
+        sendNotification("Executor", "Błąd wykonania skryptu: " .. tostring(err))
+        warn("Błąd wykonania skryptu:", err)
+    end
 end)
 
 ClearButton.MouseButton1Click:Connect(function()
-    TextBox.Text = ""
-    sendNotification("Executor", "Zawartość wyczyszczona.")
+    TextBox.Text = ""
+    sendNotification("Executor", "Zawartość wyczyszczona.")
 end)
 
 -- Tab navigation
 HomeButton.MouseButton1Click:Connect(function()
-    showFrame("Home")
+    showFrame("Home")
 end)
 
 PremiumButton.MouseButton1Click:Connect(function()
-    showFrame("Premium")
+    showFrame("Premium")
 end)
 
 ExecutorButton.MouseButton1Click:Connect(function()
-    showFrame("Executor")
+    showFrame("Executor")
 end)
 
 UpdateLogsButton.MouseButton1Click:Connect(function()
-    showFrame("UpdateLogs")
+    showFrame("UpdateLogs")
 end)
 
 -- HideButton functionality
 HideButton.MouseButton1Click:Connect(function()
-    Frame.Visible = not Frame.Visible
+    Frame.Visible = not Frame.Visible
 end)
 
 MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gamePassId, wasPurchased)
-    if userId == player.UserId and gamePassId == GAMEPASS_ID then
-        if wasPurchased then
-            sendNotification("Universal Scripts", "Wersja premium kupiona pomyślnie! Dziękujemy za zakup.")
-            hasGamePass = true
-            showFrame("Premium")
-        else
-            sendNotification("Universal Scripts", "Anulowano zakup wersji premium.")
-        end
-        checkGamePassStatus()
-    end
+    if userId == player.UserId and gamePassId == GAMEPASS_ID then
+        if wasPurchased then
+            sendNotification("Universal Scripts", "Wersja premium kupiona pomyślnie! Dziękujemy za zakup.")
+            hasGamePass = true
+            showFrame("Premium")
+        else
+            sendNotification("Universal Scripts", "Anulowano zakup wersji premium.")
+        end
+        checkGamePassStatus()
+    end
 end)
 
 -- Initial setup
