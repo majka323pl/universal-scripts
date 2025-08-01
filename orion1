@@ -1,0 +1,148 @@
+-- Załaduj Orion (upewnij się, że pochodzi z bezpiecznego repo)
+local Orion = loadstring(game:HttpGet("https://raw.githubusercontent.com/jensonhirst/Orion/main/Orion.lua"))()
+
+-- Główne GUI
+local Window = Orion:MakeWindow({
+    Name = "99 Nights i Forest Script",
+    HidePremium = false,
+    SaveConfig = true,
+    ConfigFolder = "ForestScriptConfig"
+})
+
+---
+--- Sekcja Automatyzacji
+---
+
+local AutoTab = Window:MakeTab({
+    Name = "Auto Farm",
+    Icon = "rbxassetid://4483345998"
+})
+
+local autoChopToggle = AutoTab:AddToggle({
+    Name = "Auto Chop Wood",
+    Default = false
+})
+
+local autoMineToggle = AutoTab:AddToggle({
+    Name = "Auto Mine",
+    Default = false
+})
+
+---
+--- ESP Section
+---
+
+local EspTab = Window:MakeTab({
+    Name = "ESP",
+    Icon = "rbxassetid://4483345998"
+})
+
+local espToggle = EspTab:AddToggle({
+    Name = "Enable ESP for Resources",
+    Default = false
+})
+
+---
+--- Combat tab
+---
+
+local CombatTab = Window:MakeTab({
+    Name = "Combat",
+    Icon = "rbxassetid://4483345998"
+})
+
+local killAuraToggle = CombatTab:AddToggle({
+    Name = "Kill Aura",
+    Default = false
+})
+
+---
+--- Pętle robocze
+---
+
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+-- Funkcja do znajdowania najbliższego obiektu
+local function findNearestObject(folder, filterName)
+    local nearestObject = nil
+    local minDistance = math.huge
+    local characterPosition = character.PrimaryPart.Position
+
+    for _, obj in ipairs(folder:GetChildren()) do
+        if obj.Name == filterName then
+            local distance = (obj.Position - characterPosition).Magnitude
+            if distance < minDistance then
+                minDistance = distance
+                nearestObject = obj
+            end
+        end
+    end
+    return nearestObject, minDistance
+end
+
+-- Pętla główna (wątek worker)
+spawn(function()
+    while true do
+        task.wait(0.5) -- Użyj task.wait() zamiast wait() dla lepszej wydajności
+
+        character = player.Character or player.CharacterAdded:Wait()
+        if not character or not character.PrimaryPart then continue end
+
+        -- Auto Farming
+        if autoChopToggle.Value or autoMineToggle.Value then
+            local targetObject, dist
+            
+            if autoChopToggle.Value then
+                targetObject, dist = findNearestObject(workspace:FindFirstChild("Trees"), "TreePart")
+                if targetObject and dist < 20 then
+                    humanoid:MoveTo(targetObject.Position)
+                    task.wait(0.2)
+                    -- Tutaj powinieneś użyć RemoteFunction/Event do interakcji z serwerem, jeśli gra to wspiera
+                    -- Na przykład: game.ReplicatedStorage.RemoteEvents.ChopTree:FireServer(targetObject)
+                end
+            end
+
+            if autoMineToggle.Value then
+                targetObject, dist = findNearestObject(workspace:FindFirstChild("Ores"), "OrePart")
+                if targetObject and dist < 20 then
+                    humanoid:MoveTo(targetObject.Position)
+                    task.wait(0.2)
+                    -- Podobnie jak powyżej, użyj RemoteEvent
+                end
+            end
+        end
+
+        -- Kill Aura
+        if killAuraToggle.Value then
+            local targetMob, dist = findNearestObject(workspace:FindFirstChild("Mobs"), "MobPart") -- Zmień "MobPart" na właściwą nazwę
+            if targetMob and dist < 10 then
+                -- Atakowanie moba
+                -- Tutaj również najlepiej użyć RemoteEvent do ataku, zamiast zmieniać health
+                -- Na przykład: game.ReplicatedStorage.RemoteEvents.Attack:FireServer(targetMob)
+            end
+        end
+
+        -- ESP
+        if espToggle.Value then
+            for _, obj in ipairs(workspace:GetDescendants()) do
+                if (obj.Name == "Chest" or obj.Name == "Resource") and not obj:FindFirstChild("Highlight") then
+                    local hl = Instance.new("Highlight")
+                    hl.FillColor = Color3.new(0, 1, 0)
+                    hl.OutlineColor = Color3.new(1, 1, 1)
+                    hl.Parent = obj
+                end
+            end
+        else
+            for _, obj in ipairs(workspace:GetDescendants()) do
+                local hl = obj:FindFirstChild("Highlight")
+                if hl then
+                    hl:Destroy()
+                end
+            end
+        end
+    end
+end)
+
+Orion:Init()
