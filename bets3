@@ -1,9 +1,3 @@
---[
---         Gui2Lua™
---         10zOfficial
---         Version 1.0.0
---]
-
 -- Instances (Your GUI as provided, with added HideButton)
 local player = game.Players.LocalPlayer
 local MarketplaceService = game:GetService("MarketplaceService")
@@ -41,6 +35,9 @@ local NoclipButton = Instance.new("TextButton")
 local UICorner_9 = Instance.new("UICorner")
 local SpeedTool = Instance.new("TextButton")
 local UICorner_10 = Instance.new("UICorner")
+local GameButton = Instance.new("TextButton") -- Przycisk Game został przeniesiony do HomeFrame
+local UICorner_18 = Instance.new("UICorner") -- jego UICorner również
+
 local PremiumFrame = Instance.new("ScrollingFrame")
 local ConsoleButton = Instance.new("TextButton")
 local UICorner_11 = Instance.new("UICorner")
@@ -56,8 +53,6 @@ local SpectateButton = Instance.new("TextButton")
 local UICorner_16 = Instance.new("UICorner")
 local GAGButton = Instance.new("TextButton")
 local UICorner_17 = Instance.new("UICorner")
-local GameButton = Instance.new("TextButton")
-local UICorner_18 = Instance.new("UICorner")
 local ExecutorFrame = Instance.new("Frame")
 local TextBox = Instance.new("TextBox")
 local UICorner_19 = Instance.new("UICorner")
@@ -300,6 +295,24 @@ SpeedTool.TextWrapped = true
 UICorner_10.Parent = SpeedTool
 UICorner_10.CornerRadius = UDim.new(0, 5)
 
+-- NOWY PRZYCISK GAME W HOME
+GameButton.Name = "GameButton"
+GameButton.Parent = HomeFrame
+GameButton.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
+GameButton.BorderColor3 = Color3.new(0, 0, 0)
+GameButton.BorderSizePixel = 0
+GameButton.Position = UDim2.new(0.47, 0, 0.12, 0) -- Nowa pozycja, aby pasowała do układu
+GameButton.Size = UDim2.new(0.22, 0, 0.08, 0)
+GameButton.Font = Enum.Font.FredokaOne
+GameButton.Text = "Game"
+GameButton.TextColor3 = Color3.new(1, 1, 1)
+GameButton.TextScaled = true
+GameButton.TextSize = 14
+GameButton.TextWrapped = true
+
+UICorner_18.Parent = GameButton
+UICorner_18.CornerRadius = UDim.new(0, 5)
+
 PremiumFrame.Name = "PremiumFrame"
 PremiumFrame.Parent = Frame
 PremiumFrame.Active = true
@@ -430,23 +443,6 @@ GAGButton.TextWrapped = true
 
 UICorner_17.Parent = GAGButton
 UICorner_17.CornerRadius = UDim.new(0, 5)
-
-GameButton.Name = "GameButton"
-GameButton.Parent = PremiumFrame
-GameButton.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
-GameButton.BorderColor3 = Color3.new(0, 0, 0)
-GameButton.BorderSizePixel = 0
-GameButton.Position = UDim2.new(0.70, 0, 0.12, 0)
-GameButton.Size = UDim2.new(0.22, 0, 0.08, 0)
-GameButton.Font = Enum.Font.FredokaOne
-GameButton.Text = "Game"
-GameButton.TextColor3 = Color3.new(1, 1, 1)
-GameButton.TextScaled = true
-GameButton.TextSize = 14
-GameButton.TextWrapped = true
-
-UICorner_18.Parent = GameButton
-UICorner_18.CornerRadius = UDim.new(0, 5)
 
 ExecutorFrame.Name = "ExecutorFrame"
 ExecutorFrame.Parent = Frame
@@ -624,15 +620,10 @@ end
 local function runScriptAndNotify(url, buttonName)
     local success, err = pcall(function()
         local scriptContent = game:HttpGet(url, true)
-        if scriptContent and scriptContent ~= "" then
-            local func = loadstring(scriptContent)
-            if func then
-                pcall(func)
-            else
-                error("Błąd kompilacji skryptu: invalid Lua syntax")
-            end
+        if scriptContent then
+            loadstring(scriptContent)()
         else
-            error("Nie można pobrać zawartości skryptu lub skrypt jest pusty.")
+            error("Nie można pobrać zawartości skryptu.")
         end
     end)
     if success then
@@ -681,6 +672,13 @@ SpeedTool.MouseButton1Click:Connect(function()
     runScriptAndNotify("https://pastebin.com/raw/X7B0HPc2", SpeedTool.Text)
 end)
 
+-- Nowy event dla przycisku Game
+GameButton.MouseButton1Click:Connect(function()
+    local gameId = game.PlaceId
+    local url = "https://raw.githubusercontent.com/majka323pl/universal-scripts/main/game_scripts/" .. gameId
+    runScriptAndNotify(url, GameButton.Text)
+end)
+
 -- Button connections (Premium Frame)
 ConsoleButton.MouseButton1Click:Connect(function()
     checkPremiumAndRunScript("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source", ConsoleButton.Text)
@@ -710,32 +708,18 @@ GAGButton.MouseButton1Click:Connect(function()
     checkPremiumAndRunScript("https://raw.githubusercontent.com/ThundarZ/Welcome/main/Main/GaG/Main.lua", GAGButton.Text)
 end)
 
-GameButton.MouseButton1Click:Connect(function()
-    local gameId = game.PlaceId
-    local url = "https://raw.githubusercontent.com/majka323pl/universal-scripts/main/game_scripts/" .. gameId
-    checkPremiumAndRunScript(url, GameButton.Text)
-end)
 
 -- Button connections (Executor Frame)
 ExecuteButton.MouseButton1Click:Connect(function()
     local scriptContent = TextBox.Text
-    if scriptContent and string.gsub(scriptContent, "%s", "") ~= "" then
-        local success, err = pcall(function()
-            local func = loadstring(scriptContent)
-            if func then
-                pcall(func)
-            else
-                error("Błąd kompilacji skryptu: invalid Lua syntax")
-            end
-        end)
-        if success then
-            sendNotification("Executor", "Skrypt wykonany pomyślnie!")
-        else
-            sendNotification("Executor", "Błąd wykonania skryptu: " .. tostring(err))
-            warn("Błąd wykonania skryptu:", err)
-        end
+    local success, err = pcall(function()
+        loadstring(scriptContent)()
+    end)
+    if success then
+        sendNotification("Executor", "Skrypt wykonany pomyślnie!")
     else
-        sendNotification("Executor", "Pole tekstowe jest puste!")
+        sendNotification("Executor", "Błąd wykonania skryptu: " .. tostring(err))
+        warn("Błąd wykonania skryptu:", err)
     end
 end)
 
