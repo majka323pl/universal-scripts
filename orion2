@@ -9,123 +9,77 @@ local Window = Orion:MakeWindow({
     ConfigFolder = "ForestScriptConfig"
 })
 
----
---- Sekcja Automatyzacji
----
-
+-- Sekcja Automatyzacji
 local AutoTab = Window:MakeTab({
     Name = "Auto Farm",
-    Icon = "rbxassetid://4483345998"
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
 })
 
-local autoChopToggle = AutoTab:AddToggle({
+AutoTab:AddToggle({
     Name = "Auto Chop Wood",
-    Default = false
+    Default = false,
+    Save = true,
+    Flag = "AutoChop"
 })
 
-local autoMineToggle = AutoTab:AddToggle({
-    Name = "Auto Mine",
-    Default = false
-})
-
----
---- ESP Section
----
-
+-- Sekcja ESP
 local EspTab = Window:MakeTab({
     Name = "ESP",
-    Icon = "rbxassetid://4483345998"
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
 })
 
-local espToggle = EspTab:AddToggle({
+EspTab:AddToggle({
     Name = "Enable ESP for Resources",
-    Default = false
+    Default = false,
+    Save = true,
+    Flag = "ESP"
 })
 
----
---- Combat tab
----
-
+-- Sekcja walki
 local CombatTab = Window:MakeTab({
     Name = "Combat",
-    Icon = "rbxassetid://4483345998"
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
 })
 
-local killAuraToggle = CombatTab:AddToggle({
+CombatTab:AddToggle({
     Name = "Kill Aura",
-    Default = false
+    Default = false,
+    Save = true,
+    Flag = "KillAura"
 })
 
----
---- Pętle robocze
----
-
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoid = character:WaitForChild("Humanoid")
-
--- Funkcja do znajdowania najbliższego obiektu
-local function findNearestObject(folder, filterName)
-    local nearestObject = nil
-    local minDistance = math.huge
-    local characterPosition = character.PrimaryPart.Position
-
-    for _, obj in ipairs(folder:GetChildren()) do
-        if obj.Name == filterName then
-            local distance = (obj.Position - characterPosition).Magnitude
-            if distance < minDistance then
-                minDistance = distance
-                nearestObject = obj
-            end
-        end
-    end
-    return nearestObject, minDistance
-end
-
--- Pętla główna (wątek worker)
+-- Pętle robocze
 spawn(function()
-    while true do
-        task.wait(0.5) -- Użyj task.wait() zamiast wait() dla lepszej wydajności
-
-        character = player.Character or player.CharacterAdded:Wait()
+    while task.wait(0.5) do
+        local character = game.Players.LocalPlayer.Character
         if not character or not character.PrimaryPart then continue end
-
-        -- Auto Farming
-        if autoChopToggle.Value or autoMineToggle.Value then
-            local targetObject, dist
-            
-            if autoChopToggle.Value then
-                targetObject, dist = findNearestObject(workspace:FindFirstChild("Trees"), "TreePart")
-                if targetObject and dist < 20 then
-                    humanoid:MoveTo(targetObject.Position)
-                    task.wait(0.2)
-                    -- Tutaj powinieneś użyć RemoteFunction/Event do interakcji z serwerem, jeśli gra to wspiera
-                    -- Na przykład: game.ReplicatedStorage.RemoteEvents.ChopTree:FireServer(targetObject)
+        
+        -- Logika Auto Chopa
+        if Orion.Flags.AutoChop.Value then
+            local nearestTree, minDistance = nil, math.huge
+            for _, tree in ipairs(workspace:GetDescendants()) do
+                if tree.Name == "TreePart" and tree:IsA("BasePart") then
+                    local distance = (tree.Position - character.PrimaryPart.Position).Magnitude
+                    if distance < minDistance then
+                        minDistance = distance
+                        nearestTree = tree
+                    end
                 end
             end
 
-            if autoMineToggle.Value then
-                targetObject, dist = findNearestObject(workspace:FindFirstChild("Ores"), "OrePart")
-                if targetObject and dist < 20 then
-                    humanoid:MoveTo(targetObject.Position)
-                    task.wait(0.2)
-                    -- Podobnie jak powyżej, użyj RemoteEvent
+            if nearestTree and minDistance < 50 then
+                local clickDetector = nearestTree:FindFirstChildOfClass("ClickDetector")
+                if clickDetector then
+                    fireclickdetector(clickDetector)
                 end
             end
         end
 
-        -- Kill Aura
-        if killAuraToggle.Value then
-            local targetMob, dist = findNearestObject(workspace:FindFirstChild("Mobs"), "MobPart") -- Zmień "MobPart" na właściwą nazwę
-            if targetMob and dist < 10 then
-                -- Atakowanie moba
-                -- Tutaj również najlepiej użyć RemoteEvent do ataku, zamiast zmieniać health
-                -- Na przykład: game.ReplicatedStorage.RemoteEvents.Attack:FireServer(targetMob)
-            end
-        end
-
-        -- ESP
-        if espToggle.Value then
+        -- Logika ESP
+        if Orion.Flags.ESP.Value then
             for _, obj in ipairs(workspace:GetDescendants()) do
                 if (obj.Name == "Chest" or obj.Name == "Resource") and not obj:FindFirstChild("Highlight") then
                     local hl = Instance.new("Highlight")
@@ -139,6 +93,31 @@ spawn(function()
                 local hl = obj:FindFirstChild("Highlight")
                 if hl then
                     hl:Destroy()
+                end
+            end
+        end
+
+        -- Logika Kill Aura
+        if Orion.Flags.KillAura.Value then
+            local nearestMob, minDistance = nil, math.huge
+            for _, mob in ipairs(workspace:GetDescendants()) do
+                local humanoid = mob:FindFirstChildOfClass("Humanoid")
+                local primaryPart = mob:FindFirstChild("PrimaryPart")
+                if humanoid and humanoid.Health > 0 and primaryPart then
+                    local distance = (primaryPart.Position - character.PrimaryPart.Position).Magnitude
+                    if distance < minDistance then
+                        minDistance = distance
+                        nearestMob = mob
+                    end
+                end
+            end
+
+            if nearestMob and minDistance < 10 then
+                -- Wskazówka: Bezpośrednia zmiana HP na kliencie nie zadziała w większości gier.
+                -- Ta część wymaga wysłania zdarzenia do serwera (np. poprzez RemoteEvent).
+                local humanoid = nearestMob:FindFirstChildOfClass("Humanoid")
+                if humanoid then
+                    humanoid:TakeDamage(10)
                 end
             end
         end
