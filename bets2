@@ -1,0 +1,784 @@
+--[
+--         Gui2Lua™
+--         10zOfficial
+--         Version 1.0.0
+--]
+
+-- Instances (Your GUI as provided, with added HideButton)
+local player = game.Players.LocalPlayer
+local MarketplaceService = game:GetService("MarketplaceService")
+local StarterGui = game:GetService("StarterGui")
+local HttpService = game:GetService("HttpService")
+
+local GAMEPASS_ID = 1296972626
+local hasGamePass = false
+local initialGamePassCheckDone = false
+
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local PageFrame = Instance.new("Frame")
+local HomeButton = Instance.new("TextButton")
+local UICorner = Instance.new("UICorner")
+local PremiumButton = Instance.new("TextButton")
+local UICorner_2 = Instance.new("UICorner")
+local ExecutorButton = Instance.new("TextButton")
+local UICorner_3 = Instance.new("UICorner")
+local UpdateLogsButton = Instance.new("TextButton")
+local UICorner_4 = Instance.new("UICorner")
+local TextLabel = Instance.new("TextLabel")
+local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
+local HomeFrame = Instance.new("ScrollingFrame")
+local AntiFlingButton = Instance.new("TextButton")
+local UICorner_5 = Instance.new("UICorner")
+local ClickTPToolButton = Instance.new("TextButton")
+local UICorner_6 = Instance.new("UICorner")
+local FlyButton = Instance.new("TextButton")
+local UICorner_7 = Instance.new("UICorner")
+local InfJumpButton = Instance.new("TextButton")
+local UICorner_8 = Instance.new("UICorner")
+local NoclipButton = Instance.new("TextButton")
+local UICorner_9 = Instance.new("UICorner")
+local SpeedTool = Instance.new("TextButton")
+local UICorner_10 = Instance.new("UICorner")
+local PremiumFrame = Instance.new("ScrollingFrame")
+local ConsoleButton = Instance.new("TextButton")
+local UICorner_11 = Instance.new("UICorner")
+local FlingButton = Instance.new("TextButton")
+local UICorner_12 = Instance.new("UICorner")
+local GhostMM2Button = Instance.new("TextButton")
+local UICorner_13 = Instance.new("UICorner")
+local InvisibilityButton = Instance.new("TextButton")
+local UICorner_14 = Instance.new("UICorner")
+local MM2Button = Instance.new("TextButton")
+local UICorner_15 = Instance.new("UICorner")
+local SpectateButton = Instance.new("TextButton")
+local UICorner_16 = Instance.new("UICorner")
+local GAGButton = Instance.new("TextButton")
+local UICorner_17 = Instance.new("UICorner")
+local GameButton = Instance.new("TextButton")
+local UICorner_18 = Instance.new("UICorner")
+local ExecutorFrame = Instance.new("Frame")
+local TextBox = Instance.new("TextBox")
+local UICorner_19 = Instance.new("UICorner")
+local ExecuteButton = Instance.new("TextButton")
+local UICorner_20 = Instance.new("UICorner")
+local ClearButton = Instance.new("TextButton")
+local UICorner_21 = Instance.new("UICorner")
+local UpdateLogsFrame = Instance.new("Frame")
+local TextBox_2 = Instance.new("TextBox")
+local TextLabel_2 = Instance.new("TextLabel")
+local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
+local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
+
+-- Nowy przycisk HideButton
+local HideButton = Instance.new("ImageButton")
+
+-- Properties
+ScreenGui.Parent = player:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ScreenGui.ResetOnSpawn = false
+
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.new(0.294118, 0.294118, 0.294118)
+Frame.BorderColor3 = Color3.new(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(-0.000152064255, 0, -0.000255506427, 0)
+Frame.Size = UDim2.new(1.00015211, 0, 1.00025547, 0)
+
+-- Dodano UICorner dla głównej ramki
+local FrameCorner = Instance.new("UICorner")
+FrameCorner.Parent = Frame
+FrameCorner.CornerRadius = UDim.new(0, 10) -- Ustawiono zaokrąglenie rogów
+
+PageFrame.Name = "PageFrame"
+PageFrame.Parent = Frame
+PageFrame.BackgroundColor3 = Color3.new(0.156863, 0.156863, 0.156863)
+PageFrame.BorderColor3 = Color3.new(0, 0, 0)
+PageFrame.BorderSizePixel = 0
+PageFrame.Size = UDim2.new(0.154673219, 0, 1.00814199, 0)
+
+HomeButton.Name = "HomeButton"
+HomeButton.Parent = Frame
+HomeButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
+HomeButton.BorderColor3 = Color3.new(0, 0, 0)
+HomeButton.BorderSizePixel = 0
+HomeButton.Position = UDim2.new(0.00523903081, 0, 0.0903890133, 0)
+HomeButton.Size = UDim2.new(0.142763585, 0, 0.0572082363, 0)
+HomeButton.Font = Enum.Font.FredokaOne
+HomeButton.Text = "Home"
+HomeButton.TextColor3 = Color3.new(0, 0, 0)
+HomeButton.TextScaled = true
+HomeButton.TextSize = 14
+HomeButton.TextWrapped = true
+
+UICorner.Parent = HomeButton
+UICorner.CornerRadius = UDim.new(0, 5)
+
+PremiumButton.Name = "PremiumButton"
+PremiumButton.Parent = Frame
+PremiumButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
+PremiumButton.BorderColor3 = Color3.new(0, 0, 0)
+PremiumButton.BorderSizePixel = 0
+PremiumButton.Position = UDim2.new(0.00523903081, 0, 0.168192223, 0)
+PremiumButton.Size = UDim2.new(0.142763585, 0, 0.0572082363, 0)
+PremiumButton.Font = Enum.Font.FredokaOne
+PremiumButton.Text = "Premium"
+PremiumButton.TextColor3 = Color3.new(0, 0, 0)
+PremiumButton.TextScaled = true
+PremiumButton.TextSize = 14
+PremiumButton.TextWrapped = true
+
+UICorner_2.Parent = PremiumButton
+UICorner_2.CornerRadius = UDim.new(0, 5)
+
+ExecutorButton.Name = "ExecutorButton"
+ExecutorButton.Parent = Frame
+ExecutorButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
+ExecutorButton.BorderColor3 = Color3.new(0, 0, 0)
+ExecutorButton.BorderSizePixel = 0
+ExecutorButton.Position = UDim2.new(0.00523903081, 0, 0.245995417, 0)
+ExecutorButton.Size = UDim2.new(0.142763585, 0, 0.0572082363, 0)
+ExecutorButton.Font = Enum.Font.FredokaOne
+ExecutorButton.Text = "Executor"
+ExecutorButton.TextColor3 = Color3.new(0, 0, 0)
+ExecutorButton.TextScaled = true
+ExecutorButton.TextSize = 14
+ExecutorButton.TextWrapped = true
+
+UICorner_3.Parent = ExecutorButton
+UICorner_3.CornerRadius = UDim.new(0, 5)
+
+UpdateLogsButton.Name = "UpdateLogsButton"
+UpdateLogsButton.Parent = Frame
+UpdateLogsButton.BackgroundColor3 = Color3.new(0.419608, 0.419608, 0.419608)
+UpdateLogsButton.BorderColor3 = Color3.new(0, 0, 0)
+UpdateLogsButton.BorderSizePixel = 0
+UpdateLogsButton.Position = UDim2.new(0.00523903081, 0, 0.326086968, 0)
+UpdateLogsButton.Size = UDim2.new(0.142763585, 0, 0.0572082363, 0)
+UpdateLogsButton.Font = Enum.Font.FredokaOne
+UpdateLogsButton.Text = "Update Logs"
+UpdateLogsButton.TextColor3 = Color3.new(0, 0, 0)
+UpdateLogsButton.TextScaled = true
+UpdateLogsButton.TextSize = 14
+UpdateLogsButton.TextWrapped = true
+
+UICorner_4.Parent = UpdateLogsButton
+UICorner_4.CornerRadius = UDim.new(0, 5)
+
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.new(1, 1, 1)
+TextLabel.BackgroundTransparency = 1
+TextLabel.BorderColor3 = Color3.new(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(-0.00228961254, 0, 0.977253437, 0)
+TextLabel.Size = UDim2.new(0.149236277, 0, 0.0324336514, 0)
+TextLabel.Font = Enum.Font.FredokaOne
+TextLabel.Text = "V2.6"
+TextLabel.TextColor3 = Color3.new(1, 1, 1)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14
+TextLabel.TextWrapped = true
+
+UIAspectRatioConstraint.Parent = TextLabel
+UIAspectRatioConstraint.AspectRatio = 9.75
+
+UITextSizeConstraint.Parent = TextLabel
+UITextSizeConstraint.MaxTextSize = 22
+
+HomeFrame.Name = "HomeFrame"
+HomeFrame.Parent = Frame
+HomeFrame.Active = true
+HomeFrame.BackgroundColor3 = Color3.new(1, 1, 1)
+HomeFrame.BackgroundTransparency = 1
+HomeFrame.BorderColor3 = Color3.new(0, 0, 0)
+HomeFrame.BorderSizePixel = 0
+HomeFrame.Position = UDim2.new(0.168303862, 0, 0.0125858122, 0)
+HomeFrame.Size = UDim2.new(0.811696112, 0, 0.978287756, 0)
+HomeFrame.Visible = true -- Domyślnie HomeFrame jest widoczny
+
+-- Zmodyfikowane rozmiary i pozycje przycisków w HomeFrame
+AntiFlingButton.Name = "AntiFlingButton"
+AntiFlingButton.Parent = HomeFrame
+AntiFlingButton.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
+AntiFlingButton.BorderColor3 = Color3.new(0, 0, 0)
+AntiFlingButton.BorderSizePixel = 0
+AntiFlingButton.Position = UDim2.new(0.01, 0, 0.02, 0) -- Proporcjonalna pozycja
+AntiFlingButton.Size = UDim2.new(0.22, 0, 0.08, 0) -- Proporcjonalny rozmiar
+AntiFlingButton.Font = Enum.Font.FredokaOne
+AntiFlingButton.Text = "Anty-Fling"
+AntiFlingButton.TextColor3 = Color3.new(1, 1, 1)
+AntiFlingButton.TextScaled = true
+AntiFlingButton.TextSize = 14
+AntiFlingButton.TextWrapped = true
+
+UICorner_5.Parent = AntiFlingButton
+UICorner_5.CornerRadius = UDim.new(0, 5)
+
+ClickTPToolButton.Name = "ClickTPToolButton"
+ClickTPToolButton.Parent = HomeFrame
+ClickTPToolButton.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
+ClickTPToolButton.BorderColor3 = Color3.new(0, 0, 0)
+ClickTPToolButton.BorderSizePixel = 0
+ClickTPToolButton.Position = UDim2.new(0.24, 0, 0.02, 0)
+ClickTPToolButton.Size = UDim2.new(0.22, 0, 0.08, 0)
+ClickTPToolButton.Font = Enum.Font.FredokaOne
+ClickTPToolButton.Text = "Click TP Tool"
+ClickTPToolButton.TextColor3 = Color3.new(1, 1, 1)
+ClickTPToolButton.TextScaled = true
+ClickTPToolButton.TextSize = 14
+ClickTPToolButton.TextWrapped = true
+
+UICorner_6.Parent = ClickTPToolButton
+UICorner_6.CornerRadius = UDim.new(0, 5)
+
+FlyButton.Name = "FlyButton"
+FlyButton.Parent = HomeFrame
+FlyButton.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
+FlyButton.BorderColor3 = Color3.new(0, 0, 0)
+FlyButton.BorderSizePixel = 0
+FlyButton.Position = UDim2.new(0.47, 0, 0.02, 0)
+FlyButton.Size = UDim2.new(0.22, 0, 0.08, 0)
+FlyButton.Font = Enum.Font.FredokaOne
+FlyButton.Text = "Fly"
+FlyButton.TextColor3 = Color3.new(1, 1, 1)
+FlyButton.TextScaled = true
+FlyButton.TextSize = 14
+FlyButton.TextWrapped = true
+
+UICorner_7.Parent = FlyButton
+UICorner_7.CornerRadius = UDim.new(0, 5)
+
+InfJumpButton.Name = "InfJumpButton"
+InfJumpButton.Parent = HomeFrame
+InfJumpButton.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
+InfJumpButton.BorderColor3 = Color3.new(0, 0, 0)
+InfJumpButton.BorderSizePixel = 0
+InfJumpButton.Position = UDim2.new(0.70, 0, 0.02, 0)
+InfJumpButton.Size = UDim2.new(0.22, 0, 0.08, 0)
+InfJumpButton.Font = Enum.Font.FredokaOne
+InfJumpButton.Text = "Infinity Jump"
+InfJumpButton.TextColor3 = Color3.new(1, 1, 1)
+InfJumpButton.TextScaled = true
+InfJumpButton.TextSize = 14
+InfJumpButton.TextWrapped = true
+
+UICorner_8.Parent = InfJumpButton
+UICorner_8.CornerRadius = UDim.new(0, 5)
+
+NoclipButton.Name = "NoclipButton"
+NoclipButton.Parent = HomeFrame
+NoclipButton.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
+NoclipButton.BorderColor3 = Color3.new(0, 0, 0)
+NoclipButton.BorderSizePixel = 0
+NoclipButton.Position = UDim2.new(0.01, 0, 0.12, 0)
+NoclipButton.Size = UDim2.new(0.22, 0, 0.08, 0)
+NoclipButton.Font = Enum.Font.FredokaOne
+NoclipButton.Text = "NoClip"
+NoclipButton.TextColor3 = Color3.new(1, 1, 1)
+NoclipButton.TextScaled = true
+NoclipButton.TextSize = 14
+NoclipButton.TextWrapped = true
+
+UICorner_9.Parent = NoclipButton
+UICorner_9.CornerRadius = UDim.new(0, 5)
+
+SpeedTool.Name = "SpeedTool"
+SpeedTool.Parent = HomeFrame
+SpeedTool.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
+SpeedTool.BorderColor3 = Color3.new(0, 0, 0)
+SpeedTool.BorderSizePixel = 0
+SpeedTool.Position = UDim2.new(0.24, 0, 0.12, 0)
+SpeedTool.Size = UDim2.new(0.22, 0, 0.08, 0)
+SpeedTool.Font = Enum.Font.FredokaOne
+SpeedTool.Text = "Speed Tool"
+SpeedTool.TextColor3 = Color3.new(1, 1, 1)
+SpeedTool.TextScaled = true
+SpeedTool.TextSize = 14
+SpeedTool.TextWrapped = true
+
+UICorner_10.Parent = SpeedTool
+UICorner_10.CornerRadius = UDim.new(0, 5)
+
+PremiumFrame.Name = "PremiumFrame"
+PremiumFrame.Parent = Frame
+PremiumFrame.Active = true
+PremiumFrame.BackgroundColor3 = Color3.new(1, 1, 1)
+PremiumFrame.BackgroundTransparency = 1
+PremiumFrame.BorderColor3 = Color3.new(0, 0, 0)
+PremiumFrame.BorderSizePixel = 0
+PremiumFrame.Position = UDim2.new(0.168303862, 0, 0.0125858122, 0)
+PremiumFrame.Size = UDim2.new(0.811696112, 0, 0.978287756, 0)
+PremiumFrame.Visible = false
+
+-- Zmodyfikowane rozmiary i pozycje przycisków w PremiumFrame
+ConsoleButton.Name = "ConsoleButton"
+ConsoleButton.Parent = PremiumFrame
+ConsoleButton.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
+ConsoleButton.BorderColor3 = Color3.new(0, 0, 0)
+ConsoleButton.BorderSizePixel = 0
+ConsoleButton.Position = UDim2.new(0.01, 0, 0.02, 0)
+ConsoleButton.Size = UDim2.new(0.22, 0, 0.08, 0)
+ConsoleButton.Font = Enum.Font.FredokaOne
+ConsoleButton.Text = "Console"
+ConsoleButton.TextColor3 = Color3.new(1, 1, 1)
+ConsoleButton.TextScaled = true
+ConsoleButton.TextSize = 14
+ConsoleButton.TextWrapped = true
+
+UICorner_11.Parent = ConsoleButton
+UICorner_11.CornerRadius = UDim.new(0, 5)
+
+FlingButton.Name = "FlingButton"
+FlingButton.Parent = PremiumFrame
+FlingButton.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
+FlingButton.BorderColor3 = Color3.new(0, 0, 0)
+FlingButton.BorderSizePixel = 0
+FlingButton.Position = UDim2.new(0.24, 0, 0.02, 0)
+FlingButton.Size = UDim2.new(0.22, 0, 0.08, 0)
+FlingButton.Font = Enum.Font.FredokaOne
+FlingButton.Text = "Fling"
+FlingButton.TextColor3 = Color3.new(1, 1, 1)
+FlingButton.TextScaled = true
+FlingButton.TextSize = 14
+FlingButton.TextWrapped = true
+
+UICorner_12.Parent = FlingButton
+UICorner_12.CornerRadius = UDim.new(0, 5)
+
+GhostMM2Button.Name = "GhostMM2Button"
+GhostMM2Button.Parent = PremiumFrame
+GhostMM2Button.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
+GhostMM2Button.BorderColor3 = Color3.new(0, 0, 0)
+GhostMM2Button.BorderSizePixel = 0
+GhostMM2Button.Position = UDim2.new(0.47, 0, 0.02, 0)
+GhostMM2Button.Size = UDim2.new(0.22, 0, 0.08, 0)
+GhostMM2Button.Font = Enum.Font.FredokaOne
+GhostMM2Button.Text = "GhostMM2"
+GhostMM2Button.TextColor3 = Color3.new(1, 1, 1)
+GhostMM2Button.TextScaled = true
+GhostMM2Button.TextSize = 14
+GhostMM2Button.TextWrapped = true
+
+UICorner_13.Parent = GhostMM2Button
+UICorner_13.CornerRadius = UDim.new(0, 5)
+
+InvisibilityButton.Name = "InvisibilityButton"
+InvisibilityButton.Parent = PremiumFrame
+InvisibilityButton.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
+InvisibilityButton.BorderColor3 = Color3.new(0, 0, 0)
+InvisibilityButton.BorderSizePixel = 0
+InvisibilityButton.Position = UDim2.new(0.70, 0, 0.02, 0)
+InvisibilityButton.Size = UDim2.new(0.22, 0, 0.08, 0)
+InvisibilityButton.Font = Enum.Font.FredokaOne
+InvisibilityButton.Text = "Invisibility"
+InvisibilityButton.TextColor3 = Color3.new(1, 1, 1)
+InvisibilityButton.TextScaled = true
+InvisibilityButton.TextSize = 14
+InvisibilityButton.TextWrapped = true
+
+UICorner_14.Parent = InvisibilityButton
+UICorner_14.CornerRadius = UDim.new(0, 5)
+
+MM2Button.Name = "MM2Button"
+MM2Button.Parent = PremiumFrame
+MM2Button.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
+MM2Button.BorderColor3 = Color3.new(0, 0, 0)
+MM2Button.BorderSizePixel = 0
+MM2Button.Position = UDim2.new(0.01, 0, 0.12, 0)
+MM2Button.Size = UDim2.new(0.22, 0, 0.08, 0)
+MM2Button.Font = Enum.Font.FredokaOne
+MM2Button.Text = "MM2"
+MM2Button.TextColor3 = Color3.new(1, 1, 1)
+MM2Button.TextScaled = true
+MM2Button.TextSize = 14
+MM2Button.TextWrapped = true
+
+UICorner_15.Parent = MM2Button
+UICorner_15.CornerRadius = UDim.new(0, 5)
+
+SpectateButton.Name = "SpectateButton"
+SpectateButton.Parent = PremiumFrame
+SpectateButton.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
+SpectateButton.BorderColor3 = Color3.new(0, 0, 0)
+SpectateButton.BorderSizePixel = 0
+SpectateButton.Position = UDim2.new(0.24, 0, 0.12, 0)
+SpectateButton.Size = UDim2.new(0.22, 0, 0.08, 0)
+SpectateButton.Font = Enum.Font.FredokaOne
+SpectateButton.Text = "Spectate"
+SpectateButton.TextColor3 = Color3.new(1, 1, 1)
+SpectateButton.TextScaled = true
+SpectateButton.TextSize = 14
+SpectateButton.TextWrapped = true
+
+UICorner_16.Parent = SpectateButton
+UICorner_16.CornerRadius = UDim.new(0, 5)
+
+GAGButton.Name = "GAGButton"
+GAGButton.Parent = PremiumFrame
+GAGButton.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
+GAGButton.BorderColor3 = Color3.new(0, 0, 0)
+GAGButton.BorderSizePixel = 0
+GAGButton.Position = UDim2.new(0.47, 0, 0.12, 0)
+GAGButton.Size = UDim2.new(0.22, 0, 0.08, 0)
+GAGButton.Font = Enum.Font.FredokaOne
+GAGButton.Text = "GAG"
+GAGButton.TextColor3 = Color3.new(1, 1, 1)
+GAGButton.TextScaled = true
+GAGButton.TextSize = 14
+GAGButton.TextWrapped = true
+
+UICorner_17.Parent = GAGButton
+UICorner_17.CornerRadius = UDim.new(0, 5)
+
+GameButton.Name = "GameButton"
+GameButton.Parent = PremiumFrame
+GameButton.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
+GameButton.BorderColor3 = Color3.new(0, 0, 0)
+GameButton.BorderSizePixel = 0
+GameButton.Position = UDim2.new(0.70, 0, 0.12, 0)
+GameButton.Size = UDim2.new(0.22, 0, 0.08, 0)
+GameButton.Font = Enum.Font.FredokaOne
+GameButton.Text = "Game"
+GameButton.TextColor3 = Color3.new(1, 1, 1)
+GameButton.TextScaled = true
+GameButton.TextSize = 14
+GameButton.TextWrapped = true
+
+UICorner_18.Parent = GameButton
+UICorner_18.CornerRadius = UDim.new(0, 5)
+
+ExecutorFrame.Name = "ExecutorFrame"
+ExecutorFrame.Parent = Frame
+ExecutorFrame.BackgroundColor3 = Color3.new(1, 1, 1)
+ExecutorFrame.BackgroundTransparency = 1
+ExecutorFrame.BorderColor3 = Color3.new(0, 0, 0)
+ExecutorFrame.BorderSizePixel = 0
+ExecutorFrame.Position = UDim2.new(0.153896526, 0, 0, 0)
+ExecutorFrame.Size = UDim2.new(0.846103489, 0, 1, 0)
+ExecutorFrame.Visible = false
+
+TextBox.Parent = ExecutorFrame
+TextBox.BackgroundColor3 = Color3.new(0.188235, 0.188235, 0.188235)
+TextBox.BorderColor3 = Color3.new(0, 0, 0)
+TextBox.BorderSizePixel = 0
+TextBox.Position = UDim2.new(0.0239938088, 0, 0.034324944, 0)
+TextBox.Size = UDim2.new(0.950478315, 0, 0.858123243, 0)
+TextBox.Font = Enum.Font.SourceSans
+TextBox.Text = ""
+TextBox.TextColor3 = Color3.new(1, 1, 1)
+TextBox.TextSize = 40
+TextBox.TextWrapped = true
+TextBox.TextXAlignment = Enum.TextXAlignment.Left
+TextBox.TextYAlignment = Enum.TextYAlignment.Top
+
+UICorner_19.Parent = TextBox
+UICorner_19.CornerRadius = UDim.new(0, 5)
+
+ExecuteButton.Name = "ExecuteButton"
+ExecuteButton.Parent = ExecutorFrame
+ExecuteButton.BackgroundColor3 = Color3.new(0.188235, 0.188235, 0.188235)
+ExecuteButton.BorderColor3 = Color3.new(0, 0, 0)
+ExecuteButton.BorderSizePixel = 0
+ExecuteButton.Position = UDim2.new(0.799799204, 0, 0.915331781, 0)
+ExecuteButton.Size = UDim2.new(0.163300589, 0, 0.0572082363, 0)
+ExecuteButton.Font = Enum.Font.FredokaOne
+ExecuteButton.Text = "Execute"
+ExecuteButton.TextColor3 = Color3.new(1, 1, 1)
+ExecuteButton.TextScaled = true
+ExecuteButton.TextSize = 14
+ExecuteButton.TextWrapped = true
+
+UICorner_20.Parent = ExecuteButton
+UICorner_20.CornerRadius = UDim.new(0, 5)
+
+ClearButton.Name = "ClearButton"
+ClearButton.Parent = ExecutorFrame
+ClearButton.BackgroundColor3 = Color3.new(0.188235, 0.188235, 0.188235)
+ClearButton.BorderColor3 = Color3.new(0, 0, 0)
+ClearButton.BorderSizePixel = 0
+ClearButton.Position = UDim2.new(0.627763689, 0, 0.915331781, 0)
+ClearButton.Size = UDim2.new(0.163300589, 0, 0.0572082363, 0)
+ClearButton.Font = Enum.Font.FredokaOne
+ClearButton.Text = "Clear"
+ClearButton.TextColor3 = Color3.new(1, 1, 1)
+ClearButton.TextScaled = true
+ClearButton.TextSize = 14
+ClearButton.TextWrapped = true
+
+UICorner_21.Parent = ClearButton
+UICorner_21.CornerRadius = UDim.new(0, 5)
+
+UpdateLogsFrame.Name = "UpdateLogsFrame"
+UpdateLogsFrame.Parent = Frame
+UpdateLogsFrame.BackgroundColor3 = Color3.new(1, 1, 1)
+UpdateLogsFrame.BackgroundTransparency = 1
+UpdateLogsFrame.BorderColor3 = Color3.new(0, 0, 0)
+UpdateLogsFrame.BorderSizePixel = 0
+UpdateLogsFrame.Position = UDim2.new(0.153896526, 0, 0, 0)
+UpdateLogsFrame.Size = UDim2.new(0.846103489, 0, 1, 0)
+UpdateLogsFrame.Visible = false
+
+TextBox_2.Parent = UpdateLogsFrame
+TextBox_2.BackgroundColor3 = Color3.new(0.156863, 0.156863, 0.156863)
+TextBox_2.BorderColor3 = Color3.new(0, 0, 0)
+TextBox_2.BorderSizePixel = 0
+TextBox_2.Position = UDim2.new(0.0252824463, 0, 0.0331428982, 0)
+TextBox_2.Size = UDim2.new(0.950478315, 0, 0.935812354, 0)
+TextBox_2.Font = Enum.Font.SourceSans
+TextBox_2.Text = "                                  --- Update Logs---\n[23.07.2025] Wersja 2.5 - Wersja beta\nJest nowa zakładka Updatel Logs!\nJest dodana nowa funkcja Executor która nie wymaga Premium!, teraz już nie musisz używać swojego Executora bo masz go pod ręką!\nZostał usunięty Keysystem, bo okazał się problematyczny.\n[28.07.2025] Wersja 2.6 - Wersja stable\nNaprawiono błędy z wersji beta!\nZostał dodany nowy  interfejs graficzny!"
+TextBox_2.TextColor3 = Color3.new(1, 1, 1)
+TextBox_2.TextScaled = true
+TextBox_2.TextSize = 14
+TextBox_2.TextWrapped = true
+TextBox_2.TextXAlignment = Enum.TextXAlignment.Left
+TextBox_2.TextYAlignment = Enum.TextYAlignment.Top
+
+TextLabel_2.Parent = Frame
+TextLabel_2.BackgroundColor3 = Color3.new(1, 1, 1)
+TextLabel_2.BackgroundTransparency = 1
+TextLabel_2.BorderColor3 = Color3.new(0, 0, 0)
+TextLabel_2.BorderSizePixel = 0
+TextLabel_2.Position = UDim2.new(0.00523902057, 0, 0.004290618, 0)
+TextLabel_2.Size = UDim2.new(0.142108709, 0, 0.077803202, 0)
+TextLabel_2.Font = Enum.Font.FredokaOne
+TextLabel_2.Text = "Universal Scripts V2"
+TextLabel_2.TextColor3 = Color3.new(1, 1, 1)
+TextLabel_2.TextScaled = true
+TextLabel_2.TextSize = 14
+TextLabel_2.TextWrapped = true
+
+UIAspectRatioConstraint_2.Parent = TextLabel_2
+UIAspectRatioConstraint_2.AspectRatio = 3.191176414489746
+
+UITextSizeConstraint_2.Parent = TextLabel_2
+UITextSizeConstraint_2.MaxTextSize = 66
+
+-- HideButton Properties
+HideButton.Name = "HideButton"
+HideButton.Parent = ScreenGui
+HideButton.BackgroundColor3 = Color3.new(1, 0, 0)
+HideButton.BorderColor3 = Color3.new(0, 0, 0)
+HideButton.BorderSizePixel = 3
+HideButton.Image = "rbxassetid://102860171689689" -- Zastąp obrazem, który chcesz użyć, np. ikoną "X" lub podobnym
+HideButton.ImageColor3 = Color3.new(1, 1, 1)
+HideButton.ScaleType = Enum.ScaleType.Fit
+HideButton.Position = UDim2.new(0.95, 0, 0.02, 0)
+HideButton.Size = UDim2.new(0, 30, 0, 30)
+HideButton.ZIndex = 5
+HideButton.Draggable = true
+
+-- Functions
+local function sendNotification(title, text)
+    StarterGui:SetCore("SendNotification", {
+        Title = title,
+        Text = text,
+        Icon = "rbxassetid://102860171689689",
+        Duration = 5
+    })
+end
+
+local function showFrame(frameName)
+    HomeFrame.Visible = false
+    PremiumFrame.Visible = false
+    ExecutorFrame.Visible = false
+    UpdateLogsFrame.Visible = false
+
+    if frameName == "Home" then
+        HomeFrame.Visible = true
+    elseif frameName == "Premium" then
+        if hasGamePass then
+            PremiumFrame.Visible = true
+        else
+            sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby uzyskać dostęp do tej zakładki!")
+            MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
+        end
+    elseif frameName == "Executor" then
+        ExecutorFrame.Visible = true
+    elseif frameName == "UpdateLogs" then
+        UpdateLogsFrame.Visible = true
+    end
+end
+
+local function checkGamePassStatus()
+    local success, result = pcall(function()
+        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
+    end)
+
+    if success then
+        hasGamePass = result
+        if not initialGamePassCheckDone then
+            if hasGamePass then
+                sendNotification("Universal Scripts", "Posiadasz wersję premium! Funkcje Premium odblokowane.")
+            else
+                sendNotification("Universal Scripts", "Nie posiadasz wersji premium. Kliknij zakładkę Premium, aby uzyskać dostęp do funkcji.")
+            end
+            initialGamePassCheckDone = true
+        end
+    else
+        warn("Błąd podczas sprawdzania wersji premium:", result)
+        sendNotification("Universal Scripts", "Nie można sprawdzić statusu wersji premium. Spróbuj ponownie.")
+    end
+end
+
+local function runScriptAndNotify(url, buttonName)
+    local success, err = pcall(function()
+        local scriptContent = game:HttpGet(url, true)
+        if scriptContent and scriptContent ~= "" then
+            local func = loadstring(scriptContent)
+            if func then
+                pcall(func)
+            else
+                error("Błąd kompilacji skryptu: invalid Lua syntax")
+            end
+        else
+            error("Nie można pobrać zawartości skryptu lub skrypt jest pusty.")
+        end
+    end)
+    if success then
+        sendNotification("Universal Scripts", "Skrypt '" .. buttonName .. "' załadowany!")
+    else
+        sendNotification("Universal Scripts", "Błąd ładowania skryptu '" .. buttonName .. "': " .. tostring(err))
+        warn("Błąd ładowania skryptu '" .. buttonName .. "':", err)
+    end
+end
+
+local function checkPremiumAndRunScript(scriptUrl, buttonName)
+    local successGP, currentHasGamePass = pcall(function()
+        return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
+    end)
+
+    if (successGP and currentHasGamePass) then
+        runScriptAndNotify(scriptUrl, buttonName)
+    else
+        sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
+        MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
+    end
+end
+
+-- Button connections (Home Frame)
+AntiFlingButton.MouseButton1Click:Connect(function()
+    runScriptAndNotify("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/anty-fling", AntiFlingButton.Text)
+end)
+
+ClickTPToolButton.MouseButton1Click:Connect(function()
+    runScriptAndNotify("https://pastebin.com/raw/4KF2WJ9u", ClickTPToolButton.Text)
+end)
+
+FlyButton.MouseButton1Click:Connect(function()
+    runScriptAndNotify("https://pastebin.com/raw/xuSMWfDu", FlyButton.Text)
+end)
+
+InfJumpButton.MouseButton1Click:Connect(function()
+    runScriptAndNotify("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/infinity-jump", InfJumpButton.Text)
+end)
+
+NoclipButton.MouseButton1Click:Connect(function()
+    runScriptAndNotify("https://pastebin.com/raw/CnbYfaj1", NoclipButton.Text)
+end)
+
+SpeedTool.MouseButton1Click:Connect(function()
+    runScriptAndNotify("https://pastebin.com/raw/X7B0HPc2", SpeedTool.Text)
+end)
+
+-- Button connections (Premium Frame)
+ConsoleButton.MouseButton1Click:Connect(function()
+    checkPremiumAndRunScript("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source", ConsoleButton.Text)
+end)
+
+FlingButton.MouseButton1Click:Connect(function()
+    checkPremiumAndRunScript('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt', FlingButton.Text)
+end)
+
+GhostMM2Button.MouseButton1Click:Connect(function()
+    checkPremiumAndRunScript("https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Murder%20Mystery", GhostMM2Button.Text)
+end)
+
+InvisibilityButton.MouseButton1Click:Connect(function()
+    checkPremiumAndRunScript('https://pastebin.com/raw/3Rnd9rHf', InvisibilityButton.Text)
+end)
+
+MM2Button.MouseButton1Click:Connect(function()
+    checkPremiumAndRunScript("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring", MM2Button.Text)
+end)
+
+SpectateButton.MouseButton1Click:Connect(function()
+    checkPremiumAndRunScript("https://pastebin.com/raw/UFVLWQRw", SpectateButton.Text)
+end)
+
+GAGButton.MouseButton1Click:Connect(function()
+    checkPremiumAndRunScript("https://raw.githubusercontent.com/ThundarZ/Welcome/main/Main/GaG/Main.lua", GAGButton.Text)
+end)
+
+GameButton.MouseButton1Click:Connect(function()
+    local gameId = game.PlaceId
+    local url = "https://raw.githubusercontent.com/majka323pl/universal-scripts/main/game_scripts/" .. gameId
+    checkPremiumAndRunScript(url, GameButton.Text)
+end)
+
+-- Button connections (Executor Frame)
+ExecuteButton.MouseButton1Click:Connect(function()
+    local scriptContent = TextBox.Text
+    if scriptContent and string.gsub(scriptContent, "%s", "") ~= "" then
+        local success, err = pcall(function()
+            local func = loadstring(scriptContent)
+            if func then
+                pcall(func)
+            else
+                error("Błąd kompilacji skryptu: invalid Lua syntax")
+            end
+        end)
+        if success then
+            sendNotification("Executor", "Skrypt wykonany pomyślnie!")
+        else
+            sendNotification("Executor", "Błąd wykonania skryptu: " .. tostring(err))
+            warn("Błąd wykonania skryptu:", err)
+        end
+    else
+        sendNotification("Executor", "Pole tekstowe jest puste!")
+    end
+end)
+
+ClearButton.MouseButton1Click:Connect(function()
+    TextBox.Text = ""
+    sendNotification("Executor", "Zawartość wyczyszczona.")
+end)
+
+-- Tab navigation
+HomeButton.MouseButton1Click:Connect(function()
+    showFrame("Home")
+end)
+
+PremiumButton.MouseButton1Click:Connect(function()
+    showFrame("Premium")
+end)
+
+ExecutorButton.MouseButton1Click:Connect(function()
+    showFrame("Executor")
+end)
+
+UpdateLogsButton.MouseButton1Click:Connect(function()
+    showFrame("UpdateLogs")
+end)
+
+-- HideButton functionality
+HideButton.MouseButton1Click:Connect(function()
+    Frame.Visible = not Frame.Visible
+end)
+
+MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gamePassId, wasPurchased)
+    if userId == player.UserId and gamePassId == GAMEPASS_ID then
+        if wasPurchased then
+            sendNotification("Universal Scripts", "Wersja premium kupiona pomyślnie! Dziękujemy za zakup.")
+            hasGamePass = true
+            showFrame("Premium")
+        else
+            sendNotification("Universal Scripts", "Anulowano zakup wersji premium.")
+        end
+        checkGamePassStatus()
+    end
+end)
+
+-- Initial setup
+showFrame("Home")
+checkGamePassStatus()
