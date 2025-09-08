@@ -1,22 +1,21 @@
-
 --[
---     Gui2Lua™
+--     Gui2Luaâ˘
 --     10zOfficial
 --     Version 1.0.0
 --]
 
--- Instances & Services
+-- Instances
 local player = game.Players.LocalPlayer
 local MarketplaceService = game:GetService("MarketplaceService")
 local StarterGui = game:GetService("StarterGui")
 local HttpService = game:GetService("HttpService")
-local CoreGui = game:GetService("CoreGui")
+local UserInputService = game:GetService("UserInputService")
+local VirtualInputManager = game:GetService("VirtualInputManager")
 
 local GAMEPASS_ID = 1296972626
 local hasGamePass = false
 local initialGamePassCheckDone = false
 
--- ScreenGui
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local PageFrame = Instance.new("Frame")
@@ -52,16 +51,10 @@ local ConsoleButton = Instance.new("TextButton")
 local UICorner_11 = Instance.new("UICorner")
 local FlingButton = Instance.new("TextButton")
 local UICorner_12 = Instance.new("UICorner")
-local GhostMM2Button = Instance.new("TextButton")
-local UICorner_13 = Instance.new("UICorner")
 local InvisibilityButton = Instance.new("TextButton")
 local UICorner_14 = Instance.new("UICorner")
-local MM2Button = Instance.new("TextButton")
-local UICorner_15 = Instance.new("UICorner")
 local SpectateButton = Instance.new("TextButton")
 local UICorner_16 = Instance.new("UICorner")
-local GAGButton = Instance.new("TextButton")
-local UICorner_17 = Instance.new("UICorner")
 
 local ExecutorFrame = Instance.new("Frame")
 local TextBox = Instance.new("TextBox")
@@ -71,6 +64,7 @@ local UICorner_20 = Instance.new("UICorner")
 local ClearButton = Instance.new("TextButton")
 local UICorner_21 = Instance.new("UICorner")
 local UpdateLogsFrame = Instance.new("Frame")
+
 local UpdateLogsLabel = Instance.new("TextLabel")
 local TextLabel_2 = Instance.new("TextLabel")
 local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
@@ -78,40 +72,11 @@ local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
 
 local HideButton = Instance.new("ImageButton")
 
+-- Properties
+ScreenGui.Parent = player:WaitForChild("PlayerGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ScreenGui.ResetOnSpawn = false
-ScreenGui.Parent = player:WaitForChild("PlayerGui")
 
-ScreenGui.Name = HttpService:GenerateGUID(false)
-task.spawn(function()
-    while task.wait(2) do
-        if ScreenGui.Parent == CoreGui or ScreenGui.Parent == player.PlayerGui then
-            ScreenGui.Name = HttpService:GenerateGUID(false)
-        end
-    end
-end)
-
-local mt = getrawmetatable(game)
-local oldIndex = mt.__index
-setreadonly(mt, false)
-mt.__index = newcclosure(function(self, key)
-    if self == CoreGui and key == "GetChildren" then
-        return function()
-            local children = oldIndex(self, key)(self)
-            local filtered = {}
-            for _, obj in ipairs(children) do
-                if not (obj:IsA("ScreenGui") and obj.Name:find("-")) then
-                    table.insert(filtered, obj)
-                end
-            end
-            return filtered
-        end
-    end
-    return oldIndex(self, key)
-end)
-setreadonly(mt, true)
-
--- Properties
 Frame.Parent = ScreenGui
 Frame.BackgroundColor3 = Color3.new(0.294118, 0.294118, 0.294118)
 Frame.BorderColor3 = Color3.new(0, 0, 0)
@@ -393,29 +358,12 @@ FlingButton.TextWrapped = true
 UICorner_12.Parent = FlingButton
 UICorner_12.CornerRadius = UDim.new(0, 5)
 
-GhostMM2Button.Name = "GhostMM2Button"
-GhostMM2Button.Parent = PremiumFrame
-GhostMM2Button.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
-GhostMM2Button.BorderColor3 = Color3.new(0, 0, 0)
-GhostMM2Button.BorderSizePixel = 0
-GhostMM2Button.Position = UDim2.new(0.47, 0, 0.02, 0)
-GhostMM2Button.Size = UDim2.new(0.22, 0, 0.08, 0)
-GhostMM2Button.Font = Enum.Font.FredokaOne
-GhostMM2Button.Text = "GhostMM2"
-GhostMM2Button.TextColor3 = Color3.new(1, 1, 1)
-GhostMM2Button.TextScaled = true
-GhostMM2Button.TextSize = 14
-GhostMM2Button.TextWrapped = true
-
-UICorner_13.Parent = GhostMM2Button
-UICorner_13.CornerRadius = UDim.new(0, 5)
-
 InvisibilityButton.Name = "InvisibilityButton"
 InvisibilityButton.Parent = PremiumFrame
 InvisibilityButton.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
 InvisibilityButton.BorderColor3 = Color3.new(0, 0, 0)
 InvisibilityButton.BorderSizePixel = 0
-InvisibilityButton.Position = UDim2.new(0.70, 0, 0.02, 0)
+InvisibilityButton.Position = UDim2.new(0.47, 0, 0.02, 0)
 InvisibilityButton.Size = UDim2.new(0.22, 0, 0.08, 0)
 InvisibilityButton.Font = Enum.Font.FredokaOne
 InvisibilityButton.Text = "Invisibility"
@@ -427,29 +375,12 @@ InvisibilityButton.TextWrapped = true
 UICorner_14.Parent = InvisibilityButton
 UICorner_14.CornerRadius = UDim.new(0, 5)
 
-MM2Button.Name = "MM2Button"
-MM2Button.Parent = PremiumFrame
-MM2Button.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
-MM2Button.BorderColor3 = Color3.new(0, 0, 0)
-MM2Button.BorderSizePixel = 0
-MM2Button.Position = UDim2.new(0.01, 0, 0.12, 0)
-MM2Button.Size = UDim2.new(0.22, 0, 0.08, 0)
-MM2Button.Font = Enum.Font.FredokaOne
-MM2Button.Text = "MM2"
-MM2Button.TextColor3 = Color3.new(1, 1, 1)
-MM2Button.TextScaled = true
-MM2Button.TextSize = 14
-MM2Button.TextWrapped = true
-
-UICorner_15.Parent = MM2Button
-UICorner_15.CornerRadius = UDim.new(0, 5)
-
 SpectateButton.Name = "SpectateButton"
 SpectateButton.Parent = PremiumFrame
 SpectateButton.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
 SpectateButton.BorderColor3 = Color3.new(0, 0, 0)
 SpectateButton.BorderSizePixel = 0
-SpectateButton.Position = UDim2.new(0.24, 0, 0.12, 0)
+SpectateButton.Position = UDim2.new(0.70, 0, 0.02, 0)
 SpectateButton.Size = UDim2.new(0.22, 0, 0.08, 0)
 SpectateButton.Font = Enum.Font.FredokaOne
 SpectateButton.Text = "Spectate"
@@ -460,23 +391,6 @@ SpectateButton.TextWrapped = true
 
 UICorner_16.Parent = SpectateButton
 UICorner_16.CornerRadius = UDim.new(0, 5)
-
-GAGButton.Name = "GAGButton"
-GAGButton.Parent = PremiumFrame
-GAGButton.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
-GAGButton.BorderColor3 = Color3.new(0, 0, 0)
-GAGButton.BorderSizePixel = 0
-GAGButton.Position = UDim2.new(0.47, 0, 0.12, 0)
-GAGButton.Size = UDim2.new(0.22, 0, 0.08, 0)
-GAGButton.Font = Enum.Font.FredokaOne
-GAGButton.Text = "GAG"
-GAGButton.TextColor3 = Color3.new(1, 1, 1)
-GAGButton.TextScaled = true
-GAGButton.TextSize = 14
-GAGButton.TextWrapped = true
-
-UICorner_17.Parent = GAGButton
-UICorner_17.CornerRadius = UDim.new(0, 5)
 
 ExecutorFrame.Name = "ExecutorFrame"
 ExecutorFrame.Parent = Frame
@@ -557,7 +471,7 @@ UpdateLogsLabel.BorderSizePixel = 0
 UpdateLogsLabel.Position = UDim2.new(0.0252824463, 0, 0.0331428982, 0)
 UpdateLogsLabel.Size = UDim2.new(0.950478315, 0, 0.935812354, 0)
 UpdateLogsLabel.Font = Enum.Font.SourceSans
-UpdateLogsLabel.Text = "**--- Update Logs---** \n\n **[23.07.2025] Wersja 2.5 - Wersja beta** \n * Jest nowa zakładka Update Logs! \n * Jest dodana nowa funkcja Executor, która nie wymaga Premium! Teraz już nie musisz używać swojego Executora, bo masz go pod ręką! \n * Został usunięty Keysystem, bo okazał się problematyczny. \n\n **[28.07.2025] Wersja 2.6 - Wersja stable** \n * Naprawiono błędy z wersji beta! \n * Został dodany nowy interfejs graficzny!"
+UpdateLogsLabel.Text = "**--- Update Logs---** \n\n **[23.07.2025] Wersja 2.5 - Wersja beta** \n * Jest nowa zakĹadka Update Logs! \n * Jest dodana nowa funkcja Executor, ktĂłra nie wymaga Premium! Teraz juĹź nie musisz uĹźywaÄ swojego Executora, bo masz go pod rÄkÄ! \n * ZostaĹ usuniÄty Keysystem, bo okazaĹ siÄ problematyczny. \n\n **[28.07.2025] Wersja 2.6 - Wersja stable** \n * Naprawiono bĹÄdy z wersji beta! \n * ZostaĹ dodany nowy interfejs graficzny!"
 UpdateLogsLabel.TextColor3 = Color3.new(1, 1, 1)
 UpdateLogsLabel.TextScaled = true
 UpdateLogsLabel.TextSize = 14
@@ -620,7 +534,7 @@ local function showFrame(frameName)
         if hasGamePass then
             PremiumFrame.Visible = true
         else
-            sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby uzyskać dostęp do tej zakładki!")
+            sendNotification("Universal Scripts", "Musisz posiadaÄ wersjÄ premium, aby uzyskaÄ dostÄp do tej zakĹadki!")
             MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
         end
     elseif frameName == "Executor" then
@@ -639,15 +553,15 @@ local function checkGamePassStatus()
         hasGamePass = result
         if not initialGamePassCheckDone then
             if hasGamePass then
-                sendNotification("Universal Scripts", "Posiadasz wersję premium! Funkcje Premium odblokowane.")
+                sendNotification("Universal Scripts", "Posiadasz wersjÄ premium! Funkcje Premium odblokowane.")
             else
-                sendNotification("Universal Scripts", "Nie posiadasz wersji premium. Kliknij zakładkę Premium, aby uzyskać dostęp do funkcji.")
+                sendNotification("Universal Scripts", "Nie posiadasz wersji premium. Kliknij zakĹadkÄ Premium, aby uzyskaÄ dostÄp do funkcji.")
             end
             initialGamePassCheckDone = true
         end
     else
-        warn("Błąd podczas sprawdzania wersji premium:", result)
-        sendNotification("Universal Scripts", "Nie można sprawdzić statusu wersji premium. Spróbuj ponownie.")
+        warn("BĹÄd podczas sprawdzania wersji premium:", result)
+        sendNotification("Universal Scripts", "Nie moĹźna sprawdziÄ statusu wersji premium. SprĂłbuj ponownie.")
     end
 end
 
@@ -657,14 +571,14 @@ local function runScriptAndNotify(url, buttonName)
         if scriptContent then
             loadstring(scriptContent)()
         else
-            error("Nie można pobrać zawartości skryptu.")
+            error("Nie moĹźna pobraÄ zawartoĹci skryptu.")
         end
     end)
     if success then
-        sendNotification("Universal Scripts", "Skrypt '" .. buttonName .. "' załadowany!")
+        sendNotification("Universal Scripts", "Skrypt '" .. buttonName .. "' zaĹadowany!")
     else
-        sendNotification("Universal Scripts", "Błąd ładowania skryptu '" .. buttonName .. "': " .. tostring(err))
-        warn("Błąd ładowania skryptu '" .. buttonName .. "':", err)
+        sendNotification("Universal Scripts", "BĹÄd Ĺadowania skryptu '" .. buttonName .. "': " .. tostring(err))
+        warn("BĹÄd Ĺadowania skryptu '" .. buttonName .. "':", err)
     end
 end
 
@@ -676,7 +590,7 @@ local function checkPremiumAndRunScript(scriptUrl, buttonName)
     if (successGP and currentHasGamePass) then
         runScriptAndNotify(scriptUrl, buttonName)
     else
-        sendNotification("Universal Scripts", "Musisz posiadać wersję premium, aby użyć tej funkcji!")
+        sendNotification("Universal Scripts", "Musisz posiadaÄ wersjÄ premium, aby uĹźyÄ tej funkcji!")
         MarketplaceService:PromptGamePassPurchase(player, GAMEPASS_ID)
     end
 end
@@ -721,24 +635,12 @@ FlingButton.MouseButton1Click:Connect(function()
     checkPremiumAndRunScript('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt', FlingButton.Text)
 end)
 
-GhostMM2Button.MouseButton1Click:Connect(function()
-    checkPremiumAndRunScript("https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Murder%20Mystery", GhostMM2Button.Text)
-end)
-
 InvisibilityButton.MouseButton1Click:Connect(function()
     checkPremiumAndRunScript('https://pastebin.com/raw/3Rnd9rHf', InvisibilityButton.Text)
 end)
 
-MM2Button.MouseButton1Click:Connect(function()
-    checkPremiumAndRunScript("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring", MM2Button.Text)
-end)
-
 SpectateButton.MouseButton1Click:Connect(function()
-    checkPremiumAndRunScript("https://pastebin.com/raw/UFVLWQRw", SpectateButton.Text)
-end)
-
-GAGButton.MouseButton1Click:Connect(function()
-    checkPremiumAndRunScript("https://raw.githubusercontent.com/ThundarZ/Welcome/main/Main/GaG/Main.lua", GAGButton.Text)
+    checkPremiumAndRunScript("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/spectate", SpectateButton.Text)
 end)
 
 -- Button connections (Executor Frame)
@@ -748,16 +650,16 @@ ExecuteButton.MouseButton1Click:Connect(function()
         loadstring(scriptContent)()
     end)
     if success then
-        sendNotification("Executor", "Skrypt wykonany pomyślnie!")
+        sendNotification("Executor", "Skrypt wykonany pomyĹlnie!")
     else
-        sendNotification("Executor", "Błąd wykonania skryptu: " .. tostring(err))
-        warn("Błąd wykonania skryptu:", err)
+        sendNotification("Executor", "BĹÄd wykonania skryptu: " .. tostring(err))
+        warn("BĹÄd wykonania skryptu:", err)
     end
 end)
 
 ClearButton.MouseButton1Click:Connect(function()
     TextBox.Text = ""
-    sendNotification("Executor", "Zawartość wyczyszczona.")
+    sendNotification("Executor", "ZawartoĹÄ wyczyszczona.")
 end)
 
 -- Tab navigation
@@ -785,13 +687,20 @@ end)
 MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(userId, gamePassId, wasPurchased)
     if userId == player.UserId and gamePassId == GAMEPASS_ID then
         if wasPurchased then
-            sendNotification("Universal Scripts", "Wersja premium kupiona pomyślnie! Dziękujemy za zakup.")
+            sendNotification("Universal Scripts", "Wersja premium kupiona pomyĹlnie! DziÄkujemy za zakup.")
             hasGamePass = true
             showFrame("Premium")
         else
             sendNotification("Universal Scripts", "Anulowano zakup wersji premium.")
         end
         checkGamePassStatus()
+    end
+end)
+
+-- Keybind to toggle GUI visibility on F8 press
+UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
+    if input.KeyCode == Enum.KeyCode.F8 and not gameProcessedEvent then
+        Frame.Visible = not Frame.Visible
     end
 end)
 
