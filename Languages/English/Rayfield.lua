@@ -1,4 +1,3 @@
-======================Rayfield=======================================
 -- Universal Scripts V6 - Full (Rayfield preserved + Executor with modals & proper save/edit/rename/delete)
 --⚠️ wymagane exploity: isfolder, makefolder, listfiles, isfile, readfile, writefile, delfile
 
