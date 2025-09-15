@@ -1,5 +1,4 @@
-==================Orion==========================
--- Universal Scripts V6 - Full (Orion (LOADER) preserved + Executor with modals & proper save/edit/rename/delete)
++-- Universal Scripts V6 - Full (Orion (LOADER) preserved + Executor with modals & proper save/edit/rename/delete)
 -- ⚠️ required exploits: isfolder, makefolder, listfiles, isfile, readfile, writefile, delfile
 
 -- Services
