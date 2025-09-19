@@ -1,4 +1,4 @@
 ## TO EXECUTE USE
 ```lua
-loadstring(game:HttpGet("https://majka323pl.github.io/k/"))()
+loadstring(game:HttpGet("https://majka323pl.github.io/r/"))()
 ```
