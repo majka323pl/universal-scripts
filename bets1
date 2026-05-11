@@ -73,32 +73,32 @@ local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
 local ImageLabel_5 = Instance.new("ImageLabel")
 local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
 local Buttons = Instance.new("Frame")
-local UICorner_19 = Instance.new("UICorner")
 local BuyPremiumTab = Instance.new("TextButton")
-local UICorner_20 = Instance.new("UICorner")
+local UICorner_19 = Instance.new("UICorner")
 local UITextSizeConstraint_15 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_4 = Instance.new("UIAspectRatioConstraint")
 local ExecutorTab = Instance.new("TextButton")
-local UICorner_21 = Instance.new("UICorner")
+local UICorner_20 = Instance.new("UICorner")
 local UITextSizeConstraint_16 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_5 = Instance.new("UIAspectRatioConstraint")
 local ScriptsButton = Instance.new("TextButton")
-local UICorner_22 = Instance.new("UICorner")
+local UICorner_21 = Instance.new("UICorner")
 local UITextSizeConstraint_17 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_6 = Instance.new("UIAspectRatioConstraint")
 local UpdateLogs = Instance.new("TextButton")
-local UICorner_23 = Instance.new("UICorner")
+local UICorner_22 = Instance.new("UICorner")
 local UITextSizeConstraint_18 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_7 = Instance.new("UIAspectRatioConstraint")
 local TimerButton = Instance.new("TextButton")
-local UICorner_24 = Instance.new("UICorner")
+local UICorner_23 = Instance.new("UICorner")
 local UITextSizeConstraint_19 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_8 = Instance.new("UIAspectRatioConstraint")
 local RejoinButton = Instance.new("TextButton")
-local UICorner_25 = Instance.new("UICorner")
+local UICorner_24 = Instance.new("UICorner")
 local UITextSizeConstraint_20 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_9 = Instance.new("UIAspectRatioConstraint")
+local UICorner_25 = Instance.new("UICorner")
 local StartScript = Instance.new("Frame")
 local UICorner_26 = Instance.new("UICorner")
 local BackButton_2 = Instance.new("TextButton")
@@ -247,6 +247,7 @@ Scripts.BorderColor3 = Color3.new(0, 0, 0)
 Scripts.BorderSizePixel = 0
 Scripts.Position = UDim2.new(0.026433643, 0, 0.0318192206, 0)
 Scripts.Size = UDim2.new(0.70532918, 0, 0.681432605, 0)
+Scripts.Visible = false
 Scripts.Style = Enum.FrameStyle.DropShadow
 
 UICorner_4.Parent = Scripts
@@ -428,6 +429,7 @@ Locked.BorderColor3 = Color3.new(0, 0, 0)
 Locked.BorderSizePixel = 0
 Locked.Position = UDim2.new(-1.4669132e-07, 0, 0, 0)
 Locked.Size = UDim2.new(0.999810457, 0, 1, 0)
+Locked.Visible = false
 
 UICorner_14.Parent = Locked
 
@@ -590,8 +592,6 @@ Buttons.BorderSizePixel = 5
 Buttons.Position = UDim2.new(0.102991901, 0, 0.720608592, 0)
 Buttons.Size = UDim2.new(0, 951, 0, 98)
 
-UICorner_19.Parent = Home
-
 BuyPremiumTab.Name = "BuyPremiumTab"
 BuyPremiumTab.Parent = Home
 BuyPremiumTab.BackgroundColor3 = Color3.new(1, 0.717647, 0)
@@ -606,7 +606,7 @@ BuyPremiumTab.TextScaled = true
 BuyPremiumTab.TextSize = 14
 BuyPremiumTab.TextWrapped = true
 
-UICorner_20.Parent = BuyPremiumTab
+UICorner_19.Parent = BuyPremiumTab
 
 UITextSizeConstraint_15.Parent = BuyPremiumTab
 UITextSizeConstraint_15.MaxTextSize = 30
@@ -629,7 +629,7 @@ ExecutorTab.TextScaled = true
 ExecutorTab.TextSize = 14
 ExecutorTab.TextWrapped = true
 
-UICorner_21.Parent = ExecutorTab
+UICorner_20.Parent = ExecutorTab
 
 UITextSizeConstraint_16.Parent = ExecutorTab
 UITextSizeConstraint_16.MaxTextSize = 33
@@ -650,7 +650,7 @@ ScriptsButton.TextScaled = true
 ScriptsButton.TextSize = 14
 ScriptsButton.TextWrapped = true
 
-UICorner_22.Parent = ScriptsButton
+UICorner_21.Parent = ScriptsButton
 
 UITextSizeConstraint_17.Parent = ScriptsButton
 UITextSizeConstraint_17.MaxTextSize = 33
@@ -671,7 +671,7 @@ UpdateLogs.TextScaled = true
 UpdateLogs.TextSize = 14
 UpdateLogs.TextWrapped = true
 
-UICorner_23.Parent = UpdateLogs
+UICorner_22.Parent = UpdateLogs
 
 UITextSizeConstraint_18.Parent = UpdateLogs
 UITextSizeConstraint_18.MaxTextSize = 30
@@ -692,7 +692,7 @@ TimerButton.TextScaled = true
 TimerButton.TextSize = 14
 TimerButton.TextWrapped = true
 
-UICorner_24.Parent = TimerButton
+UICorner_23.Parent = TimerButton
 
 UITextSizeConstraint_19.Parent = TimerButton
 UITextSizeConstraint_19.MaxTextSize = 30
@@ -713,12 +713,14 @@ RejoinButton.TextScaled = true
 RejoinButton.TextSize = 14
 RejoinButton.TextWrapped = true
 
-UICorner_25.Parent = RejoinButton
+UICorner_24.Parent = RejoinButton
 
 UITextSizeConstraint_20.Parent = RejoinButton
 UITextSizeConstraint_20.MaxTextSize = 30
 
 UIAspectRatioConstraint_9.Parent = RejoinButton
+
+UICorner_25.Parent = Home
 
 StartScript.Name = "StartScript"
 StartScript.Parent = Frame
@@ -1165,9 +1167,7 @@ UIAspectRatioConstraint_11.AspectRatio = 16.428571701049805
 
 -- Scripts
 
--- ProjectUniversal.LocalScript is disabled.
--- ProjectUniversal.Script is disabled.
-local function CQNI_fake_script() -- Guzik1.LocalScript 
+local function FGIEPE_fake_script() -- Guzik1.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1)
 
 	local TweenService = game:GetService("TweenService")
@@ -1229,8 +1229,8 @@ local function CQNI_fake_script() -- Guzik1.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(CQNI_fake_script)()
-local function BTZISJ_fake_script() -- Guzik1_2.LocalScript 
+coroutine.wrap(FGIEPE_fake_script)()
+local function DPTFVK_fake_script() -- Guzik1_2.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_2)
 
 	local button = script.Parent
@@ -1335,8 +1335,8 @@ local function BTZISJ_fake_script() -- Guzik1_2.LocalScript
 	end
 	
 end
-coroutine.wrap(BTZISJ_fake_script)()
-local function CQUHK_fake_script() -- Guzik1_3.LocalScript 
+coroutine.wrap(DPTFVK_fake_script)()
+local function WMMHHG_fake_script() -- Guzik1_3.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_3)
 
 	local button = script.Parent
@@ -1436,8 +1436,8 @@ local function CQUHK_fake_script() -- Guzik1_3.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(CQUHK_fake_script)()
-local function TZVMC_fake_script() -- Guzik1_3.LocalScript 
+coroutine.wrap(WMMHHG_fake_script)()
+local function MIAE_fake_script() -- Guzik1_3.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_3)
 
 	--[[ 
@@ -1487,8 +1487,8 @@ local function TZVMC_fake_script() -- Guzik1_3.LocalScript
 	end)
 	
 end
-coroutine.wrap(TZVMC_fake_script)()
-local function RSELGGH_fake_script() -- Guzik1_4.LocalScript 
+coroutine.wrap(MIAE_fake_script)()
+local function RGYC_fake_script() -- Guzik1_4.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_4)
 
 	local button = script.Parent
@@ -1587,8 +1587,8 @@ local function RSELGGH_fake_script() -- Guzik1_4.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(RSELGGH_fake_script)()
-local function WPAUSD_fake_script() -- Guzik1_4.LocalScript 
+coroutine.wrap(RGYC_fake_script)()
+local function IKQJRZF_fake_script() -- Guzik1_4.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_4)
 
 	--[[ 
@@ -1640,8 +1640,8 @@ local function WPAUSD_fake_script() -- Guzik1_4.LocalScript
 	end)
 	
 end
-coroutine.wrap(WPAUSD_fake_script)()
-local function ZQLWM_fake_script() -- Guzik1_5.LocalScript 
+coroutine.wrap(IKQJRZF_fake_script)()
+local function XZXLOHD_fake_script() -- Guzik1_5.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_5)
 
 	local button = script.Parent
@@ -1740,8 +1740,8 @@ local function ZQLWM_fake_script() -- Guzik1_5.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(ZQLWM_fake_script)()
-local function POYJHP_fake_script() -- Guzik1_5.LocalScript 
+coroutine.wrap(XZXLOHD_fake_script)()
+local function HNHC_fake_script() -- Guzik1_5.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_5)
 
 	--[[ 
@@ -1793,8 +1793,8 @@ local function POYJHP_fake_script() -- Guzik1_5.LocalScript
 	end)
 	
 end
-coroutine.wrap(POYJHP_fake_script)()
-local function JQTCFNE_fake_script() -- Guzik1_6.LocalScript 
+coroutine.wrap(HNHC_fake_script)()
+local function HNUJFL_fake_script() -- Guzik1_6.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_6)
 
 	local button = script.Parent
@@ -1893,8 +1893,8 @@ local function JQTCFNE_fake_script() -- Guzik1_6.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(JQTCFNE_fake_script)()
-local function UMXT_fake_script() -- Guzik1_6.LocalScript 
+coroutine.wrap(HNUJFL_fake_script)()
+local function JQHRC_fake_script() -- Guzik1_6.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_6)
 
 	--[[ 
@@ -1946,8 +1946,8 @@ local function UMXT_fake_script() -- Guzik1_6.LocalScript
 	end)
 	
 end
-coroutine.wrap(UMXT_fake_script)()
-local function CWSLZ_fake_script() -- Guzik1_7.LocalScript 
+coroutine.wrap(JQHRC_fake_script)()
+local function FWHM_fake_script() -- Guzik1_7.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_7)
 
 	local button = script.Parent
@@ -2046,8 +2046,8 @@ local function CWSLZ_fake_script() -- Guzik1_7.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(CWSLZ_fake_script)()
-local function GPLENPA_fake_script() -- Guzik1_7.LocalScript 
+coroutine.wrap(FWHM_fake_script)()
+local function QETTWF_fake_script() -- Guzik1_7.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_7)
 
 	--[[ 
@@ -2099,8 +2099,8 @@ local function GPLENPA_fake_script() -- Guzik1_7.LocalScript
 	end)
 	
 end
-coroutine.wrap(GPLENPA_fake_script)()
-local function WSCD_fake_script() -- Guzik1_8.LocalScript 
+coroutine.wrap(QETTWF_fake_script)()
+local function QEWB_fake_script() -- Guzik1_8.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_8)
 
 	local button = script.Parent
@@ -2199,8 +2199,8 @@ local function WSCD_fake_script() -- Guzik1_8.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(WSCD_fake_script)()
-local function ZJTXABS_fake_script() -- Guzik1_8.LocalScript 
+coroutine.wrap(QEWB_fake_script)()
+local function HRXZFUR_fake_script() -- Guzik1_8.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_8)
 
 	--[[ 
@@ -2252,8 +2252,8 @@ local function ZJTXABS_fake_script() -- Guzik1_8.LocalScript
 	end)
 	
 end
-coroutine.wrap(ZJTXABS_fake_script)()
-local function PGKALI_fake_script() -- Guzik1_9.LocalScript 
+coroutine.wrap(HRXZFUR_fake_script)()
+local function INDXFE_fake_script() -- Guzik1_9.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_9)
 
 	local button = script.Parent
@@ -2353,8 +2353,8 @@ local function PGKALI_fake_script() -- Guzik1_9.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(PGKALI_fake_script)()
-local function CAHCAF_fake_script() -- Guzik1_9.LocalScript 
+coroutine.wrap(INDXFE_fake_script)()
+local function GXKSJKU_fake_script() -- Guzik1_9.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_9)
 
 	--[[ 
@@ -2406,8 +2406,8 @@ local function CAHCAF_fake_script() -- Guzik1_9.LocalScript
 	end)
 	
 end
-coroutine.wrap(CAHCAF_fake_script)()
-local function HZDT_fake_script() -- BackButton.LocalScript 
+coroutine.wrap(GXKSJKU_fake_script)()
+local function JBIDHP_fake_script() -- BackButton.LocalScript 
 	local script = Instance.new('LocalScript', BackButton)
 
 	local TweenService = game:GetService("TweenService")
@@ -2469,8 +2469,8 @@ local function HZDT_fake_script() -- BackButton.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(HZDT_fake_script)()
-local function ZNLKK_fake_script() -- RSPYbutton.LocalScript 
+coroutine.wrap(JBIDHP_fake_script)()
+local function KKFAJ_fake_script() -- RSPYbutton.LocalScript 
 	local script = Instance.new('LocalScript', RSPYbutton)
 
 	local button = script.Parent
@@ -2570,430 +2570,96 @@ local function ZNLKK_fake_script() -- RSPYbutton.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(ZNLKK_fake_script)()
-local function CWEQ_fake_script() -- RSPYbutton.LocalScript 
-	local script = Instance.new('LocalScript', RSPYbutton)
-
-	--[[ 
-	    🔧 Uniwersalny LocalScript dla każdego guzika w "Scripts"
-	    Po kliknięciu otwiera ramkę "StartScript" i ustawia dane.
-	    Autor: LUA Programming GOD 😎
-	--]]
-	
-	-- 🔹 Referencje GUI
-	local button = script.Parent
-	local player = game.Players.LocalPlayer
-	local gui = player:WaitForChild("PlayerGui"):WaitForChild("ScreenGui")
-	
-	-- Ramki
-	local mainFrame = gui:WaitForChild("Frame")
-	local scriptsFrame = mainFrame:WaitForChild("Scripts")
-	local startScriptFrame = mainFrame:WaitForChild("StartScript")
-	
-	-- Elementy w StartScript
-	local nameLabel = startScriptFrame:WaitForChild("Name")
-	local descLabel = startScriptFrame:WaitForChild("DescLabel")
-	local executeButton = startScriptFrame:WaitForChild("TextButton")
-	local backButton = startScriptFrame:WaitForChild("BackButton")
-	
-	-- 🔒 Ikony kłódek
-	local buttonLockedIcon = button:FindFirstChild("Locked") -- Kłódka na przycisku w menu Scripts
-	local executeLockedIcon = executeButton:FindFirstChild("Locked") -- Kłódka w StartScript
-	
-	-- ✏️ Automatyczne dane
-	local scriptName = button.Text
-	local scriptDescription = [[
-	Ten skrypt po odpaleniu coś robi
-	nie wiadomo co
-	]]
-	
-	-- 🖱️ Kliknięcie guzika (otwiera menu skryptu)
-	button.MouseButton1Click:Connect(function()
-		scriptsFrame.Visible = false
-		startScriptFrame.Visible = true
-	
-		-- Ustaw nazwę i opis
-		nameLabel.Text = scriptName
-		descLabel.Text = scriptDescription
-	end)
-	
-	-- 🔙 Powrót z StartScript do Scripts
-	backButton.MouseButton1Click:Connect(function()
-		startScriptFrame.Visible = false
-		scriptsFrame.Visible = true
-	end)
-	
-	-- 🟡 Gamepass sprawdzanie
-	local MarketplaceService = game:GetService("MarketplaceService")
-	local GAMEPASS_ID = 1296972626 -- 🟡 Twój Gamepass ID
-	
-	-- 🔹 Ustawienie startowe
-	executeButton.Active = false
-	executeButton.AutoButtonColor = false
-	if executeLockedIcon then executeLockedIcon.Visible = true end
-	if buttonLockedIcon then buttonLockedIcon.Visible = true end
-	
-	print("🔹 Sprawdzanie gamepassa Premium dla gracza:", player.Name)
-	
-	-- ✅ Sprawdzenie posiadania gamepassa
-	local success, ownsGamepass = pcall(function()
-		return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
-	end)
-	
-	if not success then
-		warn("❌ Błąd przy sprawdzaniu gamepassa:", ownsGamepass)
-		return
-	end
-	
-	if ownsGamepass then
-		-- ✅ Gracz ma Premium
-		executeButton.Active = true
-		executeButton.AutoButtonColor = true
-	
-		-- 🔓 Ukryj kłódki
-		if executeLockedIcon then executeLockedIcon.Visible = false end
-		if buttonLockedIcon then buttonLockedIcon.Visible = false end
-	
-		-- 🟢 Co ma się stać po kliknięciu?
-		executeButton.MouseButton1Click:Connect(function()
-			_G.Notify("lol", 1)
-		end)
-	
-	else
-		-- 🚫 Gracz nie ma Premium
-		executeButton.Active = false
-		executeButton.AutoButtonColor = false
-	
-		-- 🔒 Pokaż kłódki
-		if executeLockedIcon then executeLockedIcon.Visible = true end
-		if buttonLockedIcon then buttonLockedIcon.Visible = true end
-	
-		executeButton.MouseButton1Click:Connect(function()
-			_G.Notify("Nie masz Premium! Wejdź w 'Home' i kup Premium, aby uruchomić ten skrypt.")
-		end)
-	end
-	
-end
-coroutine.wrap(CWEQ_fake_script)()
-local function YJEQV_fake_script() -- SpectateButton.LocalScript 
+coroutine.wrap(KKFAJ_fake_script)()
+-- RSPYbutton.LocalScript is disabled.
+local function JAAGCI_fake_script() -- SpectateButton.LocalScript 
 	local script = Instance.new('LocalScript', SpectateButton)
 
-	--[[
+	--[[ 
+	    🔧 Uniwersalny LocalScript dla każdego guzika w "Scripts"
+	    Wersja: Kłódka znika przy Gamepassie, brak akcji przy braku posiadania.
+	--]]
 	
-	    🔒 Premium Button System + Animacje
-	    Autor: ChatGPT
+	-- 🔹 Referencje GUI
+	local button = script.Parent
+	local player = game.Players.LocalPlayer
+	local gui = player:WaitForChild("PlayerGui"):WaitForChild("ScreenGui")
 	
-	    ✅ Pokazuje/ukrywa "Locked"
-	    ✅ Sprawdza gamepass
-	    ✅ Hover animation
-	    ✅ Click animation
-	    ✅ Smooth GUI transitions
-	
-	    📌 WRZUĆ TEN SCRIPT DO:
-	    Frame > LocalScript
-	
-	]]
-	
-	------------------------------------------------
-	-- SERVICES
-	------------------------------------------------
-	
-	local Players = game:GetService("Players")
-	local TweenService = game:GetService("TweenService")
-	local MarketplaceService = game:GetService("MarketplaceService")
-	
-	------------------------------------------------
-	-- PLAYER
-	------------------------------------------------
-	
-	local player = Players.LocalPlayer
-	local playerGui = player:WaitForChild("PlayerGui")
-	
-	------------------------------------------------
-	-- GUI
-	------------------------------------------------
-	
-	local gui = playerGui:WaitForChild("ScreenGui")
+	-- Ramki
 	local mainFrame = gui:WaitForChild("Frame")
-	
 	local scriptsFrame = mainFrame:WaitForChild("Scripts")
 	local startScriptFrame = mainFrame:WaitForChild("StartScript")
 	
+	-- Elementy w StartScript
 	local nameLabel = startScriptFrame:WaitForChild("Name")
 	local descLabel = startScriptFrame:WaitForChild("DescLabel")
-	
 	local executeButton = startScriptFrame:WaitForChild("TextButton")
 	local backButton = startScriptFrame:WaitForChild("BackButton")
 	
-	------------------------------------------------
-	-- GAMEPASS
-	------------------------------------------------
+	-- 🔒 Ikony kłódek
+	local buttonLockedIcon = button:FindFirstChild("Locked") 
+	local executeLockedIcon = executeButton:FindFirstChild("Locked")
 	
-	local GAMEPASS_ID = 1296972626
+	-- ✏️ Automatyczne dane
+	local scriptName = button.Text
+	local scriptDescription = "Ten skrypt po odpaleniu coś robi\nnie wiadomo co"
 	
-	local ownsPremium = false
-	
-	local success, result = pcall(function()
-		return MarketplaceService:UserOwnsGamePassAsync(
-			player.UserId,
-			GAMEPASS_ID
-		)
-	end)
-	
-	if success then
-		ownsPremium = result
-	else
-		warn("❌ Gamepass check failed")
-	end
-	
-	------------------------------------------------
-	-- ANIMATION SETTINGS
-	------------------------------------------------
-	
-	local hoverSize = 1.05
-	local clickSize = 0.95
-	
-	local tweenInfo = TweenInfo.new(
-		0.15,
-		Enum.EasingStyle.Quad,
-		Enum.EasingDirection.Out
-	)
-	
-	------------------------------------------------
-	-- FUNCTIONS
-	------------------------------------------------
-	
-	local currentButton = nil
-	
-	local function animateButton(button)
-	
-		local originalSize = button.Size
-	
-		------------------------------------------------
-		-- HOVER
-		------------------------------------------------
-	
-		button.MouseEnter:Connect(function()
-	
-			local tween = TweenService:Create(
-				button,
-				tweenInfo,
-				{
-					Size = UDim2.new(
-						originalSize.X.Scale * hoverSize,
-						originalSize.X.Offset,
-	
-						originalSize.Y.Scale * hoverSize,
-						originalSize.Y.Offset
-					)
-				}
-			)
-	
-			tween:Play()
-		end)
-	
-		button.MouseLeave:Connect(function()
-	
-			local tween = TweenService:Create(
-				button,
-				tweenInfo,
-				{
-					Size = originalSize
-				}
-			)
-	
-			tween:Play()
-		end)
-	
-		------------------------------------------------
-		-- CLICK
-		------------------------------------------------
-	
-		button.MouseButton1Down:Connect(function()
-	
-			local tween = TweenService:Create(
-				button,
-				tweenInfo,
-				{
-					Size = UDim2.new(
-						originalSize.X.Scale * clickSize,
-						originalSize.X.Offset,
-	
-						originalSize.Y.Scale * clickSize,
-						originalSize.Y.Offset
-					)
-				}
-			)
-	
-			tween:Play()
-		end)
-	
-		button.MouseButton1Up:Connect(function()
-	
-			local tween = TweenService:Create(
-				button,
-				tweenInfo,
-				{
-					Size = originalSize
-				}
-			)
-	
-			tween:Play()
-		end)
-	end
-	
-	------------------------------------------------
-	-- OPEN SCRIPT MENU
-	------------------------------------------------
-	
-	local function openMenu(button)
-	
-		currentButton = button
-	
-		--------------------------------------------
-		-- TEXT
-		--------------------------------------------
-	
-		nameLabel.Text = button.Text
-	
-		local customDescription = button:GetAttribute("Description")
-	
-		if customDescription then
-			descLabel.Text = customDescription
-		else
-			descLabel.Text = "Uruchamia "..button.Text
-		end
-	
-		--------------------------------------------
-		-- GUI ANIMATION
-		--------------------------------------------
-	
+	-- 🖱️ Otwieranie menu skryptu
+	button.MouseButton1Click:Connect(function()
 		scriptsFrame.Visible = false
 		startScriptFrame.Visible = true
-	
-		startScriptFrame.Position = UDim2.new(0.5,0,0.6,0)
-	
-		local tween = TweenService:Create(
-			startScriptFrame,
-			TweenInfo.new(
-				0.25,
-				Enum.EasingStyle.Back,
-				Enum.EasingDirection.Out
-			),
-			{
-				Position = UDim2.new(0.5,0,0.5,0)
-			}
-		)
-	
-		tween:Play()
-	end
-	
-	------------------------------------------------
-	-- BUTTON SETUP
-	------------------------------------------------
-	
-	for _, button in pairs(scriptsFrame:GetChildren()) do
-	
-		if button:IsA("TextButton") then
-	
-			----------------------------------------
-			-- LOCKED ICON
-			----------------------------------------
-	
-			local locked = button:FindFirstChild("Locked")
-	
-			if locked then
-				locked.Visible = not ownsPremium
-			end
-	
-			----------------------------------------
-			-- AUTO DESCRIPTION UNDER BUTTON
-			----------------------------------------
-	
-			local desc = Instance.new("TextLabel")
-	
-			desc.Name = "AutoDescription"
-	
-			desc.BackgroundTransparency = 1
-	
-			desc.Size = UDim2.new(1,0,0,18)
-	
-			desc.Position = UDim2.new(0,0,1,2)
-	
-			desc.Font = Enum.Font.Gotham
-	
-			desc.TextScaled = true
-	
-			desc.TextColor3 = Color3.fromRGB(180,180,180)
-	
-			desc.Text = "Open "..button.Text
-	
-			desc.Parent = button
-	
-			----------------------------------------
-			-- ANIMATIONS
-			----------------------------------------
-	
-			animateButton(button)
-	
-			----------------------------------------
-			-- CLICK
-			----------------------------------------
-	
-			button.MouseButton1Click:Connect(function()
-	
-				if ownsPremium then
-					openMenu(button)
-				else
-	
-					if _G.Notify then
-						_G.Notify(
-							"❌ Nie masz Premium",
-							3
-						)
-					end
-				end
-			end)
-		end
-	end
-	
-	------------------------------------------------
-	-- EXECUTE BUTTON
-	------------------------------------------------
-	
-	animateButton(executeButton)
-	
-	executeButton.MouseButton1Click:Connect(function()
-	
-		if not currentButton then
-			return
-		end
-	
-		print("🚀 Executed:", currentButton.Text)
-	
-		if _G.Notify then
-			_G.Notify(
-				"Executed "..currentButton.Text,
-				2
-			)
-		end
+		nameLabel.Text = scriptName
+		descLabel.Text = scriptDescription
 	end)
 	
-	------------------------------------------------
-	-- BACK BUTTON
-	------------------------------------------------
-	
-	animateButton(backButton)
-	
+	-- 🔙 Powrót
 	backButton.MouseButton1Click:Connect(function()
-	
 		startScriptFrame.Visible = false
 		scriptsFrame.Visible = true
-	
 	end)
+	
+	-- 🟡 Gamepass sprawdzanie
+	local MarketplaceService = game:GetService("MarketplaceService")
+	local GAMEPASS_ID = 1296972626 
+	
+	-- ✅ Sprawdzenie posiadania gamepassa
+	local success, ownsGamepass = pcall(function()
+		return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
+	end)
+	
+	if success and ownsGamepass then
+		-- ✅ GRACZ MA PREMIUM
+		print("✅ Premium aktywne - odblokowano funkcje")
+	
+		-- 🔓 Ukryj kłódki
+		if buttonLockedIcon then buttonLockedIcon.Visible = false end
+		if executeLockedIcon then executeLockedIcon.Visible = false end
+	
+		-- Włącz efekty przycisku
+		executeButton.Active = true
+		executeButton.AutoButtonColor = true
+	
+		-- 🟢 Podepnij funkcję odpalania (TYLKO dla posiadaczy)
+		executeButton.MouseButton1Click:Connect(function()
+			_G.Notify("Uruchamianie...", 1)
+			-- Tutaj Twój kod skryptu
+		end)
+	
+	else
+		-- 🚫 GRACZ NIE MA PREMIUM (lub błąd)
+		print("🚫 Brak Premium - przycisk zablokowany")
+	
+		-- 🔒 Pokaż kłódki
+		if buttonLockedIcon then buttonLockedIcon.Visible = true end
+		if executeLockedIcon then executeLockedIcon.Visible = true end
+	
+		-- Wyłącz przycisk (brak reakcji na kliknięcie)
+		executeButton.Active = false
+		executeButton.AutoButtonColor = false
+	end
 end
-coroutine.wrap(YJEQV_fake_script)()
-local function RWJCDB_fake_script() -- Button1.LocalScript 
+coroutine.wrap(JAAGCI_fake_script)()
+local function RCTP_fake_script() -- Button1.LocalScript 
 	local script = Instance.new('LocalScript', Button1)
 
 	local button = script.Parent
@@ -3093,8 +2759,8 @@ local function RWJCDB_fake_script() -- Button1.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(RWJCDB_fake_script)()
-local function GYPO_fake_script() -- Button1.LocalScript 
+coroutine.wrap(RCTP_fake_script)()
+local function QGVV_fake_script() -- Button1.LocalScript 
 	local script = Instance.new('LocalScript', Button1)
 
 	--[[ 
@@ -3197,8 +2863,8 @@ local function GYPO_fake_script() -- Button1.LocalScript
 	end
 	
 end
-coroutine.wrap(GYPO_fake_script)()
-local function ATQC_fake_script() -- Nickdispaly.LocalScript 
+coroutine.wrap(QGVV_fake_script)()
+local function POAUYLA_fake_script() -- Nickdispaly.LocalScript 
 	local script = Instance.new('LocalScript', Nickdispaly)
 
 	local Players = game:GetService("Players")
@@ -3211,8 +2877,8 @@ local function ATQC_fake_script() -- Nickdispaly.LocalScript
 	
 	label.Text = "Witaj " .. display_name .. "(@" .. username .. ")"
 end
-coroutine.wrap(ATQC_fake_script)()
-local function VAPZEV_fake_script() -- ImageLabel_4.LocalScript 
+coroutine.wrap(POAUYLA_fake_script)()
+local function UDZYO_fake_script() -- ImageLabel_4.LocalScript 
 	local script = Instance.new('LocalScript', ImageLabel_4)
 
 	local Players = game:GetService("Players")
@@ -3239,9 +2905,9 @@ local function VAPZEV_fake_script() -- ImageLabel_4.LocalScript
 	
 	-- not needed but if imagelabel is too big image will be pixelated very badly: imageLabel.Size = UDim2.new(0, 420, 0, 420)
 end
-coroutine.wrap(VAPZEV_fake_script)()
+coroutine.wrap(UDZYO_fake_script)()
 -- BuyPremiumTab.LocalScript is disabled.
-local function YLQJ_fake_script() -- BuyPremiumTab.LocalScript 
+local function MQYUXKX_fake_script() -- BuyPremiumTab.LocalScript 
 	local script = Instance.new('LocalScript', BuyPremiumTab)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -3252,8 +2918,8 @@ local function YLQJ_fake_script() -- BuyPremiumTab.LocalScript
 		end)
 	end)
 end
-coroutine.wrap(YLQJ_fake_script)()
-local function OJBQDET_fake_script() -- ExecutorTab.LocalScript 
+coroutine.wrap(MQYUXKX_fake_script)()
+local function FLTC_fake_script() -- ExecutorTab.LocalScript 
 	local script = Instance.new('LocalScript', ExecutorTab)
 
 	local TweenService = game:GetService("TweenService")
@@ -3350,9 +3016,9 @@ local function OJBQDET_fake_script() -- ExecutorTab.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(OJBQDET_fake_script)()
+coroutine.wrap(FLTC_fake_script)()
 -- ScriptsButton.LocalScript is disabled.
-local function BOGHWUZ_fake_script() -- ScriptsButton.LocalScript 
+local function FVBETYN_fake_script() -- ScriptsButton.LocalScript 
 	local script = Instance.new('LocalScript', ScriptsButton)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -3376,8 +3042,8 @@ local function BOGHWUZ_fake_script() -- ScriptsButton.LocalScript
 		end)
 	end)
 end
-coroutine.wrap(BOGHWUZ_fake_script)()
-local function TWNPTXL_fake_script() -- UpdateLogs.LocalScript 
+coroutine.wrap(FVBETYN_fake_script)()
+local function RKKXD_fake_script() -- UpdateLogs.LocalScript 
 	local script = Instance.new('LocalScript', UpdateLogs)
 
 	local TweenService = game:GetService("TweenService")
@@ -3474,8 +3140,8 @@ local function TWNPTXL_fake_script() -- UpdateLogs.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(TWNPTXL_fake_script)()
-local function JPVQF_fake_script() -- TimerButton.LocalScript 
+coroutine.wrap(RKKXD_fake_script)()
+local function FLKZ_fake_script() -- TimerButton.LocalScript 
 	local script = Instance.new('LocalScript', TimerButton)
 
 	local TweenService = game:GetService("TweenService")
@@ -3625,8 +3291,8 @@ local function JPVQF_fake_script() -- TimerButton.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(JPVQF_fake_script)()
-local function SAXG_fake_script() -- RejoinButton.LocalScript 
+coroutine.wrap(FLKZ_fake_script)()
+local function DRXQHPA_fake_script() -- RejoinButton.LocalScript 
 	local script = Instance.new('LocalScript', RejoinButton)
 
 	local TweenService = game:GetService("TweenService")
@@ -3783,8 +3449,8 @@ local function SAXG_fake_script() -- RejoinButton.LocalScript
 		teleportService:Teleport(gamePlaceId, player)
 	end
 end
-coroutine.wrap(SAXG_fake_script)()
-local function AQGUH_fake_script() -- BackButton_2.LocalScript 
+coroutine.wrap(DRXQHPA_fake_script)()
+local function SPNGDYY_fake_script() -- BackButton_2.LocalScript 
 	local script = Instance.new('LocalScript', BackButton_2)
 
 	local TweenService = game:GetService("TweenService")
@@ -3846,8 +3512,8 @@ local function AQGUH_fake_script() -- BackButton_2.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(AQGUH_fake_script)()
-local function WSZTA_fake_script() -- TextButton.LocalScript 
+coroutine.wrap(SPNGDYY_fake_script)()
+local function RPFC_fake_script() -- TextButton.LocalScript 
 	local script = Instance.new('LocalScript', TextButton)
 
 	local button = script.Parent
@@ -3947,8 +3613,8 @@ local function WSZTA_fake_script() -- TextButton.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(WSZTA_fake_script)()
-local function ZFNRJJW_fake_script() -- Executor.LocalScript 
+coroutine.wrap(RPFC_fake_script)()
+local function BYPE_fake_script() -- Executor.LocalScript 
 	local script = Instance.new('LocalScript', Executor)
 
 	-- Executor - poprawiony LocalScript
@@ -4522,8 +4188,8 @@ local function ZFNRJJW_fake_script() -- Executor.LocalScript
 	end)
 	
 end
-coroutine.wrap(ZFNRJJW_fake_script)()
-local function KXHMJ_fake_script() -- CopyToClipboard.LocalScript 
+coroutine.wrap(BYPE_fake_script)()
+local function FFAEJE_fake_script() -- CopyToClipboard.LocalScript 
 	local script = Instance.new('LocalScript', CopyToClipboard)
 
 	local TweenService = game:GetService("TweenService")
@@ -4673,8 +4339,8 @@ local function KXHMJ_fake_script() -- CopyToClipboard.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(KXHMJ_fake_script)()
-local function NZARMW_fake_script() -- Execute.LocalScript 
+coroutine.wrap(FFAEJE_fake_script)()
+local function GZHM_fake_script() -- Execute.LocalScript 
 	local script = Instance.new('LocalScript', Execute)
 
 	local TweenService = game:GetService("TweenService")
@@ -4879,8 +4545,8 @@ local function NZARMW_fake_script() -- Execute.LocalScript
 		end
 	end
 end
-coroutine.wrap(NZARMW_fake_script)()
-local function TUUK_fake_script() -- Rename.LocalScript 
+coroutine.wrap(GZHM_fake_script)()
+local function AZSCDLL_fake_script() -- Rename.LocalScript 
 	local script = Instance.new('LocalScript', Rename)
 
 	local TweenService = game:GetService("TweenService")
@@ -5030,8 +4696,8 @@ local function TUUK_fake_script() -- Rename.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(TUUK_fake_script)()
-local function AWLCZC_fake_script() -- Delete.LocalScript 
+coroutine.wrap(AZSCDLL_fake_script)()
+local function CVSUUD_fake_script() -- Delete.LocalScript 
 	local script = Instance.new('LocalScript', Delete)
 
 	local TweenService = game:GetService("TweenService")
@@ -5181,8 +4847,8 @@ local function AWLCZC_fake_script() -- Delete.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(AWLCZC_fake_script)()
-local function EWFBCG_fake_script() -- ClearExecTextBox.LocalScript 
+coroutine.wrap(CVSUUD_fake_script)()
+local function LYTWS_fake_script() -- ClearExecTextBox.LocalScript 
 	local script = Instance.new('LocalScript', ClearExecTextBox)
 
 	local TweenService = game:GetService("TweenService")
@@ -5332,8 +4998,8 @@ local function EWFBCG_fake_script() -- ClearExecTextBox.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(EWFBCG_fake_script)()
-local function UEHBPP_fake_script() -- SaveFile.LocalScript 
+coroutine.wrap(LYTWS_fake_script)()
+local function SDAYM_fake_script() -- SaveFile.LocalScript 
 	local script = Instance.new('LocalScript', SaveFile)
 
 	local TweenService = game:GetService("TweenService")
@@ -5483,8 +5149,8 @@ local function UEHBPP_fake_script() -- SaveFile.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(UEHBPP_fake_script)()
-local function DSXKH_fake_script() -- Guzik1_10.LocalScript 
+coroutine.wrap(SDAYM_fake_script)()
+local function YIOJ_fake_script() -- Guzik1_10.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_10)
 
 	local button = script.Parent
@@ -5740,8 +5406,8 @@ local function DSXKH_fake_script() -- Guzik1_10.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(DSXKH_fake_script)()
-local function CKDD_fake_script() -- BackButton_3.LocalScript 
+coroutine.wrap(YIOJ_fake_script)()
+local function KFQYQRY_fake_script() -- BackButton_3.LocalScript 
 	local script = Instance.new('LocalScript', BackButton_3)
 
 	local TweenService = game:GetService("TweenService")
@@ -5803,189 +5469,10 @@ local function CKDD_fake_script() -- BackButton_3.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(CKDD_fake_script)()
-local function EBKHE_fake_script() -- CloseButton.LocalScript 
-	local script = Instance.new('LocalScript', CloseButton)
-
-	-- Odwołania do elementów GUI
-	local button = script.Parent
-	local frame = button.Parent.Frame
-	
-	-- Ustawienia animacji
-	local TweenService = game:GetService("TweenService")
-	local tweenTime = 0.3  -- czas trwania animacji (w sekundach)
-	
-	-- Zmienna stanu (czy GUI jest widoczne)
-	local isVisible = true
-	
-	-- Funkcja do animacji widoczności
-	local function toggleFrame()
-		if isVisible then
-			-- Animacja zanikania
-			local tween = TweenService:Create(
-				frame,
-				TweenInfo.new(tweenTime, Enum.EasingStyle.Sine, Enum.EasingDirection.Out),
-				{BackgroundTransparency = 1}
-			)
-			tween:Play()
-			tween.Completed:Connect(function()
-				frame.Visible = false
-			end)
-		else
-			frame.Visible = true
-			-- Animacja pojawiania
-			local tween = TweenService:Create(
-				frame,
-				TweenInfo.new(tweenTime, Enum.EasingStyle.Sine, Enum.EasingDirection.Out),
-				{BackgroundTransparency = 0.3}
-			)
-			tween:Play()
-		end
-	
-		-- Zmiana stanu
-		isVisible = not isVisible
-	end
-	
-	-- Podłączenie przycisku
-	button.MouseButton1Click:Connect(toggleFrame)
-	
-end
-coroutine.wrap(EBKHE_fake_script)()
-local function IWKJRG_fake_script() -- TextLabel_2.LocalScript 
-	local script = Instance.new('LocalScript', TextLabel_2)
-
-	-- LocalScript wewnątrz TextLabel
-	local TweenService = game:GetService("TweenService")
-	local RunService = game:GetService("RunService")
-	
-	local textLabel = script.Parent
-	local frame = script.Parent.Parent
-	
-	-- 💡 Zapamiętaj oryginalną pozycję i rozmiar ramki
-	local originalPosition = frame.Position
-	local originalSize = frame.Size
-	
-	-- 💡 Utwórz pasek czasu (jeśli go nie ma)
-	local progressBar = frame:FindFirstChild("ProgressBar")
-	if not progressBar then
-		progressBar = Instance.new("Frame")
-		progressBar.Name = "ProgressBar"
-		progressBar.AnchorPoint = Vector2.new(0, 1)
-		progressBar.Position = UDim2.new(0, 0, 1, 0)
-		progressBar.Size = UDim2.new(1, 0, 0, 4)
-		progressBar.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
-		progressBar.BorderSizePixel = 0
-		progressBar.Parent = frame
-	
-		-- ➕ Dodaj biały obrys
-		local stroke = Instance.new("UIStroke")
-		stroke.Thickness = 1.5
-		stroke.Color = Color3.fromRGB(255, 255, 255)
-		stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-		stroke.Parent = progressBar
-	end
-	
-	-- 💡 Ustawienia animacji
-	local tweenTime = 0.5
-	
-	-- 💡 Przygotowanie ramki
-	frame.AnchorPoint = Vector2.new(0.5, 0.5)
-	frame.Position = UDim2.new(
-		originalPosition.X.Scale + frame.Size.X.Scale / 2,
-		originalPosition.X.Offset + frame.Size.X.Offset / 2,
-		originalPosition.Y.Scale + frame.Size.Y.Scale / 2,
-		originalPosition.Y.Offset + frame.Size.Y.Offset / 2
-	)
-	
-	local collapsedSize = UDim2.new(0, 0, originalSize.Y.Scale, originalSize.Y.Offset)
-	frame.Visible = false
-	frame.Size = collapsedSize
-	textLabel.Visible = false
-	
-	-- 💡 Dźwięk powiadomienia
-	local sound = Instance.new("Sound")
-	sound.SoundId = "rbxassetid://3494283437" -- 🔊 możesz zmienić na inny
-	sound.Volume = 1
-	sound.Parent = frame
-	
-	-- 💡 Globalna funkcja do pokazywania powiadomień
-	function _G.Notify(message, duration)
-		duration = duration or 5 -- domyślnie 5 sekund, jeśli nie podano
-	
-		textLabel.Text = message
-		frame.Visible = true
-	
-		-- 🔊 Dźwięk startu
-		sound:Play()
-	
-		-- 🔹 Rozszerzenie ramki (od środka)
-		local expandTween = TweenService:Create(
-			frame,
-			TweenInfo.new(tweenTime, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-			{Size = originalSize}
-		)
-		expandTween:Play()
-		expandTween.Completed:Wait()
-	
-		-- 🔹 Pokazanie tekstu
-		textLabel.Visible = true
-	
-		-- 🔹 Reset paska
-		progressBar.Size = UDim2.new(1, 0, 0, 4)
-		progressBar.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
-	
-		-- 🔹 Cofanie paska w czasie trwania
-		local barTween = TweenService:Create(
-			progressBar,
-			TweenInfo.new(duration, Enum.EasingStyle.Linear),
-			{Size = UDim2.new(0, 0, 0, 4)}
-		)
-		barTween:Play()
-	
-		-- 🔹 Zmiana koloru paska w czasie
-		local elapsed = 0
-		local conn
-		conn = RunService.Heartbeat:Connect(function(dt)
-			elapsed += dt
-			local progress = math.clamp(elapsed / duration, 0, 1)
-			local color
-			if progress < 0.5 then
-				local t = progress * 2
-				color = Color3.new(1 * t, 1, 0)
-			else
-				local t = (progress - 0.5) * 2
-				color = Color3.new(1, 1 - t, 0)
-			end
-			progressBar.BackgroundColor3 = color
-			if progress >= 1 then
-				conn:Disconnect()
-			end
-		end)
-	
-		-- 🔹 Czekaj do końca czasu trwania
-		task.wait(duration)
-	
-		-- 🔹 Ukrycie tekstu
-		textLabel.Visible = false
-	
-		-- 🔹 Zwinięcie ramki (do środka)
-		local collapseTween = TweenService:Create(
-			frame,
-			TweenInfo.new(tweenTime, Enum.EasingStyle.Quad, Enum.EasingDirection.In),
-			{Size = collapsedSize}
-		)
-		collapseTween:Play()
-		collapseTween.Completed:Wait()
-	
-		frame.Visible = false
-	end
-	
-	-- 🔹 Test (możesz usunąć po sprawdzeniu)
-	-- _G.ShowNotification("Zebrałeś rzadki przedmiot!", 8)
-	
-end
-coroutine.wrap(IWKJRG_fake_script)()
-local function SCRF_fake_script() -- ProjectUniversal.LocalScript 
+coroutine.wrap(KFQYQRY_fake_script)()
+-- ProjectUniversal.LocalScript is disabled.
+-- ProjectUniversal.Script is disabled.
+local function WQWHUOC_fake_script() -- ProjectUniversal.LocalScript 
 	local script = Instance.new('LocalScript', ProjectUniversal)
 
 	local TweenService = game:GetService("TweenService")
@@ -6119,4 +5606,185 @@ local function SCRF_fake_script() -- ProjectUniversal.LocalScript
 		})
 	end)
 end
-coroutine.wrap(SCRF_fake_script)()
+coroutine.wrap(WQWHUOC_fake_script)()
+local function OERGB_fake_script() -- CloseButton.LocalScript 
+	local script = Instance.new('LocalScript', CloseButton)
+
+	-- Odwołania do elementów GUI
+	local button = script.Parent
+	local frame = button.Parent.Frame
+	
+	-- Ustawienia animacji
+	local TweenService = game:GetService("TweenService")
+	local tweenTime = 0.3  -- czas trwania animacji (w sekundach)
+	
+	-- Zmienna stanu (czy GUI jest widoczne)
+	local isVisible = true
+	
+	-- Funkcja do animacji widoczności
+	local function toggleFrame()
+		if isVisible then
+			-- Animacja zanikania
+			local tween = TweenService:Create(
+				frame,
+				TweenInfo.new(tweenTime, Enum.EasingStyle.Sine, Enum.EasingDirection.Out),
+				{BackgroundTransparency = 1}
+			)
+			tween:Play()
+			tween.Completed:Connect(function()
+				frame.Visible = false
+			end)
+		else
+			frame.Visible = true
+			-- Animacja pojawiania
+			local tween = TweenService:Create(
+				frame,
+				TweenInfo.new(tweenTime, Enum.EasingStyle.Sine, Enum.EasingDirection.Out),
+				{BackgroundTransparency = 0.3}
+			)
+			tween:Play()
+		end
+	
+		-- Zmiana stanu
+		isVisible = not isVisible
+	end
+	
+	-- Podłączenie przycisku
+	button.MouseButton1Click:Connect(toggleFrame)
+	
+end
+coroutine.wrap(OERGB_fake_script)()
+local function KAOKGAB_fake_script() -- TextLabel_2.LocalScript 
+	local script = Instance.new('LocalScript', TextLabel_2)
+
+	-- LocalScript wewnątrz TextLabel
+	local TweenService = game:GetService("TweenService")
+	local RunService = game:GetService("RunService")
+	
+	local textLabel = script.Parent
+	local frame = script.Parent.Parent
+	
+	-- 💡 Zapamiętaj oryginalną pozycję i rozmiar ramki
+	local originalPosition = frame.Position
+	local originalSize = frame.Size
+	
+	-- 💡 Utwórz pasek czasu (jeśli go nie ma)
+	local progressBar = frame:FindFirstChild("ProgressBar")
+	if not progressBar then
+		progressBar = Instance.new("Frame")
+		progressBar.Name = "ProgressBar"
+		progressBar.AnchorPoint = Vector2.new(0, 1)
+		progressBar.Position = UDim2.new(0, 0, 1, 0)
+		progressBar.Size = UDim2.new(1, 0, 0, 4)
+		progressBar.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+		progressBar.BorderSizePixel = 0
+		progressBar.Parent = frame
+	
+		-- ➕ Dodaj biały obrys
+		local stroke = Instance.new("UIStroke")
+		stroke.Thickness = 1.5
+		stroke.Color = Color3.fromRGB(255, 255, 255)
+		stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+		stroke.Parent = progressBar
+	end
+	
+	-- 💡 Ustawienia animacji
+	local tweenTime = 0.5
+	
+	-- 💡 Przygotowanie ramki
+	frame.AnchorPoint = Vector2.new(0.5, 0.5)
+	frame.Position = UDim2.new(
+		originalPosition.X.Scale + frame.Size.X.Scale / 2,
+		originalPosition.X.Offset + frame.Size.X.Offset / 2,
+		originalPosition.Y.Scale + frame.Size.Y.Scale / 2,
+		originalPosition.Y.Offset + frame.Size.Y.Offset / 2
+	)
+	
+	local collapsedSize = UDim2.new(0, 0, originalSize.Y.Scale, originalSize.Y.Offset)
+	frame.Visible = false
+	frame.Size = collapsedSize
+	textLabel.Visible = false
+	
+	-- 💡 Dźwięk powiadomienia
+	local sound = Instance.new("Sound")
+	sound.SoundId = "rbxassetid://3494283437" -- 🔊 możesz zmienić na inny
+	sound.Volume = 1
+	sound.Parent = frame
+	
+	-- 💡 Globalna funkcja do pokazywania powiadomień
+	function _G.Notify(message, duration)
+		duration = duration or 5 -- domyślnie 5 sekund, jeśli nie podano
+	
+		textLabel.Text = message
+		frame.Visible = true
+	
+		-- 🔊 Dźwięk startu
+		sound:Play()
+	
+		-- 🔹 Rozszerzenie ramki (od środka)
+		local expandTween = TweenService:Create(
+			frame,
+			TweenInfo.new(tweenTime, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+			{Size = originalSize}
+		)
+		expandTween:Play()
+		expandTween.Completed:Wait()
+	
+		-- 🔹 Pokazanie tekstu
+		textLabel.Visible = true
+	
+		-- 🔹 Reset paska
+		progressBar.Size = UDim2.new(1, 0, 0, 4)
+		progressBar.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+	
+		-- 🔹 Cofanie paska w czasie trwania
+		local barTween = TweenService:Create(
+			progressBar,
+			TweenInfo.new(duration, Enum.EasingStyle.Linear),
+			{Size = UDim2.new(0, 0, 0, 4)}
+		)
+		barTween:Play()
+	
+		-- 🔹 Zmiana koloru paska w czasie
+		local elapsed = 0
+		local conn
+		conn = RunService.Heartbeat:Connect(function(dt)
+			elapsed += dt
+			local progress = math.clamp(elapsed / duration, 0, 1)
+			local color
+			if progress < 0.5 then
+				local t = progress * 2
+				color = Color3.new(1 * t, 1, 0)
+			else
+				local t = (progress - 0.5) * 2
+				color = Color3.new(1, 1 - t, 0)
+			end
+			progressBar.BackgroundColor3 = color
+			if progress >= 1 then
+				conn:Disconnect()
+			end
+		end)
+	
+		-- 🔹 Czekaj do końca czasu trwania
+		task.wait(duration)
+	
+		-- 🔹 Ukrycie tekstu
+		textLabel.Visible = false
+	
+		-- 🔹 Zwinięcie ramki (do środka)
+		local collapseTween = TweenService:Create(
+			frame,
+			TweenInfo.new(tweenTime, Enum.EasingStyle.Quad, Enum.EasingDirection.In),
+			{Size = collapsedSize}
+		)
+		collapseTween:Play()
+		collapseTween.Completed:Wait()
+	
+		frame.Visible = false
+	end
+	
+	-- 🔹 Test (możesz usunąć po sprawdzeniu)
+	-- _G.ShowNotification("Zebrałeś rzadki przedmiot!", 8)
+	
+end
+coroutine.wrap(KAOKGAB_fake_script)()
