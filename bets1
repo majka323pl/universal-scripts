@@ -20,147 +20,129 @@ local Guzik1_2 = Instance.new("TextButton")
 local UICorner_3 = Instance.new("UICorner")
 local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
 local TextLabel = Instance.new("TextLabel")
-local Scripts = Instance.new("Frame")
-local UICorner_4 = Instance.new("UICorner")
-local Guzik1_3 = Instance.new("TextButton")
-local UICorner_5 = Instance.new("UICorner")
-local UITextSizeConstraint_3 = Instance.new("UITextSizeConstraint")
-local Guzik1_4 = Instance.new("TextButton")
-local UICorner_6 = Instance.new("UICorner")
-local UITextSizeConstraint_4 = Instance.new("UITextSizeConstraint")
-local Guzik1_5 = Instance.new("TextButton")
-local UICorner_7 = Instance.new("UICorner")
-local UITextSizeConstraint_5 = Instance.new("UITextSizeConstraint")
-local Guzik1_6 = Instance.new("TextButton")
-local UICorner_8 = Instance.new("UICorner")
-local UITextSizeConstraint_6 = Instance.new("UITextSizeConstraint")
-local Guzik1_7 = Instance.new("TextButton")
-local UICorner_9 = Instance.new("UICorner")
-local UITextSizeConstraint_7 = Instance.new("UITextSizeConstraint")
-local Guzik1_8 = Instance.new("TextButton")
-local UICorner_10 = Instance.new("UICorner")
-local UITextSizeConstraint_8 = Instance.new("UITextSizeConstraint")
-local Guzik1_9 = Instance.new("TextButton")
-local UICorner_11 = Instance.new("UICorner")
-local UITextSizeConstraint_9 = Instance.new("UITextSizeConstraint")
-local BackButton = Instance.new("TextButton")
-local UICorner_12 = Instance.new("UICorner")
-local RSPYbutton = Instance.new("TextButton")
-local UICorner_13 = Instance.new("UICorner")
-local UITextSizeConstraint_10 = Instance.new("UITextSizeConstraint")
-local Locked = Instance.new("Frame")
-local UICorner_14 = Instance.new("UICorner")
-local ImageLabel = Instance.new("ImageLabel")
-local SpectateButton = Instance.new("TextButton")
-local UICorner_15 = Instance.new("UICorner")
-local UITextSizeConstraint_11 = Instance.new("UITextSizeConstraint")
-local Locked_2 = Instance.new("Frame")
-local UICorner_16 = Instance.new("UICorner")
-local ImageLabel_2 = Instance.new("ImageLabel")
-local Button1 = Instance.new("TextButton")
-local UICorner_17 = Instance.new("UICorner")
-local UITextSizeConstraint_12 = Instance.new("UITextSizeConstraint")
-local Locked_3 = Instance.new("Frame")
-local UICorner_18 = Instance.new("UICorner")
-local ImageLabel_3 = Instance.new("ImageLabel")
 local Home = Instance.new("Frame")
 local Text = Instance.new("TextLabel")
-local UITextSizeConstraint_13 = Instance.new("UITextSizeConstraint")
+local UITextSizeConstraint_3 = Instance.new("UITextSizeConstraint")
 local Nickdispaly = Instance.new("TextLabel")
-local UITextSizeConstraint_14 = Instance.new("UITextSizeConstraint")
-local ImageLabel_4 = Instance.new("ImageLabel")
+local UITextSizeConstraint_4 = Instance.new("UITextSizeConstraint")
+local ImageLabel = Instance.new("ImageLabel")
 local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
-local ImageLabel_5 = Instance.new("ImageLabel")
+local ImageLabel_2 = Instance.new("ImageLabel")
 local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
 local Buttons = Instance.new("Frame")
+local UICorner_4 = Instance.new("UICorner")
 local BuyPremiumTab = Instance.new("TextButton")
-local UICorner_19 = Instance.new("UICorner")
-local UITextSizeConstraint_15 = Instance.new("UITextSizeConstraint")
+local UICorner_5 = Instance.new("UICorner")
+local UITextSizeConstraint_5 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_4 = Instance.new("UIAspectRatioConstraint")
 local ExecutorTab = Instance.new("TextButton")
-local UICorner_20 = Instance.new("UICorner")
-local UITextSizeConstraint_16 = Instance.new("UITextSizeConstraint")
+local UICorner_6 = Instance.new("UICorner")
+local UITextSizeConstraint_6 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_5 = Instance.new("UIAspectRatioConstraint")
 local ScriptsButton = Instance.new("TextButton")
-local UICorner_21 = Instance.new("UICorner")
-local UITextSizeConstraint_17 = Instance.new("UITextSizeConstraint")
+local UICorner_7 = Instance.new("UICorner")
+local UITextSizeConstraint_7 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_6 = Instance.new("UIAspectRatioConstraint")
 local UpdateLogs = Instance.new("TextButton")
-local UICorner_22 = Instance.new("UICorner")
-local UITextSizeConstraint_18 = Instance.new("UITextSizeConstraint")
+local UICorner_8 = Instance.new("UICorner")
+local UITextSizeConstraint_8 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_7 = Instance.new("UIAspectRatioConstraint")
 local TimerButton = Instance.new("TextButton")
-local UICorner_23 = Instance.new("UICorner")
-local UITextSizeConstraint_19 = Instance.new("UITextSizeConstraint")
+local UICorner_9 = Instance.new("UICorner")
+local UITextSizeConstraint_9 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_8 = Instance.new("UIAspectRatioConstraint")
 local RejoinButton = Instance.new("TextButton")
-local UICorner_24 = Instance.new("UICorner")
-local UITextSizeConstraint_20 = Instance.new("UITextSizeConstraint")
+local UICorner_10 = Instance.new("UICorner")
+local UITextSizeConstraint_10 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_9 = Instance.new("UIAspectRatioConstraint")
-local UICorner_25 = Instance.new("UICorner")
-local StartScript = Instance.new("Frame")
-local UICorner_26 = Instance.new("UICorner")
-local BackButton_2 = Instance.new("TextButton")
-local UICorner_27 = Instance.new("UICorner")
-local DescLabel = Instance.new("TextLabel")
-local TextButton = Instance.new("TextButton")
-local UICorner_28 = Instance.new("UICorner")
-local Locked_4 = Instance.new("Frame")
-local UICorner_29 = Instance.new("UICorner")
-local ImageLabel_6 = Instance.new("ImageLabel")
-local Name = Instance.new("TextLabel")
-local UICorner_30 = Instance.new("UICorner")
-local Executor = Instance.new("Frame")
-local UICorner_31 = Instance.new("UICorner")
-local Scripts_2 = Instance.new("Frame")
-local UICorner_32 = Instance.new("UICorner")
-local Scripttab = Instance.new("Frame")
-local UICorner_33 = Instance.new("UICorner")
-local CopyToClipboard = Instance.new("ImageButton")
-local UICorner_34 = Instance.new("UICorner")
-local Tip = Instance.new("TextLabel")
-local UICorner_35 = Instance.new("UICorner")
-local Execute = Instance.new("ImageButton")
-local UICorner_36 = Instance.new("UICorner")
-local Tip_2 = Instance.new("TextLabel")
-local UICorner_37 = Instance.new("UICorner")
-local Rename = Instance.new("ImageButton")
-local UICorner_38 = Instance.new("UICorner")
-local Tip_3 = Instance.new("TextLabel")
-local UICorner_39 = Instance.new("UICorner")
-local Delete = Instance.new("ImageButton")
-local UICorner_40 = Instance.new("UICorner")
-local Tip_4 = Instance.new("TextLabel")
-local UICorner_41 = Instance.new("UICorner")
-local ClearExecTextBox = Instance.new("ImageButton")
-local UICorner_42 = Instance.new("UICorner")
-local Tip_5 = Instance.new("TextLabel")
-local UICorner_43 = Instance.new("UICorner")
-local SaveFile = Instance.new("ImageButton")
-local UICorner_44 = Instance.new("UICorner")
-local Tip_6 = Instance.new("TextLabel")
-local UICorner_45 = Instance.new("UICorner")
-local ScrollingFrame = Instance.new("ScrollingFrame")
-local Guzik1_10 = Instance.new("TextButton")
-local UICorner_46 = Instance.new("UICorner")
+local RejoinButton_2 = Instance.new("TextButton")
+local UICorner_11 = Instance.new("UICorner")
+local UITextSizeConstraint_11 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_10 = Instance.new("UIAspectRatioConstraint")
-local UITextSizeConstraint_21 = Instance.new("UITextSizeConstraint")
-local BackButton_3 = Instance.new("TextButton")
-local UICorner_47 = Instance.new("UICorner")
+local Executor = Instance.new("Frame")
+local UICorner_12 = Instance.new("UICorner")
+local Scripts = Instance.new("Frame")
+local UICorner_13 = Instance.new("UICorner")
+local Scripttab = Instance.new("Frame")
+local UICorner_14 = Instance.new("UICorner")
+local CopyToClipboard = Instance.new("ImageButton")
+local UICorner_15 = Instance.new("UICorner")
+local Tip = Instance.new("TextLabel")
+local UICorner_16 = Instance.new("UICorner")
+local Execute = Instance.new("ImageButton")
+local UICorner_17 = Instance.new("UICorner")
+local Tip_2 = Instance.new("TextLabel")
+local UICorner_18 = Instance.new("UICorner")
+local Rename = Instance.new("ImageButton")
+local UICorner_19 = Instance.new("UICorner")
+local Tip_3 = Instance.new("TextLabel")
+local UICorner_20 = Instance.new("UICorner")
+local Delete = Instance.new("ImageButton")
+local UICorner_21 = Instance.new("UICorner")
+local Tip_4 = Instance.new("TextLabel")
+local UICorner_22 = Instance.new("UICorner")
+local ClearExecTextBox = Instance.new("ImageButton")
+local UICorner_23 = Instance.new("UICorner")
+local Tip_5 = Instance.new("TextLabel")
+local UICorner_24 = Instance.new("UICorner")
+local SaveFile = Instance.new("ImageButton")
+local UICorner_25 = Instance.new("UICorner")
+local Tip_6 = Instance.new("TextLabel")
+local UICorner_26 = Instance.new("UICorner")
+local ScrollingFrame = Instance.new("ScrollingFrame")
+local Guzik1_3 = Instance.new("TextButton")
+local UICorner_27 = Instance.new("UICorner")
+local UIAspectRatioConstraint_11 = Instance.new("UIAspectRatioConstraint")
+local UITextSizeConstraint_12 = Instance.new("UITextSizeConstraint")
+local BackButton = Instance.new("TextButton")
+local UICorner_28 = Instance.new("UICorner")
 local ErrorLabel = Instance.new("TextLabel")
-local UICorner_48 = Instance.new("UICorner")
-local UITextSizeConstraint_22 = Instance.new("UITextSizeConstraint")
+local UICorner_29 = Instance.new("UICorner")
+local UITextSizeConstraint_13 = Instance.new("UITextSizeConstraint")
 local ExecutorScrollingFrame = Instance.new("ScrollingFrame")
 local ExecutorTextBox = Instance.new("TextBox")
-local UICorner_49 = Instance.new("UICorner")
-local CloseButton = Instance.new("TextButton")
-local UICorner_50 = Instance.new("UICorner")
-local UITextSizeConstraint_23 = Instance.new("UITextSizeConstraint")
-local Notification = Instance.new("Frame")
+local UICorner_30 = Instance.new("UICorner")
+local Searcher = Instance.new("Frame")
+local UICorner_31 = Instance.new("UICorner")
+local ScrollingFrame_2 = Instance.new("ScrollingFrame")
+local Frame_2 = Instance.new("Frame")
+local Guzik1_4 = Instance.new("TextButton")
+local UICorner_32 = Instance.new("UICorner")
+local UITextSizeConstraint_14 = Instance.new("UITextSizeConstraint")
+local Guzik1_5 = Instance.new("TextButton")
+local UICorner_33 = Instance.new("UICorner")
+local UITextSizeConstraint_15 = Instance.new("UITextSizeConstraint")
+local Guzik1_6 = Instance.new("TextButton")
+local UICorner_34 = Instance.new("UICorner")
+local UITextSizeConstraint_16 = Instance.new("UITextSizeConstraint")
+local UICorner_35 = Instance.new("UICorner")
 local TextLabel_2 = Instance.new("TextLabel")
-local UICorner_51 = Instance.new("UICorner")
-local UIAspectRatioConstraint_11 = Instance.new("UIAspectRatioConstraint")
+local Opublikowana = Instance.new("TextLabel")
+local Opublikowana_2 = Instance.new("TextLabel")
+local Opublikowana_3 = Instance.new("TextLabel")
+local Opublikowana_4 = Instance.new("TextLabel")
+local TextLabel_3 = Instance.new("TextLabel")
+local UICorner_36 = Instance.new("UICorner")
+local StartScript = Instance.new("Frame")
+local UICorner_37 = Instance.new("UICorner")
+local BackButton_2 = Instance.new("TextButton")
+local UICorner_38 = Instance.new("UICorner")
+local DescLabel = Instance.new("TextLabel")
+local TextButton = Instance.new("TextButton")
+local UICorner_39 = Instance.new("UICorner")
+local Locked = Instance.new("Frame")
+local UICorner_40 = Instance.new("UICorner")
+local ImageLabel_3 = Instance.new("ImageLabel")
+local Name = Instance.new("TextLabel")
+local UICorner_41 = Instance.new("UICorner")
+local CloseButton = Instance.new("TextButton")
+local UICorner_42 = Instance.new("UICorner")
+local UITextSizeConstraint_17 = Instance.new("UITextSizeConstraint")
+local Notification = Instance.new("Frame")
+local TextLabel_4 = Instance.new("TextLabel")
+local UICorner_43 = Instance.new("UICorner")
+local UIAspectRatioConstraint_12 = Instance.new("UIAspectRatioConstraint")
 
 -- Properties
 
@@ -185,6 +167,7 @@ Loader.BorderColor3 = Color3.new(0, 0, 0)
 Loader.BorderSizePixel = 0
 Loader.Position = UDim2.new(0.026433643, 0, 0.0320368111, 0)
 Loader.Size = UDim2.new(0.70532918, 0, 0.681432605, 0)
+Loader.Visible = false
 
 UICorner.Parent = Loader
 
@@ -240,286 +223,6 @@ TextLabel.TextScaled = true
 TextLabel.TextSize = 14
 TextLabel.TextWrapped = true
 
-Scripts.Name = "Scripts"
-Scripts.Parent = Frame
-Scripts.BackgroundColor3 = Color3.new(0.219608, 0.219608, 0.219608)
-Scripts.BorderColor3 = Color3.new(0, 0, 0)
-Scripts.BorderSizePixel = 0
-Scripts.Position = UDim2.new(0.026433643, 0, 0.0318192206, 0)
-Scripts.Size = UDim2.new(0.70532918, 0, 0.681432605, 0)
-Scripts.Visible = false
-Scripts.Style = Enum.FrameStyle.DropShadow
-
-UICorner_4.Parent = Scripts
-
-Guzik1_3.Name = "Guzik1"
-Guzik1_3.Parent = Scripts
-Guzik1_3.BackgroundColor3 = Color3.new(1, 0.717647, 0)
-Guzik1_3.BorderColor3 = Color3.new(0, 0, 0)
-Guzik1_3.BorderSizePixel = 0
-Guzik1_3.Position = UDim2.new(0.019999994, 0, 0.0290456433, 0)
-Guzik1_3.Size = UDim2.new(0.158518523, 0, 0.0926694348, 0)
-Guzik1_3.Font = Enum.Font.FredokaOne
-Guzik1_3.Text = "Fly"
-Guzik1_3.TextColor3 = Color3.new(0, 0, 0)
-Guzik1_3.TextScaled = true
-Guzik1_3.TextSize = 14
-Guzik1_3.TextWrapped = true
-
-UICorner_5.Parent = Guzik1_3
-
-UITextSizeConstraint_3.Parent = Guzik1_3
-UITextSizeConstraint_3.MaxTextSize = 67
-
-Guzik1_4.Name = "Guzik1"
-Guzik1_4.Parent = Scripts
-Guzik1_4.BackgroundColor3 = Color3.new(1, 0.717647, 0)
-Guzik1_4.BorderColor3 = Color3.new(0, 0, 0)
-Guzik1_4.BorderSizePixel = 0
-Guzik1_4.Position = UDim2.new(0.188888893, 0, 0.0290456433, 0)
-Guzik1_4.Size = UDim2.new(0.151851848, 0, 0.0926694348, 0)
-Guzik1_4.Font = Enum.Font.FredokaOne
-Guzik1_4.Text = "Anty-Fling"
-Guzik1_4.TextColor3 = Color3.new(0, 0, 0)
-Guzik1_4.TextScaled = true
-Guzik1_4.TextSize = 14
-Guzik1_4.TextWrapped = true
-
-UICorner_6.Parent = Guzik1_4
-
-UITextSizeConstraint_4.Parent = Guzik1_4
-UITextSizeConstraint_4.MaxTextSize = 45
-
-Guzik1_5.Name = "Guzik1"
-Guzik1_5.Parent = Scripts
-Guzik1_5.BackgroundColor3 = Color3.new(1, 0.717647, 0)
-Guzik1_5.BorderColor3 = Color3.new(0, 0, 0)
-Guzik1_5.BorderSizePixel = 0
-Guzik1_5.Position = UDim2.new(0.352592587, 0, 0.0290456433, 0)
-Guzik1_5.Size = UDim2.new(0.149629623, 0, 0.0926694348, 0)
-Guzik1_5.Font = Enum.Font.FredokaOne
-Guzik1_5.Text = "Click TP Tool"
-Guzik1_5.TextColor3 = Color3.new(0, 0, 0)
-Guzik1_5.TextScaled = true
-Guzik1_5.TextSize = 14
-Guzik1_5.TextWrapped = true
-
-UICorner_7.Parent = Guzik1_5
-
-UITextSizeConstraint_5.Parent = Guzik1_5
-UITextSizeConstraint_5.MaxTextSize = 38
-
-Guzik1_6.Name = "Guzik1"
-Guzik1_6.Parent = Scripts
-Guzik1_6.BackgroundColor3 = Color3.new(1, 0.717647, 0)
-Guzik1_6.BorderColor3 = Color3.new(0, 0, 0)
-Guzik1_6.BorderSizePixel = 0
-Guzik1_6.Position = UDim2.new(0.513333321, 0, 0.0290456433, 0)
-Guzik1_6.Size = UDim2.new(0.166666672, 0, 0.0926694348, 0)
-Guzik1_6.Font = Enum.Font.FredokaOne
-Guzik1_6.Text = "Infinity Jump"
-Guzik1_6.TextColor3 = Color3.new(0, 0, 0)
-Guzik1_6.TextScaled = true
-Guzik1_6.TextSize = 14
-Guzik1_6.TextWrapped = true
-
-UICorner_8.Parent = Guzik1_6
-
-UITextSizeConstraint_6.Parent = Guzik1_6
-UITextSizeConstraint_6.MaxTextSize = 41
-
-Guzik1_7.Name = "Guzik1"
-Guzik1_7.Parent = Scripts
-Guzik1_7.BackgroundColor3 = Color3.new(1, 0.717647, 0)
-Guzik1_7.BorderColor3 = Color3.new(0, 0, 0)
-Guzik1_7.BorderSizePixel = 0
-Guzik1_7.Position = UDim2.new(0.690370381, 0, 0.0290456433, 0)
-Guzik1_7.Size = UDim2.new(0.145925924, 0, 0.0926694348, 0)
-Guzik1_7.Font = Enum.Font.FredokaOne
-Guzik1_7.Text = "NoClip"
-Guzik1_7.TextColor3 = Color3.new(0, 0, 0)
-Guzik1_7.TextScaled = true
-Guzik1_7.TextSize = 14
-Guzik1_7.TextWrapped = true
-
-UICorner_9.Parent = Guzik1_7
-
-UITextSizeConstraint_7.Parent = Guzik1_7
-UITextSizeConstraint_7.MaxTextSize = 67
-
-Guzik1_8.Name = "Guzik1"
-Guzik1_8.Parent = Scripts
-Guzik1_8.BackgroundColor3 = Color3.new(1, 0.717647, 0)
-Guzik1_8.BorderColor3 = Color3.new(0, 0, 0)
-Guzik1_8.BorderSizePixel = 0
-Guzik1_8.Position = UDim2.new(0.844444335, 0, 0.0290456433, 0)
-Guzik1_8.Size = UDim2.new(0.146666661, 0, 0.0926694348, 0)
-Guzik1_8.Font = Enum.Font.FredokaOne
-Guzik1_8.Text = "Speed Tool"
-Guzik1_8.TextColor3 = Color3.new(0, 0, 0)
-Guzik1_8.TextScaled = true
-Guzik1_8.TextSize = 14
-Guzik1_8.TextWrapped = true
-
-UICorner_10.Parent = Guzik1_8
-
-UITextSizeConstraint_8.Parent = Guzik1_8
-UITextSizeConstraint_8.MaxTextSize = 44
-
-Guzik1_9.Name = "Guzik1"
-Guzik1_9.Parent = Scripts
-Guzik1_9.BackgroundColor3 = Color3.new(1, 0.717647, 0)
-Guzik1_9.BorderColor3 = Color3.new(0, 0, 0)
-Guzik1_9.BorderSizePixel = 0
-Guzik1_9.Position = UDim2.new(0.019999994, 0, 0.143845096, 0)
-Guzik1_9.Size = UDim2.new(0.158518523, 0, 0.0926694348, 0)
-Guzik1_9.Font = Enum.Font.FredokaOne
-Guzik1_9.Text = "Game"
-Guzik1_9.TextColor3 = Color3.new(0, 0, 0)
-Guzik1_9.TextScaled = true
-Guzik1_9.TextSize = 14
-Guzik1_9.TextWrapped = true
-
-UICorner_11.Parent = Guzik1_9
-
-UITextSizeConstraint_9.Parent = Guzik1_9
-UITextSizeConstraint_9.MaxTextSize = 67
-
-BackButton.Name = "BackButton"
-BackButton.Parent = Scripts
-BackButton.BackgroundColor3 = Color3.new(1, 0, 0)
-BackButton.BackgroundTransparency = 1
-BackButton.BorderColor3 = Color3.new(0, 0, 0)
-BackButton.BorderSizePixel = 0
-BackButton.Position = UDim2.new(-0.0150406901, 0, -0.0284440927, 0)
-BackButton.Size = UDim2.new(0.034814816, 0, 0.0691562966, 0)
-BackButton.Font = Enum.Font.FredokaOne
-BackButton.Text = "⬅️"
-BackButton.TextColor3 = Color3.new(0, 0, 0)
-BackButton.TextScaled = true
-BackButton.TextSize = 14
-BackButton.TextWrapped = true
-
-UICorner_12.Parent = BackButton
-
-RSPYbutton.Name = "RSPYbutton"
-RSPYbutton.Parent = Scripts
-RSPYbutton.BackgroundColor3 = Color3.new(1, 0.717647, 0)
-RSPYbutton.BorderColor3 = Color3.new(0, 0, 0)
-RSPYbutton.BorderSizePixel = 0
-RSPYbutton.Position = UDim2.new(0.188394085, 0, 0.143845096, 0)
-RSPYbutton.Size = UDim2.new(0.15234676, 0, 0.0926694348, 0)
-RSPYbutton.Font = Enum.Font.FredokaOne
-RSPYbutton.Text = "RSPY"
-RSPYbutton.TextColor3 = Color3.new(0, 0, 0)
-RSPYbutton.TextScaled = true
-RSPYbutton.TextSize = 14
-RSPYbutton.TextWrapped = true
-
-UICorner_13.Parent = RSPYbutton
-
-UITextSizeConstraint_10.Parent = RSPYbutton
-UITextSizeConstraint_10.MaxTextSize = 67
-
-Locked.Name = "Locked"
-Locked.Parent = RSPYbutton
-Locked.BackgroundColor3 = Color3.new(0, 0, 0)
-Locked.BackgroundTransparency = 0.20000000298023224
-Locked.BorderColor3 = Color3.new(0, 0, 0)
-Locked.BorderSizePixel = 0
-Locked.Position = UDim2.new(-1.4669132e-07, 0, 0, 0)
-Locked.Size = UDim2.new(0.999810457, 0, 1, 0)
-Locked.Visible = false
-
-UICorner_14.Parent = Locked
-
-ImageLabel.Parent = Locked
-ImageLabel.BackgroundColor3 = Color3.new(0, 0, 0)
-ImageLabel.BackgroundTransparency = 1
-ImageLabel.BorderColor3 = Color3.new(0, 0, 0)
-ImageLabel.BorderSizePixel = 0
-ImageLabel.Position = UDim2.new(0.307802647, 0, 0, 0)
-ImageLabel.Size = UDim2.new(0, 72, 0, 67)
-ImageLabel.Image = "rbxassetid://13967666260"
-
-SpectateButton.Name = "SpectateButton"
-SpectateButton.Parent = Scripts
-SpectateButton.BackgroundColor3 = Color3.new(1, 0.717647, 0)
-SpectateButton.BorderColor3 = Color3.new(0, 0, 0)
-SpectateButton.BorderSizePixel = 0
-SpectateButton.Position = UDim2.new(0.352216244, 0, 0.143845096, 0)
-SpectateButton.Size = UDim2.new(0.150006011, 0, 0.0926694348, 0)
-SpectateButton.Font = Enum.Font.FredokaOne
-SpectateButton.Text = "Spectate"
-SpectateButton.TextColor3 = Color3.new(0, 0, 0)
-SpectateButton.TextScaled = true
-SpectateButton.TextSize = 14
-SpectateButton.TextWrapped = true
-
-UICorner_15.Parent = SpectateButton
-
-UITextSizeConstraint_11.Parent = SpectateButton
-UITextSizeConstraint_11.MaxTextSize = 67
-
-Locked_2.Name = "Locked"
-Locked_2.Parent = SpectateButton
-Locked_2.BackgroundColor3 = Color3.new(0, 0, 0)
-Locked_2.BackgroundTransparency = 0.20000000298023224
-Locked_2.BorderColor3 = Color3.new(0, 0, 0)
-Locked_2.BorderSizePixel = 0
-Locked_2.Position = UDim2.new(-1.4669132e-07, 0, 0, 0)
-Locked_2.Size = UDim2.new(0.999810457, 0, 1, 0)
-
-UICorner_16.Parent = Locked_2
-
-ImageLabel_2.Parent = Locked_2
-ImageLabel_2.BackgroundColor3 = Color3.new(0, 0, 0)
-ImageLabel_2.BackgroundTransparency = 1
-ImageLabel_2.BorderColor3 = Color3.new(0, 0, 0)
-ImageLabel_2.BorderSizePixel = 0
-ImageLabel_2.Position = UDim2.new(0.307802647, 0, 0, 0)
-ImageLabel_2.Size = UDim2.new(0, 72, 0, 67)
-ImageLabel_2.Image = "rbxassetid://13967666260"
-
-Button1.Name = "Button1"
-Button1.Parent = Scripts
-Button1.BackgroundColor3 = Color3.new(1, 0.717647, 0)
-Button1.BorderColor3 = Color3.new(0, 0, 0)
-Button1.BorderSizePixel = 0
-Button1.Position = UDim2.new(0.512990594, 0, 0.143845096, 0)
-Button1.Size = UDim2.new(0.167009369, 0, 0.0926694348, 0)
-Button1.Font = Enum.Font.FredokaOne
-Button1.Text = "Game"
-Button1.TextColor3 = Color3.new(0, 0, 0)
-Button1.TextScaled = true
-Button1.TextSize = 14
-Button1.TextWrapped = true
-
-UICorner_17.Parent = Button1
-
-UITextSizeConstraint_12.Parent = Button1
-UITextSizeConstraint_12.MaxTextSize = 67
-
-Locked_3.Name = "Locked"
-Locked_3.Parent = Button1
-Locked_3.BackgroundColor3 = Color3.new(0, 0, 0)
-Locked_3.BackgroundTransparency = 0.20000000298023224
-Locked_3.BorderColor3 = Color3.new(0, 0, 0)
-Locked_3.BorderSizePixel = 0
-Locked_3.Position = UDim2.new(-1.4669132e-07, 0, 0, 0)
-Locked_3.Size = UDim2.new(0.999810457, 0, 1, 0)
-
-UICorner_18.Parent = Locked_3
-
-ImageLabel_3.Parent = Locked_3
-ImageLabel_3.BackgroundColor3 = Color3.new(0, 0, 0)
-ImageLabel_3.BackgroundTransparency = 1
-ImageLabel_3.BorderColor3 = Color3.new(0, 0, 0)
-ImageLabel_3.BorderSizePixel = 0
-ImageLabel_3.Position = UDim2.new(0.307802647, 0, 0, 0)
-ImageLabel_3.Size = UDim2.new(0, 72, 0, 67)
-ImageLabel_3.Image = "rbxassetid://13967666260"
-
 Home.Name = "Home"
 Home.Parent = Frame
 Home.BackgroundColor3 = Color3.new(0.219608, 0.219608, 0.219608)
@@ -527,7 +230,6 @@ Home.BorderColor3 = Color3.new(1, 1, 1)
 Home.BorderSizePixel = 0
 Home.Position = UDim2.new(0.0316902027, 0, 0.0323279239, 0)
 Home.Size = UDim2.new(0.70532918, 0, 0.681432605, 0)
-Home.Visible = false
 
 Text.Name = "Text"
 Text.Parent = Home
@@ -543,8 +245,8 @@ Text.TextScaled = true
 Text.TextSize = 14
 Text.TextWrapped = true
 
-UITextSizeConstraint_13.Parent = Text
-UITextSizeConstraint_13.MaxTextSize = 73
+UITextSizeConstraint_3.Parent = Text
+UITextSizeConstraint_3.MaxTextSize = 73
 
 Nickdispaly.Name = "Nick dispaly"
 Nickdispaly.Parent = Home
@@ -560,28 +262,28 @@ Nickdispaly.TextScaled = true
 Nickdispaly.TextSize = 14
 Nickdispaly.TextWrapped = true
 
-UITextSizeConstraint_14.Parent = Nickdispaly
-UITextSizeConstraint_14.MaxTextSize = 73
+UITextSizeConstraint_4.Parent = Nickdispaly
+UITextSizeConstraint_4.MaxTextSize = 73
 
-ImageLabel_4.Parent = Home
-ImageLabel_4.BackgroundColor3 = Color3.new(1, 1, 1)
-ImageLabel_4.BorderColor3 = Color3.new(0, 0, 0)
-ImageLabel_4.BorderSizePixel = 5
-ImageLabel_4.Position = UDim2.new(0.168148145, 0, 0.0802213028, 0)
-ImageLabel_4.Size = UDim2.new(0.088888891, 0, 0.165975109, 0)
-ImageLabel_4.Image = "\"https://www.roblox.com/headshot-thumbnail/image?userId=\"..player.UserId..\"&width=420&height=420&format=png\""
+ImageLabel.Parent = Home
+ImageLabel.BackgroundColor3 = Color3.new(1, 1, 1)
+ImageLabel.BorderColor3 = Color3.new(0, 0, 0)
+ImageLabel.BorderSizePixel = 5
+ImageLabel.Position = UDim2.new(0.168148145, 0, 0.0802213028, 0)
+ImageLabel.Size = UDim2.new(0.088888891, 0, 0.165975109, 0)
+ImageLabel.Image = "\"https://www.roblox.com/headshot-thumbnail/image?userId=\"..player.UserId..\"&width=420&height=420&format=png\""
 
-UIAspectRatioConstraint.Parent = ImageLabel_4
+UIAspectRatioConstraint.Parent = ImageLabel
 
-ImageLabel_5.Parent = Home
-ImageLabel_5.BackgroundColor3 = Color3.new(1, 1, 1)
-ImageLabel_5.BorderColor3 = Color3.new(0, 0, 0)
-ImageLabel_5.BorderSizePixel = 0
-ImageLabel_5.Position = UDim2.new(0.74000001, 0, 0.0802213028, 0)
-ImageLabel_5.Size = UDim2.new(0.088888891, 0, 0.165975109, 0)
-ImageLabel_5.Image = "rbxassetid://82911968150602"
+ImageLabel_2.Parent = Home
+ImageLabel_2.BackgroundColor3 = Color3.new(1, 1, 1)
+ImageLabel_2.BorderColor3 = Color3.new(0, 0, 0)
+ImageLabel_2.BorderSizePixel = 0
+ImageLabel_2.Position = UDim2.new(0.74000001, 0, 0.0802213028, 0)
+ImageLabel_2.Size = UDim2.new(0.088888891, 0, 0.165975109, 0)
+ImageLabel_2.Image = "rbxassetid://82911968150602"
 
-UIAspectRatioConstraint_2.Parent = ImageLabel_5
+UIAspectRatioConstraint_2.Parent = ImageLabel_2
 
 Buttons.Name = "Buttons"
 Buttons.Parent = Home
@@ -591,6 +293,8 @@ Buttons.BorderColor3 = Color3.new(0, 0, 0)
 Buttons.BorderSizePixel = 5
 Buttons.Position = UDim2.new(0.102991901, 0, 0.720608592, 0)
 Buttons.Size = UDim2.new(0, 951, 0, 98)
+
+UICorner_4.Parent = Home
 
 BuyPremiumTab.Name = "BuyPremiumTab"
 BuyPremiumTab.Parent = Home
@@ -606,10 +310,10 @@ BuyPremiumTab.TextScaled = true
 BuyPremiumTab.TextSize = 14
 BuyPremiumTab.TextWrapped = true
 
-UICorner_19.Parent = BuyPremiumTab
+UICorner_5.Parent = BuyPremiumTab
 
-UITextSizeConstraint_15.Parent = BuyPremiumTab
-UITextSizeConstraint_15.MaxTextSize = 30
+UITextSizeConstraint_5.Parent = BuyPremiumTab
+UITextSizeConstraint_5.MaxTextSize = 30
 
 UIAspectRatioConstraint_3.Parent = BuyPremiumTab
 
@@ -629,10 +333,10 @@ ExecutorTab.TextScaled = true
 ExecutorTab.TextSize = 14
 ExecutorTab.TextWrapped = true
 
-UICorner_20.Parent = ExecutorTab
+UICorner_6.Parent = ExecutorTab
 
-UITextSizeConstraint_16.Parent = ExecutorTab
-UITextSizeConstraint_16.MaxTextSize = 33
+UITextSizeConstraint_6.Parent = ExecutorTab
+UITextSizeConstraint_6.MaxTextSize = 33
 
 UIAspectRatioConstraint_5.Parent = ExecutorTab
 
@@ -650,10 +354,10 @@ ScriptsButton.TextScaled = true
 ScriptsButton.TextSize = 14
 ScriptsButton.TextWrapped = true
 
-UICorner_21.Parent = ScriptsButton
+UICorner_7.Parent = ScriptsButton
 
-UITextSizeConstraint_17.Parent = ScriptsButton
-UITextSizeConstraint_17.MaxTextSize = 33
+UITextSizeConstraint_7.Parent = ScriptsButton
+UITextSizeConstraint_7.MaxTextSize = 33
 
 UIAspectRatioConstraint_6.Parent = ScriptsButton
 
@@ -671,10 +375,10 @@ UpdateLogs.TextScaled = true
 UpdateLogs.TextSize = 14
 UpdateLogs.TextWrapped = true
 
-UICorner_22.Parent = UpdateLogs
+UICorner_8.Parent = UpdateLogs
 
-UITextSizeConstraint_18.Parent = UpdateLogs
-UITextSizeConstraint_18.MaxTextSize = 30
+UITextSizeConstraint_8.Parent = UpdateLogs
+UITextSizeConstraint_8.MaxTextSize = 30
 
 UIAspectRatioConstraint_7.Parent = UpdateLogs
 
@@ -692,10 +396,10 @@ TimerButton.TextScaled = true
 TimerButton.TextSize = 14
 TimerButton.TextWrapped = true
 
-UICorner_23.Parent = TimerButton
+UICorner_9.Parent = TimerButton
 
-UITextSizeConstraint_19.Parent = TimerButton
-UITextSizeConstraint_19.MaxTextSize = 30
+UITextSizeConstraint_9.Parent = TimerButton
+UITextSizeConstraint_9.MaxTextSize = 30
 
 UIAspectRatioConstraint_8.Parent = TimerButton
 
@@ -713,109 +417,33 @@ RejoinButton.TextScaled = true
 RejoinButton.TextSize = 14
 RejoinButton.TextWrapped = true
 
-UICorner_24.Parent = RejoinButton
+UICorner_10.Parent = RejoinButton
 
-UITextSizeConstraint_20.Parent = RejoinButton
-UITextSizeConstraint_20.MaxTextSize = 30
+UITextSizeConstraint_10.Parent = RejoinButton
+UITextSizeConstraint_10.MaxTextSize = 30
 
 UIAspectRatioConstraint_9.Parent = RejoinButton
 
-UICorner_25.Parent = Home
+RejoinButton_2.Name = "RejoinButton"
+RejoinButton_2.Parent = Home
+RejoinButton_2.BackgroundColor3 = Color3.new(1, 0.717647, 0)
+RejoinButton_2.BorderColor3 = Color3.new(0, 0, 0)
+RejoinButton_2.BorderSizePixel = 0
+RejoinButton_2.Position = UDim2.new(0.68334341, 0, 0.66196841, 0)
+RejoinButton_2.Size = UDim2.new(0.0839715227, 0, 0.145510465, 0)
+RejoinButton_2.Font = Enum.Font.FredokaOne
+RejoinButton_2.Text = "Searcher"
+RejoinButton_2.TextColor3 = Color3.new(0, 0, 0)
+RejoinButton_2.TextScaled = true
+RejoinButton_2.TextSize = 14
+RejoinButton_2.TextWrapped = true
 
-StartScript.Name = "StartScript"
-StartScript.Parent = Frame
-StartScript.BackgroundColor3 = Color3.new(0.219608, 0.219608, 0.219608)
-StartScript.BackgroundTransparency = 0.20000000298023224
-StartScript.BorderColor3 = Color3.new(0, 0, 0)
-StartScript.BorderSizePixel = 0
-StartScript.Position = UDim2.new(0.026433643, 0, 0.0318192206, 0)
-StartScript.Size = UDim2.new(0.70532918, 0, 0.681432605, 0)
-StartScript.Visible = false
+UICorner_11.Parent = RejoinButton_2
 
-UICorner_26.Parent = StartScript
+UITextSizeConstraint_11.Parent = RejoinButton_2
+UITextSizeConstraint_11.MaxTextSize = 30
 
-BackButton_2.Name = "BackButton"
-BackButton_2.Parent = StartScript
-BackButton_2.BackgroundColor3 = Color3.new(1, 0, 0)
-BackButton_2.BackgroundTransparency = 1
-BackButton_2.BorderColor3 = Color3.new(0, 0, 0)
-BackButton_2.BorderSizePixel = 0
-BackButton_2.Position = UDim2.new(-0.0150406901, 0, -0.0284440927, 0)
-BackButton_2.Size = UDim2.new(0.034814816, 0, 0.0691562966, 0)
-BackButton_2.Font = Enum.Font.FredokaOne
-BackButton_2.Text = "⬅️"
-BackButton_2.TextColor3 = Color3.new(0, 0, 0)
-BackButton_2.TextScaled = true
-BackButton_2.TextSize = 14
-BackButton_2.TextWrapped = true
-
-UICorner_27.Parent = BackButton_2
-
-DescLabel.Name = "DescLabel"
-DescLabel.Parent = StartScript
-DescLabel.BackgroundColor3 = Color3.new(0.368627, 0.368627, 0.368627)
-DescLabel.BackgroundTransparency = 1
-DescLabel.BorderColor3 = Color3.new(0, 0, 0)
-DescLabel.BorderSizePixel = 0
-DescLabel.Position = UDim2.new(0.0274306983, 0, 0.0401106514, 0)
-DescLabel.Size = UDim2.new(0, 915, 0, 648)
-DescLabel.Font = Enum.Font.FredokaOne
-DescLabel.TextColor3 = Color3.new(1, 1, 1)
-DescLabel.TextSize = 49
-DescLabel.TextWrapped = true
-DescLabel.TextYAlignment = Enum.TextYAlignment.Top
-
-TextButton.Parent = StartScript
-TextButton.BackgroundColor3 = Color3.new(1, 0.701961, 0)
-TextButton.BorderColor3 = Color3.new(0, 0, 0)
-TextButton.BorderSizePixel = 0
-TextButton.Position = UDim2.new(0.772631466, 0, 0.887966812, 0)
-TextButton.Size = UDim2.new(0, 298, 0, 81)
-TextButton.Font = Enum.Font.FredokaOne
-TextButton.Text = "Execute"
-TextButton.TextColor3 = Color3.new(0, 0, 0)
-TextButton.TextScaled = true
-TextButton.TextSize = 14
-TextButton.TextWrapped = true
-
-UICorner_28.Parent = TextButton
-
-Locked_4.Name = "Locked"
-Locked_4.Parent = TextButton
-Locked_4.BackgroundColor3 = Color3.new(0, 0, 0)
-Locked_4.BackgroundTransparency = 0.20000000298023224
-Locked_4.BorderColor3 = Color3.new(0, 0, 0)
-Locked_4.BorderSizePixel = 0
-Locked_4.Position = UDim2.new(-1.4669132e-07, 0, 0, 0)
-Locked_4.Size = UDim2.new(0.999810457, 0, 1, 0)
-Locked_4.Visible = false
-
-UICorner_29.Parent = Locked_4
-
-ImageLabel_6.Parent = Locked_4
-ImageLabel_6.BackgroundColor3 = Color3.new(0, 0, 0)
-ImageLabel_6.BackgroundTransparency = 1
-ImageLabel_6.BorderColor3 = Color3.new(0, 0, 0)
-ImageLabel_6.BorderSizePixel = 0
-ImageLabel_6.Position = UDim2.new(0.307802647, 0, 0, 0)
-ImageLabel_6.Size = UDim2.new(0, 72, 0, 67)
-ImageLabel_6.Image = "rbxassetid://13967666260"
-
-Name.Name = "Name"
-Name.Parent = StartScript
-Name.BackgroundColor3 = Color3.new(1, 0.74902, 0)
-Name.BorderColor3 = Color3.new(0, 0, 0)
-Name.BorderSizePixel = 0
-Name.Position = UDim2.new(0.772631466, 0, 0.0401106514, 0)
-Name.Size = UDim2.new(0, 298, 0, 50)
-Name.Font = Enum.Font.FredokaOne
-Name.Text = "Button"
-Name.TextColor3 = Color3.new(0, 0, 0)
-Name.TextScaled = true
-Name.TextSize = 14
-Name.TextWrapped = true
-
-UICorner_30.Parent = Name
+UIAspectRatioConstraint_10.Parent = RejoinButton_2
 
 Executor.Name = "Executor"
 Executor.Parent = Frame
@@ -827,18 +455,18 @@ Executor.Position = UDim2.new(0.00927324314, 0, 0.0152410166, 0)
 Executor.Size = UDim2.new(0.598900139, 0, 0.731224597, 0)
 Executor.Visible = false
 
-UICorner_31.Parent = Executor
+UICorner_12.Parent = Executor
 
-Scripts_2.Name = "Scripts"
-Scripts_2.Parent = Executor
-Scripts_2.BackgroundColor3 = Color3.new(0.219608, 0.219608, 0.219608)
-Scripts_2.BackgroundTransparency = 0.20000000298023224
-Scripts_2.BorderColor3 = Color3.new(0, 0, 0)
-Scripts_2.BorderSizePixel = 0
-Scripts_2.Position = UDim2.new(1.01858497, 0, -0.00131808827, 0)
-Scripts_2.Size = UDim2.new(0.231397375, 0, 1, 0)
+Scripts.Name = "Scripts"
+Scripts.Parent = Executor
+Scripts.BackgroundColor3 = Color3.new(0.219608, 0.219608, 0.219608)
+Scripts.BackgroundTransparency = 0.20000000298023224
+Scripts.BorderColor3 = Color3.new(0, 0, 0)
+Scripts.BorderSizePixel = 0
+Scripts.Position = UDim2.new(1.01858497, 0, -0.00131808827, 0)
+Scripts.Size = UDim2.new(0.231397375, 0, 1, 0)
 
-UICorner_32.Parent = Scripts_2
+UICorner_13.Parent = Scripts
 
 Scripttab.Name = "Script tab"
 Scripttab.Parent = Executor
@@ -849,7 +477,7 @@ Scripttab.BorderSizePixel = 0
 Scripttab.Position = UDim2.new(0.342010975, 0, 0.892343044, 0)
 Scripttab.Size = UDim2.new(0.335365176, 0, 0.0897914842, 0)
 
-UICorner_33.Parent = Scripttab
+UICorner_14.Parent = Scripttab
 
 CopyToClipboard.Name = "CopyToClipboard"
 CopyToClipboard.Parent = Scripttab
@@ -860,7 +488,7 @@ CopyToClipboard.Position = UDim2.new(0.693508089, 0, 0.101019181, 0)
 CopyToClipboard.Size = UDim2.new(0.138401404, 0, 0.790322602, 0)
 CopyToClipboard.Image = "rbxassetid://12011030159"
 
-UICorner_34.Parent = CopyToClipboard
+UICorner_15.Parent = CopyToClipboard
 
 Tip.Name = "Tip"
 Tip.Parent = CopyToClipboard
@@ -877,7 +505,7 @@ Tip.TextScaled = true
 Tip.TextSize = 14
 Tip.TextWrapped = true
 
-UICorner_35.Parent = Tip
+UICorner_16.Parent = Tip
 
 Execute.Name = "Execute"
 Execute.Parent = Scripttab
@@ -888,7 +516,7 @@ Execute.Position = UDim2.new(0.852282405, 0, 0.101019181, 0)
 Execute.Size = UDim2.new(0.129352927, 0, 0.790322602, 0)
 Execute.Image = "rbxassetid://12099513379"
 
-UICorner_36.Parent = Execute
+UICorner_17.Parent = Execute
 
 Tip_2.Name = "Tip"
 Tip_2.Parent = Execute
@@ -905,7 +533,7 @@ Tip_2.TextScaled = true
 Tip_2.TextSize = 14
 Tip_2.TextWrapped = true
 
-UICorner_37.Parent = Tip_2
+UICorner_18.Parent = Tip_2
 
 Rename.Name = "Rename"
 Rename.Parent = Scripttab
@@ -916,7 +544,7 @@ Rename.Position = UDim2.new(0.535052538, 0, 0.101019181, 0)
 Rename.Size = UDim2.new(0.139858067, 0, 0.790322602, 0)
 Rename.Image = "rbxassetid://84076926197960"
 
-UICorner_38.Parent = Rename
+UICorner_19.Parent = Rename
 
 Tip_3.Name = "Tip"
 Tip_3.Parent = Rename
@@ -933,7 +561,7 @@ Tip_3.TextScaled = true
 Tip_3.TextSize = 14
 Tip_3.TextWrapped = true
 
-UICorner_39.Parent = Tip_3
+UICorner_20.Parent = Tip_3
 
 Delete.Name = "Delete"
 Delete.Parent = Scripttab
@@ -944,7 +572,7 @@ Delete.Position = UDim2.new(0.0272436161, 0, 0.101019181, 0)
 Delete.Size = UDim2.new(0.142993778, 0, 0.790322542, 0)
 Delete.Image = "rbxassetid://8463436236"
 
-UICorner_40.Parent = Delete
+UICorner_21.Parent = Delete
 
 Tip_4.Name = "Tip"
 Tip_4.Parent = Delete
@@ -961,7 +589,7 @@ Tip_4.TextScaled = true
 Tip_4.TextSize = 14
 Tip_4.TextWrapped = true
 
-UICorner_41.Parent = Tip_4
+UICorner_22.Parent = Tip_4
 
 ClearExecTextBox.Name = "ClearExecTextBox"
 ClearExecTextBox.Parent = Scripttab
@@ -972,7 +600,7 @@ ClearExecTextBox.Position = UDim2.new(0.197807193, 0, 0.101019181, 0)
 ClearExecTextBox.Size = UDim2.new(0.149158582, 0, 0.790322542, 0)
 ClearExecTextBox.Image = "rbxassetid://9348208337"
 
-UICorner_42.Parent = ClearExecTextBox
+UICorner_23.Parent = ClearExecTextBox
 
 Tip_5.Name = "Tip"
 Tip_5.Parent = ClearExecTextBox
@@ -989,7 +617,7 @@ Tip_5.TextScaled = true
 Tip_5.TextSize = 14
 Tip_5.TextWrapped = true
 
-UICorner_43.Parent = Tip_5
+UICorner_24.Parent = Tip_5
 
 SaveFile.Name = "SaveFile"
 SaveFile.Parent = Scripttab
@@ -1000,7 +628,7 @@ SaveFile.Position = UDim2.new(0.371361732, 0, 0.101019181, 0)
 SaveFile.Size = UDim2.new(0.142411858, 0, 0.790322602, 0)
 SaveFile.Image = "rbxassetid://101071239052290"
 
-UICorner_44.Parent = SaveFile
+UICorner_25.Parent = SaveFile
 
 Tip_6.Name = "Tip"
 Tip_6.Parent = SaveFile
@@ -1017,7 +645,7 @@ Tip_6.TextScaled = true
 Tip_6.TextSize = 14
 Tip_6.TextWrapped = true
 
-UICorner_45.Parent = Tip_6
+UICorner_26.Parent = Tip_6
 
 ScrollingFrame.Parent = Executor
 ScrollingFrame.Active = true
@@ -1028,44 +656,44 @@ ScrollingFrame.BorderSizePixel = 0
 ScrollingFrame.Position = UDim2.new(1.0256052, 0, 0.018099878, 0)
 ScrollingFrame.Size = UDim2.new(0.229540199, 0, 0.951590598, 0)
 
-Guzik1_10.Name = "Guzik1"
-Guzik1_10.Parent = ScrollingFrame
-Guzik1_10.BackgroundColor3 = Color3.new(1, 0.717647, 0)
-Guzik1_10.BorderColor3 = Color3.new(0, 0, 0)
-Guzik1_10.BorderSizePixel = 0
-Guzik1_10.Position = UDim2.new(0.0190308262, 0, 0.00415391615, 0)
-Guzik1_10.Size = UDim2.new(0, 239, 0, 40)
-Guzik1_10.Font = Enum.Font.FredokaOne
-Guzik1_10.Text = "Script #1"
-Guzik1_10.TextColor3 = Color3.new(0, 0, 0)
-Guzik1_10.TextScaled = true
-Guzik1_10.TextSize = 14
-Guzik1_10.TextWrapped = true
+Guzik1_3.Name = "Guzik1"
+Guzik1_3.Parent = ScrollingFrame
+Guzik1_3.BackgroundColor3 = Color3.new(1, 0.717647, 0)
+Guzik1_3.BorderColor3 = Color3.new(0, 0, 0)
+Guzik1_3.BorderSizePixel = 0
+Guzik1_3.Position = UDim2.new(0.0190308262, 0, 0.00415391615, 0)
+Guzik1_3.Size = UDim2.new(0, 239, 0, 40)
+Guzik1_3.Font = Enum.Font.FredokaOne
+Guzik1_3.Text = "Script #1"
+Guzik1_3.TextColor3 = Color3.new(0, 0, 0)
+Guzik1_3.TextScaled = true
+Guzik1_3.TextSize = 14
+Guzik1_3.TextWrapped = true
 
-UICorner_46.Parent = Guzik1_10
+UICorner_27.Parent = Guzik1_3
 
-UIAspectRatioConstraint_10.Parent = Guzik1_10
-UIAspectRatioConstraint_10.AspectRatio = 6.882352828979492
+UIAspectRatioConstraint_11.Parent = Guzik1_3
+UIAspectRatioConstraint_11.AspectRatio = 6.882352828979492
 
-UITextSizeConstraint_21.Parent = Guzik1_10
-UITextSizeConstraint_21.MaxTextSize = 34
+UITextSizeConstraint_12.Parent = Guzik1_3
+UITextSizeConstraint_12.MaxTextSize = 34
 
-BackButton_3.Name = "BackButton"
-BackButton_3.Parent = Executor
-BackButton_3.BackgroundColor3 = Color3.new(1, 0, 0)
-BackButton_3.BackgroundTransparency = 1
-BackButton_3.BorderColor3 = Color3.new(0, 0, 0)
-BackButton_3.BorderSizePixel = 0
-BackButton_3.Position = UDim2.new(-0.0150406901, 0, -0.0284440927, 0)
-BackButton_3.Size = UDim2.new(0.0309210531, 0, 0.0691562966, 0)
-BackButton_3.Font = Enum.Font.FredokaOne
-BackButton_3.Text = "⬅️"
-BackButton_3.TextColor3 = Color3.new(0, 0, 0)
-BackButton_3.TextScaled = true
-BackButton_3.TextSize = 14
-BackButton_3.TextWrapped = true
+BackButton.Name = "BackButton"
+BackButton.Parent = Executor
+BackButton.BackgroundColor3 = Color3.new(1, 0, 0)
+BackButton.BackgroundTransparency = 1
+BackButton.BorderColor3 = Color3.new(0, 0, 0)
+BackButton.BorderSizePixel = 0
+BackButton.Position = UDim2.new(-0.0150406901, 0, -0.0284440927, 0)
+BackButton.Size = UDim2.new(0.0309210531, 0, 0.0691562966, 0)
+BackButton.Font = Enum.Font.FredokaOne
+BackButton.Text = "⬅️"
+BackButton.TextColor3 = Color3.new(0, 0, 0)
+BackButton.TextScaled = true
+BackButton.TextSize = 14
+BackButton.TextWrapped = true
 
-UICorner_47.Parent = BackButton_3
+UICorner_28.Parent = BackButton
 
 ErrorLabel.Name = "ErrorLabel"
 ErrorLabel.Parent = Executor
@@ -1082,10 +710,10 @@ ErrorLabel.TextSize = 14
 ErrorLabel.TextWrapped = true
 ErrorLabel.TextXAlignment = Enum.TextXAlignment.Left
 
-UICorner_48.Parent = ErrorLabel
+UICorner_29.Parent = ErrorLabel
 
-UITextSizeConstraint_22.Parent = ErrorLabel
-UITextSizeConstraint_22.MaxTextSize = 14
+UITextSizeConstraint_13.Parent = ErrorLabel
+UITextSizeConstraint_13.MaxTextSize = 14
 
 ExecutorScrollingFrame.Name = "ExecutorScrollingFrame"
 ExecutorScrollingFrame.Parent = Executor
@@ -1116,7 +744,269 @@ ExecutorTextBox.TextWrapped = true
 ExecutorTextBox.TextXAlignment = Enum.TextXAlignment.Left
 ExecutorTextBox.TextYAlignment = Enum.TextYAlignment.Top
 
-UICorner_49.Parent = ExecutorScrollingFrame
+UICorner_30.Parent = ExecutorScrollingFrame
+
+Searcher.Name = "Searcher"
+Searcher.Parent = Frame
+Searcher.BackgroundColor3 = Color3.new(0.219608, 0.219608, 0.219608)
+Searcher.BackgroundTransparency = 0.20000000298023224
+Searcher.BorderColor3 = Color3.new(0, 0, 0)
+Searcher.BorderSizePixel = 0
+Searcher.Position = UDim2.new(0.026433643, 0, 0.0320368111, 0)
+Searcher.Size = UDim2.new(0.70532918, 0, 0.681432605, 0)
+Searcher.Visible = false
+
+UICorner_31.Parent = Searcher
+
+ScrollingFrame_2.Parent = Searcher
+ScrollingFrame_2.Active = true
+ScrollingFrame_2.BackgroundColor3 = Color3.new(1, 1, 1)
+ScrollingFrame_2.BackgroundTransparency = 1
+ScrollingFrame_2.BorderColor3 = Color3.new(0, 0, 0)
+ScrollingFrame_2.BorderSizePixel = 0
+ScrollingFrame_2.Position = UDim2.new(0.0222055763, 0, 0.0353789032, 0)
+ScrollingFrame_2.Size = UDim2.new(0, 1246, 0, 711)
+
+Frame_2.Parent = ScrollingFrame_2
+Frame_2.BackgroundColor3 = Color3.new(0.666667, 0.666667, 0.666667)
+Frame_2.BorderColor3 = Color3.new(0, 0, 0)
+Frame_2.BorderSizePixel = 0
+Frame_2.Position = UDim2.new(0.0299280938, 0, 0.0196549445, 0)
+Frame_2.Size = UDim2.new(0, 1173, 0, 100)
+
+Guzik1_4.Name = "Guzik1"
+Guzik1_4.Parent = Frame_2
+Guzik1_4.BackgroundColor3 = Color3.new(1, 0.666667, 0.00392157)
+Guzik1_4.BorderColor3 = Color3.new(0, 0, 0)
+Guzik1_4.BorderSizePixel = 0
+Guzik1_4.Position = UDim2.new(0.72477752, 0, 0.333487332, 0)
+Guzik1_4.Size = UDim2.new(0.0758386552, 0, 0.327125102, 0)
+Guzik1_4.Font = Enum.Font.SourceSans
+Guzik1_4.Text = "Wykonaj"
+Guzik1_4.TextColor3 = Color3.new(0, 0, 0)
+Guzik1_4.TextScaled = true
+Guzik1_4.TextSize = 14
+Guzik1_4.TextWrapped = true
+
+UICorner_32.Parent = Guzik1_4
+
+UITextSizeConstraint_14.Parent = Guzik1_4
+UITextSizeConstraint_14.MaxTextSize = 53
+
+Guzik1_5.Name = "Guzik1"
+Guzik1_5.Parent = Frame_2
+Guzik1_5.BackgroundColor3 = Color3.new(1, 0.666667, 0.00392157)
+Guzik1_5.BorderColor3 = Color3.new(0, 0, 0)
+Guzik1_5.BorderSizePixel = 0
+Guzik1_5.Position = UDim2.new(0.809720993, 0, 0.333487332, 0)
+Guzik1_5.Size = UDim2.new(0.0758386627, 0, 0.327125102, 0)
+Guzik1_5.Font = Enum.Font.SourceSans
+Guzik1_5.Text = "Skopiuj"
+Guzik1_5.TextColor3 = Color3.new(0, 0, 0)
+Guzik1_5.TextScaled = true
+Guzik1_5.TextSize = 14
+Guzik1_5.TextWrapped = true
+
+UICorner_33.Parent = Guzik1_5
+
+UITextSizeConstraint_15.Parent = Guzik1_5
+UITextSizeConstraint_15.MaxTextSize = 53
+
+Guzik1_6.Name = "Guzik1"
+Guzik1_6.Parent = Frame_2
+Guzik1_6.BackgroundColor3 = Color3.new(1, 0.666667, 0.00392157)
+Guzik1_6.BorderColor3 = Color3.new(0, 0, 0)
+Guzik1_6.BorderSizePixel = 0
+Guzik1_6.Position = UDim2.new(0.895730853, 0, 0.333487332, 0)
+Guzik1_6.Size = UDim2.new(0.0758386776, 0, 0.327125102, 0)
+Guzik1_6.Font = Enum.Font.SourceSans
+Guzik1_6.Text = "Edytuj"
+Guzik1_6.TextColor3 = Color3.new(0, 0, 0)
+Guzik1_6.TextScaled = true
+Guzik1_6.TextSize = 14
+Guzik1_6.TextWrapped = true
+
+UICorner_34.Parent = Guzik1_6
+
+UITextSizeConstraint_16.Parent = Guzik1_6
+UITextSizeConstraint_16.MaxTextSize = 53
+
+UICorner_35.Parent = Frame_2
+
+TextLabel_2.Parent = Frame_2
+TextLabel_2.BackgroundColor3 = Color3.new(1, 1, 1)
+TextLabel_2.BackgroundTransparency = 1
+TextLabel_2.BorderColor3 = Color3.new(0, 0, 0)
+TextLabel_2.BorderSizePixel = 0
+TextLabel_2.Size = UDim2.new(0, 423, 0, 18)
+TextLabel_2.Font = Enum.Font.SourceSans
+TextLabel_2.Text = "Gra:"
+TextLabel_2.TextColor3 = Color3.new(0, 0, 0)
+TextLabel_2.TextSize = 14
+
+Opublikowana.Name = "Opublikowana"
+Opublikowana.Parent = Frame_2
+Opublikowana.BackgroundColor3 = Color3.new(1, 1, 1)
+Opublikowana.BackgroundTransparency = 1
+Opublikowana.BorderColor3 = Color3.new(0, 0, 0)
+Opublikowana.BorderSizePixel = 0
+Opublikowana.Position = UDim2.new(0.497868717, 0, 0.819999993, 0)
+Opublikowana.Size = UDim2.new(0, 423, 0, 18)
+Opublikowana.Font = Enum.Font.SourceSans
+Opublikowana.Text = "Opublikowano:"
+Opublikowana.TextColor3 = Color3.new(0, 0, 0)
+Opublikowana.TextSize = 14
+
+Opublikowana_2.Name = "Opublikowana"
+Opublikowana_2.Parent = Frame_2
+Opublikowana_2.BackgroundColor3 = Color3.new(1, 1, 1)
+Opublikowana_2.BackgroundTransparency = 1
+Opublikowana_2.BorderColor3 = Color3.new(0, 0, 0)
+Opublikowana_2.BorderSizePixel = 0
+Opublikowana_2.Position = UDim2.new(0.223358914, 0, 0.819999993, 0)
+Opublikowana_2.Size = UDim2.new(0, 423, 0, 18)
+Opublikowana_2.Font = Enum.Font.SourceSans
+Opublikowana_2.Text = "Polubienia:"
+Opublikowana_2.TextColor3 = Color3.new(0, 0, 0)
+Opublikowana_2.TextSize = 14
+
+Opublikowana_3.Name = "Opublikowana"
+Opublikowana_3.Parent = Frame_2
+Opublikowana_3.BackgroundColor3 = Color3.new(1, 1, 1)
+Opublikowana_3.BackgroundTransparency = 1
+Opublikowana_3.BorderColor3 = Color3.new(0, 0, 0)
+Opublikowana_3.BorderSizePixel = 0
+Opublikowana_3.Position = UDim2.new(-0.137254909, 0, 0.819999993, 0)
+Opublikowana_3.Size = UDim2.new(0, 423, 0, 18)
+Opublikowana_3.Font = Enum.Font.SourceSans
+Opublikowana_3.Text = "Wyświetlenia:"
+Opublikowana_3.TextColor3 = Color3.new(0, 0, 0)
+Opublikowana_3.TextSize = 14
+
+Opublikowana_4.Name = "Opublikowana"
+Opublikowana_4.Parent = Frame_2
+Opublikowana_4.BackgroundColor3 = Color3.new(1, 1, 1)
+Opublikowana_4.BackgroundTransparency = 1
+Opublikowana_4.BorderColor3 = Color3.new(0, 0, 0)
+Opublikowana_4.BorderSizePixel = 0
+Opublikowana_4.Position = UDim2.new(0, 0, 0.239999995, 0)
+Opublikowana_4.Size = UDim2.new(0, 466, 0, 26)
+Opublikowana_4.Font = Enum.Font.SourceSans
+Opublikowana_4.Text = "Nazwa Skryptu"
+Opublikowana_4.TextColor3 = Color3.new(0, 0, 0)
+Opublikowana_4.TextScaled = true
+Opublikowana_4.TextSize = 14
+Opublikowana_4.TextWrapped = true
+
+TextLabel_3.Parent = Frame_2
+TextLabel_3.BackgroundColor3 = Color3.new(1, 1, 1)
+TextLabel_3.BorderColor3 = Color3.new(0, 0, 0)
+TextLabel_3.BorderSizePixel = 0
+TextLabel_3.Position = UDim2.new(0.0127877239, 0, 0.5, 0)
+TextLabel_3.Size = UDim2.new(0, 91, 0, 25)
+TextLabel_3.Font = Enum.Font.SourceSans
+TextLabel_3.Text = "tag"
+TextLabel_3.TextColor3 = Color3.new(0, 0, 0)
+TextLabel_3.TextScaled = true
+TextLabel_3.TextSize = 14
+TextLabel_3.TextWrapped = true
+
+UICorner_36.Parent = TextLabel_3
+
+StartScript.Name = "StartScript"
+StartScript.Parent = Frame
+StartScript.BackgroundColor3 = Color3.new(0.219608, 0.219608, 0.219608)
+StartScript.BackgroundTransparency = 0.20000000298023224
+StartScript.BorderColor3 = Color3.new(0, 0, 0)
+StartScript.BorderSizePixel = 0
+StartScript.Position = UDim2.new(0.026433643, 0, 0.0318192206, 0)
+StartScript.Size = UDim2.new(0.70532918, 0, 0.681432605, 0)
+StartScript.Visible = false
+
+UICorner_37.Parent = StartScript
+
+BackButton_2.Name = "BackButton"
+BackButton_2.Parent = StartScript
+BackButton_2.BackgroundColor3 = Color3.new(1, 0, 0)
+BackButton_2.BackgroundTransparency = 1
+BackButton_2.BorderColor3 = Color3.new(0, 0, 0)
+BackButton_2.BorderSizePixel = 0
+BackButton_2.Position = UDim2.new(-0.0150406901, 0, -0.0284440927, 0)
+BackButton_2.Size = UDim2.new(0.034814816, 0, 0.0691562966, 0)
+BackButton_2.Font = Enum.Font.FredokaOne
+BackButton_2.Text = "⬅️"
+BackButton_2.TextColor3 = Color3.new(0, 0, 0)
+BackButton_2.TextScaled = true
+BackButton_2.TextSize = 14
+BackButton_2.TextWrapped = true
+
+UICorner_38.Parent = BackButton_2
+
+DescLabel.Name = "DescLabel"
+DescLabel.Parent = StartScript
+DescLabel.BackgroundColor3 = Color3.new(0.368627, 0.368627, 0.368627)
+DescLabel.BackgroundTransparency = 1
+DescLabel.BorderColor3 = Color3.new(0, 0, 0)
+DescLabel.BorderSizePixel = 0
+DescLabel.Position = UDim2.new(0.0274306983, 0, 0.0401106514, 0)
+DescLabel.Size = UDim2.new(0, 915, 0, 648)
+DescLabel.Font = Enum.Font.FredokaOne
+DescLabel.TextColor3 = Color3.new(1, 1, 1)
+DescLabel.TextSize = 49
+DescLabel.TextWrapped = true
+DescLabel.TextYAlignment = Enum.TextYAlignment.Top
+
+TextButton.Parent = StartScript
+TextButton.BackgroundColor3 = Color3.new(1, 0.701961, 0)
+TextButton.BorderColor3 = Color3.new(0, 0, 0)
+TextButton.BorderSizePixel = 0
+TextButton.Position = UDim2.new(0.772631466, 0, 0.887966812, 0)
+TextButton.Size = UDim2.new(0, 298, 0, 81)
+TextButton.Font = Enum.Font.FredokaOne
+TextButton.Text = "Execute"
+TextButton.TextColor3 = Color3.new(0, 0, 0)
+TextButton.TextScaled = true
+TextButton.TextSize = 14
+TextButton.TextWrapped = true
+
+UICorner_39.Parent = TextButton
+
+Locked.Name = "Locked"
+Locked.Parent = TextButton
+Locked.BackgroundColor3 = Color3.new(0, 0, 0)
+Locked.BackgroundTransparency = 0.20000000298023224
+Locked.BorderColor3 = Color3.new(0, 0, 0)
+Locked.BorderSizePixel = 0
+Locked.Position = UDim2.new(-1.4669132e-07, 0, 0, 0)
+Locked.Size = UDim2.new(0.999810457, 0, 1, 0)
+Locked.Visible = false
+
+UICorner_40.Parent = Locked
+
+ImageLabel_3.Parent = Locked
+ImageLabel_3.BackgroundColor3 = Color3.new(0, 0, 0)
+ImageLabel_3.BackgroundTransparency = 1
+ImageLabel_3.BorderColor3 = Color3.new(0, 0, 0)
+ImageLabel_3.BorderSizePixel = 0
+ImageLabel_3.Position = UDim2.new(0.307802647, 0, 0, 0)
+ImageLabel_3.Size = UDim2.new(0, 72, 0, 67)
+ImageLabel_3.Image = "rbxassetid://13967666260"
+
+Name.Name = "Name"
+Name.Parent = StartScript
+Name.BackgroundColor3 = Color3.new(1, 0.74902, 0)
+Name.BorderColor3 = Color3.new(0, 0, 0)
+Name.BorderSizePixel = 0
+Name.Position = UDim2.new(0.772631466, 0, 0.0401106514, 0)
+Name.Size = UDim2.new(0, 298, 0, 50)
+Name.Font = Enum.Font.FredokaOne
+Name.Text = "Button"
+Name.TextColor3 = Color3.new(0, 0, 0)
+Name.TextScaled = true
+Name.TextSize = 14
+Name.TextWrapped = true
+
+UICorner_41.Parent = Name
 
 CloseButton.Name = "CloseButton"
 CloseButton.Parent = ProjectUniversal
@@ -1132,10 +1022,10 @@ CloseButton.TextScaled = true
 CloseButton.TextSize = 14
 CloseButton.TextWrapped = true
 
-UICorner_50.Parent = CloseButton
+UICorner_42.Parent = CloseButton
 
-UITextSizeConstraint_23.Parent = CloseButton
-UITextSizeConstraint_23.MaxTextSize = 49
+UITextSizeConstraint_17.Parent = CloseButton
+UITextSizeConstraint_17.MaxTextSize = 49
 
 Notification.Name = "Notification"
 Notification.Parent = ProjectUniversal
@@ -1146,28 +1036,165 @@ Notification.Position = UDim2.new(0.218569115, 0, -0.0454545468, 0)
 Notification.Size = UDim2.new(0.565308988, 0, 0.0586124398, 0)
 Notification.Visible = false
 
-TextLabel_2.Parent = Notification
-TextLabel_2.BackgroundColor3 = Color3.new(1, 0.635294, 0)
-TextLabel_2.BackgroundTransparency = 2
-TextLabel_2.BorderColor3 = Color3.new(0, 0, 0)
-TextLabel_2.BorderSizePixel = 0
-TextLabel_2.Position = UDim2.new(0.127222821, 0, 0.125296608, 0)
-TextLabel_2.Size = UDim2.new(0, 576, 0, 42)
-TextLabel_2.Font = Enum.Font.FredokaOne
-TextLabel_2.Text = "Test"
-TextLabel_2.TextColor3 = Color3.new(0, 0, 0)
-TextLabel_2.TextScaled = true
-TextLabel_2.TextSize = 14
-TextLabel_2.TextWrapped = true
+TextLabel_4.Parent = Notification
+TextLabel_4.BackgroundColor3 = Color3.new(1, 0.635294, 0)
+TextLabel_4.BackgroundTransparency = 2
+TextLabel_4.BorderColor3 = Color3.new(0, 0, 0)
+TextLabel_4.BorderSizePixel = 0
+TextLabel_4.Position = UDim2.new(0.127222821, 0, 0.125296608, 0)
+TextLabel_4.Size = UDim2.new(0, 576, 0, 42)
+TextLabel_4.Font = Enum.Font.FredokaOne
+TextLabel_4.Text = "Test"
+TextLabel_4.TextColor3 = Color3.new(0, 0, 0)
+TextLabel_4.TextScaled = true
+TextLabel_4.TextSize = 14
+TextLabel_4.TextWrapped = true
 
-UICorner_51.Parent = Notification
+UICorner_43.Parent = Notification
 
-UIAspectRatioConstraint_11.Parent = Notification
-UIAspectRatioConstraint_11.AspectRatio = 16.428571701049805
+UIAspectRatioConstraint_12.Parent = Notification
+UIAspectRatioConstraint_12.AspectRatio = 16.428571701049805
 
 -- Scripts
 
-local function FGIEPE_fake_script() -- Guzik1.LocalScript 
+-- ProjectUniversal.LocalScript is disabled.
+-- ProjectUniversal.Script is disabled.
+local function LKQN_fake_script() -- ProjectUniversal.LocalScript 
+	local script = Instance.new('LocalScript', ProjectUniversal)
+
+		local TweenService = game:GetService("TweenService")
+	
+	-- DEFINICJA GLOBALNEJ FUNKCJI
+	function _G.AnimateAndFunc(button, callback)
+		if not button then return end
+	
+		local expandPixels = 10
+		local tweenDuration = 0.2
+	
+		-- Inicjalizacja komponentów
+		local uiStroke = button:FindFirstChildWhichIsA("UIStroke")
+		local tip = button:FindFirstChild("Tip")
+	
+		-- Zapamiętywanie stanu początkowego
+		local originalSize = button.Size
+		local originalPosition = button.Position
+		local originalStrokeThickness = uiStroke and uiStroke.Thickness or 2.5
+		local hoverStrokeThickness = 4
+		local originalStrokeColor = uiStroke and uiStroke.Color or Color3.fromRGB(0, 0, 0)
+		local hoverStrokeColor = Color3.fromRGB(0, 0, 0)
+	
+		local originalChildSizes = {}
+		for _, child in ipairs(button:GetChildren()) do
+			if child:IsA("TextLabel") or child:IsA("ImageLabel") or child:IsA("TextButton") then
+				originalChildSizes[child] = child.Size
+			end
+		end
+	
+		-- Tworzenie dźwięków
+		local hoverSound = Instance.new("Sound")
+		hoverSound.SoundId = "rbxassetid://75250247593685"
+		hoverSound.Volume = 1
+		hoverSound.Parent = button
+	
+		local clickSound = Instance.new("Sound")
+		clickSound.SoundId = "rbxassetid://535716488"
+		clickSound.Volume = 1
+		clickSound.Parent = button
+	
+		-- Setup Tip
+		if tip then
+			if tip:IsA("TextLabel") then tip.TextTransparency = 1
+			elseif tip:IsA("Frame") or tip:IsA("ImageLabel") then tip.BackgroundTransparency = 1 end
+			tip.Visible = false
+		end
+	
+		-- Event: Hover Enter
+		button.MouseEnter:Connect(function()
+			local newSize = UDim2.new(originalSize.X.Scale, originalSize.X.Offset + expandPixels * 2, originalSize.Y.Scale, originalSize.Y.Offset + expandPixels * 2)
+			local newPosition = UDim2.new(originalPosition.X.Scale, originalPosition.X.Offset - expandPixels, originalPosition.Y.Scale, originalPosition.Y.Offset - expandPixels)
+	
+			button:TweenSizeAndPosition(newSize, newPosition, "Out", "Quad", tweenDuration, true)
+	
+			for child, size in pairs(originalChildSizes) do
+				local newChildSize = UDim2.new(size.X.Scale, size.X.Offset + expandPixels, size.Y.Scale, size.Y.Offset + expandPixels)
+				child:TweenSize(newChildSize, "Out", "Quad", tweenDuration, true)
+			end
+	
+			if uiStroke then
+				uiStroke.Thickness = hoverStrokeThickness
+				uiStroke.Color = hoverStrokeColor
+			end
+	
+			hoverSound:Play()
+	
+			if tip then
+				tip.Visible = true
+				TweenService:Create(tip, TweenInfo.new(0.3), {
+					TextTransparency = tip:IsA("TextLabel") and 0 or nil,
+					BackgroundTransparency = (tip:IsA("Frame") or tip:IsA("ImageLabel")) and 0 or nil
+				}):Play()
+			end
+		end)
+	
+		-- Event: Hover Leave
+		button.MouseLeave:Connect(function()
+			button:TweenSizeAndPosition(originalSize, originalPosition, "Out", "Quad", tweenDuration, true)
+			for child, size in pairs(originalChildSizes) do
+				child:TweenSize(size, "Out", "Quad", tweenDuration, true)
+			end
+	
+			if uiStroke then
+				uiStroke.Thickness = originalStrokeThickness
+				uiStroke.Color = originalStrokeColor
+			end
+	
+			if tip then
+				local fade = TweenService:Create(tip, TweenInfo.new(0.3), {
+					TextTransparency = tip:IsA("TextLabel") and 1 or nil,
+					BackgroundTransparency = (tip:IsA("Frame") or tip:IsA("ImageLabel")) and 1 or nil
+				})
+				fade:Play()
+				fade.Completed:Connect(function() tip.Visible = false end)
+			end
+		end)
+	
+		-- Event: Click
+		button.MouseButton1Click:Connect(function()
+			clickSound:Play()
+			if callback then
+				callback() 
+			end
+		end)
+	end
+	
+	-- PRZYKŁAD UŻYCIA
+	_G.AnimateAndFunc(script.Parent, function()
+		local Players = game:GetService("Players")
+		local StarterGui = game:GetService("StarterGui")
+		local TeleportService = game:GetService("TeleportService")
+	
+		local PLACE_ID_CELU = 6557073879 
+		local player = Players.LocalPlayer
+		local callback = Instance.new("BindableFunction")
+	
+		callback.OnInvoke = function(buttonText)
+			if buttonText == "Tak" then
+				TeleportService:Teleport(PLACE_ID_CELU, player)
+			end
+		end
+	
+		StarterGui:SetCore("SendNotification", {
+			Title = "Zakup premium",
+			Text = "Czy zgadzasz się na teleportację?",
+			Button1 = "Tak",
+			Button2 = "Nie",
+			Callback = callback,
+			Duration = 10
+		})
+	end)
+end
+coroutine.wrap(LKQN_fake_script)()
+local function IXMLIKK_fake_script() -- Guzik1.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1)
 
 	local TweenService = game:GetService("TweenService")
@@ -1229,8 +1256,8 @@ local function FGIEPE_fake_script() -- Guzik1.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(FGIEPE_fake_script)()
-local function DPTFVK_fake_script() -- Guzik1_2.LocalScript 
+coroutine.wrap(IXMLIKK_fake_script)()
+local function OBAE_fake_script() -- Guzik1_2.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_2)
 
 	local button = script.Parent
@@ -1335,1536 +1362,8 @@ local function DPTFVK_fake_script() -- Guzik1_2.LocalScript
 	end
 	
 end
-coroutine.wrap(DPTFVK_fake_script)()
-local function WMMHHG_fake_script() -- Guzik1_3.LocalScript 
-	local script = Instance.new('LocalScript', Guzik1_3)
-
-	local button = script.Parent
-	local expandPixels = 10
-	local tweenDuration = 0.2
-	
-	-- Pobieramy UIStroke (jeśli istnieje)
-	local uiStroke = button:FindFirstChildWhichIsA("UIStroke")
-	
-	-- Dane oryginalne
-	local originalSize = button.Size
-	local originalPosition = button.Position
-	local originalStrokeThickness = uiStroke and uiStroke.Thickness or 2.5
-	local hoverStrokeThickness = 4
-	local originalStrokeColor = uiStroke and uiStroke.Color or Color3.fromRGB(0, 0, 0)
-	local hoverStrokeColor = Color3.fromRGB(0, 0, 0)
-	
-	-- Przechowywanie oryginalnych rozmiarów dzieci
-	local originalChildSizes = {}
-	for _, child in ipairs(button:GetChildren()) do
-		if child:IsA("TextLabel") or child:IsA("ImageLabel") or child:IsA("TextButton") then
-			originalChildSizes[child] = child.Size
-		end
-	end
-	
-	-- 🔊 Tworzymy dźwięki
-	local hoverSound = Instance.new("Sound")
-	hoverSound.SoundId = "rbxassetid://75250247593685"
-	hoverSound.Volume = 1
-	hoverSound.Parent = button
-	
-	local clickSound = Instance.new("Sound")
-	clickSound.SoundId = "rbxassetid://535716488"
-	clickSound.Volume = 1
-	clickSound.Parent = button
-	
-	-- 🎨 Efekt: po najechaniu myszką
-	local function onMouseEnter()
-		local newSize = UDim2.new(
-			originalSize.X.Scale,
-			originalSize.X.Offset + expandPixels * 2,
-			originalSize.Y.Scale,
-			originalSize.Y.Offset + expandPixels * 2
-		)
-	
-		local newPosition = UDim2.new(
-			originalPosition.X.Scale,
-			originalPosition.X.Offset - expandPixels,
-			originalPosition.Y.Scale,
-			originalPosition.Y.Offset - expandPixels
-		)
-	
-		button:TweenSizeAndPosition(newSize, newPosition, "Out", "Quad", tweenDuration, true)
-	
-		for child, originalSize in pairs(originalChildSizes) do
-			local newChildSize = UDim2.new(
-				originalSize.X.Scale,
-				originalSize.X.Offset + expandPixels,
-				originalSize.Y.Scale,
-				originalSize.Y.Offset + expandPixels
-			)
-			child:TweenSize(newChildSize, "Out", "Quad", tweenDuration, true)
-		end
-	
-		if uiStroke then
-			uiStroke.Thickness = hoverStrokeThickness
-			uiStroke.Color = hoverStrokeColor
-		end
-	
-		-- 🔊 Odtwórz dźwięk hover
-		hoverSound:Play()
-	end
-	
-	-- 🎨 Efekt: po opuszczeniu myszką
-	local function onMouseLeave()
-		button:TweenSizeAndPosition(originalSize, originalPosition, "Out", "Quad", tweenDuration, true)
-	
-		for child, originalSize in pairs(originalChildSizes) do
-			child:TweenSize(originalSize, "Out", "Quad", tweenDuration, true)
-		end
-	
-		if uiStroke then
-			uiStroke.Thickness = originalStrokeThickness
-			uiStroke.Color = originalStrokeColor
-		end
-	end
-	
-	-- 🖱️ Efekt: po kliknięciu przycisku
-	local function onMouseClick()
-		-- 🔊 Odtwórz dźwięk kliknięcia
-		clickSound:Play()
-	end
-	
-	-- Podłączenie zdarzeń
-	button.MouseEnter:Connect(onMouseEnter)
-	button.MouseLeave:Connect(onMouseLeave)
-	button.MouseButton1Click:Connect(onMouseClick)
-	
-end
-coroutine.wrap(WMMHHG_fake_script)()
-local function MIAE_fake_script() -- Guzik1_3.LocalScript 
-	local script = Instance.new('LocalScript', Guzik1_3)
-
-	--[[ 
-	    🔧 Uniwersalny LocalScript dla każdego guzika w "Scripts"
-	    Po kliknięciu otwiera ramkę "StartScript" i ustawia dane.
-	    Autor: LUA Programming GOD 😎
-	--]]
-	
-	local button = script.Parent
-	local player = game.Players.LocalPlayer
-	local gui = player:WaitForChild("PlayerGui"):WaitForChild("ScreenGui")
-	
-	-- Ramki
-	local mainFrame = gui:WaitForChild("Frame")
-	local scriptsFrame = mainFrame:WaitForChild("Scripts")
-	local startScriptFrame = mainFrame:WaitForChild("StartScript")
-	
-	-- Elementy w StartScript
-	local nameLabel = startScriptFrame:WaitForChild("Name")
-	local descLabel = startScriptFrame:WaitForChild("DescLabel")
-	local executeButton = startScriptFrame:WaitForChild("TextButton")
-	local backButton = startScriptFrame:WaitForChild("BackButton")
-	
-	-- ✏️ Automatyczne dane
-	local scriptName = button.Text
-	local scriptDescription = "Opis dla skryptu: " .. button.Text .. "\nTutaj możesz wpisać co robi ten skrypt."
-	
-	-- 🖱️ Kliknięcie guzika (otwiera menu skryptu)
-	button.MouseButton1Click:Connect(function()
-		scriptsFrame.Visible = false
-		startScriptFrame.Visible = true
-	
-		-- Ustaw nazwę i opis
-		nameLabel.Text = scriptName
-		descLabel.Text = scriptDescription
-	end)
-	
-	-- 🖱️ Kliknięcie Execute (uruchamia powiadomienie lub kod)
-	executeButton.MouseButton1Click:Connect(function()
-		loadstring(game:HttpGet("https://pastebin.com/raw/xuSMWfDu"))()
-	end)
-	
-	-- 🔙 Powrót z StartScript do Scripts
-	backButton.MouseButton1Click:Connect(function()
-		startScriptFrame.Visible = false
-		scriptsFrame.Visible = true
-	end)
-	
-end
-coroutine.wrap(MIAE_fake_script)()
-local function RGYC_fake_script() -- Guzik1_4.LocalScript 
-	local script = Instance.new('LocalScript', Guzik1_4)
-
-	local button = script.Parent
-	local expandPixels = 10
-	local tweenDuration = 0.2
-	
-	-- Pobieramy UIStroke (jeśli istnieje)
-	local uiStroke = button:FindFirstChildWhichIsA("UIStroke")
-	
-	-- Dane oryginalne
-	local originalSize = button.Size
-	local originalPosition = button.Position
-	local originalStrokeThickness = uiStroke and uiStroke.Thickness or 2.5
-	local hoverStrokeThickness = 4
-	local originalStrokeColor = uiStroke and uiStroke.Color or Color3.fromRGB(0, 0, 0)
-	local hoverStrokeColor = Color3.fromRGB(0, 0, 0)
-	
-	-- Przechowywanie oryginalnych rozmiarów dzieci
-	local originalChildSizes = {}
-	for _, child in ipairs(button:GetChildren()) do
-		if child:IsA("TextLabel") or child:IsA("ImageLabel") or child:IsA("TextButton") then
-			originalChildSizes[child] = child.Size
-		end
-	end
-	
-	-- 🔊 Tworzymy dźwięki
-	local hoverSound = Instance.new("Sound")
-	hoverSound.SoundId = "rbxassetid://75250247593685"
-	hoverSound.Volume = 1
-	hoverSound.Parent = button
-	
-	local clickSound = Instance.new("Sound")
-	clickSound.SoundId = "rbxassetid://535716488"
-	clickSound.Volume = 1
-	clickSound.Parent = button
-	
-	-- 🎨 Efekt: po najechaniu myszką
-	local function onMouseEnter()
-		local newSize = UDim2.new(
-			originalSize.X.Scale,
-			originalSize.X.Offset + expandPixels * 2,
-			originalSize.Y.Scale,
-			originalSize.Y.Offset + expandPixels * 2
-		)
-	
-		local newPosition = UDim2.new(
-			originalPosition.X.Scale,
-			originalPosition.X.Offset - expandPixels,
-			originalPosition.Y.Scale,
-			originalPosition.Y.Offset - expandPixels
-		)
-	
-		button:TweenSizeAndPosition(newSize, newPosition, "Out", "Quad", tweenDuration, true)
-	
-		for child, originalSize in pairs(originalChildSizes) do
-			local newChildSize = UDim2.new(
-				originalSize.X.Scale,
-				originalSize.X.Offset + expandPixels,
-				originalSize.Y.Scale,
-				originalSize.Y.Offset + expandPixels
-			)
-			child:TweenSize(newChildSize, "Out", "Quad", tweenDuration, true)
-		end
-	
-		if uiStroke then
-			uiStroke.Thickness = hoverStrokeThickness
-			uiStroke.Color = hoverStrokeColor
-		end
-	
-		-- 🔊 Odtwórz dźwięk hover
-		hoverSound:Play()
-	end
-	
-	-- 🎨 Efekt: po opuszczeniu myszką
-	local function onMouseLeave()
-		button:TweenSizeAndPosition(originalSize, originalPosition, "Out", "Quad", tweenDuration, true)
-	
-		for child, originalSize in pairs(originalChildSizes) do
-			child:TweenSize(originalSize, "Out", "Quad", tweenDuration, true)
-		end
-	
-		if uiStroke then
-			uiStroke.Thickness = originalStrokeThickness
-			uiStroke.Color = originalStrokeColor
-		end
-	end
-	
-	-- 🖱️ Efekt: po kliknięciu przycisku
-	local function onMouseClick()
-		-- 🔊 Odtwórz dźwięk kliknięcia
-		clickSound:Play()
-	end
-	
-	-- Podłączenie zdarzeń
-	button.MouseEnter:Connect(onMouseEnter)
-	button.MouseLeave:Connect(onMouseLeave)
-	button.MouseButton1Click:Connect(onMouseClick)
-end
-coroutine.wrap(RGYC_fake_script)()
-local function IKQJRZF_fake_script() -- Guzik1_4.LocalScript 
-	local script = Instance.new('LocalScript', Guzik1_4)
-
-	--[[ 
-	    🔧 Uniwersalny LocalScript dla każdego guzika w "Scripts"
-	    Po kliknięciu otwiera ramkę "StartScript" i ustawia dane.
-	    Autor: LUA Programming GOD 😎
-	--]]
-	
-	local button = script.Parent
-	local player = game.Players.LocalPlayer
-	local gui = player:WaitForChild("PlayerGui"):WaitForChild("ScreenGui")
-	
-	-- Ramki
-	local mainFrame = gui:WaitForChild("Frame")
-	local scriptsFrame = mainFrame:WaitForChild("Scripts")
-	local startScriptFrame = mainFrame:WaitForChild("StartScript")
-	
-	-- Elementy w StartScript
-	local nameLabel = startScriptFrame:WaitForChild("Name")
-	local descLabel = startScriptFrame:WaitForChild("DescLabel")
-	local executeButton = startScriptFrame:WaitForChild("TextButton")
-	local backButton = startScriptFrame:WaitForChild("BackButton")
-	
-	-- ✏️ Automatyczne dane
-	local scriptName = button.Text
-	local scriptDescription = "Opis dla skryptu: " .. button.Text .. "\nTutaj możesz wpisać co robi ten skrypt."
-	
-	-- 🖱️ Kliknięcie guzika (otwiera menu skryptu)
-	button.MouseButton1Click:Connect(function()
-		scriptsFrame.Visible = false
-		startScriptFrame.Visible = true
-	
-		-- Ustaw nazwę i opis
-		nameLabel.Text = scriptName
-		descLabel.Text = scriptDescription
-	end)
-	
-	-- 🖱️ Kliknięcie Execute (uruchamia powiadomienie lub kod)
-	executeButton.MouseButton1Click:Connect(function()
-		if startScriptFrame.Visible and nameLabel.Text == scriptName then
-			loadstring(game:HttpGet("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/anty-fling"))()
-		end
-	end)
-	
-	-- 🔙 Powrót z StartScript do Scripts
-	backButton.MouseButton1Click:Connect(function()
-		startScriptFrame.Visible = false
-		scriptsFrame.Visible = true
-	end)
-	
-end
-coroutine.wrap(IKQJRZF_fake_script)()
-local function XZXLOHD_fake_script() -- Guzik1_5.LocalScript 
-	local script = Instance.new('LocalScript', Guzik1_5)
-
-	local button = script.Parent
-	local expandPixels = 10
-	local tweenDuration = 0.2
-	
-	-- Pobieramy UIStroke (jeśli istnieje)
-	local uiStroke = button:FindFirstChildWhichIsA("UIStroke")
-	
-	-- Dane oryginalne
-	local originalSize = button.Size
-	local originalPosition = button.Position
-	local originalStrokeThickness = uiStroke and uiStroke.Thickness or 2.5
-	local hoverStrokeThickness = 4
-	local originalStrokeColor = uiStroke and uiStroke.Color or Color3.fromRGB(0, 0, 0)
-	local hoverStrokeColor = Color3.fromRGB(0, 0, 0)
-	
-	-- Przechowywanie oryginalnych rozmiarów dzieci
-	local originalChildSizes = {}
-	for _, child in ipairs(button:GetChildren()) do
-		if child:IsA("TextLabel") or child:IsA("ImageLabel") or child:IsA("TextButton") then
-			originalChildSizes[child] = child.Size
-		end
-	end
-	
-	-- 🔊 Tworzymy dźwięki
-	local hoverSound = Instance.new("Sound")
-	hoverSound.SoundId = "rbxassetid://75250247593685"
-	hoverSound.Volume = 1
-	hoverSound.Parent = button
-	
-	local clickSound = Instance.new("Sound")
-	clickSound.SoundId = "rbxassetid://535716488"
-	clickSound.Volume = 1
-	clickSound.Parent = button
-	
-	-- 🎨 Efekt: po najechaniu myszką
-	local function onMouseEnter()
-		local newSize = UDim2.new(
-			originalSize.X.Scale,
-			originalSize.X.Offset + expandPixels * 2,
-			originalSize.Y.Scale,
-			originalSize.Y.Offset + expandPixels * 2
-		)
-	
-		local newPosition = UDim2.new(
-			originalPosition.X.Scale,
-			originalPosition.X.Offset - expandPixels,
-			originalPosition.Y.Scale,
-			originalPosition.Y.Offset - expandPixels
-		)
-	
-		button:TweenSizeAndPosition(newSize, newPosition, "Out", "Quad", tweenDuration, true)
-	
-		for child, originalSize in pairs(originalChildSizes) do
-			local newChildSize = UDim2.new(
-				originalSize.X.Scale,
-				originalSize.X.Offset + expandPixels,
-				originalSize.Y.Scale,
-				originalSize.Y.Offset + expandPixels
-			)
-			child:TweenSize(newChildSize, "Out", "Quad", tweenDuration, true)
-		end
-	
-		if uiStroke then
-			uiStroke.Thickness = hoverStrokeThickness
-			uiStroke.Color = hoverStrokeColor
-		end
-	
-		-- 🔊 Odtwórz dźwięk hover
-		hoverSound:Play()
-	end
-	
-	-- 🎨 Efekt: po opuszczeniu myszką
-	local function onMouseLeave()
-		button:TweenSizeAndPosition(originalSize, originalPosition, "Out", "Quad", tweenDuration, true)
-	
-		for child, originalSize in pairs(originalChildSizes) do
-			child:TweenSize(originalSize, "Out", "Quad", tweenDuration, true)
-		end
-	
-		if uiStroke then
-			uiStroke.Thickness = originalStrokeThickness
-			uiStroke.Color = originalStrokeColor
-		end
-	end
-	
-	-- 🖱️ Efekt: po kliknięciu przycisku
-	local function onMouseClick()
-		-- 🔊 Odtwórz dźwięk kliknięcia
-		clickSound:Play()
-	end
-	
-	-- Podłączenie zdarzeń
-	button.MouseEnter:Connect(onMouseEnter)
-	button.MouseLeave:Connect(onMouseLeave)
-	button.MouseButton1Click:Connect(onMouseClick)
-end
-coroutine.wrap(XZXLOHD_fake_script)()
-local function HNHC_fake_script() -- Guzik1_5.LocalScript 
-	local script = Instance.new('LocalScript', Guzik1_5)
-
-	--[[ 
-	    🔧 Uniwersalny LocalScript dla każdego guzika w "Scripts"
-	    Po kliknięciu otwiera ramkę "StartScript" i ustawia dane.
-	    Autor: LUA Programming GOD 😎
-	--]]
-	
-	local button = script.Parent
-	local player = game.Players.LocalPlayer
-	local gui = player:WaitForChild("PlayerGui"):WaitForChild("ScreenGui")
-	
-	-- Ramki
-	local mainFrame = gui:WaitForChild("Frame")
-	local scriptsFrame = mainFrame:WaitForChild("Scripts")
-	local startScriptFrame = mainFrame:WaitForChild("StartScript")
-	
-	-- Elementy w StartScript
-	local nameLabel = startScriptFrame:WaitForChild("Name")
-	local descLabel = startScriptFrame:WaitForChild("DescLabel")
-	local executeButton = startScriptFrame:WaitForChild("TextButton")
-	local backButton = startScriptFrame:WaitForChild("BackButton")
-	
-	-- ✏️ Automatyczne dane
-	local scriptName = button.Text
-	local scriptDescription = "Opis dla skryptu: " .. button.Text .. "\nTutaj możesz wpisać co robi ten skrypt."
-	
-	-- 🖱️ Kliknięcie guzika (otwiera menu skryptu)
-	button.MouseButton1Click:Connect(function()
-		scriptsFrame.Visible = false
-		startScriptFrame.Visible = true
-	
-		-- Ustaw nazwę i opis
-		nameLabel.Text = scriptName
-		descLabel.Text = scriptDescription
-	end)
-	
-	-- 🖱️ Kliknięcie Execute (uruchamia powiadomienie lub kod)
-	executeButton.MouseButton1Click:Connect(function()
-		if startScriptFrame.Visible and nameLabel.Text == scriptName then
-			loadstring(game:HttpGet("https://pastebin.com/raw/4KF2WJ9u"))()
-		end
-	end)
-	
-	-- 🔙 Powrót z StartScript do Scripts
-	backButton.MouseButton1Click:Connect(function()
-		startScriptFrame.Visible = false
-		scriptsFrame.Visible = true
-	end)
-	
-end
-coroutine.wrap(HNHC_fake_script)()
-local function HNUJFL_fake_script() -- Guzik1_6.LocalScript 
-	local script = Instance.new('LocalScript', Guzik1_6)
-
-	local button = script.Parent
-	local expandPixels = 10
-	local tweenDuration = 0.2
-	
-	-- Pobieramy UIStroke (jeśli istnieje)
-	local uiStroke = button:FindFirstChildWhichIsA("UIStroke")
-	
-	-- Dane oryginalne
-	local originalSize = button.Size
-	local originalPosition = button.Position
-	local originalStrokeThickness = uiStroke and uiStroke.Thickness or 2.5
-	local hoverStrokeThickness = 4
-	local originalStrokeColor = uiStroke and uiStroke.Color or Color3.fromRGB(0, 0, 0)
-	local hoverStrokeColor = Color3.fromRGB(0, 0, 0)
-	
-	-- Przechowywanie oryginalnych rozmiarów dzieci
-	local originalChildSizes = {}
-	for _, child in ipairs(button:GetChildren()) do
-		if child:IsA("TextLabel") or child:IsA("ImageLabel") or child:IsA("TextButton") then
-			originalChildSizes[child] = child.Size
-		end
-	end
-	
-	-- 🔊 Tworzymy dźwięki
-	local hoverSound = Instance.new("Sound")
-	hoverSound.SoundId = "rbxassetid://75250247593685"
-	hoverSound.Volume = 1
-	hoverSound.Parent = button
-	
-	local clickSound = Instance.new("Sound")
-	clickSound.SoundId = "rbxassetid://535716488"
-	clickSound.Volume = 1
-	clickSound.Parent = button
-	
-	-- 🎨 Efekt: po najechaniu myszką
-	local function onMouseEnter()
-		local newSize = UDim2.new(
-			originalSize.X.Scale,
-			originalSize.X.Offset + expandPixels * 2,
-			originalSize.Y.Scale,
-			originalSize.Y.Offset + expandPixels * 2
-		)
-	
-		local newPosition = UDim2.new(
-			originalPosition.X.Scale,
-			originalPosition.X.Offset - expandPixels,
-			originalPosition.Y.Scale,
-			originalPosition.Y.Offset - expandPixels
-		)
-	
-		button:TweenSizeAndPosition(newSize, newPosition, "Out", "Quad", tweenDuration, true)
-	
-		for child, originalSize in pairs(originalChildSizes) do
-			local newChildSize = UDim2.new(
-				originalSize.X.Scale,
-				originalSize.X.Offset + expandPixels,
-				originalSize.Y.Scale,
-				originalSize.Y.Offset + expandPixels
-			)
-			child:TweenSize(newChildSize, "Out", "Quad", tweenDuration, true)
-		end
-	
-		if uiStroke then
-			uiStroke.Thickness = hoverStrokeThickness
-			uiStroke.Color = hoverStrokeColor
-		end
-	
-		-- 🔊 Odtwórz dźwięk hover
-		hoverSound:Play()
-	end
-	
-	-- 🎨 Efekt: po opuszczeniu myszką
-	local function onMouseLeave()
-		button:TweenSizeAndPosition(originalSize, originalPosition, "Out", "Quad", tweenDuration, true)
-	
-		for child, originalSize in pairs(originalChildSizes) do
-			child:TweenSize(originalSize, "Out", "Quad", tweenDuration, true)
-		end
-	
-		if uiStroke then
-			uiStroke.Thickness = originalStrokeThickness
-			uiStroke.Color = originalStrokeColor
-		end
-	end
-	
-	-- 🖱️ Efekt: po kliknięciu przycisku
-	local function onMouseClick()
-		-- 🔊 Odtwórz dźwięk kliknięcia
-		clickSound:Play()
-	end
-	
-	-- Podłączenie zdarzeń
-	button.MouseEnter:Connect(onMouseEnter)
-	button.MouseLeave:Connect(onMouseLeave)
-	button.MouseButton1Click:Connect(onMouseClick)
-end
-coroutine.wrap(HNUJFL_fake_script)()
-local function JQHRC_fake_script() -- Guzik1_6.LocalScript 
-	local script = Instance.new('LocalScript', Guzik1_6)
-
-	--[[ 
-	    🔧 Uniwersalny LocalScript dla każdego guzika w "Scripts"
-	    Po kliknięciu otwiera ramkę "StartScript" i ustawia dane.
-	    Autor: LUA Programming GOD 😎
-	--]]
-	
-	local button = script.Parent
-	local player = game.Players.LocalPlayer
-	local gui = player:WaitForChild("PlayerGui"):WaitForChild("ScreenGui")
-	
-	-- Ramki
-	local mainFrame = gui:WaitForChild("Frame")
-	local scriptsFrame = mainFrame:WaitForChild("Scripts")
-	local startScriptFrame = mainFrame:WaitForChild("StartScript")
-	
-	-- Elementy w StartScript
-	local nameLabel = startScriptFrame:WaitForChild("Name")
-	local descLabel = startScriptFrame:WaitForChild("DescLabel")
-	local executeButton = startScriptFrame:WaitForChild("TextButton")
-	local backButton = startScriptFrame:WaitForChild("BackButton")
-	
-	-- ✏️ Automatyczne dane
-	local scriptName = button.Text
-	local scriptDescription = "Opis dla skryptu: " .. button.Text .. "\nTutaj możesz wpisać co robi ten skrypt."
-	
-	-- 🖱️ Kliknięcie guzika (otwiera menu skryptu)
-	button.MouseButton1Click:Connect(function()
-		scriptsFrame.Visible = false
-		startScriptFrame.Visible = true
-	
-		-- Ustaw nazwę i opis
-		nameLabel.Text = scriptName
-		descLabel.Text = scriptDescription
-	end)
-	
-	-- 🖱️ Kliknięcie Execute (uruchamia powiadomienie lub kod)
-	executeButton.MouseButton1Click:Connect(function()
-		if startScriptFrame.Visible and nameLabel.Text == scriptName then
-			loadstring(game:HttpGet("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/infinity-jump"))()
-		end
-	end)
-	
-	-- 🔙 Powrót z StartScript do Scripts
-	backButton.MouseButton1Click:Connect(function()
-		startScriptFrame.Visible = false
-		scriptsFrame.Visible = true
-	end)
-	
-end
-coroutine.wrap(JQHRC_fake_script)()
-local function FWHM_fake_script() -- Guzik1_7.LocalScript 
-	local script = Instance.new('LocalScript', Guzik1_7)
-
-	local button = script.Parent
-	local expandPixels = 10
-	local tweenDuration = 0.2
-	
-	-- Pobieramy UIStroke (jeśli istnieje)
-	local uiStroke = button:FindFirstChildWhichIsA("UIStroke")
-	
-	-- Dane oryginalne
-	local originalSize = button.Size
-	local originalPosition = button.Position
-	local originalStrokeThickness = uiStroke and uiStroke.Thickness or 2.5
-	local hoverStrokeThickness = 4
-	local originalStrokeColor = uiStroke and uiStroke.Color or Color3.fromRGB(0, 0, 0)
-	local hoverStrokeColor = Color3.fromRGB(0, 0, 0)
-	
-	-- Przechowywanie oryginalnych rozmiarów dzieci
-	local originalChildSizes = {}
-	for _, child in ipairs(button:GetChildren()) do
-		if child:IsA("TextLabel") or child:IsA("ImageLabel") or child:IsA("TextButton") then
-			originalChildSizes[child] = child.Size
-		end
-	end
-	
-	-- 🔊 Tworzymy dźwięki
-	local hoverSound = Instance.new("Sound")
-	hoverSound.SoundId = "rbxassetid://75250247593685"
-	hoverSound.Volume = 1
-	hoverSound.Parent = button
-	
-	local clickSound = Instance.new("Sound")
-	clickSound.SoundId = "rbxassetid://535716488"
-	clickSound.Volume = 1
-	clickSound.Parent = button
-	
-	-- 🎨 Efekt: po najechaniu myszką
-	local function onMouseEnter()
-		local newSize = UDim2.new(
-			originalSize.X.Scale,
-			originalSize.X.Offset + expandPixels * 2,
-			originalSize.Y.Scale,
-			originalSize.Y.Offset + expandPixels * 2
-		)
-	
-		local newPosition = UDim2.new(
-			originalPosition.X.Scale,
-			originalPosition.X.Offset - expandPixels,
-			originalPosition.Y.Scale,
-			originalPosition.Y.Offset - expandPixels
-		)
-	
-		button:TweenSizeAndPosition(newSize, newPosition, "Out", "Quad", tweenDuration, true)
-	
-		for child, originalSize in pairs(originalChildSizes) do
-			local newChildSize = UDim2.new(
-				originalSize.X.Scale,
-				originalSize.X.Offset + expandPixels,
-				originalSize.Y.Scale,
-				originalSize.Y.Offset + expandPixels
-			)
-			child:TweenSize(newChildSize, "Out", "Quad", tweenDuration, true)
-		end
-	
-		if uiStroke then
-			uiStroke.Thickness = hoverStrokeThickness
-			uiStroke.Color = hoverStrokeColor
-		end
-	
-		-- 🔊 Odtwórz dźwięk hover
-		hoverSound:Play()
-	end
-	
-	-- 🎨 Efekt: po opuszczeniu myszką
-	local function onMouseLeave()
-		button:TweenSizeAndPosition(originalSize, originalPosition, "Out", "Quad", tweenDuration, true)
-	
-		for child, originalSize in pairs(originalChildSizes) do
-			child:TweenSize(originalSize, "Out", "Quad", tweenDuration, true)
-		end
-	
-		if uiStroke then
-			uiStroke.Thickness = originalStrokeThickness
-			uiStroke.Color = originalStrokeColor
-		end
-	end
-	
-	-- 🖱️ Efekt: po kliknięciu przycisku
-	local function onMouseClick()
-		-- 🔊 Odtwórz dźwięk kliknięcia
-		clickSound:Play()
-	end
-	
-	-- Podłączenie zdarzeń
-	button.MouseEnter:Connect(onMouseEnter)
-	button.MouseLeave:Connect(onMouseLeave)
-	button.MouseButton1Click:Connect(onMouseClick)
-end
-coroutine.wrap(FWHM_fake_script)()
-local function QETTWF_fake_script() -- Guzik1_7.LocalScript 
-	local script = Instance.new('LocalScript', Guzik1_7)
-
-	--[[ 
-	    🔧 Uniwersalny LocalScript dla każdego guzika w "Scripts"
-	    Po kliknięciu otwiera ramkę "StartScript" i ustawia dane.
-	    Autor: LUA Programming GOD 😎
-	--]]
-	
-	local button = script.Parent
-	local player = game.Players.LocalPlayer
-	local gui = player:WaitForChild("PlayerGui"):WaitForChild("ScreenGui")
-	
-	-- Ramki
-	local mainFrame = gui:WaitForChild("Frame")
-	local scriptsFrame = mainFrame:WaitForChild("Scripts")
-	local startScriptFrame = mainFrame:WaitForChild("StartScript")
-	
-	-- Elementy w StartScript
-	local nameLabel = startScriptFrame:WaitForChild("Name")
-	local descLabel = startScriptFrame:WaitForChild("DescLabel")
-	local executeButton = startScriptFrame:WaitForChild("TextButton")
-	local backButton = startScriptFrame:WaitForChild("BackButton")
-	
-	-- ✏️ Automatyczne dane
-	local scriptName = button.Text
-	local scriptDescription = "Opis dla skryptu: " .. button.Text .. "\nTutaj możesz wpisać co robi ten skrypt."
-	
-	-- 🖱️ Kliknięcie guzika (otwiera menu skryptu)
-	button.MouseButton1Click:Connect(function()
-		scriptsFrame.Visible = false
-		startScriptFrame.Visible = true
-	
-		-- Ustaw nazwę i opis
-		nameLabel.Text = scriptName
-		descLabel.Text = scriptDescription
-	end)
-	
-	-- 🖱️ Kliknięcie Execute (uruchamia powiadomienie lub kod)
-	executeButton.MouseButton1Click:Connect(function()
-		if startScriptFrame.Visible and nameLabel.Text == scriptName then
-			loadstring(game:HttpGet("https://pastebin.com/raw/CnbYfaj1"))()
-		end
-	end)
-	
-	-- 🔙 Powrót z StartScript do Scripts
-	backButton.MouseButton1Click:Connect(function()
-		startScriptFrame.Visible = false
-		scriptsFrame.Visible = true
-	end)
-	
-end
-coroutine.wrap(QETTWF_fake_script)()
-local function QEWB_fake_script() -- Guzik1_8.LocalScript 
-	local script = Instance.new('LocalScript', Guzik1_8)
-
-	local button = script.Parent
-	local expandPixels = 10
-	local tweenDuration = 0.2
-	
-	-- Pobieramy UIStroke (jeśli istnieje)
-	local uiStroke = button:FindFirstChildWhichIsA("UIStroke")
-	
-	-- Dane oryginalne
-	local originalSize = button.Size
-	local originalPosition = button.Position
-	local originalStrokeThickness = uiStroke and uiStroke.Thickness or 2.5
-	local hoverStrokeThickness = 4
-	local originalStrokeColor = uiStroke and uiStroke.Color or Color3.fromRGB(0, 0, 0)
-	local hoverStrokeColor = Color3.fromRGB(0, 0, 0)
-	
-	-- Przechowywanie oryginalnych rozmiarów dzieci
-	local originalChildSizes = {}
-	for _, child in ipairs(button:GetChildren()) do
-		if child:IsA("TextLabel") or child:IsA("ImageLabel") or child:IsA("TextButton") then
-			originalChildSizes[child] = child.Size
-		end
-	end
-	
-	-- 🔊 Tworzymy dźwięki
-	local hoverSound = Instance.new("Sound")
-	hoverSound.SoundId = "rbxassetid://75250247593685"
-	hoverSound.Volume = 1
-	hoverSound.Parent = button
-	
-	local clickSound = Instance.new("Sound")
-	clickSound.SoundId = "rbxassetid://535716488"
-	clickSound.Volume = 1
-	clickSound.Parent = button
-	
-	-- 🎨 Efekt: po najechaniu myszką
-	local function onMouseEnter()
-		local newSize = UDim2.new(
-			originalSize.X.Scale,
-			originalSize.X.Offset + expandPixels * 2,
-			originalSize.Y.Scale,
-			originalSize.Y.Offset + expandPixels * 2
-		)
-	
-		local newPosition = UDim2.new(
-			originalPosition.X.Scale,
-			originalPosition.X.Offset - expandPixels,
-			originalPosition.Y.Scale,
-			originalPosition.Y.Offset - expandPixels
-		)
-	
-		button:TweenSizeAndPosition(newSize, newPosition, "Out", "Quad", tweenDuration, true)
-	
-		for child, originalSize in pairs(originalChildSizes) do
-			local newChildSize = UDim2.new(
-				originalSize.X.Scale,
-				originalSize.X.Offset + expandPixels,
-				originalSize.Y.Scale,
-				originalSize.Y.Offset + expandPixels
-			)
-			child:TweenSize(newChildSize, "Out", "Quad", tweenDuration, true)
-		end
-	
-		if uiStroke then
-			uiStroke.Thickness = hoverStrokeThickness
-			uiStroke.Color = hoverStrokeColor
-		end
-	
-		-- 🔊 Odtwórz dźwięk hover
-		hoverSound:Play()
-	end
-	
-	-- 🎨 Efekt: po opuszczeniu myszką
-	local function onMouseLeave()
-		button:TweenSizeAndPosition(originalSize, originalPosition, "Out", "Quad", tweenDuration, true)
-	
-		for child, originalSize in pairs(originalChildSizes) do
-			child:TweenSize(originalSize, "Out", "Quad", tweenDuration, true)
-		end
-	
-		if uiStroke then
-			uiStroke.Thickness = originalStrokeThickness
-			uiStroke.Color = originalStrokeColor
-		end
-	end
-	
-	-- 🖱️ Efekt: po kliknięciu przycisku
-	local function onMouseClick()
-		-- 🔊 Odtwórz dźwięk kliknięcia
-		clickSound:Play()
-	end
-	
-	-- Podłączenie zdarzeń
-	button.MouseEnter:Connect(onMouseEnter)
-	button.MouseLeave:Connect(onMouseLeave)
-	button.MouseButton1Click:Connect(onMouseClick)
-end
-coroutine.wrap(QEWB_fake_script)()
-local function HRXZFUR_fake_script() -- Guzik1_8.LocalScript 
-	local script = Instance.new('LocalScript', Guzik1_8)
-
-	--[[ 
-	    🔧 Uniwersalny LocalScript dla każdego guzika w "Scripts"
-	    Po kliknięciu otwiera ramkę "StartScript" i ustawia dane.
-	    Autor: LUA Programming GOD 😎
-	--]]
-	
-	local button = script.Parent
-	local player = game.Players.LocalPlayer
-	local gui = player:WaitForChild("PlayerGui"):WaitForChild("ScreenGui")
-	
-	-- Ramki
-	local mainFrame = gui:WaitForChild("Frame")
-	local scriptsFrame = mainFrame:WaitForChild("Scripts")
-	local startScriptFrame = mainFrame:WaitForChild("StartScript")
-	
-	-- Elementy w StartScript
-	local nameLabel = startScriptFrame:WaitForChild("Name")
-	local descLabel = startScriptFrame:WaitForChild("DescLabel")
-	local executeButton = startScriptFrame:WaitForChild("TextButton")
-	local backButton = startScriptFrame:WaitForChild("BackButton")
-	
-	-- ✏️ Automatyczne dane
-	local scriptName = button.Text
-	local scriptDescription = "Opis dla skryptu: " .. button.Text .. "\nTutaj możesz wpisać co robi ten skrypt."
-	
-	-- 🖱️ Kliknięcie guzika (otwiera menu skryptu)
-	button.MouseButton1Click:Connect(function()
-		scriptsFrame.Visible = false
-		startScriptFrame.Visible = true
-	
-		-- Ustaw nazwę i opis
-		nameLabel.Text = scriptName
-		descLabel.Text = scriptDescription
-	end)
-	
-	-- 🖱️ Kliknięcie Execute (uruchamia powiadomienie lub kod)
-	executeButton.MouseButton1Click:Connect(function()
-		if startScriptFrame.Visible and nameLabel.Text == scriptName then
-			loadstring(game:HttpGet("https://pastebin.com/raw/X7B0HPc2"))()
-		end
-	end)
-	
-	-- 🔙 Powrót z StartScript do Scripts
-	backButton.MouseButton1Click:Connect(function()
-		startScriptFrame.Visible = false
-		scriptsFrame.Visible = true
-	end)
-	
-end
-coroutine.wrap(HRXZFUR_fake_script)()
-local function INDXFE_fake_script() -- Guzik1_9.LocalScript 
-	local script = Instance.new('LocalScript', Guzik1_9)
-
-	local button = script.Parent
-	local expandPixels = 10
-	local tweenDuration = 0.2
-	
-	-- Pobieramy UIStroke (jeśli istnieje)
-	local uiStroke = button:FindFirstChildWhichIsA("UIStroke")
-	
-	-- Dane oryginalne
-	local originalSize = button.Size
-	local originalPosition = button.Position
-	local originalStrokeThickness = uiStroke and uiStroke.Thickness or 2.5
-	local hoverStrokeThickness = 4
-	local originalStrokeColor = uiStroke and uiStroke.Color or Color3.fromRGB(0, 0, 0)
-	local hoverStrokeColor = Color3.fromRGB(0, 0, 0)
-	
-	-- Przechowywanie oryginalnych rozmiarów dzieci
-	local originalChildSizes = {}
-	for _, child in ipairs(button:GetChildren()) do
-		if child:IsA("TextLabel") or child:IsA("ImageLabel") or child:IsA("TextButton") then
-			originalChildSizes[child] = child.Size
-		end
-	end
-	
-	-- 🔊 Tworzymy dźwięki
-	local hoverSound = Instance.new("Sound")
-	hoverSound.SoundId = "rbxassetid://75250247593685"
-	hoverSound.Volume = 1
-	hoverSound.Parent = button
-	
-	local clickSound = Instance.new("Sound")
-	clickSound.SoundId = "rbxassetid://535716488"
-	clickSound.Volume = 1
-	clickSound.Parent = button
-	
-	-- 🎨 Efekt: po najechaniu myszką
-	local function onMouseEnter()
-		local newSize = UDim2.new(
-			originalSize.X.Scale,
-			originalSize.X.Offset + expandPixels * 2,
-			originalSize.Y.Scale,
-			originalSize.Y.Offset + expandPixels * 2
-		)
-	
-		local newPosition = UDim2.new(
-			originalPosition.X.Scale,
-			originalPosition.X.Offset - expandPixels,
-			originalPosition.Y.Scale,
-			originalPosition.Y.Offset - expandPixels
-		)
-	
-		button:TweenSizeAndPosition(newSize, newPosition, "Out", "Quad", tweenDuration, true)
-	
-		for child, originalSize in pairs(originalChildSizes) do
-			local newChildSize = UDim2.new(
-				originalSize.X.Scale,
-				originalSize.X.Offset + expandPixels,
-				originalSize.Y.Scale,
-				originalSize.Y.Offset + expandPixels
-			)
-			child:TweenSize(newChildSize, "Out", "Quad", tweenDuration, true)
-		end
-	
-		if uiStroke then
-			uiStroke.Thickness = hoverStrokeThickness
-			uiStroke.Color = hoverStrokeColor
-		end
-	
-		-- 🔊 Odtwórz dźwięk hover
-		hoverSound:Play()
-	end
-	
-	-- 🎨 Efekt: po opuszczeniu myszką
-	local function onMouseLeave()
-		button:TweenSizeAndPosition(originalSize, originalPosition, "Out", "Quad", tweenDuration, true)
-	
-		for child, originalSize in pairs(originalChildSizes) do
-			child:TweenSize(originalSize, "Out", "Quad", tweenDuration, true)
-		end
-	
-		if uiStroke then
-			uiStroke.Thickness = originalStrokeThickness
-			uiStroke.Color = originalStrokeColor
-		end
-	end
-	
-	-- 🖱️ Efekt: po kliknięciu przycisku
-	local function onMouseClick()
-		-- 🔊 Odtwórz dźwięk kliknięcia
-		clickSound:Play()
-	end
-	
-	-- Podłączenie zdarzeń
-	button.MouseEnter:Connect(onMouseEnter)
-	button.MouseLeave:Connect(onMouseLeave)
-	button.MouseButton1Click:Connect(onMouseClick)
-	
-end
-coroutine.wrap(INDXFE_fake_script)()
-local function GXKSJKU_fake_script() -- Guzik1_9.LocalScript 
-	local script = Instance.new('LocalScript', Guzik1_9)
-
-	--[[ 
-	    🔧 Uniwersalny LocalScript dla każdego guzika w "Scripts"
-	    Po kliknięciu otwiera ramkę "StartScript" i ustawia dane.
-	    Autor: LUA Programming GOD 😎
-	--]]
-	
-	local button = script.Parent
-	local player = game.Players.LocalPlayer
-	local gui = player:WaitForChild("PlayerGui"):WaitForChild("ScreenGui")
-	
-	-- Ramki
-	local mainFrame = gui:WaitForChild("Frame")
-	local scriptsFrame = mainFrame:WaitForChild("Scripts")
-	local startScriptFrame = mainFrame:WaitForChild("StartScript")
-	
-	-- Elementy w StartScript
-	local nameLabel = startScriptFrame:WaitForChild("Name")
-	local descLabel = startScriptFrame:WaitForChild("DescLabel")
-	local executeButton = startScriptFrame:WaitForChild("TextButton")
-	local backButton = startScriptFrame:WaitForChild("BackButton")
-	
-	-- ✏️ Automatyczne dane
-	local scriptName = button.Text
-	local scriptDescription = "Opis dla skryptu: " .. button.Text .. "\nTutaj możesz wpisać co robi ten skrypt."
-	
-	-- 🖱️ Kliknięcie guzika (otwiera menu skryptu)
-	button.MouseButton1Click:Connect(function()
-		scriptsFrame.Visible = false
-		startScriptFrame.Visible = true
-	
-		-- Ustaw nazwę i opis
-		nameLabel.Text = scriptName
-		descLabel.Text = scriptDescription
-	end)
-	
-	-- 🖱️ Kliknięcie Execute (uruchamia powiadomienie lub kod)
-	executeButton.MouseButton1Click:Connect(function()
-		if startScriptFrame.Visible and nameLabel.Text == scriptName then
-			loadstring(game:HttpGet("https://raw.githubusercontent.com/majka323pl/universal-scripts/main/game_scripts/"..game.PlaceId))()
-		end
-	end)
-	
-	-- 🔙 Powrót z StartScript do Scripts
-	backButton.MouseButton1Click:Connect(function()
-		startScriptFrame.Visible = false
-		scriptsFrame.Visible = true
-	end)
-	
-end
-coroutine.wrap(GXKSJKU_fake_script)()
-local function JBIDHP_fake_script() -- BackButton.LocalScript 
-	local script = Instance.new('LocalScript', BackButton)
-
-	local TweenService = game:GetService("TweenService")
-	local button = script.Parent
-	local tweenDuration = 0.2
-	local expandPixels = 3 -- Efekt hover (do dostosowania)
-	
-	-- Opcjonalne: Ustawienia efektu hover/click
-	local originalSize = button.Size
-	local originalPosition = button.Position
-	
-	-- 🔊 Dźwięki (możesz usunąć, jeśli nie używasz)
-	local clickSound = Instance.new("Sound")
-	clickSound.SoundId = "rbxassetid://535716488"
-	clickSound.Volume = 1
-	clickSound.Parent = button
-	
-	-- 🎨 Efekt: po najechaniu myszką
-	local function onMouseEnter()
-		local newSize = UDim2.new(
-			originalSize.X.Scale, originalSize.X.Offset + expandPixels * 2,
-			originalSize.Y.Scale, originalSize.Y.Offset + expandPixels * 2
-		)
-		local newPosition = UDim2.new(
-			originalPosition.X.Scale, originalPosition.X.Offset - expandPixels,
-			originalPosition.Y.Scale, originalPosition.Y.Offset - expandPixels
-		)
-		button:TweenSizeAndPosition(newSize, newPosition, "Out", "Quad", tweenDuration, true)
-	end
-	
-	-- 🎨 Efekt: po opuszczeniu myszką
-	local function onMouseLeave()
-		button:TweenSizeAndPosition(originalSize, originalPosition, "Out", "Quad", tweenDuration, true)
-	end
-	
-	-- 🖱️ Główna funkcja: przełączanie na Home
-	local function onMouseClick()
-		clickSound:Play()
-	
-		-- Zakładana hierarchia: Przycisk -> AktualnyPanel (np. Scripts_2) -> Frame (Główny Kontener)
-		local Frame = script.Parent.Parent.Parent 
-	
-		local Home = Frame:FindFirstChild("Home")
-		local CurrentPanel = script.Parent.Parent -- Bieżący panel (np. Scripts_2 lub Executor)
-	
-		-- Przełączenie
-		if Home and CurrentPanel and CurrentPanel.Name ~= "Home" then
-			CurrentPanel.Visible = false -- Ukryj bieżący panel (z którego kliknięto)
-			Home.Visible = true          -- Pokaż panel główny Home
-		elseif CurrentPanel.Name == "Home" then
-			warn("Jesteś już na ekranie Home. Brak akcji.")
-		else
-			warn("Brak panelu Home w głównym Frame.")
-		end
-	end
-	
-	-- Podłączenie zdarzeń
-	button.MouseEnter:Connect(onMouseEnter)
-	button.MouseLeave:Connect(onMouseLeave)
-	button.MouseButton1Click:Connect(onMouseClick)
-end
-coroutine.wrap(JBIDHP_fake_script)()
-local function KKFAJ_fake_script() -- RSPYbutton.LocalScript 
-	local script = Instance.new('LocalScript', RSPYbutton)
-
-	local button = script.Parent
-	local expandPixels = 10
-	local tweenDuration = 0.2
-	
-	-- Pobieramy UIStroke (jeśli istnieje)
-	local uiStroke = button:FindFirstChildWhichIsA("UIStroke")
-	
-	-- Dane oryginalne
-	local originalSize = button.Size
-	local originalPosition = button.Position
-	local originalStrokeThickness = uiStroke and uiStroke.Thickness or 2.5
-	local hoverStrokeThickness = 4
-	local originalStrokeColor = uiStroke and uiStroke.Color or Color3.fromRGB(0, 0, 0)
-	local hoverStrokeColor = Color3.fromRGB(0, 0, 0)
-	
-	-- Przechowywanie oryginalnych rozmiarów dzieci
-	local originalChildSizes = {}
-	for _, child in ipairs(button:GetChildren()) do
-		if child:IsA("TextLabel") or child:IsA("ImageLabel") or child:IsA("TextButton") then
-			originalChildSizes[child] = child.Size
-		end
-	end
-	
-	-- 🔊 Tworzymy dźwięki
-	local hoverSound = Instance.new("Sound")
-	hoverSound.SoundId = "rbxassetid://75250247593685"
-	hoverSound.Volume = 1
-	hoverSound.Parent = button
-	
-	local clickSound = Instance.new("Sound")
-	clickSound.SoundId = "rbxassetid://535716488"
-	clickSound.Volume = 1
-	clickSound.Parent = button
-	
-	-- 🎨 Efekt: po najechaniu myszką
-	local function onMouseEnter()
-		local newSize = UDim2.new(
-			originalSize.X.Scale,
-			originalSize.X.Offset + expandPixels * 2,
-			originalSize.Y.Scale,
-			originalSize.Y.Offset + expandPixels * 2
-		)
-	
-		local newPosition = UDim2.new(
-			originalPosition.X.Scale,
-			originalPosition.X.Offset - expandPixels,
-			originalPosition.Y.Scale,
-			originalPosition.Y.Offset - expandPixels
-		)
-	
-		button:TweenSizeAndPosition(newSize, newPosition, "Out", "Quad", tweenDuration, true)
-	
-		for child, originalSize in pairs(originalChildSizes) do
-			local newChildSize = UDim2.new(
-				originalSize.X.Scale,
-				originalSize.X.Offset + expandPixels,
-				originalSize.Y.Scale,
-				originalSize.Y.Offset + expandPixels
-			)
-			child:TweenSize(newChildSize, "Out", "Quad", tweenDuration, true)
-		end
-	
-		if uiStroke then
-			uiStroke.Thickness = hoverStrokeThickness
-			uiStroke.Color = hoverStrokeColor
-		end
-	
-		-- 🔊 Odtwórz dźwięk hover
-		hoverSound:Play()
-	end
-	
-	-- 🎨 Efekt: po opuszczeniu myszką
-	local function onMouseLeave()
-		button:TweenSizeAndPosition(originalSize, originalPosition, "Out", "Quad", tweenDuration, true)
-	
-		for child, originalSize in pairs(originalChildSizes) do
-			child:TweenSize(originalSize, "Out", "Quad", tweenDuration, true)
-		end
-	
-		if uiStroke then
-			uiStroke.Thickness = originalStrokeThickness
-			uiStroke.Color = originalStrokeColor
-		end
-	end
-	
-	-- 🖱️ Efekt: po kliknięciu przycisku
-	local function onMouseClick()
-		-- 🔊 Odtwórz dźwięk kliknięcia
-		clickSound:Play()
-	end
-	
-	-- Podłączenie zdarzeń
-	button.MouseEnter:Connect(onMouseEnter)
-	button.MouseLeave:Connect(onMouseLeave)
-	button.MouseButton1Click:Connect(onMouseClick)
-	
-end
-coroutine.wrap(KKFAJ_fake_script)()
--- RSPYbutton.LocalScript is disabled.
-local function JAAGCI_fake_script() -- SpectateButton.LocalScript 
-	local script = Instance.new('LocalScript', SpectateButton)
-
-	--[[ 
-	    🔧 Uniwersalny LocalScript dla każdego guzika w "Scripts"
-	    Wersja: Kłódka znika przy Gamepassie, brak akcji przy braku posiadania.
-	--]]
-	
-	-- 🔹 Referencje GUI
-	local button = script.Parent
-	local player = game.Players.LocalPlayer
-	local gui = player:WaitForChild("PlayerGui"):WaitForChild("ScreenGui")
-	
-	-- Ramki
-	local mainFrame = gui:WaitForChild("Frame")
-	local scriptsFrame = mainFrame:WaitForChild("Scripts")
-	local startScriptFrame = mainFrame:WaitForChild("StartScript")
-	
-	-- Elementy w StartScript
-	local nameLabel = startScriptFrame:WaitForChild("Name")
-	local descLabel = startScriptFrame:WaitForChild("DescLabel")
-	local executeButton = startScriptFrame:WaitForChild("TextButton")
-	local backButton = startScriptFrame:WaitForChild("BackButton")
-	
-	-- 🔒 Ikony kłódek
-	local buttonLockedIcon = button:FindFirstChild("Locked") 
-	local executeLockedIcon = executeButton:FindFirstChild("Locked")
-	
-	-- ✏️ Automatyczne dane
-	local scriptName = button.Text
-	local scriptDescription = "Ten skrypt po odpaleniu coś robi\nnie wiadomo co"
-	
-	-- 🖱️ Otwieranie menu skryptu
-	button.MouseButton1Click:Connect(function()
-		scriptsFrame.Visible = false
-		startScriptFrame.Visible = true
-		nameLabel.Text = scriptName
-		descLabel.Text = scriptDescription
-	end)
-	
-	-- 🔙 Powrót
-	backButton.MouseButton1Click:Connect(function()
-		startScriptFrame.Visible = false
-		scriptsFrame.Visible = true
-	end)
-	
-	-- 🟡 Gamepass sprawdzanie
-	local MarketplaceService = game:GetService("MarketplaceService")
-	local GAMEPASS_ID = 1296972626 
-	
-	-- ✅ Sprawdzenie posiadania gamepassa
-	local success, ownsGamepass = pcall(function()
-		return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
-	end)
-	
-	if success and ownsGamepass then
-		-- ✅ GRACZ MA PREMIUM
-		print("✅ Premium aktywne - odblokowano funkcje")
-	
-		-- 🔓 Ukryj kłódki
-		if buttonLockedIcon then buttonLockedIcon.Visible = false end
-		if executeLockedIcon then executeLockedIcon.Visible = false end
-	
-		-- Włącz efekty przycisku
-		executeButton.Active = true
-		executeButton.AutoButtonColor = true
-	
-		-- 🟢 Podepnij funkcję odpalania (TYLKO dla posiadaczy)
-		executeButton.MouseButton1Click:Connect(function()
-			_G.Notify("Uruchamianie...", 1)
-			-- Tutaj Twój kod skryptu
-		end)
-	
-	else
-		-- 🚫 GRACZ NIE MA PREMIUM (lub błąd)
-		print("🚫 Brak Premium - przycisk zablokowany")
-	
-		-- 🔒 Pokaż kłódki
-		if buttonLockedIcon then buttonLockedIcon.Visible = true end
-		if executeLockedIcon then executeLockedIcon.Visible = true end
-	
-		-- Wyłącz przycisk (brak reakcji na kliknięcie)
-		executeButton.Active = false
-		executeButton.AutoButtonColor = false
-	end
-end
-coroutine.wrap(JAAGCI_fake_script)()
-local function RCTP_fake_script() -- Button1.LocalScript 
-	local script = Instance.new('LocalScript', Button1)
-
-	local button = script.Parent
-	local expandPixels = 10
-	local tweenDuration = 0.2
-	
-	-- Pobieramy UIStroke (jeśli istnieje)
-	local uiStroke = button:FindFirstChildWhichIsA("UIStroke")
-	
-	-- Dane oryginalne
-	local originalSize = button.Size
-	local originalPosition = button.Position
-	local originalStrokeThickness = uiStroke and uiStroke.Thickness or 2.5
-	local hoverStrokeThickness = 4
-	local originalStrokeColor = uiStroke and uiStroke.Color or Color3.fromRGB(0, 0, 0)
-	local hoverStrokeColor = Color3.fromRGB(0, 0, 0)
-	
-	-- Przechowywanie oryginalnych rozmiarów dzieci
-	local originalChildSizes = {}
-	for _, child in ipairs(button:GetChildren()) do
-		if child:IsA("TextLabel") or child:IsA("ImageLabel") or child:IsA("TextButton") then
-			originalChildSizes[child] = child.Size
-		end
-	end
-	
-	-- 🔊 Tworzymy dźwięki
-	local hoverSound = Instance.new("Sound")
-	hoverSound.SoundId = "rbxassetid://75250247593685"
-	hoverSound.Volume = 1
-	hoverSound.Parent = button
-	
-	local clickSound = Instance.new("Sound")
-	clickSound.SoundId = "rbxassetid://535716488"
-	clickSound.Volume = 1
-	clickSound.Parent = button
-	
-	-- 🎨 Efekt: po najechaniu myszką
-	local function onMouseEnter()
-		local newSize = UDim2.new(
-			originalSize.X.Scale,
-			originalSize.X.Offset + expandPixels * 2,
-			originalSize.Y.Scale,
-			originalSize.Y.Offset + expandPixels * 2
-		)
-	
-		local newPosition = UDim2.new(
-			originalPosition.X.Scale,
-			originalPosition.X.Offset - expandPixels,
-			originalPosition.Y.Scale,
-			originalPosition.Y.Offset - expandPixels
-		)
-	
-		button:TweenSizeAndPosition(newSize, newPosition, "Out", "Quad", tweenDuration, true)
-	
-		for child, originalSize in pairs(originalChildSizes) do
-			local newChildSize = UDim2.new(
-				originalSize.X.Scale,
-				originalSize.X.Offset + expandPixels,
-				originalSize.Y.Scale,
-				originalSize.Y.Offset + expandPixels
-			)
-			child:TweenSize(newChildSize, "Out", "Quad", tweenDuration, true)
-		end
-	
-		if uiStroke then
-			uiStroke.Thickness = hoverStrokeThickness
-			uiStroke.Color = hoverStrokeColor
-		end
-	
-		-- 🔊 Odtwórz dźwięk hover
-		hoverSound:Play()
-	end
-	
-	-- 🎨 Efekt: po opuszczeniu myszką
-	local function onMouseLeave()
-		button:TweenSizeAndPosition(originalSize, originalPosition, "Out", "Quad", tweenDuration, true)
-	
-		for child, originalSize in pairs(originalChildSizes) do
-			child:TweenSize(originalSize, "Out", "Quad", tweenDuration, true)
-		end
-	
-		if uiStroke then
-			uiStroke.Thickness = originalStrokeThickness
-			uiStroke.Color = originalStrokeColor
-		end
-	end
-	
-	-- 🖱️ Efekt: po kliknięciu przycisku
-	local function onMouseClick()
-		-- 🔊 Odtwórz dźwięk kliknięcia
-		clickSound:Play()
-	end
-	
-	-- Podłączenie zdarzeń
-	button.MouseEnter:Connect(onMouseEnter)
-	button.MouseLeave:Connect(onMouseLeave)
-	button.MouseButton1Click:Connect(onMouseClick)
-	
-end
-coroutine.wrap(RCTP_fake_script)()
-local function QGVV_fake_script() -- Button1.LocalScript 
-	local script = Instance.new('LocalScript', Button1)
-
-	--[[ 
-	    🔧 Uniwersalny LocalScript dla każdego guzika w "Scripts"
-	    Po kliknięciu otwiera ramkę "StartScript" i ustawia dane.
-	    Autor: LUA Programming GOD 😎
-	--]]
-	
-	-- 🔹 Referencje GUI
-	local button = script.Parent
-	local player = game.Players.LocalPlayer
-	local gui = player:WaitForChild("PlayerGui"):WaitForChild("ScreenGui")
-	
-	-- Ramki
-	local mainFrame = gui:WaitForChild("Frame")
-	local scriptsFrame = mainFrame:WaitForChild("Scripts")
-	local startScriptFrame = mainFrame:WaitForChild("StartScript")
-	
-	-- Elementy w StartScript
-	local nameLabel = startScriptFrame:WaitForChild("Name")
-	local descLabel = startScriptFrame:WaitForChild("DescLabel")
-	local executeButton = startScriptFrame:WaitForChild("TextButton")
-	local backButton = startScriptFrame:WaitForChild("BackButton")
-	
-	-- 🔒 Ikony kłódek
-	local buttonLockedIcon = button:FindFirstChild("Locked") -- Kłódka na przycisku w menu Scripts
-	local executeLockedIcon = executeButton:FindFirstChild("Locked") -- Kłódka w StartScript
-	
-	-- ✏️ Automatyczne dane
-	local scriptName = button.Text
-	local scriptDescription = [[
-	Ten skrypt po odpaleniu coś robi
-	nie wiadomo co
-	]]
-	
-	-- 🖱️ Kliknięcie guzika (otwiera menu skryptu)
-	button.MouseButton1Click:Connect(function()
-		scriptsFrame.Visible = false
-		startScriptFrame.Visible = true
-	
-		-- Ustaw nazwę i opis
-		nameLabel.Text = scriptName
-		descLabel.Text = scriptDescription
-	end)
-	
-	-- 🔙 Powrót z StartScript do Scripts
-	backButton.MouseButton1Click:Connect(function()
-		startScriptFrame.Visible = false
-		scriptsFrame.Visible = true
-	end)
-	
-	-- 🟡 Gamepass sprawdzanie
-	local MarketplaceService = game:GetService("MarketplaceService")
-	local GAMEPASS_ID = 1296972626 -- 🟡 Twój Gamepass ID
-	
-	-- 🔹 Ustawienie startowe
-	executeButton.Active = false
-	executeButton.AutoButtonColor = false
-	if executeLockedIcon then executeLockedIcon.Visible = true end
-	if buttonLockedIcon then buttonLockedIcon.Visible = true end
-	
-	print("🔹 Sprawdzanie gamepassa Premium dla gracza:", player.Name)
-	
-	-- ✅ Sprawdzenie posiadania gamepassa
-	local success, ownsGamepass = pcall(function()
-		return MarketplaceService:UserOwnsGamePassAsync(player.UserId, GAMEPASS_ID)
-	end)
-	
-	if not success then
-		warn("❌ Błąd przy sprawdzaniu gamepassa:", ownsGamepass)
-		return
-	end
-	
-	if ownsGamepass then
-		-- ✅ Gracz ma Premium
-		executeButton.Active = true
-		executeButton.AutoButtonColor = true
-	
-		-- 🔓 Ukryj kłódki
-		if executeLockedIcon then executeLockedIcon.Visible = false end
-		if buttonLockedIcon then buttonLockedIcon.Visible = false end
-	
-		-- 🟢 Co ma się stać po kliknięciu?
-		executeButton.MouseButton1Click:Connect(function()
-			_G.Notify("lol", 1)
-		end)
-	
-	else
-		-- 🚫 Gracz nie ma Premium
-		executeButton.Active = false
-		executeButton.AutoButtonColor = false
-	
-		-- 🔒 Pokaż kłódki
-		if executeLockedIcon then executeLockedIcon.Visible = true end
-		if buttonLockedIcon then buttonLockedIcon.Visible = true end
-	
-		executeButton.MouseButton1Click:Connect(function()
-			_G.Notify("Nie masz Premium! Wejdź w 'Home' i kup Premium, aby uruchomić ten skrypt.")
-		end)
-	end
-	
-end
-coroutine.wrap(QGVV_fake_script)()
-local function POAUYLA_fake_script() -- Nickdispaly.LocalScript 
+coroutine.wrap(OBAE_fake_script)()
+local function NRQGUMY_fake_script() -- Nickdispaly.LocalScript 
 	local script = Instance.new('LocalScript', Nickdispaly)
 
 	local Players = game:GetService("Players")
@@ -2877,9 +1376,9 @@ local function POAUYLA_fake_script() -- Nickdispaly.LocalScript
 	
 	label.Text = "Witaj " .. display_name .. "(@" .. username .. ")"
 end
-coroutine.wrap(POAUYLA_fake_script)()
-local function UDZYO_fake_script() -- ImageLabel_4.LocalScript 
-	local script = Instance.new('LocalScript', ImageLabel_4)
+coroutine.wrap(NRQGUMY_fake_script)()
+local function WFQXCB_fake_script() -- ImageLabel.LocalScript 
+	local script = Instance.new('LocalScript', ImageLabel)
 
 	local Players = game:GetService("Players")
 	
@@ -2905,21 +1404,10 @@ local function UDZYO_fake_script() -- ImageLabel_4.LocalScript
 	
 	-- not needed but if imagelabel is too big image will be pixelated very badly: imageLabel.Size = UDim2.new(0, 420, 0, 420)
 end
-coroutine.wrap(UDZYO_fake_script)()
+coroutine.wrap(WFQXCB_fake_script)()
 -- BuyPremiumTab.LocalScript is disabled.
-local function MQYUXKX_fake_script() -- BuyPremiumTab.LocalScript 
-	local script = Instance.new('LocalScript', BuyPremiumTab)
-
-	script.Parent.MouseButton1Click:Connect(function()
-		-- Inny skrypt, np. obsługujący przycisk w menu sklepu
-		_G.AnimateAndFunc(script.Parent, function()
-			print("Przycisk w innym skrypcie zadziałał!")
-			-- Twój kod tutaj
-		end)
-	end)
-end
-coroutine.wrap(MQYUXKX_fake_script)()
-local function FLTC_fake_script() -- ExecutorTab.LocalScript 
+-- BuyPremiumTab.LocalScript is disabled.
+local function PQUQX_fake_script() -- ExecutorTab.LocalScript 
 	local script = Instance.new('LocalScript', ExecutorTab)
 
 	local TweenService = game:GetService("TweenService")
@@ -3016,9 +1504,9 @@ local function FLTC_fake_script() -- ExecutorTab.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(FLTC_fake_script)()
+coroutine.wrap(PQUQX_fake_script)()
 -- ScriptsButton.LocalScript is disabled.
-local function FVBETYN_fake_script() -- ScriptsButton.LocalScript 
+local function VKFPI_fake_script() -- ScriptsButton.LocalScript 
 	local script = Instance.new('LocalScript', ScriptsButton)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -3042,257 +1530,10 @@ local function FVBETYN_fake_script() -- ScriptsButton.LocalScript
 		end)
 	end)
 end
-coroutine.wrap(FVBETYN_fake_script)()
-local function RKKXD_fake_script() -- UpdateLogs.LocalScript 
-	local script = Instance.new('LocalScript', UpdateLogs)
-
-	local TweenService = game:GetService("TweenService")
-	local button = script.Parent
-	local expandPixels = 10
-	local tweenDuration = 0.2
-	
-	-- Pobieramy UIStroke (jeśli istnieje)
-	local uiStroke = button:FindFirstChildWhichIsA("UIStroke")
-	
-	-- Pobieramy element Tip (tooltip)
-	local tip = button:FindFirstChild("Tip")
-	
-	-- Dane oryginalne
-	local originalSize = button.Size
-	local originalPosition = button.Position
-	local originalStrokeThickness = uiStroke and uiStroke.Thickness or 2.5
-	local hoverStrokeThickness = 4
-	local originalStrokeColor = uiStroke and uiStroke.Color or Color3.fromRGB(0, 0, 0)
-	local hoverStrokeColor = Color3.fromRGB(0, 0, 0)
-	
-	-- Przechowywanie oryginalnych rozmiarów dzieci (dla efektu rozszerzenia)
-	local originalChildSizes = {}
-	for _, child in ipairs(button:GetChildren()) do
-		if child:IsA("TextLabel") or child:IsA("ImageLabel") or child:IsA("TextButton") then
-			originalChildSizes[child] = child.Size
-		end
-	end
-	
-	-- 🔊 Dźwięki (jeśli są)
-	local hoverSound = Instance.new("Sound")
-	hoverSound.SoundId = "rbxassetid://75250247593685" -- Przykładowy ID
-	hoverSound.Volume = 1
-	hoverSound.Parent = button
-	
-	local clickSound = Instance.new("Sound")
-	clickSound.SoundId = "rbxassetid://535716488" -- Przykładowy ID
-	clickSound.Volume = 1
-	clickSound.Parent = button
-	
-	-- 🎨 Efekt: po najechaniu myszką
-	local function onMouseEnter()
-		local newSize = UDim2.new(
-			originalSize.X.Scale, originalSize.X.Offset + expandPixels * 2,
-			originalSize.Y.Scale, originalSize.Y.Offset + expandPixels * 2
-		)
-		local newPosition = UDim2.new(
-			originalPosition.X.Scale, originalPosition.X.Offset - expandPixels,
-			originalPosition.Y.Scale, originalPosition.Y.Offset - expandPixels
-		)
-		button:TweenSizeAndPosition(newSize, newPosition, "Out", "Quad", tweenDuration, true)
-	
-		if uiStroke then
-			uiStroke.Thickness = hoverStrokeThickness
-			uiStroke.Color = hoverStrokeColor
-		end
-	
-		hoverSound:Play()
-	end
-	
-	-- 🎨 Efekt: po opuszczeniu myszką
-	local function onMouseLeave()
-		button:TweenSizeAndPosition(originalSize, originalPosition, "Out", "Quad", tweenDuration, true)
-	
-		if uiStroke then
-			uiStroke.Thickness = originalStrokeThickness
-			uiStroke.Color = originalStrokeColor
-		end
-	end
-	
-	-- 🖱️ Główna funkcja: po kliknięciu
-	local function onMouseClick()
-		clickSound:Play()
-	
-		-- Zakładamy hierarchię: SkryptyTab -> Home -> Frame (główny ScreenGui element)
-		local Frame = script.Parent.Parent.Parent.Parent.Frame
-	
-		local Home = Frame:FindFirstChild("Home")
-		local Executor = Frame:FindFirstChild("Executor")
-		local ScriptsPanel = Frame:FindFirstChild("Update Logs") -- Właściwy panel Skryptów
-	
-		-- Ustawienie widoczności paneli
-		if Home and Executor and ScriptsPanel then
-			Home.Visible = false          -- Ukryj ekran główny
-			Executor.Visible = false      -- Ukryj Executor
-			ScriptsPanel.Visible = true   -- Pokaż panel Skrypty
-		else
-			warn("Brak jednego z wymaganych paneli (Home, Executor, Scripts_2) w Frame.")
-		end
-	end
-	
-	-- Podłączenie zdarzeń
-	button.MouseEnter:Connect(onMouseEnter)
-	button.MouseLeave:Connect(onMouseLeave)
-	button.MouseButton1Click:Connect(onMouseClick)
-end
-coroutine.wrap(RKKXD_fake_script)()
-local function FLKZ_fake_script() -- TimerButton.LocalScript 
-	local script = Instance.new('LocalScript', TimerButton)
-
-	local TweenService = game:GetService("TweenService")
-	
-	local button = script.Parent
-	local expandPixels = 10
-	local tweenDuration = 0.2
-	
-	-- Pobieramy UIStroke (jeśli istnieje)
-	local uiStroke = button:FindFirstChildWhichIsA("UIStroke")
-	
-	-- Pobieramy element Tip (tooltip)
-	local tip = button:FindFirstChild("Tip")
-	
-	-- Dane oryginalne
-	local originalSize = button.Size
-	local originalPosition = button.Position
-	local originalStrokeThickness = uiStroke and uiStroke.Thickness or 2.5
-	local hoverStrokeThickness = 4
-	local originalStrokeColor = uiStroke and uiStroke.Color or Color3.fromRGB(0, 0, 0)
-	local hoverStrokeColor = Color3.fromRGB(0, 0, 0)
-	
-	-- Przechowywanie oryginalnych rozmiarów dzieci
-	local originalChildSizes = {}
-	for _, child in ipairs(button:GetChildren()) do
-		if child:IsA("TextLabel") or child:IsA("ImageLabel") or child:IsA("TextButton") then
-			originalChildSizes[child] = child.Size
-		end
-	end
-	
-	-- 🔊 Tworzymy dźwięki
-	local hoverSound = Instance.new("Sound")
-	hoverSound.SoundId = "rbxassetid://75250247593685"
-	hoverSound.Volume = 1
-	hoverSound.Parent = button
-	
-	local clickSound = Instance.new("Sound")
-	clickSound.SoundId = "rbxassetid://535716488"
-	clickSound.Volume = 1
-	clickSound.Parent = button
-	
-	-- 🌫️ Ustawiamy początkowy stan Tip
-	if tip then
-		if tip:IsA("TextLabel") then
-			tip.TextTransparency = 1
-		elseif tip:IsA("Frame") or tip:IsA("ImageLabel") then
-			tip.BackgroundTransparency = 1
-		end
-		tip.Visible = false
-	end
-	
-	-- 🎨 Efekt: po najechaniu myszką
-	local function onMouseEnter()
-		local newSize = UDim2.new(
-			originalSize.X.Scale,
-			originalSize.X.Offset + expandPixels * 2,
-			originalSize.Y.Scale,
-			originalSize.Y.Offset + expandPixels * 2
-		)
-	
-		local newPosition = UDim2.new(
-			originalPosition.X.Scale,
-			originalPosition.X.Offset - expandPixels,
-			originalPosition.Y.Scale,
-			originalPosition.Y.Offset - expandPixels
-		)
-	
-		button:TweenSizeAndPosition(newSize, newPosition, "Out", "Quad", tweenDuration, true)
-	
-		for child, originalSize in pairs(originalChildSizes) do
-			local newChildSize = UDim2.new(
-				originalSize.X.Scale,
-				originalSize.X.Offset + expandPixels,
-				originalSize.Y.Scale,
-				originalSize.Y.Offset + expandPixels
-			)
-			child:TweenSize(newChildSize, "Out", "Quad", tweenDuration, true)
-		end
-	
-		if uiStroke then
-			uiStroke.Thickness = hoverStrokeThickness
-			uiStroke.Color = hoverStrokeColor
-		end
-	
-		-- 🔊 Dźwięk hover
-		hoverSound:Play()
-	
-		-- 🌫️ Fade In dla Tip
-		if tip then
-			tip.Visible = true
-			local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-			local goal = {}
-	
-			if tip:IsA("TextLabel") then
-				goal.TextTransparency = 0
-			elseif tip:IsA("Frame") or tip:IsA("ImageLabel") then
-				goal.BackgroundTransparency = 0
-			end
-	
-			local fadeIn = TweenService:Create(tip, tweenInfo, goal)
-			fadeIn:Play()
-		end
-	end
-	
-	-- 🎨 Efekt: po opuszczeniu myszką
-	local function onMouseLeave()
-		button:TweenSizeAndPosition(originalSize, originalPosition, "Out", "Quad", tweenDuration, true)
-	
-		for child, originalSize in pairs(originalChildSizes) do
-			child:TweenSize(originalSize, "Out", "Quad", tweenDuration, true)
-		end
-	
-		if uiStroke then
-			uiStroke.Thickness = originalStrokeThickness
-			uiStroke.Color = originalStrokeColor
-		end
-	
-		-- 🌫️ Fade Out dla Tip, potem ukrycie
-		if tip then
-			local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-			local goal = {}
-	
-			if tip:IsA("TextLabel") then
-				goal.TextTransparency = 1
-			elseif tip:IsA("Frame") or tip:IsA("ImageLabel") then
-				goal.BackgroundTransparency = 1
-			end
-	
-			local fadeOut = TweenService:Create(tip, tweenInfo, goal)
-			fadeOut:Play()
-	
-			-- Po zakończeniu tweena — ukryj Tip
-			fadeOut.Completed:Connect(function()
-				tip.Visible = false
-			end)
-		end
-	end
-	
-	-- 🖱️ Efekt: po kliknięciu przycisku
-	local function onMouseClick()
-		clickSound:Play()
-		
-	end
-	
-	-- Podłączenie zdarzeń
-	button.MouseEnter:Connect(onMouseEnter)
-	button.MouseLeave:Connect(onMouseLeave)
-	button.MouseButton1Click:Connect(onMouseClick)
-end
-coroutine.wrap(FLKZ_fake_script)()
-local function DRXQHPA_fake_script() -- RejoinButton.LocalScript 
+coroutine.wrap(VKFPI_fake_script)()
+-- UpdateLogs.LocalScript is disabled.
+-- TimerButton.LocalScript is disabled.
+local function XNMN_fake_script() -- RejoinButton.LocalScript 
 	local script = Instance.new('LocalScript', RejoinButton)
 
 	local TweenService = game:GetService("TweenService")
@@ -3449,172 +1690,50 @@ local function DRXQHPA_fake_script() -- RejoinButton.LocalScript
 		teleportService:Teleport(gamePlaceId, player)
 	end
 end
-coroutine.wrap(DRXQHPA_fake_script)()
-local function SPNGDYY_fake_script() -- BackButton_2.LocalScript 
-	local script = Instance.new('LocalScript', BackButton_2)
+coroutine.wrap(XNMN_fake_script)()
+local function MYEFA_fake_script() -- RejoinButton_2.LocalScript 
+	local script = Instance.new('LocalScript', RejoinButton_2)
 
-	local TweenService = game:GetService("TweenService")
-	local button = script.Parent
-	local tweenDuration = 0.2
-	local expandPixels = 3 -- Efekt hover (do dostosowania)
+	script.Parent.MouseButton1Click:Connect(function()
+		-- Inny skrypt, np. obsługujący przycisk w menu sklepu
+		_G.AnimateAndFunc(script.Parent, function()
+			local button = script.Parent
+			local MainFrame = button.Parent.Parent -- Ścieżka do głównej ramki (dostosuj jeśli trzeba)
+			local Searcher = MainFrame:FindFirstChild("Searcher")
 	
-	-- Opcjonalne: Ustawienia efektu hover/click
-	local originalSize = button.Size
-	local originalPosition = button.Position
+			-- Funkcja przełączania zakładek
+			local function openTab()
+				-- 1. Ukrywamy wszystkie inne zakładki w ramce głównej
+				for _, child in pairs(MainFrame:GetChildren()) do
+					if child:IsA("Frame") and child.Name ~= "TopBar" then -- TopBar zostaje widoczny
+						child.Visible = false
+					end
+				end
 	
-	-- 🔊 Dźwięki (możesz usunąć, jeśli nie używasz)
-	local clickSound = Instance.new("Sound")
-	clickSound.SoundId = "rbxassetid://535716488"
-	clickSound.Volume = 1
-	clickSound.Parent = button
+				-- 2. Pokazujemy tylko naszą wyszukiwarkę
+				if Searcher then
+					Searcher.Visible = true
+				else
+					warn("Nie znaleziono ramki Searcher w MainFrame!")
+				end
+			end
 	
-	-- 🎨 Efekt: po najechaniu myszką
-	local function onMouseEnter()
-		local newSize = UDim2.new(
-			originalSize.X.Scale, originalSize.X.Offset + expandPixels * 2,
-			originalSize.Y.Scale, originalSize.Y.Offset + expandPixels * 2
-		)
-		local newPosition = UDim2.new(
-			originalPosition.X.Scale, originalPosition.X.Offset - expandPixels,
-			originalPosition.Y.Scale, originalPosition.Y.Offset - expandPixels
-		)
-		button:TweenSizeAndPosition(newSize, newPosition, "Out", "Quad", tweenDuration, true)
-	end
+			-- Efekt najechania myszką (opcjonalny, pasujący do Twojego stylu)
+			button.MouseEnter:Connect(function()
+				button.BackgroundColor3 = Color3.fromRGB(255, 190, 50) -- Jaśniejszy pomarańcz
+			end)
 	
-	-- 🎨 Efekt: po opuszczeniu myszką
-	local function onMouseLeave()
-		button:TweenSizeAndPosition(originalSize, originalPosition, "Out", "Quad", tweenDuration, true)
-	end
+			button.MouseLeave:Connect(function()
+				button.BackgroundColor3 = Color3.fromRGB(255, 170, 0) -- Powrót do oryginału
+			end)
 	
-	-- 🖱️ Główna funkcja: przełączanie na Home
-	local function onMouseClick()
-		clickSound:Play()
-	
-		-- Zakładana hierarchia: Przycisk -> AktualnyPanel (np. Scripts_2) -> Frame (Główny Kontener)
-		local Frame = script.Parent.Parent.Parent 
-	
-		local Home = Frame:FindFirstChild("Scripts")
-		local CurrentPanel = script.Parent.Parent -- Bieżący panel (np. Scripts_2 lub Executor)
-	
-		-- Przełączenie
-		if Home and CurrentPanel and CurrentPanel.Name ~= "Home" then
-			CurrentPanel.Visible = false -- Ukryj bieżący panel (z którego kliknięto)
-			Home.Visible = true          -- Pokaż panel główny Home
-		elseif CurrentPanel.Name == "Home" then
-			warn("Jesteś już na ekranie Home. Brak akcji.")
-		else
-			warn("Brak panelu Home w głównym Frame.")
-		end
-	end
-	
-	-- Podłączenie zdarzeń
-	button.MouseEnter:Connect(onMouseEnter)
-	button.MouseLeave:Connect(onMouseLeave)
-	button.MouseButton1Click:Connect(onMouseClick)
+			-- Kliknięcie otwiera zakładkę
+			button.MouseButton1Click:Connect(openTab)
+		end)
+	end)
 end
-coroutine.wrap(SPNGDYY_fake_script)()
-local function RPFC_fake_script() -- TextButton.LocalScript 
-	local script = Instance.new('LocalScript', TextButton)
-
-	local button = script.Parent
-	local expandPixels = 10
-	local tweenDuration = 0.2
-	
-	-- Pobieramy UIStroke (jeśli istnieje)
-	local uiStroke = button:FindFirstChildWhichIsA("UIStroke")
-	
-	-- Dane oryginalne
-	local originalSize = button.Size
-	local originalPosition = button.Position
-	local originalStrokeThickness = uiStroke and uiStroke.Thickness or 2.5
-	local hoverStrokeThickness = 4
-	local originalStrokeColor = uiStroke and uiStroke.Color or Color3.fromRGB(0, 0, 0)
-	local hoverStrokeColor = Color3.fromRGB(0, 0, 0)
-	
-	-- Przechowywanie oryginalnych rozmiarów dzieci
-	local originalChildSizes = {}
-	for _, child in ipairs(button:GetChildren()) do
-		if child:IsA("TextLabel") or child:IsA("ImageLabel") or child:IsA("TextButton") then
-			originalChildSizes[child] = child.Size
-		end
-	end
-	
-	-- 🔊 Tworzymy dźwięki
-	local hoverSound = Instance.new("Sound")
-	hoverSound.SoundId = "rbxassetid://75250247593685"
-	hoverSound.Volume = 1
-	hoverSound.Parent = button
-	
-	local clickSound = Instance.new("Sound")
-	clickSound.SoundId = "rbxassetid://535716488"
-	clickSound.Volume = 1
-	clickSound.Parent = button
-	
-	-- 🎨 Efekt: po najechaniu myszką
-	local function onMouseEnter()
-		local newSize = UDim2.new(
-			originalSize.X.Scale,
-			originalSize.X.Offset + expandPixels * 2,
-			originalSize.Y.Scale,
-			originalSize.Y.Offset + expandPixels * 2
-		)
-	
-		local newPosition = UDim2.new(
-			originalPosition.X.Scale,
-			originalPosition.X.Offset - expandPixels,
-			originalPosition.Y.Scale,
-			originalPosition.Y.Offset - expandPixels
-		)
-	
-		button:TweenSizeAndPosition(newSize, newPosition, "Out", "Quad", tweenDuration, true)
-	
-		for child, originalSize in pairs(originalChildSizes) do
-			local newChildSize = UDim2.new(
-				originalSize.X.Scale,
-				originalSize.X.Offset + expandPixels,
-				originalSize.Y.Scale,
-				originalSize.Y.Offset + expandPixels
-			)
-			child:TweenSize(newChildSize, "Out", "Quad", tweenDuration, true)
-		end
-	
-		if uiStroke then
-			uiStroke.Thickness = hoverStrokeThickness
-			uiStroke.Color = hoverStrokeColor
-		end
-	
-		-- 🔊 Odtwórz dźwięk hover
-		hoverSound:Play()
-	end
-	
-	-- 🎨 Efekt: po opuszczeniu myszką
-	local function onMouseLeave()
-		button:TweenSizeAndPosition(originalSize, originalPosition, "Out", "Quad", tweenDuration, true)
-	
-		for child, originalSize in pairs(originalChildSizes) do
-			child:TweenSize(originalSize, "Out", "Quad", tweenDuration, true)
-		end
-	
-		if uiStroke then
-			uiStroke.Thickness = originalStrokeThickness
-			uiStroke.Color = originalStrokeColor
-		end
-	end
-	
-	-- 🖱️ Efekt: po kliknięciu przycisku
-	local function onMouseClick()
-		-- 🔊 Odtwórz dźwięk kliknięcia
-		clickSound:Play()
-	end
-	
-	-- Podłączenie zdarzeń
-	button.MouseEnter:Connect(onMouseEnter)
-	button.MouseLeave:Connect(onMouseLeave)
-	button.MouseButton1Click:Connect(onMouseClick)
-	
-end
-coroutine.wrap(RPFC_fake_script)()
-local function BYPE_fake_script() -- Executor.LocalScript 
+coroutine.wrap(MYEFA_fake_script)()
+local function LCNEIA_fake_script() -- Executor.LocalScript 
 	local script = Instance.new('LocalScript', Executor)
 
 	-- Executor - poprawiony LocalScript
@@ -4188,8 +2307,8 @@ local function BYPE_fake_script() -- Executor.LocalScript
 	end)
 	
 end
-coroutine.wrap(BYPE_fake_script)()
-local function FFAEJE_fake_script() -- CopyToClipboard.LocalScript 
+coroutine.wrap(LCNEIA_fake_script)()
+local function YKMCXY_fake_script() -- CopyToClipboard.LocalScript 
 	local script = Instance.new('LocalScript', CopyToClipboard)
 
 	local TweenService = game:GetService("TweenService")
@@ -4339,8 +2458,8 @@ local function FFAEJE_fake_script() -- CopyToClipboard.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(FFAEJE_fake_script)()
-local function GZHM_fake_script() -- Execute.LocalScript 
+coroutine.wrap(YKMCXY_fake_script)()
+local function RJDRE_fake_script() -- Execute.LocalScript 
 	local script = Instance.new('LocalScript', Execute)
 
 	local TweenService = game:GetService("TweenService")
@@ -4545,8 +2664,8 @@ local function GZHM_fake_script() -- Execute.LocalScript
 		end
 	end
 end
-coroutine.wrap(GZHM_fake_script)()
-local function AZSCDLL_fake_script() -- Rename.LocalScript 
+coroutine.wrap(RJDRE_fake_script)()
+local function SAWKIZY_fake_script() -- Rename.LocalScript 
 	local script = Instance.new('LocalScript', Rename)
 
 	local TweenService = game:GetService("TweenService")
@@ -4696,8 +2815,8 @@ local function AZSCDLL_fake_script() -- Rename.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(AZSCDLL_fake_script)()
-local function CVSUUD_fake_script() -- Delete.LocalScript 
+coroutine.wrap(SAWKIZY_fake_script)()
+local function FXYAA_fake_script() -- Delete.LocalScript 
 	local script = Instance.new('LocalScript', Delete)
 
 	local TweenService = game:GetService("TweenService")
@@ -4847,8 +2966,8 @@ local function CVSUUD_fake_script() -- Delete.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(CVSUUD_fake_script)()
-local function LYTWS_fake_script() -- ClearExecTextBox.LocalScript 
+coroutine.wrap(FXYAA_fake_script)()
+local function TQPSNPB_fake_script() -- ClearExecTextBox.LocalScript 
 	local script = Instance.new('LocalScript', ClearExecTextBox)
 
 	local TweenService = game:GetService("TweenService")
@@ -4998,8 +3117,8 @@ local function LYTWS_fake_script() -- ClearExecTextBox.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(LYTWS_fake_script)()
-local function SDAYM_fake_script() -- SaveFile.LocalScript 
+coroutine.wrap(TQPSNPB_fake_script)()
+local function CJZHAC_fake_script() -- SaveFile.LocalScript 
 	local script = Instance.new('LocalScript', SaveFile)
 
 	local TweenService = game:GetService("TweenService")
@@ -5149,9 +3268,9 @@ local function SDAYM_fake_script() -- SaveFile.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(SDAYM_fake_script)()
-local function YIOJ_fake_script() -- Guzik1_10.LocalScript 
-	local script = Instance.new('LocalScript', Guzik1_10)
+coroutine.wrap(CJZHAC_fake_script)()
+local function UBTJKHV_fake_script() -- Guzik1_3.LocalScript 
+	local script = Instance.new('LocalScript', Guzik1_3)
 
 	local button = script.Parent
 	local expandPixels = 10
@@ -5406,9 +3525,9 @@ local function YIOJ_fake_script() -- Guzik1_10.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(YIOJ_fake_script)()
-local function KFQYQRY_fake_script() -- BackButton_3.LocalScript 
-	local script = Instance.new('LocalScript', BackButton_3)
+coroutine.wrap(UBTJKHV_fake_script)()
+local function ENPY_fake_script() -- BackButton.LocalScript 
+	local script = Instance.new('LocalScript', BackButton)
 
 	local TweenService = game:GetService("TweenService")
 	local button = script.Parent
@@ -5469,145 +3588,523 @@ local function KFQYQRY_fake_script() -- BackButton_3.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(KFQYQRY_fake_script)()
--- ProjectUniversal.LocalScript is disabled.
--- ProjectUniversal.Script is disabled.
-local function WQWHUOC_fake_script() -- ProjectUniversal.LocalScript 
-	local script = Instance.new('LocalScript', ProjectUniversal)
+coroutine.wrap(ENPY_fake_script)()
+local function IBXPTDO_fake_script() -- Guzik1_4.LocalScript 
+	local script = Instance.new('LocalScript', Guzik1_4)
 
 	local TweenService = game:GetService("TweenService")
+	local button = script.Parent
+	local tweenDuration = 0.2
+	local expandPixels = 3 -- Efekt hover (do dostosowania)
 	
-	-- DEFINICJA GLOBALNEJ FUNKCJI
-	function _G.AnimateAndFunc(button, callback)
-		if not button then return end
+	-- Opcjonalne: Ustawienia efektu hover/click
+	local originalSize = button.Size
+	local originalPosition = button.Position
 	
-		local expandPixels = 10
-		local tweenDuration = 0.2
+	-- 🔊 Dźwięki (możesz usunąć, jeśli nie używasz)
+	local clickSound = Instance.new("Sound")
+	clickSound.SoundId = "rbxassetid://535716488"
+	clickSound.Volume = 1
+	clickSound.Parent = button
 	
-		-- Inicjalizacja komponentów
-		local uiStroke = button:FindFirstChildWhichIsA("UIStroke")
-		local tip = button:FindFirstChild("Tip")
-	
-		-- Zapamiętywanie stanu początkowego
-		local originalSize = button.Size
-		local originalPosition = button.Position
-		local originalStrokeThickness = uiStroke and uiStroke.Thickness or 2.5
-		local hoverStrokeThickness = 4
-		local originalStrokeColor = uiStroke and uiStroke.Color or Color3.fromRGB(0, 0, 0)
-		local hoverStrokeColor = Color3.fromRGB(0, 0, 0)
-	
-		local originalChildSizes = {}
-		for _, child in ipairs(button:GetChildren()) do
-			if child:IsA("TextLabel") or child:IsA("ImageLabel") or child:IsA("TextButton") then
-				originalChildSizes[child] = child.Size
-			end
-		end
-	
-		-- Tworzenie dźwięków
-		local hoverSound = Instance.new("Sound")
-		hoverSound.SoundId = "rbxassetid://75250247593685"
-		hoverSound.Volume = 1
-		hoverSound.Parent = button
-	
-		local clickSound = Instance.new("Sound")
-		clickSound.SoundId = "rbxassetid://535716488"
-		clickSound.Volume = 1
-		clickSound.Parent = button
-	
-		-- Setup Tip
-		if tip then
-			if tip:IsA("TextLabel") then tip.TextTransparency = 1
-			elseif tip:IsA("Frame") or tip:IsA("ImageLabel") then tip.BackgroundTransparency = 1 end
-			tip.Visible = false
-		end
-	
-		-- Event: Hover Enter
-		button.MouseEnter:Connect(function()
-			local newSize = UDim2.new(originalSize.X.Scale, originalSize.X.Offset + expandPixels * 2, originalSize.Y.Scale, originalSize.Y.Offset + expandPixels * 2)
-			local newPosition = UDim2.new(originalPosition.X.Scale, originalPosition.X.Offset - expandPixels, originalPosition.Y.Scale, originalPosition.Y.Offset - expandPixels)
-	
-			button:TweenSizeAndPosition(newSize, newPosition, "Out", "Quad", tweenDuration, true)
-	
-			for child, size in pairs(originalChildSizes) do
-				local newChildSize = UDim2.new(size.X.Scale, size.X.Offset + expandPixels, size.Y.Scale, size.Y.Offset + expandPixels)
-				child:TweenSize(newChildSize, "Out", "Quad", tweenDuration, true)
-			end
-	
-			if uiStroke then
-				uiStroke.Thickness = hoverStrokeThickness
-				uiStroke.Color = hoverStrokeColor
-			end
-	
-			hoverSound:Play()
-	
-			if tip then
-				tip.Visible = true
-				TweenService:Create(tip, TweenInfo.new(0.3), {
-					TextTransparency = tip:IsA("TextLabel") and 0 or nil,
-					BackgroundTransparency = (tip:IsA("Frame") or tip:IsA("ImageLabel")) and 0 or nil
-				}):Play()
-			end
-		end)
-	
-		-- Event: Hover Leave
-		button.MouseLeave:Connect(function()
-			button:TweenSizeAndPosition(originalSize, originalPosition, "Out", "Quad", tweenDuration, true)
-			for child, size in pairs(originalChildSizes) do
-				child:TweenSize(size, "Out", "Quad", tweenDuration, true)
-			end
-	
-			if uiStroke then
-				uiStroke.Thickness = originalStrokeThickness
-				uiStroke.Color = originalStrokeColor
-			end
-	
-			if tip then
-				local fade = TweenService:Create(tip, TweenInfo.new(0.3), {
-					TextTransparency = tip:IsA("TextLabel") and 1 or nil,
-					BackgroundTransparency = (tip:IsA("Frame") or tip:IsA("ImageLabel")) and 1 or nil
-				})
-				fade:Play()
-				fade.Completed:Connect(function() tip.Visible = false end)
-			end
-		end)
-	
-		-- Event: Click
-		button.MouseButton1Click:Connect(function()
-			clickSound:Play()
-			if callback then
-				callback() 
-			end
-		end)
+	-- 🎨 Efekt: po najechaniu myszką
+	local function onMouseEnter()
+		local newSize = UDim2.new(
+			originalSize.X.Scale, originalSize.X.Offset + expandPixels * 2,
+			originalSize.Y.Scale, originalSize.Y.Offset + expandPixels * 2
+		)
+		local newPosition = UDim2.new(
+			originalPosition.X.Scale, originalPosition.X.Offset - expandPixels,
+			originalPosition.Y.Scale, originalPosition.Y.Offset - expandPixels
+		)
+		button:TweenSizeAndPosition(newSize, newPosition, "Out", "Quad", tweenDuration, true)
 	end
 	
-	-- PRZYKŁAD UŻYCIA
-	_G.AnimateAndFunc(script.Parent, function()
-		local Players = game:GetService("Players")
-		local StarterGui = game:GetService("StarterGui")
-		local TeleportService = game:GetService("TeleportService")
+	-- 🎨 Efekt: po opuszczeniu myszką
+	local function onMouseLeave()
+		button:TweenSizeAndPosition(originalSize, originalPosition, "Out", "Quad", tweenDuration, true)
+	end
 	
-		local PLACE_ID_CELU = 6557073879 
-		local player = Players.LocalPlayer
-		local callback = Instance.new("BindableFunction")
+	-- 🖱️ Główna funkcja: przełączanie na Home
+	local function onMouseClick()
+		clickSound:Play()
 	
-		callback.OnInvoke = function(buttonText)
-			if buttonText == "Tak" then
-				TeleportService:Teleport(PLACE_ID_CELU, player)
+		-- Zakładana hierarchia: Przycisk -> AktualnyPanel (np. Scripts_2) -> Frame (Główny Kontener)
+		local Frame = script.Parent.Parent.Parent 
+	
+		local Home = Frame:FindFirstChild("Home")
+		local CurrentPanel = script.Parent.Parent -- Bieżący panel (np. Scripts_2 lub Executor)
+	
+		-- Przełączenie
+		if Home and CurrentPanel and CurrentPanel.Name ~= "Home" then
+			CurrentPanel.Visible = false -- Ukryj bieżący panel (z którego kliknięto)
+			Home.Visible = true          -- Pokaż panel główny Home
+		elseif CurrentPanel.Name == "Home" then
+			warn("Jesteś już na ekranie Home. Brak akcji.")
+		else
+			warn("Brak panelu Home w głównym Frame.")
+		end
+	end
+	
+	-- Podłączenie zdarzeń
+	button.MouseEnter:Connect(onMouseEnter)
+	button.MouseLeave:Connect(onMouseLeave)
+	button.MouseButton1Click:Connect(onMouseClick)
+end
+coroutine.wrap(IBXPTDO_fake_script)()
+local function CCDLLY_fake_script() -- Guzik1_5.LocalScript 
+	local script = Instance.new('LocalScript', Guzik1_5)
+
+	local TweenService = game:GetService("TweenService")
+	local button = script.Parent
+	local tweenDuration = 0.2
+	local expandPixels = 3 -- Efekt hover (do dostosowania)
+	
+	-- Opcjonalne: Ustawienia efektu hover/click
+	local originalSize = button.Size
+	local originalPosition = button.Position
+	
+	-- 🔊 Dźwięki (możesz usunąć, jeśli nie używasz)
+	local clickSound = Instance.new("Sound")
+	clickSound.SoundId = "rbxassetid://535716488"
+	clickSound.Volume = 1
+	clickSound.Parent = button
+	
+	-- 🎨 Efekt: po najechaniu myszką
+	local function onMouseEnter()
+		local newSize = UDim2.new(
+			originalSize.X.Scale, originalSize.X.Offset + expandPixels * 2,
+			originalSize.Y.Scale, originalSize.Y.Offset + expandPixels * 2
+		)
+		local newPosition = UDim2.new(
+			originalPosition.X.Scale, originalPosition.X.Offset - expandPixels,
+			originalPosition.Y.Scale, originalPosition.Y.Offset - expandPixels
+		)
+		button:TweenSizeAndPosition(newSize, newPosition, "Out", "Quad", tweenDuration, true)
+	end
+	
+	-- 🎨 Efekt: po opuszczeniu myszką
+	local function onMouseLeave()
+		button:TweenSizeAndPosition(originalSize, originalPosition, "Out", "Quad", tweenDuration, true)
+	end
+	
+	-- 🖱️ Główna funkcja: przełączanie na Home
+	local function onMouseClick()
+		clickSound:Play()
+	
+		-- Zakładana hierarchia: Przycisk -> AktualnyPanel (np. Scripts_2) -> Frame (Główny Kontener)
+		local Frame = script.Parent.Parent.Parent 
+	
+		local Home = Frame:FindFirstChild("Home")
+		local CurrentPanel = script.Parent.Parent -- Bieżący panel (np. Scripts_2 lub Executor)
+	
+		-- Przełączenie
+		if Home and CurrentPanel and CurrentPanel.Name ~= "Home" then
+			CurrentPanel.Visible = false -- Ukryj bieżący panel (z którego kliknięto)
+			Home.Visible = true          -- Pokaż panel główny Home
+		elseif CurrentPanel.Name == "Home" then
+			warn("Jesteś już na ekranie Home. Brak akcji.")
+		else
+			warn("Brak panelu Home w głównym Frame.")
+		end
+	end
+	
+	-- Podłączenie zdarzeń
+	button.MouseEnter:Connect(onMouseEnter)
+	button.MouseLeave:Connect(onMouseLeave)
+	button.MouseButton1Click:Connect(onMouseClick)
+end
+coroutine.wrap(CCDLLY_fake_script)()
+local function IDMDYSD_fake_script() -- Guzik1_6.LocalScript 
+	local script = Instance.new('LocalScript', Guzik1_6)
+
+	local TweenService = game:GetService("TweenService")
+	local button = script.Parent
+	local tweenDuration = 0.2
+	local expandPixels = 3 -- Efekt hover (do dostosowania)
+	
+	-- Opcjonalne: Ustawienia efektu hover/click
+	local originalSize = button.Size
+	local originalPosition = button.Position
+	
+	-- 🔊 Dźwięki (możesz usunąć, jeśli nie używasz)
+	local clickSound = Instance.new("Sound")
+	clickSound.SoundId = "rbxassetid://535716488"
+	clickSound.Volume = 1
+	clickSound.Parent = button
+	
+	-- 🎨 Efekt: po najechaniu myszką
+	local function onMouseEnter()
+		local newSize = UDim2.new(
+			originalSize.X.Scale, originalSize.X.Offset + expandPixels * 2,
+			originalSize.Y.Scale, originalSize.Y.Offset + expandPixels * 2
+		)
+		local newPosition = UDim2.new(
+			originalPosition.X.Scale, originalPosition.X.Offset - expandPixels,
+			originalPosition.Y.Scale, originalPosition.Y.Offset - expandPixels
+		)
+		button:TweenSizeAndPosition(newSize, newPosition, "Out", "Quad", tweenDuration, true)
+	end
+	
+	-- 🎨 Efekt: po opuszczeniu myszką
+	local function onMouseLeave()
+		button:TweenSizeAndPosition(originalSize, originalPosition, "Out", "Quad", tweenDuration, true)
+	end
+	
+	-- 🖱️ Główna funkcja: przełączanie na Home
+	local function onMouseClick()
+		clickSound:Play()
+	
+		-- Zakładana hierarchia: Przycisk -> AktualnyPanel (np. Scripts_2) -> Frame (Główny Kontener)
+		local Frame = script.Parent.Parent.Parent 
+	
+		local Home = Frame:FindFirstChild("Home")
+		local CurrentPanel = script.Parent.Parent -- Bieżący panel (np. Scripts_2 lub Executor)
+	
+		-- Przełączenie
+		if Home and CurrentPanel and CurrentPanel.Name ~= "Home" then
+			CurrentPanel.Visible = false -- Ukryj bieżący panel (z którego kliknięto)
+			Home.Visible = true          -- Pokaż panel główny Home
+		elseif CurrentPanel.Name == "Home" then
+			warn("Jesteś już na ekranie Home. Brak akcji.")
+		else
+			warn("Brak panelu Home w głównym Frame.")
+		end
+	end
+	
+	-- Podłączenie zdarzeń
+	button.MouseEnter:Connect(onMouseEnter)
+	button.MouseLeave:Connect(onMouseLeave)
+	button.MouseButton1Click:Connect(onMouseClick)
+end
+coroutine.wrap(IDMDYSD_fake_script)()
+local function YSYV_fake_script() -- ScrollingFrame_2.LocalScript 
+	local script = Instance.new('LocalScript', ScrollingFrame_2)
+
+	--[[
+	    Zintegrowany ScriptBlox Hub x ProjectUniversal UI
+	    Dynamiczne generowanie kart na podstawie Twojego designu.
+	]]
+	
+	local UserInputService = game:GetService("UserInputService")
+	local HttpService = game:GetService("HttpService")
+	local StarterGui = game:GetService("StarterGui")
+	
+	-- Sprawdzenie wsparcia HTTP dla Twojego executora
+	local requestFunc = http_request or request or (syn and syn.request) or (fluxus and fluxus.request)
+	if not requestFunc then
+		StarterGui:SetCore("SendNotification",{ 
+			Title = "Błąd", 
+			Text = "Twój executor nie wspiera zapytań HTTP (request).", 
+			Duration = 5 
+		})
+		return
+	end
+	
+	-- Referencje do Twojego GUI (Upewnij się, że nazwy się zgadzają)
+	local ScreenGui = script.Parent.Parent -- Zakładam, że skrypt jest w Frame
+	local Searcher = script.Parent -- Ramka "Searcher"
+	local Scroll = Searcher:WaitForChild("ScrollingFrame")
+	
+	-- Funkcja pomocnicza do tworzenia przycisków w stylu Twojego GUI
+	local function CreateStyledButton(parent, text, pos, color)
+		local btn = Instance.new("TextButton")
+		btn.Name = "Guzik_" .. text
+		btn.Parent = parent
+		btn.BackgroundColor3 = color
+		btn.BorderSizePixel = 0
+		btn.Position = pos
+		btn.Size = UDim2.new(0.076, 0, 0.327, 0)
+		btn.Font = Enum.Font.SourceSans
+		btn.Text = text
+		btn.TextColor3 = Color3.new(0, 0, 0)
+		btn.TextScaled = true
+	
+		local corner = Instance.new("UICorner")
+		corner.CornerRadius = UDim.new(0, 8)
+		corner.Parent = btn
+	
+		local constraint = Instance.new("UITextSizeConstraint")
+		constraint.MaxTextSize = 53
+		constraint.Parent = btn
+	
+		return btn
+	end
+	
+	-- Funkcja generująca pojedynczą kartę skryptu
+	local function CreateScriptCard(scriptData)
+		local Frame = Instance.new("Frame")
+		Frame.Name = "ScriptCard"
+		Frame.BackgroundColor3 = Color3.fromRGB(170, 170, 170)
+		Frame.BorderSizePixel = 0
+		Frame.Size = UDim2.new(0.95, 0, 0, 100)
+	
+		local corner = Instance.new("UICorner")
+		corner.Parent = Frame
+	
+		-- Nazwa Gry
+		local GraLabel = Instance.new("TextLabel")
+		GraLabel.Parent = Frame
+		GraLabel.BackgroundTransparency = 1
+		GraLabel.Position = UDim2.new(0.01, 0, 0, 5)
+		GraLabel.Size = UDim2.new(0, 423, 0, 18)
+		GraLabel.Font = Enum.Font.SourceSans
+		GraLabel.Text = "Gra: " .. (scriptData.game.name or "Universal")
+		GraLabel.TextXAlignment = Enum.TextXAlignment.Left
+	
+		-- Tytuł Skryptu
+		local Tytul = Instance.new("TextLabel")
+		Tytul.Parent = Frame
+		Tytul.BackgroundTransparency = 1
+		Tytul.Position = UDim2.new(0.01, 0, 0.24, 0)
+		Tytul.Size = UDim2.new(0.6, 0, 0, 26)
+		Tytul.Font = Enum.Font.SourceSans
+		Tytul.Text = scriptData.title
+		Tytul.TextScaled = true
+		Tytul.TextXAlignment = Enum.TextXAlignment.Left
+	
+		-- Statystyki (Dół karty)
+		local Stats = Instance.new("TextLabel")
+		Stats.Parent = Frame
+		Stats.BackgroundTransparency = 1
+		Stats.Position = UDim2.new(0.01, 0, 0.82, 0)
+		Stats.Size = UDim2.new(0.7, 0, 0, 18)
+		Stats.Font = Enum.Font.SourceSans
+		Stats.Text = string.format("👁 %d  |  👍 %d  |  📅 %s", 
+			scriptData.views or 0, 
+			scriptData.likeCount or 0, 
+			(scriptData.createdAt or "Brak"):sub(1,10))
+		Stats.TextXAlignment = Enum.TextXAlignment.Left
+	
+		-- Przyciski Akcji (Kolory z Twojego designu)
+		local ExecBtn = CreateStyledButton(Frame, "Wykonaj", UDim2.new(0.725, 0, 0.333, 0), Color3.new(1, 0.666, 0))
+		local CopyBtn = CreateStyledButton(Frame, "Skopiuj", UDim2.new(0.81, 0, 0.333, 0), Color3.new(1, 0.666, 0))
+		local EditBtn = CreateStyledButton(Frame, "Link", UDim2.new(0.896, 0, 0.333, 0), Color3.new(1, 0.666, 0))
+	
+		-- Logika przycisków
+		ExecBtn.MouseButton1Click:Connect(function()
+			if scriptData.script then
+				loadstring(scriptData.script)()
+				StarterGui:SetCore("SendNotification", {Title="Hub", Text="Skrypt wykonany!", Duration=2})
 			end
+		end)
+	
+		CopyBtn.MouseButton1Click:Connect(function()
+			setclipboard(scriptData.script or "")
+			StarterGui:SetCore("SendNotification", {Title="Hub", Text="Skopiowano kod!", Duration=2})
+		end)
+	
+		EditBtn.MouseButton1Click:Connect(function()
+			local link = "https://scriptblox.com/script/" .. (scriptData.slug or "")
+			setclipboard(link)
+			StarterGui:SetCore("SendNotification", {Title="Hub", Text="Skopiowano link ScriptBlox!", Duration=2})
+		end)
+	
+		return Frame
+	end
+	
+	-- Funkcja wyszukiwania
+	function SearchScripts(query)
+		-- Czyścimy ScrollFrame
+		for _, child in pairs(Scroll:GetChildren()) do
+			if child:IsA("Frame") then child:Destroy() end
 		end
 	
-		StarterGui:SetCore("SendNotification", {
-			Title = "Zakup premium",
-			Text = "Czy zgadzasz się na teleportację?",
-			Button1 = "Tak",
-			Button2 = "Nie",
-			Callback = callback,
-			Duration = 10
-		})
-	end)
+		local url = "https://scriptblox.com/api/script/search?q=" .. HttpService:UrlEncode(query) .. "&mode=free&page=1"
+	
+		local success, response = pcall(function()
+			return requestFunc({Url = url, Method = "GET"})
+		end)
+	
+		if success and response.StatusCode == 200 then
+			local data = HttpService:JSONDecode(response.Body)
+			local scripts = data.result.scripts
+	
+			local layout = Scroll:FindFirstChildOfClass("UIListLayout") or Instance.new("UIListLayout", Scroll)
+			layout.Padding = UDim.new(0, 10)
+			layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	
+			for _, sData in pairs(scripts) do
+				local card = CreateScriptCard(sData)
+				card.Parent = Scroll
+			end
+	
+			Scroll.CanvasSize = UDim2.new(0, 0, 0, layout.AbsoluteContentSize.Y + 20)
+		else
+			warn("Błąd połączenia z API ScriptBlox")
+		end
+	end
+	
+	-- Przykład podpięcia pod TextBox (Musisz go mieć w GUI)
+	-- local SearchBox = Searcher:WaitForChild("TextBox")
+	-- SearchBox.FocusLost:Connect(function(enter) if enter then SearchScripts(SearchBox.Text) end end)
 end
-coroutine.wrap(WQWHUOC_fake_script)()
-local function OERGB_fake_script() -- CloseButton.LocalScript 
+coroutine.wrap(YSYV_fake_script)()
+local function SKLNT_fake_script() -- BackButton_2.LocalScript 
+	local script = Instance.new('LocalScript', BackButton_2)
+
+	local TweenService = game:GetService("TweenService")
+	local button = script.Parent
+	local tweenDuration = 0.2
+	local expandPixels = 3 -- Efekt hover (do dostosowania)
+	
+	-- Opcjonalne: Ustawienia efektu hover/click
+	local originalSize = button.Size
+	local originalPosition = button.Position
+	
+	-- 🔊 Dźwięki (możesz usunąć, jeśli nie używasz)
+	local clickSound = Instance.new("Sound")
+	clickSound.SoundId = "rbxassetid://535716488"
+	clickSound.Volume = 1
+	clickSound.Parent = button
+	
+	-- 🎨 Efekt: po najechaniu myszką
+	local function onMouseEnter()
+		local newSize = UDim2.new(
+			originalSize.X.Scale, originalSize.X.Offset + expandPixels * 2,
+			originalSize.Y.Scale, originalSize.Y.Offset + expandPixels * 2
+		)
+		local newPosition = UDim2.new(
+			originalPosition.X.Scale, originalPosition.X.Offset - expandPixels,
+			originalPosition.Y.Scale, originalPosition.Y.Offset - expandPixels
+		)
+		button:TweenSizeAndPosition(newSize, newPosition, "Out", "Quad", tweenDuration, true)
+	end
+	
+	-- 🎨 Efekt: po opuszczeniu myszką
+	local function onMouseLeave()
+		button:TweenSizeAndPosition(originalSize, originalPosition, "Out", "Quad", tweenDuration, true)
+	end
+	
+	-- 🖱️ Główna funkcja: przełączanie na Home
+	local function onMouseClick()
+		clickSound:Play()
+	
+		-- Zakładana hierarchia: Przycisk -> AktualnyPanel (np. Scripts_2) -> Frame (Główny Kontener)
+		local Frame = script.Parent.Parent.Parent 
+	
+		local Home = Frame:FindFirstChild("Scripts")
+		local CurrentPanel = script.Parent.Parent -- Bieżący panel (np. Scripts_2 lub Executor)
+	
+		-- Przełączenie
+		if Home and CurrentPanel and CurrentPanel.Name ~= "Home" then
+			CurrentPanel.Visible = false -- Ukryj bieżący panel (z którego kliknięto)
+			Home.Visible = true          -- Pokaż panel główny Home
+		elseif CurrentPanel.Name == "Home" then
+			warn("Jesteś już na ekranie Home. Brak akcji.")
+		else
+			warn("Brak panelu Home w głównym Frame.")
+		end
+	end
+	
+	-- Podłączenie zdarzeń
+	button.MouseEnter:Connect(onMouseEnter)
+	button.MouseLeave:Connect(onMouseLeave)
+	button.MouseButton1Click:Connect(onMouseClick)
+end
+coroutine.wrap(SKLNT_fake_script)()
+local function NMBHPL_fake_script() -- TextButton.LocalScript 
+	local script = Instance.new('LocalScript', TextButton)
+
+	local button = script.Parent
+	local expandPixels = 10
+	local tweenDuration = 0.2
+	
+	-- Pobieramy UIStroke (jeśli istnieje)
+	local uiStroke = button:FindFirstChildWhichIsA("UIStroke")
+	
+	-- Dane oryginalne
+	local originalSize = button.Size
+	local originalPosition = button.Position
+	local originalStrokeThickness = uiStroke and uiStroke.Thickness or 2.5
+	local hoverStrokeThickness = 4
+	local originalStrokeColor = uiStroke and uiStroke.Color or Color3.fromRGB(0, 0, 0)
+	local hoverStrokeColor = Color3.fromRGB(0, 0, 0)
+	
+	-- Przechowywanie oryginalnych rozmiarów dzieci
+	local originalChildSizes = {}
+	for _, child in ipairs(button:GetChildren()) do
+		if child:IsA("TextLabel") or child:IsA("ImageLabel") or child:IsA("TextButton") then
+			originalChildSizes[child] = child.Size
+		end
+	end
+	
+	-- 🔊 Tworzymy dźwięki
+	local hoverSound = Instance.new("Sound")
+	hoverSound.SoundId = "rbxassetid://75250247593685"
+	hoverSound.Volume = 1
+	hoverSound.Parent = button
+	
+	local clickSound = Instance.new("Sound")
+	clickSound.SoundId = "rbxassetid://535716488"
+	clickSound.Volume = 1
+	clickSound.Parent = button
+	
+	-- 🎨 Efekt: po najechaniu myszką
+	local function onMouseEnter()
+		local newSize = UDim2.new(
+			originalSize.X.Scale,
+			originalSize.X.Offset + expandPixels * 2,
+			originalSize.Y.Scale,
+			originalSize.Y.Offset + expandPixels * 2
+		)
+	
+		local newPosition = UDim2.new(
+			originalPosition.X.Scale,
+			originalPosition.X.Offset - expandPixels,
+			originalPosition.Y.Scale,
+			originalPosition.Y.Offset - expandPixels
+		)
+	
+		button:TweenSizeAndPosition(newSize, newPosition, "Out", "Quad", tweenDuration, true)
+	
+		for child, originalSize in pairs(originalChildSizes) do
+			local newChildSize = UDim2.new(
+				originalSize.X.Scale,
+				originalSize.X.Offset + expandPixels,
+				originalSize.Y.Scale,
+				originalSize.Y.Offset + expandPixels
+			)
+			child:TweenSize(newChildSize, "Out", "Quad", tweenDuration, true)
+		end
+	
+		if uiStroke then
+			uiStroke.Thickness = hoverStrokeThickness
+			uiStroke.Color = hoverStrokeColor
+		end
+	
+		-- 🔊 Odtwórz dźwięk hover
+		hoverSound:Play()
+	end
+	
+	-- 🎨 Efekt: po opuszczeniu myszką
+	local function onMouseLeave()
+		button:TweenSizeAndPosition(originalSize, originalPosition, "Out", "Quad", tweenDuration, true)
+	
+		for child, originalSize in pairs(originalChildSizes) do
+			child:TweenSize(originalSize, "Out", "Quad", tweenDuration, true)
+		end
+	
+		if uiStroke then
+			uiStroke.Thickness = originalStrokeThickness
+			uiStroke.Color = originalStrokeColor
+		end
+	end
+	
+	-- 🖱️ Efekt: po kliknięciu przycisku
+	local function onMouseClick()
+		-- 🔊 Odtwórz dźwięk kliknięcia
+		clickSound:Play()
+	end
+	
+	-- Podłączenie zdarzeń
+	button.MouseEnter:Connect(onMouseEnter)
+	button.MouseLeave:Connect(onMouseLeave)
+	button.MouseButton1Click:Connect(onMouseClick)
+	
+end
+coroutine.wrap(NMBHPL_fake_script)()
+local function WIOFPDC_fake_script() -- CloseButton.LocalScript 
 	local script = Instance.new('LocalScript', CloseButton)
 
 	-- Odwołania do elementów GUI
@@ -5653,9 +4150,9 @@ local function OERGB_fake_script() -- CloseButton.LocalScript
 	button.MouseButton1Click:Connect(toggleFrame)
 	
 end
-coroutine.wrap(OERGB_fake_script)()
-local function KAOKGAB_fake_script() -- TextLabel_2.LocalScript 
-	local script = Instance.new('LocalScript', TextLabel_2)
+coroutine.wrap(WIOFPDC_fake_script)()
+local function JRIAY_fake_script() -- TextLabel_4.LocalScript 
+	local script = Instance.new('LocalScript', TextLabel_4)
 
 	-- LocalScript wewnątrz TextLabel
 	local TweenService = game:GetService("TweenService")
@@ -5787,4 +4284,4 @@ local function KAOKGAB_fake_script() -- TextLabel_2.LocalScript
 	-- _G.ShowNotification("Zebrałeś rzadki przedmiot!", 8)
 	
 end
-coroutine.wrap(KAOKGAB_fake_script)()
+coroutine.wrap(JRIAY_fake_script)()
