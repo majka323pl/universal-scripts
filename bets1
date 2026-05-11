@@ -124,24 +124,27 @@ local Opublikowana_3 = Instance.new("TextLabel")
 local Opublikowana_4 = Instance.new("TextLabel")
 local TextLabel_3 = Instance.new("TextLabel")
 local UICorner_36 = Instance.new("UICorner")
-local StartScript = Instance.new("Frame")
-local UICorner_37 = Instance.new("UICorner")
-local BackButton_2 = Instance.new("TextButton")
-local UICorner_38 = Instance.new("UICorner")
-local DescLabel = Instance.new("TextLabel")
+local TextBox = Instance.new("TextBox")
 local TextButton = Instance.new("TextButton")
+local UICorner_37 = Instance.new("UICorner")
+local StartScript = Instance.new("Frame")
+local UICorner_38 = Instance.new("UICorner")
+local BackButton_2 = Instance.new("TextButton")
 local UICorner_39 = Instance.new("UICorner")
-local Locked = Instance.new("Frame")
+local DescLabel = Instance.new("TextLabel")
+local TextButton_2 = Instance.new("TextButton")
 local UICorner_40 = Instance.new("UICorner")
+local Locked = Instance.new("Frame")
+local UICorner_41 = Instance.new("UICorner")
 local ImageLabel_3 = Instance.new("ImageLabel")
 local Name = Instance.new("TextLabel")
-local UICorner_41 = Instance.new("UICorner")
-local CloseButton = Instance.new("TextButton")
 local UICorner_42 = Instance.new("UICorner")
+local CloseButton = Instance.new("TextButton")
+local UICorner_43 = Instance.new("UICorner")
 local UITextSizeConstraint_17 = Instance.new("UITextSizeConstraint")
 local Notification = Instance.new("Frame")
 local TextLabel_4 = Instance.new("TextLabel")
-local UICorner_43 = Instance.new("UICorner")
+local UICorner_44 = Instance.new("UICorner")
 local UIAspectRatioConstraint_12 = Instance.new("UIAspectRatioConstraint")
 
 -- Properties
@@ -913,6 +916,34 @@ TextLabel_3.TextWrapped = true
 
 UICorner_36.Parent = TextLabel_3
 
+TextBox.Parent = Searcher
+TextBox.BackgroundColor3 = Color3.new(0, 0, 0)
+TextBox.BorderColor3 = Color3.new(0, 0, 0)
+TextBox.BorderSizePixel = 0
+TextBox.Position = UDim2.new(0.0507591888, 0, 0.00917230826, 0)
+TextBox.Size = UDim2.new(0, 983, 0, 36)
+TextBox.Font = Enum.Font.SourceSans
+TextBox.Text = ""
+TextBox.TextColor3 = Color3.new(1, 1, 1)
+TextBox.TextScaled = true
+TextBox.TextSize = 14
+TextBox.TextWrapped = true
+
+TextButton.Parent = Searcher
+TextButton.BackgroundColor3 = Color3.new(1, 1, 1)
+TextButton.BorderColor3 = Color3.new(0, 0, 0)
+TextButton.BorderSizePixel = 0
+TextButton.Position = UDim2.new(0.876929045, 0, 0.00917230826, 0)
+TextButton.Size = UDim2.new(0, 134, 0, 43)
+TextButton.Font = Enum.Font.SourceSans
+TextButton.Text = "Search"
+TextButton.TextColor3 = Color3.new(0, 0, 0)
+TextButton.TextScaled = true
+TextButton.TextSize = 14
+TextButton.TextWrapped = true
+
+UICorner_37.Parent = TextButton
+
 StartScript.Name = "StartScript"
 StartScript.Parent = Frame
 StartScript.BackgroundColor3 = Color3.new(0.219608, 0.219608, 0.219608)
@@ -923,7 +954,7 @@ StartScript.Position = UDim2.new(0.026433643, 0, 0.0318192206, 0)
 StartScript.Size = UDim2.new(0.70532918, 0, 0.681432605, 0)
 StartScript.Visible = false
 
-UICorner_37.Parent = StartScript
+UICorner_38.Parent = StartScript
 
 BackButton_2.Name = "BackButton"
 BackButton_2.Parent = StartScript
@@ -940,7 +971,7 @@ BackButton_2.TextScaled = true
 BackButton_2.TextSize = 14
 BackButton_2.TextWrapped = true
 
-UICorner_38.Parent = BackButton_2
+UICorner_39.Parent = BackButton_2
 
 DescLabel.Name = "DescLabel"
 DescLabel.Parent = StartScript
@@ -956,23 +987,23 @@ DescLabel.TextSize = 49
 DescLabel.TextWrapped = true
 DescLabel.TextYAlignment = Enum.TextYAlignment.Top
 
-TextButton.Parent = StartScript
-TextButton.BackgroundColor3 = Color3.new(1, 0.701961, 0)
-TextButton.BorderColor3 = Color3.new(0, 0, 0)
-TextButton.BorderSizePixel = 0
-TextButton.Position = UDim2.new(0.772631466, 0, 0.887966812, 0)
-TextButton.Size = UDim2.new(0, 298, 0, 81)
-TextButton.Font = Enum.Font.FredokaOne
-TextButton.Text = "Execute"
-TextButton.TextColor3 = Color3.new(0, 0, 0)
-TextButton.TextScaled = true
-TextButton.TextSize = 14
-TextButton.TextWrapped = true
+TextButton_2.Parent = StartScript
+TextButton_2.BackgroundColor3 = Color3.new(1, 0.701961, 0)
+TextButton_2.BorderColor3 = Color3.new(0, 0, 0)
+TextButton_2.BorderSizePixel = 0
+TextButton_2.Position = UDim2.new(0.772631466, 0, 0.887966812, 0)
+TextButton_2.Size = UDim2.new(0, 298, 0, 81)
+TextButton_2.Font = Enum.Font.FredokaOne
+TextButton_2.Text = "Execute"
+TextButton_2.TextColor3 = Color3.new(0, 0, 0)
+TextButton_2.TextScaled = true
+TextButton_2.TextSize = 14
+TextButton_2.TextWrapped = true
 
-UICorner_39.Parent = TextButton
+UICorner_40.Parent = TextButton_2
 
 Locked.Name = "Locked"
-Locked.Parent = TextButton
+Locked.Parent = TextButton_2
 Locked.BackgroundColor3 = Color3.new(0, 0, 0)
 Locked.BackgroundTransparency = 0.20000000298023224
 Locked.BorderColor3 = Color3.new(0, 0, 0)
@@ -981,7 +1012,7 @@ Locked.Position = UDim2.new(-1.4669132e-07, 0, 0, 0)
 Locked.Size = UDim2.new(0.999810457, 0, 1, 0)
 Locked.Visible = false
 
-UICorner_40.Parent = Locked
+UICorner_41.Parent = Locked
 
 ImageLabel_3.Parent = Locked
 ImageLabel_3.BackgroundColor3 = Color3.new(0, 0, 0)
@@ -1006,7 +1037,7 @@ Name.TextScaled = true
 Name.TextSize = 14
 Name.TextWrapped = true
 
-UICorner_41.Parent = Name
+UICorner_42.Parent = Name
 
 CloseButton.Name = "CloseButton"
 CloseButton.Parent = ProjectUniversal
@@ -1022,7 +1053,7 @@ CloseButton.TextScaled = true
 CloseButton.TextSize = 14
 CloseButton.TextWrapped = true
 
-UICorner_42.Parent = CloseButton
+UICorner_43.Parent = CloseButton
 
 UITextSizeConstraint_17.Parent = CloseButton
 UITextSizeConstraint_17.MaxTextSize = 49
@@ -1050,7 +1081,7 @@ TextLabel_4.TextScaled = true
 TextLabel_4.TextSize = 14
 TextLabel_4.TextWrapped = true
 
-UICorner_43.Parent = Notification
+UICorner_44.Parent = Notification
 
 UIAspectRatioConstraint_12.Parent = Notification
 UIAspectRatioConstraint_12.AspectRatio = 16.428571701049805
@@ -1059,7 +1090,7 @@ UIAspectRatioConstraint_12.AspectRatio = 16.428571701049805
 
 -- ProjectUniversal.LocalScript is disabled.
 -- ProjectUniversal.Script is disabled.
-local function LKQN_fake_script() -- ProjectUniversal.LocalScript 
+local function KZZYOGU_fake_script() -- ProjectUniversal.LocalScript 
 	local script = Instance.new('LocalScript', ProjectUniversal)
 
 		local TweenService = game:GetService("TweenService")
@@ -1193,8 +1224,8 @@ local function LKQN_fake_script() -- ProjectUniversal.LocalScript
 		})
 	end)
 end
-coroutine.wrap(LKQN_fake_script)()
-local function IXMLIKK_fake_script() -- Guzik1.LocalScript 
+coroutine.wrap(KZZYOGU_fake_script)()
+local function XPEOT_fake_script() -- Guzik1.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1)
 
 	local TweenService = game:GetService("TweenService")
@@ -1256,8 +1287,8 @@ local function IXMLIKK_fake_script() -- Guzik1.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(IXMLIKK_fake_script)()
-local function OBAE_fake_script() -- Guzik1_2.LocalScript 
+coroutine.wrap(XPEOT_fake_script)()
+local function WGVI_fake_script() -- Guzik1_2.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_2)
 
 	local button = script.Parent
@@ -1362,8 +1393,8 @@ local function OBAE_fake_script() -- Guzik1_2.LocalScript
 	end
 	
 end
-coroutine.wrap(OBAE_fake_script)()
-local function NRQGUMY_fake_script() -- Nickdispaly.LocalScript 
+coroutine.wrap(WGVI_fake_script)()
+local function FNOG_fake_script() -- Nickdispaly.LocalScript 
 	local script = Instance.new('LocalScript', Nickdispaly)
 
 	local Players = game:GetService("Players")
@@ -1376,8 +1407,8 @@ local function NRQGUMY_fake_script() -- Nickdispaly.LocalScript
 	
 	label.Text = "Witaj " .. display_name .. "(@" .. username .. ")"
 end
-coroutine.wrap(NRQGUMY_fake_script)()
-local function WFQXCB_fake_script() -- ImageLabel.LocalScript 
+coroutine.wrap(FNOG_fake_script)()
+local function KYCSQOI_fake_script() -- ImageLabel.LocalScript 
 	local script = Instance.new('LocalScript', ImageLabel)
 
 	local Players = game:GetService("Players")
@@ -1404,10 +1435,10 @@ local function WFQXCB_fake_script() -- ImageLabel.LocalScript
 	
 	-- not needed but if imagelabel is too big image will be pixelated very badly: imageLabel.Size = UDim2.new(0, 420, 0, 420)
 end
-coroutine.wrap(WFQXCB_fake_script)()
+coroutine.wrap(KYCSQOI_fake_script)()
 -- BuyPremiumTab.LocalScript is disabled.
 -- BuyPremiumTab.LocalScript is disabled.
-local function PQUQX_fake_script() -- ExecutorTab.LocalScript 
+local function CVZSWU_fake_script() -- ExecutorTab.LocalScript 
 	local script = Instance.new('LocalScript', ExecutorTab)
 
 	local TweenService = game:GetService("TweenService")
@@ -1504,9 +1535,9 @@ local function PQUQX_fake_script() -- ExecutorTab.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(PQUQX_fake_script)()
+coroutine.wrap(CVZSWU_fake_script)()
 -- ScriptsButton.LocalScript is disabled.
-local function VKFPI_fake_script() -- ScriptsButton.LocalScript 
+local function GNCABFG_fake_script() -- ScriptsButton.LocalScript 
 	local script = Instance.new('LocalScript', ScriptsButton)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -1530,10 +1561,10 @@ local function VKFPI_fake_script() -- ScriptsButton.LocalScript
 		end)
 	end)
 end
-coroutine.wrap(VKFPI_fake_script)()
+coroutine.wrap(GNCABFG_fake_script)()
 -- UpdateLogs.LocalScript is disabled.
 -- TimerButton.LocalScript is disabled.
-local function XNMN_fake_script() -- RejoinButton.LocalScript 
+local function PAFZX_fake_script() -- RejoinButton.LocalScript 
 	local script = Instance.new('LocalScript', RejoinButton)
 
 	local TweenService = game:GetService("TweenService")
@@ -1690,50 +1721,24 @@ local function XNMN_fake_script() -- RejoinButton.LocalScript
 		teleportService:Teleport(gamePlaceId, player)
 	end
 end
-coroutine.wrap(XNMN_fake_script)()
-local function MYEFA_fake_script() -- RejoinButton_2.LocalScript 
+coroutine.wrap(PAFZX_fake_script)()
+local function DKHE_fake_script() -- RejoinButton_2.LocalScript 
 	local script = Instance.new('LocalScript', RejoinButton_2)
 
-	script.Parent.MouseButton1Click:Connect(function()
-		-- Inny skrypt, np. obsługujący przycisk w menu sklepu
-		_G.AnimateAndFunc(script.Parent, function()
-			local button = script.Parent
-			local MainFrame = button.Parent.Parent -- Ścieżka do głównej ramki (dostosuj jeśli trzeba)
-			local Searcher = MainFrame:FindFirstChild("Searcher")
+	local btn = script.Parent
+	local SearcherFrame = btn.Parent.Parent.Parent.Frame.Searcher -- Dopasuj ścieżkę!
 	
-			-- Funkcja przełączania zakładek
-			local function openTab()
-				-- 1. Ukrywamy wszystkie inne zakładki w ramce głównej
-				for _, child in pairs(MainFrame:GetChildren()) do
-					if child:IsA("Frame") and child.Name ~= "TopBar" then -- TopBar zostaje widoczny
-						child.Visible = false
-					end
-				end
-	
-				-- 2. Pokazujemy tylko naszą wyszukiwarkę
-				if Searcher then
-					Searcher.Visible = true
-				else
-					warn("Nie znaleziono ramki Searcher w MainFrame!")
-				end
-			end
-	
-			-- Efekt najechania myszką (opcjonalny, pasujący do Twojego stylu)
-			button.MouseEnter:Connect(function()
-				button.BackgroundColor3 = Color3.fromRGB(255, 190, 50) -- Jaśniejszy pomarańcz
-			end)
-	
-			button.MouseLeave:Connect(function()
-				button.BackgroundColor3 = Color3.fromRGB(255, 170, 0) -- Powrót do oryginału
-			end)
-	
-			-- Kliknięcie otwiera zakładkę
-			button.MouseButton1Click:Connect(openTab)
-		end)
+	btn.MouseButton1Click:Connect(function()
+		-- Ukryj inne ramki
+		for _, frame in pairs(SearcherFrame.Parent:GetChildren()) do
+			if frame:IsA("Frame") then frame.Visible = false end
+		end
+		-- Pokaż wyszukiwarkę
+		SearcherFrame.Visible = true
 	end)
 end
-coroutine.wrap(MYEFA_fake_script)()
-local function LCNEIA_fake_script() -- Executor.LocalScript 
+coroutine.wrap(DKHE_fake_script)()
+local function BWELGQ_fake_script() -- Executor.LocalScript 
 	local script = Instance.new('LocalScript', Executor)
 
 	-- Executor - poprawiony LocalScript
@@ -2307,8 +2312,8 @@ local function LCNEIA_fake_script() -- Executor.LocalScript
 	end)
 	
 end
-coroutine.wrap(LCNEIA_fake_script)()
-local function YKMCXY_fake_script() -- CopyToClipboard.LocalScript 
+coroutine.wrap(BWELGQ_fake_script)()
+local function RHYZS_fake_script() -- CopyToClipboard.LocalScript 
 	local script = Instance.new('LocalScript', CopyToClipboard)
 
 	local TweenService = game:GetService("TweenService")
@@ -2458,8 +2463,8 @@ local function YKMCXY_fake_script() -- CopyToClipboard.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(YKMCXY_fake_script)()
-local function RJDRE_fake_script() -- Execute.LocalScript 
+coroutine.wrap(RHYZS_fake_script)()
+local function XHDZGS_fake_script() -- Execute.LocalScript 
 	local script = Instance.new('LocalScript', Execute)
 
 	local TweenService = game:GetService("TweenService")
@@ -2664,8 +2669,8 @@ local function RJDRE_fake_script() -- Execute.LocalScript
 		end
 	end
 end
-coroutine.wrap(RJDRE_fake_script)()
-local function SAWKIZY_fake_script() -- Rename.LocalScript 
+coroutine.wrap(XHDZGS_fake_script)()
+local function ZXVEF_fake_script() -- Rename.LocalScript 
 	local script = Instance.new('LocalScript', Rename)
 
 	local TweenService = game:GetService("TweenService")
@@ -2815,8 +2820,8 @@ local function SAWKIZY_fake_script() -- Rename.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(SAWKIZY_fake_script)()
-local function FXYAA_fake_script() -- Delete.LocalScript 
+coroutine.wrap(ZXVEF_fake_script)()
+local function MNQA_fake_script() -- Delete.LocalScript 
 	local script = Instance.new('LocalScript', Delete)
 
 	local TweenService = game:GetService("TweenService")
@@ -2966,8 +2971,8 @@ local function FXYAA_fake_script() -- Delete.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(FXYAA_fake_script)()
-local function TQPSNPB_fake_script() -- ClearExecTextBox.LocalScript 
+coroutine.wrap(MNQA_fake_script)()
+local function PRPLKC_fake_script() -- ClearExecTextBox.LocalScript 
 	local script = Instance.new('LocalScript', ClearExecTextBox)
 
 	local TweenService = game:GetService("TweenService")
@@ -3117,8 +3122,8 @@ local function TQPSNPB_fake_script() -- ClearExecTextBox.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(TQPSNPB_fake_script)()
-local function CJZHAC_fake_script() -- SaveFile.LocalScript 
+coroutine.wrap(PRPLKC_fake_script)()
+local function EHTFNM_fake_script() -- SaveFile.LocalScript 
 	local script = Instance.new('LocalScript', SaveFile)
 
 	local TweenService = game:GetService("TweenService")
@@ -3268,8 +3273,8 @@ local function CJZHAC_fake_script() -- SaveFile.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(CJZHAC_fake_script)()
-local function UBTJKHV_fake_script() -- Guzik1_3.LocalScript 
+coroutine.wrap(EHTFNM_fake_script)()
+local function NFLH_fake_script() -- Guzik1_3.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_3)
 
 	local button = script.Parent
@@ -3525,8 +3530,8 @@ local function UBTJKHV_fake_script() -- Guzik1_3.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(UBTJKHV_fake_script)()
-local function ENPY_fake_script() -- BackButton.LocalScript 
+coroutine.wrap(NFLH_fake_script)()
+local function UBJQ_fake_script() -- BackButton.LocalScript 
 	local script = Instance.new('LocalScript', BackButton)
 
 	local TweenService = game:GetService("TweenService")
@@ -3588,8 +3593,8 @@ local function ENPY_fake_script() -- BackButton.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(ENPY_fake_script)()
-local function IBXPTDO_fake_script() -- Guzik1_4.LocalScript 
+coroutine.wrap(UBJQ_fake_script)()
+local function NALY_fake_script() -- Guzik1_4.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_4)
 
 	local TweenService = game:GetService("TweenService")
@@ -3651,8 +3656,8 @@ local function IBXPTDO_fake_script() -- Guzik1_4.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(IBXPTDO_fake_script)()
-local function CCDLLY_fake_script() -- Guzik1_5.LocalScript 
+coroutine.wrap(NALY_fake_script)()
+local function XFCB_fake_script() -- Guzik1_5.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_5)
 
 	local TweenService = game:GetService("TweenService")
@@ -3714,8 +3719,8 @@ local function CCDLLY_fake_script() -- Guzik1_5.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(CCDLLY_fake_script)()
-local function IDMDYSD_fake_script() -- Guzik1_6.LocalScript 
+coroutine.wrap(XFCB_fake_script)()
+local function YSOAPJZ_fake_script() -- Guzik1_6.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_6)
 
 	local TweenService = game:GetService("TweenService")
@@ -3777,170 +3782,110 @@ local function IDMDYSD_fake_script() -- Guzik1_6.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(IDMDYSD_fake_script)()
-local function YSYV_fake_script() -- ScrollingFrame_2.LocalScript 
-	local script = Instance.new('LocalScript', ScrollingFrame_2)
+coroutine.wrap(YSOAPJZ_fake_script)()
+local function AFPFZ_fake_script() -- Searcher.LocalScript 
+	local script = Instance.new('LocalScript', Searcher)
 
-	--[[
-	    Zintegrowany ScriptBlox Hub x ProjectUniversal UI
-	    Dynamiczne generowanie kart na podstawie Twojego designu.
-	]]
+	local Searcher = script.Parent
+	local Scroll = Searcher:WaitForChild("ScrollingFrame")
+	local Input = Searcher:WaitForChild("TextBox")
+	local SearchBtn = Searcher:WaitForChild("TextButton")
 	
-	local UserInputService = game:GetService("UserInputService")
 	local HttpService = game:GetService("HttpService")
 	local StarterGui = game:GetService("StarterGui")
 	
-	-- Sprawdzenie wsparcia HTTP dla Twojego executora
+	-- Wykrywanie funkcji Twojego exploita (musi być uruchomione w exec)
 	local requestFunc = http_request or request or (syn and syn.request) or (fluxus and fluxus.request)
-	if not requestFunc then
-		StarterGui:SetCore("SendNotification",{ 
-			Title = "Błąd", 
-			Text = "Twój executor nie wspiera zapytań HTTP (request).", 
-			Duration = 5 
-		})
-		return
-	end
 	
-	-- Referencje do Twojego GUI (Upewnij się, że nazwy się zgadzają)
-	local ScreenGui = script.Parent.Parent -- Zakładam, że skrypt jest w Frame
-	local Searcher = script.Parent -- Ramka "Searcher"
-	local Scroll = Searcher:WaitForChild("ScrollingFrame")
-	
-	-- Funkcja pomocnicza do tworzenia przycisków w stylu Twojego GUI
-	local function CreateStyledButton(parent, text, pos, color)
-		local btn = Instance.new("TextButton")
-		btn.Name = "Guzik_" .. text
-		btn.Parent = parent
-		btn.BackgroundColor3 = color
-		btn.BorderSizePixel = 0
-		btn.Position = pos
-		btn.Size = UDim2.new(0.076, 0, 0.327, 0)
-		btn.Font = Enum.Font.SourceSans
-		btn.Text = text
-		btn.TextColor3 = Color3.new(0, 0, 0)
-		btn.TextScaled = true
-	
-		local corner = Instance.new("UICorner")
-		corner.CornerRadius = UDim.new(0, 8)
-		corner.Parent = btn
-	
-		local constraint = Instance.new("UITextSizeConstraint")
-		constraint.MaxTextSize = 53
-		constraint.Parent = btn
-	
-		return btn
-	end
-	
-	-- Funkcja generująca pojedynczą kartę skryptu
-	local function CreateScriptCard(scriptData)
-		local Frame = Instance.new("Frame")
-		Frame.Name = "ScriptCard"
-		Frame.BackgroundColor3 = Color3.fromRGB(170, 170, 170)
-		Frame.BorderSizePixel = 0
-		Frame.Size = UDim2.new(0.95, 0, 0, 100)
-	
-		local corner = Instance.new("UICorner")
-		corner.Parent = Frame
-	
-		-- Nazwa Gry
-		local GraLabel = Instance.new("TextLabel")
-		GraLabel.Parent = Frame
-		GraLabel.BackgroundTransparency = 1
-		GraLabel.Position = UDim2.new(0.01, 0, 0, 5)
-		GraLabel.Size = UDim2.new(0, 423, 0, 18)
-		GraLabel.Font = Enum.Font.SourceSans
-		GraLabel.Text = "Gra: " .. (scriptData.game.name or "Universal")
-		GraLabel.TextXAlignment = Enum.TextXAlignment.Left
-	
-		-- Tytuł Skryptu
-		local Tytul = Instance.new("TextLabel")
-		Tytul.Parent = Frame
-		Tytul.BackgroundTransparency = 1
-		Tytul.Position = UDim2.new(0.01, 0, 0.24, 0)
-		Tytul.Size = UDim2.new(0.6, 0, 0, 26)
-		Tytul.Font = Enum.Font.SourceSans
-		Tytul.Text = scriptData.title
-		Tytul.TextScaled = true
-		Tytul.TextXAlignment = Enum.TextXAlignment.Left
-	
-		-- Statystyki (Dół karty)
-		local Stats = Instance.new("TextLabel")
-		Stats.Parent = Frame
-		Stats.BackgroundTransparency = 1
-		Stats.Position = UDim2.new(0.01, 0, 0.82, 0)
-		Stats.Size = UDim2.new(0.7, 0, 0, 18)
-		Stats.Font = Enum.Font.SourceSans
-		Stats.Text = string.format("👁 %d  |  👍 %d  |  📅 %s", 
-			scriptData.views or 0, 
-			scriptData.likeCount or 0, 
-			(scriptData.createdAt or "Brak"):sub(1,10))
-		Stats.TextXAlignment = Enum.TextXAlignment.Left
-	
-		-- Przyciski Akcji (Kolory z Twojego designu)
-		local ExecBtn = CreateStyledButton(Frame, "Wykonaj", UDim2.new(0.725, 0, 0.333, 0), Color3.new(1, 0.666, 0))
-		local CopyBtn = CreateStyledButton(Frame, "Skopiuj", UDim2.new(0.81, 0, 0.333, 0), Color3.new(1, 0.666, 0))
-		local EditBtn = CreateStyledButton(Frame, "Link", UDim2.new(0.896, 0, 0.333, 0), Color3.new(1, 0.666, 0))
-	
-		-- Logika przycisków
-		ExecBtn.MouseButton1Click:Connect(function()
-			if scriptData.script then
-				loadstring(scriptData.script)()
-				StarterGui:SetCore("SendNotification", {Title="Hub", Text="Skrypt wykonany!", Duration=2})
-			end
-		end)
-	
-		CopyBtn.MouseButton1Click:Connect(function()
-			setclipboard(scriptData.script or "")
-			StarterGui:SetCore("SendNotification", {Title="Hub", Text="Skopiowano kod!", Duration=2})
-		end)
-	
-		EditBtn.MouseButton1Click:Connect(function()
-			local link = "https://scriptblox.com/script/" .. (scriptData.slug or "")
-			setclipboard(link)
-			StarterGui:SetCore("SendNotification", {Title="Hub", Text="Skopiowano link ScriptBlox!", Duration=2})
-		end)
-	
-		return Frame
-	end
-	
-	-- Funkcja wyszukiwania
-	function SearchScripts(query)
-		-- Czyścimy ScrollFrame
+	-- FUNKCJA 1: Czyszczenie starych wyników
+	local function ClearResults()
 		for _, child in pairs(Scroll:GetChildren()) do
 			if child:IsA("Frame") then child:Destroy() end
 		end
+	end
 	
-		local url = "https://scriptblox.com/api/script/search?q=" .. HttpService:UrlEncode(query) .. "&mode=free&page=1"
+	-- FUNKCJA 2: Tworzenie karty skryptu (Twój design)
+	local function CreateCard(data)
+		local Card = Instance.new("Frame")
+		Card.Name = "ScriptResult"
+		Card.BackgroundColor3 = Color3.fromRGB(100, 100, 100) -- Szary jak w Twoim projekcie
+		Card.Size = UDim2.new(0.95, 0, 0, 100)
+		Instance.new("UICorner", Card).CornerRadius = UDim.new(0, 8)
+	
+		-- Tytuł
+		local Title = Instance.new("TextLabel")
+		Title.Parent = Card
+		Title.BackgroundTransparency = 1
+		Title.Position = UDim2.new(0.02, 0, 0.2, 0)
+		Title.Size = UDim2.new(0.6, 0, 0, 30)
+		Title.Text = data.title
+		Title.TextColor3 = Color3.new(1, 1, 1)
+		Title.TextScaled = true
+		Title.Font = Enum.Font.SourceSansBold
+		Title.TextXAlignment = Enum.TextXAlignment.Left
+	
+		-- Przycisk Wykonaj (Pomarańczowy)
+		local Exec = Instance.new("TextButton")
+		Exec.Parent = Card
+		Exec.Text = "WYKONAJ"
+		Exec.BackgroundColor3 = Color3.new(1, 0.66, 0)
+		Exec.Size = UDim2.new(0.15, 0, 0.4, 0)
+		Exec.Position = UDim2.new(0.82, 0, 0.3, 0)
+		Instance.new("UICorner", Exec)
+	
+		-- Logika przycisku Wykonaj
+		Exec.MouseButton1Click:Connect(function()
+			if data.script then
+				local success, err = pcall(function()
+					loadstring(data.script)()
+				end)
+				if success then
+					StarterGui:SetCore("SendNotification", {Title="Sukces", Text="Uruchomiono: "..data.title})
+				else
+					warn("Błąd: "..err)
+				end
+			end
+		end)
+	
+		return Card
+	end
+	
+	-- FUNKCJA 3: Serce wyszukiwarki (API)
+	local function StartSearch()
+		local text = Input.Text
+		if text == "" then return end
+	
+		ClearResults()
+	
+		if not requestFunc then
+			StarterGui:SetCore("SendNotification", {Title="Błąd", Text="Twoje exploit nie obsługuje HTTP!"})
+			return
+		end
+	
+		-- Pobieranie danych ze ScriptBlox
+		local url = "https://scriptblox.com/api/script/search?q=" .. HttpService:UrlEncode(text) .. "&mode=free&page=1"
 	
 		local success, response = pcall(function()
 			return requestFunc({Url = url, Method = "GET"})
 		end)
 	
 		if success and response.StatusCode == 200 then
-			local data = HttpService:JSONDecode(response.Body)
-			local scripts = data.result.scripts
-	
-			local layout = Scroll:FindFirstChildOfClass("UIListLayout") or Instance.new("UIListLayout", Scroll)
-			layout.Padding = UDim.new(0, 10)
-			layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-	
-			for _, sData in pairs(scripts) do
-				local card = CreateScriptCard(sData)
+			local decoded = HttpService:JSONDecode(response.Body)
+			for _, s in pairs(decoded.result.scripts) do
+				local card = CreateCard(s)
 				card.Parent = Scroll
 			end
-	
-			Scroll.CanvasSize = UDim2.new(0, 0, 0, layout.AbsoluteContentSize.Y + 20)
-		else
-			warn("Błąd połączenia z API ScriptBlox")
+			-- Automatyczne dostosowanie przewijania
+			Scroll.CanvasSize = UDim2.new(0, 0, 0, Scroll.UIListLayout.AbsoluteContentSize.Y + 10)
 		end
 	end
 	
-	-- Przykład podpięcia pod TextBox (Musisz go mieć w GUI)
-	-- local SearchBox = Searcher:WaitForChild("TextBox")
-	-- SearchBox.FocusLost:Connect(function(enter) if enter then SearchScripts(SearchBox.Text) end end)
+	-- Podpięcie wszystkiego pod przycisk
+	SearchBtn.MouseButton1Click:Connect(StartSearch)
+	Input.FocusLost:Connect(function(enter) if enter then StartSearch() end end)
 end
-coroutine.wrap(YSYV_fake_script)()
-local function SKLNT_fake_script() -- BackButton_2.LocalScript 
+coroutine.wrap(AFPFZ_fake_script)()
+local function POMWWB_fake_script() -- BackButton_2.LocalScript 
 	local script = Instance.new('LocalScript', BackButton_2)
 
 	local TweenService = game:GetService("TweenService")
@@ -4002,9 +3947,9 @@ local function SKLNT_fake_script() -- BackButton_2.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(SKLNT_fake_script)()
-local function NMBHPL_fake_script() -- TextButton.LocalScript 
-	local script = Instance.new('LocalScript', TextButton)
+coroutine.wrap(POMWWB_fake_script)()
+local function MFVBNHX_fake_script() -- TextButton_2.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_2)
 
 	local button = script.Parent
 	local expandPixels = 10
@@ -4103,8 +4048,8 @@ local function NMBHPL_fake_script() -- TextButton.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(NMBHPL_fake_script)()
-local function WIOFPDC_fake_script() -- CloseButton.LocalScript 
+coroutine.wrap(MFVBNHX_fake_script)()
+local function SVMERKU_fake_script() -- CloseButton.LocalScript 
 	local script = Instance.new('LocalScript', CloseButton)
 
 	-- Odwołania do elementów GUI
@@ -4150,8 +4095,8 @@ local function WIOFPDC_fake_script() -- CloseButton.LocalScript
 	button.MouseButton1Click:Connect(toggleFrame)
 	
 end
-coroutine.wrap(WIOFPDC_fake_script)()
-local function JRIAY_fake_script() -- TextLabel_4.LocalScript 
+coroutine.wrap(SVMERKU_fake_script)()
+local function NWVKSM_fake_script() -- TextLabel_4.LocalScript 
 	local script = Instance.new('LocalScript', TextLabel_4)
 
 	-- LocalScript wewnątrz TextLabel
@@ -4284,4 +4229,4 @@ local function JRIAY_fake_script() -- TextLabel_4.LocalScript
 	-- _G.ShowNotification("Zebrałeś rzadki przedmiot!", 8)
 	
 end
-coroutine.wrap(JRIAY_fake_script)()
+coroutine.wrap(NWVKSM_fake_script)()
