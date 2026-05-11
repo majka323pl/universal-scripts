@@ -1091,7 +1091,7 @@ UIAspectRatioConstraint_12.AspectRatio = 16.428571701049805
 
 -- ProjectUniversal.LocalScript is disabled.
 -- ProjectUniversal.Script is disabled.
-local function NRFR_fake_script() -- ProjectUniversal.LocalScript 
+local function WYYW_fake_script() -- ProjectUniversal.LocalScript 
 	local script = Instance.new('LocalScript', ProjectUniversal)
 
 		local TweenService = game:GetService("TweenService")
@@ -1225,8 +1225,8 @@ local function NRFR_fake_script() -- ProjectUniversal.LocalScript
 		})
 	end)
 end
-coroutine.wrap(NRFR_fake_script)()
-local function YGLVCML_fake_script() -- Guzik1.LocalScript 
+coroutine.wrap(WYYW_fake_script)()
+local function HAEWKZ_fake_script() -- Guzik1.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1)
 
 	local TweenService = game:GetService("TweenService")
@@ -1288,8 +1288,8 @@ local function YGLVCML_fake_script() -- Guzik1.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(YGLVCML_fake_script)()
-local function DAMCGNS_fake_script() -- Guzik1_2.LocalScript 
+coroutine.wrap(HAEWKZ_fake_script)()
+local function MVIYSGL_fake_script() -- Guzik1_2.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_2)
 
 	local button = script.Parent
@@ -1394,8 +1394,8 @@ local function DAMCGNS_fake_script() -- Guzik1_2.LocalScript
 	end
 	
 end
-coroutine.wrap(DAMCGNS_fake_script)()
-local function IQAUI_fake_script() -- Nickdispaly.LocalScript 
+coroutine.wrap(MVIYSGL_fake_script)()
+local function EHTNTQ_fake_script() -- Nickdispaly.LocalScript 
 	local script = Instance.new('LocalScript', Nickdispaly)
 
 	local Players = game:GetService("Players")
@@ -1408,8 +1408,8 @@ local function IQAUI_fake_script() -- Nickdispaly.LocalScript
 	
 	label.Text = "Witaj " .. display_name .. "(@" .. username .. ")"
 end
-coroutine.wrap(IQAUI_fake_script)()
-local function IFZU_fake_script() -- ImageLabel.LocalScript 
+coroutine.wrap(EHTNTQ_fake_script)()
+local function JGFQC_fake_script() -- ImageLabel.LocalScript 
 	local script = Instance.new('LocalScript', ImageLabel)
 
 	local Players = game:GetService("Players")
@@ -1436,10 +1436,10 @@ local function IFZU_fake_script() -- ImageLabel.LocalScript
 	
 	-- not needed but if imagelabel is too big image will be pixelated very badly: imageLabel.Size = UDim2.new(0, 420, 0, 420)
 end
-coroutine.wrap(IFZU_fake_script)()
+coroutine.wrap(JGFQC_fake_script)()
 -- BuyPremiumTab.LocalScript is disabled.
 -- BuyPremiumTab.LocalScript is disabled.
-local function TACBOQF_fake_script() -- ExecutorTab.LocalScript 
+local function CQQRW_fake_script() -- ExecutorTab.LocalScript 
 	local script = Instance.new('LocalScript', ExecutorTab)
 
 	local TweenService = game:GetService("TweenService")
@@ -1536,9 +1536,9 @@ local function TACBOQF_fake_script() -- ExecutorTab.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(TACBOQF_fake_script)()
+coroutine.wrap(CQQRW_fake_script)()
 -- ScriptsButton.LocalScript is disabled.
-local function LDRLW_fake_script() -- ScriptsButton.LocalScript 
+local function SLHVATP_fake_script() -- ScriptsButton.LocalScript 
 	local script = Instance.new('LocalScript', ScriptsButton)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -1562,10 +1562,10 @@ local function LDRLW_fake_script() -- ScriptsButton.LocalScript
 		end)
 	end)
 end
-coroutine.wrap(LDRLW_fake_script)()
+coroutine.wrap(SLHVATP_fake_script)()
 -- UpdateLogs.LocalScript is disabled.
 -- TimerButton.LocalScript is disabled.
-local function YBZD_fake_script() -- RejoinButton.LocalScript 
+local function KABTURU_fake_script() -- RejoinButton.LocalScript 
 	local script = Instance.new('LocalScript', RejoinButton)
 
 	local TweenService = game:GetService("TweenService")
@@ -1722,8 +1722,8 @@ local function YBZD_fake_script() -- RejoinButton.LocalScript
 		teleportService:Teleport(gamePlaceId, player)
 	end
 end
-coroutine.wrap(YBZD_fake_script)()
-local function ZSJFSW_fake_script() -- RejoinButton_2.LocalScript 
+coroutine.wrap(KABTURU_fake_script)()
+local function VXERH_fake_script() -- RejoinButton_2.LocalScript 
 	local script = Instance.new('LocalScript', RejoinButton_2)
 
 	local btn = script.Parent
@@ -1738,8 +1738,8 @@ local function ZSJFSW_fake_script() -- RejoinButton_2.LocalScript
 		SearcherFrame.Visible = true
 	end)
 end
-coroutine.wrap(ZSJFSW_fake_script)()
-local function VFUVY_fake_script() -- Executor.LocalScript 
+coroutine.wrap(VXERH_fake_script)()
+local function ZTYHAL_fake_script() -- Executor.LocalScript 
 	local script = Instance.new('LocalScript', Executor)
 
 	-- Executor - poprawiony LocalScript
@@ -2313,8 +2313,8 @@ local function VFUVY_fake_script() -- Executor.LocalScript
 	end)
 	
 end
-coroutine.wrap(VFUVY_fake_script)()
-local function VHDNCD_fake_script() -- CopyToClipboard.LocalScript 
+coroutine.wrap(ZTYHAL_fake_script)()
+local function IGTIHSB_fake_script() -- CopyToClipboard.LocalScript 
 	local script = Instance.new('LocalScript', CopyToClipboard)
 
 	local TweenService = game:GetService("TweenService")
@@ -2464,8 +2464,8 @@ local function VHDNCD_fake_script() -- CopyToClipboard.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(VHDNCD_fake_script)()
-local function WTRVYF_fake_script() -- Execute.LocalScript 
+coroutine.wrap(IGTIHSB_fake_script)()
+local function SJUS_fake_script() -- Execute.LocalScript 
 	local script = Instance.new('LocalScript', Execute)
 
 	local TweenService = game:GetService("TweenService")
@@ -2670,8 +2670,8 @@ local function WTRVYF_fake_script() -- Execute.LocalScript
 		end
 	end
 end
-coroutine.wrap(WTRVYF_fake_script)()
-local function UPQT_fake_script() -- Rename.LocalScript 
+coroutine.wrap(SJUS_fake_script)()
+local function DVVGJEA_fake_script() -- Rename.LocalScript 
 	local script = Instance.new('LocalScript', Rename)
 
 	local TweenService = game:GetService("TweenService")
@@ -2821,8 +2821,8 @@ local function UPQT_fake_script() -- Rename.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(UPQT_fake_script)()
-local function IMBBNR_fake_script() -- Delete.LocalScript 
+coroutine.wrap(DVVGJEA_fake_script)()
+local function GUVDQP_fake_script() -- Delete.LocalScript 
 	local script = Instance.new('LocalScript', Delete)
 
 	local TweenService = game:GetService("TweenService")
@@ -2972,8 +2972,8 @@ local function IMBBNR_fake_script() -- Delete.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(IMBBNR_fake_script)()
-local function CBWOTZG_fake_script() -- ClearExecTextBox.LocalScript 
+coroutine.wrap(GUVDQP_fake_script)()
+local function RNMZ_fake_script() -- ClearExecTextBox.LocalScript 
 	local script = Instance.new('LocalScript', ClearExecTextBox)
 
 	local TweenService = game:GetService("TweenService")
@@ -3123,8 +3123,8 @@ local function CBWOTZG_fake_script() -- ClearExecTextBox.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(CBWOTZG_fake_script)()
-local function ELBR_fake_script() -- SaveFile.LocalScript 
+coroutine.wrap(RNMZ_fake_script)()
+local function CHXPX_fake_script() -- SaveFile.LocalScript 
 	local script = Instance.new('LocalScript', SaveFile)
 
 	local TweenService = game:GetService("TweenService")
@@ -3274,8 +3274,8 @@ local function ELBR_fake_script() -- SaveFile.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(ELBR_fake_script)()
-local function PVELRW_fake_script() -- Guzik1_3.LocalScript 
+coroutine.wrap(CHXPX_fake_script)()
+local function ALWUFC_fake_script() -- Guzik1_3.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_3)
 
 	local button = script.Parent
@@ -3531,8 +3531,8 @@ local function PVELRW_fake_script() -- Guzik1_3.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(PVELRW_fake_script)()
-local function RKXSOAA_fake_script() -- BackButton.LocalScript 
+coroutine.wrap(ALWUFC_fake_script)()
+local function TKYQN_fake_script() -- BackButton.LocalScript 
 	local script = Instance.new('LocalScript', BackButton)
 
 	local TweenService = game:GetService("TweenService")
@@ -3594,8 +3594,8 @@ local function RKXSOAA_fake_script() -- BackButton.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(RKXSOAA_fake_script)()
-local function VDRIFD_fake_script() -- Guzik1_4.LocalScript 
+coroutine.wrap(TKYQN_fake_script)()
+local function RDTTY_fake_script() -- Guzik1_4.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_4)
 
 	local TweenService = game:GetService("TweenService")
@@ -3657,8 +3657,8 @@ local function VDRIFD_fake_script() -- Guzik1_4.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(VDRIFD_fake_script)()
-local function ZRSOVJE_fake_script() -- Guzik1_5.LocalScript 
+coroutine.wrap(RDTTY_fake_script)()
+local function SBCKGS_fake_script() -- Guzik1_5.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_5)
 
 	local TweenService = game:GetService("TweenService")
@@ -3720,8 +3720,8 @@ local function ZRSOVJE_fake_script() -- Guzik1_5.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(ZRSOVJE_fake_script)()
-local function AGDLJ_fake_script() -- Guzik1_6.LocalScript 
+coroutine.wrap(SBCKGS_fake_script)()
+local function EJRL_fake_script() -- Guzik1_6.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_6)
 
 	local TweenService = game:GetService("TweenService")
@@ -3783,23 +3783,31 @@ local function AGDLJ_fake_script() -- Guzik1_6.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(AGDLJ_fake_script)()
-local function LTDCWZS_fake_script() -- Searcher.LocalScript 
+coroutine.wrap(EJRL_fake_script)()
+local function VKHRXL_fake_script() -- Searcher.LocalScript 
 	local script = Instance.new('LocalScript', Searcher)
 
 	local Searcher = script.Parent
 	local Scroll = Searcher:WaitForChild("ScrollingFrame")
 	local Input = Searcher:WaitForChild("TextBox")
 	local SearchBtn = Searcher:WaitForChild("TextButton")
-	local Template = Scroll:WaitForChild("Template") -- Ta ramka, której nazwę zmieniłeś
+	local Template = Scroll:WaitForChild("Template")
 	
 	local HttpService = game:GetService("HttpService")
-	local StarterGui = game:GetService("StarterGui")
 	
-	-- Funkcja sprawdzająca czy Twój program (executor) ma dostęp do internetu
+	-- Funkcja pomocnicza do bezpiecznego wysyłania powiadomień
+	local function sendNotify(text)
+		if _G.Notify then
+			_G.Notify(text, 1)
+		else
+			-- Fallback jeśli _G.Notify jeszcze się nie załadował
+			warn("ProjectUniversal: " .. text)
+		end
+	end
+	
+	-- Wykrywanie funkcji executora
 	local requestFunc = http_request or request or (syn and syn.request) or (fluxus and fluxus.request)
 	
-	-- Czyścimy listę przy każdym nowym szukaniu
 	local function ClearResults()
 		for _, child in pairs(Scroll:GetChildren()) do
 			if child:IsA("Frame") and child.Name ~= "Template" then
@@ -3810,12 +3818,16 @@ local function LTDCWZS_fake_script() -- Searcher.LocalScript
 	
 	local function StartSearch()
 		local text = Input.Text
-		if text == "" then return end
+		if text == "" then 
+			sendNotify("Wpisz nazwę skryptu!")
+			return 
+		end
 	
+		sendNotify("Szukanie: " .. text .. "...")
 		ClearResults()
 	
 		if not requestFunc then
-			StarterGui:SetCore("SendNotification", {Title = "Błąd", Text = "Uruchom to w executorze (np. Solara/Wave)!"})
+			sendNotify("Błąd: Brak wsparcia HTTP!")
 			return
 		end
 	
@@ -3827,51 +3839,73 @@ local function LTDCWZS_fake_script() -- Searcher.LocalScript
 	
 		if success and response.StatusCode == 200 then
 			local data = HttpService:JSONDecode(response.Body)
+			local scripts = data.result.scripts
 	
-			-- Dodajemy układanie na liście (UIListLayout) jeśli go zapomniałeś dodać
-			if not Scroll:FindFirstChildOfClass("UIListLayout") then
-				local layout = Instance.new("UIListLayout", Scroll)
-				layout.Padding = UDim.new(0, 5)
+			if #scripts == 0 then
+				sendNotify("Nie znaleziono wyników.")
+				return
+			end
+	
+			-- Sprawdzamy UIListLayout
+			local layout = Scroll:FindFirstChildOfClass("UIListLayout")
+			if not layout then
+				layout = Instance.new("UIListLayout", Scroll)
+				layout.Padding = UDim.new(0, 8)
 				layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 			end
 	
-			for _, s in pairs(data.result.scripts) do
+			for _, s in pairs(scripts) do
 				local clone = Template:Clone()
 				clone.Name = "Result"
 				clone.Parent = Scroll
-				clone.Visible = true -- Pokazujemy sklonowaną ramkę
+				clone.Visible = true
 	
-				-- Ustawiamy nazwę skryptu (Twoja labelka Opublikowana_4)
-				if clone:FindFirstChild("Opublikowana_4") then
-					clone.Opublikowana_4.Text = s.title
+				-- Ustawienie tytułu (Twoja labelka Opublikowana_4)
+				local title = clone:FindFirstChild("Opublikowana_4")
+				if title then
+					title.Text = s.title
 				end
 	
-				-- Obsługa guzików wewnątrz sklonowanej ramki
+				-- Obsługa przycisków
 				for _, child in pairs(clone:GetChildren()) do
-					if child:IsA("TextButton") and child.Name == "Guzik1" then
+					if child:IsA("TextButton") then
 						if child.Text == "Wykonaj" then
 							child.MouseButton1Click:Connect(function()
-								loadstring(s.script)()
+								local func, err = loadstring(s.script)
+								if func then
+									func()
+									sendNotify("Skrypt wykonany!")
+								else
+									sendNotify("Błąd skryptu!")
+								end
 							end)
 						elseif child.Text == "Skopiuj" then
 							child.MouseButton1Click:Connect(function()
 								setclipboard(s.script)
+								sendNotify("Skopiowano kod!")
 							end)
 						end
 					end
 				end
 			end
 	
-			-- Ustawiamy wielkość przewijania żeby działało
-			Scroll.CanvasSize = UDim2.new(0, 0, 0, Scroll.UIListLayout.AbsoluteContentSize.Y + 20)
+			Scroll.CanvasSize = UDim2.new(0, 0, 0, layout.AbsoluteContentSize.Y + 20)
+			sendNotify("Znaleziono " .. #scripts .. " skryptów.")
+		else
+			sendNotify("Błąd połączenia z API.")
 		end
 	end
 	
-	-- Podpinamy funkcję pod kliknięcie Twojego niebieskiego przycisku
+	-- Podpięcie kliknięcia
 	SearchBtn.MouseButton1Click:Connect(StartSearch)
+	
+	-- Szukaj też po kliknięciu Enter
+	Input.FocusLost:Connect(function(enter)
+		if enter then StartSearch() end
+	end)
 end
-coroutine.wrap(LTDCWZS_fake_script)()
-local function MOXR_fake_script() -- BackButton_2.LocalScript 
+coroutine.wrap(VKHRXL_fake_script)()
+local function WMYS_fake_script() -- BackButton_2.LocalScript 
 	local script = Instance.new('LocalScript', BackButton_2)
 
 	local TweenService = game:GetService("TweenService")
@@ -3933,8 +3967,8 @@ local function MOXR_fake_script() -- BackButton_2.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(MOXR_fake_script)()
-local function TWDIZR_fake_script() -- TextButton_2.LocalScript 
+coroutine.wrap(WMYS_fake_script)()
+local function ACEE_fake_script() -- TextButton_2.LocalScript 
 	local script = Instance.new('LocalScript', TextButton_2)
 
 	local button = script.Parent
@@ -4034,8 +4068,8 @@ local function TWDIZR_fake_script() -- TextButton_2.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(TWDIZR_fake_script)()
-local function WVFN_fake_script() -- CloseButton.LocalScript 
+coroutine.wrap(ACEE_fake_script)()
+local function JTJL_fake_script() -- CloseButton.LocalScript 
 	local script = Instance.new('LocalScript', CloseButton)
 
 	-- Odwołania do elementów GUI
@@ -4081,8 +4115,8 @@ local function WVFN_fake_script() -- CloseButton.LocalScript
 	button.MouseButton1Click:Connect(toggleFrame)
 	
 end
-coroutine.wrap(WVFN_fake_script)()
-local function ELLNSTQ_fake_script() -- TextLabel_4.LocalScript 
+coroutine.wrap(JTJL_fake_script)()
+local function MQJPWLG_fake_script() -- TextLabel_4.LocalScript 
 	local script = Instance.new('LocalScript', TextLabel_4)
 
 	-- LocalScript wewnątrz TextLabel
@@ -4215,4 +4249,4 @@ local function ELLNSTQ_fake_script() -- TextLabel_4.LocalScript
 	-- _G.ShowNotification("Zebrałeś rzadki przedmiot!", 8)
 	
 end
-coroutine.wrap(ELLNSTQ_fake_script)()
+coroutine.wrap(MQJPWLG_fake_script)()
