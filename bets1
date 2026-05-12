@@ -1,175 +1,205 @@
-
 --[[
-    ProjectUniversal: Script Searcher Edition
-    Zintegrowana wersja Mobile-Friendly
+    ProjectUniversal: Fullscreen Searcher + Editor Integration
 ]]
 
-local ProjectUniversal = game:GetService("CoreGui"):FindFirstChild("ProjectUniversal") or game:GetService("StarterGui"):FindFirstChild("ProjectUniversal")
-local MainFrame = ProjectUniversal and ProjectUniversal:FindFirstChild("Frame")
-
--- Jeśli nie masz jeszcze bazy, skrypt stworzy ją tymczasowo dla testu
-if not MainFrame then
-    local sg = Instance.new("ScreenGui", game:GetService("CoreGui"))
-    sg.Name = "ProjectUniversal"
-    MainFrame = Instance.new("Frame", sg)
-    MainFrame.Name = "Frame"
-    MainFrame.Size = UDim2.new(0.5, 0, 0.5, 0)
-    MainFrame.Position = UDim2.new(0.25, 0, 0.25, 0)
-    MainFrame.Visible = true
-end
-
--- Instances
-local Searcher = Instance.new("Frame")
-local UICorner = Instance.new("UICorner")
-local ScrollingFrame = Instance.new("ScrollingFrame")
-local UIListLayout = Instance.new("UIListLayout") -- Dodano dla porządku
-local Template = Instance.new("Frame")
-local Guzik1 = Instance.new("TextButton")
-local UICorner_2 = Instance.new("UICorner")
-local Guzik1_2 = Instance.new("TextButton")
-local UICorner_3 = Instance.new("UICorner")
-local UICorner_5 = Instance.new("UICorner")
-local Opublikowana_4 = Instance.new("TextLabel")
-local TextBox = Instance.new("TextBox")
-local UICorner_7 = Instance.new("UICorner")
-local TextButton = Instance.new("TextButton")
-local UICorner_8 = Instance.new("UICorner")
-
--- Properties
-Searcher.Name = "Searcher"
-Searcher.Parent = MainFrame
-Searcher.BackgroundColor3 = Color3.fromRGB(56, 56, 56)
-Searcher.BackgroundTransparency = 0.2
-Searcher.Position = UDim2.new(0.026, 0, 0.032, 0)
-Searcher.Size = UDim2.new(0.95, 0, 0.9, 0)
-Searcher.Visible = true
-
-UICorner.Parent = Searcher
-
-ScrollingFrame.Parent = Searcher
-ScrollingFrame.Active = true
-ScrollingFrame.BackgroundTransparency = 1
-ScrollingFrame.Position = UDim2.new(0.022, 0, 0.1, 0)
-ScrollingFrame.Size = UDim2.new(0.95, 0, 0.85, 0)
-ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
-ScrollingFrame.ScrollBarThickness = 4
-
-UIListLayout.Parent = ScrollingFrame
-UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout.Padding = UDim.new(0, 10)
-
-Template.Name = "Template"
-Template.Parent = ScrollingFrame
-Template.BackgroundColor3 = Color3.fromRGB(255, 181, 7)
-Template.Size = UDim2.new(1, -10, 0, 80)
-Template.Visible = false
-
-Guzik1.Name = "Execute"
-Guzik1.Parent = Template
-Guzik1.BackgroundColor3 = Color3.fromRGB(181, 181, 181)
-Guzik1.Position = UDim2.new(0.75, 0, 0.2, 0)
-Guzik1.Size = UDim2.new(0.1, 0, 0.6, 0)
-Guzik1.Text = "Wykonaj"
-Guzik1.TextScaled = true
-UICorner_2.Parent = Guzik1
-
-Guzik1_2.Name = "Copy"
-Guzik1_2.Parent = Template
-Guzik1_2.BackgroundColor3 = Color3.fromRGB(181, 181, 181)
-Guzik1_2.Position = UDim2.new(0.87, 0, 0.2, 0)
-Guzik1_2.Size = UDim2.new(0.1, 0, 0.6, 0)
-Guzik1_2.Text = "Skopiuj"
-Guzik1_2.TextScaled = true
-UICorner_3.Parent = Guzik1_2
-
-UICorner_5.Parent = Template
-
-Opublikowana_4.Name = "Title"
-Opublikowana_4.Parent = Template
-Opublikowana_4.BackgroundTransparency = 1
-Opublikowana_4.Position = UDim2.new(0.02, 0, 0.2, 0)
-Opublikowana_4.Size = UDim2.new(0.7, 0, 0.6, 0)
-Opublikowana_4.Font = Enum.Font.SourceSansBold
-Opublikowana_4.Text = "Nazwa Skryptu"
-Opublikowana_4.TextScaled = true
-Opublikowana_4.TextXAlignment = Enum.TextXAlignment.Left
-
-TextBox.Parent = Searcher
-TextBox.BackgroundColor3 = Color3.fromRGB(148, 148, 148)
-TextBox.Position = UDim2.new(0.05, 0, 0.01, 0)
-TextBox.Size = UDim2.new(0.7, 0, 0.07, 0)
-TextBox.PlaceholderText = "Wpisz nazwę skryptu..."
-TextBox.Text = ""
-TextBox.TextScaled = true
-UICorner_7.Parent = TextBox
-
-TextButton.Name = "SearchBtn"
-TextButton.Parent = Searcher
-TextButton.BackgroundColor3 = Color3.fromRGB(255, 183, 0)
-TextButton.Position = UDim2.new(0.78, 0, 0.01, 0)
-TextButton.Size = UDim2.new(0.17, 0, 0.07, 0)
-TextButton.Font = Enum.Font.FredokaOne
-TextButton.Text = "Szukaj"
-TextButton.TextScaled = true
-UICorner_8.Parent = TextButton
-
--- ==========================================
--- LOGIKA DZIAŁANIA (MOBILE & PC)
--- ==========================================
-
+local CoreGui = game:GetService("CoreGui")
 local HttpService = game:GetService("HttpService")
 
-local function Search()
-    local text = TextBox.Text
-    if text == "" then return end
-    
-    TextBox:ReleaseFocus()
-    if _G.Notify then _G.Notify("Szukanie...", 1) end
+-- 1. Szukamy głównego kontenera (ProjectUniversal -> Frame)
+local ProjectUniversal = CoreGui:FindFirstChild("ProjectUniversal") or game:GetService("StarterGui"):FindFirstChild("ProjectUniversal")
+local MainFrame = ProjectUniversal and ProjectUniversal:FindFirstChild("Frame")
 
-    -- Czyszczenie
-    for _, child in pairs(ScrollingFrame:GetChildren()) do
-        if child:IsA("Frame") and child.Name ~= "Template" then
-            child:Destroy()
-        end
+if not MainFrame then
+    warn("Nie znaleziono MainFrame (ProjectUniversal). Upewnij się, że hub jest włączony.")
+    return
+end
+
+-- ==========================================
+-- TWORZENIE GUI SEARCHERA (PEŁNOEKRANOWE)
+-- ==========================================
+
+local Searcher = Instance.new("Frame")
+Searcher.Name = "Searcher"
+Searcher.Parent = MainFrame
+Searcher.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Searcher.BackgroundTransparency = 0.1
+Searcher.BorderSizePixel = 0
+Searcher.Size = UDim2.new(1, 0, 1, 0) -- Pełny ekran wewnątrz MainFrame
+Searcher.Position = UDim2.new(0, 0, 0, 0)
+Searcher.Visible = false -- Startowo ukryty, otwierany przyciskiem
+
+local UICorner = Instance.new("UICorner", Searcher)
+
+-- Pole tekstowe
+local TextBox = Instance.new("TextBox")
+TextBox.Parent = Searcher
+TextBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+TextBox.Position = UDim2.new(0.05, 0, 0.02, 0)
+TextBox.Size = UDim2.new(0.65, 0, 0.08, 0)
+TextBox.PlaceholderText = "Szukaj skryptów..."
+TextBox.Text = ""
+TextBox.TextColor3 = Color3.new(1, 1, 1)
+TextBox.TextScaled = true
+Instance.new("UICorner", TextBox)
+
+-- Przycisk Szukaj
+local SearchBtn = Instance.new("TextButton")
+SearchBtn.Name = "SearchBtn"
+SearchBtn.Parent = Searcher
+SearchBtn.BackgroundColor3 = Color3.fromRGB(255, 180, 0)
+SearchBtn.Position = UDim2.new(0.72, 0, 0.02, 0)
+SearchBtn.Size = UDim2.new(0.1, 0, 0.08, 0)
+SearchBtn.Text = "SZUKAJ"
+SearchBtn.Font = Enum.Font.FredokaOne
+Instance.new("UICorner", SearchBtn)
+
+-- Przycisk Powrót (Twój kod Tween)
+local BackBtn = Instance.new("TextButton")
+BackBtn.Name = "BackBtn"
+BackBtn.Parent = Searcher
+BackBtn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+BackBtn.Position = UDim2.new(0.85, 0, 0.02, 0)
+BackBtn.Size = UDim2.new(0.1, 0, 0.08, 0)
+BackBtn.Text = "MENU"
+BackBtn.TextColor3 = Color3.new(1, 1, 1)
+BackBtn.TextScaled = true
+Instance.new("UICorner", BackBtn)
+
+-- Lista wyników
+local Scroll = Instance.new("ScrollingFrame")
+Scroll.Parent = Searcher
+Scroll.BackgroundTransparency = 1
+Scroll.Position = UDim2.new(0.05, 0, 0.12, 0)
+Scroll.Size = UDim2.new(0.9, 0, 0.85, 0)
+Scroll.CanvasSize = UDim2.new(0, 0, 0, 0)
+Scroll.ScrollBarThickness = 6
+
+local layout = Instance.new("UIListLayout", Scroll)
+layout.Padding = UDim.new(0, 10)
+layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+
+-- Szablon (Template)
+local Template = Instance.new("Frame")
+Template.Name = "Template"
+Template.Parent = Scroll
+Template.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+Template.Size = UDim2.new(1, -20, 0, 100)
+Template.Visible = false
+Instance.new("UICorner", Template)
+
+local Title = Instance.new("TextLabel")
+Title.Name = "Title"
+Title.Parent = Template
+Title.BackgroundTransparency = 1
+Title.Position = UDim2.new(0.02, 0, 0.1, 0)
+Title.Size = UDim2.new(0.6, 0, 0.4, 0)
+Title.TextColor3 = Color3.new(1, 1, 1)
+Title.TextScaled = true
+Title.TextXAlignment = Enum.TextXAlignment.Left
+
+-- Guziki na karcie
+local function CreateCardBtn(name, pos, color, text)
+    local b = Instance.new("TextButton")
+    b.Name = name
+    b.Parent = Template
+    b.BackgroundColor3 = color
+    b.Position = pos
+    b.Size = UDim2.new(0.12, 0, 0.4, 0)
+    b.Text = text
+    b.TextScaled = true
+    Instance.new("UICorner", b)
+    return b
+end
+
+local ExecBtn = CreateCardBtn("Execute", UDim2.new(0.58, 0, 0.3, 0), Color3.fromRGB(0, 170, 0), "Wykonaj")
+local CopyBtn = CreateCardBtn("Copy", UDim2.new(0.72, 0, 0.3, 0), Color3.fromRGB(170, 170, 170), "Skopiuj")
+local EditBtn = CreateCardBtn("Edit", UDim2.new(0.86, 0, 0.3, 0), Color3.fromRGB(0, 120, 255), "Edytuj")
+
+-- ==========================================
+-- LOGIKA DZIAŁANIA
+-- ==========================================
+
+-- 1. Funkcja wyszukiwania
+_G.StartProjectSearch = function()
+    local q = TextBox.Text
+    if q == "" then return end
+    
+    for _, v in pairs(Scroll:GetChildren()) do
+        if v:IsA("Frame") and v.Name ~= "Template" then v:Destroy() end
     end
 
-    local request = http_request or request or (syn and syn.request) or (fluxus and fluxus.request)
-    if not request then 
-        warn("Brak obsługi HTTP w Twoim executorze.")
-        return 
-    end
-
-    local url = "https://scriptblox.com/api/script/search?q=" .. HttpService:UrlEncode(text) .. "&mode=free&page=1"
+    local req = http_request or request or (syn and syn.request)
+    local url = "https://scriptblox.com/api/script/search?q=" .. HttpService:UrlEncode(q) .. "&mode=free&page=1"
     
-    local success, response = pcall(function()
-        return request({Url = url, Method = "GET"})
-    end)
-
-    if success and response.StatusCode == 200 then
-        local data = HttpService:JSONDecode(response.Body)
-        
+    local success, res = pcall(function() return req({Url = url, Method = "GET"}) end)
+    if success and res.StatusCode == 200 then
+        local data = HttpService:JSONDecode(res.Body)
         for _, s in pairs(data.result.scripts) do
-            local clone = Template:Clone()
-            clone.Parent = ScrollingFrame
-            clone.Visible = true
-            clone.Title.Text = s.title
+            local card = Template:Clone()
+            card.Parent = Scroll
+            card.Visible = true
+            card.Title.Text = s.title
             
-            -- Wykonaj
-            clone.Execute.Activated:Connect(function()
-                local f, err = loadstring(s.script)
-                if f then f() else warn(err) end
-            end)
+            card.Execute.Activated:Connect(function() loadstring(s.script)() end)
+            card.Copy.Activated:Connect(function() setclipboard(s.script) end)
             
-            -- Kopiuj
-            clone.Copy.Activated:Connect(function()
-                setclipboard(s.script)
-                if _G.Notify then _G.Notify("Skopiowano!", 1) end
+            -- Edytuj: wysyła do Twojego panelu edytora (jeśli masz TextBox w Executorze)
+            card.Edit.Activated:Connect(function()
+                local ExecutorPanel = MainFrame:FindFirstChild("Executor") -- Zmień nazwę jeśli panel edytora nazywa się inaczej
+                if ExecutorPanel then
+                    local EditorBox = ExecutorPanel:FindFirstChildOfClass("TextBox") or ExecutorPanel:FindFirstChild("Editor")
+                    if EditorBox then
+                        EditorBox.Text = s.script
+                        Searcher.Visible = false
+                        ExecutorPanel.Visible = true
+                    end
+                end
+                setclipboard(s.script) -- Backup do schowka
             end)
         end
-        ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, UIListLayout.AbsoluteContentSize.Y + 20)
+        Scroll.CanvasSize = UDim2.new(0, 0, 0, layout.AbsoluteContentSize.Y + 20)
     end
 end
 
--- Podpięcie pod przycisk (Używamy Activated dla Mobile)
-TextButton.Activated:Connect(Search)
-TextBox.FocusLost:Connect(function(enter) if enter then Search() end end)
+-- 2. Twój kod TWEEN dla BackBtn
+local function ApplyTweenLogic(btn)
+    local originalSize = btn.Size
+    local originalPosition = btn.Position
+    local expandPixels = 3
+
+    btn.MouseEnter:Connect(function()
+        local newSize = UDim2.new(originalSize.X.Scale, originalSize.X.Offset + expandPixels * 2, originalSize.Y.Scale, originalSize.Y.Offset + expandPixels * 2)
+        local newPosition = UDim2.new(originalPosition.X.Scale, originalPosition.X.Offset - expandPixels, originalPosition.Y.Scale, originalPosition.Y.Offset - expandPixels)
+        btn:TweenSizeAndPosition(newSize, newPosition, "Out", "Quad", 0.2, true)
+    end)
+
+    btn.MouseLeave:Connect(function()
+        btn:TweenSizeAndPosition(originalSize, originalPosition, "Out", "Quad", 0.2, true)
+    end)
+
+    btn.Activated:Connect(function()
+        local Home = MainFrame:FindFirstChild("Home")
+        if Home then
+            Searcher.Visible = false
+            Home.Visible = true
+        end
+    end)
+end
+ApplyTweenLogic(BackBtn)
+
+-- 3. Przycisk otwierający Searcher (dodaj do Menu bocznego lub Home)
+-- Szukamy przycisku w Twoim GUI, który ma otwierać wyszukiwarkę
+-- Jeśli go nie masz, ten kod stworzy przycisk testowy:
+local OpenBtn = MainFrame:FindFirstChild("OpenSearch") -- Zmień na nazwę Twojego guzika w Studio
+if OpenBtn then
+    OpenBtn.Activated:Connect(function()
+        for _, p in pairs(MainFrame:GetChildren()) do 
+            if p:IsA("Frame") then p.Visible = false end 
+        end
+        Searcher.Visible = true
+    end)
+end
+
+-- Podpięcie szukania
+SearchBtn.Activated:Connect(_G.StartProjectSearch)
+TextBox.FocusLost:Connect(function(enter) if enter then _G.StartProjectSearch() end end)
