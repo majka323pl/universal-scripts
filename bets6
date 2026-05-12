@@ -3816,3 +3816,54 @@ local function JPZBFED_fake_script() -- ProjectUniversal.LocalScript
 	end)
 end
 coroutine.wrap(JPZBFED_fake_script)()
+-- Logika przełączania zakładek
+local function showTab(tabToShow)
+    Home.Visible = false
+    Executor.Visible = false
+    Searcher.Visible = false
+    Loader.Visible = false
+    -- Dodaj inne ramki, jeśli istnieją
+    
+    tabToShow.Visible = true
+end
+
+-- Obsługa przycisków w menu głównym (Home)
+ExecutorTab.MouseButton1Click:Connect(function()
+    showTab(Executor)
+end)
+
+ScriptsButton.MouseButton1Click:Connect(function()
+    -- Tu możesz dodać ramkę ze skryptami, jeśli ją stworzyłeś
+    print("Otwieranie skryptów...") 
+end)
+
+SearchButton.MouseButton1Click:Connect(function()
+    showTab(Searcher)
+end)
+
+-- Obsługa przycisków powrotu (Back)
+BackButton.MouseButton1Click:Connect(function()
+    showTab(Home)
+end)
+
+BackButton_3.MouseButton1Click:Connect(function()
+    showTab(Home)
+end)
+
+-- Logika Executora
+Execute.MouseButton1Click:Connect(function()
+    local code = ExecutorTextBox.Text
+    local success, err = pcall(function()
+        loadstring(code)()
+    end)
+    
+    if not success then
+        ErrorLabel.Text = "Last Error: " .. tostring(err)
+    else
+        ErrorLabel.Text = "Last Error: None"
+    end
+end)
+
+ClearExecTextBox.MouseButton1Click:Connect(function()
+    ExecutorTextBox.Text = ""
+end)
