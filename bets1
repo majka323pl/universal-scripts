@@ -1,0 +1,175 @@
+
+--[[
+    ProjectUniversal: Script Searcher Edition
+    Zintegrowana wersja Mobile-Friendly
+]]
+
+local ProjectUniversal = game:GetService("CoreGui"):FindFirstChild("ProjectUniversal") or game:GetService("StarterGui"):FindFirstChild("ProjectUniversal")
+local MainFrame = ProjectUniversal and ProjectUniversal:FindFirstChild("Frame")
+
+-- Jeśli nie masz jeszcze bazy, skrypt stworzy ją tymczasowo dla testu
+if not MainFrame then
+    local sg = Instance.new("ScreenGui", game:GetService("CoreGui"))
+    sg.Name = "ProjectUniversal"
+    MainFrame = Instance.new("Frame", sg)
+    MainFrame.Name = "Frame"
+    MainFrame.Size = UDim2.new(0.5, 0, 0.5, 0)
+    MainFrame.Position = UDim2.new(0.25, 0, 0.25, 0)
+    MainFrame.Visible = true
+end
+
+-- Instances
+local Searcher = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local ScrollingFrame = Instance.new("ScrollingFrame")
+local UIListLayout = Instance.new("UIListLayout") -- Dodano dla porządku
+local Template = Instance.new("Frame")
+local Guzik1 = Instance.new("TextButton")
+local UICorner_2 = Instance.new("UICorner")
+local Guzik1_2 = Instance.new("TextButton")
+local UICorner_3 = Instance.new("UICorner")
+local UICorner_5 = Instance.new("UICorner")
+local Opublikowana_4 = Instance.new("TextLabel")
+local TextBox = Instance.new("TextBox")
+local UICorner_7 = Instance.new("UICorner")
+local TextButton = Instance.new("TextButton")
+local UICorner_8 = Instance.new("UICorner")
+
+-- Properties
+Searcher.Name = "Searcher"
+Searcher.Parent = MainFrame
+Searcher.BackgroundColor3 = Color3.fromRGB(56, 56, 56)
+Searcher.BackgroundTransparency = 0.2
+Searcher.Position = UDim2.new(0.026, 0, 0.032, 0)
+Searcher.Size = UDim2.new(0.95, 0, 0.9, 0)
+Searcher.Visible = true
+
+UICorner.Parent = Searcher
+
+ScrollingFrame.Parent = Searcher
+ScrollingFrame.Active = true
+ScrollingFrame.BackgroundTransparency = 1
+ScrollingFrame.Position = UDim2.new(0.022, 0, 0.1, 0)
+ScrollingFrame.Size = UDim2.new(0.95, 0, 0.85, 0)
+ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+ScrollingFrame.ScrollBarThickness = 4
+
+UIListLayout.Parent = ScrollingFrame
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.Padding = UDim.new(0, 10)
+
+Template.Name = "Template"
+Template.Parent = ScrollingFrame
+Template.BackgroundColor3 = Color3.fromRGB(255, 181, 7)
+Template.Size = UDim2.new(1, -10, 0, 80)
+Template.Visible = false
+
+Guzik1.Name = "Execute"
+Guzik1.Parent = Template
+Guzik1.BackgroundColor3 = Color3.fromRGB(181, 181, 181)
+Guzik1.Position = UDim2.new(0.75, 0, 0.2, 0)
+Guzik1.Size = UDim2.new(0.1, 0, 0.6, 0)
+Guzik1.Text = "Wykonaj"
+Guzik1.TextScaled = true
+UICorner_2.Parent = Guzik1
+
+Guzik1_2.Name = "Copy"
+Guzik1_2.Parent = Template
+Guzik1_2.BackgroundColor3 = Color3.fromRGB(181, 181, 181)
+Guzik1_2.Position = UDim2.new(0.87, 0, 0.2, 0)
+Guzik1_2.Size = UDim2.new(0.1, 0, 0.6, 0)
+Guzik1_2.Text = "Skopiuj"
+Guzik1_2.TextScaled = true
+UICorner_3.Parent = Guzik1_2
+
+UICorner_5.Parent = Template
+
+Opublikowana_4.Name = "Title"
+Opublikowana_4.Parent = Template
+Opublikowana_4.BackgroundTransparency = 1
+Opublikowana_4.Position = UDim2.new(0.02, 0, 0.2, 0)
+Opublikowana_4.Size = UDim2.new(0.7, 0, 0.6, 0)
+Opublikowana_4.Font = Enum.Font.SourceSansBold
+Opublikowana_4.Text = "Nazwa Skryptu"
+Opublikowana_4.TextScaled = true
+Opublikowana_4.TextXAlignment = Enum.TextXAlignment.Left
+
+TextBox.Parent = Searcher
+TextBox.BackgroundColor3 = Color3.fromRGB(148, 148, 148)
+TextBox.Position = UDim2.new(0.05, 0, 0.01, 0)
+TextBox.Size = UDim2.new(0.7, 0, 0.07, 0)
+TextBox.PlaceholderText = "Wpisz nazwę skryptu..."
+TextBox.Text = ""
+TextBox.TextScaled = true
+UICorner_7.Parent = TextBox
+
+TextButton.Name = "SearchBtn"
+TextButton.Parent = Searcher
+TextButton.BackgroundColor3 = Color3.fromRGB(255, 183, 0)
+TextButton.Position = UDim2.new(0.78, 0, 0.01, 0)
+TextButton.Size = UDim2.new(0.17, 0, 0.07, 0)
+TextButton.Font = Enum.Font.FredokaOne
+TextButton.Text = "Szukaj"
+TextButton.TextScaled = true
+UICorner_8.Parent = TextButton
+
+-- ==========================================
+-- LOGIKA DZIAŁANIA (MOBILE & PC)
+-- ==========================================
+
+local HttpService = game:GetService("HttpService")
+
+local function Search()
+    local text = TextBox.Text
+    if text == "" then return end
+    
+    TextBox:ReleaseFocus()
+    if _G.Notify then _G.Notify("Szukanie...", 1) end
+
+    -- Czyszczenie
+    for _, child in pairs(ScrollingFrame:GetChildren()) do
+        if child:IsA("Frame") and child.Name ~= "Template" then
+            child:Destroy()
+        end
+    end
+
+    local request = http_request or request or (syn and syn.request) or (fluxus and fluxus.request)
+    if not request then 
+        warn("Brak obsługi HTTP w Twoim executorze.")
+        return 
+    end
+
+    local url = "https://scriptblox.com/api/script/search?q=" .. HttpService:UrlEncode(text) .. "&mode=free&page=1"
+    
+    local success, response = pcall(function()
+        return request({Url = url, Method = "GET"})
+    end)
+
+    if success and response.StatusCode == 200 then
+        local data = HttpService:JSONDecode(response.Body)
+        
+        for _, s in pairs(data.result.scripts) do
+            local clone = Template:Clone()
+            clone.Parent = ScrollingFrame
+            clone.Visible = true
+            clone.Title.Text = s.title
+            
+            -- Wykonaj
+            clone.Execute.Activated:Connect(function()
+                local f, err = loadstring(s.script)
+                if f then f() else warn(err) end
+            end)
+            
+            -- Kopiuj
+            clone.Copy.Activated:Connect(function()
+                setclipboard(s.script)
+                if _G.Notify then _G.Notify("Skopiowano!", 1) end
+            end)
+        end
+        ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, UIListLayout.AbsoluteContentSize.Y + 20)
+    end
+end
+
+-- Podpięcie pod przycisk (Używamy Activated dla Mobile)
+TextButton.Activated:Connect(Search)
+TextBox.FocusLost:Connect(function(enter) if enter then Search() end end)
