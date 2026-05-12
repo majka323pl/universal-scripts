@@ -11,72 +11,64 @@
 
 local PROJECTUNIVERSAL67 = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
-local Loader = Instance.new("Frame")
-local UICorner = Instance.new("UICorner")
-local Guzik1 = Instance.new("TextButton")
-local UICorner_2 = Instance.new("UICorner")
-local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
-local Guzik1_2 = Instance.new("TextButton")
-local UICorner_3 = Instance.new("UICorner")
-local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
 local TextLabel = Instance.new("TextLabel")
 local Executor = Instance.new("Frame")
-local UICorner_4 = Instance.new("UICorner")
+local UICorner = Instance.new("UICorner")
 local Scripts = Instance.new("Frame")
-local UICorner_5 = Instance.new("UICorner")
+local UICorner_2 = Instance.new("UICorner")
 local Scripttab = Instance.new("Frame")
-local UICorner_6 = Instance.new("UICorner")
+local UICorner_3 = Instance.new("UICorner")
 local CopyToClipboard = Instance.new("ImageButton")
-local UICorner_7 = Instance.new("UICorner")
+local UICorner_4 = Instance.new("UICorner")
 local Tip = Instance.new("TextLabel")
-local UICorner_8 = Instance.new("UICorner")
+local UICorner_5 = Instance.new("UICorner")
 local Execute = Instance.new("ImageButton")
-local UICorner_9 = Instance.new("UICorner")
+local UICorner_6 = Instance.new("UICorner")
 local Tip_2 = Instance.new("TextLabel")
-local UICorner_10 = Instance.new("UICorner")
+local UICorner_7 = Instance.new("UICorner")
 local Rename = Instance.new("ImageButton")
-local UICorner_11 = Instance.new("UICorner")
+local UICorner_8 = Instance.new("UICorner")
 local Tip_3 = Instance.new("TextLabel")
-local UICorner_12 = Instance.new("UICorner")
+local UICorner_9 = Instance.new("UICorner")
 local Delete = Instance.new("ImageButton")
-local UICorner_13 = Instance.new("UICorner")
+local UICorner_10 = Instance.new("UICorner")
 local Tip_4 = Instance.new("TextLabel")
-local UICorner_14 = Instance.new("UICorner")
+local UICorner_11 = Instance.new("UICorner")
 local ClearExecTextBox = Instance.new("ImageButton")
-local UICorner_15 = Instance.new("UICorner")
+local UICorner_12 = Instance.new("UICorner")
 local Tip_5 = Instance.new("TextLabel")
-local UICorner_16 = Instance.new("UICorner")
+local UICorner_13 = Instance.new("UICorner")
 local SaveFile = Instance.new("ImageButton")
-local UICorner_17 = Instance.new("UICorner")
+local UICorner_14 = Instance.new("UICorner")
 local Tip_6 = Instance.new("TextLabel")
-local UICorner_18 = Instance.new("UICorner")
+local UICorner_15 = Instance.new("UICorner")
 local ScrollingFrame = Instance.new("ScrollingFrame")
-local Guzik1_3 = Instance.new("TextButton")
-local UICorner_19 = Instance.new("UICorner")
+local Guzik1 = Instance.new("TextButton")
+local UICorner_16 = Instance.new("UICorner")
 local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
-local UITextSizeConstraint_3 = Instance.new("UITextSizeConstraint")
+local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
 local BackButton = Instance.new("TextButton")
-local UICorner_20 = Instance.new("UICorner")
+local UICorner_17 = Instance.new("UICorner")
 local ErrorLabel = Instance.new("TextLabel")
-local UICorner_21 = Instance.new("UICorner")
-local UITextSizeConstraint_4 = Instance.new("UITextSizeConstraint")
+local UICorner_18 = Instance.new("UICorner")
+local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
 local ExecutorScrollingFrame = Instance.new("ScrollingFrame")
 local ExecutorTextBox = Instance.new("TextBox")
-local UICorner_22 = Instance.new("UICorner")
+local UICorner_19 = Instance.new("UICorner")
 local Searcher = Instance.new("Frame")
-local UICorner_23 = Instance.new("UICorner")
+local UICorner_20 = Instance.new("UICorner")
 local ScrollingFrame_2 = Instance.new("ScrollingFrame")
 local Template = Instance.new("Frame")
+local Guzik1_2 = Instance.new("TextButton")
+local UICorner_21 = Instance.new("UICorner")
+local UITextSizeConstraint_3 = Instance.new("UITextSizeConstraint")
+local Guzik1_3 = Instance.new("TextButton")
+local UICorner_22 = Instance.new("UICorner")
+local UITextSizeConstraint_4 = Instance.new("UITextSizeConstraint")
 local Guzik1_4 = Instance.new("TextButton")
-local UICorner_24 = Instance.new("UICorner")
+local UICorner_23 = Instance.new("UICorner")
 local UITextSizeConstraint_5 = Instance.new("UITextSizeConstraint")
-local Guzik1_5 = Instance.new("TextButton")
-local UICorner_25 = Instance.new("UICorner")
-local UITextSizeConstraint_6 = Instance.new("UITextSizeConstraint")
-local Guzik1_6 = Instance.new("TextButton")
-local UICorner_26 = Instance.new("UICorner")
-local UITextSizeConstraint_7 = Instance.new("UITextSizeConstraint")
-local UICorner_27 = Instance.new("UICorner")
+local UICorner_24 = Instance.new("UICorner")
 local GameName = Instance.new("TextLabel")
 local PublishLabel = Instance.new("TextLabel")
 local LikeLabel = Instance.new("TextLabel")
@@ -84,99 +76,99 @@ local ViewsLabel = Instance.new("TextLabel")
 local ScriptName = Instance.new("TextLabel")
 local UIListLayout = Instance.new("UIListLayout")
 local TextBox = Instance.new("TextBox")
-local UITextSizeConstraint_8 = Instance.new("UITextSizeConstraint")
-local UICorner_28 = Instance.new("UICorner")
+local UITextSizeConstraint_6 = Instance.new("UITextSizeConstraint")
+local UICorner_25 = Instance.new("UICorner")
 local TextButton = Instance.new("TextButton")
-local UICorner_29 = Instance.new("UICorner")
-local UITextSizeConstraint_9 = Instance.new("UITextSizeConstraint")
+local UICorner_26 = Instance.new("UICorner")
+local UITextSizeConstraint_7 = Instance.new("UITextSizeConstraint")
 local BackButton_2 = Instance.new("TextButton")
-local UICorner_30 = Instance.new("UICorner")
+local UICorner_27 = Instance.new("UICorner")
 local Home = Instance.new("Frame")
 local Text = Instance.new("TextLabel")
-local UITextSizeConstraint_10 = Instance.new("UITextSizeConstraint")
+local UITextSizeConstraint_8 = Instance.new("UITextSizeConstraint")
 local Nickdispaly = Instance.new("TextLabel")
-local UITextSizeConstraint_11 = Instance.new("UITextSizeConstraint")
+local UITextSizeConstraint_9 = Instance.new("UITextSizeConstraint")
 local ImageLabel = Instance.new("ImageLabel")
 local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
 local ImageLabel_2 = Instance.new("ImageLabel")
 local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
 local Buttons = Instance.new("Frame")
+local UICorner_28 = Instance.new("UICorner")
 local BuyPremiumTab = Instance.new("TextButton")
-local UICorner_31 = Instance.new("UICorner")
-local UITextSizeConstraint_12 = Instance.new("UITextSizeConstraint")
+local UICorner_29 = Instance.new("UICorner")
+local UITextSizeConstraint_10 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_4 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_5 = Instance.new("UIAspectRatioConstraint")
 local ExecutorTab = Instance.new("TextButton")
-local UICorner_32 = Instance.new("UICorner")
-local UITextSizeConstraint_13 = Instance.new("UITextSizeConstraint")
+local UICorner_30 = Instance.new("UICorner")
+local UITextSizeConstraint_11 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_6 = Instance.new("UIAspectRatioConstraint")
 local ScriptsButton = Instance.new("TextButton")
-local UICorner_33 = Instance.new("UICorner")
-local UITextSizeConstraint_14 = Instance.new("UITextSizeConstraint")
+local UICorner_31 = Instance.new("UICorner")
+local UITextSizeConstraint_12 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_7 = Instance.new("UIAspectRatioConstraint")
 local UpdateLogs = Instance.new("TextButton")
-local UICorner_34 = Instance.new("UICorner")
-local UITextSizeConstraint_15 = Instance.new("UITextSizeConstraint")
+local UICorner_32 = Instance.new("UICorner")
+local UITextSizeConstraint_13 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_8 = Instance.new("UIAspectRatioConstraint")
 local TimerButton = Instance.new("TextButton")
-local UICorner_35 = Instance.new("UICorner")
-local UITextSizeConstraint_16 = Instance.new("UITextSizeConstraint")
+local UICorner_33 = Instance.new("UICorner")
+local UITextSizeConstraint_14 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_9 = Instance.new("UIAspectRatioConstraint")
 local RejoinButton = Instance.new("TextButton")
-local UICorner_36 = Instance.new("UICorner")
-local UITextSizeConstraint_17 = Instance.new("UITextSizeConstraint")
+local UICorner_34 = Instance.new("UICorner")
+local UITextSizeConstraint_15 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_10 = Instance.new("UIAspectRatioConstraint")
 local SearchButton = Instance.new("TextButton")
-local UICorner_37 = Instance.new("UICorner")
-local UITextSizeConstraint_18 = Instance.new("UITextSizeConstraint")
+local UICorner_35 = Instance.new("UICorner")
+local UITextSizeConstraint_16 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_11 = Instance.new("UIAspectRatioConstraint")
-local UICorner_38 = Instance.new("UICorner")
 local StartScript = Instance.new("Frame")
-local UICorner_39 = Instance.new("UICorner")
+local UICorner_36 = Instance.new("UICorner")
 local BackButton_3 = Instance.new("TextButton")
-local UICorner_40 = Instance.new("UICorner")
+local UICorner_37 = Instance.new("UICorner")
 local DescLabel = Instance.new("TextLabel")
 local TextButton_2 = Instance.new("TextButton")
-local UICorner_41 = Instance.new("UICorner")
+local UICorner_38 = Instance.new("UICorner")
 local Locked = Instance.new("Frame")
-local UICorner_42 = Instance.new("UICorner")
+local UICorner_39 = Instance.new("UICorner")
 local ImageLabel_3 = Instance.new("ImageLabel")
 local Name = Instance.new("TextLabel")
-local UICorner_43 = Instance.new("UICorner")
+local UICorner_40 = Instance.new("UICorner")
 local Scripts_2 = Instance.new("Frame")
+local UICorner_41 = Instance.new("UICorner")
 local BackButton_4 = Instance.new("TextButton")
-local UICorner_44 = Instance.new("UICorner")
+local UICorner_42 = Instance.new("UICorner")
 local Dex = Instance.new("TextButton")
-local UICorner_45 = Instance.new("UICorner")
-local UITextSizeConstraint_19 = Instance.new("UITextSizeConstraint")
+local UICorner_43 = Instance.new("UICorner")
+local UITextSizeConstraint_17 = Instance.new("UITextSizeConstraint")
 local Locked_2 = Instance.new("Frame")
-local UICorner_46 = Instance.new("UICorner")
+local UICorner_44 = Instance.new("UICorner")
 local ImageLabel_4 = Instance.new("ImageLabel")
 local UIAspectRatioConstraint_12 = Instance.new("UIAspectRatioConstraint")
-local UICorner_47 = Instance.new("UICorner")
 local Game = Instance.new("TextButton")
-local UICorner_48 = Instance.new("UICorner")
-local UITextSizeConstraint_20 = Instance.new("UITextSizeConstraint")
+local UICorner_45 = Instance.new("UICorner")
+local UITextSizeConstraint_18 = Instance.new("UITextSizeConstraint")
 local Locked_3 = Instance.new("Frame")
-local UICorner_49 = Instance.new("UICorner")
+local UICorner_46 = Instance.new("UICorner")
 local ImageLabel_5 = Instance.new("ImageLabel")
 local UIAspectRatioConstraint_13 = Instance.new("UIAspectRatioConstraint")
 local Guzik2 = Instance.new("TextButton")
-local UICorner_50 = Instance.new("UICorner")
-local UITextSizeConstraint_21 = Instance.new("UITextSizeConstraint")
+local UICorner_47 = Instance.new("UICorner")
+local UITextSizeConstraint_19 = Instance.new("UITextSizeConstraint")
 local Guzik3 = Instance.new("TextButton")
-local UICorner_51 = Instance.new("UICorner")
-local UITextSizeConstraint_22 = Instance.new("UITextSizeConstraint")
+local UICorner_48 = Instance.new("UICorner")
+local UITextSizeConstraint_20 = Instance.new("UITextSizeConstraint")
 local Guzik4 = Instance.new("TextButton")
-local UICorner_52 = Instance.new("UICorner")
-local UITextSizeConstraint_23 = Instance.new("UITextSizeConstraint")
+local UICorner_49 = Instance.new("UICorner")
+local UITextSizeConstraint_21 = Instance.new("UITextSizeConstraint")
 local CloseButton = Instance.new("TextButton")
-local UICorner_53 = Instance.new("UICorner")
-local UITextSizeConstraint_24 = Instance.new("UITextSizeConstraint")
+local UICorner_50 = Instance.new("UICorner")
+local UITextSizeConstraint_22 = Instance.new("UITextSizeConstraint")
 local Notification = Instance.new("Frame")
 local TextLabel_2 = Instance.new("TextLabel")
-local UITextSizeConstraint_25 = Instance.new("UITextSizeConstraint")
-local UICorner_54 = Instance.new("UICorner")
+local UITextSizeConstraint_23 = Instance.new("UITextSizeConstraint")
+local UICorner_51 = Instance.new("UICorner")
 local UIAspectRatioConstraint_14 = Instance.new("UIAspectRatioConstraint")
 
 -- Properties
@@ -193,55 +185,6 @@ Frame.BorderColor3 = Color3.new(0, 0, 0)
 Frame.BorderSizePixel = 0
 Frame.Position = UDim2.new(-0.000412940979, 0, 0, 0)
 Frame.Size = UDim2.new(1.30027175, 0, 1.33964646, 0)
-
-Loader.Name = "Loader"
-Loader.Parent = Frame
-Loader.BackgroundColor3 = Color3.new(0.219608, 0.219608, 0.219608)
-Loader.BackgroundTransparency = 0.20000000298023224
-Loader.BorderColor3 = Color3.new(0, 0, 0)
-Loader.BorderSizePixel = 0
-Loader.Position = UDim2.new(0.026433643, 0, 0.0320368111, 0)
-Loader.Size = UDim2.new(0.70532918, 0, 0.681432605, 0)
-
-UICorner.Parent = Loader
-
-Guzik1.Name = "Guzik1"
-Guzik1.Parent = Loader
-Guzik1.BackgroundColor3 = Color3.new(1, 0.666667, 0.00392157)
-Guzik1.BorderColor3 = Color3.new(0, 0, 0)
-Guzik1.BorderSizePixel = 0
-Guzik1.Position = UDim2.new(0.349164039, 0, 0.374827027, 0)
-Guzik1.Size = UDim2.new(0.301481485, 0, 0.0733056739, 0)
-Guzik1.Font = Enum.Font.SourceSans
-Guzik1.Text = "Polski"
-Guzik1.TextColor3 = Color3.new(0, 0, 0)
-Guzik1.TextScaled = true
-Guzik1.TextSize = 14
-Guzik1.TextWrapped = true
-
-UICorner_2.Parent = Guzik1
-
-UITextSizeConstraint.Parent = Guzik1
-UITextSizeConstraint.MaxTextSize = 53
-
-Guzik1_2.Name = "Guzik1"
-Guzik1_2.Parent = Loader
-Guzik1_2.BackgroundColor3 = Color3.new(1, 0.666667, 0.00392157)
-Guzik1_2.BorderColor3 = Color3.new(0, 0, 0)
-Guzik1_2.BorderSizePixel = 0
-Guzik1_2.Position = UDim2.new(0.349164039, 0, 0.464741558, 0)
-Guzik1_2.Size = UDim2.new(0.301481485, 0, 0.0719225481, 0)
-Guzik1_2.Font = Enum.Font.SourceSans
-Guzik1_2.Text = "Coming Soon!(English)"
-Guzik1_2.TextColor3 = Color3.new(0, 0, 0)
-Guzik1_2.TextScaled = true
-Guzik1_2.TextSize = 14
-Guzik1_2.TextWrapped = true
-
-UICorner_3.Parent = Guzik1_2
-
-UITextSizeConstraint_2.Parent = Guzik1_2
-UITextSizeConstraint_2.MaxTextSize = 52
 
 TextLabel.Parent = Frame
 TextLabel.BackgroundColor3 = Color3.new(1, 1, 1)
@@ -267,7 +210,7 @@ Executor.Position = UDim2.new(0.00927324314, 0, 0.0152410166, 0)
 Executor.Size = UDim2.new(0.598900139, 0, 0.731224597, 0)
 Executor.Visible = false
 
-UICorner_4.Parent = Executor
+UICorner.Parent = Executor
 
 Scripts.Name = "Scripts"
 Scripts.Parent = Executor
@@ -278,7 +221,7 @@ Scripts.BorderSizePixel = 0
 Scripts.Position = UDim2.new(1.01858497, 0, -0.00131808827, 0)
 Scripts.Size = UDim2.new(0.231397375, 0, 1, 0)
 
-UICorner_5.Parent = Scripts
+UICorner_2.Parent = Scripts
 
 Scripttab.Name = "Script tab"
 Scripttab.Parent = Executor
@@ -289,7 +232,7 @@ Scripttab.BorderSizePixel = 0
 Scripttab.Position = UDim2.new(0.342010975, 0, 0.892343044, 0)
 Scripttab.Size = UDim2.new(0.335365176, 0, 0.0897914842, 0)
 
-UICorner_6.Parent = Scripttab
+UICorner_3.Parent = Scripttab
 
 CopyToClipboard.Name = "CopyToClipboard"
 CopyToClipboard.Parent = Scripttab
@@ -300,7 +243,7 @@ CopyToClipboard.Position = UDim2.new(0.693508089, 0, 0.101019181, 0)
 CopyToClipboard.Size = UDim2.new(0.138401404, 0, 0.790322602, 0)
 CopyToClipboard.Image = "rbxassetid://12011030159"
 
-UICorner_7.Parent = CopyToClipboard
+UICorner_4.Parent = CopyToClipboard
 
 Tip.Name = "Tip"
 Tip.Parent = CopyToClipboard
@@ -317,7 +260,7 @@ Tip.TextScaled = true
 Tip.TextSize = 14
 Tip.TextWrapped = true
 
-UICorner_8.Parent = Tip
+UICorner_5.Parent = Tip
 
 Execute.Name = "Execute"
 Execute.Parent = Scripttab
@@ -328,7 +271,7 @@ Execute.Position = UDim2.new(0.852282405, 0, 0.101019181, 0)
 Execute.Size = UDim2.new(0.129352927, 0, 0.790322602, 0)
 Execute.Image = "rbxassetid://12099513379"
 
-UICorner_9.Parent = Execute
+UICorner_6.Parent = Execute
 
 Tip_2.Name = "Tip"
 Tip_2.Parent = Execute
@@ -345,7 +288,7 @@ Tip_2.TextScaled = true
 Tip_2.TextSize = 14
 Tip_2.TextWrapped = true
 
-UICorner_10.Parent = Tip_2
+UICorner_7.Parent = Tip_2
 
 Rename.Name = "Rename"
 Rename.Parent = Scripttab
@@ -356,7 +299,7 @@ Rename.Position = UDim2.new(0.535052538, 0, 0.101019181, 0)
 Rename.Size = UDim2.new(0.139858067, 0, 0.790322602, 0)
 Rename.Image = "rbxassetid://84076926197960"
 
-UICorner_11.Parent = Rename
+UICorner_8.Parent = Rename
 
 Tip_3.Name = "Tip"
 Tip_3.Parent = Rename
@@ -373,7 +316,7 @@ Tip_3.TextScaled = true
 Tip_3.TextSize = 14
 Tip_3.TextWrapped = true
 
-UICorner_12.Parent = Tip_3
+UICorner_9.Parent = Tip_3
 
 Delete.Name = "Delete"
 Delete.Parent = Scripttab
@@ -384,7 +327,7 @@ Delete.Position = UDim2.new(0.0272436161, 0, 0.101019181, 0)
 Delete.Size = UDim2.new(0.142993778, 0, 0.790322542, 0)
 Delete.Image = "rbxassetid://8463436236"
 
-UICorner_13.Parent = Delete
+UICorner_10.Parent = Delete
 
 Tip_4.Name = "Tip"
 Tip_4.Parent = Delete
@@ -401,7 +344,7 @@ Tip_4.TextScaled = true
 Tip_4.TextSize = 14
 Tip_4.TextWrapped = true
 
-UICorner_14.Parent = Tip_4
+UICorner_11.Parent = Tip_4
 
 ClearExecTextBox.Name = "ClearExecTextBox"
 ClearExecTextBox.Parent = Scripttab
@@ -412,7 +355,7 @@ ClearExecTextBox.Position = UDim2.new(0.197807193, 0, 0.101019181, 0)
 ClearExecTextBox.Size = UDim2.new(0.149158582, 0, 0.790322542, 0)
 ClearExecTextBox.Image = "rbxassetid://9348208337"
 
-UICorner_15.Parent = ClearExecTextBox
+UICorner_12.Parent = ClearExecTextBox
 
 Tip_5.Name = "Tip"
 Tip_5.Parent = ClearExecTextBox
@@ -429,7 +372,7 @@ Tip_5.TextScaled = true
 Tip_5.TextSize = 14
 Tip_5.TextWrapped = true
 
-UICorner_16.Parent = Tip_5
+UICorner_13.Parent = Tip_5
 
 SaveFile.Name = "SaveFile"
 SaveFile.Parent = Scripttab
@@ -440,7 +383,7 @@ SaveFile.Position = UDim2.new(0.371361732, 0, 0.101019181, 0)
 SaveFile.Size = UDim2.new(0.142411858, 0, 0.790322602, 0)
 SaveFile.Image = "rbxassetid://101071239052290"
 
-UICorner_17.Parent = SaveFile
+UICorner_14.Parent = SaveFile
 
 Tip_6.Name = "Tip"
 Tip_6.Parent = SaveFile
@@ -457,7 +400,7 @@ Tip_6.TextScaled = true
 Tip_6.TextSize = 14
 Tip_6.TextWrapped = true
 
-UICorner_18.Parent = Tip_6
+UICorner_15.Parent = Tip_6
 
 ScrollingFrame.Parent = Executor
 ScrollingFrame.Active = true
@@ -468,27 +411,27 @@ ScrollingFrame.BorderSizePixel = 0
 ScrollingFrame.Position = UDim2.new(1.0256052, 0, 0.018099878, 0)
 ScrollingFrame.Size = UDim2.new(0.229540199, 0, 0.951590598, 0)
 
-Guzik1_3.Name = "Guzik1"
-Guzik1_3.Parent = ScrollingFrame
-Guzik1_3.BackgroundColor3 = Color3.new(1, 0.717647, 0)
-Guzik1_3.BorderColor3 = Color3.new(0, 0, 0)
-Guzik1_3.BorderSizePixel = 0
-Guzik1_3.Position = UDim2.new(0.0190308262, 0, 0.00415391615, 0)
-Guzik1_3.Size = UDim2.new(0, 239, 0, 40)
-Guzik1_3.Font = Enum.Font.FredokaOne
-Guzik1_3.Text = "Script #1"
-Guzik1_3.TextColor3 = Color3.new(0, 0, 0)
-Guzik1_3.TextScaled = true
-Guzik1_3.TextSize = 14
-Guzik1_3.TextWrapped = true
+Guzik1.Name = "Guzik1"
+Guzik1.Parent = ScrollingFrame
+Guzik1.BackgroundColor3 = Color3.new(1, 0.717647, 0)
+Guzik1.BorderColor3 = Color3.new(0, 0, 0)
+Guzik1.BorderSizePixel = 0
+Guzik1.Position = UDim2.new(0.0190308262, 0, 0.00415391615, 0)
+Guzik1.Size = UDim2.new(0, 239, 0, 40)
+Guzik1.Font = Enum.Font.FredokaOne
+Guzik1.Text = "Script #1"
+Guzik1.TextColor3 = Color3.new(0, 0, 0)
+Guzik1.TextScaled = true
+Guzik1.TextSize = 14
+Guzik1.TextWrapped = true
 
-UICorner_19.Parent = Guzik1_3
+UICorner_16.Parent = Guzik1
 
-UIAspectRatioConstraint.Parent = Guzik1_3
+UIAspectRatioConstraint.Parent = Guzik1
 UIAspectRatioConstraint.AspectRatio = 6.882352828979492
 
-UITextSizeConstraint_3.Parent = Guzik1_3
-UITextSizeConstraint_3.MaxTextSize = 34
+UITextSizeConstraint.Parent = Guzik1
+UITextSizeConstraint.MaxTextSize = 34
 
 BackButton.Name = "BackButton"
 BackButton.Parent = Executor
@@ -505,7 +448,7 @@ BackButton.TextScaled = true
 BackButton.TextSize = 14
 BackButton.TextWrapped = true
 
-UICorner_20.Parent = BackButton
+UICorner_17.Parent = BackButton
 
 ErrorLabel.Name = "ErrorLabel"
 ErrorLabel.Parent = Executor
@@ -522,10 +465,10 @@ ErrorLabel.TextSize = 14
 ErrorLabel.TextWrapped = true
 ErrorLabel.TextXAlignment = Enum.TextXAlignment.Left
 
-UICorner_21.Parent = ErrorLabel
+UICorner_18.Parent = ErrorLabel
 
-UITextSizeConstraint_4.Parent = ErrorLabel
-UITextSizeConstraint_4.MaxTextSize = 14
+UITextSizeConstraint_2.Parent = ErrorLabel
+UITextSizeConstraint_2.MaxTextSize = 14
 
 ExecutorScrollingFrame.Name = "ExecutorScrollingFrame"
 ExecutorScrollingFrame.Parent = Executor
@@ -556,7 +499,7 @@ ExecutorTextBox.TextWrapped = true
 ExecutorTextBox.TextXAlignment = Enum.TextXAlignment.Left
 ExecutorTextBox.TextYAlignment = Enum.TextYAlignment.Top
 
-UICorner_22.Parent = ExecutorScrollingFrame
+UICorner_19.Parent = ExecutorScrollingFrame
 
 Searcher.Name = "Searcher"
 Searcher.Parent = Frame
@@ -568,7 +511,7 @@ Searcher.Position = UDim2.new(0.026433643, 0, 0.0320368111, 0)
 Searcher.Size = UDim2.new(0.70532918, 0, 0.681432605, 0)
 Searcher.Visible = false
 
-UICorner_23.Parent = Searcher
+UICorner_20.Parent = Searcher
 
 ScrollingFrame_2.Parent = Searcher
 ScrollingFrame_2.Active = true
@@ -588,64 +531,64 @@ Template.Position = UDim2.new(0, 0, -1.99940455e-08, 0)
 Template.Size = UDim2.new(0, 549, 0, 51)
 Template.Visible = false
 
+Guzik1_2.Name = "Guzik1"
+Guzik1_2.Parent = Template
+Guzik1_2.BackgroundColor3 = Color3.new(0.709804, 0.709804, 0.709804)
+Guzik1_2.BorderColor3 = Color3.new(0, 0, 0)
+Guzik1_2.BorderSizePixel = 0
+Guzik1_2.Position = UDim2.new(0.72477752, 0, 0.333487332, 0)
+Guzik1_2.Size = UDim2.new(0.0758386552, 0, 0.327125102, 0)
+Guzik1_2.Font = Enum.Font.SourceSans
+Guzik1_2.Text = "Wykonaj"
+Guzik1_2.TextColor3 = Color3.new(0, 0, 0)
+Guzik1_2.TextScaled = true
+Guzik1_2.TextSize = 14
+Guzik1_2.TextWrapped = true
+
+UICorner_21.Parent = Guzik1_2
+
+UITextSizeConstraint_3.Parent = Guzik1_2
+UITextSizeConstraint_3.MaxTextSize = 53
+
+Guzik1_3.Name = "Guzik1"
+Guzik1_3.Parent = Template
+Guzik1_3.BackgroundColor3 = Color3.new(0.709804, 0.709804, 0.709804)
+Guzik1_3.BorderColor3 = Color3.new(0, 0, 0)
+Guzik1_3.BorderSizePixel = 0
+Guzik1_3.Position = UDim2.new(0.809720993, 0, 0.333487332, 0)
+Guzik1_3.Size = UDim2.new(0.0758386627, 0, 0.327125102, 0)
+Guzik1_3.Font = Enum.Font.SourceSans
+Guzik1_3.Text = "Skopiuj"
+Guzik1_3.TextColor3 = Color3.new(0, 0, 0)
+Guzik1_3.TextScaled = true
+Guzik1_3.TextSize = 14
+Guzik1_3.TextWrapped = true
+
+UICorner_22.Parent = Guzik1_3
+
+UITextSizeConstraint_4.Parent = Guzik1_3
+UITextSizeConstraint_4.MaxTextSize = 53
+
 Guzik1_4.Name = "Guzik1"
 Guzik1_4.Parent = Template
 Guzik1_4.BackgroundColor3 = Color3.new(0.709804, 0.709804, 0.709804)
 Guzik1_4.BorderColor3 = Color3.new(0, 0, 0)
 Guzik1_4.BorderSizePixel = 0
-Guzik1_4.Position = UDim2.new(0.72477752, 0, 0.333487332, 0)
-Guzik1_4.Size = UDim2.new(0.0758386552, 0, 0.327125102, 0)
+Guzik1_4.Position = UDim2.new(0.895730853, 0, 0.333487332, 0)
+Guzik1_4.Size = UDim2.new(0.0758386776, 0, 0.327125102, 0)
 Guzik1_4.Font = Enum.Font.SourceSans
-Guzik1_4.Text = "Wykonaj"
+Guzik1_4.Text = "Edytuj"
 Guzik1_4.TextColor3 = Color3.new(0, 0, 0)
 Guzik1_4.TextScaled = true
 Guzik1_4.TextSize = 14
 Guzik1_4.TextWrapped = true
 
-UICorner_24.Parent = Guzik1_4
+UICorner_23.Parent = Guzik1_4
 
 UITextSizeConstraint_5.Parent = Guzik1_4
 UITextSizeConstraint_5.MaxTextSize = 53
 
-Guzik1_5.Name = "Guzik1"
-Guzik1_5.Parent = Template
-Guzik1_5.BackgroundColor3 = Color3.new(0.709804, 0.709804, 0.709804)
-Guzik1_5.BorderColor3 = Color3.new(0, 0, 0)
-Guzik1_5.BorderSizePixel = 0
-Guzik1_5.Position = UDim2.new(0.809720993, 0, 0.333487332, 0)
-Guzik1_5.Size = UDim2.new(0.0758386627, 0, 0.327125102, 0)
-Guzik1_5.Font = Enum.Font.SourceSans
-Guzik1_5.Text = "Skopiuj"
-Guzik1_5.TextColor3 = Color3.new(0, 0, 0)
-Guzik1_5.TextScaled = true
-Guzik1_5.TextSize = 14
-Guzik1_5.TextWrapped = true
-
-UICorner_25.Parent = Guzik1_5
-
-UITextSizeConstraint_6.Parent = Guzik1_5
-UITextSizeConstraint_6.MaxTextSize = 53
-
-Guzik1_6.Name = "Guzik1"
-Guzik1_6.Parent = Template
-Guzik1_6.BackgroundColor3 = Color3.new(0.709804, 0.709804, 0.709804)
-Guzik1_6.BorderColor3 = Color3.new(0, 0, 0)
-Guzik1_6.BorderSizePixel = 0
-Guzik1_6.Position = UDim2.new(0.895730853, 0, 0.333487332, 0)
-Guzik1_6.Size = UDim2.new(0.0758386776, 0, 0.327125102, 0)
-Guzik1_6.Font = Enum.Font.SourceSans
-Guzik1_6.Text = "Edytuj"
-Guzik1_6.TextColor3 = Color3.new(0, 0, 0)
-Guzik1_6.TextScaled = true
-Guzik1_6.TextSize = 14
-Guzik1_6.TextWrapped = true
-
-UICorner_26.Parent = Guzik1_6
-
-UITextSizeConstraint_7.Parent = Guzik1_6
-UITextSizeConstraint_7.MaxTextSize = 53
-
-UICorner_27.Parent = Template
+UICorner_24.Parent = Template
 
 GameName.Name = "GameName"
 GameName.Parent = Template
@@ -730,10 +673,10 @@ TextBox.TextScaled = true
 TextBox.TextSize = 14
 TextBox.TextWrapped = true
 
-UITextSizeConstraint_8.Parent = TextBox
-UITextSizeConstraint_8.MaxTextSize = 36
+UITextSizeConstraint_6.Parent = TextBox
+UITextSizeConstraint_6.MaxTextSize = 36
 
-UICorner_28.Parent = TextBox
+UICorner_25.Parent = TextBox
 
 TextButton.Parent = Searcher
 TextButton.BackgroundColor3 = Color3.new(1, 0.717647, 0)
@@ -748,10 +691,10 @@ TextButton.TextScaled = true
 TextButton.TextSize = 14
 TextButton.TextWrapped = true
 
-UICorner_29.Parent = TextButton
+UICorner_26.Parent = TextButton
 
-UITextSizeConstraint_9.Parent = TextButton
-UITextSizeConstraint_9.MaxTextSize = 30
+UITextSizeConstraint_7.Parent = TextButton
+UITextSizeConstraint_7.MaxTextSize = 30
 
 BackButton_2.Name = "BackButton"
 BackButton_2.Parent = Searcher
@@ -768,7 +711,7 @@ BackButton_2.TextScaled = true
 BackButton_2.TextSize = 14
 BackButton_2.TextWrapped = true
 
-UICorner_30.Parent = BackButton_2
+UICorner_27.Parent = BackButton_2
 
 Home.Name = "Home"
 Home.Parent = Frame
@@ -777,7 +720,6 @@ Home.BorderColor3 = Color3.new(1, 1, 1)
 Home.BorderSizePixel = 0
 Home.Position = UDim2.new(0.0316902027, 0, 0.0323279239, 0)
 Home.Size = UDim2.new(0.70532918, 0, 0.681432605, 0)
-Home.Visible = false
 
 Text.Name = "Text"
 Text.Parent = Home
@@ -793,8 +735,8 @@ Text.TextScaled = true
 Text.TextSize = 14
 Text.TextWrapped = true
 
-UITextSizeConstraint_10.Parent = Text
-UITextSizeConstraint_10.MaxTextSize = 73
+UITextSizeConstraint_8.Parent = Text
+UITextSizeConstraint_8.MaxTextSize = 73
 
 Nickdispaly.Name = "Nick dispaly"
 Nickdispaly.Parent = Home
@@ -810,8 +752,8 @@ Nickdispaly.TextScaled = true
 Nickdispaly.TextSize = 14
 Nickdispaly.TextWrapped = true
 
-UITextSizeConstraint_11.Parent = Nickdispaly
-UITextSizeConstraint_11.MaxTextSize = 73
+UITextSizeConstraint_9.Parent = Nickdispaly
+UITextSizeConstraint_9.MaxTextSize = 73
 
 ImageLabel.Parent = Home
 ImageLabel.BackgroundColor3 = Color3.new(1, 1, 1)
@@ -842,6 +784,8 @@ Buttons.BorderSizePixel = 5
 Buttons.Position = UDim2.new(0.102991901, 0, 0.720608592, 0)
 Buttons.Size = UDim2.new(0, 951, 0, 98)
 
+UICorner_28.Parent = Home
+
 BuyPremiumTab.Name = "BuyPremiumTab"
 BuyPremiumTab.Parent = Home
 BuyPremiumTab.BackgroundColor3 = Color3.new(1, 0.717647, 0)
@@ -856,10 +800,10 @@ BuyPremiumTab.TextScaled = true
 BuyPremiumTab.TextSize = 14
 BuyPremiumTab.TextWrapped = true
 
-UICorner_31.Parent = BuyPremiumTab
+UICorner_29.Parent = BuyPremiumTab
 
-UITextSizeConstraint_12.Parent = BuyPremiumTab
-UITextSizeConstraint_12.MaxTextSize = 30
+UITextSizeConstraint_10.Parent = BuyPremiumTab
+UITextSizeConstraint_10.MaxTextSize = 30
 
 UIAspectRatioConstraint_4.Parent = BuyPremiumTab
 
@@ -879,10 +823,10 @@ ExecutorTab.TextScaled = true
 ExecutorTab.TextSize = 14
 ExecutorTab.TextWrapped = true
 
-UICorner_32.Parent = ExecutorTab
+UICorner_30.Parent = ExecutorTab
 
-UITextSizeConstraint_13.Parent = ExecutorTab
-UITextSizeConstraint_13.MaxTextSize = 33
+UITextSizeConstraint_11.Parent = ExecutorTab
+UITextSizeConstraint_11.MaxTextSize = 33
 
 UIAspectRatioConstraint_6.Parent = ExecutorTab
 
@@ -900,10 +844,10 @@ ScriptsButton.TextScaled = true
 ScriptsButton.TextSize = 14
 ScriptsButton.TextWrapped = true
 
-UICorner_33.Parent = ScriptsButton
+UICorner_31.Parent = ScriptsButton
 
-UITextSizeConstraint_14.Parent = ScriptsButton
-UITextSizeConstraint_14.MaxTextSize = 33
+UITextSizeConstraint_12.Parent = ScriptsButton
+UITextSizeConstraint_12.MaxTextSize = 33
 
 UIAspectRatioConstraint_7.Parent = ScriptsButton
 
@@ -921,10 +865,10 @@ UpdateLogs.TextScaled = true
 UpdateLogs.TextSize = 14
 UpdateLogs.TextWrapped = true
 
-UICorner_34.Parent = UpdateLogs
+UICorner_32.Parent = UpdateLogs
 
-UITextSizeConstraint_15.Parent = UpdateLogs
-UITextSizeConstraint_15.MaxTextSize = 30
+UITextSizeConstraint_13.Parent = UpdateLogs
+UITextSizeConstraint_13.MaxTextSize = 30
 
 UIAspectRatioConstraint_8.Parent = UpdateLogs
 
@@ -942,10 +886,10 @@ TimerButton.TextScaled = true
 TimerButton.TextSize = 14
 TimerButton.TextWrapped = true
 
-UICorner_35.Parent = TimerButton
+UICorner_33.Parent = TimerButton
 
-UITextSizeConstraint_16.Parent = TimerButton
-UITextSizeConstraint_16.MaxTextSize = 30
+UITextSizeConstraint_14.Parent = TimerButton
+UITextSizeConstraint_14.MaxTextSize = 30
 
 UIAspectRatioConstraint_9.Parent = TimerButton
 
@@ -963,10 +907,10 @@ RejoinButton.TextScaled = true
 RejoinButton.TextSize = 14
 RejoinButton.TextWrapped = true
 
-UICorner_36.Parent = RejoinButton
+UICorner_34.Parent = RejoinButton
 
-UITextSizeConstraint_17.Parent = RejoinButton
-UITextSizeConstraint_17.MaxTextSize = 30
+UITextSizeConstraint_15.Parent = RejoinButton
+UITextSizeConstraint_15.MaxTextSize = 30
 
 UIAspectRatioConstraint_10.Parent = RejoinButton
 
@@ -984,14 +928,12 @@ SearchButton.TextScaled = true
 SearchButton.TextSize = 14
 SearchButton.TextWrapped = true
 
-UICorner_37.Parent = SearchButton
+UICorner_35.Parent = SearchButton
 
-UITextSizeConstraint_18.Parent = SearchButton
-UITextSizeConstraint_18.MaxTextSize = 30
+UITextSizeConstraint_16.Parent = SearchButton
+UITextSizeConstraint_16.MaxTextSize = 30
 
 UIAspectRatioConstraint_11.Parent = SearchButton
-
-UICorner_38.Parent = Home
 
 StartScript.Name = "StartScript"
 StartScript.Parent = Frame
@@ -1003,7 +945,7 @@ StartScript.Position = UDim2.new(0.026433643, 0, 0.0318192206, 0)
 StartScript.Size = UDim2.new(0.70532918, 0, 0.681432605, 0)
 StartScript.Visible = false
 
-UICorner_39.Parent = StartScript
+UICorner_36.Parent = StartScript
 
 BackButton_3.Name = "BackButton"
 BackButton_3.Parent = StartScript
@@ -1020,7 +962,7 @@ BackButton_3.TextScaled = true
 BackButton_3.TextSize = 14
 BackButton_3.TextWrapped = true
 
-UICorner_40.Parent = BackButton_3
+UICorner_37.Parent = BackButton_3
 
 DescLabel.Name = "DescLabel"
 DescLabel.Parent = StartScript
@@ -1049,7 +991,7 @@ TextButton_2.TextScaled = true
 TextButton_2.TextSize = 14
 TextButton_2.TextWrapped = true
 
-UICorner_41.Parent = TextButton_2
+UICorner_38.Parent = TextButton_2
 
 Locked.Name = "Locked"
 Locked.Parent = TextButton_2
@@ -1061,7 +1003,7 @@ Locked.Position = UDim2.new(-1.4669132e-07, 0, 0, 0)
 Locked.Size = UDim2.new(0.999810457, 0, 1, 0)
 Locked.Visible = false
 
-UICorner_42.Parent = Locked
+UICorner_39.Parent = Locked
 
 ImageLabel_3.Parent = Locked
 ImageLabel_3.BackgroundColor3 = Color3.new(0, 0, 0)
@@ -1086,7 +1028,7 @@ Name.TextScaled = true
 Name.TextSize = 14
 Name.TextWrapped = true
 
-UICorner_43.Parent = Name
+UICorner_40.Parent = Name
 
 Scripts_2.Name = "Scripts"
 Scripts_2.Parent = Frame
@@ -1097,6 +1039,8 @@ Scripts_2.Position = UDim2.new(0.026433643, 0, 0.0318192206, 0)
 Scripts_2.Size = UDim2.new(0.70532918, 0, 0.681432605, 0)
 Scripts_2.Visible = false
 Scripts_2.Style = Enum.FrameStyle.DropShadow
+
+UICorner_41.Parent = Scripts_2
 
 BackButton_4.Name = "BackButton"
 BackButton_4.Parent = Scripts_2
@@ -1113,7 +1057,7 @@ BackButton_4.TextScaled = true
 BackButton_4.TextSize = 14
 BackButton_4.TextWrapped = true
 
-UICorner_44.Parent = BackButton_4
+UICorner_42.Parent = BackButton_4
 
 Dex.Name = "Dex"
 Dex.Parent = Scripts_2
@@ -1129,10 +1073,10 @@ Dex.TextScaled = true
 Dex.TextSize = 14
 Dex.TextWrapped = true
 
-UICorner_45.Parent = Dex
+UICorner_43.Parent = Dex
 
-UITextSizeConstraint_19.Parent = Dex
-UITextSizeConstraint_19.MaxTextSize = 67
+UITextSizeConstraint_17.Parent = Dex
+UITextSizeConstraint_17.MaxTextSize = 67
 
 Locked_2.Name = "Locked"
 Locked_2.Parent = Dex
@@ -1143,7 +1087,7 @@ Locked_2.BorderSizePixel = 0
 Locked_2.Position = UDim2.new(-1.4669132e-07, 0, 0, 0)
 Locked_2.Size = UDim2.new(0.999810457, 0, 1, 0)
 
-UICorner_46.Parent = Locked_2
+UICorner_44.Parent = Locked_2
 
 ImageLabel_4.Parent = Locked_2
 ImageLabel_4.BackgroundColor3 = Color3.new(0, 0, 0)
@@ -1156,8 +1100,6 @@ ImageLabel_4.Image = "rbxassetid://13967666260"
 
 UIAspectRatioConstraint_12.Parent = ImageLabel_4
 UIAspectRatioConstraint_12.AspectRatio = 1.0746269226074219
-
-UICorner_47.Parent = Scripts_2
 
 Game.Name = "Game"
 Game.Parent = Scripts_2
@@ -1173,10 +1115,10 @@ Game.TextScaled = true
 Game.TextSize = 14
 Game.TextWrapped = true
 
-UICorner_48.Parent = Game
+UICorner_45.Parent = Game
 
-UITextSizeConstraint_20.Parent = Game
-UITextSizeConstraint_20.MaxTextSize = 67
+UITextSizeConstraint_18.Parent = Game
+UITextSizeConstraint_18.MaxTextSize = 67
 
 Locked_3.Name = "Locked"
 Locked_3.Parent = Game
@@ -1187,7 +1129,7 @@ Locked_3.BorderSizePixel = 0
 Locked_3.Position = UDim2.new(-1.4669132e-07, 0, 0, 0)
 Locked_3.Size = UDim2.new(0.999810457, 0, 1, 0)
 
-UICorner_49.Parent = Locked_3
+UICorner_46.Parent = Locked_3
 
 ImageLabel_5.Parent = Locked_3
 ImageLabel_5.BackgroundColor3 = Color3.new(0, 0, 0)
@@ -1215,10 +1157,10 @@ Guzik2.TextScaled = true
 Guzik2.TextSize = 14
 Guzik2.TextWrapped = true
 
-UICorner_50.Parent = Guzik2
+UICorner_47.Parent = Guzik2
 
-UITextSizeConstraint_21.Parent = Guzik2
-UITextSizeConstraint_21.MaxTextSize = 67
+UITextSizeConstraint_19.Parent = Guzik2
+UITextSizeConstraint_19.MaxTextSize = 67
 
 Guzik3.Name = "Guzik3"
 Guzik3.Parent = Scripts_2
@@ -1234,10 +1176,10 @@ Guzik3.TextScaled = true
 Guzik3.TextSize = 14
 Guzik3.TextWrapped = true
 
-UICorner_51.Parent = Guzik3
+UICorner_48.Parent = Guzik3
 
-UITextSizeConstraint_22.Parent = Guzik3
-UITextSizeConstraint_22.MaxTextSize = 67
+UITextSizeConstraint_20.Parent = Guzik3
+UITextSizeConstraint_20.MaxTextSize = 67
 
 Guzik4.Name = "Guzik4"
 Guzik4.Parent = Scripts_2
@@ -1253,10 +1195,10 @@ Guzik4.TextScaled = true
 Guzik4.TextSize = 14
 Guzik4.TextWrapped = true
 
-UICorner_52.Parent = Guzik4
+UICorner_49.Parent = Guzik4
 
-UITextSizeConstraint_23.Parent = Guzik4
-UITextSizeConstraint_23.MaxTextSize = 67
+UITextSizeConstraint_21.Parent = Guzik4
+UITextSizeConstraint_21.MaxTextSize = 67
 
 CloseButton.Name = "CloseButton"
 CloseButton.Parent = PROJECTUNIVERSAL67
@@ -1272,10 +1214,10 @@ CloseButton.TextScaled = true
 CloseButton.TextSize = 14
 CloseButton.TextWrapped = true
 
-UICorner_53.Parent = CloseButton
+UICorner_50.Parent = CloseButton
 
-UITextSizeConstraint_24.Parent = CloseButton
-UITextSizeConstraint_24.MaxTextSize = 49
+UITextSizeConstraint_22.Parent = CloseButton
+UITextSizeConstraint_22.MaxTextSize = 49
 
 Notification.Name = "Notification"
 Notification.Parent = PROJECTUNIVERSAL67
@@ -1300,10 +1242,10 @@ TextLabel_2.TextScaled = true
 TextLabel_2.TextSize = 14
 TextLabel_2.TextWrapped = true
 
-UITextSizeConstraint_25.Parent = TextLabel_2
-UITextSizeConstraint_25.MaxTextSize = 42
+UITextSizeConstraint_23.Parent = TextLabel_2
+UITextSizeConstraint_23.MaxTextSize = 42
 
-UICorner_54.Parent = Notification
+UICorner_51.Parent = Notification
 
 UIAspectRatioConstraint_14.Parent = Notification
 UIAspectRatioConstraint_14.AspectRatio = 16.428571701049805
@@ -1314,30 +1256,7 @@ UIAspectRatioConstraint_14.AspectRatio = 16.428571701049805
 -- PROJECTUNIVERSAL67.Script is disabled.
 -- PROJECTUNIVERSAL67.LocalScript is disabled.
 -- PROJECTUNIVERSAL67.LocalScript is disabled.
-local function WAPO_fake_script() -- Guzik1.LocalScript 
-	local script = Instance.new('LocalScript', Guzik1)
-
-	script.Parent.MouseButton1Click:Connect(function()
-		-- Zakładana hierarchia: Przycisk -> AktualnyPanel (np. Scripts_2) -> Frame (Główny Kontener)
-		local Frame = script.Parent.Parent.Parent 
-	
-		local Home = Frame:FindFirstChild("Home")
-		local CurrentPanel = script.Parent.Parent -- Bieżący panel (np. Scripts_2 lub Executor)
-	
-		-- Przełączenie
-		if Home and CurrentPanel and CurrentPanel.Name ~= "Home" then
-			CurrentPanel.Visible = false -- Ukryj bieżący panel (z którego kliknięto)
-			Home.Visible = true          -- Pokaż panel główny Home
-		elseif CurrentPanel.Name == "Home" then
-			warn("Jesteś już na ekranie Home. Brak akcji.")
-		else
-			warn("Brak panelu Home w głównym Frame.")
-		end
-	end)
-end
-coroutine.wrap(WAPO_fake_script)()
--- Guzik1_2.LocalScript is disabled.
-local function BUOZ_fake_script() -- Executor.LocalScript 
+local function QZGHS_fake_script() -- Executor.LocalScript 
 	local script = Instance.new('LocalScript', Executor)
 
 	-- Executor - poprawiony LocalScript
@@ -1911,8 +1830,8 @@ local function BUOZ_fake_script() -- Executor.LocalScript
 	end)
 	
 end
-coroutine.wrap(BUOZ_fake_script)()
-local function BVDLP_fake_script() -- CopyToClipboard.LocalScript 
+coroutine.wrap(QZGHS_fake_script)()
+local function GZEFMX_fake_script() -- CopyToClipboard.LocalScript 
 	local script = Instance.new('LocalScript', CopyToClipboard)
 
 	local TweenService = game:GetService("TweenService")
@@ -2062,8 +1981,8 @@ local function BVDLP_fake_script() -- CopyToClipboard.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(BVDLP_fake_script)()
-local function SUFJ_fake_script() -- Execute.LocalScript 
+coroutine.wrap(GZEFMX_fake_script)()
+local function HPUSR_fake_script() -- Execute.LocalScript 
 	local script = Instance.new('LocalScript', Execute)
 
 	local TweenService = game:GetService("TweenService")
@@ -2268,8 +2187,8 @@ local function SUFJ_fake_script() -- Execute.LocalScript
 		end
 	end
 end
-coroutine.wrap(SUFJ_fake_script)()
-local function JQFGJXT_fake_script() -- Rename.LocalScript 
+coroutine.wrap(HPUSR_fake_script)()
+local function QSOLFTV_fake_script() -- Rename.LocalScript 
 	local script = Instance.new('LocalScript', Rename)
 
 	local TweenService = game:GetService("TweenService")
@@ -2419,8 +2338,8 @@ local function JQFGJXT_fake_script() -- Rename.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(JQFGJXT_fake_script)()
-local function KNPGAZQ_fake_script() -- Delete.LocalScript 
+coroutine.wrap(QSOLFTV_fake_script)()
+local function COIK_fake_script() -- Delete.LocalScript 
 	local script = Instance.new('LocalScript', Delete)
 
 	local TweenService = game:GetService("TweenService")
@@ -2570,8 +2489,8 @@ local function KNPGAZQ_fake_script() -- Delete.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(KNPGAZQ_fake_script)()
-local function IWOH_fake_script() -- ClearExecTextBox.LocalScript 
+coroutine.wrap(COIK_fake_script)()
+local function LNZBGM_fake_script() -- ClearExecTextBox.LocalScript 
 	local script = Instance.new('LocalScript', ClearExecTextBox)
 
 	local TweenService = game:GetService("TweenService")
@@ -2721,8 +2640,8 @@ local function IWOH_fake_script() -- ClearExecTextBox.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(IWOH_fake_script)()
-local function ZDFYW_fake_script() -- SaveFile.LocalScript 
+coroutine.wrap(LNZBGM_fake_script)()
+local function MRBGYO_fake_script() -- SaveFile.LocalScript 
 	local script = Instance.new('LocalScript', SaveFile)
 
 	local TweenService = game:GetService("TweenService")
@@ -2872,9 +2791,9 @@ local function ZDFYW_fake_script() -- SaveFile.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(ZDFYW_fake_script)()
-local function FFYM_fake_script() -- Guzik1_3.LocalScript 
-	local script = Instance.new('LocalScript', Guzik1_3)
+coroutine.wrap(MRBGYO_fake_script)()
+local function RWWDLE_fake_script() -- Guzik1.LocalScript 
+	local script = Instance.new('LocalScript', Guzik1)
 
 	local button = script.Parent
 	local expandPixels = 10
@@ -3129,8 +3048,8 @@ local function FFYM_fake_script() -- Guzik1_3.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(FFYM_fake_script)()
-local function DNKFGCJ_fake_script() -- BackButton.LocalScript 
+coroutine.wrap(RWWDLE_fake_script)()
+local function AUCZAHC_fake_script() -- BackButton.LocalScript 
 	local script = Instance.new('LocalScript', BackButton)
 
 	local TweenService = game:GetService("TweenService")
@@ -3192,8 +3111,8 @@ local function DNKFGCJ_fake_script() -- BackButton.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(DNKFGCJ_fake_script)()
-local function ONJV_fake_script() -- Searcher.LocalScript 
+coroutine.wrap(AUCZAHC_fake_script)()
+local function DDCZDZ_fake_script() -- Searcher.LocalScript 
 	local script = Instance.new('LocalScript', Searcher)
 
 	local Searcher = script.Parent
@@ -3316,8 +3235,134 @@ local function ONJV_fake_script() -- Searcher.LocalScript
 	-- Rejestracja globalnej funkcji dla innych przycisków
 	_G.StartProjectSearch = StartSearch
 end
-coroutine.wrap(ONJV_fake_script)()
-local function NXPSGDT_fake_script() -- Guzik1_4.LocalScript 
+coroutine.wrap(DDCZDZ_fake_script)()
+local function PIVJHY_fake_script() -- Guzik1_2.LocalScript 
+	local script = Instance.new('LocalScript', Guzik1_2)
+
+	local TweenService = game:GetService("TweenService")
+	local button = script.Parent
+	local tweenDuration = 0.2
+	local expandPixels = 3 -- Efekt hover (do dostosowania)
+	
+	-- Opcjonalne: Ustawienia efektu hover/click
+	local originalSize = button.Size
+	local originalPosition = button.Position
+	
+	-- 🔊 Dźwięki (możesz usunąć, jeśli nie używasz)
+	local clickSound = Instance.new("Sound")
+	clickSound.SoundId = "rbxassetid://535716488"
+	clickSound.Volume = 1
+	clickSound.Parent = button
+	
+	-- 🎨 Efekt: po najechaniu myszką
+	local function onMouseEnter()
+		local newSize = UDim2.new(
+			originalSize.X.Scale, originalSize.X.Offset + expandPixels * 2,
+			originalSize.Y.Scale, originalSize.Y.Offset + expandPixels * 2
+		)
+		local newPosition = UDim2.new(
+			originalPosition.X.Scale, originalPosition.X.Offset - expandPixels,
+			originalPosition.Y.Scale, originalPosition.Y.Offset - expandPixels
+		)
+		button:TweenSizeAndPosition(newSize, newPosition, "Out", "Quad", tweenDuration, true)
+	end
+	
+	-- 🎨 Efekt: po opuszczeniu myszką
+	local function onMouseLeave()
+		button:TweenSizeAndPosition(originalSize, originalPosition, "Out", "Quad", tweenDuration, true)
+	end
+	
+	-- 🖱️ Główna funkcja: przełączanie na Home
+	local function onMouseClick()
+		clickSound:Play()
+	
+		-- Zakładana hierarchia: Przycisk -> AktualnyPanel (np. Scripts_2) -> Frame (Główny Kontener)
+		local Frame = script.Parent.Parent.Parent 
+	
+		local Home = Frame:FindFirstChild("Home")
+		local CurrentPanel = script.Parent.Parent -- Bieżący panel (np. Scripts_2 lub Executor)
+	
+		-- Przełączenie
+		if Home and CurrentPanel and CurrentPanel.Name ~= "Home" then
+			CurrentPanel.Visible = false -- Ukryj bieżący panel (z którego kliknięto)
+			Home.Visible = true          -- Pokaż panel główny Home
+		elseif CurrentPanel.Name == "Home" then
+			warn("Jesteś już na ekranie Home. Brak akcji.")
+		else
+			warn("Brak panelu Home w głównym Frame.")
+		end
+	end
+	
+	-- Podłączenie zdarzeń
+	button.MouseEnter:Connect(onMouseEnter)
+	button.MouseLeave:Connect(onMouseLeave)
+	button.MouseButton1Click:Connect(onMouseClick)
+end
+coroutine.wrap(PIVJHY_fake_script)()
+local function GMSA_fake_script() -- Guzik1_3.LocalScript 
+	local script = Instance.new('LocalScript', Guzik1_3)
+
+	local TweenService = game:GetService("TweenService")
+	local button = script.Parent
+	local tweenDuration = 0.2
+	local expandPixels = 3 -- Efekt hover (do dostosowania)
+	
+	-- Opcjonalne: Ustawienia efektu hover/click
+	local originalSize = button.Size
+	local originalPosition = button.Position
+	
+	-- 🔊 Dźwięki (możesz usunąć, jeśli nie używasz)
+	local clickSound = Instance.new("Sound")
+	clickSound.SoundId = "rbxassetid://535716488"
+	clickSound.Volume = 1
+	clickSound.Parent = button
+	
+	-- 🎨 Efekt: po najechaniu myszką
+	local function onMouseEnter()
+		local newSize = UDim2.new(
+			originalSize.X.Scale, originalSize.X.Offset + expandPixels * 2,
+			originalSize.Y.Scale, originalSize.Y.Offset + expandPixels * 2
+		)
+		local newPosition = UDim2.new(
+			originalPosition.X.Scale, originalPosition.X.Offset - expandPixels,
+			originalPosition.Y.Scale, originalPosition.Y.Offset - expandPixels
+		)
+		button:TweenSizeAndPosition(newSize, newPosition, "Out", "Quad", tweenDuration, true)
+	end
+	
+	-- 🎨 Efekt: po opuszczeniu myszką
+	local function onMouseLeave()
+		button:TweenSizeAndPosition(originalSize, originalPosition, "Out", "Quad", tweenDuration, true)
+	end
+	
+	-- 🖱️ Główna funkcja: przełączanie na Home
+	local function onMouseClick()
+		clickSound:Play()
+	
+		-- Zakładana hierarchia: Przycisk -> AktualnyPanel (np. Scripts_2) -> Frame (Główny Kontener)
+		local Frame = script.Parent.Parent.Parent 
+	
+		local Home = Frame:FindFirstChild("Home")
+		local CurrentPanel = script.Parent.Parent -- Bieżący panel (np. Scripts_2 lub Executor)
+	
+		-- Przełączenie
+		if Home and CurrentPanel and CurrentPanel.Name ~= "Home" then
+			CurrentPanel.Visible = false -- Ukryj bieżący panel (z którego kliknięto)
+			Home.Visible = true          -- Pokaż panel główny Home
+		elseif CurrentPanel.Name == "Home" then
+			warn("Jesteś już na ekranie Home. Brak akcji.")
+		else
+			warn("Brak panelu Home w głównym Frame.")
+		end
+	end
+	
+	-- Podłączenie zdarzeń
+	button.MouseEnter:Connect(onMouseEnter)
+	button.MouseLeave:Connect(onMouseLeave)
+	button.MouseButton1Click:Connect(onMouseClick)
+end
+coroutine.wrap(GMSA_fake_script)()
+local function YNWVZ_fake_script() -- Guzik1_4.LocalScript 
 	local script = Instance.new('LocalScript', Guzik1_4)
 
 	local TweenService = game:GetService("TweenService")
@@ -3379,134 +3424,8 @@ local function NXPSGDT_fake_script() -- Guzik1_4.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(NXPSGDT_fake_script)()
-local function QJRNT_fake_script() -- Guzik1_5.LocalScript 
-	local script = Instance.new('LocalScript', Guzik1_5)
-
-	local TweenService = game:GetService("TweenService")
-	local button = script.Parent
-	local tweenDuration = 0.2
-	local expandPixels = 3 -- Efekt hover (do dostosowania)
-	
-	-- Opcjonalne: Ustawienia efektu hover/click
-	local originalSize = button.Size
-	local originalPosition = button.Position
-	
-	-- 🔊 Dźwięki (możesz usunąć, jeśli nie używasz)
-	local clickSound = Instance.new("Sound")
-	clickSound.SoundId = "rbxassetid://535716488"
-	clickSound.Volume = 1
-	clickSound.Parent = button
-	
-	-- 🎨 Efekt: po najechaniu myszką
-	local function onMouseEnter()
-		local newSize = UDim2.new(
-			originalSize.X.Scale, originalSize.X.Offset + expandPixels * 2,
-			originalSize.Y.Scale, originalSize.Y.Offset + expandPixels * 2
-		)
-		local newPosition = UDim2.new(
-			originalPosition.X.Scale, originalPosition.X.Offset - expandPixels,
-			originalPosition.Y.Scale, originalPosition.Y.Offset - expandPixels
-		)
-		button:TweenSizeAndPosition(newSize, newPosition, "Out", "Quad", tweenDuration, true)
-	end
-	
-	-- 🎨 Efekt: po opuszczeniu myszką
-	local function onMouseLeave()
-		button:TweenSizeAndPosition(originalSize, originalPosition, "Out", "Quad", tweenDuration, true)
-	end
-	
-	-- 🖱️ Główna funkcja: przełączanie na Home
-	local function onMouseClick()
-		clickSound:Play()
-	
-		-- Zakładana hierarchia: Przycisk -> AktualnyPanel (np. Scripts_2) -> Frame (Główny Kontener)
-		local Frame = script.Parent.Parent.Parent 
-	
-		local Home = Frame:FindFirstChild("Home")
-		local CurrentPanel = script.Parent.Parent -- Bieżący panel (np. Scripts_2 lub Executor)
-	
-		-- Przełączenie
-		if Home and CurrentPanel and CurrentPanel.Name ~= "Home" then
-			CurrentPanel.Visible = false -- Ukryj bieżący panel (z którego kliknięto)
-			Home.Visible = true          -- Pokaż panel główny Home
-		elseif CurrentPanel.Name == "Home" then
-			warn("Jesteś już na ekranie Home. Brak akcji.")
-		else
-			warn("Brak panelu Home w głównym Frame.")
-		end
-	end
-	
-	-- Podłączenie zdarzeń
-	button.MouseEnter:Connect(onMouseEnter)
-	button.MouseLeave:Connect(onMouseLeave)
-	button.MouseButton1Click:Connect(onMouseClick)
-end
-coroutine.wrap(QJRNT_fake_script)()
-local function GVKVDUZ_fake_script() -- Guzik1_6.LocalScript 
-	local script = Instance.new('LocalScript', Guzik1_6)
-
-	local TweenService = game:GetService("TweenService")
-	local button = script.Parent
-	local tweenDuration = 0.2
-	local expandPixels = 3 -- Efekt hover (do dostosowania)
-	
-	-- Opcjonalne: Ustawienia efektu hover/click
-	local originalSize = button.Size
-	local originalPosition = button.Position
-	
-	-- 🔊 Dźwięki (możesz usunąć, jeśli nie używasz)
-	local clickSound = Instance.new("Sound")
-	clickSound.SoundId = "rbxassetid://535716488"
-	clickSound.Volume = 1
-	clickSound.Parent = button
-	
-	-- 🎨 Efekt: po najechaniu myszką
-	local function onMouseEnter()
-		local newSize = UDim2.new(
-			originalSize.X.Scale, originalSize.X.Offset + expandPixels * 2,
-			originalSize.Y.Scale, originalSize.Y.Offset + expandPixels * 2
-		)
-		local newPosition = UDim2.new(
-			originalPosition.X.Scale, originalPosition.X.Offset - expandPixels,
-			originalPosition.Y.Scale, originalPosition.Y.Offset - expandPixels
-		)
-		button:TweenSizeAndPosition(newSize, newPosition, "Out", "Quad", tweenDuration, true)
-	end
-	
-	-- 🎨 Efekt: po opuszczeniu myszką
-	local function onMouseLeave()
-		button:TweenSizeAndPosition(originalSize, originalPosition, "Out", "Quad", tweenDuration, true)
-	end
-	
-	-- 🖱️ Główna funkcja: przełączanie na Home
-	local function onMouseClick()
-		clickSound:Play()
-	
-		-- Zakładana hierarchia: Przycisk -> AktualnyPanel (np. Scripts_2) -> Frame (Główny Kontener)
-		local Frame = script.Parent.Parent.Parent 
-	
-		local Home = Frame:FindFirstChild("Home")
-		local CurrentPanel = script.Parent.Parent -- Bieżący panel (np. Scripts_2 lub Executor)
-	
-		-- Przełączenie
-		if Home and CurrentPanel and CurrentPanel.Name ~= "Home" then
-			CurrentPanel.Visible = false -- Ukryj bieżący panel (z którego kliknięto)
-			Home.Visible = true          -- Pokaż panel główny Home
-		elseif CurrentPanel.Name == "Home" then
-			warn("Jesteś już na ekranie Home. Brak akcji.")
-		else
-			warn("Brak panelu Home w głównym Frame.")
-		end
-	end
-	
-	-- Podłączenie zdarzeń
-	button.MouseEnter:Connect(onMouseEnter)
-	button.MouseLeave:Connect(onMouseLeave)
-	button.MouseButton1Click:Connect(onMouseClick)
-end
-coroutine.wrap(GVKVDUZ_fake_script)()
-local function VZVO_fake_script() -- TextButton.LocalScript 
+coroutine.wrap(YNWVZ_fake_script)()
+local function BPNV_fake_script() -- TextButton.LocalScript 
 	local script = Instance.new('LocalScript', TextButton)
 
 	local button = script.Parent
@@ -3534,8 +3453,8 @@ local function VZVO_fake_script() -- TextButton.LocalScript
 	-- Dodatkowo MouseButton1Down dla lepszej responsywności na telefonach
 	button.MouseButton1Down:Connect(onClick)
 end
-coroutine.wrap(VZVO_fake_script)()
-local function TTWAPSR_fake_script() -- BackButton_2.LocalScript 
+coroutine.wrap(BPNV_fake_script)()
+local function URAM_fake_script() -- BackButton_2.LocalScript 
 	local script = Instance.new('LocalScript', BackButton_2)
 
 	local button = script.Parent
@@ -3555,8 +3474,8 @@ local function TTWAPSR_fake_script() -- BackButton_2.LocalScript
 		end
 	end)
 end
-coroutine.wrap(TTWAPSR_fake_script)()
-local function FEOHEE_fake_script() -- Nickdispaly.LocalScript 
+coroutine.wrap(URAM_fake_script)()
+local function NYISIPV_fake_script() -- Nickdispaly.LocalScript 
 	local script = Instance.new('LocalScript', Nickdispaly)
 
 	local Players = game:GetService("Players")
@@ -3569,8 +3488,8 @@ local function FEOHEE_fake_script() -- Nickdispaly.LocalScript
 	
 	label.Text = "Witaj " .. display_name .. "(@" .. username .. ")"
 end
-coroutine.wrap(FEOHEE_fake_script)()
-local function BPZS_fake_script() -- ImageLabel.LocalScript 
+coroutine.wrap(NYISIPV_fake_script)()
+local function CLYSQOP_fake_script() -- ImageLabel.LocalScript 
 	local script = Instance.new('LocalScript', ImageLabel)
 
 	local Players = game:GetService("Players")
@@ -3597,10 +3516,10 @@ local function BPZS_fake_script() -- ImageLabel.LocalScript
 	
 	-- not needed but if imagelabel is too big image will be pixelated very badly: imageLabel.Size = UDim2.new(0, 420, 0, 420)
 end
-coroutine.wrap(BPZS_fake_script)()
+coroutine.wrap(CLYSQOP_fake_script)()
 -- BuyPremiumTab.LocalScript is disabled.
 -- BuyPremiumTab.LocalScript is disabled.
-local function MNFF_fake_script() -- ExecutorTab.LocalScript 
+local function CGOCBW_fake_script() -- ExecutorTab.LocalScript 
 	local script = Instance.new('LocalScript', ExecutorTab)
 
 	local TweenService = game:GetService("TweenService")
@@ -3697,8 +3616,8 @@ local function MNFF_fake_script() -- ExecutorTab.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(MNFF_fake_script)()
-local function ZOKMTDP_fake_script() -- ScriptsButton.LocalScript 
+coroutine.wrap(CGOCBW_fake_script)()
+local function NEGD_fake_script() -- ScriptsButton.LocalScript 
 	local script = Instance.new('LocalScript', ScriptsButton)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -3718,10 +3637,10 @@ local function ZOKMTDP_fake_script() -- ScriptsButton.LocalScript
 		end
 	end)
 end
-coroutine.wrap(ZOKMTDP_fake_script)()
+coroutine.wrap(NEGD_fake_script)()
 -- UpdateLogs.LocalScript is disabled.
 -- TimerButton.LocalScript is disabled.
-local function LFYBK_fake_script() -- RejoinButton.LocalScript 
+local function BVQD_fake_script() -- RejoinButton.LocalScript 
 	local script = Instance.new('LocalScript', RejoinButton)
 
 	local TweenService = game:GetService("TweenService")
@@ -3878,8 +3797,8 @@ local function LFYBK_fake_script() -- RejoinButton.LocalScript
 		teleportService:Teleport(gamePlaceId, player)
 	end
 end
-coroutine.wrap(LFYBK_fake_script)()
-local function LMMAZ_fake_script() -- SearchButton.LocalScript 
+coroutine.wrap(BVQD_fake_script)()
+local function BJXEN_fake_script() -- SearchButton.LocalScript 
 	local script = Instance.new('LocalScript', SearchButton)
 
 	local button = script.Parent
@@ -3896,8 +3815,8 @@ local function LMMAZ_fake_script() -- SearchButton.LocalScript
 		searcher.Visible = true
 	end)
 end
-coroutine.wrap(LMMAZ_fake_script)()
-local function OSTPLLM_fake_script() -- BackButton_3.LocalScript 
+coroutine.wrap(BJXEN_fake_script)()
+local function IWOVEE_fake_script() -- BackButton_3.LocalScript 
 	local script = Instance.new('LocalScript', BackButton_3)
 
 	local TweenService = game:GetService("TweenService")
@@ -3959,8 +3878,8 @@ local function OSTPLLM_fake_script() -- BackButton_3.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(OSTPLLM_fake_script)()
-local function VJAMJHI_fake_script() -- TextButton_2.LocalScript 
+coroutine.wrap(IWOVEE_fake_script)()
+local function UOOG_fake_script() -- TextButton_2.LocalScript 
 	local script = Instance.new('LocalScript', TextButton_2)
 
 	local button = script.Parent
@@ -4060,8 +3979,8 @@ local function VJAMJHI_fake_script() -- TextButton_2.LocalScript
 	button.MouseButton1Click:Connect(onMouseClick)
 	
 end
-coroutine.wrap(VJAMJHI_fake_script)()
-local function AFIE_fake_script() -- BackButton_4.LocalScript 
+coroutine.wrap(UOOG_fake_script)()
+local function FKVYDPY_fake_script() -- BackButton_4.LocalScript 
 	local script = Instance.new('LocalScript', BackButton_4)
 
 	local TweenService = game:GetService("TweenService")
@@ -4123,32 +4042,32 @@ local function AFIE_fake_script() -- BackButton_4.LocalScript
 	button.MouseLeave:Connect(onMouseLeave)
 	button.MouseButton1Click:Connect(onMouseClick)
 end
-coroutine.wrap(AFIE_fake_script)()
+coroutine.wrap(FKVYDPY_fake_script)()
 -- Dex.LocalScript is disabled.
 -- Dex.LocalScript is disabled.
 -- Game.LocalScript is disabled.
 -- Game.LocalScript is disabled.
-local function ZDMRR_fake_script() -- Guzik2.LocalScript 
+local function ROLBVUN_fake_script() -- Guzik2.LocalScript 
 	local script = Instance.new('LocalScript', Guzik2)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		loadstring(game:HttpGet("https://pastebin.com/raw/xuSMWfDu"))()
 	end)
 end
-coroutine.wrap(ZDMRR_fake_script)()
+coroutine.wrap(ROLBVUN_fake_script)()
 -- Guzik2.LocalScript is disabled.
-local function OCPMB_fake_script() -- Guzik3.LocalScript 
+local function SFXSG_fake_script() -- Guzik3.LocalScript 
 	local script = Instance.new('LocalScript', Guzik3)
 
 	script.Parent.MouseButton2Click:Connect(function()
 		loadstring(game:HttpGet("https://pastebin.com/raw/xuSMWfDu"))()
 	end)
 end
-coroutine.wrap(OCPMB_fake_script)()
+coroutine.wrap(SFXSG_fake_script)()
 -- Guzik3.LocalScript is disabled.
 -- Guzik4.LocalScript is disabled.
 -- Guzik4.LocalScript is disabled.
-local function CNHB_fake_script() -- CloseButton.LocalScript 
+local function LCMMO_fake_script() -- CloseButton.LocalScript 
 	local script = Instance.new('LocalScript', CloseButton)
 
 	-- Odwołania do elementów GUI
@@ -4194,8 +4113,8 @@ local function CNHB_fake_script() -- CloseButton.LocalScript
 	button.MouseButton1Click:Connect(toggleFrame)
 	
 end
-coroutine.wrap(CNHB_fake_script)()
-local function LESYVQX_fake_script() -- TextLabel_2.LocalScript 
+coroutine.wrap(LCMMO_fake_script)()
+local function NYUCHIE_fake_script() -- TextLabel_2.LocalScript 
 	local script = Instance.new('LocalScript', TextLabel_2)
 
 	-- LocalScript wewnątrz TextLabel
@@ -4328,4 +4247,4 @@ local function LESYVQX_fake_script() -- TextLabel_2.LocalScript
 	-- _G.ShowNotification("Zebrałeś rzadki przedmiot!", 8)
 	
 end
-coroutine.wrap(LESYVQX_fake_script)()
+coroutine.wrap(NYUCHIE_fake_script)()
