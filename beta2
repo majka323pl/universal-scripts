@@ -1,0 +1,4 @@
+pcall(function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/bets5"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/beta"))() 
+end)
