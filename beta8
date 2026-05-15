@@ -1,5 +1,8 @@
 pcall(function()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/bets5"))()
 end)
-
+task.wait(3)
+pcall(function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/bets5"))()
+end)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/bets1"))() 
