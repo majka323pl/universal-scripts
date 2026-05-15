@@ -1,2 +1,0 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/bets1"))()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/majka323pl/universal-scripts/refs/heads/main/bets5"))()
